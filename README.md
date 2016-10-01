@@ -14,7 +14,7 @@
 
 * Distance detection of objects
 * Detect friends on images based on their facebook profiles
-* Detect emotions and represent with an emoji
+* Detect emotions from photos and represent them with an emoji
 
 ### Vector Graphics
 
@@ -30,9 +30,14 @@
 ### Web
 
 * CSS Prototype Generation from example
-* CSS Animations from gifs
+* Animating svg figures like walking people
 
 ### Image Generation
 
 * LowPoly Image Creation
-* Create an Image from a Sketch
+* [Create an Image from a Sketch](https://github.com/alexjc/neural-doodle)
+* [Image Analogies](https://github.com/awentzonline/image-analogies)
+* [Paint Photos in Style Of Any Artist](http://www.boredpanda.com/computer-deep-learning-algorithm-painting-masters/)
+* Create an image from a text (A pictures says more than thousand words)
+
+### Image Completion
