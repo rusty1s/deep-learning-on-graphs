@@ -12,19 +12,24 @@
 
 ### Object Detection
 
-* Distance detection of detected objects
+* Distance detection of objects
+* Detect friends on images based on their facebook profiles
+* Detect emotions and represent with an emoji
 
 ### Vector Graphics
 
-* Convert pixelbased Images to vectorbased Images
+* Convert pixelbased images to vectorbased images
+* [Fake Chine Characters in Vector Format with TensorFlow](http://blog.otoro.net/2015/12/28/recurrent-net-dreams-up-fake-chinese-characters-in-vector-format-with-tensorflow/)
+* Create responsive Svgs via Attention Detection (see [SVG has more potential](https://madebymike.com.au//writing/svg-has-more-potential/))
 
 ### Fonts
 
-* Font Variant Creation
+* Font Variant Generation
+* [Anaylizing 50k fonts using deep neural networks](https://erikbern.com/2016/01/21/analyzing-50k-fonts-using-deep-neural-networks/)
 
 ### Web
 
-* CSS Prototype Creation from example
+* CSS Prototype Generation from example
 * CSS Animations from gifs
 
 ### Image Generation
