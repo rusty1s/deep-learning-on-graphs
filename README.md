@@ -15,6 +15,8 @@
 * Distance detection of objects
 * Detect friends on images based on their facebook profiles
 * Detect emotions from photos and represent them with an emoji
+* Detect rotations of objects and replace them with objects that have a similar 
+  rotation
 
 ### Vector Graphics
 
