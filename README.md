@@ -20,6 +20,7 @@
 
 ### Vector Graphics
 
+* Convert svgs as graphs to input them in neuronal networks
 * Convert pixelbased images to vectorbased images
 * [Fake Chine Characters in Vector Format with TensorFlow](http://blog.otoro.net/2015/12/28/recurrent-net-dreams-up-fake-chinese-characters-in-vector-format-with-tensorflow/)
 * Create responsive Svgs via Attention Detection (see [SVG has more potential](https://madebymike.com.au//writing/svg-has-more-potential/))
