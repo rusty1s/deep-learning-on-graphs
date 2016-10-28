@@ -23,10 +23,13 @@ test_images, test_labels = mnist.test.next_batch(200)
 # Mnist images are 28 pixels by 28 pixels, so we can flatten it into a vector 
 # of 28x28 = 784 numbers.
 # The first dimension is an index into the list of images.
-# => train_images is a [5000, 784] and train_labels is a [5000, 10] array of 
-# floats
-train_x = tf.placeholder(tf.float32, [None, 784]) # variable indices
-test_x = tf.placeholder(tf.float32, [784]) # one index
+# => e.g. train_images is a [5000, 784] and train_labels is a [5000, 10] array 
+# of floats
+img_size = 28
+img_size_flat = img_size * img_size
+
+train_x = tf.placeholder(tf.float32, [None, img_size_flat]) # variable indices
+test_x = tf.placeholder(tf.float32, [img_size_flat]) # one index
 
 #
 # Nearest neighbor calculation using L1 distance:
