@@ -1,2 +1,4 @@
 .DS_Store
 log_graph
+*.aux
+*.log
