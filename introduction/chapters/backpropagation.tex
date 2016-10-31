@@ -1,0 +1,39 @@
+\section{Backpropagation}
+
+\begin{itemize}
+\item berechnet den Gradienten der Kostenfunktion $C_x$
+\end{itemize}
+
+\subsection{Notation}
+
+\begin{itemize}
+  \item $w_{jk}^l$ beschreibt das Gewicht des $k$ten Neurons im $(l-1)$ten Layer zu dem $j$ten Neuron im $l$ten Layer
+  \item $b_j^l$ beschreibt den Bias des $j$ten Neurons im $l$ten Layer
+  \item $a_j^l$ beschreibt die Ausgabe (\emph{Aktivierung}) des $j$ten Neurons im $l$ten Layer
+  \item $\Rightarrow$ $a_j^l = \sigma {( {(\sum_k w_{jk}^l a_k^{l-1})} + b_j^k)}$
+  \item lässt uns die Aktivierung und den Bias als Vektor schreiben, die Gewichte zwischen zwei Layern als Matrix
+  \item $\Rightarrow$ $a^l = \sigma {(w^l a^{l-1} + b^l)}$
+  \item $z^l \equiv w^l a^{l-1}+b^l$ wird als \emph{gewichtete Eingabe} bezeichnet
+  \item $\Rightarrow$ $C_x = ||y(x) - a^L(x)||^2$, wobei $a^L(x)$ der Vektor des letzten Layers bei Eingabe $x$ beschreibt
+\end{itemize}
+
+\subsubsection{Hadamard Produkt $s \odot t$}
+
+\begin{itemize}
+  \item elementweise Multiplikation zweier Vektoren
+  \item \underline{Beispiel:} $\begin{pmatrix}1\\2\end{pmatrix} \odot \begin{pmatrix}3\\4\end{pmatrix}=\begin{pmatrix}1 \cdot 3\\2 \cdot 4\end{pmatrix}=\begin{pmatrix}3\\8\end{pmatrix}$
+\end{itemize}
+
+\subsection{Die vier fundamentalen Gleichungen der Backpropagation}
+
+\begin{itemize}
+  \item $\delta_j^l \equiv \frac{\partial C}{\partial z_j^l}$ bezeichnet den \emph{Fehler} im $j$ten Neuron im $l$ten Layer
+  \item Backpropagation berechnet $\delta_j^l$ und projiziert den Fehler auf $\frac{\partial C}{\partial w_{jk}^l}$ und $\frac{\partial C}{\partial b_j^l}$
+\end{itemize}
+
+\begin{enumerate}
+  \item \textbf{Der Fehler im Output-Layer, $\delta^L$:}
+  \begin{itemize}
+      \item wadawd
+  \end{itemize}
+\end{enumerate}
