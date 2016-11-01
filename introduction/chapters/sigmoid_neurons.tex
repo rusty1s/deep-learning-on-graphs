@@ -45,7 +45,7 @@
   \begin{itemize}
     \item definiere den Gradienten $\nabla C  = {(\frac{\partial C}{\partial v_1}, \frac{\partial C}{\partial v_2}, \ldots, \frac{\partial C}{\partial v_n})}^T$ von $C$ aus den partiellen Ableitungen $\frac{\partial C}{\partial v_i}$ von $C$
     \item $\Rightarrow$ $\Delta C \approx \nabla  C \cdot \Delta v$
-    \item wähle $\Delta v = - \eta \nabla C$, dann gilt $\Delta C \approx - \eta \nabla C \cdot \nabla C  = - \eta ||\nabla C||^2$
+    \item wähle $\Delta v = - \eta \nabla C$, dann gilt $\Delta C \approx - \eta \nabla C \cdot \nabla C  = - \eta ||\nabla C||^2$ \todo{warum noch mal?}
     \begin{itemize}
       \item $\eta$ wird das \emph{Lerntempo} (engl. \emph{learning rate}) genannt
       \item da $||\nabla C||^2 \geq 0$ folgt, dass $\Delta C \leq 0$ für alle $\eta \in \mathbb{R}^+$
@@ -58,7 +58,7 @@
 
 \begin{itemize}
   \item $\nabla C$ besteht aus partiellen Ableitungen der Komponenten $w_k$ und $b_l$
-  \item \underline{Problem:} $\nabla C$ wird berechnet aus dem Mittelwert der Gradienten $\nabla C_x = \frac{||y(x)-a(x)||^2}{2}$ für alle Trainingsdaten $x$ $\Rightarrow$ berechnungsintensiv
+  \item \underline{Problem:} $\nabla C$ wird berechnet aus dem Mittelwert der Gradienten $\nabla C_x = \frac{1}{2}||y(x)-a(x)||^2$ für alle Trainingsdaten $x$ $\Rightarrow$ berechnungsintensiv
   \item \underline{Lösung:} \emph{Stochastic gradient descent}
   \begin{itemize}
     \item \underline{Idee:} berechne $\nabla C$ aus einer kleinen Anzahl $m$ zufällig gewählter Trainingsdaten $X_1, X_2, \ldots, X_m$

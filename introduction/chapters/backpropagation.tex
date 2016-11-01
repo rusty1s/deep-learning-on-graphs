@@ -1,7 +1,7 @@
 \section{Backpropagation}
 
 \begin{itemize}
-\item berechnet den Gradienten der Kostenfunktion $C_x$
+\item berechnet den Gradienten $\nabla C_x$ der Kostenfunktion $C_x$
 \end{itemize}
 
 \subsection{Notation}
@@ -10,11 +10,18 @@
   \item $w_{jk}^l$ beschreibt das Gewicht des $k$ten Neurons im $(l-1)$ten Layer zu dem $j$ten Neuron im $l$ten Layer
   \item $b_j^l$ beschreibt den Bias des $j$ten Neurons im $l$ten Layer
   \item $a_j^l$ beschreibt die Ausgabe (\emph{Aktivierung}) des $j$ten Neurons im $l$ten Layer
-  \item $\Rightarrow$ $a_j^l = \sigma {( {(\sum_k w_{jk}^l a_k^{l-1})} + b_j^k)}$
-  \item lässt uns die Aktivierung und den Bias als Vektor schreiben, die Gewichte zwischen zwei Layern als Matrix
-  \item $\Rightarrow$ $a^l = \sigma {(w^l a^{l-1} + b^l)}$
+  \item $\Rightarrow$ $a_j^l = \sigma {( {(\sum_k w_{jk}^l a_k^{l-1})} + b_j^l)}$
+  \item \underline{Intuition:} lässt uns die Aktivierung und den Bias als Vektor schreiben, die Gewichte zwischen zwei Layern als Matrix
+  \begin{itemize}
+    \item \underline{Beispiel:}
+    \begin{itemize}
+      \item Layer 1 besitzt 4 Neuronen, Layer 2 besitzt 3 Neuronen
+      \item $a^1 = \begin{pmatrix}a_1^1\\a_2^1\\a_3^1\\a_4^1\end{pmatrix}, b^2 = \begin{pmatrix}b_1^2\\b_2^2\\b_3^2\end{pmatrix}, w^2 = \begin{pmatrix}w^2_{11}&w^2_{12}&w^2_{13}&w^2_{14}\\w^2_{21}&w^2_{22}&w^2_{23}&w^2_{24}\\w^2_{31}&w^2_{32}&w^2_{33}&w^2_{34}\end{pmatrix}$
+      \item $a^2 = \sigma{(w^2 \cdot a^1 + b^2)}$, wobei $\sigma$ auf jeder Komponente einzeln angewendet wird
+    \end{itemize}
+  \end{itemize}
   \item $z^l \equiv w^l a^{l-1}+b^l$ wird als \emph{gewichtete Eingabe} bezeichnet
-  \item $\Rightarrow$ $C_x = ||y(x) - a^L(x)||^2$, wobei $a^L(x)$ der Vektor des letzten Layers bei Eingabe $x$ beschreibt
+  \item $\Rightarrow$ $C_x = \frac{1}{2} ||y(x) - a^L(x)||^2$, wobei $a^L(x)$ der Vektor des letzten Layers bei Eingabe $x$ beschreibt
 \end{itemize}
 
 \subsubsection{Hadamard Produkt $s \odot t$}
@@ -27,13 +34,65 @@
 \subsection{Die vier fundamentalen Gleichungen der Backpropagation}
 
 \begin{itemize}
-  \item $\delta_j^l \equiv \frac{\partial C}{\partial z_j^l}$ bezeichnet den \emph{Fehler} im $j$ten Neuron im $l$ten Layer
-  \item Backpropagation berechnet $\delta_j^l$ und projiziert den Fehler auf $\frac{\partial C}{\partial w_{jk}^l}$ und $\frac{\partial C}{\partial b_j^l}$
+  \item $\delta_j^l \equiv \frac{\partial C_x}{\partial z_j^l}$ bezeichnet den \emph{Fehler} im $j$ten Neuron im $l$ten Layer
+  \begin{itemize}
+    \item \underline{Veranschaulichung:}
+    \begin{enumerate}
+      \item an dem $j$ten Neuron im $l$ten Layer kommt eine Eingabe $z_j^l$ an
+      \item es wird eine kleine Veränderung $\Delta z_j^l$ vorgenommen, sodass die Kosten minimiert werden
+      \begin{itemize}
+        \item wenn $\frac{\partial C_x}{\partial z_j^l}$ einen großen (negativen) Wert hat, dann können die Kosten reduziert werden, wenn $\Delta z_j^l$ entgegengesetzt zur Steigung gewählt wird
+        \item wenn $\frac{\partial C_x}{\partial z_j^l}$ nahe an Null, dann ist auch $\Delta z_j^l$ nahe bei Null
+      \end{itemize}
+      \item anstatt $\sigma(z^l_j)$ wird $\sigma(z_j^l + \Delta z_j^l)$ weitergeleitet
+    \end{enumerate}
+  \end{itemize}
+  \item Backpropagation berechnet $\delta_j^l$ und projiziert den Fehler auf $\frac{\partial C_x}{\partial w_{jk}^l}$ und $\frac{\partial C_x}{\partial b_j^l}$
 \end{itemize}
 
 \begin{enumerate}
-  \item \textbf{Der Fehler im Output-Layer, $\delta^L$:}
+  \item \textbf{Der Fehler $\delta^L$ im Output-Layer:}
   \begin{itemize}
-      \item wadawd
+    \item die Komponenten von $\delta^L$ sind gegeben durch $\delta^L_j = \frac{\partial C_x}{\partial a_j^L}\sigma'(z^L_j)$
+    \item $\frac{\partial C_x}{\partial a_j^L} = (a_j - y_j)$ beschreibt, wie schnell sich die Kosten in der $j$ten Ausgabe verändern
+    \item $\Rightarrow$ wenn $C_x$ unabhängig von dem Ausgabeneuron $j$, dann ist $\delta_j^l$ klein
+    \item \underline{Matrix-Schreibweise:} $\delta^L = \nabla_a C_x \odot \sigma'(z^L)$
+  \end{itemize}
+  \item \textbf{Der Fehler $\delta^l$ in Abhängigkeit zu $\delta^{l+1}$:}
+  \begin{itemize}
+    \item $\delta^l = ({(w^{l+1})}^T \cdot \delta^{l+1}) \odot \sigma'(z^l)$
+    \item Angenommen, wir kennen den Fehler $\delta^{l+1}$
+    \item das Transponieren der Matrix $w^{l+1}$ kann als rückwärts durch das Netz gehen verstanden werden
+  \end{itemize}
+  \item \textbf{Abhängigkeit des Fehlers $\delta^l_j$ zur Kostenveränderung bzgl.\ des Bias $b^l_j$:}
+  \begin{itemize}
+    \item $\frac{\partial C_x}{\partial b^l_j} = \delta^l_j$
+  \end{itemize}
+  \item \textbf{Abhängigkeit des Fehlers $\delta^l_j$ zur Kostenveränderung bzgl.\ des Gwichts $w^l_{jk}$:}
+  \begin{itemize}
+    \item $\frac{\partial C_x}{\partial w^l_{jk}} = a_k^{l-1} \delta_j^l$
   \end{itemize}
 \end{enumerate}
+
+\subsection{Algorithmus}
+
+\begin{enumerate}
+  \item fülle das Netz mit beliebigen Gewichten und Bias-Werten
+  \item setze $x$ als Eingabe des Netzes
+  \item berechne $z^l$ und $a^l = \sigma(z^l)$ für jeden Layer
+  \item bestimme den Output-Error $\delta^L$ über die erste Gleichung
+  \item bestimme den Fehler $\delta^l$ rückwärts für jeden Layer $l$ mit $l = \lbrace L-1, L-2, \ldots, 2 \rbrace$
+  \item berechne die Gradienten $\frac{\partial C_x}{\partial w^l_{jk}}$ und $\frac{\partial C_x}{\partial b^l_j}$
+\end{enumerate}
+
+\begin{itemize}
+  \item für eine zufällige Anzahl $m$ an Trainingsdaten gilt dann (Stochastic gradient descent):
+  \begin{enumerate}
+    \item berechne den Fehler $\delta^{x,l}$ in jeder Schicht $l$ und für jede Eingabe $x$
+    \item verändere die Gewichte anhand folgender Regel:
+    \begin{itemize}
+      \item $w^l \rightarrow w^l - \frac{\eta}{m} \sum_x \delta^{x,l}{(a^{x,l-1})}^T$
+      \item $b^l \rightarrow b^l - \frac{\eta}{m} \sum_x \delta^{x,l}$ \todo{warum?}
+    \end{itemize}
+  \end{enumerate}
+\end{itemize}
