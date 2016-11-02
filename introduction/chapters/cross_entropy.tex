@@ -2,7 +2,7 @@
 
 \begin{itemize}
   \item Netz lernt wohlmöglich ziemlich langsam (braucht viele Iterationen, um die Trainingsdaten gut zu approximieren)
-  \item Netz lernt langsam, wenn $\frac{\partial C}{\partial w}$ und $\frac{\partial C}{\partial b}$ klein
+  \item Netz lernt langsam, wenn $\frac{\partial C}{\partial w} = (a-y)\sigma'(z)x$ und $\frac{\partial C}{\partial b} = (a-y)\sigma'(z)$ klein
   \item $\Rightarrow$ $\sigma'(z)$ ist klein für große/kleine $z$-Werte
   \item kann verbessert werden, in dem eine andere Kostenfunktion benutzt wird $\Rightarrow$ \textbf{Cross-Entropy}:
 \end{itemize}
@@ -17,5 +17,13 @@
   \item $C > 0$:
   \begin{itemize}
     \item $y, a, (1-y), (1 - a) \in [0,1]$
+    \item $\ln x$ ist negativ für $x \in [0,1]$
   \end{itemize}
+\item wenn $a = \sigma(z) \approx y$, dann ist $C \approx 0$
+  \item $\frac{\partial C}{\partial w_j} = - \frac{1}{n} \sum_x {( \frac{y}{\sigma(z)} - \frac{1-y}{1-\sigma(z)} )} \frac{\partial \sigma}{\partial w_j} = - \frac{1}{n} {( \frac{y}{\sigma(z)} - \frac{1-y}{1-\sigma(z)} )} \sigma'(z) x_j = \frac{1}{n} \sum_x \frac{\sigma'(z)x_j \cdot (\sigma(z) - y)}{\sigma(z)(1-\sigma(z))}$
+  \item mit $\sigma(z)= \frac{1}{1 + e^{-z}}$ ergibt sich $\sigma'(z)=\sigma(z)(1-\sigma(z))$
+  \item $\Rightarrow$ $\frac{\partial C}{\partial w_j} = \frac{1}{n} \sum_x x_j (\sigma(z) - y)$
+  \item die Gechwindigkeit, mit der das Gewicht lernt, ist abhängig ist abhängig von dem Fehler in der Ausgabe $\sigma(z)-y$
+  \item für den Bias ergibt sich $\frac{\partial C}{\partial b} = \frac{1}{n} \sum_x (\sigma(z) - y)$
+  \item $\Rightarrow$ Lernrate ist unabhängig von $\sigma'(z)$
 \end{itemize}

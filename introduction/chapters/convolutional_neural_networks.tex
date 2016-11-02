@@ -1,0 +1,23 @@
+\subsection{Convolutional Neural Networks}
+
+\begin{itemize}
+  \item nutzt die räumliche Anordnung von Bildern aus
+  \item besteht aus drei grundlegenden Ideen:
+  \begin{enumerate}
+    \item \textbf{Local Receptive Fields:}
+    \begin{itemize}
+      \item anstatt ein Bild (z.B. $28 \times 28$) als einen langen vertikalen Vektor ($784$ Komponenten) zu beschreiben, wird es als eine Matrix aus Neuronen betrachtet
+      \item nicht jedes Eingabe-Neuron wird mit jedem Hidden Neuron in der ersten Schicht verbunden, sondern nur eine kleine Region der Eingabe (z.B. $5 \times 5$)
+      \item diese Region heißt \emph{local receptive field} für das Hidden-Neuron
+      \item die Region wird pixelweise von links nach rechts und von oben nach unten bewegt und jeweils mit einem Hidden-Neuron verbunden ($28 \times 28$ Bild, $5 \times 5$ Region führt zu $24 \times 24$ Hidden-Neuronen)
+      \item es kann auch nicht pixelweise verschoben werden (z.B. um 2 Pixel)
+    \end{itemize}
+    \item \textbf{Shared Weights and Biases:}
+    \begin{itemize}
+      \item jedes Neuron besitzt einen Bias und $5 \times 5$ Gewichte zu seinem Local Reeptive Field
+      \item \underline{jedes Neuron in der ersten Schicht besitzt die gleichen Gewichte und den gleichen Bias!}
+      \item $\Rightarrow$ alle Neuronen in der ersten Schicht sollen das gleiche Merkmal lernen, nur an anderen Positionen
+      \item Die Verbindung zwischen Eingabe und erstem Hidden-Layer heißt daher auch oft \emph{Feature Map}
+    \end{itemize}
+  \end{enumerate}
+\end{itemize}
