@@ -12,6 +12,7 @@ learning_rate = 0.001
 training_iters = 200000
 batch_size = 128
 display_step = 10
+model_path = 'convolutional.ckpt'
 
 # network parameters
 n_input = img_size * img_size
