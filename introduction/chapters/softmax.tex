@@ -1,0 +1,17 @@
+\section{Softmax}
+
+\begin{itemize}
+  \item Alternative zu Sigmoid Neurons für den Output-Layer
+  \item $a^L_j = \frac{e^{z_j^L}}{\sum_k e^{z_k^L}}$
+  \item $\Rightarrow$ Output eines Neurons wird von den anderen Neuronen der Ausgabe beeinflusst
+  \item Output der Neuronen wird immer zu $1$ aufsummiert: $\sum_j a^L_j = \frac{\sum_j e^{z_j^L}{\sum_k e^{z_k^L}}} = 1$
+  \item $\Rightarrow$ Ausgabe kann als Wahrscheinlichkeitsverteilung verstanden werden
+  \item Es lässt sich eine ähnliche Kostenfunktion aufstellen zu den Sigmoid Neurons mit Cross Entropy:
+  \begin{itemize}
+    \item $C = - \ln a^L_y$
+    \item \underline{Beispiel:} wir trainieren MNIST Bilder und lernen auf einem Bild mit einer 7, dann können die Kosten als $- \ln a^L_7$ beschrieben werden
+    \item $\frac{\partial C}{\partial b_j^L} = a^L_j - y_i$
+    \item $\frac{\partial C}{\partial w^L_{jk}} = a^{L-1}_k (a^L_j - y_i)$
+    \item $\delta^L_j = a^L_j - y_j$
+  \end{itemize}
+\end{itemize}

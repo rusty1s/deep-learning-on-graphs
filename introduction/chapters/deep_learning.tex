@@ -1,0 +1,26 @@
+\section{Deep learning}
+
+\begin{itemize}
+  \item \emph{tiefe neuronale Netze}: ein Netz mit mindestens zwei Hidden-Layern
+\end{itemize}
+
+\subsection{Vanishing gradient}
+
+\begin{itemize}
+  \item \underline{Beobachtung:} tiefe Netze leisten nicht unbedingt bessere Ergebnisse
+  \item spätere Schichten im Netzwerk lernen schneller als vorangegangene
+  \item $||\delta^1||$ und $||\delta^2||$ beschreiben (ungefähr) die Geschwindigkeit mit der das Netz in der ersten und zweiten Schicht lernt
+  \item \underline{Veranschaulichung:}
+  \begin{itemize}
+    \item ein neuronales Netz mit 6 Layern mit jeweils einem Neuron
+    \item $\frac{\partial C}{\partial b_1} = \sigma'(z_1) \times w_2 \times \sigma'(z_2) \times \cdots \times w_4 \times \sigma'(z_4) \times \frac{\partial C}{\partial a_4}$
+    \item das Netz wird wird mit Gewichten $\in [0,1]$ initialisert $\Rightarrow |w_j| \leq 1$ und $\sigma' \leq \frac{1}{4}$
+    \item damit ist $w_i \sigma'(z_i) \leq \frac{1}{4}$
+    \item $\Rightarrow$ $\frac{\partial C}{\partial b_1}$ ist um minimal um einen Faktor $16$ kleiner als $\frac{\partial C}{\partial b_3}$
+  \end{itemize}
+  \item \emph{Exploding gradient}: Das gleiche Problem, aber andersherum
+  \begin{itemize}
+    \item Gewichte sind nicht auf $1$ eingeschränkt, dann wird $\frac{\partial C}{\partial b_i}$ exponentiell groß
+  \end{itemize}
+\item es ist in der Regel schwer zu erreichen, dass $|w \sigma'(z)| \geq 1$, da $z$ ebenfalls von $w$ abhängt
+\end{itemize}
