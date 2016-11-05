@@ -7,6 +7,7 @@
 * [Neural Networks and Deep Learning](http://www.neuralnetworksanddeeplearning.com) (Free Online Book)
 * [Deep Learning Weekly](http://www.deeplearningweekly.com) (Newsletter)
 * [TensorFlow](https://www.tensorflow.org) (Open Source Library)
+* [TensorFlow in a Nutshell](http://camron.xyz)
 
 ## Applications
 
