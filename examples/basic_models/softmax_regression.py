@@ -51,6 +51,5 @@ for _ in range(1000):
     sess.run(train_step, feed_dict={ x: batch_images, y: batch_labels })
 
 # run the test
-print('Train accuracy:', sess.run(accuracy, feed_dict= { x: mnist.train.images, y: mnist.train.labels }))
-
-print('Test accuracy:', sess.run(accuracy, feed_dict= { x: mnist.test.images, y: mnist.test.labels }))
+print('Accuracy on train images:', sess.run(accuracy, feed_dict= { x: mnist.train.images, y: mnist.train.labels }))
+print('Accuracy on test images:', sess.run(accuracy, feed_dict= { x: mnist.test.images, y: mnist.test.labels }))

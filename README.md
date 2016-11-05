@@ -9,6 +9,11 @@
 * [TensorFlow](https://www.tensorflow.org) (Open Source Library)
 * [TensorFlow in a Nutshell](http://camron.xyz)
 
+## TensorFlow Tutorials
+
+* [Official](https://www.tensorflow.org/versions/r0.11/tutorials/index.html)
+* [Examples](https://github.com/aymericdamien/TensorFlow-Examples)
+
 ## Applications
 
 ### Object Detection

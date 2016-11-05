@@ -2,3 +2,5 @@
 log_graph
 *.aux
 *.log
+*.ckpt*
+checkpoint
