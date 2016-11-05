@@ -16,8 +16,7 @@
 * Distance detection of objects
 * Detect friends on images based on their facebook profiles
 * Detect emotions from photos and represent them with an emoji
-* Detect rotations of objects and replace them with objects that have a similar 
-  rotation
+* Detect rotations/poses of objects and replace them with objects that have a similar rotation
 
 ### Vector Graphics
 
@@ -25,6 +24,7 @@
 * Convert pixelbased images to vectorbased images
 * [Fake Chine Characters in Vector Format with TensorFlow](http://blog.otoro.net/2015/12/28/recurrent-net-dreams-up-fake-chinese-characters-in-vector-format-with-tensorflow/)
 * Create responsive Svgs via Attention Detection (see [SVG has more potential](https://madebymike.com.au//writing/svg-has-more-potential/))
+* **Comparison:** Performannce and Speed on different networking tasks like classification on pixelbased images and pixelbased images converted to vector graphics
 
 ### Fonts
 
