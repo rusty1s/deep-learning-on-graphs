@@ -12,6 +12,7 @@ test_images, test_labels = mnist.test.next_batch(200)
 img_size = 28
 img_size_flat = img_size * img_size
 
+# placeholders for training and test images, that we can input into the network
 train_x = tf.placeholder(tf.float32, [None, img_size_flat])
 test_x = tf.placeholder(tf.float32, [img_size_flat])
 
@@ -35,6 +36,7 @@ test_x = tf.placeholder(tf.float32, [img_size_flat])
 #    things are more likely independent of the input.
 # 2. We convert that evidence into probabilities.
 
+# variables for weights and bias, that TensorFlow can modify
 weight = tf.Variable(tf.zeros([img_size_flat, 10]))
 bias = tf.Variable(tf.zeros([10]))
 
