@@ -1,13 +1,16 @@
 # Master-Thesis
 
+![TU Dortmund](https://github.com/rusty1s/thesis/tud_logo.pdf)
+![Lehrstuhl für Graphische Systeme](https://github.com/rusty1s/thesis/fi_logo.pdf)
+
 * **Universität:** TU Dortmund
 * **Fakultät:** Lehrstuhl für Graphische Systeme
 
-# Anwendbarkeit von Convolutional Neural Networks auf Graph-Repräsentationen für Bildern
+# Anwendbarkeit von Convolutional Neural Networks auf Graph-Repräsentationen von Bildern
 
 ## Inhalt
 
-* verschiedene **Graph-Repräsentationen für Bilder**
+* verschiedene **Graph-Repräsentationen von Bildern**
   * Segmentierungsgraphen
   * Superpixel
     * verschiedene Superpixelberechnungsverfahren
