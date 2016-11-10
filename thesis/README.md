@@ -11,6 +11,7 @@
   * Segmentierungsgraphen
   * Superpixel
     * verschiedene Superpixelberechnungsverfahren
+  * Vektorgraphiken als Graph- bzw. Baum-Repräsentation
 * **Convolutional Neural Networks auf Graphen**
   * Verfahren
 * **Convolutional Neural Networks auf Graph-Repräsentationen von Bildern**
