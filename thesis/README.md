@@ -3,18 +3,18 @@
 * Universität: TU Dortmund
 * Fakultät: Lehrstuhl für Graphische Systeme
 
-# Anwendbarkeit von Convolutional Neural Networks für Graphen auf Bilder
+# Anwendbarkeit von Convolutional Neural Networks auf Graph-Repräsentationen von Bildern
 
 ## Inhalt
 
-* verschiedene Graph-Repräsentationen für Bilder
+* verschiedene **Graph-Repräsentationen für Bilder**
   * Segmentierungsgraphen
   * Superpixel
     * verschiedene Superpixelberechnungsverfahren
-* Convolutional Neural Networks für Graphen
+* **Convolutional Neural Networks für Graphen**
   * Klassifikation
   * Segmentierung
-* Evaluation
+* **Evaluation**
   * Performance unterschiedlicher Graph-Repräsentationsverfahren
   * Performance CNN auf Graphen gegenüber CNN auf Bildern
   * Laufzeit CNN auf Graphen gegenüber CNN auf Bildern
@@ -22,5 +22,5 @@
 
 ## Motivation
 
-* Potenzial sehr gute Resultate zu liefern
+* Potential sehr gute Resultate zu liefern
 * CNNs auf Graphen sind im Allgemein kleiner als CNNs auf Bildern
