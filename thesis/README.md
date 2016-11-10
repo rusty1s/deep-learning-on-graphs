@@ -1,8 +1,5 @@
 # Master-Thesis
 
-![TU Dortmund](https://github.com/rusty1s/thesis/tud_logo.pdf)
-![Lehrstuhl für Graphische Systeme](https://github.com/rusty1s/thesis/fi_logo.pdf)
-
 * **Universität:** TU Dortmund
 * **Fakultät:** Lehrstuhl für Graphische Systeme
 
@@ -16,8 +13,9 @@
     * verschiedene Superpixelberechnungsverfahren
 * **Convolutional Neural Networks für Graphen**
   * Verfahren
-  * Problem: Klassifikation
-  * Problem: Segmentierung
+* **Convolutional Neural Networks für Graph-Repräsentationen von Bildern**
+  * *Problem:* Klassifikation
+  * *Problem:* Segmentierung
 * **Evaluation**
   * Performance unterschiedlicher Graph-Repräsentationsverfahren
   * Performance CNN auf Graphen gegenüber CNN auf Bildern
