@@ -11,9 +11,9 @@
   * Segmentierungsgraphen
   * Superpixel
     * verschiedene Superpixelberechnungsverfahren
-* **Convolutional Neural Networks für Graphen**
+* **Convolutional Neural Networks auf Graphen**
   * Verfahren
-* **Convolutional Neural Networks für Graph-Repräsentationen von Bildern**
+* **Convolutional Neural Networks auf Graph-Repräsentationen von Bildern**
   * *Problem:* Klassifikation
   * *Problem:* Segmentierung
 * **Evaluation**
