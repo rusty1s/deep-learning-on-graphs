@@ -1,7 +1,7 @@
 # Master-Thesis
 
-* Universität: TU Dortmund
-* Fakultät: Lehrstuhl für Graphische Systeme
+* **Universität:** TU Dortmund
+* **Fakultät:** Lehrstuhl für Graphische Systeme
 
 # Anwendbarkeit von Convolutional Neural Networks auf Graph-Repräsentationen für Bildern
 
