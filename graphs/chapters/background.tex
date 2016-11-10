@@ -1,0 +1,24 @@
+\section{Grundlagen}
+
+\begin{itemize}
+  \item Graph $G = (V, E)$ mit $V = \lbrace v_1, \ldots, v_n \rbrace$ und $E \subseteq V \times V$, wobei $n$ Anzahl der Knoten und $m$ Anzahl der Kanten
+  \item Adjazenzmatrix $A$ mit Größe $n \times n$, wobei $A_{i,j} = 1$, falls eine Kante von $v_i$ nach $v_j$ existiert (sonst $0$) $\Rightarrow$ $v_i$ und $v_j$ sind adjazent
+  \item ein Weg ist eine Sequenz von Knoten, bei der benachbarte Knoten adjazent sind
+  \item $d(u,v)$ beschreibt die minimale Distanz zwischen von $u$ nach $v$
+  \item $N_1(v)$ beschreibt die 1-Nachbarschaft um einen Knoten, d.h.\ alle Knoten die adjazent sind zu $v$
+\end{itemize}
+
+\subsection{Beschriftung und Partitionierung}
+
+\begin{itemize}
+  \item eine Graph-Beschriftung $l: V \rightarrow S$ bildet einen Knoten auf eine sortierbare Einheit ab
+  \item induziert ein \emph{Ranking} $r: V \rightarrow \lbrace 1, \ldots, |V| \rbrace$ mit $r(u) < r(v)$ genau dann, wenn $l(u) > l(v)$
+  \item falls $l$ injektiv, dann gibt es eine totale Ordnung der Knoten in $G$ und eine eindeutige Adjazenzmatrix $A^l$, bei der die Knoten die Position $r(v)$ haben
+  \item eine Graph-Beschriftung induziert eine Partionierung $\lbrace V_1, \ldots V_k \rbrace$ mit $u, v \in V_i$ falls $l(u) = l(v)$
+  \item \underline{Metriken:}
+    \begin{itemize}
+      \item Anteil an kürzesten Wegen von $v$ zu $v$ (\emph{Betweeness centrality})
+      \item Grad der Knoten (Anzahl adjazenter Knoten)
+      \item \ldots
+    \end{itemize}
+\end{itemize}

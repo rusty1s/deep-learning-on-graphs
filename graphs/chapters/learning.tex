@@ -1,0 +1,39 @@
+\section{Lernen von Graphen}
+
+\subsection{Knotenauswahl}
+
+\begin{itemize}
+  \item Auswahl an Knoten, für die ein Receptive Field erstellt werden soll
+  \item \underline{Gegeben:} Graph-Beschreibung $l$, Abstand $s$, Anzahl $w$ an Reciptive Fields
+\end{itemize}
+
+\begin{enumerate}
+  \item sortiere die Knoten auf Basis von $l$
+  \item iteriere über die sortierte Knotenmenge mit Abständen $s$, bis $w$ Knoten ausgewählt wurden
+\end{enumerate}
+
+\subsection{Nachbarschaftssuche}
+
+\begin{itemize}
+  \item \underline{Gegeben:} Knoten $v$, Größe $k$ des Receptive Fields
+\end{itemize}
+
+\begin{enumerate}
+  \item setze initiale Knotenmenge $N$ auf $v$
+  \item wiederhole bis $|N| > k$:
+    \begin{enumerate}
+      \item berechne für alle Knoten $i$ in $N$ die Nachbarschaften $N_1(i)$ und füge sie zu $N$ hinzu
+    \end{enumerate}
+\end{enumerate}
+
+\begin{itemize}
+  \item \underline{Bemerkung:} im Allgemein gilt $|N| \neq k$
+\end{itemize}
+
+\subsection{Normalisierung}
+
+\begin{itemize}
+  \item \underline{Gegeben:} Menge von Graphen $\mathcal{G}$ mit $k$ Knoten, Distanzmetriken für Matrizen $d_A$ und Graphen $d_G$
+  \item \underline{Optimierungsproblem:} $\min_l \sum_{G \in \mathcal{G}} \sum_{G' \in \mathcal{G}} {( d_A(A^l(G), A^l(G') - d_g(G, G')) )}$
+  \item \todo{weitermachen}
+\end{itemize}
