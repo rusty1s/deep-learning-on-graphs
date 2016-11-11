@@ -8,7 +8,7 @@
   \begin{itemize}
     \item Grad der Knoten, d.h.\ Anzahl adjazenter Knoten (\underline{gewichtet:} Auswärtsgrad – Einwärtsgrad)
     \item \emph{Betweeness centrality}: $g(v) = \sum_{s \neq v \neq t} \frac{\sigma_{st}(v)}{\sigma{st}}$, wobei $\sigma_{st}$ die Anzahl an kürzesten Pfaden von $s$ nach $t$ ist und $\sigma_{st}$ die Anzahl dieser Pfade, die durch $v$ gehen
-    \item \emph{Weisfeiler-Lehman Algorithmus} \todo{was ist das?}
+    \item \emph{Weisfeiler-Lehman Algorithmus}
     \item \emph{Page-Rank}
     \item \emph{Eigenvektor-Zentralität}
   \end{itemize}
@@ -41,7 +41,31 @@
 \subsection{Normalisierung}
 
 \begin{itemize}
-  \item \underline{Gegeben:} Menge von Graphen $\mathcal{G}$ mit $k$ Knoten, Distanzmetriken für Matrizen $d_A$ und Graphen $d_G$
-  \item \underline{Optimierungsproblem:} $\min_l \sum_{G \in \mathcal{G}} \sum_{G' \in \mathcal{G}} {( d_A(A^l(G), A^l(G') - d_g(G, G')) )}$
-  \item \todo{weitermachen}
+  \item Aus einem Nachbarschaftsgraphen soll ein Receptive Field konstruiert werden
+  \item Knoten werden anhand eines Graph-Labelings $l$ sortiert
+  \begin{itemize}
+    \item ein Receptive Field für die Knoten (Größe $k$) und ein Receptive Field für die Kanten (Größe $k \times k$)
+    \item jedes Knoten- oder Kantenattribut wird in einem Receptive Field abgespeichert (z.B.\ Farbe)
+  \end{itemize}
+  \item \underline{Gegeben:} Menge von Graphen $\mathcal{G}$ mit $k$ Knoten, Distanzmetriken für $k \times k$ Matrizen $d_A$ und Graphen $d_G$ für $k$ Knoten
+  \begin{itemize}
+    \item $d_A$, z.B.\ \emph{Hamming-Abstand}: $d_A(x, y) = | \lbrace j \in \lbrace 1, \ldots, N \rbrace | x_j \neq y_j \rbrace |$
+    \item \underline{Beispiel:} $12345$ und $13344 \rightarrow 2$
+    \item $d_G$: z.B.\ \emph{Edit distance}
+  \end{itemize}
+  \item \underline{Optimierungsproblem über $l$:} $\min_l \sum_{G \in \mathcal{G}} \sum_{G' \in \mathcal{G}} {( d_A(A^l(G), A^l(G') - d_g(G, G')) )}$
+  \item $\Rightarrow$ für beliebige Graphen $G$ und $G'$ soll die Ähnlichkeit dieser Graphen gleich der Ähnlichkeit der Graphen im Vektorraum sein (basierend auf den Adjazenzmatrizen der Graphen)
+  \item $\Rightarrow$ Problem is NP-schwer
+  \item \underline{Alternative:} wähle aus einer Menge von Labelings die beste zu einer gegebenen Menge von Graphen
+  \begin{itemize}
+    \item $\lbrace (G_1, G'_1), \ldots, (G_N, G'_N)$ eine zufällge Auswahl an Graphpaaren von $\mathcal{G}$
+    \item wähle das Labeling $l$ so, dass $\sum_{i=1}^N \frac{d_A(A^l(G_i), A^l(G'_i))}{N}$ minimal
+  \end{itemize}
+  \item Labelings werden nur berechnet für Knoten gleicher Distanz zum Startknoten $v$
+  \item Labelings sind im Allgemeinen nicht injektiv $\Rightarrow$ sortiere anhand lexikographischer maximaler Adjazenzmatrizen
 \end{itemize}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=.9\textwidth]{images/normalization}
+\end{figure}
