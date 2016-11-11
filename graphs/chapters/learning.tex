@@ -4,6 +4,14 @@
 
 \begin{itemize}
   \item Auswahl an Knoten, für die ein Receptive Field erstellt werden soll
+  \item Graph-Beschreibung $l$ – \underline{Metriken}:
+  \begin{itemize}
+    \item Grad der Knoten, d.h.\ Anzahl adjazenter Knoten (\underline{gewichtet:} Auswärtsgrad – Einwärtsgrad)
+    \item \emph{Betweeness centrality}: $g(v) = \sum_{s \neq v \neq t} \frac{\sigma_{st}(v)}{\sigma{st}}$, wobei $\sigma_{st}$ die Anzahl an kürzesten Pfaden von $s$ nach $t$ ist und $\sigma_{st}$ die Anzahl dieser Pfade, die durch $v$ gehen
+    \item \emph{Weisfeiler-Lehman Algorithmus} \todo{was ist das?}
+    \item \emph{Page-Rank}
+    \item \emph{Eigenvektor-Zentralität}
+  \end{itemize}
   \item \underline{Gegeben:} Graph-Beschreibung $l$, Abstand $s$, Anzahl $w$ an Reciptive Fields
 \end{itemize}
 
