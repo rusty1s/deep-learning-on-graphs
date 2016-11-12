@@ -9,6 +9,10 @@
 * [TensorFlow](https://www.tensorflow.org) (Open Source Library)
 * [TensorFlow in a Nutshell](http://camron.xyz)
 
+##Python Tutorials
+
+* [Learn Python the hard way](https://learnpythonthehardway.org/book/)
+
 ## TensorFlow Tutorials
 
 * [Official](https://www.tensorflow.org/versions/r0.11/tutorials/index.html)

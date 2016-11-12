@@ -20,10 +20,9 @@ n_hidden_1 = 256
 n_hidden_2 = 256
 n_output = 10
 
-# model creation function
+# model creation function with relu (perceptron) activation
 def multilayer_perceptron(x, weights, biases):
     layer_1 = tf.add(tf.matmul(x, weights['h1']), biases['b1'])
-    # activation function is relu for perceptrons
     layer_1 = tf.nn.relu(layer_1)
 
     layer_2 = tf.add(tf.matmul(layer_1, weights['h2']), biases['b2'])

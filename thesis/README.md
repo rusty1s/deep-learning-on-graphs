@@ -15,7 +15,7 @@
 * **Convolutional Neural Networks auf Graphen**
   * Verfahren
 * **Convolutional Neural Networks auf Graph-Repräsentationen von Bildern**
-  * *Problem:* Klassifikation
+  * *Problem:* Klassifikation (bessere Evaluationsmethoden)
   * *Problem:* Segmentierung
 * **Evaluation**
   * Performance unterschiedlicher Graph-Repräsentationsverfahren
