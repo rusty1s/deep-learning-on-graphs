@@ -14,6 +14,10 @@
 * [Official](https://www.tensorflow.org/versions/r0.11/tutorials/index.html)
 * [Examples](https://github.com/aymericdamien/TensorFlow-Examples)
 
+## Paper
+
+* [Dropout: A Simple Way to Prevent Neural Networks from Overfitting](https://www.cs.toronto.edu/~hinton/absps/JMLRdropout.pdf)
+
 ## Applications
 
 ### Object Detection
