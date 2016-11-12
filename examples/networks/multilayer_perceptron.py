@@ -22,11 +22,11 @@ n_output = 10
 
 # model creation function
 def multilayer_perceptron(x, weights, biases):
-    layer_1 = tf.add(tf.matmul(x, weights['h1']), biases['b1'])
+    layer_1 = tf.add(tf.matmul(x, weights['1']), biases['1'])
     # activation function is relu for perceptrons
     layer_1 = tf.nn.relu(layer_1)
 
-    layer_2 = tf.add(tf.matmul(layer_1, weights['h2']), biases['b2'])
+    layer_2 = tf.add(tf.matmul(layer_1, weights['2']), biases['2'])
     layer_2 = tf.nn.relu(layer_2)
 
     out_layer = tf.add(tf.matmul(layer_2, weights['out']), biases['out'])
@@ -37,14 +37,14 @@ x = tf.placeholder(tf.float32, [None, n_input])
 y = tf.placeholder(tf.float32, [None, n_output])
 
 weights = {
-    'h1': tf.Variable(tf.random_normal([n_input, n_hidden_1])),
-    'h2': tf.Variable(tf.random_normal([n_hidden_1, n_hidden_2])),
+    '1': tf.Variable(tf.random_normal([n_input, n_hidden_1])),
+    '2': tf.Variable(tf.random_normal([n_hidden_1, n_hidden_2])),
     'out': tf.Variable(tf.random_normal([n_hidden_2, n_output])),
 }
 
 biases = {
-    'b1': tf.Variable(tf.random_normal([n_hidden_1])),
-    'b2': tf.Variable(tf.random_normal([n_hidden_2])),
+    '1': tf.Variable(tf.random_normal([n_hidden_1])),
+    '2': tf.Variable(tf.random_normal([n_hidden_2])),
     'out': tf.Variable(tf.random_normal([n_output])),
 }
 
