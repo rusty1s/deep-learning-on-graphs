@@ -27,3 +27,9 @@
 
 * Potential sehr gute Resultate zu liefern
 * CNNs auf Graphen sind im Allgemein kleiner als CNNs auf Bildern
+
+## Offene Fragen
+
+* Python 2 vs. Python 3?
+* Patchy-SAN: eigene Implementation oder nachfragen?
+* Wie verarbeiten andere CNNs Superpixel?
