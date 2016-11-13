@@ -7,6 +7,7 @@
 * [Graph  Kernels](https://edoc.ub.uni-muenchen.de/7169/1/Borgwardt_KarstenMichael.pdf)
 * [Image Classification with Segmenation Graph Kernels](http://www.di.ens.fr/~fbach/harchaoui_bach_cvpr07.pdf)
 * [Deep Graph Kernels](http://dl.acm.org/citation.cfm?id=2783417)
+*  [Pratical graph isomorphism, II](https://arxiv.org/pdf/1301.1493v1.pdf)
 
 ## Frameworks
 
