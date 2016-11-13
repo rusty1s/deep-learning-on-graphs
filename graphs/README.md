@@ -13,4 +13,4 @@
 
 * Patchy-SAN
 * [nauty](http://pallini.di.uniroma1.it)
-  * [Python Wrapper](https://web.cs.dal.ca/~peter/software/pynauty/html/install.html)
+  * [Python Wrapper](https://web.cs.dal.ca/~peter/software/pynauty/html/index.html)
