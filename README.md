@@ -21,6 +21,7 @@
 ## Paper
 
 * [Dropout: A Simple Way to Prevent Neural Networks from Overfitting](https://www.cs.toronto.edu/~hinton/absps/JMLRdropout.pdf)
+*  [A method for stochastic optimization](https://arxiv.org/pdf/1412.6980v8.pdf)
 
 ## Applications
 
