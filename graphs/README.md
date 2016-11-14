@@ -14,3 +14,8 @@
 * Patchy-SAN
 * [nauty](http://pallini.di.uniroma1.it)
   * [Python Wrapper](https://web.cs.dal.ca/~peter/software/pynauty/html/index.html)
+
+## Algorithms
+
+* [Hierarchies of Partitions and Morphological Segmentation](http://dl.acm.org/citation.cfm?id=715394)
+  * Watershed transform framework for fast segmentation of large images into a given number of segments
