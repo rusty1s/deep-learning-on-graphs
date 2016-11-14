@@ -13,18 +13,21 @@
 \tableofcontents
 \cleardoublepage
 
-% Mathematische Notation
-\pagenumbering{gobble}
-\include{chapters/notation}
-\addcontentsline{toc}{chapter}{Mathematische Notation}
-\cleardoublepage
-
 % Kapitel
 \pagenumbering{arabic}
+
+\newglossaryentry{R}{name=\ensuremath{\mathbb{R}}, description={Menge der reellen Zahlen}}
+
+\chapter{lol}
+\gls{R} ist bla bla
 
 % Anhang
 \appendix
 \include{chapters/anhang}
+
+% Mathematische Notation
+\printglossary[title={Symbolverzeichnis}]
+\cleardoublepage
 
 % Abbildungsverzeichnis
 \listoffigures
