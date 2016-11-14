@@ -10,7 +10,6 @@
 * [Superpixel graph label transfer with learned distance metric](http://users.cecs.anu.edu.au/~sgould/papers/eccv14-spgraph.pdf)
 * [Harmony Potentials for Joint Classification and Segmentation](http://www.cat.uab.es/~joost/papers/cvpr2010.pdf)
 * [On Parameter Learning in CRF-based Approaches to Object Class Image Segmentation](https://www.vision.ee.ethz.ch/en/publications/papers/proceedings/eth_biwi_00742.pdf)
-* [PatchMatchGraph: Building a Graph of Dense Patch Correspondences for Label Transfer](https://www.vision.ee.ethz.ch/en/publications/papers/proceedings/eth_biwi_00742.pdf)
 
 ## Algorithms
 
