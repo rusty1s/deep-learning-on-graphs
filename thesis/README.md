@@ -14,6 +14,7 @@
   * Vektorgraphiken als Graph- bzw. Baum-Repräsentation
 * **Convolutional Neural Networks auf Graphen**
   * Verfahren
+    * Multi-Scale Feature Maps
 * **Convolutional Neural Networks auf Graph-Repräsentationen von Bildern**
   * *Problem:* Klassifikation (bessere Evaluationsmethoden)
   * *Problem:* Segmentierung
