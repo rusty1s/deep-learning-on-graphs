@@ -1,36 +1,48 @@
-% main.tex
 \include{header}
+
 \begin{document}
+
 \selectlanguage{german}
-\include{kapitel/titelseite}
+
+% Titelseite
+\include{chapters/titelseite}
 \blankpage
+
+% Inhaltsverzeichnis
 \pagenumbering{roman}
 \tableofcontents
 \cleardoublepage
-\pagenumbering{arabic}
+
+% Mathematische Notation
+\pagenumbering{gobble}
+\include{chapters/notation}
+\addcontentsline{toc}{chapter}{Mathematische Notation}
+\cleardoublepage
+
 % Kapitel
-\include{kapitel/einleitung}
-\include{kapitel/kapitel2}
+\pagenumbering{arabic}
+
 % Anhang
 \appendix
-\include{kapitel/anhang}
+\include{chapters/anhang}
+
 % Abbildungsverzeichnis
 \listoffigures
 \addcontentsline{toc}{chapter}{Abbildungsverzeichnis}
 \cleardoublepage
+
 % Algorithmenverzeichnis
 \listofalgorithms
 \addcontentsline{toc}{chapter}{Algorithmenverzeichnis}
 \cleardoublepage
+
 % Literaturverzeichnis
 \bibliographystyle{gerplain}
-\bibliography{literatur/diplom}
-\addcontentsline{toc}{chapter}{\bibname}
-% Erklaerung
-\thispagestyle{myheadings}
-\markboth{}{ERKLÄRUNG}
-\addcontentsline{toc}{chapter}{Erklärung}
-\include{kapitel/erklaerung}
+\bibliography{bibliography}
+\addcontentsline{toc}{chapter}{Literaturverzeichnis}
 \cleardoublepage
-\end{document}
 
+% Eidesstattliche Versicherung
+\includepdf{chapters/versicherung}
+
+\end{document}
