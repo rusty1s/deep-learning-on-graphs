@@ -8,6 +8,7 @@
 * [Convolutional Networks in Scene Labelling](http://cs231n.stanford.edu/reports/ashwinpp_final_report.pdf)
 * [Feedforward semantic segmentation with zoom-out features](http://www.cv-foundation.org/openaccess/content_cvpr_2015/papers/Mostajabi_Feedforward_Semantic_Segmentation_2015_CVPR_paper.pdf)
 * [Superpixel graph label transfer with learned distance metric](http://users.cecs.anu.edu.au/~sgould/papers/eccv14-spgraph.pdf)
+* [PatchMatchGraph: Building a Graph of Dense Patch Correspondences for Label Transfer](https://www.vision.ee.ethz.ch/en/publications/papers/proceedings/eth_biwi_00742.pdf)
 * [Harmony Potentials for Joint Classification and Segmentation](http://www.cat.uab.es/~joost/papers/cvpr2010.pdf)
 * [On Parameter Learning in CRF-based Approaches to Object Class Image Segmentation](https://www.vision.ee.ethz.ch/en/publications/papers/proceedings/eth_biwi_00742.pdf)
 
