@@ -1,4 +1,3 @@
-% header.tex
 \documentclass[a4paper,11pt,twoside,ngerman,color]{book}
 \usepackage[a4paper,left=3.5cm,right=2.5cm,bottom=3.5cm,top=3cm]{geometry}
 
@@ -7,6 +6,14 @@
 \usepackage[pdftex]{graphicx,color}
 \usepackage{amsmath,amssymb,subfigure}
 
+% erlaube inkludieren von PDF-Seiten
+\usepackage{pdfpages}
+
+% \usepackage[absolute, showboxes]{textpos}
+\usepackage[absolute]{textpos}
+\usepackage[ucmark=true]{glossaries}
+\glstoctrue
+\makeglossaries
 
 % Theorem-Umgebungen
 \usepackage[amsmath,thmmarks]{ntheorem}
@@ -20,7 +27,6 @@
 \usepackage{algorithmic}
 
 \usepackage{enumerate}
-
 
 % Bibtex deutsch
 \usepackage{bibgerm}
@@ -110,8 +116,8 @@
  \clearpage{\pagestyle{empty}\cleardoublepage}
 }
 
-% Keine einzelnen Zeilen beim Anfang eines Abschnitts (Schusterjungen)
+% Keine einzelnen Zeilen beim Anfang eines Abschnitts
 \clubpenalty = 10000
-% Keine einzelnen Zeilen am Ende eines Abschnitts (Hurenkinder)
-\widowpenalty = 10000 \displaywidowpenalty = 10000
-% EOF
+% Keine einzelnen Zeilen am Ende eines Abschnitts
+\widowpenalty = 10000
+\displaywidowpenalty = 10000

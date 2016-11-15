@@ -14,6 +14,7 @@
   * Vektorgraphiken als Graph- bzw. Baum-Repräsentation
 * **Convolutional Neural Networks auf Graphen**
   * Verfahren
+    * Multi-Scale Feature Maps
 * **Convolutional Neural Networks auf Graph-Repräsentationen von Bildern**
   * *Problem:* Klassifikation (bessere Evaluationsmethoden)
   * *Problem:* Segmentierung
@@ -33,3 +34,6 @@
 * Python 2 vs. Python 3?
 * Patchy-SAN: eigene Implementation oder nachfragen?
 * Wie verarbeiten andere CNNs Superpixel?
+* Welche Informationen werden bei den Segmentierungsgraphen zur Klassifizierung verwendet?
+* Wie kann die Form von Flächen vektorisiert werden?
+* Wie können SVGs über Graphen repräsentiert werden?

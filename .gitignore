@@ -2,5 +2,16 @@
 log_graph
 *.aux
 *.log
+*.loa
+*.lof
+*.thm
+*.toc
+*.glg
+*.glo
+*.gls
+*.glsdefs
+*.ist
+*.bbl
+*.blg
 *.ckpt*
 checkpoint
