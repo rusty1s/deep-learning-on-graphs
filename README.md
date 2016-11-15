@@ -12,6 +12,7 @@
 ##Python Tutorials
 
 * [Learn Python the hard way](https://learnpythonthehardway.org/book/)
+* [Style Guide](https://www.python.org/dev/peps/pep-0008/)
 
 ## TensorFlow Tutorials
 
