@@ -38,18 +38,13 @@
 * Convert svgs as graphs to input them in neural networks
 * Convert pixelbased images to vectorbased images
 * [Fake Chine Characters in Vector Format with TensorFlow](http://blog.otoro.net/2015/12/28/recurrent-net-dreams-up-fake-chinese-characters-in-vector-format-with-tensorflow/)
-* Create responsive Svgs via Attention Detection (see [SVG has more potential](https://madebymike.com.au//writing/svg-has-more-potential/))
+* Create responsive svgs via Attention Detection (see [SVG has more potential](https://madebymike.com.au//writing/svg-has-more-potential/))
 * **Comparison:** Performance and accuracy tests on different networking tasks like classification on pixelbased images and pixelbased images converted to vector graphics
 
 ### Fonts
 
 * Font Variant Generation
 * [Anaylizing 50k fonts using deep neural networks](https://erikbern.com/2016/01/21/analyzing-50k-fonts-using-deep-neural-networks/)
-
-### Web
-
-* CSS Prototype Generation from example
-* Animating svg figures like walking people
 
 ### Image Generation
 
@@ -58,3 +53,7 @@
 * [Image Analogies](https://github.com/awentzonline/image-analogies)
 * [Paint Photos in Style Of Any Artist](http://www.boredpanda.com/computer-deep-learning-algorithm-painting-masters/)
 * Create an image from a text (A pictures says more than thousand words)
+
+### Graph-based image classification
+
+* Efficiency and Performance by converting images to superpixels, segmentation graphs or svgs

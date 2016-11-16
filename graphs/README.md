@@ -7,7 +7,7 @@
 * [Pratical graph isomorphism, II](https://arxiv.org/pdf/1301.1493v1.pdf)
 * [Spectral Networks and Deep Locally Connected Networks on Graphs](https://arxiv.org/pdf/1312.6203v3.pdf)
 
-## Graph Kernel Paper
+### Graph Kernels
 
 * [Graph Kernels](https://edoc.ub.uni-muenchen.de/7169/1/Borgwardt_KarstenMichael.pdf)
 * [Image Classification with Segmenation Graph Kernels](http://www.di.ens.fr/~fbach/harchaoui_bach_cvpr07.pdf)
