@@ -11,8 +11,8 @@
 * [Feedforward semantic segmentation with zoom-out features](http://www.cv-foundation.org/openaccess/content_cvpr_2015/papers/Mostajabi_Feedforward_Semantic_Segmentation_2015_CVPR_paper.pdf)
 * [Harmony Potentials for Joint Classification and Segmentation](http://www.cat.uab.es/~joost/papers/cvpr2010.pdf)
 * [On Parameter Learning in CRF-based Approaches to Object Class Image Segmentation](https://www.vision.ee.ethz.ch/en/publications/papers/proceedings/eth_biwi_00742.pdf)
-* Learning hierarchical features for scene labeling
-* Recurrent convolutional neural networks for scene parsing
+* [Learning hierarchical features for scene labeling](http://yann.lecun.com/exdb/publis/pdf/farabet-pami-13.pdf)
+* [Recurrent convolutional neural networks for scene labeling](http://jmlr.org/proceedings/papers/v32/pinheiro14.pdf)
 
 ### Representation
 
