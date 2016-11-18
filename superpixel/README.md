@@ -17,6 +17,7 @@
 * [On Parameter Learning in CRF-based Approaches to Object Class Image Segmentation](https://www.vision.ee.ethz.ch/en/publications/papers/proceedings/eth_biwi_00742.pdf)
 * [Learning hierarchical features for scene labeling](http://yann.lecun.com/exdb/publis/pdf/farabet-pami-13.pdf)
 * [Recurrent convolutional neural networks for scene labeling](http://jmlr.org/proceedings/papers/v32/pinheiro14.pdf)
+* [Deep Convolutional Neural Fields for Depth Estimation from a Single Image](https://arxiv.org/pdf/1411.6387v2.pdf) ([Github](https://github.com/slundqui/superpixelDepth))
 
 ### Representation
 
