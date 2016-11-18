@@ -26,7 +26,13 @@
 
 ## Algorithms
 
-* [Slic superpixels compared to state-of-the-art superpixel methods](https://infoscience.epfl.ch/record/177415/files/Superpixel_PAMI2011-2.pdf)
+* [SLIC superpixels compared to state-of-the-art superpixel 
+  methods](https://infoscience.epfl.ch/record/177415/files/Superpixel_PAMI2011-2.pdf)
   * runtime efficient
+  * **Implementation:** [scikit-image: Image processing in Python](http://scikit-image.org/) ([Github](https://github.com/scikit-image/scikit-image))
 * [Structured forests for fast edge detection](https://www.microsoft.com/en-us/research/wp-content/uploads/2013/12/DollarICCV13edges.pdf)
   * low quantization error
+
+## Examples
+
+* [Segmentation: A SLIC Superpixel Tutorial using Python](http://www.pyimagesearch.com/2014/07/28/a-slic-superpixel-tutorial-using-python/)
