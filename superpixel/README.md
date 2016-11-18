@@ -29,9 +29,12 @@
 * [SLIC superpixels compared to state-of-the-art superpixel 
   methods](https://infoscience.epfl.ch/record/177415/files/Superpixel_PAMI2011-2.pdf)
   * runtime efficient
-  * **Implementation:** [scikit-image: Image processing in Python](http://scikit-image.org/) ([Github](https://github.com/scikit-image/scikit-image))
+  * **Implementations:**
+    * [scikit-image: Image processing in Python](http://scikit-image.org/) ([Github](https://github.com/scikit-image/scikit-image))
+    * OpenCV
 * [Structured forests for fast edge detection](https://www.microsoft.com/en-us/research/wp-content/uploads/2013/12/DollarICCV13edges.pdf)
   * low quantization error
+* [OpenCV center of contour](http://www.pyimagesearch.com/2016/02/01/opencv-center-of-contour/)
 
 ## Examples
 
