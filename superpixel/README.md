@@ -35,8 +35,9 @@
     * OpenCV
 * [Structured forests for fast edge detection](https://www.microsoft.com/en-us/research/wp-content/uploads/2013/12/DollarICCV13edges.pdf)
   * low quantization error
-* [OpenCV center of contour](http://www.pyimagesearch.com/2016/02/01/opencv-center-of-contour/)
 
 ## Examples
 
 * [Segmentation: A SLIC Superpixel Tutorial using Python](http://www.pyimagesearch.com/2014/07/28/a-slic-superpixel-tutorial-using-python/)
+* [Accessing Individual Superpixel Segmentations with Python](http://www.pyimagesearch.com/2014/12/29/accessing-individual-superpixel-segmentations-python/)
+  * [OpenCV center of contour](http://www.pyimagesearch.com/2016/02/01/opencv-center-of-contour/)
