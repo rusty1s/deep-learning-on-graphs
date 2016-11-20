@@ -3,9 +3,12 @@
 ## Paper
 
 * [Learning Convolutional Neural Networks for Graphs](https://arxiv.org/pdf/1605.05273.pdf)
+* [Spectral Networks and Deep Locally Connected Networks on Graphs](https://arxiv.org/pdf/1312.6203v3.pdf)
+
+### Isomorphism/Automorphism
+
 * [The Weisfeiler-Lehman Method and Graph Isomorphism Testing](https://arxiv.org/pdf/1101.5211v1.pdf)
 * [Pratical graph isomorphism, II](https://arxiv.org/pdf/1301.1493v1.pdf)
-* [Spectral Networks and Deep Locally Connected Networks on Graphs](https://arxiv.org/pdf/1312.6203v3.pdf)
 
 ### Graph Kernels
 

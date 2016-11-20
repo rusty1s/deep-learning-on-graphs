@@ -34,7 +34,6 @@
 
 ## Offene Fragen
 
-* Python 2 vs. Python 3?
 * Patchy-SAN: eigene Implementation oder nachfragen?
 * Wie verarbeiten andere CNNs Superpixel?
 * Welche Informationen werden bei den Segmentierungsgraphen zur Klassifizierung verwendet?

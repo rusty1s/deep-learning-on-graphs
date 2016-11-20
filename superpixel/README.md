@@ -25,6 +25,11 @@
 * [Superpixel graph label transfer with learned distance metric](http://users.cecs.anu.edu.au/~sgould/papers/eccv14-spgraph.pdf)
 * [PatchMatchGraph: Building a Graph of Dense Patch Correspondences for Label Transfer](https://www.vision.ee.ethz.ch/en/publications/papers/proceedings/eth_biwi_00742.pdf)
 
+## Comparisons
+
+* [Superpixel Benchmark and Comparison](https://www.tu-chemnitz.de/etit/proaut/rsrc/neubert_protzel_superpixel.pdf)
+* [Superpixel Algorithms: Overview and Comparison](http://davidstutz.de/superpixel-algorithms-overview-comparison/)
+
 ## Algorithms
 
 * [SLIC superpixels compared to state-of-the-art superpixel 
@@ -32,11 +37,11 @@
   * runtime efficient
   * **Implementations:**
     * [scikit-image: Image processing in Python](http://scikit-image.org/) ([Github](https://github.com/scikit-image/scikit-image))
-    * OpenCV
+    * OpenCV >= 3.0.0
 * [Structured forests for fast edge detection](https://www.microsoft.com/en-us/research/wp-content/uploads/2013/12/DollarICCV13edges.pdf)
   * low quantization error
 
-## Examples
+## Tutorials
 
 * [Segmentation: A SLIC Superpixel Tutorial using Python](http://www.pyimagesearch.com/2014/07/28/a-slic-superpixel-tutorial-using-python/)
 * [Accessing Individual Superpixel Segmentations with Python](http://www.pyimagesearch.com/2014/12/29/accessing-individual-superpixel-segmentations-python/)
