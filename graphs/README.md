@@ -4,6 +4,10 @@
 
 * [Learning Convolutional Neural Networks for Graphs](https://arxiv.org/pdf/1605.05273.pdf)
 * [Spectral Networks and Deep Locally Connected Networks on Graphs](https://arxiv.org/pdf/1312.6203v3.pdf)
+  * Constructions of deep neural networks on graphs other than regular grids
+  * *Spatial Construction*: define locally connected and pooling layers on graphs
+      * **Locality**: Neighborhood defined over a treshold an weighted graphs
+      * TODO
 
 ### Isomorphism/Automorphism
 

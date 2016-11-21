@@ -9,21 +9,26 @@
   * Bild wird in verschiedene Superpixelrepräsentationen umgewandelt (Multi-Scale)
   * auf diesen Superpixeln werden Sequenzen für Farbkontraste und Farbverteilung erstellt (Graph Kernel)
   * Sequenzen sind die Eingaben für das CNN
-* [Object Detection by Labeling Superpixels](http://www.cv-foundation.org/openaccess/content_cvpr_2015/papers/Yan_Object_Detection_by_2015_CVPR_paper.pdf)
 * [Superpixel Convolutional Networks using Bilateral Inceptions](https://arxiv.org/pdf/1511.06739v5.pdf)
-* [Convolutional Networks in Scene Labelling](http://cs231n.stanford.edu/reports/ashwinpp_final_report.pdf)
 * [Feedforward semantic segmentation with zoom-out features](http://www.cv-foundation.org/openaccess/content_cvpr_2015/papers/Mostajabi_Feedforward_Semantic_Segmentation_2015_CVPR_paper.pdf)
 * [Harmony Potentials for Joint Classification and Segmentation](http://www.cat.uab.es/~joost/papers/cvpr2010.pdf)
 * [On Parameter Learning in CRF-based Approaches to Object Class Image Segmentation](https://www.vision.ee.ethz.ch/en/publications/papers/proceedings/eth_biwi_00742.pdf)
 * [Learning hierarchical features for scene labeling](http://yann.lecun.com/exdb/publis/pdf/farabet-pami-13.pdf)
+  * [Convolutional Networks in Scene Labelling](http://cs231n.stanford.edu/reports/ashwinpp_final_report.pdf)
 * [Recurrent convolutional neural networks for scene labeling](http://jmlr.org/proceedings/papers/v32/pinheiro14.pdf)
 * [Deep Convolutional Neural Fields for Depth Estimation from a Single Image](https://arxiv.org/pdf/1411.6387v2.pdf) ([Github](https://github.com/slundqui/superpixelDepth))
 
-### Representation
+### Non Neural Networks
 
+* [Object Detection by Labeling Superpixels](http://www.cv-foundation.org/openaccess/content_cvpr_2015/papers/Yan_Object_Detection_by_2015_CVPR_paper.pdf)
+  * Objekterkennung auf Superpixeln
+  * auf den erkannten Objekten kann dann eine Bildklassifizierung angewendet werden (z.B. CNN)
+  * Objekterkennung über Minimierung der Kosten, dass benachbarte Superpixel zum gleichen Objekt gehören
+* [Class Segmentation and Object Localization with Superpixel Neighborhoods](http://www.vision.cs.ucla.edu/papers/fulkersonVS09.pdf)
 * [Superpixel lattices](https://pdfs.semanticscholar.org/1328/880541640d3c9aa1ce7b5201f90d6c4e0925.pdf)
 * [Superpixel graph label transfer with learned distance metric](http://users.cecs.anu.edu.au/~sgould/papers/eccv14-spgraph.pdf)
 * [PatchMatchGraph: Building a Graph of Dense Patch Correspondences for Label Transfer](https://www.vision.ee.ethz.ch/en/publications/papers/proceedings/eth_biwi_00742.pdf)
+* Image labeling with a classical CRF model, constructed on the superpixels
 
 ## Comparisons
 
@@ -40,6 +45,15 @@
     * OpenCV >= 3.0.0
 * [Structured forests for fast edge detection](https://www.microsoft.com/en-us/research/wp-content/uploads/2013/12/DollarICCV13edges.pdf)
   * low quantization error
+* Quick Shift in [Quick Shift and Kernel Methods for Mode Seeking](http://vision.cs.ucla.edu/papers/vedaldiS08quick.pdf)
+  * superpixels are not fixed in size or number (a complex image with many fine scale image structures may have many more superpixels than a simple one)
+* [Convolutional Networks in Scene Labelling](http://cs231n.stanford.edu/reports/ashwinpp_final_report.pdf)
+* [Efficient Graph-Based Image Segmentation](http://cs.brown.edu/~pff/papers/seg-ijcv.pdf)
+  * Segmentierung über Graphstruktur, dessen Kanten die Ähnlichkeit zwischen zwei Knoten beschreiben
+  * Segmentierungsalgorithmus ergibt Superpixel-Repräsentation
+  * wird oft benutzt
+* [Selective Search for Object Recognition](https://ivi.fnwi.uva.nl/isis/publications/bibtexbrowser.php?key=UijlingsIJCV2013&bib=all.bib)
+  * Hierarchische Segmentierung
 
 ## Tutorials
 
