@@ -4,15 +4,37 @@
 
 \begin{itemize}
   \item Auswahl an Knoten, für die ein Receptive Field erstellt werden soll
-  \item Sortierung soll dem Verfahren von Bildern nahekommen, d.h.\ Knoten mit ähnlichen strukturellen Merkmalen sollen auch in der Vektorrepräsentation nah beieinanderliegen
+  \item Sortierung soll dem Verfahren von Bildern nahekommen, d.h. Knoten mit ähnlichen strukturellen Merkmalen sollen auch in der Vektorrepräsentation nah beieinanderliegen
   \item Graph-Beschreibung $l$ – \underline{Metriken}:
   \begin{itemize}
-    \item Grad der Knoten, d.h.\ Anzahl adjazenter Knoten (\underline{gewichtet:} Auswärtsgrad – Einwärtsgrad)
+    \item \textbf{Betweenness centrality}:
+      \begin{itemize}
+        \item $g(v) = \sum_{s \neq v \neq t} \frac{\sigma_{st}(v)}{\sigma_{st}}$
+        \item $\sigma_{st}$ beschreibt die Anzahl an kürzesten Pfaden von $s$ nach $t$ ist und $\sigma_{st}$ die Anzahl dieser Pfade, die durch $v$ gehen
+      \end{itemize}
+    \item \textbf{Eigenvector centrality}:
+    \begin{itemize}
+      \item Google's PageRank ist eine Variante der Eigenvector centrality
+      \item $G=(V,E)$ mit Adjazenzmatrix $A$, sodass $a_{v,t} = 1$, falls eine Kante von $v$ nach $t$ existiert
+      \item \underline{relative Centrality von $v$:} $x_v = \frac{1}{\lambda} \sum_{t \in N(v)} x_t = \frac{1}{\lambda} \sum{t \in G} a_{v,t}x_t$
+      \item kann als Eigenwertproblem formuliert werden: $Ax = \lambda x$
+      \item zusätzliche Einschränkung: alle Werte des Eigenvektors $x$ sollen nicht-negativ sein $\Rightarrow$ bestimme größten Eigenwert $\lambda$ $\Rightarrow$ eindeutig
+    \end{itemize}
+    \item \textbf{Degree centrality:}
+    \begin{itemize}
+      \item Grad der Knoten, d.h.\ Anzahl adjazenter Knoten (\underline{gewichtet:} Auswärtsgrad – Einwärtsgrad)
+    \end{itemize}
+    \item \textbf{Closeness centrality:}
+    \begin{itemize}
+      \item durchschnittliche Länge zwischen dem Knoten und allen anderen Knoten
+      \item je zentraler ein Knoten ist, umso näher sind alle anderen Knoten
+      \item $C(x) = \frac{1}{\sum_y d(y,x)}$
+      \item kann sich für gerichtete Graphen stark unterscheiden (hohe Closeness für ausgehende Kanten, geringe Closeness für eingehene Kanten)
+    \end{itemize}
     \item \emph{Weisfeiler-Lehman Algorithmus}
     \item \emph{Page-Rank}
-    \item \textbf{Betweenness centrality}: $g(v) = \sum_{s \neq v \neq t} \frac{\sigma_{st}(v)}{\sigma_{st}}$, wobei $\sigma_{st}$ die Anzahl an kürzesten Pfaden von $s$ nach $t$ ist und $\sigma_{st}$ die Anzahl dieser Pfade, die durch $v$ gehen
-    \item \textbf{Eigenvector centrality}:
   \end{itemize}
+  \item \todo{es werden anscheinend mehrere Metriken benutzt, wie werden diese kombiniert?}
   \item \underline{Gegeben:} Graph-Beschreibung $l$, Abstand $s$, Anzahl $w$ an Reciptive Fields
 \end{itemize}
 
