@@ -35,18 +35,20 @@
     \item \emph{Page-Rank}
   \end{itemize}
   \item \todo{es werden anscheinend mehrere Metriken benutzt, wie werden diese kombiniert?}
-  \item eventuell werden diese Metriken garnicht benötigt, da wir ja eine räumliche Struktur unseres Graphen besitzen!
+  \item eventuell werden diese Metriken garnicht benötigt, da wir ja eine räumliche Struktur unseres Graphen besitzen, dann kann ähnlich von links nach rechts und von oben nach unten analog zu CNNs auf Bildern vorgegangen werden
   \item \underline{Gegeben:} Graph-Beschreibung $l$, Abstand $s$, Anzahl $w$ an Reciptive Fields
 \end{itemize}
 
 \begin{enumerate}
   \item sortiere die Knoten auf Basis von $l$
   \item iteriere über die sortierte Knotenmenge mit Abständen $s$, bis $w$ Knoten ausgewählt wurden
+  \item werden weniger als $w$ Knoten gefunden, so werden \emph{all-zero} Receptive Fields erstellt und diese angehängt (\emph{padding purposes})
 \end{enumerate}
 
 \subsection{Nachbarschaftssuche}
 
 \begin{itemize}
+  \item \underline{Bemerkung:} wahrscheinlich falsche Angabe in Algorithmus 2 $\Rightarrow$ $|L| < |V|$, d.h. Abbruch, wenn keine Knoten mehr eingesammelt werden können
   \item \underline{Gegeben:} Knoten $v$, Größe $k$ des Receptive Fields
 \end{itemize}
 
@@ -59,13 +61,27 @@
 \end{enumerate}
 
 \begin{itemize}
-  \item \underline{Bemerkung:} im Allgemein gilt $|N| \neq k$
+  \item \underline{Bemerkungen:}
+  \begin{itemize}
+    \item im Allgemein gilt $|N| \neq k$
+    \item hier wird das Gewicht der Kanten nicht berücksichtigt, man kann den Algorithmus aber dementsprechend verändern (finde die ersten $k$ Knoten, mit dem kürzesten Pfad zu $v$)
+    \item $\Rightarrow$ das ist dann wichtig, wenn das Gewicht etwas über die räumliche Anordnung aussagt
+  \end{itemize}
 \end{itemize}
 
 \subsection{Normalisierung}
 
 \begin{itemize}
   \item Aus einem Nachbarschaftsgraphen soll ein Receptive Field konstruiert werden
+  \item \underline{Problem:} Nachbarschaftssuche liefert uns nicht genau $k$ Knoten, sind nicht sortiert
+  \item wenn weniger als $k$ Knoten, dann füge \emph{Dummy-Knoten} hinzu
+  \item \underline{Vorgehen}:
+  \begin{enumerate}
+    \item bestimme Distanz zum Wurzelknoten
+    \item führe Centrality-Berechnungen auf den Knoten gleicher Distanzen aus
+    \item Canonicalization (breche gleiche Centrality auf) $\Rightarrow$ hier wird \texttt{nauty} benutzt
+    \item nehme, die ersten $k$ Knoten
+  \end{enumerate}
   \item Knoten werden anhand eines Graph-Labelings $l$ sortiert
   \begin{itemize}
     \item ein Receptive Field für die Knoten (Größe $k$) und ein Receptive Field für die Kanten (Größe $k \times k$)

@@ -25,6 +25,15 @@
 * [A method for stochastic optimization](https://arxiv.org/pdf/1412.6980v8.pdf)
   * Adam-Optimizer
 
+## Data
+
+* [CIFAR-10](http://www.cs.toronto.edu/%7Ekriz/cifar.html) 
+  ([Citation](http://www.cs.toronto.edu/%7Ekriz/learning-features-2009-TR.pdf))
+  * [How to 
+    use](https://www.tensorflow.org/versions/r0.12/tutorials/deep_cnn/index.html)
+* [ImageNet](http://image-net.org/)
+  * [ILSVRC2014](http://image-net.org/challenges/LSVRC/2014/download-images-5jj5.php)
+
 ## Applications
 
 ### Object Detection
