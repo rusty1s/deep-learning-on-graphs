@@ -14,7 +14,7 @@
       \end{itemize}
     \item \textbf{Eigenvector centrality}:
     \begin{itemize}
-      \item Google's PageRank ist eine Variante der Eigenvector centrality
+      \item \emph{Google's PageRank} ist eine Variante der Eigenvector centrality
       \item $G=(V,E)$ mit Adjazenzmatrix $A$, sodass $a_{v,t} = 1$, falls eine Kante von $v$ nach $t$ existiert
       \item \underline{relative Centrality von $v$:} $x_v = \frac{1}{\lambda} \sum_{t \in N(v)} x_t = \frac{1}{\lambda} \sum{t \in G} a_{v,t}x_t$
       \item kann als Eigenwertproblem formuliert werden: $Ax = \lambda x$
@@ -35,6 +35,7 @@
     \item \emph{Page-Rank}
   \end{itemize}
   \item \todo{es werden anscheinend mehrere Metriken benutzt, wie werden diese kombiniert?}
+  \item eventuell werden diese Metriken garnicht benötigt, da wir ja eine räumliche Struktur unseres Graphen besitzen!
   \item \underline{Gegeben:} Graph-Beschreibung $l$, Abstand $s$, Anzahl $w$ an Reciptive Fields
 \end{itemize}
 
