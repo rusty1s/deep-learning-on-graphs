@@ -2,7 +2,10 @@
 
 ## Paper
 
-* [Learning Convolutional Neural Networks for Graphs](https://arxiv.org/pdf/1605.05273.pdf)
+* [Learning Convolutional Neural Networks for 
+  Graphs](https://arxiv.org/pdf/1605.05273.pdf) 
+  ([Slides](http://www.matlog.net/icml2016_slides.pdf))
+  * [Code](patchy.neclab.eu)
 * [Spectral Networks and Deep Locally Connected Networks on Graphs](https://arxiv.org/pdf/1312.6203v3.pdf)
   * Constructions of deep neural networks on graphs other than regular grids
   * *Spatial Construction*: define locally connected and pooling layers on graphs
