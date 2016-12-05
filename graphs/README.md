@@ -4,13 +4,15 @@
 
 ### CNNs
 
-* [Learning Convolutional Neural Networks for 
-  Graphs](https://arxiv.org/pdf/1605.05273.pdf) 
-  ([Slides](http://www.matlog.net/icml2016_slides.pdf)) 
+* [Learning Convolutional Neural Networks for
+  Graphs](https://arxiv.org/pdf/1605.05273.pdf)
+  ([Slides](http://www.matlog.net/icml2016_slides.pdf))
   ([Code](patchy.neclab.eu))
 * [Spectral Networks and Deep Locally Connected Networks on Graphs](https://arxiv.org/pdf/1312.6203v3.pdf)
-* [Convolutional Networks on Graphs for Learning Molecular 
+* [Convolutional Networks on Graphs for Learning Molecular
   Fingerprints](https://hips.seas.harvard.edu/files/duvenaud-graphs-nips-2015.pdf)
+* [Graph image representation from convolutional neural
+  networks](https://www.google.ch/patents/US9418458)
 
 ### Isomorphism/Automorphism
 

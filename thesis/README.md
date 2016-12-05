@@ -3,7 +3,7 @@
 * **Universität:** TU Dortmund
 * **Fakultät:** Lehrstuhl für Graphische Systeme
 
-# Anwendbarkeit von Convolutional Neural Networks auf Graph-Repräsentationen von Bildern
+# Convolutional Neural Networks auf Graphrepräsentationen von Bildern
 
 ## Inhalt
 
