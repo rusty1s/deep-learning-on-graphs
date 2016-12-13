@@ -8,6 +8,8 @@
 ## Inhalt
 
 * Motivation
+  * Rauschentfernung (Superpixelrepräsentation zwischen komprimiertem JPEG und
+    PNG)
 * Relevante Arbeiten
 * verschiedene **Graph-Repräsentationen von Bildern**
   * Segmentierungsgraphen
