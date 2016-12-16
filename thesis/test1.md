@@ -49,7 +49,7 @@ Daten:
 
 ## Probleme
 
-Das Problem lernt nicht. Wir erreichen 30% Accuracy bei den Trainingsdaten was 
+Das Netz lernt nicht. Wir erreichen 30% Accuracy bei den Trainingsdaten was 
 schlecht ist.
 Eventuell ist dies der zweiten Conv Ebene geschuldet. Da wir auf 1D Daten 
 arbeiten macht die eventuell keinen Sinn. Benachbarte Knoten sind nicht 
@@ -61,7 +61,7 @@ eine Ebene drunter ganz links.
 
 Numpy Beispiele
 
-# Weiteres Vorgehen
+## Weiteres Vorgehen
 
 * Code von Conv1 sollte zu Conv2 ausgeweitet werden
 * Trainieren auf 1D Cifar und 2D Cifar Bildern anstatt auf Graphen (zum 
