@@ -5,14 +5,14 @@ beliebigen Superpixelrepräsentation einen Graphen generieren kann und dieser
 dann in eine 1D Matrix umgewandelt wird der Form
 
 ```
-[Neighborhood1, Neighborhood2]
+[Neighborhood1, Neighborhood2, ...]
 ```
 
 Die einzelnen Knoten der Nachbarschaften fassen dann noch die Features, sodass 
 wir eigentlich von einer 2D Matrix sprechen können der Form
 
 ```
-Nachbarschaftsgröße * Größe der Knotenauswahl, Channels]
+[Nachbarschaftsgröße * Größe der Knotenauswahl, Channels]
 ```
 
 Features sind:
@@ -39,7 +39,6 @@ Slic auf CIFAR-100 angewendet mit folgenden Parametern:
 Das Netz besteht aus 2 Convolutions + Max Pooling und einem Fully-Connected 
 Layer.
 
-Daten:
 * Eingabe [1, 1, 900, 6]
 * Conv1: 32 Features, Größe und Stride wie Nachbarschaftsgröße 9, das heißt 
   eine Nachbarschaft wird umgewandelt in 32 Features, max pool 2
