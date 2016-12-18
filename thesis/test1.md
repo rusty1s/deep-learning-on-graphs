@@ -118,7 +118,7 @@ for i in range(20000):
         print('Step', i, 'Training accuracy', train_accuracy)
 ```
 
-**Ergebnisse:** Training accuracy nach 4000 Steps: `0.1`, also random?????
+**Ergebnisse:** Training accuracy nach 4000 Steps: `0.1`, also random????? Learning Rate schuld, weil zu klein?
 
 ## Codeprobleme
 
