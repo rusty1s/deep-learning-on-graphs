@@ -121,6 +121,7 @@ for i in range(20000):
 **Ergebnisse:**
 * Training accuracy nach 4000 Steps: `0.1`, also random????? Learning Rate schuld, weil zu klein?
 * Test accuracy nach 2000 Steps: `0.0993` :(
+
 ## Codeprobleme
 
 ### #1
