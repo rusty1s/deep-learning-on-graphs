@@ -128,16 +128,16 @@ Wir haben ein Batch von 10000 Bildern kodiert als `[1024 *red, 1024*green, 1024*
 ```python
 data = np.zeros((len(batch['data']), 32, 32, 3))
 
-    for i in range(len(batch['data'])):
-        labels[i][batch['labels'][i]] = 1.0
+for i in range(len(batch['data'])):
+    labels[i][batch['labels'][i]] = 1.0
 
-        image = batch['data'][i]
+    image = batch['data'][i]
 
-        red = image[0:1024].reshape(32, 32)
-        green = image[1024:2048].reshape(32, 32)
-        blue = image[2048:3072].reshape(32, 32)
+    red = image[0:1024].reshape(32, 32)
+    green = image[1024:2048].reshape(32, 32)
+    blue = image[2048:3072].reshape(32, 32)
 
-        data[i] = np.dstack((red, green, blue))
+    data[i] = np.dstack((red, green, blue))
 ```
 
 Es kommt mir unelegant vor, das so zu machen.
