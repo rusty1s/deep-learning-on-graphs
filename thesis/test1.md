@@ -118,11 +118,29 @@ for i in range(2000):
         print('Step', i, 'Training accuracy', train_accuracy)
 ```
 
-Ergebnisse: Training accuracy, Test accuracy
+**Ergebnisse:** Training accuracy nach 4000 Steps: `0.1`, also random?????
 
 ## Codeprobleme
 
-Numpy Beispiele
+Cifar10 Konvertierung:
+Wir haben ein Batch von 10000 Bildern kodiert als `[1024 *red, 1024*green, 1024*blue]`, also eine Shape von `[10000, 3072]`. Diese wollen wir in eine Shape von `[10000, 32 32, 3]` bringen.
+
+```python
+data = np.zeros((len(batch['data']), 32, 32, 3))
+
+    for i in range(len(batch['data'])):
+        labels[i][batch['labels'][i]] = 1.0
+
+        image = batch['data'][i]
+
+        red = image[0:1024].reshape(32, 32)
+        green = image[1024:2048].reshape(32, 32)
+        blue = image[2048:3072].reshape(32, 32)
+
+        data[i] = np.dstack((red, green, blue))
+```
+
+Es kommt mir unelegant vor, das so zu machen.
 
 ## Weiteres Vorgehen
 
@@ -136,8 +154,3 @@ Numpy Beispiele
 * Zweite Conv-Ebene mal rauslassen
 * größere Nachbarschaften betrachten (bisher unsere einzige Möglichkeit 
   Lokalität auszudrücken)
-* Cifar10 Klasse umbauen, sodass sie uns 1d und 2d Eingaben liefert um darauf 
-  zu lernen
-* Alle Datensätze in der Zukunft sollten dem Prinzip `data` und `labels` 
-  folgen. Damit können wir eine universelle Klasse schaffen, um `next_batch` zu 
-  realisieren, die die Pfade zu den Batches nehmen kann, und diese verwaltet.
