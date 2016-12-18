@@ -122,6 +122,8 @@ for i in range(20000):
 
 ## Codeprobleme
 
+### #1
+
 Cifar10 Konvertierung:
 Wir haben ein Batch von 10000 Bildern kodiert als `[1024 *red, 1024*green, 1024*blue]`, also eine Shape von `[10000, 3072]`. Diese wollen wir in eine Shape von `[10000, 32 32, 3]` bringen.
 
@@ -141,6 +143,10 @@ for i in range(len(batch['data'])):
 ```
 
 Es kommt mir unelegant vor, das so zu machen.
+
+### #2
+
+Wie füge ich Sub-Arrays an einer Position im numpy Array ein? Ist das vorgehen richtig, dass ich mir ein Numpy Array mit der gewünschten Shape mit Nullen initialisere und dann einfach wie gewohnt über Indexing die Werte setze?
 
 ## Weiteres Vorgehen
 
