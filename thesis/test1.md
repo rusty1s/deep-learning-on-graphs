@@ -68,6 +68,7 @@ Numpy Beispiele
 
 ## Weiteres Vorgehen
 
+* Nach der ersten Conv das ganze in eine 2 dimensionale Form bringen
 * Code von Conv1 sollte zu Conv2 ausgeweitet werden
 * Trainieren auf 1D Cifar und 2D Cifar Bildern anstatt auf Graphen (zum 
   Vergleich)
