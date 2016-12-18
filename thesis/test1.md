@@ -105,7 +105,7 @@ correct_prediction = tf.equal(tf.argmax(y_conv, 1), tf.argmax(y_, 1))
 accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
 sess.run(tf.initialize_all_variables())
 
-for i in range(2000):
+for i in range(20000):
     images, labels = train_set.next_batch(50)
     train_step.run(feed_dict={
         x: images, y_: labels, keep_prob: 0.5,
