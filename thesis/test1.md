@@ -67,6 +67,11 @@ Das Netz läuft im Vergleich zur 2D Conv auf den reinen Cifar-10 Bilderdaten
 unfassbar schnell, das ist mit Sicherheit zum Großteil der 1D Convolution
 geschuldet, es ist trotzdem bemerkenswert schnell.
 
+**Frage:**
+Wir können auch Kanteneigenschaften mit berücksichtigen, in dem wir
+eine Shape von `[1, 1, 900*900, in_channels]` betrachten.
+Wie können wir die mit der Shape `[1, 1, 900, 6]` kombinieren?
+
 ## Probleme
 
 Das Netz lernt nicht. Wir erreichen 30% Accuracy bei den Trainingsdaten was
