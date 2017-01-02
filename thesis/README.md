@@ -34,10 +34,15 @@
 * CNNs auf Graphen sind im Allgemein kleiner als CNNs auf Bildern
 * weniger Trainingsdaten benötigt?
 
+## Schwächen
+
+* Distorted Inputs sind nicht ohne weiteres möglich, da z.B. Farbänderungen die
+  Graphstruktur verändern können.
+
 ## Offene Fragen
 
-* Patchy-SAN: eigene Implementation oder nachfragen?
 * Wie verarbeiten andere CNNs Superpixel?
-* Welche Informationen werden bei den Segmentierungsgraphen zur Klassifizierung verwendet?
+* Welche Informationen werden bei den Segmentierungsgraphen zur Klassifizierung
+  verwendet?
 * Wie kann die Form von Flächen vektorisiert werden?
 * Wie können SVGs über Graphen repräsentiert werden?
