@@ -57,6 +57,7 @@ wobei jeder Knoten jeweils das gleiche Segment beschreibt.
 * Features: rgb, relative center, count, height, width
 * Konvertierung von 50000 Bildern 24x24 Pixeln (distorted) => ungefähr 1 Stunde
 * Node labeling: Order, Neighborhood Labeling: Betweenness centrality
+* Learning ungefähr doppelt so schnell wie auf normalem CIFAR-10 Datensatz
 
 ## ToDo
 
