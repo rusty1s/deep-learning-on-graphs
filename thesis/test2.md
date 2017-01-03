@@ -50,16 +50,19 @@ wobei jeder Knoten jeweils das gleiche Segment beschreibt.
 ## Auswertung
 
 * 20.000 Steps a 128 Batch-Size: 150 Minuten
-* Beginn 21 Loss (kommt mir sehr hoch vor)
-* 1400. Step: Loss 10, Acc 0.3-0.4
-* 2500. Step: Loss 5.5, Acc unverändert
-* 4000. Step: Loss 3, Acc unverändert
 * Slico(50)
 * [25, 10, 8] Input mit 50 Width und Stride-Size 2
 * Features: rgb, relative center, count, height, width
 * Konvertierung von 50000 Bildern 24x24 Pixeln (distorted) => ungefähr 1 Stunde
 * Node labeling: Order, Neighborhood Labeling: Betweenness centrality
 * Learning ungefähr doppelt so schnell wie auf normalem CIFAR-10 Datensatz
+* Beginn 21 Loss (kommt mir sehr hoch vor)
+* 1400. Step: Loss 10, Acc 0.3-0.4
+* 2500. Step: Loss 5.5, Acc unverändert
+* 4000. Step: Loss 3, Acc unverändert
+* 6000. Step: Loss 2, Acc unverändert
+* 10000. Step: Loss 2, Acc weiterhin unverändert
+* Training nach 6000 Steps ungefähr eingependelt
 
 ## Evaluation
 
@@ -72,3 +75,5 @@ Also 5 von 8 Features sind unnötig (zumindest für das kleine CIFAR-10 Netz).
 
 * Endscreenshot
 * Example Cifar-10 mit SLIC
+* Mail an Jan
+* JSON Network Structure
