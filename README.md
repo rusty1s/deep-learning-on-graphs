@@ -5,6 +5,8 @@
 * [Awesome Deep Vision](https://www.github.com/kjw0612/awesome-deep-vision)
 * [8 Inspirational Applications of Deep Learning](http://www.machinelearningmastery.com/inspirational-applications-deep-learning)
 * [Neural Networks and Deep Learning](http://www.neuralnetworksanddeeplearning.com) (Free Online Book)
+*  [A Guide to
+   Deep Learning](http://yerevann.com/a-guide-to-deep-learning/?utm_campaign=Revue%20newsletter&utm_medium=Newsletter&utm_source=revue)
 * [Deep Learning Weekly](http://www.deeplearningweekly.com) (Newsletter)
 * [TensorFlow](https://www.tensorflow.org) (Open Source Library)
 * [TensorFlow in a Nutshell](http://camron.xyz)
