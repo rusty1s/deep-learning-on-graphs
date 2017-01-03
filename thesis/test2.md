@@ -51,13 +51,22 @@ wobei jeder Knoten jeweils das gleiche Segment beschreibt.
 
 * 20.000 Steps a 128 Batch-Size: 150 Minuten
 * Beginn 21 Loss (kommt mir sehr hoch vor)
-* 1400 Step: Loss 10, Acc: 0.3-0.4
+* 1400. Step: Loss 10, Acc 0.3-0.4
+* 2500. Step: Loss 5.5, Acc unverändert
+* 4000. Step: Loss 3, Acc unverändert
 * Slico(50)
 * [25, 10, 8] Input mit 50 Width und Stride-Size 2
 * Features: rgb, relative center, count, height, width
 * Konvertierung von 50000 Bildern 24x24 Pixeln (distorted) => ungefähr 1 Stunde
 * Node labeling: Order, Neighborhood Labeling: Betweenness centrality
 * Learning ungefähr doppelt so schnell wie auf normalem CIFAR-10 Datensatz
+
+## Evaluation
+
+Viele Features sind unnötig, weil sie immer das gleiche beinhalten, was durch
+die gleiche Form der Superpixel zu erklären ist.
+Darunter fallen center, count, width, height.
+Also 5 von 8 Features sind unnötig (zumindest für das kleine CIFAR-10 Netz).
 
 ## ToDo
 
