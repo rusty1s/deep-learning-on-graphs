@@ -46,3 +46,19 @@ Jedes Kantenattribut spiegelt eine Adjazenzmatrix wieder
 Unterschiedliche Kantenattribute und Knotenattribute können auch kombiniert
 werden, so dass wir mehrere Graphen erhalten mit unterschiedlichen Attributen,
 wobei jeder Knoten jeweils das gleiche Segment beschreibt.
+
+## Auswertung
+
+* 20.000 Steps a 128 Batch-Size: 150 Minuten
+* Beginn 21 Loss (kommt mir sehr hoch vor)
+* 1400 Step: Loss 10, Acc: 0.3-0.4
+* Slico(50)
+* [25, 10, 8] Input mit 50 Width und Stride-Size 2
+* Features: rgb, relative center, count, height, width
+* Konvertierung von 50000 Bildern 24x24 Pixeln (distorted) => ungefähr 1 Stunde
+* Node labeling: Order, Neighborhood Labeling: Betweenness centrality
+
+## ToDo
+
+* Endscreenshot
+* Example Cifar-10 mit SLIC
