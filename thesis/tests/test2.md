@@ -103,6 +103,10 @@ Ich habe obige Zeilen daher für die Distorted Inputs erstmal rausgenommen.
 Wie wichtig sind diese Anpassungen?
 Wie könnte ich sie verwenden und weiterhin darauf Superpixel berechnen?
 
+Distorted Inputs auf den Receptive Fields des generierten Graphen scheinen mir
+unmöglich, da diese die Graphstruktur verändern würden (z.B. bei
+Farbunterschied als Kantenattribut).
+
 ## Speichern des Graphdatensatzes
 
 ### Statisch über `TFRecords`
@@ -114,6 +118,48 @@ Wie könnte ich sie verwenden und weiterhin darauf Superpixel berechnen?
 ### Dynamisch
 
 ## Graphgenerierung
+
+## Convolutional Neural Net
+
+Ich habe mir einen kleinen Convolutional Neural Net Wrapper geschrieben, bei
+dem ich die Netzstruktur über eine JSON-Datei angeben kann.
+Diese sollte relativ selbsterklärend sein.
+Für diesen Test sieht diese wie folgt aus:
+
+```json
+{
+  "batch_size": 128,
+  "last_step": 20000,
+  "structure": {
+    "conv": [
+      {
+        "output_channels": 64,
+        "weights": { "stddev": 5e-2, "decay": 0.0 },
+        "biases": { "constant": 0.1 },
+        "fields": { "size": [1, 5], "strides": [1, 1] },
+        "max_pool": { "size": [1, 3], "strides": [1, 2] }
+      }
+    ],
+    "local": [
+      {
+        "output_channels": 384,
+        "weights": { "stddev": 0.04, "decay": 0.004 },
+        "biases": {"constant": 0.1 }
+      },
+      {
+        "output_channels": 192,
+        "weights": { "stddev": 0.04, "decay": 0.004 },
+        "biases": { "constant": 0.1 }
+      }
+    ],
+    "softmax_linear": {
+      "output_channels": 10,
+      "weights": { "stddev": 0.005, "decay": 0.0 },
+      "biases": { "constant": 0.0 }
+    }
+  }
+}
+```
 
 ## Auswertung
 
