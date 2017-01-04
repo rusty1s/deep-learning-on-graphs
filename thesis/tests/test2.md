@@ -20,6 +20,8 @@ erzielen können, als auf dem eigentlichen `24x24` CIFAR-10 Bild.
 Das heißt, dass wir entweder einen besseren Superpixelalgorithmus brauchen, der
 dann entsprechend auch zeitintensiver ist als Slic(o) oder diese Tatsache ganz
 einfach tolerieren und uns nur mit größeren Bildern beschäftigen.
+Die Auswertung unterschiedlicher Superpixelalgorithmen ist natürlich auch
+Bestandteil der Arbeit.
 
 ### Beispiel
 
@@ -34,7 +36,8 @@ Die Superpixel sind durch die Durchschnittsfarbe des Segments gekennzeichnet.
 ## Weiterführende Gedanken
 
 Cifar-10 rechnet auf Batches von `[24, 24, 3] = 1728`.
-Wir rechnen auf Batches der Größe [Knotengröße, Nachbarschaftsgröße, Channels].
+Wir rechnen auf Batches der Größe `[Knotengröße, Nachbarschaftsgröße,
+Channels]`.
 Damit erhalten wir eine größere oder in etwa gleich große Menge an Daten pro
 Bild. (z.B. `[25, 10, 8] = 2000`).
 Der Vorteil, der sich einstellt ist, dass dieser Batch bereits eine
@@ -42,16 +45,13 @@ vordefinierte Convolution darstellt.
 Das heißt, wir rechnen nicht wie klassisch üblich auf 2 Convolutional-Layern,
 sondern nur noch auf einem.
 
-Angenommen wir haben einen Superpixelalgorithmus, der traumhafte Ergebnisse
-liefert.
-
 Die Knoten des Graphen verweisen jeweils auf ein Segment mit darin enthaltenen
 Features:
-* **Farbattribute**
+* **Farbattribute:**
   * Mean
   * Absolute Difference
   * ...
-* **Formattribute**
+* **Formattribute:**
   * Schwerpunkt
   * Anzahl Pixel
   * Ausdehnung (z.B. Höhe/Breite)
@@ -60,23 +60,58 @@ Features:
 Dann können wir unseren Graphen aufbauen, in dem wir Kantenattribute
 definieren.
 Jedes Kantenattribut spiegelt eine Adjazenzmatrix wieder:
-* Distanz (mit/ohne Threshold)
-* Farbunterschied (mit/ohne Threshold)
-* lokale Nachbarschaft (mit/ohne Distanz (mit/ohne Threshhold))
+* **Distanz:** mit/ohne Threshold
+* **Farbunterschied:** mit/ohne Threshold
+* **lokale Nachbarschaft:** mit/ohne Distanz (mit/ohne Threshhold)
 * ...
 
-Kantenattribute und Knotenattribute können auch kombiniert werden, so dass wir
-mehrere Graphen erhalten mit unterschiedlichen Attributen, wobei jeder gleiche
-Knotenindex jeweils das gleiche Segment beschreibt.
+Knotenattribute und Kantenattribute können auch miteinander kombiniert werden,
+so dass wir mehrere Graphen erhalten mit unterschiedlichen Attributen, wobei
+jeder gleiche Knotenindex jeweils das gleiche Segment beschreibt.
 Das scheint mir ausbaufähig zu sein.
 
 ## Distorted Inputs
 
+Die Idee der "Distorted Inputs" finde ich genial und wollte ich daher in meine
+Implementierung miteinbauen.
+Das heißt, die CIFAR10 Bilder werden zufällig verändert und auf diesen Bildern
+wird dann ein Graph generiert.
+
+Dabei ergaben sich aber ein paar Probleme:
+
+```python
+distorted_image = tf.image.random_brightness(distorted_image, max_delta=63)
+float_image = tf.image.per_image_standardization(distorted_image)
+```
+
+Jede der obrigen Zeilen Code sorgt dafür, dass wir nicht mehr auf normalen
+RGB-Bildern arbeiten, sondern auf `float`-Bildern inklusive negativen Zahlen.
+Superpixelalgorithmen kommen damit nicht gut zurecht (oder zumindest kommt es
+mir so vor).
+
+In der TensorFlow Api steht bei `random_brightness` sowie `random_contrast`
+dazu:
+
+> This is a convenience method that converts an RGB image to float
+> representation, adjusts its contrast, and then converts it back to the
+> original data type.
+
+Es wundert mich ein wenig, dass `random_contrast` die Konvertierung zurück in 
+RGB gelingt, `random_brightness` aber nicht.
+Ich habe obige Zeilen daher für die Distorted Inputs erstmal rausgenommen.
+
+Wie wichtig sind diese Anpassungen?
+Wie könnte ich sie verwenden und weiterhin darauf Superpixel berechnen?
+
 ## Speichern des Graphdatensatzes
 
-### Dynamisch
-
 ### Statisch über `TFRecords`
+
+#### Numpy
+
+#### TensorFlow
+
+### Dynamisch
 
 ## Graphgenerierung
 
