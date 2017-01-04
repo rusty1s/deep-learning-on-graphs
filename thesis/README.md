@@ -8,6 +8,7 @@
 ## Inhalt
 
 * Motivation
+  * schneller
   * Rauschentfernung (Superpixelrepräsentation zwischen komprimiertem JPEG und
     PNG)
 * Relevante Arbeiten
