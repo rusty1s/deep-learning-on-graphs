@@ -121,8 +121,8 @@ Konvertierung des Bildes zur Laufzeit darüber keinen Sinn macht, da es einfach
 zu langsam ist.
 Ich war teilweise bei 2 Examples/sec.
 
-Den Gedanken, diesen ganzen Prozess als einen Graph darzustellen, ist immernoch
-aktuell.
+Den Gedanken, diesen ganzen Prozess als einen TensorFlow-Graphen darzustellen,
+ist immernoch aktuell.
 Jedoch ist das nicht so einfach wie es klingt.
 Die Graphgenerierung habe ich als TensorFlow Operation bereits implementiert.
 Es ist jedoch nicht so schnell, dass es einen umhauen würde.
@@ -158,7 +158,7 @@ Ein paar Randdaten zur Graph- und Receptive-Fields-Generierung:
     * Center ist prozentual zur Bounding Box des Segments
     * Height and Width beschreiben die Ausdehnung der Bounding Box
   * Kantenattribute:
-    * bisher nur lokale Nachbarschaft
+    * bisher nur lokale Nachbarschaft mit Gewicht `1`
 * **Patchy-San:**
   * Knotenlabeling: Scan-Line-Order
   * Knotengröße: `25`
@@ -244,9 +244,9 @@ Deswegen bin ich mit dem aktuellen Resultat erst einmal zufrieden.
 
 ## Weiteres Vorgehen
 
-## ToDo
-
-* Mail an Jan
-* JSON Network Structure
-* Etwas schreiben zu distorded inputs und den float problemen
-* dynamisch vs statisch vs tfrecords
+* Receptive-Fields Generierung als TensorFlow Operation dynamisch zur Laufzeit
+  anstatt statisch
+* Unterschiedliche Superpixelalgorithmen anwenden (die eventuell auch auf
+  kleinen Bildern gut funktionieren)
+* Weitere Gedanken zu geeigneten Graphrepräsentation
+* Andere Datensätze mit größeren Bildern
