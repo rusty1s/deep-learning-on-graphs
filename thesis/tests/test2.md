@@ -28,8 +28,8 @@ Das Erste zeigt ein willkürliches Bild aus dem CIFAR-10 Datensatz.
 Das Zweite zeigt dieses Bild nach Anwendung von Slico mit 25 Superpixeln.
 Die Superpixel sind durch die Durchschnittsfarbe des Segments gekennzeichnet.
 
-<img src="original.png" alt="CIFAR-10" width="150" />
-<img src="slico.png" alt="Slico" width="150" />
+<img src="images/cifar10.png" alt="CIFAR-10" width="150" />
+<img src="images/cifar10_slico_25.png" alt="Slico" width="150" />
 
 ## Weiterführende Gedanken
 
@@ -68,10 +68,15 @@ Jedes Kantenattribut spiegelt eine Adjazenzmatrix wieder:
 Kantenattribute und Knotenattribute können auch kombiniert werden, so dass wir
 mehrere Graphen erhalten mit unterschiedlichen Attributen, wobei jeder gleiche
 Knotenindex jeweils das gleiche Segment beschreibt.
+Das scheint mir ausbaufähig zu sein.
 
 ## Distorted Inputs
 
 ## Speichern des Graphdatensatzes
+
+### Dynamisch
+
+### Statisch über `TFRecords`
 
 ## Graphgenerierung
 
@@ -92,6 +97,8 @@ Knotenindex jeweils das gleiche Segment beschreibt.
 * 10000. Step: Loss 2, Acc weiterhin unverändert
 * Training nach 6000 Steps ungefähr eingependelt
 
+<img src="images/test2.png" alt="Auswertung" />
+
 ## Evaluation
 
 Viele Features sind unnötig, weil sie immer das gleiche beinhalten, was durch
@@ -101,8 +108,6 @@ Also 5 von 8 Features sind unnötig (zumindest für das kleine CIFAR-10 Netz).
 
 ## ToDo
 
-* Endscreenshot
-* Example Cifar-10 mit SLIC
 * Mail an Jan
 * JSON Network Structure
 * Etwas schreiben zu distorded inputs und den float problemen
