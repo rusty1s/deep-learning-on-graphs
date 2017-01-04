@@ -80,7 +80,7 @@ wird dann ein Graph generiert.
 Dabei ergaben sich aber ein paar Probleme:
 
 ```python
-distorted_image = tf.image.random_brightness(distorted_image, max_delta=63)
+distorted_image = tf.image.random_brightness(distorted_image, max_delta=0.5)
 float_image = tf.image.per_image_standardization(distorted_image)
 ```
 
