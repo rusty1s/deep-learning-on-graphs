@@ -109,22 +109,64 @@ Farbunterschied als Kantenattribut).
 
 ## Speichern des Graphdatensatzes
 
-### Statisch über `TFRecords`
+Über die vergangenen Wochen war das leider mein Hauptproblem.
+Ich weiß nicht ob ich mich unnötig verrannt habe, aber ich hatte die Idee,
+den Graphen und die daraus berechneten Receptive Fields zur Laufzeit beim
+Lernen zu erstellen.
+Genau nachdem die eigentlichen Bilder zufällig verändert wurden.
+Die Ernüchterung schlug ziemlich schnell ein, denn dann muss dieser Prozess als
+Graph-Model in TensorFlow implementiert werden.
+Dann bin ich auf `py_func` gestoßen und habe festgestellt, dass die
+Konvertierung des Bildes zur Laufzeit darüber keinen Sinn macht, da es einfach
+zu langsam ist.
+Ich war teilweise bei 2 Examples/sec.
 
-#### Numpy
+Den Gedanken, diesen ganzen Prozess als einen Graph darzustellen, ist immernoch
+aktuell.
+Jedoch ist das nicht so einfach wie es klingt.
+Die Graphgenerierung habe ich als TensorFlow Operation bereits implementiert.
+Es ist jedoch nicht so schnell, dass es einen umhauen würde.
+Das ist denke ich auch der Tatsache geschuldet, dass ich Aufrufe wie `map_fn`
+pro Segment mache.
+Die Adjazenzgenerierung dauert ebenso ewig.
+Bei der Konvertierung dieses Graphen in Receptive Fields sieht es ebenfalls
+nicht so glänzend aus.
+Ich brauche Sachen wie `betweenness_centrality`, die nicht so einfach als
+TensorFlow Operation auf Adjazenzmatrizen auszudrücken sind.
+Ich bin ein bisschen verzweifelt.
 
-#### TensorFlow
-
-### Dynamisch
+Aktuell generiere ich mir daher eine `tfrecords` Datei für Training und
+Evaluation.
+Das tue ich auf den distorted inputs des CIFAR-10 Datensatzes und speichere mir
+folglich für den Trainingsdatensatz auch mehrere Epochen.
+Aber auch hier Ernüchterung:
+Eine Konvertierung einer Epoche (also 50.000 Bilder) dauert in etwa eine
+Stunde.
 
 ## Graphgenerierung
 
-* Slico(50)
-* [25, 10, 8] Input mit 50 Width und Stride-Size 2
-* Features: rgb, relative center, count, height, width
-* Konvertierung von 50000 Bildern 24x24 Pixeln (distorted) => ungefähr 1 Stunde
-* Node labeling: Order, Neighborhood Labeling: Betweenness centrality
-* Learning ungefähr doppelt so schnell wie auf normalem CIFAR-10 Datensatz
+Ein paar Randdaten zur Graph- und Receptive-Fields-Generierung:
+
+* **Slico:**
+  * Segmente: `50`
+  * Compactness: `1.0`
+  * Sigma: `0.0`
+  * Max iterations: `10`
+* **Graphgenerierung:**
+  * Knotenfeatures: `[red, green, blue, center_y, center_x, count, height,
+    width]`
+    * Center ist prozentual zur Bounding Box des Segments
+    * Height and Width beschreiben die Ausdehnung der Bounding Box
+  * Kantenattribute:
+    * bisher nur lokale Nachbarschaft
+* **Patchy-San:**
+  * Knotenlabeling: Scan-Line-Order
+  * Knotengröße: `25`
+  * Stride: `2`
+  * Nachbarschaftsgröße: `10`
+  * Nachbarschaftslabeling: Betweeness Centrality
+
+Das liefert mir ein Example der Form `[25, 10, 8]`.
 
 ## Convolutional Neural Net
 
