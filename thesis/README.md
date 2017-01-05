@@ -8,9 +8,6 @@
 ## Inhalt
 
 * Motivation
-  * schneller
-  * Rauschentfernung (Superpixelrepräsentation zwischen komprimiertem JPEG und
-    PNG)
 * Relevante Arbeiten
 * verschiedene **Graph-Repräsentationen von Bildern**
   * Segmentierungsgraphen
@@ -34,6 +31,9 @@
 * Potential sehr gute Resultate zu liefern
 * CNNs auf Graphen sind im Allgemein kleiner als CNNs auf Bildern
 * weniger Trainingsdaten benötigt?
+* Rauschentfernung (Superpixelrepräsentation zwischen komprimiertem JPEG und
+  PNG)
+* keine strikte Größe der Bilder notwendig
 
 ## Schwächen
 
