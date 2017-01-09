@@ -34,6 +34,7 @@
 * Rauschentfernung (Superpixelrepräsentation zwischen komprimiertem JPEG und
   PNG)
 * keine strikte Größe der Bilder notwendig
+* ggf. mehr Augmentierungsmöglichkeiten zusätzlich zur Bildaugmentierung
 
 ## Schwächen
 
