@@ -37,8 +37,9 @@
 
 ## Algorithms
 
-* [Seeds](http://www.mvdblive.org/seeds/)
-* [SLIC superpixels compared to state-of-the-art superpixel 
+* [SEEDS: Superpixels Extracted via Energy-Driven
+  Sampling](http://www.mvdblive.org/seeds/)
+* [SLIC superpixels compared to state-of-the-art superpixel
   methods](https://infoscience.epfl.ch/record/177415/files/Superpixel_PAMI2011-2.pdf)
   * runtime efficient
   * **Implementations:**
