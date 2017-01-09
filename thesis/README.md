@@ -37,8 +37,23 @@
 
 ## Schwächen
 
+### Augmentierung
+
+* Augmentierung der Daten ist im Bereich Deep Learning sehr essenziell
+* Augmentierung auf den Bildern oder auf der Superpixel Repräsentation oder auf
+  den Graphen?
+* Augmentierung ist eine Möglichkeit, dem Netz zu zeigen, welche Sachen
+  irrelevant für die Klassifikation sind (z.B. unabhängig von Brightness oder
+  Normalisieren auf zero mean/one stddev)
 * Distorted Inputs sind nicht ohne weiteres möglich, da z.B. Farbänderungen die
-  Graphstruktur verändern können.
+  Graphstruktur verändern können
+
+## Polygon Formfeatures
+
+* [A Parameter-Optimizing Model-Based Approch to the Analysis of Low-SNR Image 
+  Sequences for Biological Virus 
+  Detection](https://eldorado.tu-dortmund.de/handle/2003/35229)
+  * Kapitel 6.2
 
 ## Offene Fragen
 
