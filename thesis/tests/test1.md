@@ -1,4 +1,4 @@
-# Test 1 16.12.2016
+# Test 1 und Auswertung: 16.12.2016
 
 Ich habe den Code soweit fertiggestellt, dass man nun aus einer beliebigen
 Superpixelrepräsentation einen Graphen generieren kann und dieser dann in eine
