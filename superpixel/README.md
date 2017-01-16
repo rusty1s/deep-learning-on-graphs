@@ -18,6 +18,13 @@
 * [Recurrent convolutional neural networks for scene labeling](http://jmlr.org/proceedings/papers/v32/pinheiro14.pdf)
 * [Deep Convolutional Neural Fields for Depth Estimation from a Single Image](https://arxiv.org/pdf/1411.6387v2.pdf) ([Github](https://github.com/slundqui/superpixelDepth))
 
+## Region adjacency graphes
+
+* [Region connectivity graphs in
+  Python](http://peekaboo-vision.blogspot.de/2011/08/region-connectivity-graphs-in-python.html)
+* [Drawing Region Adjacency
+  Graphs](https://vcansimplify.wordpress.com/2014/08/15/604/)
+
 ### Non Neural Networks
 
 * [Object Detection by Labeling Superpixels](http://www.cv-foundation.org/openaccess/content_cvpr_2015/papers/Yan_Object_Detection_by_2015_CVPR_paper.pdf)
@@ -34,6 +41,8 @@
 
 * [Superpixel Benchmark and Comparison](https://www.tu-chemnitz.de/etit/proaut/rsrc/neubert_protzel_superpixel.pdf)
 * [Superpixel Algorithms: Overview and Comparison](http://davidstutz.de/superpixel-algorithms-overview-comparison/)
+* [Normalized
+  Cut](http://scikit-image.org/docs/dev/auto_examples/segmentation/plot_ncut.html)
 
 ## Algorithms
 
@@ -56,6 +65,11 @@
   * wird oft benutzt
 * [Selective Search for Object Recognition](https://ivi.fnwi.uva.nl/isis/publications/bibtexbrowser.php?key=UijlingsIJCV2013&bib=all.bib)
   * Hierarchische Segmentierung
+
+### Skimage
+
+* [Segmentation Algorithms in
+  scikits-image](http://peekaboo-vision.blogspot.de/2012/09/segmentation-algorithms-in-scikits-image.html)
 
 ## Tutorials
 

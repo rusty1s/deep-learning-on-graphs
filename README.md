@@ -29,13 +29,15 @@
 
 ## Data
 
-* [CIFAR-10](http://www.cs.toronto.edu/%7Ekriz/cifar.html) 
+* [CIFAR-10](http://www.cs.toronto.edu/%7Ekriz/cifar.html)
   ([Citation](http://www.cs.toronto.edu/%7Ekriz/learning-features-2009-TR.pdf))
-  * [How to 
+  * [How to
     use](https://www.tensorflow.org/versions/r0.12/tutorials/deep_cnn/index.html)
 * [ImageNet](http://image-net.org/)
   * 224x224 klassische Größe für allgemeine Bildklassifikation
   * [ILSVRC2014](http://image-net.org/challenges/LSVRC/2014/download-images-5jj5.php)
+  * [Random Ramblings on
+    ImageNet](http://peekaboo-vision.blogspot.de/2011/10/random-ramblings-on-imagenet.html)
 * [PascalVOC](http://host.robots.ox.ac.uk/pascal/VOC/)
 
 ## Applications

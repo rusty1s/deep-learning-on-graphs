@@ -20,9 +20,13 @@ auf dem ein Hund liegt.
 
 Es ist teilweise schwer, Formfeatures fuer Polygone zu extrahieren, die ueber
 das Polygon viel aussagen. Deswegen ist es umso besser, wenn
-Superpixelalgorithmen nicht zu grosse Superpixel berechnen und diese, wenn sie 
-nichts interessantes enthalten, moeglichst quadratisch sind. Dann kann ueber 
+Superpixelalgorithmen nicht zu grosse Superpixel berechnen und diese, wenn sie
+nichts interessantes enthalten, moeglichst quadratisch sind. Dann kann ueber
 die Form auf die Wichtigkeit dieses Superpixels geschlossen werden.
+
+* Compactness von SLIC benoetigt einen relativ hohen Wert, damit
+  Superpixelregionen recht quadratisch werden (bei PascalVOC ist 30 ein guter
+  Wert)
 
 ### Graphlabeling
 
