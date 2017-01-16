@@ -16,6 +16,9 @@ auf dem ein Hund liegt.
 * Bilder auf Bounding Box croppen (reine Imagesize ist ja fuer die Umwandlung
   in einen Graphen egal)
 
+* Falls Bounding Box klein, aber immer noch gross genug, sollte ueberlegt
+  werden, das Bild hochzuscalen.
+
 ### Superpixelalgorithmus
 
 Es ist teilweise schwer, Formfeatures fuer Polygone zu extrahieren, die ueber
