@@ -89,3 +89,5 @@
   * Kapitel 6.2
 * [Skimage Region
   Properties](http://scikit-image.org/docs/dev/api/skimage.measure.html#skimage.measure.regionprops)
+* [Merkmale von Bildregionen, Einfuehrung in 
+  Spektraltechniken](http://www-home.fh-konstanz.de/~mfranz/ibv_files/lect09_spectr.pdf)

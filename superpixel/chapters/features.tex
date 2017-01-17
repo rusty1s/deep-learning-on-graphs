@@ -1,0 +1,88 @@
+\section{Features}
+
+\subsection{Momente}
+
+Momente sind in der Bildverarbeitung bestimmte gewichtete Milttelwerte aus den Helligkeitswerten der einzelnen Pixel eines Bildes.
+Sie werden gewoehnlich so gewaehlt, dass sie gewuenschte Eigenschaften des Bildes widerspiegeln oder gewisse geometrische Interpretationen besitzen.
+Momente sind hilfreich, um einzelne Objekkte in einem \textbf{segmentierten} Bild zu beschreiben.
+
+\subsubsection{Nicht-zentrierte Momente}
+
+\begin{equation}
+  M_{ij} = \sum_x \sum_y x^i y^j g(x, y)
+\end{equation}
+
+\begin{itemize}
+  \item \textbf{Flaeche:} $M_{00}$
+  \item \textbf{Schwerpunkt:} $\frac{M_{10}}{M_{00}}$ und $\frac{M_{01}}{M_{00}}$
+\end{itemize}
+
+\subsubsection{Zentrale Momente}
+
+Zentrale Momente sind invariant bezueglich Translationen.
+
+\begin{equation}
+  \mu_{ij} = \sum_x \sum_y (x - \overline{x})^i (y - \overline{y})^j g(x, y)
+\end{equation}
+
+wobei $\overline{x}$, $\overline{y}$ Schwerpunkt.
+
+\begin{itemize}
+  \item $\mu_{00} = M_{00}$
+\end{itemize}
+
+Informationen ueber die Ausrichtung des Bildes koennen gewonnen werden, indem man zuerst die drei zentralen Momente zweiten Grades verwendet, um eine Kovarianzmatrix zu berechnen
+
+\begin{equation}
+  \text{cov}[I(x,y)] = \begin{pmatrix}
+    \frac{\mu_{20}}{\mu_{00}} & \frac{\mu_{11}}{\mu_{00}}\\
+    \frac{\mu_{11}}{\mu_{00}} & \frac{\mu_{02}}{\mu_{00}}\\
+  \end{pmatrix} = \begin{pmatrix}
+    \mu'_{20} & \mu'_{11}\\
+    \mu'_{11} & \mu'_{02}\\
+  \end{pmatrix}
+\end{equation}
+
+Die Eigenvektoren dieser Matrix entsprechen der grossen und kleinen Halbachse der Helligkeitswerte.
+Die Eigenwerte der Kovarianzmatrix sind
+
+\begin{equation}
+  \lambda_i = \frac{\mu'_{20} + \mu'_{02}}{2} \pm \frac{\sqrt{4 \mu'^2_{11} + (\mu'_{20} - \mu'_{02})^2}}{2}
+\end{equation}
+
+Die \emph{Exzentrizitaet} (engl. \emph{Eccentricity}) des Bildes ist $\sqrt{1 - \frac{\lambda_2}{\lambda_1}}$.
+Sie ist ein Mass fuer das Groessenverhaeltnis der beiden Hauptachsen.
+Bei runden Objekten ist sie nahe an $0$, bei laenglichen Objekten nahe an $1$.
+
+\subsubsection{Skalierungsinvariante Momente}
+
+Es koennen Momente $\eta_{ij}$ mit $i + j \geq 2$ konstruiert werden, die invariant bezueglich Skalierung und Translation sind, indem man das entsprechende zentrale Moment durch das entsprechend skalierte Moment vom Grad $0$ teilt.
+
+\begin{equation}
+  \eta_{ij} = \frac{\mu_{ij}}{\mu_{00}^{1 + \frac{i + j}{2}}}
+\end{equation}
+
+\subsubsection{Rotationsinvariante Momente}
+
+Es ist weiterhin moeglich, Momente zu konstruieren, die zusaetzlich invariant bezueglich einer Bildrotation sind.
+Haeufig benutzt wird die \emph{Hu}-Menge invarianter Momente.
+
+\begin{itemize}
+  \item $I_1 = \eta_{20} + \eta_{02}$: Traegheitsmoment um den Schwerpunkt des Bildes, wenn die Helligkeitswerte der Pixel als physikalische Dichte interpretiert werden
+\end{itemize}
+
+\subsection{Polygon-Features}
+
+\begin{itemize}
+  \item \textbf{Area:} Anzahl an Pixeln im Segment
+  \item \textbf{Bounding Box Area:} Flaeche der vertikalen/horizontalen gelegenen Bounding Box um das Segment
+  \item \textbf{Convex Area:} Anzahl an Pixeln der konvexen Huelle des Segments
+  \item \textbf{Local Centroid:} Zentrum/Schwerpunkt des Segments relativ zur Bounding Box
+\end{itemize}
+
+Daraus koennen weitere Features ermittelt werden:
+
+\begin{itemize}
+  \item \textbf{Extent:} $\frac{\text{Area}}{\text{Bounding Box Area}}$
+  \item \textbf{Solidity:} $\frac{\text{Area}}{\text{Convex Area}}$
+\end{itemize}
