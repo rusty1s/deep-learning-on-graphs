@@ -31,6 +31,9 @@ die Form auf die Wichtigkeit dieses Superpixels geschlossen werden.
   Superpixelregionen recht quadratisch werden (bei PascalVOC ist 30 ein guter
   Wert)
 
+<img src="images/slic_pascal_1.png" alt="SLIC Pascal VOC 1" width="300" />
+<img src="images/slic_pascal_2.png" alt="SLIC Pascal VOC 2" width="300" />
+
 ### Graphlabeling
 
 Der erste Schritt der Receptive Fields ist es, eine Ordnung der Knoten zu
