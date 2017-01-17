@@ -31,8 +31,14 @@ die Form auf die Wichtigkeit dieses Superpixels geschlossen werden.
   Superpixelregionen recht quadratisch werden (bei PascalVOC ist 30 ein guter
   Wert)
 
-<img src="images/slic_pascal_1.png" alt="SLIC Pascal VOC 1" width="300" />
-<img src="images/slic_pascal_2.png" alt="SLIC Pascal VOC 2" width="300" />
+<img src="images/pascal_1.png" alt="Pascal VOC 1" width="300" />
+<img src="images/pascal_2.png" alt="Pascal VOC 2" width="300" />
+<img src="images/pascal_1_slic.png" alt="SLIC Pascal VOC 1" width="300" />
+<img src="images/pascal_2_slic.png" alt="SLIC Pascal VOC 2" width="300" />
+<img src="images/pascal_1_quickshift.png" alt="Quickshift Pascal VOC 1" 
+width="300" />
+<img src="images/pascal_2_quickshift.png" alt="Quickshift Pascal VOC 2" 
+width="300" />
 
 ### Graphlabeling
 
