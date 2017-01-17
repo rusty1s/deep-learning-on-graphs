@@ -46,25 +46,29 @@
 
 ## Algorithms
 
-* [SEEDS: Superpixels Extracted via Energy-Driven
-  Sampling](http://www.mvdblive.org/seeds/)
 * [SLIC superpixels compared to state-of-the-art superpixel
   methods](https://infoscience.epfl.ch/record/177415/files/Superpixel_PAMI2011-2.pdf)
   * runtime efficient
   * **Implementations:**
     * [scikit-image: Image processing in Python](http://scikit-image.org/) ([Github](https://github.com/scikit-image/scikit-image))
     * OpenCV >= 3.0.0
-* [Structured forests for fast edge detection](https://www.microsoft.com/en-us/research/wp-content/uploads/2013/12/DollarICCV13edges.pdf)
-  * low quantization error
-* Quick Shift in [Quick Shift and Kernel Methods for Mode Seeking](http://vision.cs.ucla.edu/papers/vedaldiS08quick.pdf)
+* Quick Shift in [Quick Shift and Kernel Methods for Mode 
+  Seeking](http://vision.cs.ucla.edu/papers/vedaldiS08quick.pdf)
   * superpixels are not fixed in size or number (a complex image with many fine scale image structures may have many more superpixels than a simple one)
-* [Convolutional Networks in Scene Labelling](http://cs231n.stanford.edu/reports/ashwinpp_final_report.pdf)
-* [Efficient Graph-Based Image Segmentation](http://cs.brown.edu/~pff/papers/seg-ijcv.pdf)
+* [Felzenszwalb: Efficient Graph-Based Image 
+  Segmentation](http://cs.brown.edu/~pff/papers/seg-ijcv.pdf)
   * Segmentierung über Graphstruktur, dessen Kanten die Ähnlichkeit zwischen zwei Knoten beschreiben
   * Segmentierungsalgorithmus ergibt Superpixel-Repräsentation
   * wird oft benutzt
+* [SEEDS: Superpixels Extracted via Energy-Driven
+  Sampling](http://www.mvdblive.org/seeds/)
+* [Structured forests for fast edge 
+  detection](https://www.microsoft.com/en-us/research/wp-content/uploads/2013/12/DollarICCV13edges.pdf)
+  * low quantization error
 * [Selective Search for Object Recognition](https://ivi.fnwi.uva.nl/isis/publications/bibtexbrowser.php?key=UijlingsIJCV2013&bib=all.bib)
   * Hierarchische Segmentierung
+* [Convolutional Networks in Scene 
+  Labelling](http://cs231n.stanford.edu/reports/ashwinpp_final_report.pdf)
 
 ### Skimage
 
