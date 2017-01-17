@@ -80,3 +80,12 @@
 * [Segmentation: A SLIC Superpixel Tutorial using Python](http://www.pyimagesearch.com/2014/07/28/a-slic-superpixel-tutorial-using-python/)
 * [Accessing Individual Superpixel Segmentations with Python](http://www.pyimagesearch.com/2014/12/29/accessing-individual-superpixel-segmentations-python/)
   * [OpenCV center of contour](http://www.pyimagesearch.com/2016/02/01/opencv-center-of-contour/)
+
+## Formfeatures
+
+* [A Parameter-Optimizing Model-Based Approch to the Analysis of Low-SNR Image
+  Sequences for Biological Virus
+  Detection](https://eldorado.tu-dortmund.de/handle/2003/35229)
+  * Kapitel 6.2
+* [Skimage Region
+  Properties](http://scikit-image.org/docs/dev/api/skimage.measure.html#skimage.measure.regionprops)

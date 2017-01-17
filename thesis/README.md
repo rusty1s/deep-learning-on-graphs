@@ -49,13 +49,6 @@
 * Distorted Inputs sind nicht ohne weiteres möglich, da z.B. Farbänderungen die
   Graphstruktur verändern können
 
-## Polygon Formfeatures
-
-* [A Parameter-Optimizing Model-Based Approch to the Analysis of Low-SNR Image 
-  Sequences for Biological Virus 
-  Detection](https://eldorado.tu-dortmund.de/handle/2003/35229)
-  * Kapitel 6.2
-
 ## Offene Fragen
 
 * Wie verarbeiten andere CNNs Superpixel?
