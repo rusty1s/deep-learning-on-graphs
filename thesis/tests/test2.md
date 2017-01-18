@@ -30,8 +30,12 @@ Das Erste zeigt ein willkürliches Bild aus dem CIFAR-10 Datensatz.
 Das Zweite zeigt dieses Bild nach Anwendung von Slico mit 25 Superpixeln.
 Die Superpixel sind durch die Durchschnittsfarbe des Segments gekennzeichnet.
 
-<img src="images/cifar10.png" alt="CIFAR-10" width="150" />
-<img src="images/cifar10_slico_25.png" alt="Slico" width="150" />
+<img 
+src="https://github.com/rusty1s/deep-learning/raw/master/thesis/tests/images/cifar10.png" 
+alt="CIFAR-10" width="150" />
+<img 
+src="https://github.com/rusty1s/deep-learning/raw/master/thesis/tests/images/cifar10_slico_25.png" 
+alt="Slico" width="150" />
 
 ## Weiterführende Gedanken
 
@@ -231,7 +235,9 @@ Die Accuracy pendelt sich relativ früh auf 0.3-0.4 ein. Das ist ziemlich
 schlecht, aber zumindest nicht zufällig 😂.
 Die Loss pendelt sich nach 6000 Steps auf ungefähr 2 ein.
 
-<img src="images/test2.png" alt="Auswertung" />
+<img 
+src="https://github.com/rusty1s/deep-learning/raw/master/thesis/tests/images/test2.png" 
+alt="Auswertung" />
 
 ## Evaluation
 
