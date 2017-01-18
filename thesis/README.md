@@ -9,19 +9,19 @@
 
 * Motivation
 * Relevante Arbeiten
-* verschiedene **Graph-Repräsentationen von Bildern**
+* verschiedene **Graphrepräsentationen von Bildern**
   * Segmentierungsgraphen
   * Superpixel
     * verschiedene Superpixelberechnungsverfahren
-  * Vektorgraphiken als Graph- bzw. Baum-Repräsentation
+  * Vektorgraphiken als Graph- bzw. Baumrepräsentation
 * **Convolutional Neural Networks auf Graphen**
   * Verfahren
     * Multi-Scale Feature Maps
-* **Convolutional Neural Networks auf Graph-Repräsentationen von Bildern**
+* **Convolutional Neural Networks auf Graphrepräsentationen von Bildern**
   * *Problem:* Klassifikation (bessere Evaluationsmethoden)
   * *Problem:* Segmentierung
 * **Evaluation**
-  * Performance unterschiedlicher Graph-Repräsentationsverfahren
+  * Performance unterschiedlicher Graphrepräsentationsverfahren
   * Performance CNN auf Graphen gegenüber CNN auf Bildern
   * Laufzeit CNN auf Graphen gegenüber CNN auf Bildern
   * gegenüber Graph-Kernels
