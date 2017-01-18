@@ -41,13 +41,21 @@
 ### Augmentierung
 
 * Augmentierung der Daten ist im Bereich Deep Learning sehr essenziell
-* Augmentierung auf den Bildern oder auf der Superpixel Repräsentation oder auf
+* Augmentierung auf den Bildern oder auf der Superpixelrepräsentation oder auf
   den Graphen?
 * Augmentierung ist eine Möglichkeit, dem Netz zu zeigen, welche Sachen
   irrelevant für die Klassifikation sind (z.B. unabhängig von Brightness oder
   Normalisieren auf zero mean/one stddev)
-* Distorted Inputs sind nicht ohne weiteres möglich, da z.B. Farbänderungen die
-  Graphstruktur verändern können
+* auf den **Graphen:**
+  * Distorted Inputs sind nicht ohne weiteres möglich, da z.B. Farbänderungen 
+    die Graphstruktur verändern können
+* auf der **Superpixelrepraesentation:**
+  * Cropping der Superpixelrepraesentation ist nicht moeglich, da ein Crop auf 
+    dem Bild mit anschliessender Superpixelberechnung sowie der gleiche Crop 
+    auf dem Bild und der vorher berechneten Superpixelrepraesentation zu 
+    unterschiedlichen Ergebnissen fuehrt.
+    * **TODO: Beweis**
+    * evtl. ist dies garnicht so schlecht
 
 ## Offene Fragen
 

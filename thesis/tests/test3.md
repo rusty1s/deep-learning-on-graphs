@@ -71,7 +71,8 @@ Superpixel die nicht quadratisch sind und nur auffuellen. Daher sollten die
 Knoten eventuell nach Auffaelligkeit im ersten Schritt sortiert werden, d.h.
 anhand ihrer Form oder anhand ihrer unterschiedlich farbigen Nachbarn.
 
-**Idee:**
+#### Idee
+
 * Nachbarschaftslabeling fuer ausgewaehlte Knoten basierend auf Distanz zum
   Knoten
 * Knotenauswahl basierend auf Auffaelligkeit, Besonderheit der Knoten
