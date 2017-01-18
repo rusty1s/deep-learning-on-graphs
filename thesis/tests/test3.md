@@ -33,12 +33,22 @@ die Form auf die Wichtigkeit dieses Superpixels geschlossen werden.
 
 <img src="images/pascal_1.png" alt="Pascal VOC 1" width="300" />
 <img src="images/pascal_2.png" alt="Pascal VOC 2" width="300" />
+
+#### SLIC
+
 <img src="images/pascal_1_slic.png" alt="SLIC Pascal VOC 1" width="300" />
 <img src="images/pascal_2_slic.png" alt="SLIC Pascal VOC 2" width="300" />
+
+#### Quickshift
+
 <img src="images/pascal_1_quickshift.png" alt="Quickshift Pascal VOC 1" 
 width="300" />
 <img src="images/pascal_2_quickshift.png" alt="Quickshift Pascal VOC 2" 
 width="300" />
+
+#### Felzenszwalb
+
+#### SEEDs
 
 ### Graphlabeling
 
@@ -50,3 +60,8 @@ sind, geben der Bildklassifizierung wahrscheinlich mehr Informationen, als
 Superpixel die nicht quadratisch sind und nur auffuellen. Daher sollten die
 Knoten eventuell nach Auffaelligkeit im ersten Schritt sortiert werden, d.h.
 anhand ihrer Form oder anhand ihrer unterschiedlich farbigen Nachbarn.
+
+**Idee:**
+* Nachbarschaftslabeling fuer ausgewaehlte Knoten basierend auf Distanz zum
+  Knoten
+* Knotenauswahl basierend auf Auffaelligkeit, Besonderheit der Knoten

@@ -54,5 +54,4 @@
 * Wie verarbeiten andere CNNs Superpixel?
 * Welche Informationen werden bei den Segmentierungsgraphen zur Klassifizierung
   verwendet?
-* Wie kann die Form von Flächen vektorisiert werden?
 * Wie können SVGs über Graphen repräsentiert werden?
