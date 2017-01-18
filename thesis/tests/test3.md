@@ -55,7 +55,7 @@ width="300" />
 Der erste Schritt der Receptive Fields ist es, eine Ordnung der Knoten zu
 bestimmen.
 
-**Idee:** Auffaellige Superpixel mit besonderen Formen, die nicht quadratisch
+Auffaellige Superpixel mit besonderen Formen, die nicht quadratisch
 sind, geben der Bildklassifizierung wahrscheinlich mehr Informationen, als
 Superpixel die nicht quadratisch sind und nur auffuellen. Daher sollten die
 Knoten eventuell nach Auffaelligkeit im ersten Schritt sortiert werden, d.h.
