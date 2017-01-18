@@ -79,14 +79,18 @@ Haeufig benutzt wird die \emph{Hu}-Menge invarianter Momente.
 
 \begin{itemize}
   \item \textbf{Area:} Anzahl an Pixeln im Segment
-  \item \textbf{Bounding Box Area:} Flaeche der vertikalen/horizontalen gelegenen Bounding Box um das Segment
+  \item \textbf{Bounding Box Area:} Flaeche der vertikal/horizontal gelegenen Bounding Box um das Segment
+  \item \textbf{Bounding Box Height/Width:} Hoehe bzw. Breite der vertikal/horizontal gelegenen Bounding Box
   \item \textbf{Convex Area:} Anzahl an Pixeln der konvexen Huelle des Segments
   \item \textbf{Local Centroid:} Zentrum/Schwerpunkt des Segments relativ zur Bounding Box
-  \item \textbf{Eccentricity:} Groessenverhaeltnis der beiden Hauptachsen zueinander $\in [0, 1]$
+  \item \textbf{Eccentricity:} Groessenverhaeltnis der beiden Hauptachsen einer Ellipse, die das Polygon minimal umschliesst $\in [0, 1]$
   \item \textbf{Major Axis Length:} $4 \sqrt{\lambda_1}$
   \item \textbf{Minor Axis Length:} $4 \sqrt{\lambda_2}$
-  \item \textbf{Perimeter:} Laenge der Seitenlinien des Polygons, kann auch fuer Pixelpolygone berechnet werden (siehe Perimeter Estimator von K. Benkrid)
+  \item \textbf{Perimeter:} Laenge der Seitenlinien des Polygons, kann auch fuer Pixelpolygone berechnet werden (siehe Perimeter Estimator von K. Benkrid mit \emph{4- oder 8-connectivity})
   \item \textbf{Orientation:} Winkel zwischen der X-Achse und der \emph{Major Axis}
+  \item \textbf{Oriented Bounding Box Area:} Das kleinste Rechteck, dass die Region umschliesst.\todo{wie bei Pixelpolygonen berechnen? Ist ja eng mit Major Axis verwandt.}
+  \item \textbf{Oriented Bounding Box Axis 1:} Die Laenge der laengeren Seite der Oriented Bounding Box
+  \item \textbf{Oriented Bounding Box Axis 2:} Die Laenge der kuerzeren Seite der Oriented Bounding Box
 \end{itemize}
 
 Daraus koennen weitere Features ermittelt werden:
@@ -94,6 +98,13 @@ Daraus koennen weitere Features ermittelt werden:
 \begin{itemize}
   \item \textbf{Extent:} $\frac{\text{Area}}{\text{Bounding Box Area}}$
   \item \textbf{Solidity:} $\frac{\text{Area}}{\text{Convex Area}}$
+  \item \textbf{Equivalent Diameter:} Durchmesser eines Kreises mit dem Flaecheninhalt von \textbf{Area} $\sqrt{\frac{4 \cdot \text{Area}}{\pi}}$
+  \item \textbf{Rectangularity:} $\frac{\text{Area}}{\text{OBB Area}}$
+  \item \textbf{Circularity:} $\frac{4\pi \cdot \text{Area}}{\text{Perim} \cdot \text{Perim}}$
+  \item \textbf{Compactness:} $\frac{\sqrt{\frac{4}{\pi}\text{Area}}}{\text{OBB Axis 1}}$ (normalisiert Equivalent Diameter)
+  \item \textbf{Central moment feature $C^2$:} $\frac{\mu_{20} + \mu_{02}}{\mu_{00}}$ \todo{die naechsten drei gewichtet und/oder ungewichtet?}
+  \item \textbf{Centrol moment feature $C^4$:} $\frac{\mu_{40} + \mu_{22} + \mu_{04}}{\mu_{00}}$
+  \item \textbf{Elongation:} $\frac{\sqrt{(\mu_{20} - \mu_{02})^2 + \mu^2_{11}}}{\mu_{20} + \mu_{02}}$
 \end{itemize}
 
 \subsection{Helligkeit-Features}
@@ -116,6 +127,6 @@ Daraus koennen weitere Features ermittelt werden:
 \subsection{Hole-Features}
 
 \begin{itemize}
-  \item \textbf{Filled Area}: Anzahl der Pixel, die das Segment enthaelt, wenn Loecher aufgefuellt werden.
-  \item \textbf{Number of Holes (8-connectivity):} Anzahl an Loechern im Segment.
+  \item \textbf{Filled Area}: Anzahl der Pixel, die das Segment enthaelt, wenn Loecher aufgefuellt werden
+  \item \textbf{Number of Holes} oder \textbf{Euler Number:} Anzahl an Loechern im Segment, definiert als $1 - \text{Number of Holes}$ (\emph{4- oder 8-connectivity})
 \end{itemize}
