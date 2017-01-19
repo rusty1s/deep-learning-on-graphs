@@ -36,6 +36,12 @@
 * keine strikte Größe der Bilder notwendig
 * ggf. mehr Augmentierungsmöglichkeiten zusätzlich zur Bildaugmentierung
 
+### 3 Szenarien
+
+* CNN auf den normalen Bildern
+* CNN auf downgescalten Bildern zur Informationsreduktion
+* CNN auf Segmentierungen bzw. Graphen zur Informationsreduktion
+
 ## Schwächen
 
 ### Augmentierung
