@@ -41,6 +41,7 @@
 * CNN auf den normalen Bildern
 * CNN auf downgescalten Bildern zur Informationsreduktion
 * CNN auf Segmentierungen bzw. Graphen zur Informationsreduktion
+  * Vergleich mit VGG 16/19 Referenznetz
 
 ## Schwächen
 
