@@ -98,3 +98,5 @@
 
 * [An Introduction to Feature
   Selection](http://machinelearningmastery.com/an-introduction-to-feature-selection/)
+* [Feature Selection in Python with 
+  Scikit-Learn](http://machinelearningmastery.com/feature-selection-in-python-with-scikit-learn/)
