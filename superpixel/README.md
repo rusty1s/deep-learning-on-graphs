@@ -81,7 +81,7 @@
 * [Accessing Individual Superpixel Segmentations with Python](http://www.pyimagesearch.com/2014/12/29/accessing-individual-superpixel-segmentations-python/)
   * [OpenCV center of contour](http://www.pyimagesearch.com/2016/02/01/opencv-center-of-contour/)
 
-## Formfeatures
+## Feature Extraction
 
 * [A Parameter-Optimizing Model-Based Approch to the Analysis of Low-SNR Image
   Sequences for Biological Virus
@@ -93,3 +93,8 @@
   Spektraltechniken](http://www-home.fh-konstanz.de/~mfranz/ibv_files/lect09_spectr.pdf)
 * [Design and FPGA Implementation of a Perimeter 
   Estimator](http://www.maa.org/sites/default/files/images/upload_library/applets/CirclesRedistrict/perimeter.doc)
+
+## Feature Selection
+
+* [An Introduction to Feature
+  Selection](http://machinelearningmastery.com/an-introduction-to-feature-selection/)
