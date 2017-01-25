@@ -11,7 +11,7 @@
 * [TensorFlow](https://www.tensorflow.org) (Open Source Library)
 * [TensorFlow in a Nutshell](http://camron.xyz)
 
-##Python Tutorials
+## Python Tutorials
 
 * [Learn Python the hard way](https://learnpythonthehardway.org/book/)
 * [Style Guide](https://www.python.org/dev/peps/pep-0008/)
@@ -26,6 +26,8 @@
 * [Dropout: A Simple Way to Prevent Neural Networks from Overfitting](https://www.cs.toronto.edu/~hinton/absps/JMLRdropout.pdf)
 * [A method for stochastic optimization](https://arxiv.org/pdf/1412.6980v8.pdf)
   * Adam-Optimizer
+* [VGG 16/19](https://arxiv.org/pdf/1409.1556v6.pdf)
+  * [VGG in TensorFlow](https://www.cs.toronto.edu/~frossard/post/vgg16/)
 
 ## Data
 
