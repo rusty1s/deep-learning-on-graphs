@@ -10,6 +10,7 @@
 * [Deep Learning Weekly](http://www.deeplearningweekly.com) (Newsletter)
 * [TensorFlow](https://www.tensorflow.org) (Open Source Library)
 * [TensorFlow in a Nutshell](http://camron.xyz)
+* [A Year of Artificial Intelligence](https://ayearofai.com/)
 
 ## Python Tutorials
 
