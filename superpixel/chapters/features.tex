@@ -75,6 +75,52 @@ Haeufig benutzt wird die \emph{Hu}-Menge invarianter Momente.
   \item $I_1 = \eta_{20} + \eta_{02}$: Traegheitsmoment um den Schwerpunkt des Bildes, wenn die Helligkeitswerte der Pixel als physikalische Dichte interpretiert werden
 \end{itemize}
 
+\subsection{Perimeter}
+
+\emph{Perimeter} beschreibt die Länge der Seitenlinien eines Polygons.
+Normalerweise ist dies eine recht einfache Aufgabe, denn es müssen lediglich die Längen jeder einzelnen Line addiert werden.
+Für Pixelpolygone gestaltet sich dies jedoch schwieriger.
+Das kann gemacht werden, indem die Rahmenpixel bestimmt werden und die Länge der Außenkontur dann um diese Pixel berechnet wird.
+Das ergibt
+
+\begin{equation}
+  \text{Anzahl an horizontalen \& vertikalen Pixeln} + \text{Anzahl an Ecken} \cdot \sqrt{2}
+\end{equation}
+
+mit einer Anpassung an den Ecken als Diagonale.
+
+Diese Formulierung hat den Nachteil, dass die berechnete Konturlänge größer ist als die Länge des eigentlichen Polygons.
+Außerdem ist sie nicht besonders hardwarefreundlich.
+
+Ein alternativer Ansatz ist es, die Linie in der Mitte der Konturpixel zu betrachten.
+Dafür wird das Polygon zuerst ausgehöhlt.
+Dann wird zwischen drei unterschiedlichen Möglichkeiten unterschieden:
+
+\begin{enumerate}
+  \item vertikale/horizontale Linien mit Kontribution $1$
+  \item komplettdiagonale Linien mit Kontribution $\sqrt{2}$
+  \item Halb vertikal/horizontal und halbdiagonale Linien mit Kontribution $\frac{1 + \sqrt{2}}{2}$
+\end{enumerate}
+
+Dann werden die Pixel entsprechend ihrer Kontribution aufaddiert.
+Dazu wird die Rahmenmaske \emph{convolved} mit der Maske
+
+\begin{equation}
+  \begin{pmatrix}
+    10 & 2 & 10\\
+    2 & 1 & 2\\
+    10 & 2 & 10\\
+  \end{pmatrix}
+\end{equation}
+
+Das heißt, wenn wir auf einem Pixel sind wird die direkte Nachbarschaft betrachtet, und falls diese eine $1$ besitzt, mit dem jeweiligen Wert in der Matrix aufaddiert.
+Dann kann einfach entschieden werden, wie die Nachbarschaft eines Pixels aussieht.
+Ist das Ergebnis 5, 7, 15, 17, 25 oder 27, dann handelt es sich um Fall (1) an diesem Pixel.
+Ist das Ergebnis 21 oder 33, dann handelt es sich um Fall (2).
+Ist das Ergebnis 13 oder 23, dann handelt es sich um Fall (3).
+
+Dies funktioniert allerdings nur fehlerfrei, wenn zwei gegenüberliegende Konturen nicht benachbart sind.
+
 \subsection{Polygon-Features}
 
 \begin{itemize}
