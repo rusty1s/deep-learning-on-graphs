@@ -89,14 +89,18 @@
   * Kapitel 6.2
 * [Skimage Region
   Properties](http://scikit-image.org/docs/dev/api/skimage.measure.html#skimage.measure.regionprops)
-* [Merkmale von Bildregionen, Einfuehrung in 
+* [Merkmale von Bildregionen, Einfuehrung in
   Spektraltechniken](http://www-home.fh-konstanz.de/~mfranz/ibv_files/lect09_spectr.pdf)
-* [Design and FPGA Implementation of a Perimeter 
+* [Design and FPGA Implementation of a Perimeter
   Estimator](http://www.maa.org/sites/default/files/images/upload_library/applets/CirclesRedistrict/perimeter.doc)
 
 ## Feature Selection
 
 * [An Introduction to Feature
   Selection](http://machinelearningmastery.com/an-introduction-to-feature-selection/)
-* [Feature Selection in Python with 
+* [Feature Selection in Python with
   Scikit-Learn](http://machinelearningmastery.com/feature-selection-in-python-with-scikit-learn/)
+* [Convex Hull of Pixel
+  Image](http://scikit-image.org/docs/dev/auto_examples/plot_convex_hull.html)
+  * [Binary image convex hull - algorithm
+    notes](http://blogs.mathworks.com/steve/2011/10/04/binary-image-convex-hull-algorithm-notes/)

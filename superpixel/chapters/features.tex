@@ -121,6 +121,22 @@ Ist das Ergebnis 13 oder 23, dann handelt es sich um Fall (3).
 
 Dies funktioniert allerdings nur fehlerfrei, wenn zwei gegenüberliegende Konturen nicht benachbart sind.
 
+\subsection{Konvexe Hülle einer Pixelmaske}
+
+\begin{enumerate}
+  \item Berechne die $x$- und $y$-Koordinaten der 4 Ecken jedes Pixels des Binärbildes
+  \item Berechne die konvexe Hülle dieser Koordianten
+  \item Konvertiere diese konvexe Hülle in ein Binärbild mittels \texttt{poly2mask}
+\end{enumerate}
+
+Es gibt einen Fehler in der obrigen Prozedur.
+Es können Extrapixel für Diagonalen entstehen.
+Das ist nicht gut.
+Würde man den Prozess immer wiederholen, so würde irgendwann ein Rechteck entstehen.
+Um dies zu beheben, muss Schritt 1 angepasst werden.
+Statt die Eckpunkte zu sammeln, werden die Zentren der Kanten eines Pixels bestimmt.
+Das berechnet die richtige Maske bei Diagonalen und es gilt $f(f(x)) = f(x)$ \todo{wie heißt das nochmal?}
+
 \subsection{Polygon-Features}
 
 \begin{itemize}
