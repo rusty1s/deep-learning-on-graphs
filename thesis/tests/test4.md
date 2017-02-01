@@ -32,6 +32,8 @@ Max Color (3)
 45
 ```
 
+**Es fehlt noch die Oriented Bounding Box.**
+
 ## Feature Selection
 
 ## Neighborhood Assembly (Grid Spiral)
