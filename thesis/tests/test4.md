@@ -250,6 +250,7 @@ Fully-Connected-Layern und einem Softmax.
 | Step  | Loss | Accuracy |
 | -----:| ----:| --------:|
 | 2500  | 2.4  | 0.27     |
+| 2800  | 2.13 | 0.34     |
 
 Die Loss wandert nur sehr langsam nach unten, aber sie fällt.
 
