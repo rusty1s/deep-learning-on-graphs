@@ -2,6 +2,36 @@
 
 ## Feature Extraction
 
+Wir entbändigen uns unnötigen Features, die bereits aus existierenden Features 
+berechnet werden.
+So kommen wir von 83 Features auf 45 Features.
+So fliegen unteranderem die zentralen, skalierungsinvarianten, und
+rotationsinvarianten Momente raus, da diese aus den eigentlichen Momenten
+berechnet werden können.
+
+So gilt zum Beispiel:
+```
+mu_00 = M_00
+mu_11 = M_11 - xM_01 wobei x = M_10/M_00
+...
+```
+
+Ebenso fliegen Sachen raus wie `extent = M_00 / bbox_area`.
+Es bleiben folgende Features:
+
+```
+M_00 bis M_33 (16)
+Bbox Width/Height (2)
+Convex Area (1)
+Perimter (1)
+Weighted M_00 bis M_33 (16)
+Mean Color (3)
+Min Color (3)
+Max Color (3)
+==========================
+45
+```
+
 ## Feature Selection
 
 ## Neighborhood Assembly (Grid Spiral)
@@ -25,6 +55,9 @@ Der Grid-Spiral-Algorithmus funktioniert wie folgt:
    Neighborhood angehängt.
 3. Es wird wiederholt ein Nachbar `y` zum letzten hinzugefügten Knoten `x`
    gesucht, sodass `w(x, y) + w(root, y)` minimal.
+
+Die Betrachtung von `w(root, y)` hilft, das wir zentral beim Root Knoten
+bleiben und liefert uns das Spirallayout.
 
 ### Pseudocode
 
