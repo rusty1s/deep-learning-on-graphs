@@ -36,6 +36,13 @@ Max Color (3)
 
 ## Feature Selection
 
+Ich habe eine Kovarianzmatrix aufgebaut über die Features des
+Trainingdatensatzes.
+
+<img
+src="https://github.com/rusty1s/deep-learning/raw/master/thesis/tests/images/test4/cov.svg"
+width="800" />
+
 ## Neighborhood Assembly (Grid Spiral)
 
 Für die Neighborhood Assembly eines Knotens wurde ein spezieller Algorithmus
