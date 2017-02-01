@@ -34,6 +34,8 @@ x = root
 
 for i in range(1, size):
   finde Knoten y, sodass n(x, y) und w(x, y) + w(y, root) minimal
+  neighborhoods[i] = y
+  x = y
 ```
 
 ### Results
