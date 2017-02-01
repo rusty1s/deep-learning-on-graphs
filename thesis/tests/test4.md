@@ -6,6 +6,38 @@
 
 ## Neighborhood Assembly (Grid Spiral)
 
+Für die Neighborhood Assembly eines Knotens wurde ein spezieller Algorithmus
+implementiert, der die nächsten Knoten um den Rootknoten ähnlich wie bei einer
+Spirale einsammelt.
+
+Dies wurde implementiert, da der eigentliche Gedanke, eine Convolution auf
+Basis des Grids, das SLIC erzeugt, nicht möglich ist.
+Es ist daher nicht möglich, da SLIC kein vollkommenes Grid erzeugt.
+Es werden teilweise Knoten hinzugefügt oder entfernt, wenn dies sinnvoll
+erscheint.
+Damit spuckt SLIC auch immer nur eine approximierte Anzahl an Segmenten aus,
+die gewünscht waren.
+
+Der Grid-Spiral-Algorithmus funktioniert wie folgt:
+
+1. Der Root Knoten ist immer an Index 0.
+2. Es wird der nächstgelegene Nachbar zum Rootknoten gesucht und der
+   Neighborhood angehängt.
+3. Es wird wiederholt ein Nachbar `y` zum letzten hinzugefügten Knoten `x`
+   gesucht, sodass `w(x, y) + w(root, y)` minimal.
+
+### Pseudocode
+
+```python
+neighborhoods[0] = root
+x = root
+
+for i in range(1, size):
+  finde Knoten y, sodass n(x, y) und w(x, y) + w(y, root) minimal
+```
+
+### Results
+
 <img
 src="https://github.com/rusty1s/deep-learning/raw/master/thesis/tests/images/test4/1.png"
 width="400" />
