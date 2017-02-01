@@ -43,6 +43,11 @@ Trainingdatensatzes.
 src="https://github.com/rusty1s/deep-learning/raw/master/thesis/tests/images/test4/cov.png"
 width="800" />
 
+Es ist auffällig, dass die Farben sehr stark korrellieren, was komisch
+erscheint.
+Ebenso gibt es so gut wie keine negative Korrelation.
+Auch die Moment-Features korrellieren teilweise stark.
+
 ## Neighborhood Assembly (Grid Spiral)
 
 Für die Neighborhood Assembly eines Knotens wurde ein spezieller Algorithmus
