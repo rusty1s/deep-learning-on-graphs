@@ -2,8 +2,8 @@
 
 ## Feature Extraction
 
-Wir entbändigen uns unnötigen Features, die bereits aus existierenden Features 
-berechnet werden.
+Wir entbändigen uns unnötigen Features, die bereits aus existierenden Features
+berechnet werden und vertrauen darauf, dass das Netz diese für uns ermittelt.
 So kommen wir von 83 Features auf 45 Features.
 So fliegen unteranderem die zentralen, skalierungsinvarianten, und
 rotationsinvarianten Momente raus, da diese aus den eigentlichen Momenten
