@@ -6,6 +6,27 @@
 
 ## Neighborhood Assembly (Grid Spiral)
 
+<img
+src="https://github.com/rusty1s/deep-learning/raw/master/thesis/tests/images/test4/1.png"
+width="250" />
+<img
+src="https://github.com/rusty1s/deep-learning/raw/master/thesis/tests/images/test4/1_slic.png"
+width="250" />
+
+<img
+src="https://github.com/rusty1s/deep-learning/raw/master/thesis/tests/images/test4/2.png"
+width="250" />
+<img
+src="https://github.com/rusty1s/deep-learning/raw/master/thesis/tests/images/test4/2_slic.png"
+width="250" />
+
+<img
+src="https://github.com/rusty1s/deep-learning/raw/master/thesis/tests/images/test4/3.png"
+width="250" />
+<img
+src="https://github.com/rusty1s/deep-learning/raw/master/thesis/tests/images/test4/3_slic.png"
+width="250" />
+
 ## Network
 
 Für den Trainingsdatensatz von PatchySan wird jedes Example aus PascalVoc fünf
@@ -145,6 +166,16 @@ Fully-Connected-Layern und einem Softmax.
 
 ## Evaluation
 
+`3.5 examples/sec`
+`30 sec/batch`
+`10.000 min => 7 days`
+
+| Step  | Loss | Accuracy |
+| -----:| ----:| --------:|
+| 2500  | 2.4  | 0.27     |
+
+Die Loss wandert nur sehr langsam nach unten, aber sie fällt.
+
 ## Future Work
 
 ### Netzwerkstruktur
@@ -167,8 +198,8 @@ Die Kantenattribute müssten demnach reshaped werden zu
 `[Nodes, Neighborhood * Neighborhood, Channels]`.
 PatchySan erwähnt die Verwendung von **Merge Layern**.
 Die Evaluierung und Verwendung von diesen sogenannten Merge Layern, bei denen
-die beiden Tensoren zusammengefügt wird, soll weiter ausgearbeitet werden, um
-dem Netz damit mehr Informationen zu geben.
+die beiden Tensoren im späteren Verlauf des Netzes zusammengefügt werden, soll
+weiter ausgearbeitet werden, um dem Netz damit mehr Informationen zu geben.
 
 ### Datensatz
 
@@ -199,6 +230,14 @@ nicht bei eher quadratischen Regionen wie SLIC).
 Statt eines Inputs von `[168, 168, 3] = 84.672` haben wir einen Input von
 `[150, 18, 45] = 121.500`, was deutlich höher ist.
 Werden weiterhin Kantenattribute betrachtet, so steigt diese Anzahl.
+
+### Laufzeit
+
+Die Laufzeit der Netze ist sehr frustierend.
+Ich durchlaufe `3.5 examples/sec` und brauche damit für einen Batch mit Size
+`128` ungefähr 30 Sekunden.
+Hochgerechnet auf `20.000` Steps sind das `10.000` Minuten, was ungefähr 7
+Tagen entspricht.
 
 ### TensorFlow Update
 
