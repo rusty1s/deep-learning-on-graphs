@@ -61,8 +61,6 @@ Der Grid-Spiral-Algorithmus funktioniert wie folgt:
 Die Betrachtung von `w(root, y)` hilft, das wir zentral beim Root Knoten
 bleiben und liefert uns das Spirallayout.
 
-### Pseudocode
-
 ```python
 neighborhoods[0] = root
 x = root
@@ -72,8 +70,6 @@ for i in range(1, size):
   neighborhoods[i] = y
   x = y
 ```
-
-### Results
 
 <img
 src="https://github.com/rusty1s/deep-learning/raw/master/thesis/tests/images/test4/1.png"
