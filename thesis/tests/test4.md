@@ -231,9 +231,9 @@ Fully-Connected-Layern und einem Softmax.
 
 ## Evaluation
 
-`3.5 examples/sec`
-`30 sec/batch`
-`10.000 min => 7 days`
+* `3.5 examples/sec`
+* `30 sec/batch`
+* `10.000 min => 7 days`
 
 | Step  | Loss | Accuracy |
 | -----:| ----:| --------:|
