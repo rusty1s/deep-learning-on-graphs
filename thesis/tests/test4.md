@@ -8,24 +8,24 @@
 
 <img
 src="https://github.com/rusty1s/deep-learning/raw/master/thesis/tests/images/test4/1.png"
-width="250" />
+width="450" />
 <img
 src="https://github.com/rusty1s/deep-learning/raw/master/thesis/tests/images/test4/1_slic.png"
-width="250" />
+width="450" />
 
 <img
 src="https://github.com/rusty1s/deep-learning/raw/master/thesis/tests/images/test4/2.png"
-width="250" />
+width="450" />
 <img
 src="https://github.com/rusty1s/deep-learning/raw/master/thesis/tests/images/test4/2_slic.png"
-width="250" />
+width="450" />
 
 <img
 src="https://github.com/rusty1s/deep-learning/raw/master/thesis/tests/images/test4/3.png"
-width="250" />
+width="450" />
 <img
 src="https://github.com/rusty1s/deep-learning/raw/master/thesis/tests/images/test4/3_slic.png"
-width="250" />
+width="450" />
 
 ## Network
 
