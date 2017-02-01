@@ -4,7 +4,7 @@
 
 ## Feature Selection
 
-## Neighborhood Assembly
+## Neighborhood Assembly (Grid Spiral)
 
 ## Network
 
@@ -25,6 +25,7 @@ Dieses wird umgewandelt in eine normalisierte Graphdarstellung der Form `[150,
 Die entgültigen Daten von PatchySan werden nicht augmentiert, da ich noch nicht
 weiß wie.
 Sie werden jedoch linear skaliert auf Zero Mean / Unit Norm.
+**Wie sinnvoll ist dies bei Nicht-Bilder?**
 
 Die Netzwerkstruktur ist dann wie folgt:
 
@@ -127,7 +128,7 @@ Die Netzwerkstruktur ist dann wie folgt:
 }
 ```
 
-Es gibt demmch 5 Convolutional Layer, mit zwei darauf folgenden
+Es gibt demnach 5 Convolutional Layer, mit zwei darauf folgenden
 Fully-Connected-Layern und einem Softmax.
 
 ```
@@ -144,9 +145,9 @@ Fully-Connected-Layern und einem Softmax.
 
 ## Evaluation
 
-## Conclusion
-
 ## Future Work
+
+### Netzwerkstruktur
 
 Die Netzwerkstruktur von PatchySan wird nicht ganz deutlich.
 Sie berücksichtigen jedoch auch die Kantenattribute des Graphen.
@@ -162,14 +163,44 @@ PatchySan reshaped alles zu einem zweidimensionalen Tensor, ich betrachte
 jedoch dreidimensionale.
 Das ist eigentlich gehüpft wie gesprungen, solange ich nicht unterschiedliche
 Nachbarschaften convolve.
-Die Kantenattribute müssten demnach reshaped werden zu `[Nodes, Neighborhood
-* Neighborhood, Channels]`.
+Die Kantenattribute müssten demnach reshaped werden zu
+`[Nodes, Neighborhood * Neighborhood, Channels]`.
 PatchySan erwähnt die Verwendung von **Merge Layern**.
 Die Evaluierung und Verwendung von diesen sogenannten Merge Layern, bei denen
 die beiden Tensoren zusammengefügt wird, soll weiter ausgearbeitet werden, um
 dem Netz damit mehr Informationen zu geben.
 
-## TensorFlow Update
+### Datensatz
+
+Desweiteren ist der Datensatz PascalVOC wahrscheinlich nicht so gut für
+Bildklassifierung geeignet.
+Der Datensatz gibt einige Bilder, auf denen mehrere Klassen vorhanden sind.
+Diese werden aber teilweise schon herausgefiltert, sodass ich lediglich 3500
+Trainingsbilder erzeuge für 20 Klassen.
+Das ist meiner Einschätzung nach extrem wenig.
+Zudem gibt es einige sehr schwierige Klassen wie `DiningTable` und `Chair`,
+an/auf denen dann Personen sitzen oder sich Gläser befinden, die ebenfalls
+klassifiziert werden können.
+Ebenso nehmen Objekte teilweise das ganze Bild ein oder sind abgeschnitten.
+Ein Random-Cropping auf diesen Bildern hat daher eher negative als positive
+Auswirkungen.
+
+Ziel ist es daher, den ImageNet Datensatz zu verwenden (PascalVOC bildet eine
+Untermenge von ImageNet).
+Da der Grunddatensatz `2.5 TB` Daten besitzt mit mehr als 2000 Klassen, muss
+dieser erst aufbereitet werden.
+
+### Motiviation
+
+Die Motivation, ein Bild erst in einen Graphen umzustrukturieren, ist unter
+anderem die Datenreduktion.
+Es liegt aber für den Input des Netzes garkeine Datenreduktion vor (zumindest
+nicht bei eher quadratischen Regionen wie SLIC).
+Statt eines Inputs von `[168, 168, 3] = 84.672` haben wir einen Input von
+`[150, 18, 45] = 121.500`, was deutlich höher ist.
+Werden weiterhin Kantenattribute betrachtet, so steigt diese Anzahl.
+
+### TensorFlow Update
 
 TensorFlow hat seit kurzem die erste `1.0` Version veröffentlicht und
 `tensorflow` nun offiziell als `pip install` hinzugefügt.
