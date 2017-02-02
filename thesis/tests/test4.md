@@ -252,6 +252,7 @@ Fully-Connected-Layern und einem Softmax.
 | 2500  | 2.4  | 0.27     |
 | 2800  | 2.13 | 0.34     |
 | 3300  | 2.00 | 0.40     |
+| 4000  | 1.40 | 0.50     |
 
 Die Loss wandert nur sehr langsam nach unten, aber sie fällt.
 
