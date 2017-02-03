@@ -12,12 +12,6 @@
 * [TensorFlow in a Nutshell](http://camron.xyz)
 * [A Year of Artificial Intelligence](https://ayearofai.com/)
 
-## Neural Networks
-
-* Kontinuierliche Filter
-  * [Deep Function Machines: Generalized Neural Networks for Topological Layer
-    Expression](https://arxiv.org/pdf/1612.04799v1.pdf) (Section 4.1 und 4.2)
-
 ## Python Tutorials
 
 * [Learn Python the hard way](https://learnpythonthehardway.org/book/)
@@ -35,6 +29,9 @@
   * Adam-Optimizer
 * [VGG 16/19](https://arxiv.org/pdf/1409.1556v6.pdf)
   * [VGG in TensorFlow](https://www.cs.toronto.edu/~frossard/post/vgg16/)
+* Kontinuierliche Filter
+  * [Deep Function Machines: Generalized Neural Networks for Topological Layer
+    Expression](https://arxiv.org/pdf/1612.04799v1.pdf) (Section 4.1 und 4.2)
 
 ## Data
 
