@@ -5,6 +5,9 @@
 ### CNNs
 
 * [Learning Convolutional Neural Networks for
+* [Semi-Supervised Classification with Graph Convolutional
+  Networks](https://arxiv.org/pdf/1609.02907v3.pdf)
+  * [Source](https://github.com/tkipf/gcn)
   Graphs](https://arxiv.org/pdf/1605.05273.pdf)
   ([Slides](http://www.matlog.net/icml2016_slides.pdf))
   ([Code](patchy.neclab.eu))
