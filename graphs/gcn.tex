@@ -16,7 +16,64 @@
 
 \section{CNNs auf variierenden Größen}
 
+Meistens werden Bilder für die Eingabe in ein CNN gecroppt oder gewarped, damit sie einer fixen Bildgröße (z.B. $244 \times 244$) entsprechen.
+Dabei gehen aber Bildteile verloren oder werden geometrisch gestreckt, so dass sie nicht mehr naturgetreu sind.
+Desweiteren helfen Bilder mit verschiedenen Größen dabei, skalierungsinvariant zu trainieren und reduzieren Overfitting.
+Warum brauchen CNNs eine fixe Größe?
+Ein CNN besteht aus zwei Teilen, Convolutional Layern und Fully-Connected Layern.
+Die Convolutional Layer opeieren über einem beweglichen Fenster.
+Convolutional Layer brauchen eigentlich keine fixe Größe und können Feature Maps beliebiger Größe generieren.
+Das ist der Ursache geschuldet, dass wir immer nur einen Bildausschnitt betrachten und shared Weights and Biase haben.
+Die Fully-Connected Layer allerdings haben diesen Vorteil nicht, sie brauchen stets eine feste Anzahl an Neuronen.
+Beim Übergang zwischen Convolution und Fully-Connected kriegen wir deshalb Probleme.
 
+Ein Layer zwischen diesen beiden Teilen mit der Aufgabe, eine beliebige Größe von Feature Maps auf eine feste Anzahl an Neuronen zu mappen, könnte dieses Problem beseitigen.
+Dieser Layer wird auch SPP genannt (\emph{Spatial Pyramid Pooling}).
+
+\subsection{SPP Layer}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=.6\textwidth]{images/spp}
+\end{figure}
+
+Aus der letzten Convolution (z.B. $256$ Feature Maps, d.h. Shape \texttt{[-1, -1, 256]}) werden mehrere \emph{Spatial Bins} verschiedener Größen über \emph{Max-Pooling} berechnet.
+In jedem Bin werden die Features Maps gepoolt mit Größe $kM$, wobei $M$ die Anzahl an Bins ist und $k$ die Anzahl an Feature Maps.
+
+Angenommen wir haben eine Bildgröße von $224 \times 224$ und ein CNN, dass uns nach der Convolution Shapes der Form \texttt{[13, 13, 256]} liefert mit $a \times a = 13 \times 13$.
+Sagen wir wir wollen $3$ 3 Bins aufbauen mit $l = 3$:
+Dann berechnen sich die Pooling Windows mit $\lceil \frac{a}{n} \rceil$ und Strides mit $\lfloor \frac{a}{n} \rfloor$ mit $n = 1, 2, 3$.
+
+Dann können wir z.B. 3 mal Max Pooling auf diesen Daten anwenden:
+
+\begin{enumerate}
+  \item $3 \times 3 \Rightarrow$ Size $5$, Stride $4$
+  \item $2 \times 2 \Rightarrow$ Size $7$, Stride $6$
+  \item $1 \times 1 \Rightarrow$ Size $13$ Stride $13$
+\end{enumerate}
+
+Dann ergibt dies:
+
+\begin{equation}
+  3 \times 3 \times 256 + 2 \times 2 \times 256 + 1 \times 1 \times 256 = 3584
+\end{equation}
+
+Diese Neuronen können wir nun mit unseren Fully Connected Neuronen verbinden.
+
+Jetzt testen wir noch eine unterschiedliche Bildgröße von $180 \times 180$.
+Dann hat das CNN nach der Convolution die Shape \texttt{[10, 10, 256]} mit $a \times a = 10 \times 10$.
+
+\begin{enumerate}
+  \item $3 \times 3 \Rightarrow$ Size $4$, Stride $3$
+  \item $2 \times 2 \Rightarrow$ Size $5$, Stride $5$
+  \item $1 \times 1 \Rightarrow$ Size $10$ Stride $10$
+\end{enumerate}
+
+Auch das ergibt:
+
+\begin{equation}
+  3 \times 3 \times 256 + 2 \times 2 \times 256 + 1 \times 1 \times 256 = 3584
+\end{equation}
 
 \section{Graph Convolutional Networks}
 
