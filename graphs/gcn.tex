@@ -116,11 +116,35 @@ Die Propagationsregel ist dann zum Beispiel:
 
 wobei, $\sigma$ eine nicht lineare Aktivierungsfunktion ist (z.B. \texttt{ReLU}) und $W^{(l)}$ eine Gewichtsmatrix für den $l$ten Layer.
 
+Sagen wir $A$ ist eine $n \times n$ Matrix, die über mehrere Graphen hinweg variabel ist.
+Graph $1$ hat zum Beispiel $n = 100$ Knoten, wohingegen Graph $2$ nur $n = 80$.
+$H^{(l)}$ ist eine $n \times f_j$.
+Die Anzahl an Features pro Layer sind unabhängig vom Graphen und immer gleich.
+Dann ist $AH^{(l)}$ eine $n \times f_j$ Matrix.
+$W^{(l)}$ ist eine $f_{j} \times f^{j+1}$ Matrix.
+Damit ist die Gewichtsmatrix unabhängig der Knotenanzahl und kann auch für verschiedene große Graphen genutzt werden.
+Die Gleichheit von $W^{(l)}$ liefert uns den Convolution Gedanken (Shared Weights).
+Dann ist $H^{(l+1)}$ eine $n \times f_{j+1}$ Matrix.
+
+Am Ende der Convolution hin zum Fully-Connected muss dann $n \times f_{j}$ gepoolt werden, damit es immer gleich viele Eingabeneuronen gibt (siehe SPP).
+
 $A$ muss jedoch leicht modifziert werden, denn eine Multiplikation mit $A$ summiert alle Feature Vectors der lokalen Nachbarschaftsknoten auf, jedoch ohne den betrachteten Knoten (falls Knoten keine Kante zu sich selbst).
 Wir können das fixen, in dem wir für jeden Knoten eine Kante sich zu selbst hinzufügen in dem wir $A$ mit der Identitätsmatrix addieren.
 
 Desweiteren ist $A$ nicht normalisiert, das bedeutet, dass eine Multiplikation mit $A$ die Featurevectors komplett anders skaliert.
 $A$ kann zum Beispiel normalisiert werden, in dem alle Reihen zu Eins aufsummiert werden.
+
+\begin{equation}
+  D_{ii} = \sum_j A_{ij}
+\end{equation}
+
+beziehungsweise
+
+\begin{equation}
+  D^{-1}_{ii} = \frac{1}{\sum_j A_{ij}}
+\end{equation}
+
+Matrixnormalisierung dann zum Beispiel $D^{-1}A$ oder $D^{-\frac{1}{2}}AD^{-\frac{1}{2}}$.
 
 Der erste Layer würde dann die Features eines Knotens mit denen der direkten Nachbarschaft kombinieren.
 Ein weiterer Layer würde, diess für alle Wege mit Länge $2$ tun und so weiter.
@@ -154,9 +178,13 @@ Das sollte man sich ruhig zu nutze machen.
 
 \subsection{Offene Fragen}
 
-Adjazenzmatrix mit Gewichten? Wie ist das mit der Identität? Gewichte müssten ja eigl umgekehrt werden damit nahe Knoten (niedriges Gewicht) mehr Einfluss haben.
+Adjazenzmatrix mit Gewichten? Wie ist das mit der Identität? Gewichte müssten ja eigentlich umgekehrt werden damit nahe Knoten (niedriges Gewicht) mehr Einfluss haben.
 
-Ein weiteres Problem sind variable Length Convolutions.
-Die brauchen wir unbedingt.
+\section{Graph-Clustering}
+
+  
+
+
+Wenn wir den Ansatz von oben verfolgen, so ermitteln wir 
 
 \end{document}
