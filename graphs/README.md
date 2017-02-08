@@ -14,6 +14,7 @@
   ([Explanation](http://tkipf.github.io/graph-convolutional-networks/))
   * abgeleitet von [Convolutional Neural Networks on Graphs with Fast Localized
     Spectral Filtering](https://arxiv.org/pdf/1606.09375.pdf)
+    ([Code](https://github.com/mdeff/cnn_graph))
 * [Spectral Networks and Deep Locally Connected Networks on Graphs](https://arxiv.org/pdf/1312.6203v3.pdf)
   * Clustering von Graphen
 * [Convolutional Networks on Graphs for Learning Molecular
