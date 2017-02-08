@@ -1,22 +1,30 @@
 # Graphs
 
+## Material
+
+* [Deep Learning on
+  Graphs](https://figshare.com/articles/Deep_Learning_on_Graphs/4491686)
+
 ## Paper
 
 ### CNNs
 
-* [Learning Convolutional Neural Networks for
-  Graphs](https://arxiv.org/pdf/1605.05273.pdf)
+* **Spatial Approach:**
+  * [Learning Convolutional Neural Networks for
+    Graphs](https://arxiv.org/pdf/1605.05273.pdf)
   ([Slides](http://www.matlog.net/icml2016_slides.pdf))
   ([Code](patchy.neclab.eu))
-* [Semi-Supervised Classification with Graph Convolutional
+* **Spectral Approach:**
+  * [Semi-Supervised Classification with Graph Convolutional
   Networks](https://arxiv.org/pdf/1609.02907v3.pdf)
   ([Code](https://github.com/tkipf/gcn))
   ([Explanation](http://tkipf.github.io/graph-convolutional-networks/))
-  * abgeleitet von [Convolutional Neural Networks on Graphs with Fast Localized
+  * [Convolutional Neural Networks on Graphs with Fast Localized
     Spectral Filtering](https://arxiv.org/pdf/1606.09375.pdf)
     ([Code](https://github.com/mdeff/cnn_graph))
-* [Spectral Networks and Deep Locally Connected Networks on Graphs](https://arxiv.org/pdf/1312.6203v3.pdf)
-  * Clustering von Graphen
+  * [Spectral Networks and Deep Locally Connected Networks on
+    Graphs](https://arxiv.org/pdf/1312.6203v3.pdf)
+    * Clustering von Graphen
 * [Convolutional Networks on Graphs for Learning Molecular
   Fingerprints](https://hips.seas.harvard.edu/files/duvenaud-graphs-nips-2015.pdf)
 * [Graph image representation from convolutional neural
