@@ -13,7 +13,7 @@
   * [Learning Convolutional Neural Networks for
     Graphs](https://arxiv.org/pdf/1605.05273.pdf)
   ([Slides](http://www.matlog.net/icml2016_slides.pdf))
-  ([Code](patchy.neclab.eu))
+  ([Code](http://patchy.neclab.eu))
 * **Spectral Approach:**
   * [Semi-Supervised Classification with Graph Convolutional
   Networks](https://arxiv.org/pdf/1609.02907v3.pdf)
