@@ -24,7 +24,6 @@
 
 ## Paper
 
-* [Dropout: A Simple Way to Prevent Neural Networks from Overfitting](https://www.cs.toronto.edu/~hinton/absps/JMLRdropout.pdf)
 * [A method for stochastic optimization](https://arxiv.org/pdf/1412.6980v8.pdf)
   * Adam-Optimizer
 * [VGG 16/19](https://arxiv.org/pdf/1409.1556v6.pdf)
@@ -37,6 +36,13 @@
     Recognition](https://arxiv.org/pdf/1406.4729.pdf)
   * [A convolutional neraul network for modelling
     sentences](https://arxiv.org/pdf/1404.2188.pdf)
+
+## Reduce Overfitting
+
+* [Dropout: A Simple Way to Prevent Neural Networks from
+  Overfitting](https://www.cs.toronto.edu/~hinton/absps/JMLRdropout.pdf)
+* L2-Regularisierung
+* Batch-Normalisierung
 
 ## Data
 
