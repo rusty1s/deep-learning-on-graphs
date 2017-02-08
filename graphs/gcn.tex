@@ -1,4 +1,20 @@
-\section{Graph Convolutional Networks (GCN)}
+\documentclass{scrartcl}
+
+\usepackage[utf8]{inputenc}
+\usepackage{ngerman}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{a4wide}
+\usepackage{todonotes}
+\usepackage{graphicx}
+
+\title{GCN}
+
+\begin{document}
+
+\maketitle
+
+\section{Graph Convolutional Networks}
 
 \begin{itemize}
   \item großes wissenschaftliches Problem, willkürliche Graphen in ein neuronales Netz zu füttern
@@ -19,7 +35,7 @@
   \end{itemize}
   \item \textbf{Ausgabe}:
   \begin{itemize}
-      Eine Merkmalsbeschreibung $Z = N \times F$ für jeden Knoten, wobei $F$ Anzahl der Ausgabefeatures für \underline{einen} Knoten
+    \item eine Merkmalsbeschreibung $Z = N \times F$ für jeden Knoten, wobei $F$ Anzahl der Ausgabefeatures für \underline{einen} Knoten
   \end{itemize}
 \end{itemize}
 
@@ -81,3 +97,5 @@ Adjazenzmatrix mit Gewichten? Wie ist das mit der Identität? Gewichte müssten 
 
 Ein weiteres Problem sind variable Length Convolutions.
 Die brauchen wir unbedingt.
+
+\end{document}
