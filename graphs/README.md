@@ -12,7 +12,10 @@
   Networks](https://arxiv.org/pdf/1609.02907v3.pdf)
   ([Code](https://github.com/tkipf/gcn))
   ([Explanation](http://tkipf.github.io/graph-convolutional-networks/))
+  * abgeleitet von [Convolutional Neural Networks on Graphs with Fast Localized
+    Spectral Filtering](https://arxiv.org/pdf/1606.09375.pdf)
 * [Spectral Networks and Deep Locally Connected Networks on Graphs](https://arxiv.org/pdf/1312.6203v3.pdf)
+  * Clustering von Graphen
 * [Convolutional Networks on Graphs for Learning Molecular
   Fingerprints](https://hips.seas.harvard.edu/files/duvenaud-graphs-nips-2015.pdf)
 * [Graph image representation from convolutional neural

@@ -1,0 +1,83 @@
+\section{Graph Convolutional Networks (GCN)}
+
+\begin{itemize}
+  \item großes wissenschaftliches Problem, willkürliche Graphen in ein neuronales Netz zu füttern
+  \item Bereich bisher dominiert von kernelbasierten Methoden, graphbasierter Regularisierung oder ähnlichem
+  \item Es gibt eine Ansätze, der neuste ist ein \emph{spektraler}
+  \item spektraler Ansatz gilt als langsam
+  \item das ganze zählt zu dem Bereich des \emph{Semi-unsupervised Learning}, das bedeutet, dass wir einen Teil des Graphen gelabelt haben und basierend auf seiner Graphstruktur, den Rest labeln wollen.
+\end{itemize}
+
+\subsection{Definitionen}
+
+\begin{itemize}
+  \item Wir wollen eine Funktion von Merkmalen auf einem Graphen $\mathcal{G} = (\mathcal{V}, \mathcal{E})$ lernen
+  \item \textbf{Eingaben:}
+  \begin{itemize}
+    \item Eine Merkmalsbeschreibung $x_i$ für jeden Knoten $i$ dargestellt als eine Merkmalsmatrix $X = N \times D$, wobei $N$ Anzahl der Knoten und $D$ Anzahl der Merkmale
+    \item Eine repräsentative Beschreibung einer Graphstruktur in Matrixform, normalerweise eine Adjazenzmatrix $A$
+  \end{itemize}
+  \item \textbf{Ausgabe}:
+  \begin{itemize}
+      Eine Merkmalsbeschreibung $Z = N \times F$ für jeden Knoten, wobei $F$ Anzahl der Ausgabefeatures für \underline{einen} Knoten
+  \end{itemize}
+\end{itemize}
+
+Jede Schicht des neuronalen Netzes kann über eine nicht-lineare Funktion
+
+\begin{equation}
+  H^{(l+1)} = f(H^{(l)}, A)
+\end{equation}
+
+beschrieben werden, wobei $H^{(0)} = X$ und $H^{(L)} = Z$ mit $L$ Anzahl der Schichten.
+
+Die Propagationsregel ist dann zum Beispiel:
+
+\begin{equation}
+  f(H^{(l)}, A) = \sigma(AH^{(l)}W^{(l)})
+\end{equation}
+
+wobei, $\sigma$ eine nicht lineare Aktivierungsfunktion ist (z.B. \texttt{ReLU}) und $W^{(l)}$ eine Gewichtsmatrix für den $l$ten Layer.
+
+$A$ muss jedoch leicht modifziert werden, denn eine Multiplikation mit $A$ summiert alle Feature Vectors der lokalen Nachbarschaftsknoten auf, jedoch ohne den betrachteten Knoten (falls Knoten keine Kante zu sich selbst).
+Wir können das fixen, in dem wir für jeden Knoten eine Kante sich zu selbst hinzufügen in dem wir $A$ mit der Identitätsmatrix addieren.
+
+Desweiteren ist $A$ nicht normalisiert, das bedeutet, dass eine Multiplikation mit $A$ die Featurevectors komplett anders skaliert.
+$A$ kann zum Beispiel normalisiert werden, in dem alle Reihen zu Eins aufsummiert werden.
+
+Der erste Layer würde dann die Features eines Knotens mit denen der direkten Nachbarschaft kombinieren.
+Ein weiterer Layer würde, diess für alle Wege mit Länge $2$ tun und so weiter.
+
+Dies entspricht in etwa einer generaliserten Version des Weisfeiler-Lehman Algorithmus auf Graphen:
+
+Für alle Knoten $v_i \in \mathcal{G}$:
+\begin{enumerate}
+  \item Sammle Merkmale $\lbrace h_{v_j} \rbrace$ für alle Nachbarschaftsknoten ${ v_j }$
+  \item Update Knotenmerkmal $h_{v_i} \leftarrow \text{hash}(\sum_j h_{v_j})$
+Wiederhole $k$-mal oder bis Konvergenz.
+\end{enumerate}
+
+Jedem Knoten wird also ein Merkmal zugeordnet, dass seine Rolle im Graphen beschreibt.
+Dies funktioniert jedoch nicht gut für z.B. reguläre Graphen, bei dem jeder Knoten gleich viele Kanten besitzt.
+Der Weisfeiler-Lehman Algorithmus wird oft benutzt, um Graphisomorphismen zu bestimmen.
+
+\subsection{Klassifierung eines Graphen}
+
+Wie kann dieses Model genutzt werden, um einen Graphen zu klassifizieren?
+Wir erhalten $N \times F$ Features für einen Graphen nach $x$ vielen Convolutions.
+$F$ kann natürlich dann auch die Anzahl der Klassen sein.
+
+Weiteres Vorgehen:
+Wir wollen nicht einzelne Knoten labeln, sondern das gesamte Bild bzw.\ den gesamten Graphen.
+Diese Features beschreiben den Knoten sowie seine direkte und indirekte Nachbarschaft.
+Die Knoten müssten jetzt eigentlich noch geeignet gelabelt werden und können dann in ein Netz gefüttert werden.
+
+Wir können Spatial Informationen ausnutzen, wir wissen wie der Graph in der Lage aussieht.
+Das sollte man sich ruhig zu nutze machen.
+
+\subsection{Offene Fragen}
+
+Adjazenzmatrix mit Gewichten? Wie ist das mit der Identität? Gewichte müssten ja eigl umgekehrt werden damit nahe Knoten (niedriges Gewicht) mehr Einfluss haben.
+
+Ein weiteres Problem sind variable Length Convolutions.
+Die brauchen wir unbedingt.

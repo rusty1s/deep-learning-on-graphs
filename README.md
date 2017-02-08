@@ -32,6 +32,9 @@
 * Kontinuierliche Filter
   * [Deep Function Machines: Generalized Neural Networks for Topological Layer
     Expression](https://arxiv.org/pdf/1612.04799v1.pdf) (Section 4.1 und 4.2)
+* CNNs auf Daten mit variierenden Größen
+  * [A convolutional neraul network for modelling
+    sentences](https://arxiv.org/pdf/1404.2188.pdf)
 
 ## Data
 
