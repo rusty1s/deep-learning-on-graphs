@@ -34,10 +34,12 @@
 
 * [The Weisfeiler-Lehman Method and Graph Isomorphism Testing](https://arxiv.org/pdf/1101.5211v1.pdf)
 * [Pratical graph isomorphism, II](https://arxiv.org/pdf/1301.1493v1.pdf)
+* [Canoncial Labelings with
+  Nauty](https://computationalcombinatorics.wordpress.com/2012/09/20/canonical-labelings-with-nauty/)
 
 ### Labeling
 
-* Betweeness centrality 
+* Betweeness centrality
   ([YouTube](https://www.youtube.com/watch?v=6V_-xWvpMFk))
   * [A Set of Measures of Centrality Based on 
     Betweenness](http://moreno.ss.uci.edu/23.pdf)

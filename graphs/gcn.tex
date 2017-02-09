@@ -176,17 +176,43 @@ Die Knoten müssten jetzt eigentlich noch geeignet gelabelt werden und können d
 Wir können Spatial Informationen ausnutzen, wir wissen wie der Graph in der Lage aussieht.
 Das sollte man sich ruhig zu nutze machen.
 
-\subsection{Offene Fragen}
-
-Adjazenzmatrix mit Gewichten? Wie ist das mit der Identität? Gewichte müssten ja eigentlich umgekehrt werden damit nahe Knoten (niedriges Gewicht) mehr Einfluss haben.
-
 \section{Graph Pooling / Graph Coarsening / Graph Clustering}
 
 Pooling Operationen erfordern es, Graphen basierend auf lokalen Nachbarschaften zu clustern.
 Wenn dies pro Layer geschieht, dann entspricht dies einem Multi-Scale Clustering auf Graphen, der lokale geometrische Strukturen wahrt.
 Graph Clustering ist jedoch NP-schwer, d.h.\ das insbesondere Approximationen benötigt werden, um effiziente Pooling Layer zu generieren.
-Ein Graph Clustering Algorithmus, der die Knotenanzahl pro Layer um einen Faktor von $2$ reduziert, scheint für die Anwendung in einem CNN ideal, wie z.B. die \emph{Coarsening phase} des \emph{Graclus multilevel Clustering}-Algorithmus.
+Ein Graph Clustering Algorithmus, der die Knotenanzahl pro Layer um einen Faktor von $2$ reduziert, scheint für die Anwendung in einem CNN ideal, wie z.B. die \emph{Coarsening Phase} des \emph{Graclus Multilevel Clustering}-Algorithmus.
 
+Der Algorithmus kriegt als Eingabe einen Graphen $\mathcal{G}_0 = (V_0, E_0, A_0)$ und die Anzahl an gewünschten Partitionen.
+Die Coarsening Phase des Algorithmus reduziert den initialen Graphen $\mathcal{G}_0$ in immer kleinere Graphen $\mathcal{G}_1$, $\mathcal{G}_2$, \ldots, $\mathcal{G}_m$, sodass $|V_0| > |V_1| > |V_1| > \ldots > |V_m|$.
+Um den Graphen zu vergröbern, werden Knoten aus $G_i$ zu einem Superknoten für den Graphen $G_{i+1}$ zusammengefasst.
+Wenn eine Knotenauswahl kombiniert wird, dann werden die Kantengewichte als die Summe der Kantengewichte der originalen Knoten dargestellt.
+Die Knotenmerkmale werden über Max Pooling berechnet.
+
+Die Frage, die noch offen ist, ist wie eine Knotenauswahl zu einem Superpixel getroffen wird.
+Der Ansatz, der hier verfolgt wird, heißt \emph{Heavy Edge Coarsening}.
+Er funktioniert wie folgt:
+
+\begin{enumerate}
+  \item Sei ein Graph $G$ gegeben, dann setze alle seine Knoten auf den initialen unmarkierten Status.
+  \item Durchlaufe alle Knoten in einer zufälligen Reihenfolge. Für jeden Knoten $x$:
+  \begin{enumerate}
+      \item \texttt{continue}, falls $x$ bereits markiert
+      \item Verbinde $x$ mit dem unmarkierten Knoten $y$, sodass $y$ ein Nachbar von $x$ ist und das Kriterium zwischen $x$ und $y$ maximal für alle unmarkierten Nachbarn.
+      \item Markiere $x$ und $y$.
+      \item Falls es keinen Knoten $y$ gibt, d.h.\ alle Nachbarn von $x$ sind bereits markiert, markiere $x$ als alleinstehenden Knoten.
+    \end{enumerate}
+\end{enumerate}
+
+Als Verbindungskriterium sind einige Freiheitsgrade gegeben:
+
+\begin{itemize}
+  \item das höchste Kantengewicht (vgl. Metis)
+  \item \textbf{Max-cut coarsening}: maximiere $\frac{e(x, y)}{w(x)} + \frac{e(x, y)}{w(y)}$, wobei $w(x), w(y)$ die Gewichte der Knoten sind (z.B. Grad des Knoten (\textbf{Normalized Cut}))
+\end{itemize}
+
+Dieser Algorithmus reduziert die Knotenanzahl approximiert auf $2$.
+Es kann natürlich ein paar nicht verbundene Knoten geben, sodass die Knotenanzahl ein bisschen weniger reduziert wird.
 
 \section{Graph Labeling}
 
@@ -195,5 +221,18 @@ Wenn wir das nicht haben, dann haben zwei absolut gleiche Graphen mit unterschie
 Das geht natürlich nicht.
 
 Deswegen gibt es den \emph{Isomorphismus} und \emph{Automorphismus}.
+
+In der Graphentheorie ist ein Isomorphismus zwischen zwei Graphen $G$ und $H$ eine Bijektion zwischen den Knoten der beiden Graphen $f: V(G) \rightarrow V(H)$, sodass genau dann zwei Knoten $u$ und $v$ in $G$ adjazent sind, wenn $f(u)$ und $(v)$ adjazent in $H$ sind.
+Ein Automorphismus ist ein Isomorphismus von $G$ zu sich selbst.
+Ein Automorphismus ist demnach eine Permutation der Knoten, der die Knoten und Kantenverbindungen aufrecht erhält.
+Ein Automorphismus gibt demach eine Ordnung der Knoten an, die gleich ist für gleiche Graphen, die unterschiedlich gelabeled sind.
+
+\subsection{Canonicalization}
+
+\emph{Canonical Labeling} beschreibt den Prozess des Labelings eines Graphen $G$, so dass ein Graph der isomorph zu $G$ ist, das gleiche Labeling besitzt.
+
+\section{Offene Fragen}
+
+Adjazenzmatrix mit Gewichten? Wie ist das mit der Identität? Gewichte müssten ja eigentlich umgekehrt werden damit nahe Knoten (niedriges Gewicht) mehr Einfluss haben.
 
 \end{document}
