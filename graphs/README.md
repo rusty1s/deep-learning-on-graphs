@@ -44,6 +44,11 @@
   * [A Faster Algorithm for Betweenness 
     Centrality](http://algo.uni-konstanz.de/publications/b-fabc-01.pdf)
 
+### Graph Coarsening
+
+* [Weighted Graph Cuts without Eigenvectors: A Multivel
+  Approach](http://www.cs.utexas.edu/users/inderjit/public_papers/multilevel_pami.pdf)
+
 ### Graph Kernels
 
 * [Graph Kernels](https://edoc.ub.uni-muenchen.de/7169/1/Borgwardt_KarstenMichael.pdf)

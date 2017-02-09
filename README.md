@@ -36,6 +36,8 @@
     Recognition](https://arxiv.org/pdf/1406.4729.pdf)
   * [A convolutional neraul network for modelling
     sentences](https://arxiv.org/pdf/1404.2188.pdf)
+* [Efficient and Scalable Computations with Sparse
+  Tensors](http://ieee-hpec.org/2012/index_htm_files/Baskaranpaper.pdf)
 
 ## Reduce Overfitting
 

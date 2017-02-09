@@ -180,7 +180,12 @@ Das sollte man sich ruhig zu nutze machen.
 
 Adjazenzmatrix mit Gewichten? Wie ist das mit der Identität? Gewichte müssten ja eigentlich umgekehrt werden damit nahe Knoten (niedriges Gewicht) mehr Einfluss haben.
 
-\section{Graph Pooling / Graph Clustering}
+\section{Graph Pooling / Graph Coarsening / Graph Clustering}
+
+Pooling Operationen erfordern es, Graphen basierend auf lokalen Nachbarschaften zu clustern.
+Wenn dies pro Layer geschieht, dann entspricht dies einem Multi-Scale Clustering auf Graphen, der lokale geometrische Strukturen wahrt.
+Graph Clustering ist jedoch NP-schwer, d.h.\ das insbesondere Approximationen benötigt werden, um effiziente Pooling Layer zu generieren.
+Ein Graph Clustering Algorithmus, der die Knotenanzahl pro Layer um einen Faktor von $2$ reduziert, scheint für die Anwendung in einem CNN ideal, wie z.B. die \emph{Coarsening phase} des \emph{Graclus multilevel Clustering}-Algorithmus.
 
 
 \section{Graph Labeling}

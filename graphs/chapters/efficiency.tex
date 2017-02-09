@@ -1,0 +1,9 @@
+\section{Dünnbesetzte Matrizen}
+
+Aus Speichereffizienz-Gründen lohnt es sich mit \emph{dünnbesetzte Matrizen} (engl. \emph{Sparse Matrices}) für Adjazenzmatrizen zu rechnen.
+Eine dünnbesetzte Matrix ist eine Matrix, bei der so viele Einträge aus Nullen bestehen, dass man nach Möglichkeiten sucht, dies insbesondere hinsichtlich Algorithmen sowie Speicherung auszunutzen.
+In der Regel gelten Matrizen als dünnbesetzt, wenn eine Matrix mit $n^2$ Einträgen nicht mehr als $n$ oder $n \cdot \log n$ Einträge ungleich Null besitzt.
+Eine Matrix die nicht dünnbesetzt ist, heißt \emph{dicht} (engl. \emph{dense}).
+
+Dünnbesetzte Matrizen erlauben einigen Operationen, optimierter bzw.\ schneller zu sein, da nicht alle Werte der Matrix betrachtet werden müssen.
+Es gibt jedoch auch Operatione, die nicht auf dünnbesetzten Matritzen definiert sind, so dass sie vorher in eine normale Dense-Matrix überführt werden müssen.
