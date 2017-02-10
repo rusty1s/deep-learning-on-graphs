@@ -252,4 +252,23 @@ Wir definieren unsere Adjazenzmatrix $\tilde A$ aus $A$ dann wie folgt:
   \end{cases}
 \end{equation}
 
+\todo{mathematische notation für matrixberechnung?}
+
+Die diagonale Gradmatrix $\tilde D$ von $\tilde A$ ist dann definiert als $\tilde D_{ii} = \sum_j \tilde A_{ij}$.
+Für eine Diagonalmatrix $D$ gilt dann:
+
+\begin{equation}
+  D^x = \begin{pmatrix}
+    d_{00} & 0 & \cdots & 0\\
+    0 & d_{11} & \cdots & 0\\
+    \vdots & \vdots & \ddots & \vdots\\
+    0 & 0 & \cdots & d_{nn}\\
+  \end{pmatrix}^x = \begin{pmatrix}
+    d_{00}^x & 0 & \cdots & 0\\
+    0 & d_{11}^x & \cdots & 0\\
+    \vdots & \vdots & \ddots & \vdots\\
+    0 & 0 & \cdots & d_{nn}^x\\
+  \end{pmatrix}
+\end{equation}
+
 \end{document}
