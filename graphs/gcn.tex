@@ -241,7 +241,7 @@ Damit sind wir immer noch skalierungsinvariant (glaube ich).
 Gewichte $2$ und $4$ werden zu $0,5$ und $0,25$ gemappt mit Verhältnis $2$.
 Gewichte $4$ und $8$ werden auf $0,25$ und $0,125$ gemappt mit Verhältnis $2$.
 
-Wir definieren unsere Adjazenzmatrix $\tilde A$ aus $A$ dann wie folgt:
+Wir definieren unsere Adjazenzmatrix $\tilde A \in \mathbb{R}^{N \times N}$ aus $A \in \mathbb{R}^{N \times N}$ dann wie folgt:
 
 \begin{equation}
   \tilde A_{ij} = \begin{cases}
@@ -254,8 +254,8 @@ Wir definieren unsere Adjazenzmatrix $\tilde A$ aus $A$ dann wie folgt:
 
 \todo{mathematische notation für matrixberechnung?}
 
-Die diagonale Gradmatrix $\tilde D$ von $\tilde A$ ist dann definiert als $\tilde D_{ii} = \sum_j \tilde A_{ij}$.
-Für eine Diagonalmatrix $D$ gilt dann:
+Die diagonale Gradmatrix $\tilde D \in \mathbb{R}^{N \times N}$ von $\tilde A$ ist dann definiert als $\tilde D_{ii} = \sum_j \tilde A_{ij}$.
+Für eine Diagonalmatrix $D$ gilt:
 
 \begin{equation}
   D^x = \begin{pmatrix}
@@ -270,5 +270,7 @@ Für eine Diagonalmatrix $D$ gilt dann:
     0 & 0 & \cdots & d_{nn}^x\\
   \end{pmatrix}
 \end{equation}
+
+
 
 \end{document}
