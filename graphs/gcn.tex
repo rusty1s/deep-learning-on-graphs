@@ -241,12 +241,13 @@ Damit sind wir immer noch skalierungsinvariant (glaube ich).
 Gewichte $2$ und $4$ werden zu $0,5$ und $0,25$ gemappt mit Verhältnis $2$.
 Gewichte $4$ und $8$ werden auf $0,25$ und $0,125$ gemappt mit Verhältnis $2$.
 
-Wir definieren unsere Adjazenzmatrix $\tilde A$ aus einer Adjazentmatrix $A$ dann wie folgt:
+Wir definieren unsere Adjazenzmatrix $\tilde A$ aus $A$ dann wie folgt:
 
 \begin{equation}
   \tilde A_{ij} = \begin{cases}
     1, & \text{wenn }i=j\text{,}\\
-    \frac{1}{a_{ij}}, & \text{wenn }a_{ij} > 0\text{,}\\
+    1, & \text{wenn }0 < a_{ij} \leq 1\text{,}\\
+    \frac{1}{a_{ij}}, & \text{wenn }a_{ij} > 1\text{,}\\
     0, & \text{sonst.}
   \end{cases}
 \end{equation}
