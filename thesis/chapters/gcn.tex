@@ -12,17 +12,6 @@
   D_{ii} = \sum_j A_{ij}
 \end{equation}
 
-Wir definieren unsere Adjazenzmatrix $\tilde A \in \mathbb{R}^{N \times N}$ aus $A \in \mathbb{R}^{N \times N}$ dann wie folgt:
-
-\begin{equation}
-  \tilde A_{ij} = \begin{cases}
-    1, & \text{wenn }i=j\text{,}\\
-    1, & \text{wenn }0 < a_{ij} \leq 1\text{,}\\
-    a_{ij}^{-1}, & \text{wenn }a_{ij} > 1\text{,}\\
-    0, & \text{sonst.}
-  \end{cases}
-\end{equation}
-
 Für die Potenz $x \in \gls{R}$ einer Diagonalmatrix $D \in \gls{R}^{N \times N}$ gilt:
 
 \begin{equation}
@@ -56,6 +45,22 @@ Reshape zu $\gls{R}^{n \times m \cdot d}$ und Gewichtsmatrix $G \in \gls{R}^{m \
 
 \subsection{Übertragung auf eingebettete Graphen}
 
+Graphknoten haben im Allgemeinen keine Position oder Lage im Raum.
+Knoten, die Regionen in einer vorhandenen Segmentierung darstellen, haben jedoch offensichtlich eine gewisse Lage im Raum, die zum Beispiel über das Zentrum der Region definiert werden kann.
+Diese Information ist vorhanden und wichtig und sollte demnach auch nicht verloren gehen.
+Anstatt diese lokal im Knoten zu speichern, bietet es sich eher an diese Information in den Kanten zu speichern um eine bessere Faltung zu garantieren.
+Die euklische Distanz zwischen zwei benacharten Regionszentren wahrt zwar die Information der Distanz zweier Knoten zueinander, verliert aber die Information der Position zweier Knoten zueinander.
+Es bietet sich daher an, die horizontalen und vertikalen Abstände in einer Koordinate an den Kanten zu speichern.
+Es ist zu beachten, dass wir dadurch zu einem gerichteten Graphen übergehen, bei dem jede Kante von $v$ nach $w$ auch eine Kante von $w$ nach $v$ besitzt.
+
+Wir haben damit zwei Adjazenzmatrizen.
+Da Graph Convolutional Networks nicht mit negativen Gewichten funktionieren, müssen wir negative Koordinaten in eine weitere Adjazenzmatrix schreiben.
+Wir gelangen damit zu vier Adjazenzmatrizen, die die Verbindungen von einem Knoten beschreibt, die links, rechts, oben oder unten zu ihm liegen.
+Wir definieren diese Adjazenzmatrizen respektive als $A_{\text{links}}, A_{\text{rechts}}, A_{\text{oben}}$ und $A_{\text{unten}}$.
+
+Kantenattribute bzw.\ Positionen von Knoten sollten skalierungsinvariant gespeichert werden.
+Dafür werden die Abstände auf den Einheitskreis gemappt, wobei die längste Distanz eines Knotens auf dem Einheitskreis liegt (vgl. Abbildung~\ref{einheitskreis}).
+
 \begin{figure}
 \begin{tikzpicture}[]
   \draw[dashed] (0, 0) circle (4);
@@ -80,15 +85,14 @@ Reshape zu $\gls{R}^{n \times m \cdot d}$ und Gewichtsmatrix $G \in \gls{R}^{m \
 \label{einheitskreis}
 \end{figure}
 
-Graphknoten haben im allgemeinen Fall keine Position oder Lage im Raum.
-Knoten, die Regionen in einer vorhandenen Segmentierung darstellen, haben jedoch offensichtlich eine gewisse Lage im Raum, die zum Beispiel über das Zentrum der Region definiert werden kann.
-Diese Information ist vorhanden und wichtig und sollte demnach auch nicht verloren gehen.
-Anstatt diese lokal im Knoten zu speichern, bietet es sich eher an diese Information in den Kanten zu speichern um eine bessere Faltung zu garantieren.
-Die euklische Distanz zwischen zwei benacharten Regionszentren wahrt zwar die Information der Distanz zweier Knoten zueinander, verliert aber die Information der Position zweier Knoten zueinander.
-Es bietet sich daher an, die horizontalen und vertikalen Abstände in einer Koordinate an den Kanten zu speichern.
-Es ist zu beachten, dass wir dadurch zu einem gerichteten Graphen übergehen, bei dem jede Kante von $v$ nach $w$ auch eine Kante von $w$ nach $v$ besitzt, jedoch mit einem invertieren \glqq{}Gewicht\grqq.
+Für die Anwendung auf das Graph Convolutional Network müssen die Gewichte aller Adjazenzmatrizen $a_{xij} \in [0, 1]$ invertiert werden, damit nähere Knoten einen größeren Einfluss haben.
+Ebenso müssen \emph{Self Loops} für alle Knoten hinzugefügt werden.
+Wir definieren unsere Adjazenzmatrix $\tilde A \in \mathbb{R}^{N \times N}$ aus einer Adjazenzmatrix $A \in \mathbb{R}^{N \times N}$ dann über
 
-Wir haben damit zwei Adjazenzmatrizen.
-Da Graph Convolutional Networks nicht mit negativen Gewichten funktionieren, müssen wir negative Koordinaten in eine weitere Adjazenzmatrix schreiben.
-Wir gelangen damit zu vier Adjazenzmatrizen, die die Verbindungen von einem Knoten beschreibt, die links, rechts, oben oder unten zu ihm liegen.
-Wir definieren diese Adjazenzmatrizen respektive als $A_{\text{links}}, A_{\text{rechts}}, A_{\text{oben}}$ und $A_{\text{unten}}$.
+\begin{equation}
+  \tilde A_{ij} = \begin{cases}
+    1, & \text{falls }i=j\text{,}\\
+    {(a_{ij}+1)}^{-1}, & \text{falls }a_{ij} \neq 0\text{,}\\
+    0, & \text{sonst.}
+  \end{cases}
+\end{equation}
