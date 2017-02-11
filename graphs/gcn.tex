@@ -271,4 +271,30 @@ Für eine Diagonalmatrix $D$ gilt:
   \end{pmatrix}
 \end{equation}
 
+\section{Zusammenhang CNN und GCN}
+
+Der Zusammenahng zwischen CNNs und GCNs ist der, dass das CNN für Graphen nachmodelliert wird.
+So wird anstatt einem kleinen Fenster um einen Pixel dessen lokale Nachbarschaft berücksichtigt.
+Haben wir zwei Convolutions ohne Pooling, so entspricht dies in etwa der zweimaligen Anwendung von $AH$.
+Beim CNN haben wir eine Filtergröße von \texttt{[filter\_height, filter\_width, in\_channels, out\_channels]}.
+Haben wir ein $3 \times 3$ Fenster auf einem RGB Bild und wollen 64 Features bestimmen, so entspricht dies einer Filtergröße von \texttt{[3, 3, 3, 64]}.
+Die Berechnung davon lautet wie folgt:
+
+\begin{enumerate}
+  \item Der Filter wird auf eine zweidimensionale Matrix reduziert der Form \texttt{[filter\_height * filter\_width * in\_channels, out\_channels]}.
+  \item Generiere die Fenster aus dem Bild der Form \texttt{[out\_height, out\_width, filter\_height * filter\_width * in\_channels]}.
+  \item für jedes Fenster multipliziere den Vektor \texttt{[filter\_height * filter\_width * in\_channels]} mit der Filtermatrix.
+\end{enumerate}
+
+Für GCNs werden daher bisher nur Filtergrößen der Größe $1$ betrachtet, da unser Filter die Form \texttt{[in\_channels, out\_channels]} hat.
+Es gibt sogesehen daher keine Filtergröße in GCNs.
+Wir können aber mehr Information berücksichtigen, wenn wir mehrere Adjazenzmatrizen erlauben.
+Aber wie würde das dann berechnet werden???
+
+\begin{enumerate}
+  \item $A$ hat die Form \texttt{$N$, $N$, edge\_channels}.
+  \item Wir erhalten unterschiedliche Diagonalmatrizen der Form \texttt{$N$, $N$, edge\_channels}.
+  \item Unsere Gewichtsmatrix erhöht sich auf \texttt{in\_channels, out\_channels, edge\_channels}.
+\end{enumerate}
+
 \end{document}
