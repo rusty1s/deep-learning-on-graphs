@@ -4,6 +4,7 @@
 
 * [Deep Learning on
   Graphs](https://figshare.com/articles/Deep_Learning_on_Graphs/4491686)
+* [Spectral Graph Theory](http://www.math.ucsd.edu/~fan/research/revised.html)
 
 ## Paper
 

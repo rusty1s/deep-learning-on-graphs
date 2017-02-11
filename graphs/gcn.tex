@@ -247,7 +247,7 @@ Wir definieren unsere Adjazenzmatrix $\tilde A \in \mathbb{R}^{N \times N}$ aus 
   \tilde A_{ij} = \begin{cases}
     1, & \text{wenn }i=j\text{,}\\
     1, & \text{wenn }0 < a_{ij} \leq 1\text{,}\\
-    \frac{1}{a_{ij}}, & \text{wenn }a_{ij} > 1\text{,}\\
+    a_{ij}^{-1}, & \text{wenn }a_{ij} > 1\text{,}\\
     0, & \text{sonst.}
   \end{cases}
 \end{equation}
@@ -270,7 +270,5 @@ Für eine Diagonalmatrix $D$ gilt:
     0 & 0 & \cdots & d_{nn}^x\\
   \end{pmatrix}
 \end{equation}
-
-
 
 \end{document}
