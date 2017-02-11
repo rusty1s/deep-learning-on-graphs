@@ -1,3 +1,94 @@
 \chapter{Graph Convolutional Networks}
 
-\gls{R} und \gls{N} sind mathematische Symbole~\cite{nielsen15}.
+\begin{equation}
+  H^{(l+1)} = f(H^{(l)}, A)
+\end{equation}
+
+\begin{equation}
+  f(H^{(l)}, A) = \sigma(AH^{(l)}W^{(l)})
+\end{equation}
+
+\begin{equation}
+  D_{ii} = \sum_j A_{ij}
+\end{equation}
+
+Wir definieren unsere Adjazenzmatrix $\tilde A \in \mathbb{R}^{N \times N}$ aus $A \in \mathbb{R}^{N \times N}$ dann wie folgt:
+
+\begin{equation}
+  \tilde A_{ij} = \begin{cases}
+    1, & \text{wenn }i=j\text{,}\\
+    1, & \text{wenn }0 < a_{ij} \leq 1\text{,}\\
+    a_{ij}^{-1}, & \text{wenn }a_{ij} > 1\text{,}\\
+    0, & \text{sonst.}
+  \end{cases}
+\end{equation}
+
+Für die Potenz $x \in \gls{R}$ einer Diagonalmatrix $D \in \gls{R}^{N \times N}$ gilt:
+
+\begin{equation}
+  D^x = \begin{pmatrix}
+    d_{11} & 0 & \cdots & 0\\
+    0 & d_{22} & \cdots & 0\\
+    \vdots & \vdots & \ddots & \vdots\\
+    0 & 0 & \cdots & d_{nn}\\
+  \end{pmatrix}^x = \begin{pmatrix}
+    d_{11}^x & 0 & \cdots & 0\\
+    0 & d_{22}^x & \cdots & 0\\
+    \vdots & \vdots & \ddots & \vdots\\
+    0 & 0 & \cdots & d_{nn}^x\\
+  \end{pmatrix}
+\end{equation}
+
+\section{Erweiterung für mehrere Kantenattribute}
+
+Graph Convolutional Networks berücksichtigen nur eine Adjazenzmatrix.
+Das bedeutet insbesondere, dass ein Graph nur über ein Kantenattribut verfügen kann.
+Das ist für ungewichtete Graphen die Markierung einer Kante ($a_{ij} \in \lbrace 0, 1 \rbrace$) oder für gewichte Graphen das Gewicht einer Kante ($a_{ij} \in \gls{R+}$).
+Eine Menge von Kantenattributen kann über mehrere Adjazenzmatrizen definiert werden.
+Damit ist es ebenfalls möglich unterschiedliche Kanten für unterschiedliche Attribute zu definieren.
+
+Eine Menge von Adjazenzmatrizen $\mathcal{A} = \lbrace A_1, A_2, \ldots, A_m \rbrace$ mit $A_i \in \gls{R}^{n \times n}$ beschreibt damit eine Menge von $m$ Graphen über der gleichen Knotenmenge $\mathcal{V}$ mit Kardinalität $n$.
+
+$\mathcal{A} \in \gls{R}^{m \times n \times n}$ kann zu einer zweidimensionalen Matrix $A \in \gls{R}^{m \cdot n \times n}$ geglättet werden.
+
+Dann ist $A \cdot H^{(l)} \in \gls{R}^{m \cdot n \times d}$.
+Reshape zu $\gls{R}^{n \times m \cdot d}$ und Gewichtsmatrix $G \in \gls{R}^{m \cdot d \times x}$.
+
+\subsection{Übertragung auf eingebettete Graphen}
+
+\begin{figure}
+\begin{tikzpicture}[]
+  \draw[dashed] (0, 0) circle (4);
+
+  \tikzstyle{node}=[circle,draw, minimum width=5pt, inner sep=0pt, fill=black]
+  \tikzstyle{root}=[fill=red]
+
+  \node[node, root] (root) at (0,0) {};
+  \node[node, label={[fill=white]150:$(-1, 2) \rightarrow (-.25,.5)$}] (a) at (-1, 2) {};
+  \node[node, label={[fill=white]$(4, 0) \rightarrow (1, 0)$}] (b) at (4, 0) {};
+  \node[node, label={[fill=white]$(2, -2) \rightarrow (.5,-.5)$}] (c) at (2, 2) {};
+  \node[node, label={[fill=white]150:$(-3, -1) \rightarrow (-.75, -.25)$}] (d) at (-3, -1) {};
+  \node[node, label={[fill=white]50:$(1, -3) \rightarrow (.25, -.75)$}] (e) at (1, -3) {};
+
+  \path (root) edge (a);
+  \path (root) edge (b);
+  \path (root) edge (c);
+  \path (root) edge (d);
+  \path (root) edge (e);
+\end{tikzpicture}
+\caption{Abbildung der lokalen Nachbarschaftsknoten auf den Einheitskreis.}
+\label{einheitskreis}
+\end{figure}
+
+Graphknoten haben im allgemeinen Fall keine Position oder Lage im Raum.
+Knoten, die Regionen in einer vorhandenen Segmentierung darstellen, haben jedoch offensichtlich eine gewisse Lage im Raum, die zum Beispiel über das Zentrum der Region definiert werden kann.
+Diese Information ist vorhanden und wichtig und sollte demnach auch nicht verloren gehen.
+Anstatt diese lokal im Knoten zu speichern, bietet es sich eher an diese Information in den Kanten zu speichern um eine bessere Faltung zu garantieren.
+Die euklische Distanz zwischen zwei benacharten Regionszentren wahrt zwar die Information der Distanz zweier Knoten zueinander, verliert aber die Information der Position zweier Knoten zueinander.
+Es bietet sich daher an, die horizontalen und vertikalen Abstände in einer Koordinate an den Kanten zu speichern.
+Es ist zu beachten, dass wir dadurch zu einem gerichteten Graphen übergehen, bei dem jede Kante von $v$ nach $w$ auch eine Kante von $w$ nach $v$ besitzt, jedoch mit einem invertieren \glqq{}Gewicht\grqq.
+
+Wir haben damit zwei Adjazenzmatrizen.
+Da Graph Convolutional Networks nicht mit negativen Gewichten funktionieren, müssen wir negative Koordinaten in eine weitere Adjazenzmatrix schreiben.
+Wir gelangen damit zu vier Adjazenzmatrizen, die die Verbindungen von einem Knoten beschreibt, die links, rechts, oben oder unten zu ihm liegen.
+Wir definieren diese Adjazenzmatrizen respektive als $A_{\text{links}}, A_{\text{rechts}}, A_{\text{oben}}$ und $A_{\text{unten}}$.
