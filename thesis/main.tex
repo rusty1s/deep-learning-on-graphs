@@ -7,17 +7,19 @@
 
 % Titelseite
 \include{chapters/titelseite}
-\blankpage
+\blankpage{}
 
 % Inhaltsverzeichnis
 \pagenumbering{roman}
+
 \tableofcontents
-\cleardoublepage
+\cleardoublepage{}
 
 % Kapitel
 \pagenumbering{arabic}
 
 \include{chapters/einleitung}
+\include{chapters/gcn}
 
 % Anhang
 \appendix
@@ -25,23 +27,23 @@
 
 % Mathematische Notation
 \printglossary[title={Symbolverzeichnis}]
-\cleardoublepage
+\cleardoublepage{}
 
 % Abbildungsverzeichnis
 \listoffigures
 \addcontentsline{toc}{chapter}{Abbildungsverzeichnis}
-\cleardoublepage
+\cleardoublepage{}
 
 % Algorithmenverzeichnis
-\listofalgorithms
+\listofalgorithms{}
 \addcontentsline{toc}{chapter}{Algorithmenverzeichnis}
-\cleardoublepage
+\cleardoublepage{}
 
 % Literaturverzeichnis
 \bibliographystyle{gerplain}
 \bibliography{bibliography}
 \addcontentsline{toc}{chapter}{Literaturverzeichnis}
-\cleardoublepage
+\cleardoublepage{}
 
 % Eidesstattliche Versicherung
 \includepdf{chapters/versicherung}
