@@ -43,7 +43,13 @@ $\mathcal{A} \in \gls{R}^{m \times n \times n}$ kann zu einer zweidimensionalen 
 Dann ist $A \cdot H^{(l)} \in \gls{R}^{m \cdot n \times d}$.
 Reshape zu $\gls{R}^{n \times m \cdot d}$ und Gewichtsmatrix $G \in \gls{R}^{m \cdot d \times x}$.
 
-\subsection{Übertragung auf eingebettete Graphen}
+\begin{equation}
+  H^{(l+1)} = f(H^{(l)}, \mathcal{\tilde A}) = \sigma \left( \frac{1}{|\mathcal{\tilde A}|} \sum_{\tilde A_i \in \mathcal{\tilde A}} \tilde D_i^{-\frac{1}{2}} \tilde A_i \tilde D_i^{-\frac{1}{2}} H^{(l)} W^{(l)}_i \right)
+\end{equation}
+
+$\sigma(\cdot)$ kennzeichnet eine Aktivierungsfunktion wie zum Beispiel $\text{ReLU}(\cdot) = \max(0, \cdot)$.
+
+\subsection{Übertragung auf räumlich eingebettete Graphen}
 
 Graphknoten haben im Allgemeinen keine Position oder Lage im Raum.
 Knoten, die Regionen in einer vorhandenen Segmentierung darstellen, haben jedoch offensichtlich eine gewisse Lage im Raum, die zum Beispiel über das Zentrum der Region definiert werden kann.
@@ -60,10 +66,9 @@ Wir definieren diese Adjazenzmatrizen respektive als $A_{\text{links}}, A_{\text
 Falls eine Kante horizontal bzw.\ vertikal liegt, so definieren wir $a_{ij} = 1$ respektive für beide \glqq{}gegenüberliegenden\grqq\ Adjazenzmatrizen.
 
 \begin{figure}
-\begin{minipage}[c]{0.49\textwidth}
-\begin{subfigure}[c]{\textwidth}
   \centering
-  \begin{tikzpicture}
+  \subcaptionbox{$\mathcal{A}$}
+  [\textwidth]{\begin{tikzpicture}
     \tikzstyle{node}=[circle,draw, minimum width=5pt, inner sep=0pt]
     \tikzstyle{root}=[fill=black]
 
@@ -80,13 +85,9 @@ Falls eine Kante horizontal bzw.\ vertikal liegt, so definieren wir $a_{ij} = 1$
     \path (root) edge (d);
     \path (root) edge (e);
   \end{tikzpicture}
-  \subcaption{Ursprüngliche Kantenattribute eines Knoten}
-\end{subfigure}
-\end{minipage}
-\begin{minipage}[c]{0.49\textwidth}
-\begin{subfigure}[c]{0.49\textwidth}
-  \centering
-  \begin{tikzpicture}
+  }
+  \subcaptionbox{$A_{\text{links}}$}
+  [.2\textwidth]{\begin{tikzpicture}
     \tikzstyle{node}=[circle,draw, minimum width=5pt, inner sep=0pt]
     \tikzstyle{root}=[fill=black]
 
@@ -97,11 +98,9 @@ Falls eine Kante horizontal bzw.\ vertikal liegt, so definieren wir $a_{ij} = 1$
     \path (root) edge[right] node {1} (a);
     \path (root) edge[above] node {3} (d);
   \end{tikzpicture}
-  \subcaption{$A_{\text{links}}$}
-\end{subfigure}
-\begin{subfigure}[c]{0.49\textwidth}
-  \centering
-  \begin{tikzpicture}
+  }
+  \subcaptionbox{$A_{\text{rechts}}$}
+  [.2\textwidth]{\begin{tikzpicture}
     \tikzstyle{node}=[circle,draw, minimum width=5pt, inner sep=0pt]
     \tikzstyle{root}=[fill=black]
 
@@ -114,11 +113,9 @@ Falls eine Kante horizontal bzw.\ vertikal liegt, so definieren wir $a_{ij} = 1$
     \path (root) edge[above left] node {2} (c);
     \path (root) edge[left] node {1} (e);
   \end{tikzpicture}
-  \subcaption{$A_{\text{rechts}}$}
-\end{subfigure}
-\begin{subfigure}[c]{0.49\textwidth}
-  \centering
-  \begin{tikzpicture}
+  }
+  \subcaptionbox{$A_{\text{oben}}$}
+  [.2\textwidth]{\begin{tikzpicture}
     \tikzstyle{node}=[circle,draw, minimum width=5pt, inner sep=0pt]
     \tikzstyle{root}=[fill=black]
 
@@ -131,11 +128,9 @@ Falls eine Kante horizontal bzw.\ vertikal liegt, so definieren wir $a_{ij} = 1$
     \path (root) edge[below] node {0} (b);
     \path (root) edge[below right] node {2} (c);
   \end{tikzpicture}
-  \subcaption{$A_{\text{oben}}$}
-\end{subfigure}
-\begin{subfigure}[c]{0.49\textwidth}
-  \centering
-  \begin{tikzpicture}
+  }
+  \subcaptionbox{$A_{\text{unten}}$}
+  [.2\textwidth]{\begin{tikzpicture}
     \tikzstyle{node}=[circle,draw, minimum width=5pt, inner sep=0pt]
     \tikzstyle{root}=[fill=black]
 
@@ -148,15 +143,13 @@ Falls eine Kante horizontal bzw.\ vertikal liegt, so definieren wir $a_{ij} = 1$
     \path (root) edge[below] node {1} (d);
     \path (root) edge[left] node {3} (e);
   \end{tikzpicture}
-  \subcaption{$A_{\text{unten}}$}
-\end{subfigure}
-\end{minipage}
-\caption{Aufteilung einer Adjazenzmatrix in vier räumliche Bereiche.}
+  }
+\caption{Aufteilung einer Adjazenzmatrix in vier räumlich eingebettete Bereiche.}
 \label{adjazenz_aufteilung}
 \end{figure}
 
 Kantenattribute bzw.\ Positionen von Knoten sollten skalierungsinvariant gespeichert werden.
-Dafür werden die Abstände auf den Einheitskreis gemappt, wobei die längste Distanz eines Knotens auf dem Einheitskreis liegt (vgl. Abbildung~\ref{einheitskreis}).
+Dafür werden die Abstände auf den Einheitskreis gemappt, wobei der Knoten mit der längsten Distanz zum Wurzelknoten genau auf dem Einheitskreis liegt (vgl. Abbildung~\ref{einheitskreis}).
 
 \begin{figure}
 \begin{tikzpicture}
