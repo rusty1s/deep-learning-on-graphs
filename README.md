@@ -17,7 +17,7 @@
 * [Learn Python the hard way](https://learnpythonthehardway.org/book/)
 * [Style Guide](https://www.python.org/dev/peps/pep-0008/)
 * [Principle component analysis in python with
-  matplotlib][http://blog.nextgenetics.net/?e=42]
+  matplotlib](http://blog.nextgenetics.net/?e=42)
 
 ## TensorFlow Tutorials
 
