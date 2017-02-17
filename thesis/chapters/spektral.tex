@@ -1,0 +1,76 @@
+\chapter{Spektrale Graphentheorie}
+
+\begin{itemize}
+  \item \emph{Spektrum} eines Graphen zur Untersuchung seiner Eigenschaften
+  \item \emph{algebraische} oder \emph{spektrale Graphentheorie} genannt
+  \item als Spektrum eines Graphen bezeichnet man die (nach Größe geordnete) Folge der Eigenwerte $\lambda$ seiner Adjazenzmatrix, d.h. $A \cdot x = \lambda x$ ($x$ Eigenvektoren)
+\end{itemize}
+
+Algebraische Methoden sind sehr effektiv bei Graphen, die regulär und symmetrisch sind.
+Als \emph{Schleife} wird in der Graphentheorie eine Kante bezeichnet, die einen Knoten mit sich selbst verbindet.
+Ein Graph ohne Schleifen wird \emph{schleifenloser} Graph genannt.
+
+Sei $d_v$ der Grad eines Knotens $v$ eines Graphen $G$.
+Der \emph{Laplacian} $\mathcal{L}$ eines Graphen ohne Schleifen und Mehrfachkanten ist definiert als
+
+\begin{equation}
+  \mathcal{L}(u, v) = \begin{cases}
+    d_v, & \text{wenn }u = v\text{,}\\
+    -1, & \text{wenn }u\text\ {und }v\ \text{adjazent,}\\
+    0, & \text{sonst.}
+  \end{cases}
+\end{equation}
+
+Damit ist $\mathcal{L} = I - A$.
+$\mathcal{L}$ kann normalisiert werden über $\mathcal{L}_{\text{norm}} = T^{-\frac{1}{2}}LT^{-\frac{1}{2}}$, wobei $T$ die Diagonalmatrix beschreibt mit $T(v, v) = d_v$.
+Für einen \emph{isolierten} Knoten $v$, d.h.\ $d_v = 0$, gilt die Konvention $T^{-1}(v, v) = 0$.
+Ebenso lässt sich $\mathcal{L}_{\text{norm}}$ definieren als
+
+\begin{equation}
+  \mathcal{L}_{\text{norm}}(u, v) = \begin{cases}
+    1, & \text{wenn }u = v\text{und }d_v \neq 0\text{,}\\
+    -\frac{1}{\sqrt{d_u d_v}}, & \text{wenn }u\text\ {und }v\ \text{adjazent,}\\
+    0, & \text{sonst.}
+  \end{cases}
+\end{equation}
+
+Wenn $G$ $k$-regulär ist, d.h.\ $T = \text{diag}(k)$, dann gilt $\mathcal{L}_{\text{norm}} = I - \frac{1}{k}A$.
+
+Da $\mathcal{L}$ symmetrisch ist, sind seine Eigenwerte alle reell und positiv.
+
+Einem gewichtetem ungerichterem Graph $G$ kann eine Gewichtsfunktion $w: V \times V \rightarrow \mathbb{R}$ zugeschrieben werden, sodass $w(u, v) = w(v, u)$ und $w(u, v) \geq 0$.
+Falls $\lbrace u, v \rbrace \notin \mathcal{E}$, dann $w(u, v) = 0$.
+Damit sind ungewichtete Graphen nur ein Spezialfall bei dem alle Gewichte $0$ oder $1$ sind.
+Der Grad $d_v$ eines Knoten $v$ ist dann definiert als
+
+\begin{equation}
+  d_v = \sum_u w(u, v).
+\end{equation}
+
+Dann gilt
+
+\begin{equation}
+  \mathcal{L} = \begin{cases}
+    1 - \frac{w(v, v)}{d_v}, & \text{wenn }u = v\text{und }d_v \neq 0\text{,}\\
+    -\frac{w(u,v)}{\sqrt{d_u d_v}}, & \text{wenn }u\text\ {und }v\ \text{adjazent,}\\
+    0, & \text{sonst.}
+  \end{cases}
+\end{equation}
+
+Eine Verschrumpfung eines Graphen $G$ kann beschrieben werden über zwei verschiedene Knoten $u$ und $v$ zu einem neuen Knoten $v^*$ mit
+
+\begin{equation}
+  w(x,v^*) = w(x, u) + w(x, v)
+\end{equation}
+
+und
+
+\begin{equation}
+  w(v^*, v^*) = w(u, u) + w(v, v) + 2w(u,v)
+\end{equation}
+
+Mit $\lambda_G := \lambda_1$ für einen Graphen $G$, gilt für einen Graphen $H$ der aus $G$ verkleinert wurde
+
+\begin{equation}
+  \lambda_G \leq \lambda_H
+\end{equation}

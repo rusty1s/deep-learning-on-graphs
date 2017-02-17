@@ -5,6 +5,8 @@
 * [Deep Learning on
   Graphs](https://figshare.com/articles/Deep_Learning_on_Graphs/4491686)
 * [Spectral Graph Theory](http://www.math.ucsd.edu/~fan/research/revised.html)
+* [Wavelets on Graphs via Spectral Graph
+  Theory](https://arxiv.org/pdf/0912.3848.pdf)
 
 ## Paper
 
