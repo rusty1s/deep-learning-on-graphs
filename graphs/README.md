@@ -22,6 +22,7 @@
   Networks](https://arxiv.org/pdf/1609.02907v3.pdf)
   ([Code](https://github.com/tkipf/gcn))
   ([Explanation](http://tkipf.github.io/graph-convolutional-networks/))
+  ([Review](http://www.inference.vc/how-powerful-are-graph-convolutions-review-of-kipf-welling-2016-2/))
   * [Convolutional Neural Networks on Graphs with Fast Localized
     Spectral Filtering](https://arxiv.org/pdf/1606.09375.pdf)
     ([Code](https://github.com/mdeff/cnn_graph))
