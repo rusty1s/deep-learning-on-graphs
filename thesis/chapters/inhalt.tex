@@ -1,0 +1,48 @@
+\chapter{Gedachter Inhalt}
+
+Einleitung:
+Motivation
+Aufbau der Arbeit
+
+Grundlagen:
+Graphen, insbesondere planare Graphen
+Neuronale Netze (Was ist ein CNN, wie ist der Convolution Operator definiert, nicht lineare Aktivierungsfunktion)
+
+Graphrepräsentationen von Bildern
+Grid
+Superpixel
+Superpixelalgorithmen
+Merkmalextraktion (Momente)
+Merkmalselektion (Cov, PCA)
+
+Lernen auf Graphen:
+Stand der Forschung: Spatial vs Spectral
+
+Spatial:
+Patchy
+Zentralität
+Canonical Labeling
+Übertragung auf planare Graphen <- EIGENER ANTEIL (z.B. Grid Spiral)
+Komplexität
+Vorteile (einfache Architektur)/Nachteile (keine direkte Nachbarschaftsberücksichtigung möglich, keine Graph Coarsening möglich, Vorverarbeitung ist recht teuer und muss Preprocessed werden weil man das nicht über Matrixoperationen ausdrücken kann)
+
+Spectral:
+Laplacian, Fourier Transformation
+GCN und kGCN (weisfeiler Lehman)
+Übertragung auf planare Graphen (Adjazenzpartitionierung) <- EIGENER ANTEIL
+Pooling/Coarsening
+Komplexität
+Vorteile (z.B. Nachbarschaftsberücksichtigung/keine Ordnung nötig)/Nachteile (rotationsinvariant)
+
+Deep Learning auf variabler Input-Menge (SPP)
+
+Augmentierung von Graphen (ist das überhaupt möglich)
+
+Realisierung (Experimente) und Evaluation
+Adam-Optimizer
+Sparse Tensors
+Vorstellung Datensätze (MNIST, PascalVOC, CIFAR-10, ImageNet)
+Tensorflow
+Dropout L2-Regularisierung
+
+Zusammenfassung und Ausblick

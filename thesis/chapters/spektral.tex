@@ -21,7 +21,9 @@ Der \emph{Laplacian} $\mathcal{L}$ eines Graphen ohne Schleifen und Mehrfachkant
   \end{cases}
 \end{equation}
 
-Damit ist $\mathcal{L} = I - A$.
+Der Graph Laplacian ist eine Generalisierung des Laplacian auf einem Gitter.
+
+Damit ist $\mathcal{L} = D - A$.
 $\mathcal{L}$ kann normalisiert werden über $\mathcal{L}_{\text{norm}} = T^{-\frac{1}{2}}LT^{-\frac{1}{2}}$, wobei $T$ die Diagonalmatrix beschreibt mit $T(v, v) = d_v$.
 Für einen \emph{isolierten} Knoten $v$, d.h.\ $d_v = 0$, gilt die Konvention $T^{-1}(v, v) = 0$.
 Ebenso lässt sich $\mathcal{L}_{\text{norm}}$ definieren als
@@ -36,7 +38,8 @@ Ebenso lässt sich $\mathcal{L}_{\text{norm}}$ definieren als
 
 Wenn $G$ $k$-regulär ist, d.h.\ $T = \text{diag}(k)$, dann gilt $\mathcal{L}_{\text{norm}} = I - \frac{1}{k}A$.
 
-Da $\mathcal{L}$ symmetrisch ist, sind seine Eigenwerte alle reell und positiv.
+Da $\mathcal{L}$ symmetrisch ist, sind seine Eigenwerte alle $\geq 0$ (d.h. $\mathcal{L}$ ist positiv-semidefinit).
+Jede Reihen- und Spaltensumme von $\mathcal{L}$ ist $0$.
 
 Einem gewichtetem ungerichterem Graph $G$ kann eine Gewichtsfunktion $w: V \times V \rightarrow \mathbb{R}$ zugeschrieben werden, sodass $w(u, v) = w(v, u)$ und $w(u, v) \geq 0$.
 Falls $\lbrace u, v \rbrace \notin \mathcal{E}$, dann $w(u, v) = 0$.
@@ -57,6 +60,8 @@ Dann gilt
   \end{cases}
 \end{equation}
 
+Bemerke, dass hier Schleifen nicht explizit ausgeschlossen werden!
+
 Eine Verschrumpfung eines Graphen $G$ kann beschrieben werden über zwei verschiedene Knoten $u$ und $v$ zu einem neuen Knoten $v^*$ mit
 
 \begin{equation}
@@ -74,3 +79,143 @@ Mit $\lambda_G := \lambda_1$ für einen Graphen $G$, gilt für einen Graphen $H$
 \begin{equation}
   \lambda_G \leq \lambda_H
 \end{equation}
+
+\section{Spectral Graph Domain}
+
+\begin{itemize}
+  \item \emph{Spectral Graph Domain}: Der Raum der Eigenfunktionen von $\mathcal{L}$
+  \item Analogon (Nachbildung) einer \emph{Fourier-Transformation} von Funktionen auf gewichteten Graphen
+\end{itemize}
+
+Eine beliebige Funktion $f: V \rightarrow \mathbb{R}$ kann als ein Vektor in $\mathbb{R}^n$ gesehen werden.
+Dies impliziert eine Ordnung auf den Knoten.
+Wir schreiben $f \in \mathbb{R}^n$ für Funktionen auf den Knoten eines Graphen und $f(m)$ für den Wert des $m$ten Knoten.
+
+Dann gilt für eine beliebige Funktion $f \in \mathbb{R}^n$
+
+\begin{equation}
+  \mathcal{L}f(x) = \sum_{x~y} w(x, y) \cdot (f(x) - f(y))
+\end{equation}
+
+wobei die Summe über $x~y$ die Summierung über alle Knoten $y$ beschreibt, die adjazent zu $x$ sind.
+
+Angenommen $G$ ist als ein reguläres Gitter definiert der Breite und Höhe $M$
+Dann hat ein Knoten $v_{x,y}$ genau 4 Nachbarn mit Kantengewicht $\frac{1}{{(\delta w)}^2}$, bei dem $\delta w$ die euklidsche Distanz zwischen zwei Gitterpunkten beschreibt.
+
+Für eine Funktion $f: M \times M \rightarrow \mathbb{R}$ gilt dann:
+
+\begin{equation}
+  \mathcal{L}f(x, y) = \frac{4f(x,y) - f(x+1, y) - f(x-1, y) - f(x, y+1) - f(x, y-1)}{{(\delta w)}^2}
+\end{equation}
+
+Damit kann ein Signal $f$ mit der Multiplikation mit $\mathcal{L}$ als eine Weiterpropagation von $f$ unter der Berücksichtigung der lokalen Nachbarn verstanden werden (\emph{5-point Stencil}, d.h.\ $\mathcal{L}f \approx - \nabla^2 f$).
+
+\section{Diskrete Fourier Transformation}
+
+$\mathcal{L}$ besitzt genau $n$ orthogonal zueinander stehende Eigenvektoren $\lbrace u_l \rbrace_{l=1}^n \in \mathbb{R}^n$.
+Eigenvektoren $u_i$ sind auf $1$ normiert, d.h.\ $||u_i||_2 = 1$.
+Diese werden auch \emph{Graph Fourier Modes} genannt.
+Diesen sind Eigenwete $\lbrace \lambda_l \rbrace_{l=1}^n \in \mathbb{R}$ zugeordnet, die die \glqq{}Frequenzen\grqq\ bzw.\ das Spektrum des Graphen beschreiben oder visuell betrachtet die Ausdehnung des Raumes, den die Eigenvektoren aufspannen.
+Bemerke dass $\lambda_0 = 0$, da für den Eigenvektor $\vec{u_0} = {(1, 1, \ldots, 1)}^T$ gilt, dass $\mathcal{L}\vec{u_0} = 0$.
+$\mathcal{L}$ ist diagonalisierbar über $\mathcal{L} = U \Lambda U^T$, wobei $U = [u_1, \ldots, u_n] \in \mathbb{R}^{n \times n}$ die \emph{Fourier Basis} und $\Lambda = \text{diag}([\lambda_0, \ldots, \lambda_n]) \in \mathbb{R}^{n \times n}$.
+Die \emph{Fourier Transformation} eines Signals $x \in \mathbb{R}^n$ ist dann definiert als $\hat{x} = U^{T}x$ und die Inverse als $x = U\hat{x}$.
+
+\section{Convolution}
+
+Wir suchen einen Operator $x *_G y$, der eine Faltung zweier Eingangssignale $x, y$ zu einem Ausgangssignal umleitet.
+$x$ beschreibt dabei die Knotenattribute und $y$ die Gewichte.
+
+Wir definieren $*_G$ in der Fouier-Domäne als
+
+\begin{equation}
+  x *_G g = U \cdot (U^T \cdot x \odot \hat g)
+\end{equation}
+
+wobei $\odot(A, B) = (a_{ij} \cdot b_{ij})$ die elementweise Multiplikation bzw.\ das \emph{Hadamard-Produkt}.
+
+Das Hadamard-Produkt löst sich auf, wenn $\hat g$ als eine Diagonalmatrix repräsentiert wird. Dann gilt
+
+\begin{equation}
+  x *_G g = U \begin{pmatrix}
+    \hat g(\lambda_0) & \cdots & 0\\
+    0 & \cdots & \hat g(\lambda_n)
+  \end{pmatrix}U^T x = U \hat g(\Lambda) U^T x
+\end{equation}
+
+Dann beschreibt $\hat g(\Lambda) = \text{diag}(\theta)$ eine Gewichtsfunktion mit $n$ Variablen, $\theta \in \mathbb{R}^n$.
+Damit ist die Faltung bzw.\ die Gewichtung abhängig von der Input-Größe $n$, was extrem schlecht ist.
+
+\subsection{Offene Fragen}
+
+\begin{itemize}
+  \item Warum wird $\hat g$ als Diagonalmatrix repräsentiert?
+  \item Wie kommt die Convolution zustande mit dem $*$ Operator?
+  \item Was passiert bei gerichteten Graphen???? Wir haben keinen symmetrischen und insbesondere keinen positiv definiten
+\end{itemize}
+
+\subsection{Beispiel}
+
+Wir betrachten eine einfache $3 \times 3$ Adjazenzmatrix, d.h.\ $|\mathcal{V}| = n = 3$.
+
+\begin{equation}
+  A = \begin{pmatrix}
+    0 & 1 & 0\\
+    1 & 0 & 1\\
+    0 & 1 & 0
+  \end{pmatrix}
+\end{equation}
+
+mit Diagonalmatrix $D = \text{diag}(1, 2, 1)$.
+
+Der Laplacian $\mathcal{L} = D - A$ ist dann
+
+\begin{equation}
+  \mathcal{L} = \begin{pmatrix}
+    1 & -1 & 0\\
+    -1 & 2 & -1\\
+    0 & -1 & 1
+  \end{pmatrix}
+\end{equation}
+
+Nun müssen die Eigenvektoren der Matrix und dessen Eigenwerte bestimmt werden, d.h.\ wir müssen das folgende Eigenwertproblem lösen
+
+\begin{equation}
+  \mathcal{L} \cdot \vec{u} = \lambda \cdot \vec{u}
+\end{equation}
+
+Wir erhalten $3$ Eigenvektoren und Eigenwerte mit
+
+\begin{equation}
+  \lambda_0 = 0, \vec{u}_0 = \frac{1}{\sqrt{3}} \begin{pmatrix}1\\1\\1\end{pmatrix} \approx \begin{pmatrix}0.58\\0.58\\0.58\end{pmatrix},
+    \lambda_1 = 1, \vec{u}_1 = \frac{1}{\sqrt{2}} \begin{pmatrix}-1\\0\\1\end{pmatrix} \approx \begin{pmatrix}-0.71\\0\\0.71\end{pmatrix},
+      \lambda_2 = 3, \vec{u}_2 = \frac{1}{\sqrt{6}} \begin{pmatrix}1\\-2\\1\end{pmatrix} \approx \begin{pmatrix}0.41\\-0.82\\0.41\end{pmatrix}
+\end{equation}
+
+Dann sind $U$, $\Lambda$ und $U^T$ definiert als
+
+\begin{equation}
+  U \approx \begin{pmatrix}
+    0.58 & -0.71 & 0.41\\
+    0.58 & 0 & -0.82\\
+    0.58 & 0.71 & 0.41
+  \end{pmatrix},
+  \Lambda = \begin{pmatrix}
+    0 & 0 & 0\\
+    0 & 1 & 0\\
+    0 & 0 & 3
+  \end{pmatrix},
+  U^T \approx \begin{pmatrix}
+    0.58 & 0.58 & 0.58\\
+    -0.71 & 0 & 0.71\\
+    0.41 & -0.82 & 0.41
+  \end{pmatrix}
+\end{equation}
+
+Angenommen wir haben ein Signal $x = {(100, 10, 1)}^T$, dann ist der Wert dieses Signals transformiert in die Fourier Domäne definiert als $\hat x \approx {(64.09, -70.00, 33.07)}^T$.
+Führen wir $\hat x$ auf $x$ mittels $U \cdot \hat x$ zurück, erhalten wir korrekterweise $x = {(100, 10, 1)}^T$.
+
+\section{Chebyshev Polynome}
+
+\section{Probleme}
+
+Rotationsinvariant
