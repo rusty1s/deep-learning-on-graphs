@@ -7,6 +7,8 @@
 * [Spectral Graph Theory](http://www.math.ucsd.edu/~fan/research/revised.html)
 * [Wavelets on Graphs via Spectral Graph
   Theory](https://arxiv.org/pdf/0912.3848.pdf)
+* [Spatial vs.
+  Spectral](https://www.quora.com/How-do-I-generalize-convolution-of-neural-networks-to-graphs)
 
 ## Paper
 
