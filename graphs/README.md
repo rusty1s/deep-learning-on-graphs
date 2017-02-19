@@ -9,6 +9,12 @@
   Theory](https://arxiv.org/pdf/0912.3848.pdf)
 * [Spatial vs.
   Spectral](https://www.quora.com/How-do-I-generalize-convolution-of-neural-networks-to-graphs)
+* [Spectral Graph Theory and its
+  Applications](http://www.cs.yale.edu/homes/spielman/sgta/SpectTut.pdf)
+* [Sepctral Graph Theory, Fall
+  2015](http://www.cs.yale.edu/homes/spielman/561/)
+* [An Introduction to Sepctral Graph
+  Theory](http://math.uchicago.edu/~may/REU2012/REUPapers/JiangJ.pdf)
 
 ## Paper
 
@@ -40,7 +46,7 @@
 
 * [The Weisfeiler-Lehman Method and Graph Isomorphism Testing](https://arxiv.org/pdf/1101.5211v1.pdf)
 * [Pratical graph isomorphism, II](https://arxiv.org/pdf/1301.1493v1.pdf)
-* [Canoncial Labelings with
+* [Canonical Labelings with
   Nauty](https://computationalcombinatorics.wordpress.com/2012/09/20/canonical-labelings-with-nauty/)
 
 ### Labeling

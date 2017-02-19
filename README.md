@@ -11,6 +11,8 @@
 * [TensorFlow](https://www.tensorflow.org) (Open Source Library)
 * [TensorFlow in a Nutshell](http://camron.xyz)
 * [A Year of Artificial Intelligence](https://ayearofai.com/)
+* [Introduction to Convolutional Neural
+  Networks](http://cs.nju.edu.cn/wujx/paper/CNN.pdf)
 
 ## Python Tutorials
 

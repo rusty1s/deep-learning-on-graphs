@@ -120,10 +120,47 @@ Bemerke dass $\lambda_0 = 0$, da für den Eigenvektor $\vec{u_0} = {(1, 1, \ldot
 $\mathcal{L}$ ist diagonalisierbar über $\mathcal{L} = U \Lambda U^T$, wobei $U = [u_1, \ldots, u_n] \in \mathbb{R}^{n \times n}$ die \emph{Fourier Basis} und $\Lambda = \text{diag}([\lambda_0, \ldots, \lambda_n]) \in \mathbb{R}^{n \times n}$.
 Die \emph{Fourier Transformation} eines Signals $x \in \mathbb{R}^n$ ist dann definiert als $\hat{x} = U^{T}x$ und die Inverse als $x = U\hat{x}$.
 
-\section{Convolution}
+\section{Faltung}
 
-Wir suchen einen Operator $x *_G y$, der eine Faltung zweier Eingangssignale $x, y$ zu einem Ausgangssignal umleitet.
-$x$ beschreibt dabei die Knotenattribute und $y$ die Gewichte.
+Wir suchen einen Operator $x *_G g$, der eine Faltung zweier Eingangssignale $x, g$ zu einem Ausgangssignal umleitet.
+$x$ beschreibt dabei die Knotenattribute und $g$ die Gewichte.
+
+\subsection{Faltung in CNNs}
+
+In der Funktionalanalysis beschreibt die \emph{Faltung} einen mathematischen Operator, der für zwei Funktion $f$ und $g$ eine dirtte Funktion $f * g$ liefert.
+Die Faltung kann als ein Produkt von Funktionen vertanden werden.
+
+Anschaulich ist $(f * g)(x)$ der \emph{gewichtete Mittelwert} von $f$, wobei die Gewichtung durch $g$ gegeben ist.
+
+Angenommen wir wollen über einer Matrix mit einem \emph{Filter} falten.
+Sei unsere Eingangsmatrix $3 \times 4$ und unsere Filtergröße $2 \times 2$.
+
+Dann gilt zum Beispiel für den Faltungsoperator $*$ in einem Convolutional Neural Network:
+
+\begin{equation}
+  \begin{pmatrix}
+    1 & 2 & 3 & 1\\
+    4 & 5 & 6 & 1\\
+    7 & 8 & 9 & 1
+  \end{pmatrix} * \begin{pmatrix}
+    1 & 1\\
+    1 & 1
+  \end{pmatrix} = \begin{pmatrix}
+    12 & 16 & 11\\
+    24 & 28 & 17
+  \end{pmatrix}
+\end{equation}
+
+$f: 3 \times 4 \rightarrow \mathbb{R}$ und $g: 2 \ times 2 \rightarrow \mathbb{R}$, dann ist $*$ definiert als
+
+\begin{equation}
+  (f * g)(x, y) = \sum_{x_i \in [x, x+1]\\y_i \in [y, y+1]} f(x_i, y_i)g(x-x_i, y-y_i)
+\end{equation}
+
+\subsection{Faltung auf Graphen}
+
+Da wir keinen Translationsoperator auf der Domäne der Knoten $x$ beschreiben können, müssen wir unseren Faltungsoperator in der Fourier-Domäne beschreiben.
+Dafür wandeln wir unsere Knotenmenge $x$ zuerst in $\hat x$ um.
 
 Wir definieren $*_G$ in der Fouier-Domäne als
 
