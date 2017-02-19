@@ -1,0 +1,31 @@
+\section{Pooling-Ebene}
+
+\subsection{Clustering von Graphen}
+
+Pooling-Ebenen des Netzes sollen über das Clustering bzw.\ die logische Zusammenfassung von Knoten realisiert werden.
+
+Anforderungen:
+
+\begin{itemize}
+  \item mehrstufiges Clustering von Graphen für mehrere Pooling-Ebenen
+  \item Reduzierung der Knotenanzahl soll den Blick auf einen Graphen bei unterschiedlichen Auflösungen zeigen
+  \item Cluster-Algorithmen, die die Größe eines Graphen um den Faktor zwei für jede Anwendung reduzieren erlauben eine feine Kontrolle über die zu benutzenden Pooling-Größen.
+  \item effiziente Approximation, da Graph-Clustering NP-schwer (vgl. 5)
+\end{itemize}
+
+Es existieren einige Cluster-Techniken auf Graphen wie das populäre \emph{Spektrum-Clustering} (vgl. 21).
+Dieser erfüllt aber nicht die Voraussetzungen (warum nicht?).
+
+Defferrard et al.~\cite{Defferrard} benutzen für die Pooling-Ebene eines Netzes auf Graphen die \glqq{}Vergröberungsphase\grqq\ des mehrstufigen Cluster-Algorithmus \emph{Graclus}~\cite{Dhillon}.
+Dabei wird der initiale Graph $G_0$ sukzessive in kleinere Graphen $G_1, G_2, \ldots, G_m$ mit $|\mathcal{V}_0| > |\mathcal{V}_1| > \cdots > |\mathcal{V}_m|$ transformiert.
+Für die Transformation von einem Graphen $G_i$ zu einem Graphen $G_{i+1}$ mit kleinerer Knotenanzahl $|\mathcal{V}_{i+1}| < |\mathcal{V}_i|$ werden aus disjunkten Knotenuntermengen von $\mathcal{V}_i$ \glqq{}Superknoten\grqq\ für $\mathcal{V}_{i+1}$ gebildet.
+
+Die Auswahl der Untermengen erfolgt gierig.
+Die Knoten des Graphen werden als unmarkiert initialisert und zufällig durchlaufen.
+Für jeden Knoten $v \in \mathcal{V}_i$, der noch unmarkiert ist, wird ein lokaler, ebenfalls noch unmarkierter, Nachbarschaftsknoten $w \in \mathcal{N}(v)$ nach einer zuvor definierten Strategie bestimmt und $v$ sowie $w$ zu einem Superknoten $(v, w) \in \mathcal{V}_{i+1}$ verschmelzt.
+Anschließend werden $v$ und $w$ markiert.
+Falls $v$ keinen unmarkierten Nachbarn besitzt, wird $v$ allein als \emph{Singleton} $v \in \mathcal{V}_{i+1}$ deklariert und markiert~\cite{Dhillon}.
+
+Graclus reduziert die Knotenanzahl eines Graphen damit ungefähr um die Hälfte, d.h.\ $2 \cdot |\mathcal{V}_{i+1}| \approx |\mathcal{V}_i|$.
+Ausnahmen sind zum Beispiel Graphen $G = (\mathcal{V}, \mathcal{E})$ mit $\mathcal{E} = \emptyset$.
+In der Praxis zeigt sich jedoch, dass Graclus nur sehr wenige Singleton-Knoten generiert~\cite{Defferrard}.
