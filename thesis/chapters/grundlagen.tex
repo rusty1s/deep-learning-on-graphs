@@ -1,0 +1,46 @@
+$G = \left(\mathcal{V}, \mathcal{E}\right)$\\
+$\mathcal{V} = {\left\{ v_i \right\}}^N_{i=1}$\\
+$\left| V \right| = N < \infty$\\
+Merkmalsfunktion $f_G \colon \mathcal{V} \to \mathbb{R}^m$\\
+wenn nicht explizit aufgeführt, dann bla bla wir $f_G \colon \mathcal{V} \to \mathbb{R}$\\
+Umschreibung in Tensor/Dense Matrix\\
+$\mathcal{E} \subseteq \left\{ \left(u, v\right) \colon u, v \in \mathcal{V} \right\}$\\
+Falls $\left( u, v \right) \in \mathcal{E}$, dann sind $u$ und $v$ adjazent und wir schreiben dann $u \sim v$\\
+Gewichtsfunktion $w_G \colon \mathcal{V} \times \mathcal{V} \to \gls{R+}$\\
+ungewichtet: $w_G \colon \mathcal{V} \times \mathcal{V} \to \left\{ 0, 1 \right\}$\\
+Falls $\left( u, v \right) \notin \mathcal{E}$, dann $w_G\left(u, v\right) = 0$\\
+Im ungewichteten Fall ist Gewichtsfunktion implizit durch $\mathcal{E}$ gegeben\\
+Merkmalsfunktion und Gewichtsfunktion sind bei Betrachtung eines Graphen implizit gegeben \todo{umschreiben}
+
+ungerichtet:
+$u \sim v$ genau dann, wenn $v \sim u$ und
+\begin{equation}
+  w_G\left(u, v\right) = w_G\left(v, u\right)
+\end{equation}
+Fordern wir für den Verlauf dieser Arbeit (also keine gerichteten Graphen)
+
+Schleife (für den weiteren Verlauf dieser Arbeit fordern wir $w_G\left(v, v\right) = 0$)\\
+
+Der \emph{Grad} eines Knotens $v$ ist die Anzahl der Knoten, die adjazent zu ihm sind, d.h.
+\begin{equation}
+  \deg_G\left(v\right) = \sum_{v \sim u} 1
+\end{equation}
+Im Falle von gewichteten Graphen wird der Grad eines Knotens von $v$ auch oft über
+\begin{equation}
+  d_G\left(v\right) = \sum_{v \sim u} w_G\left(v, u\right)
+\end{equation}
+definiert.
+Die unterschiedliche Notation macht deutlich, wann wir welchen Grad eines Knotens meinen.
+
+Adjazenzmatrix, Umschreibung in Sparse Matrix/Tensor
+Degreematrix, Umschreibung in Sparse Matrix/Tensor
+Vorstellung $\text{diag}$
+
+Ein Knoten $v \in \mathcal{V}$ eines Graphen $G$ heißt \emph{isoliert}, $d_G\left(v\right) = 0$.\\
+Ein Graph heißt \emph{verbunden}, falls er keinen isolierten Knoten hat.\\
+
+regulär, planar\\
+
+Pfad, Pfadlänge
+Digraph / Multiedge, Umschreibung in Tensor
+connected / keine isolierten Knoten (Forderung für den Verlauf der Arbeit)

@@ -36,6 +36,8 @@ Ebenso lässt sich $\mathcal{L}_{\text{norm}}$ definieren als
   \end{cases}
 \end{equation}
 
+Der normalisierte Laplacian ist immer noch symmtrisch!
+
 Wenn $G$ $k$-regulär ist, d.h.\ $T = \text{diag}(k)$, dann gilt $\mathcal{L}_{\text{norm}} = I - \frac{1}{k}A$.
 
 Da $\mathcal{L}$ symmetrisch ist, sind seine Eigenwerte alle $\geq 0$ (d.h. $\mathcal{L}$ ist positiv-semidefinit).
@@ -185,6 +187,7 @@ Damit ist die Faltung bzw.\ die Gewichtung abhängig von der Input-Größe $n$, 
 \subsection{Offene Fragen}
 
 \begin{itemize}
+  \item Wie erklärt sich noch einmal der normalisierte Laplacian?
   \item Warum wird $\hat g$ als Diagonalmatrix repräsentiert?
   \item Wie kommt die Convolution zustande mit dem $*$ Operator?
   \item Was passiert bei gerichteten Graphen???? Wir haben keinen symmetrischen und insbesondere keinen positiv definiten
@@ -256,3 +259,8 @@ Führen wir $\hat x$ auf $x$ mittels $U \cdot \hat x$ zurück, erhalten wir korr
 \section{Probleme}
 
 Rotationsinvariant
+
+\section{Pfadlänge}
+
+wenn $d_G(m,n) > k$, dann ${(L^k)}_{m, n} = 0$
+(normalisiert sowie unnormalisiert (siehe Wavelet Lemma 5.4))

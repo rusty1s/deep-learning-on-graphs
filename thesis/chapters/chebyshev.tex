@@ -1,5 +1,12 @@
 \section{Tschebyschow-Polynome}
 
+\begin{itemize}
+  \item bisheriger Ansatz skaliert nicht gut für große Graphen
+  \item schneller Algorithmus zur Approximation des Filters notwendig $\Rightarrow$ Polynome niedriger Ordnung
+  \item Größe des Filters soll unahängig zu den Daten sein
+  \item approximiere $g(\mathcal{L})$ durch Polynom, dass rekursiv durch $\mathcal{L}$ berechnet werden kann
+\end{itemize}
+
 \emph{Tschebyschow-Polynome} (engl. \emph{Chebyshev}) bezeichnen eine Menge von Polynomen $T_n(x) \colon \mathbb{R} \to \mathbb{R}$ mit dem rekursiven Zusammenhang
 \begin{equation}
   T_n(x) = 2x \cdot T_{n-1}(x) - T_{n-2}(x)
@@ -7,3 +14,11 @@
 mit $T_0(x) = 1$ und $T_1(x) = x$.
 Ein Tschebyschow-Polynom $T_n$ ist ein Polynom $n$-ten Grads.
 Diese Polynome formen eine Orthogonalbasis
+\todo{stable recurrence property}
+
+\subsection{Eigenschaften}
+
+\begin{itemize}
+  \item Für $x \in [-1, 1]$ gilt $T_k(x) \in [-1, 1]$
+  \item Polynome formen eine Orthogonalbasis für $L^2 \left([-1, 1], \frac{d_x}{\sqrt{1-x^2}}\right)$, auch \emph{Hilbertraum} genannt
+\end{itemize}
