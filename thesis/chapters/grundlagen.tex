@@ -1,46 +1,71 @@
-$G = \left(\mathcal{V}, \mathcal{E}\right)$\\
-$\mathcal{V} = {\left\{ v_i \right\}}^N_{i=1}$\\
-$\left| V \right| = N < \infty$\\
+\chapter{Grundlagen}
+
+\section{Matrizen und Tensoren}
+
+\section{Graphentheorie}
+
+Graph Tupel $G = \left(\mathcal{V}, \mathcal{E}\right)$\\
+$\mathcal{V} = {\left\{ v_i \right\}}^n_{i=1}$\\
+$\left| V \right| = n < \infty$\\
 Merkmalsfunktion $f_G \colon \mathcal{V} \to \mathbb{R}^m$\\
 wenn nicht explizit aufgeführt, dann bla bla wir $f_G \colon \mathcal{V} \to \mathbb{R}$\\
 Umschreibung in Tensor/Dense Matrix\\
-$\mathcal{E} \subseteq \left\{ \left(u, v\right) \colon u, v \in \mathcal{V} \right\}$\\
+$\mathcal{E} \subseteq \mathcal{V} \times \mathcal{V}$\\
 Falls $\left( u, v \right) \in \mathcal{E}$, dann sind $u$ und $v$ adjazent und wir schreiben dann $u \sim v$\\
-Gewichtsfunktion $w_G \colon \mathcal{V} \times \mathcal{V} \to \gls{R+}$\\
-ungewichtet: $w_G \colon \mathcal{V} \times \mathcal{V} \to \left\{ 0, 1 \right\}$\\
-Falls $\left( u, v \right) \notin \mathcal{E}$, dann $w_G\left(u, v\right) = 0$\\
+Gewichtsfunktion $w \colon \mathcal{V} \times \mathcal{V} \to \gls{R+}$\\
+ungewichtet: $w \colon \mathcal{V} \times \mathcal{V} \to \left\{ 0, 1 \right\}$\\
+Falls $\left( u, v \right) \notin \mathcal{E}$, dann $w\left(u, v\right) = 0$\\
 Im ungewichteten Fall ist Gewichtsfunktion implizit durch $\mathcal{E}$ gegeben\\
 Merkmalsfunktion und Gewichtsfunktion sind bei Betrachtung eines Graphen implizit gegeben \todo{umschreiben}
 
 ungerichtet:
 $u \sim v$ genau dann, wenn $v \sim u$ und
 \begin{equation}
-  w_G\left(u, v\right) = w_G\left(v, u\right)
+  w\left(u, v\right) = w\left(v, u\right)
 \end{equation}
 Fordern wir für den Verlauf dieser Arbeit (also keine gerichteten Graphen)
 
-Schleife (für den weiteren Verlauf dieser Arbeit fordern wir $w_G\left(v, v\right) = 0$)\\
+Als \emph{Schleife} wird eine Kante bezeichnet, die einen Knoten mit sich selbst verbindet, d.h.\ $w\left(v, v\right) > 0$.
+Ein Graph ohne Schleifen wird \emph{schleifenloser Graph} genannt.
+Für den weiteren Verlauf dieser Arbeit fordern wir schleifenlose Graphen.\\
+
+Adjazenzmatrix $\mathbf{A} \in \gls{R+}^{n \times n}$ eines Graphen $G$ mit $\mathbf{A}_{ij} = w(v_i, v_j)$\\
+Wir sagen ein Knoten $v_i$ hat Position $i$ in $\mathbf{A}$.
+Umschreibung in Sparse Matrix/Tensor\\
+
+$G$ ist eindeutig definiert durch $\mathbf{A}$ und $f_G$.
 
 Der \emph{Grad} eines Knotens $v$ ist die Anzahl der Knoten, die adjazent zu ihm sind, d.h.
 \begin{equation}
-  \deg_G\left(v\right) = \sum_{v \sim u} 1
+  \deg\left(v\right) = \sum_{v \sim u} 1
 \end{equation}
 Im Falle von gewichteten Graphen wird der Grad eines Knotens von $v$ auch oft über
 \begin{equation}
-  d_G\left(v\right) = \sum_{v \sim u} w_G\left(v, u\right)
+  d\left(v_i\right) = \sum_{j} \mathbf{A}_{ij}
 \end{equation}
 definiert.
 Die unterschiedliche Notation macht deutlich, wann wir welchen Grad eines Knotens meinen.
 
-Adjazenzmatrix, Umschreibung in Sparse Matrix/Tensor
-Degreematrix, Umschreibung in Sparse Matrix/Tensor
-Vorstellung $\text{diag}$
+Die Gradmatrix $\mathbf{D} \in \gls{R+}^{n \times n}$ eines Graphen $G$ ist definiert als Diagonalmatrix
+\begin{equation}
+  \mathbf{D} = \text{diag}\left( \left[ d\left(v_1\right), \ldots, d\left(v_n\right) \right] \right)
+\end{equation}
+Umschreibung in Sparse Matrix/Tensor
 
-Ein Knoten $v \in \mathcal{V}$ eines Graphen $G$ heißt \emph{isoliert}, $d_G\left(v\right) = 0$.\\
-Ein Graph heißt \emph{verbunden}, falls er keinen isolierten Knoten hat.\\
+Ein Knoten $v \in \mathcal{V}$ eines Graphen $G$ heißt genau dann \emph{isoliert}, wenn $d\left(v\right) = 0$.\\
+Ein Graph ist \emph{verbunden}, falls er keinen isolierten Knoten besitzt.
+Für den weiteren Verlauf dieser Arbeit fordern wir, dass $G$ verbunden ist.\
 
-regulär, planar\\
+Ein Graph heißt \emph{$k$-regulär} falls $\deg\left(v_i\right) = k$ für alle $1, \ldots, n$.
+Ein \emph{ebener Graph} ist eine konkrete Darstellung eines Graphen auf der zweidimensionalen Ebene $\mathbb{R}^2$.
+Jedem Knoten $v$ ist eine Positionsfunktion $p \colon \mathcal{V} \to \mathbb{R}^2$ zugeordnet, die die Position eines Knotens auf der Ebene eindeutig definiert.
 
 Pfad, Pfadlänge
-Digraph / Multiedge, Umschreibung in Tensor
-connected / keine isolierten Knoten (Forderung für den Verlauf der Arbeit)
+
+Ein \emph{Weg} ist eine Folge von Knoten $\left( v_0, v_1, \ldots, v_s \right)$, sodass $(v_i, v_{i+1}) \in \mathcal{E}$ für alle $1 \leq i < s$.
+Ein \emph{Pfad} ist ein Weg, sodass $v_i \neq v_{i+1}$.
+Im Kontext von schleifenlosen Graphen sind die Begriffe Weg und Pfad äquivalent.
+Wir schreiben $s \colon \mathcal{V} \times \mathcal{V} \to \gls{N}$ für die Länge des kürzesten Pfades von $u$ nach $v$.
+
+\emph{Mehrfachkantengraphen}, auch \emph{Multigraphen} genannt können zwei Knoten auch durch mehrere Kanten verbunden sein.
+Multigraphen lassen sich als Tensor $\left[\mathbf{A}_1, \ldots, \mathbf{A}_m\right] \in \gls{R+}^{m \times n \times n}$ schreiben.
