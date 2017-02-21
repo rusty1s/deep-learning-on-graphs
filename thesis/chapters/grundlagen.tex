@@ -16,7 +16,6 @@ Gewichtsfunktion $w \colon \mathcal{V} \times \mathcal{V} \to \gls{R+}$\\
 ungewichtet: $w \colon \mathcal{V} \times \mathcal{V} \to \left\{ 0, 1 \right\}$\\
 Falls $\left( u, v \right) \notin \mathcal{E}$, dann $w\left(u, v\right) = 0$\\
 Im ungewichteten Fall ist Gewichtsfunktion implizit durch $\mathcal{E}$ gegeben\\
-Merkmalsfunktion und Gewichtsfunktion sind bei Betrachtung eines Graphen implizit gegeben \todo{umschreiben}
 
 ungerichtet:
 $u \sim v$ genau dann, wenn $v \sim u$ und
@@ -60,12 +59,11 @@ Ein Graph heißt \emph{$k$-regulär} falls $\deg\left(v_i\right) = k$ für alle 
 Ein \emph{ebener Graph} ist eine konkrete Darstellung eines Graphen auf der zweidimensionalen Ebene $\mathbb{R}^2$.
 Jedem Knoten $v$ ist eine Positionsfunktion $p \colon \mathcal{V} \to \mathbb{R}^2$ zugeordnet, die die Position eines Knotens auf der Ebene eindeutig definiert.
 
-Pfad, Pfadlänge
+Ein \emph{Weg} ist eine Folge von Knoten $\left( v_{x\left(1\right)}, v_{x\left(2\right)}, \ldots, v_{x\left(s\right)} \right)$, sodass $v_{x\left(i\right)} \sim v_{x\left(i+1\right)}$ für alle $1 \leq i < s$ mit Länge $s$, wobei $x \colon \left\{ 1, \ldots, n \right\} \to \left\{ 1, \ldots, n \right\}$ eine Permutation auf der Anzahl der Knoten.
 
-Ein \emph{Weg} ist eine Folge von Knoten $\left( v_0, v_1, \ldots, v_s \right)$, sodass $(v_i, v_{i+1}) \in \mathcal{E}$ für alle $1 \leq i < s$.
 Ein \emph{Pfad} ist ein Weg, sodass $v_i \neq v_{i+1}$.
 Im Kontext von schleifenlosen Graphen sind die Begriffe Weg und Pfad äquivalent.
-Wir schreiben $s \colon \mathcal{V} \times \mathcal{V} \to \gls{N}$ für die Länge des kürzesten Pfades von $u$ nach $v$.
+Wir schreiben $s\left(u, v\right)$ einer Funktion $s \colon \mathcal{V} \times \mathcal{V} \to \gls{N}$ für die Länge des kürzesten Pfades von $u$ nach $v$.
 
-\emph{Mehrfachkantengraphen}, auch \emph{Multigraphen} genannt können zwei Knoten auch durch mehrere Kanten verbunden sein.
-Multigraphen lassen sich als Tensor $\left[\mathbf{A}_1, \ldots, \mathbf{A}_m\right] \in \gls{R+}^{m \times n \times n}$ schreiben.
+In Graphen mit \emph{Mehrfachkanten}, auch \emph{Multigraphen} genannt, können zwei Knoten durch mehrere Kanten verbunden sein.
+Multigraphen lassen sich als Tensor über einen Vektor von Adjazenzmatrizen $\left[\mathbf{A}_1, \ldots, \mathbf{A}_m\right] \in \gls{R+}^{m \times n \times n}$ schreiben.
