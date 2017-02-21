@@ -22,3 +22,29 @@ Diese Polynome formen eine Orthogonalbasis
   \item Für $x \in [-1, 1]$ gilt $T_k(x) \in [-1, 1]$
   \item Polynome formen eine Orthogonalbasis für $L^2 \left([-1, 1], \frac{d_x}{\sqrt{1-x^2}}\right)$, auch \emph{Hilbertraum} genannt
 \end{itemize}
+
+Rescale $\mathbf{\Lambda}$ zu $\mathbf{\tilde \Lambda} = \frac{2}{\lambda_{\max}} \mathbf{\Lambda} - \mathbf{I} \in {\left[-1, 1\right]}^{n \times n}$.
+$\lambda_{\max}$ ist der Wert des größten Eigenvektors von $\mathbf{L}$.
+
+Dann ist $T_k\left( \text{diag}^{-1}\left(\mathbf{\tilde \Lambda}\right) \right) \in {\left[-1, 1\right]}^{n}$
+
+Hammon et al zeigen, dass $g_{\mathbf{\theta}}(\mathbf{\Lambda})$ beliebig genau mit Hilfe der  rekursiven Tschebyschow-Polynome mit Grad $k$ und einer festen Filtergröße $\mathbf{\theta}^{\prime} \in \mathbb{R}^k$ approximiert werden kann
+\begin{equation}
+  g_{\mathbf{\theta}}\left(\mathbf{\Lambda}\right) \approx g^{\prime}_{\mathbf{\theta}^{\prime}}\left(\mathbf{\Lambda}\right) = \text{diag}\left(\sum_{i = 0}^{k-1} \mathbf{\theta}^{\prime}_i \cdot T_i \left(\text{diag}^{-1}\left(\mathbf{\tilde \Lambda}\right)\right)\right)
+\end{equation}
+
+Beweisidee nachgucken
+
+Es zeigt sich, dass
+\begin{equation}
+  y = \mathbf{U} \cdot g^{\prime}_{\mathbf{\theta}^{\prime}}\left(\mathbf{\Lambda}\right) \cdot \mathbf{U}^{\top} \cdot \mathbf{x} = g^{\prime}_{\mathbf{\theta}^{\prime}}\left(\mathbf{L}\right) \cdot \mathbf{x}
+\end{equation}
+
+wobei $g^{\prime}_{\mathbf{\theta}^{\prime}}\left(\mathbf{L}\right) = \sum_{i=0}^{k-1} \mathbf{\theta}_i T_i\left( \mathbf{\tilde L}\right)$ und $\mathbf{\tilde L} = \frac{2}{\lambda_{\max}}\mathbf{L} - \mathbf{I}$
+
+Frage: Ist $\mathbf{\tilde L}$ auch im Intervall $-1$ und $1$????
+
+Beweisidee: $\mathbf{L}^k = {\left(\mathbf{U}\mathbf{\Lambda}\mathbf{U}^{\top}\right)}^k = \mathbf{U}\mathbf{\Lambda}^k\mathbf{U^{\top}}$
+
+
+Spektrale Filter, die repräsentiert werden durch ein Polynom vom Grad 

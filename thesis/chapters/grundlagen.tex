@@ -2,6 +2,14 @@
 
 \section{Matrizen und Tensoren}
 
+$\text{diag} \colon \mathbb{R}^n \to \mathbb{R}^{n \times n}$ einen Vektor $\mathbf{d}$ in Diagonalform $\mathbf{D}$ bringt mit $\mathbf{D}_{ii} = \mathbf{d_i}$ und $\mathbf{D}_{ij} = 0$ für $i \neq j$.
+Die Inverse $\text{diag}^{-1} \colon \mathbb{R}^{n \times n} \to \mathbb{R}^n$ liefert zu einer beliebigen Diagonalmatrix $\mathbf{D}$ dessen Diagonalvektor $\mathbf{d}$.
+brauch ich glaub ich nicht mehr
+
+Wir erlauben, dass wir eine eindimensionale Funktion $f \colon \mathbb{R} \to \mathbb{R}$ auch elementweise auf Vektoren, Matrizen bzw.\ Tensoren anwenden dürfen.
+
+Identitätsmatrix $\mathbf{I}$
+
 \section{Graphentheorie}
 
 Graph Tupel $G = \left(\mathcal{V}, \mathcal{E}\right)$\\
@@ -47,21 +55,22 @@ Die unterschiedliche Notation macht deutlich, wann wir welchen Grad eines Knoten
 
 Die Gradmatrix $\mathbf{D} \in \gls{R+}^{n \times n}$ eines Graphen $G$ ist definiert als Diagonalmatrix
 \begin{equation}
-  \mathbf{D} = \text{diag}\left( \left[ d\left(v_1\right), \ldots, d\left(v_n\right) \right] \right)
+  \mathbf{D} = \text{diag}\left( {\left[ d\left(v_1\right), \ldots, d\left(v_n\right) \right]}^T \right)
 \end{equation}
 Umschreibung in Sparse Matrix/Tensor
 
-Ein Knoten $v \in \mathcal{V}$ eines Graphen $G$ heißt genau dann \emph{isoliert}, wenn $d\left(v\right) = 0$.\\
+Ein Knoten $v \in \mathcal{V}$ eines Graphen $G$ heißt genau dann \emph{isoliert}, wenn $\deg\left(v\right) = 0$.\\
 Ein Graph ist \emph{verbunden}, falls er keinen isolierten Knoten besitzt.
 Für den weiteren Verlauf dieser Arbeit fordern wir, dass $G$ verbunden ist.\
 
 Ein Graph heißt \emph{$k$-regulär} falls $\deg\left(v_i\right) = k$ für alle $1, \ldots, n$.
+
 Ein \emph{ebener Graph} ist eine konkrete Darstellung eines Graphen auf der zweidimensionalen Ebene $\mathbb{R}^2$.
 Jedem Knoten $v$ ist eine Positionsfunktion $p \colon \mathcal{V} \to \mathbb{R}^2$ zugeordnet, die die Position eines Knotens auf der Ebene eindeutig definiert.
 
 Ein \emph{Weg} ist eine Folge von Knoten $\left( v_{x\left(1\right)}, v_{x\left(2\right)}, \ldots, v_{x\left(s\right)} \right)$, sodass $v_{x\left(i\right)} \sim v_{x\left(i+1\right)}$ für alle $1 \leq i < s$ mit Länge $s$, wobei $x \colon \left\{ 1, \ldots, n \right\} \to \left\{ 1, \ldots, n \right\}$ eine Permutation auf der Anzahl der Knoten.
 
-Ein \emph{Pfad} ist ein Weg, sodass $v_i \neq v_{i+1}$.
+Ein \emph{Pfad} ist ein Weg, sodass $v_{x\left(i\right)} \neq v_{x\left(i+1\right)}$.
 Im Kontext von schleifenlosen Graphen sind die Begriffe Weg und Pfad äquivalent.
 Wir schreiben $s\left(u, v\right)$ einer Funktion $s \colon \mathcal{V} \times \mathcal{V} \to \gls{N}$ für die Länge des kürzesten Pfades von $u$ nach $v$.
 
