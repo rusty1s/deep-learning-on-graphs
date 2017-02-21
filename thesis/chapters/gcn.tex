@@ -1,6 +1,39 @@
-\chapter{Graph Convolutional Networks}
+\section{Graph Convolutional Networks}
 
+\begin{itemize}
+  \item Idee: setze $k = 1$ für alle Faltungsebenen
+  \item Begründung: $k = 1$ berücksichtigt alle Knoten, die zum jeweiligen Faltungsknoten adjazent sind
+  \item für CNNs hat sich gezeigt, dass kleine Filtergrößen wie $3 \times 3$ keine negativen Auswirkungen haben
+  \item viele kleine Faltungsebenen ohne Pooling propagieren die Informationen weit entfernterer Knoten weiter \todo{VGG Paper, oder he et al, deep residual learning}
+  \item kann das Problem des Overfitting reduzieren für Graphen mit hohem Grad
+\end{itemize}
 
+Annahme: $\lambda_{\max} \approx 2$ \todo{ist das begründet, woher kommt diese Zahl}
+Begründung: Netzparameter werden die Veränderung der Skalierung von $\mathbf{\tilde L}$ annehmen/ausgleichen.
+Dann ist $\mathbf{\tilde L} = \mathbf{L} - \mathbf{I}$.
+
+Dann gilt für die Filterung eines Signals $\mathbf{x}$ über $g_{\mathbf{\theta}}$
+\begin{equation}
+  g_{\mathbf{\theta}} \star \mathbf{x} = \mathbf{U}g_{\mathbf{\theta}}\left(\mathbf{\Lambda}\right)\mathbf{U}^{\top}\mathbf{x} \approx g^{\prime}_{\mathbf{\theta^{\prime}}} \left(\mathbf{L}\right) \mathbf{x} = \sum_{i=0}^{1} \mathbf{\theta}^{\prime}_i T_i \left(\mathbf{L} - \mathbf{I}\right) \mathbf{x} = \mathbf{\theta}^{\prime}_0 \mathbf{x} + \mathbf{\theta}^{\prime}_1 \left(\mathbf{L} - \mathbf{I}\right) \mathbf{x}
+\end{equation}
+Wenn wir den normalisierten Laplacian benutzen, gegeben durch $\mathbf{L} = \mathbf{I} - \mathbf{D}^{-\frac{1}{2}} \mathbf{A} \mathbf{D}^{-\frac{1}{2}}$, dann lässt sich weiter vereinfachen mit
+\begin{equation}
+  g_{\mathbf{\theta}} \star \mathbf{x} \approx \mathbf{\theta}^{\prime}_0 \mathbf{x} - \mathbf{\theta}^{\prime}_1 \mathbf{D}^{-\frac{1}{2}} \mathbf{A} \mathbf{D}^{-\frac{1}{2}} \mathbf{x}
+\end{equation}
+
+Um die Gefahr des Overfittings und die Anzahl an Berechnungen weiter zu reduzieren, können die Anzahl der Parameter weiter reduziert werden.
+Mit $\mathbf{\theta} = \mathbf{\theta}^{\prime}_0 = - \mathbf{\theta}^{\prime}_1$ gilt dann
+\begin{equation}
+  g_{\mathbf{\theta}} \star \mathbf{x} \approx \mathbf{\theta} \left(\mathbf{I} + \mathbf{D}^{-\frac{1}{2}} \mathbf{A} \mathbf{D}^{-\frac{1}{2}}\right) \mathbf{x}
+\end{equation}
+
+$\mathbf{I} + \mathbf{D}^{-\frac{1}{2}} \mathbf{A} \mathbf{D}^{-\frac{1}{2}}$ hat nun Eigenwerte im Bereich $\left[0, 2\right]$\todo{warum?}.
+Wiederholte Anwendungen dieses Operators können dann zu numerischen Instabilitäten oder explodieren/verschwindenen Gradienten führen.\todo{warum}
+Um dies zu verhindern, wird folgende Renormalisierung vorgenommen:
+$\mathbf{I} + \mathbf{D}^{-\frac{1}{2}} \mathbf{A} \mathbf{D}^{-\frac{1}{2}} \to \mathbf{\tilde D}^{-\frac{1}{2}} \mathbf{\tilde A} \mathbf{\tilde D}^{-\frac{1}{2}}$ mit $\mathbf{\tilde A} = \mathbf{A} + \mathbf{I}$ und $\mathbf{\tilde D}$ ist nun die Gradmatrix der renormalisierten Adjazenzmatrix $\mathbf{\tilde A}$.
+\begin{equation}
+  g_{\mathbf{\theta}} \star \mathbf{x} \approx \mathbf{\theta} \left(\mathbf{\tilde D}^{-\frac{1}{2}} \mathbf{\tilde A} \mathbf{\tilde D}^{-\frac{1}{2}}\right) \mathbf{x}
+\end{equation}
 
 \begin{equation}
   H^{(l+1)} = f(H^{(l)}, A)

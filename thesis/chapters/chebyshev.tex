@@ -30,21 +30,42 @@ Dann ist $T_k\left( \text{diag}^{-1}\left(\mathbf{\tilde \Lambda}\right) \right)
 
 Hammon et al zeigen, dass $g_{\mathbf{\theta}}(\mathbf{\Lambda})$ beliebig genau mit Hilfe der  rekursiven Tschebyschow-Polynome mit Grad $k$ und einer festen Filtergröße $\mathbf{\theta}^{\prime} \in \mathbb{R}^k$ approximiert werden kann
 \begin{equation}
-  g_{\mathbf{\theta}}\left(\mathbf{\Lambda}\right) \approx g^{\prime}_{\mathbf{\theta}^{\prime}}\left(\mathbf{\Lambda}\right) = \text{diag}\left(\sum_{i = 0}^{k-1} \mathbf{\theta}^{\prime}_i \cdot T_i \left(\text{diag}^{-1}\left(\mathbf{\tilde \Lambda}\right)\right)\right)
+  g_{\mathbf{\theta}}\left(\mathbf{\Lambda}\right) \approx g^{\prime}_{\mathbf{\theta}^{\prime}}\left(\mathbf{\Lambda}\right) = \sum_{i = 0}^{k-1} \mathbf{\theta}^{\prime}_i \cdot T_i \left(\mathbf{\tilde \Lambda}\right)
 \end{equation}
 
 Beweisidee nachgucken
 
 Es zeigt sich, dass
 \begin{equation}
-  y = \mathbf{U} \cdot g^{\prime}_{\mathbf{\theta}^{\prime}}\left(\mathbf{\Lambda}\right) \cdot \mathbf{U}^{\top} \cdot \mathbf{x} = g^{\prime}_{\mathbf{\theta}^{\prime}}\left(\mathbf{L}\right) \cdot \mathbf{x}
+  \mathbf{U} \cdot g^{\prime}_{\mathbf{\theta}^{\prime}}\left(\mathbf{\Lambda}\right) \cdot \mathbf{U}^{\top} = g^{\prime}_{\mathbf{\theta}^{\prime}}\left(\mathbf{L}\right)
 \end{equation}
 
-wobei $g^{\prime}_{\mathbf{\theta}^{\prime}}\left(\mathbf{L}\right) = \sum_{i=0}^{k-1} \mathbf{\theta}_i T_i\left( \mathbf{\tilde L}\right)$ und $\mathbf{\tilde L} = \frac{2}{\lambda_{\max}}\mathbf{L} - \mathbf{I}$
+wobei $g^{\prime}_{\mathbf{\theta}^{\prime}}\left(\mathbf{L}\right) = \sum_{i=0}^{k-1} \mathbf{\theta}_i \cdot T_i\left(\mathbf{\tilde L}\right)$ mit $\mathbf{\tilde L} = \frac{2}{\lambda_{\max}}\mathbf{L} - \mathbf{I}$
 
-Frage: Ist $\mathbf{\tilde L}$ auch im Intervall $-1$ und $1$????
+Frage:
+Ist $\mathbf{\tilde L}$ auch im Intervall $-1$ und $1$?
+muss ja oder nciht?
 
 Beweisidee: $\mathbf{L}^k = {\left(\mathbf{U}\mathbf{\Lambda}\mathbf{U}^{\top}\right)}^k = \mathbf{U}\mathbf{\Lambda}^k\mathbf{U^{\top}}$
 
+Jetzt lässt sich $y = g^{\prime}_{\mathbf{\theta^{\prime}}}\left(\mathbf{L}\right) \cdot \mathbf{x} = \sum_{i=0}^{k-1} \mathbf{\theta}^{\prime}_i \cdot T_i \left(\mathbf{\tilde L}\right) \cdot \mathbf{x}$ sehr schnell berechnen:
 
-Spektrale Filter, die repräsentiert werden durch ein Polynom vom Grad 
+\begin{enumerate}
+  \item berechnne $\mathbf{\overline{x}}_i$ für alle $i \in \left\{ 0, 1, \ldots, k-1 \right\}$:
+  \begin{enumerate}
+    \item $\mathbf{\overline{x}}_0 = \mathbf{x}$
+    \item $\mathbf{\overline{x}}_1 = \mathbf{\tilde L} \mathbf{x}$
+    \item $\mathbf{\overline{x}}_i = 2\mathbf{\tilde L} \mathbf{\overline{x}}_{i-1} - \mathbf{\overline{x}}_{i-2}$
+  \end{enumerate}
+\item berechne $\mathbf{y} = \left[\mathbf{\overline{x}}_0, \mathbf{\overline{x}}_1, \ldots, \mathbf{\overline{x}}_{k-1} \right] \cdot \mathbf{\theta}^{\prime}$
+\end{enumerate}
+
+\subsubsection{Laufzeit}
+
+ \begin{itemize}
+   \item anstatt $\mathbf{L}^k$ zu berechnen mit Komplexität $\mathcal{O}\left(n^2\right)$ haben wir nur noch $k$ Multiplikationen mit der Matrix $\mathbf{\tilde L}$
+   \item da $\mathbf{\tilde L}$ für große Graphen sehr dünnbesetzt ist, d.h.\ $\left|\mathcal{E}\right| \ll n^2$, haben wir bei Verwendung von \emph{dünnbesetzten Matrizen} nur noch von $\mathcal{O}\left(k\left|\mathcal{E}\right|\right)$ \todo{ist das nicht eher $k^2$?}
+ \end{itemize}
+
+TODO:
+Spektrale Filter, die repräsentiert werden durch ein Polynom vom Grad $k$ sind \emph{$k$-lokalisiert}.
