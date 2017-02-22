@@ -1,14 +1,17 @@
 \section{Graph Convolutional Networks}
 
 \begin{itemize}
+  \item aus~\cite{GCN}
   \item Idee: setze $k = 2$ für alle Faltungsebenen
-  \item Begründung: $k < 2$ berücksichtigt nur alle Knoten, die zum jeweiligen Faltungsknoten adjazent sind
+  \item Begründung: Faltung über $i < k = 2$ berücksichtigt nur alle Knoten, die zum jeweiligen Faltungsknoten adjazent sind und den Knoten selber (Begründung weiter oben)
   \item für CNNs hat sich gezeigt, dass kleine Filtergrößen wie $3 \times 3$ keine negativen Auswirkungen haben
   \item viele kleine Faltungsebenen ohne Pooling propagieren die Informationen weit entfernterer Knoten weiter \todo{VGG Paper, oder he et al, deep residual learning}
   \item kann das Problem des Overfitting reduzieren für Graphen mit hohem Grad
 \end{itemize}
 
 Annahme: $\lambda_{\max} \approx 2$ \todo{ist das begründet, woher kommt diese Zahl}
+Es gilt $0 \leq \lambda_0 \leq \cdots \leq \lambda{n-1} \leq 2$~\cite{Chung} (aber nur für bitartite Graphen?)
+Wenn das gilt, dann wird $\lambda_{\max} := 2$ einfach auf die obere Schranke gesetzt
 Begründung: Netzparameter werden die Veränderung der Skalierung von $\mathbf{\tilde L}$ annehmen/ausgleichen.
 Dann ist $\mathbf{\tilde L} = \mathbf{L} - \mathbf{I}$.
 

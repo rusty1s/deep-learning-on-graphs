@@ -20,24 +20,15 @@
 
 \include{chapters/inhalt}
 
-\include{chapters/einleitung}
-
-\include{chapters/grundlagen}
-
-\include{chapters/graphen_auf_bildern}
-
-\include{chapters/spatial}
-\include{chapters/patchy}
-
-\include{chapters/spectral}
-\include{chapters/chebyshev}
-\include{chapters/gcn}
-\include{chapters/spectral_beispiel}
-\include{chapters/pooling}
+\include{chapters/einleitung/main}
+\include{chapters/grundlagen/main}
+\include{chapters/bildgraphen/main}
+\include{chapters/spatial/main}
+\include{chapters/spectral/main}
 
 % Anhang
 \appendix
-\include{chapters/anhang}
+\include{chapters/anhang/main}
 
 % Mathematische Notation
 \printglossary[title={Symbolverzeichnis}]
@@ -54,8 +45,8 @@
 \cleardoublepage{}
 
 % Literaturverzeichnis
-\bibliographystyle{gerplain}
 \bibliography{bibliography}
+\bibliographystyle{gerplain}
 \addcontentsline{toc}{chapter}{Literaturverzeichnis}
 \cleardoublepage{}
 

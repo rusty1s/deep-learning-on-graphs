@@ -1,0 +1,78 @@
+\section{Tschebyschow-Polynome}
+
+\begin{itemize}
+  \item bisheriger Ansatz skaliert nicht gut für große Graphen
+  \item schneller Algorithmus zur Approximation des Filters notwendig $\Rightarrow$ Polynome niedriger Ordnung
+  \item Größe des Filters soll unahängig zu den Daten sein
+  \item approximiere $g(\mathcal{L})$ durch Polynom, dass rekursiv durch $\mathcal{L}$ berechnet werden kann
+\end{itemize}
+
+Diese Polynome formen eine Orthogonalbasis
+\todo{stable recurrence property}
+Polynome formen eine Orthogonalbasis für $L^2 \left([-1, 1], \frac{d_x}{\sqrt{1-x^2}}\right)$, auch \emph{Hilbertraum} genannt
+
+Spektrale Filter, die repräsentiert werden durch ein Polynom vom Grad $k$ sind \emph{$k$-lokalisiert}.
+
+\todo{die Grundidee der Polynomialsierung muss hierhin + übergang zu Chebyshev}
+
+\subsection{Tschebyschow-Polynome}
+
+\begin{itemize}
+  \item bisher Filterung eines Signals $\mathbf{x}$ zu $\mathbf{y} = \mathbf{U}g_{\mathbf{\theta}}\left(\mathbf{\Lambda}\right)\mathbf{U}^{\top}\mathbf{x}$
+  \item $g_{\mathbf{\theta}}\left(\mathbf{\Lambda}\right)$ kann über ein Polynom $k$ten Grades $g^{\prime}_{\mathbf{\theta}^{\prime}}\left(\mathbf{\Lambda}\right)$ approximiert werden, $\mathbf{\theta}^{\prime} \in \mathbb{R}^k$
+  \item \underline{Aber:} Filterung ist sehr teuer aufgrund der Multiplikation der dichten Matrix $\mathbf{U}$, d.h.\ $\mathcal{O}\left(n^2\right)$
+  \item \underline{Lösung:} Parametrisiere $g_{\mathbf{\theta}}\left(\mathbf{L}\right)$ als eine polynomielle Funktion, die rekursiv aus $\mathbf{L}$ berechnet werden kann.
+  \item Warum sollte das effizienter sein? $\mathbf{L}$ ist nicht dicht besetzt, und hat nur $\left|\mathcal{E}\right| + n \ll n^2$ Einträge mit $n \leq \left|\mathcal{E}\right|$
+\end{itemize}
+
+\emph{Tschebyschow-Polynome} (engl. \emph{Chebyshev}) bezeichnen eine Menge von Polynomen $T_n\left(x\right) \colon \gls{R} \to \gls{R}$ mit dem rekursiven Zusammenhang
+\begin{equation}
+  T_n\left(x\right) = 2x T_{n-1}\left(x\right) - T_{n-2}\left(x\right)
+\end{equation}
+mit $T_0\left(x\right) = 1$ und $T_1\left(x\right) = x$.
+Ein Tschebyschow-Polynom $T_n$ ist ein Polynom $n$-ten Grads.
+
+Für $x \in \left[-1, 1\right]$ gilt $T_k\left(x\right) \in \left[-1, 1\right]$
+\todo{irgendwas mit Hilbertraum}
+
+Rescale $\mathbf{\Lambda}$ zu $\mathbf{\tilde \Lambda} = \frac{2}{\lambda_{\max}} \mathbf{\Lambda} - \mathbf{I} \in {\left[-1, 1\right]}^{n \times n}$.
+$\lambda_{\max}$ ist der Wert des größten Eigenvektors von $\mathbf{L}$.
+
+Dann ist $T_k\left(\mathbf{\tilde \Lambda}\right) \in {\left[-1, 1\right]}^{n \times n}$
+
+Hammon et al zeigen, dass $g_{\mathbf{\theta}}(\mathbf{\Lambda})$ beliebig genau mit Hilfe der  rekursiven Tschebyschow-Polynome mit Grad $k$ und einer festen Filtergröße $\mathbf{\theta}^{\prime} \in \mathbb{R}^k$ approximiert werden kann
+\begin{equation}
+  g_{\mathbf{\theta}}\left(\mathbf{\Lambda}\right) \approx g^{\prime}_{\mathbf{\theta}^{\prime}}\left(\mathbf{\Lambda}\right) = \sum_{i = 0}^{k-1} \mathbf{\theta}^{\prime}_i T_i \left(\mathbf{\tilde \Lambda}\right)
+\end{equation}
+
+\todo{Beweisidee nachgucken}
+
+Es zeigt sich, dass
+\begin{equation}
+  \mathbf{U} g^{\prime}_{\mathbf{\theta}^{\prime}}\left(\mathbf{\Lambda}\right) \mathbf{U}^{\top} = g^{\prime}_{\mathbf{\theta}^{\prime}}\left(\mathbf{L}\right)
+\end{equation}
+
+wobei $g^{\prime}_{\mathbf{\theta}^{\prime}}\left(\mathbf{L}\right) = \sum_{i=0}^{k-1} \mathbf{\theta}_i T_i\left(\mathbf{\tilde L}\right)$ mit $\mathbf{\tilde L} = \frac{2}{\lambda_{\max}}\mathbf{L} - \mathbf{I}$
+
+Beweisidee: $\mathbf{L}^k = {\left(\mathbf{U}\mathbf{\Lambda}\mathbf{U}^{\top}\right)}^k = \mathbf{U}\mathbf{\Lambda}^k\mathbf{U^{\top}}$~\cite{GCN} und $\mathbf{U}\mathbf{U}^{\top} = \mathbf{I}$ (Quelle)
+\todo{nachrechnen}
+
+Jetzt lässt sich $y = g^{\prime}_{\mathbf{\theta^{\prime}}}\left(\mathbf{L}\right) \mathbf{x} = \sum_{i=0}^{k-1} \mathbf{\theta}^{\prime}_i T_i \left(\mathbf{\tilde L}\right) \mathbf{x}$ sehr schnell berechnen:
+
+\begin{enumerate}
+  \item berechnne $\mathbf{\overline{x}}_i$ für alle $i \in \left\{ 0, 1, \ldots, k-1 \right\}$ mit Hilfe von Rekursion:
+  \begin{enumerate}
+    \item $\mathbf{\overline{x}}_0 = \mathbf{x}$
+    \item $\mathbf{\overline{x}}_1 = \mathbf{\tilde L} \mathbf{x}$
+    \item $\mathbf{\overline{x}}_i = 2\mathbf{\tilde L} \mathbf{\overline{x}}_{i-1} - \mathbf{\overline{x}}_{i-2}$
+  \end{enumerate}
+\item berechne $\mathbf{y} = \left[\mathbf{\overline{x}}_0, \mathbf{\overline{x}}_1, \ldots, \mathbf{\overline{x}}_{k-1} \right] \mathbf{\theta}^{\prime}$
+\end{enumerate}
+
+\subsubsection{Laufzeit}
+
+ \begin{itemize}
+   \item anstatt $\mathbf{L}^k$ zu berechnen mit Komplexität $\mathcal{O}\left(n^2\right)$ haben wir nur noch $k$ Multiplikationen mit der Matrix $\mathbf{\tilde L}$
+   \item da $\mathbf{\tilde L}$ für große Graphen sehr dünnbesetzt ist, d.h.\ $\left|\mathcal{E}\right| \ll n^2$, haben wir bei Verwendung von \emph{dünnbesetzten Matrizen} nur noch eine Laufzeit von $\mathcal{O}\left(k\left|\mathcal{E}\right|\right)$~\cite{Hammond, Defferrard}
+   \item für den zweiten Schritt gilt $\mathcal{O}\left(kn\right)$, mit $n \leq \left|\mathcal{E}\right|$ bedingt damit nur Schritt Eins die Laufzeit
+ \end{itemize}
