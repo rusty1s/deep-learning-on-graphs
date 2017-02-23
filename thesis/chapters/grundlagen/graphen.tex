@@ -1,66 +1,68 @@
 \section{Graphentheorie}
 
-Graph Tupel $G = \left(\mathcal{V}, \mathcal{E}\right)$\\
-$\mathcal{V} = {\left\{ v_i \right\}}^n_{i=1}$\\
-$\left| V \right| = n < \infty$\\
-Merkmalsfunktion $f_G \colon \mathcal{V} \to \mathbb{R}^m$\\
-wenn nicht explizit aufgeführt, dann bla bla wir $f_G \colon \mathcal{V} \to \mathbb{R}$\\
+Graph Tupel $\gls{G} = \left(\gls{V}, \gls{E}\right)$\\
+$\gls{V} = {\left\{ v_i \right\}}^n_{i=1}$\\
+$\left| \gls{V} \right| = n < \infty$\\
+Merkmalsfunktion $f_G \colon \gls{V} \to \gls{R}^m$\\
+wenn nicht explizit aufgeführt, dann bla bla wir $f_{\gls{G}} \colon \gls{V} \to \gls{R}$\\
 Umschreibung in Tensor/Dense Matrix\\
-$\mathcal{E} \subseteq \mathcal{V} \times \mathcal{V}$\\
-Falls $\left( u, v \right) \in \mathcal{E}$, dann sind $u$ und $v$ adjazent und wir schreiben dann $u \sim v$\\
-Gewichtsfunktion $w \colon \mathcal{V} \times \mathcal{V} \to \gls{R+}$\\
-ungewichtet: $w \colon \mathcal{V} \times \mathcal{V} \to \left\{ 0, 1 \right\}$\\
-Falls $\left( u, v \right) \notin \mathcal{E}$, dann $w\left(u, v\right) = 0$\\
-Im ungewichteten Fall ist Gewichtsfunktion implizit durch $\mathcal{E}$ gegeben\\
+$\gls{E} \subseteq \gls{V} \times \gls{V}$\\
+Falls $\left( u, v \right) \in \gls{E}$, dann sind $u$ und $v$ adjazent und wir schreiben $u \gls{adj} v$\\
+Gewichtsfunktion $\gls{w} \colon \gls{V} \times \gls{V} \to \gls{R+}$\\
+ungewichtet: $\gls{w} \colon \gls{V} \times \gls{V} \to \left\{ 0, 1 \right\}$\\
+Falls $\left( u, v \right) \notin \gls{E}$, dann $\gls{w}\left(u, v\right) = 0$\\
+Im ungewichteten Fall ist Gewichtsfunktion implizit durch $\gls{E}$ gegeben\\
 
 ungerichtet:
-$u \sim v$ genau dann, wenn $v \sim u$ und
+$u \gls{adj} v$ genau dann, wenn $v \gls{adj} u$ und
 \begin{equation}
-  w\left(u, v\right) = w\left(v, u\right)
+  \gls{w}\left(u, v\right) = \gls{w}\left(v, u\right)
 \end{equation}
 Fordern wir für den Verlauf dieser Arbeit (also keine gerichteten Graphen)
 
-Als \emph{Schleife} wird eine Kante bezeichnet, die einen Knoten mit sich selbst verbindet, d.h.\ $w\left(v, v\right) > 0$.
+Als \emph{Schleife} wird eine Kante bezeichnet, die einen Knoten mit sich selbst verbindet, d.h.\ $\gls{w}\left(v, v\right) > 0$.
 Ein Graph ohne Schleifen wird \emph{schleifenloser Graph} genannt.
 Für den weiteren Verlauf dieser Arbeit fordern wir schleifenlose Graphen.\\
 
-Adjazenzmatrix $\mathbf{A} \in \gls{R+}^{n \times n}$ eines Graphen $G$ mit $\mathbf{A}_{ij} = w(v_i, v_j)$\\
-Wir sagen ein Knoten $v_i$ hat Position $i$ in $\mathbf{A}$.
+Adjazenzmatrix $\gls{A} \in \gls{R+}^{n \times n}$ eines Graphen $\gls{G}$ mit $\gls{A}_{ij} = \gls{w}\left(v_i, v_j\right)$\\
+Wir sagen ein Knoten $v_i$ hat Position $i$ in $\gls{A}$.
 Umschreibung in Sparse Matrix/Tensor\\
 
-$G$ ist eindeutig definiert durch $\mathbf{A}$ und $f_G$.
+\gls{G} ist eindeutig definiert durch \gls{A} und $f_G$.
 
 Der \emph{Grad} eines Knotens $v$ ist die Anzahl der Knoten, die adjazent zu ihm sind, d.h.
 \begin{equation}
-  \deg\left(v\right) = \sum_{v \sim u} 1
+  \gls{degree}\left(v\right) = \sum_{v \gls{adj} u} 1
 \end{equation}
 Im Falle von gewichteten Graphen wird der Grad eines Knotens von $v$ auch oft über
 \begin{equation}
-  d\left(v_i\right) = \sum_{j} \mathbf{A}_{ij}
+  \gls{d}\left(v_i\right) = \sum^n_{j=1} \gls{A}_{ij}
 \end{equation}
 definiert.
 Die unterschiedliche Notation macht deutlich, wann wir welchen Grad eines Knotens meinen.
 
-Die Gradmatrix $\mathbf{D} \in \gls{R+}^{n \times n}$ eines Graphen $G$ ist definiert als Diagonalmatrix
+Die Gradmatrix $\gls{D} \in \gls{R+}^{n \times n}$ eines Graphen \gls{G} ist definiert als Diagonalmatrix
 \begin{equation}
-  \mathbf{D} = \text{diag}\left( {\left[ d\left(v_1\right), \ldots, d\left(v_n\right) \right]}^T \right)
+  \gls{D} = \gls{diag}\left( {\left[ \gls{d}\left(v_1\right), \ldots, \gls{d}\left(v_n\right) \right]}^{\top} \right)
 \end{equation}
 Umschreibung in Sparse Matrix/Tensor
 
-Ein Knoten $v \in \mathcal{V}$ eines Graphen $G$ heißt genau dann \emph{isoliert}, wenn $\deg\left(v\right) = 0$.\\
-Ein Graph ist \emph{verbunden}, falls er keinen isolierten Knoten besitzt.
-Für den weiteren Verlauf dieser Arbeit fordern wir, dass $G$ verbunden ist.\
+% Ein Knoten $v \in \gls{V}$ eines Graphen \gls{G} heißt genau dann \emph{isoliert}, wenn $\gls{degree}\left(v\right) = 0$.\\
 
-Ein Graph heißt \emph{$k$-regulär} falls $\deg\left(v_i\right) = k$ für alle $1, \ldots, n$.
+Ein Graph heißt \emph{$k$-regulär} falls $\gls{degree}\left(v_i\right) = k$ für alle $1, \ldots, n$.
 
-Ein \emph{ebener Graph} ist eine konkrete Darstellung eines Graphen auf der zweidimensionalen Ebene $\mathbb{R}^2$.
-Jedem Knoten $v$ ist eine Positionsfunktion $p \colon \mathcal{V} \to \mathbb{R}^2$ zugeordnet, die die Position eines Knotens auf der Ebene eindeutig definiert.
+Ein \emph{ebener Graph} ist eine konkrete Darstellung eines Graphen auf der zweidimensionalen Ebene $\gls{R}^2$.
+Jedem Knoten $v$ ist eine Positionsfunktion $\gls{p} \colon \gls{V} \to \gls{R}^2$ zugeordnet, die die Position eines Knotens auf der Ebene eindeutig definiert.
 
-Ein \emph{Weg} ist eine Folge von Knoten $\left( v_{x\left(1\right)}, v_{x\left(2\right)}, \ldots, v_{x\left(s\right)} \right)$, sodass $v_{x\left(i\right)} \sim v_{x\left(i+1\right)}$ für alle $1 \leq i < s$ mit Länge $s$, wobei $x \colon \left\{ 1, \ldots, n \right\} \to \left\{ 1, \ldots, n \right\}$ eine Permutation auf der Anzahl der Knoten.
+Ein \emph{Weg} ist eine Folge von Knoten $\left( v_{x\left(1\right)}, v_{x\left(2\right)}, \ldots, v_{x\left(k\right)} \right)$, sodass $v_{x\left(i\right)} \gls{adj} v_{x\left(i+1\right)}$ für alle $1 \leq i < k$ mit Länge $k$, wobei $x \colon \left\{ 1, \ldots, n \right\} \to \left\{ 1, \ldots, n \right\}$ eine Permutation auf der Anzahl der Knoten.
+\todo{das stimmt noch nicht ganz, gehen ja auch mehrere Knoten}
 
 Ein \emph{Pfad} ist ein Weg, sodass $v_{x\left(i\right)} \neq v_{x\left(i+1\right)}$.
 Im Kontext von schleifenlosen Graphen sind die Begriffe Weg und Pfad äquivalent.
-Wir schreiben $s\left(u, v\right)$ einer Funktion $s \colon \mathcal{V} \times \mathcal{V} \to \gls{N}$ für die Länge des kürzesten Pfades von $u$ nach $v$.
+Wir schreiben $\gls{s}\left(u, v\right)$ einer Funktion $\gls{s} \colon \gls{V} \times \gls{V} \to \gls{N}$ für die Länge des kürzesten Pfades von $u$ nach $v$.
+
+Ein Graph ist \emph{verbunden}, falls es von jedem Knoten $u$ einen Weg zu jedem Knoten $v$ gibt.
+Für den weiteren Verlauf dieser Arbeit fordern wir, dass $G$ verbunden ist.\
 
 In Graphen mit \emph{Mehrfachkanten}, auch \emph{Multigraphen} genannt, können zwei Knoten durch mehrere Kanten verbunden sein.
-Multigraphen lassen sich als Tensor über einen Vektor von Adjazenzmatrizen $\left[\mathbf{A}_1, \ldots, \mathbf{A}_m\right] \in \gls{R+}^{m \times n \times n}$ schreiben.
+Multigraphen lassen sich als Tensor über einen Vektor von Adjazenzmatrizen $\left[\gls{A}_1, \ldots, \gls{A}_m\right] \in \gls{R+}^{m \times n \times n}$ schreiben.
