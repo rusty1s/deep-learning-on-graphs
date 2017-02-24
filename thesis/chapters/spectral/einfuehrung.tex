@@ -3,83 +3,62 @@
 \begin{itemize}
   \item \emph{Spektrum} eines Graphen zur Untersuchung seiner Eigenschaften
   \item \emph{algebraische} oder \emph{spektrale Graphentheorie} genannt
-  \item als Spektrum eines Graphen bezeichnet man die (nach Größe geordnete) Folge der Eigenwerte $\lambda$ seiner Adjazenzmatrix, d.h. $A \cdot x = \lambda x$ ($x$ Eigenvektoren)
 \end{itemize}
 
 Algebraische Methoden sind sehr effektiv bei Graphen, die regulär und symmetrisch sind.
-Als \emph{Schleife} wird in der Graphentheorie eine Kante bezeichnet, die einen Knoten mit sich selbst verbindet.
-Ein Graph ohne Schleifen wird \emph{schleifenloser} Graph genannt.
 
-Sei $d_v$ der Grad eines Knotens $v$ eines Graphen $G$.
-Der \emph{Laplacian} $\mathcal{L}$ eines Graphen ohne Schleifen und Mehrfachkanten ist definiert als
+\subsection{Eigenwerte, Eigenvektoren und Eigenfunktionen}
 
-\begin{equation}
-  \mathcal{L}(u, v) = \begin{cases}
-    d_v, & \text{wenn }u = v\text{,}\\
-    -1, & \text{wenn }u\text\ {und }v\ \text{adjazent,}\\
-    0, & \text{sonst.}
-  \end{cases}
-\end{equation}
+$\ma{M}\ve{v} = \lambda\ve{v}$\\
+Zu einem Eigenwert $\lambda$ gibt es unendlich viele (skalierte) Eigenvektoren $\ve{v}$
+Eigenvektor $\ve{v}$ ist dann eindeutig definiert mit $\left\|\ve{c}\right\|_2 = 1$
+Wenn $\ma{M}$ symmetrisch ist und $\ve{v}_1$ und $\ve{v}_2$ zwei unterschiedliche Eigenvektoren, dann sind $\ve{v}_1 \gls{ortho} \ve{v}_2$
+Jede symmetrische Matrix hat $n$ Eigenwerte mit $\lambda_0 \leq \cdots \lambda_{n-1}$
+
+
+\subsection{Der Laplacian und seine Eigenwerte}
 
 Der Graph Laplacian ist eine Generalisierung des Laplacian auf einem Gitter.
 
-Damit ist $\mathcal{L} = D - A$.
-$\mathcal{L}$ kann normalisiert werden über $\mathcal{L}_{\text{norm}} = T^{-\frac{1}{2}}LT^{-\frac{1}{2}}$, wobei $T$ die Diagonalmatrix beschreibt mit $T(v, v) = d_v$.
-Für einen \emph{isolierten} Knoten $v$, d.h.\ $d_v = 0$, gilt die Konvention $T^{-1}(v, v) = 0$.
-Ebenso lässt sich $\mathcal{L}_{\text{norm}}$ definieren als
+Der Laplacian \gls{L} eines Graphen \gls{G} ist definiert als $\gls{L} = \gls{D} - \gls{A}$~\cite{Chung}.
+Der normalisierte Laplacian \gls{Lnorm} ist definiert als $\gls{Lnorm} = \gls{D}^{-\frac{1}{2}} \gls{L} \gls{D}^{-\frac{1}{2}}$~\cite{Chung}.
+Es gilt die Konvention, dass ${\left(\gls{D}^{-\frac{1}{2}}\right)}_{ii} = 0$ falls $\gls{D}_{ii} = 0$
+Für verbundene Graphen gilt weiterhin $\gls{Lnorm} = \gls{I} - \gls{D}^{-\frac{1}{2}} \gls{A} \gls{D}^{-\frac{1}{2}}$~\cite{Chung}.
+Wenn \gls{G} $k$-regulär ist, dann gilt $\gls{Lnorm} = \gls{I} - \frac{1}{k} \gls{A}$.~\cite{Chung}\todo{das gilt natürlich nur im ungewichteten Fall, also weg?}
+\todo{was gilt denn alles im gewichteten?}
+
+\gls{L} und \gls{Lnorm} sind keine ähnlichen Matrizen.
+Insbesondere sind ihre Eigenvektoren unterschiedlich.
+Die Nutzung des \gls{L} oder \gls{Lnorm} ist damit abhängig von dem Problem, welches man betrachtet.~\cite{Hammond}.
+
+Wir schreiben \gls{Lboth} wenn die Wahl des Laplacian (unnormalisiert, normalisiert) irrelevant ist.
+
+Jede Reihen- und Spaltensumme von $\gls{Lboth}$ ist $0$, d.h.\ $\sum_i \gls{Lboth}_{ij} = 0$ und $\sum_i \gls{Lboth}_{ji} = 0$ für alle $i \in \left\{1, \ldots, n\right\}$.
+\todo{stimmt das für \gls{Lnorm}?}
+$\gls{Lboth} \in \gls{R}^{n \times n}$ hat genau $n$ Eigenwerte ${\left\{\lambda_i\right\}}_{i = 0}^{n-1}$.
+\gls{Lboth} ist eine symmetrische reelle Matrix, d.h.\ insbesondere liegen ihre Eigenwerte $\lambda_i$ in $\gls{R+}$.\\
+\todo{positive semidefinitheit}
+\todo{Lambda Ordering}
+Anzahl der Eigenvektoren gleich Null ist die Anzahl an Komponenten, die ein Graph besitzt.
+$0 = \lambda_0 < \lambda_1 \leq \lambda_2 \leq \cdots \leq \lambda_{n-1}$ wenn Graph verbunden.\todo{quelle}\\
+$\lambda_0 = 0$, da $\ve{u}_0 = {\left[1, \ldots, 1\right]}^{\top}$ Eigenvektor von \gls{Lboth}\todo{quelle}\\
+$\gls{Lambda} = \gls{diag}\left(\left[\lambda_0, \ldots, \lambda_{n-1}\right]\right)$\\
+Für einen Graphen \gls{G} definieren wir $\lambda_{\gls{G}} := \lambda_1$ und $\lambda_{\max} := \lambda_{n-1}$
+\todo{lambda upper bound}
+\todo{$\gls{L}^k$}
+
+Für \gls{Lnorm} gilt $\lambda_{\max} \leq 2$\todo{quelle}
+
+Eine Verschrumpfung eines Graphen \gls{G} kann beschrieben werden über zwei verschiedene Knoten $u$ und $v$ zu einem neuen Knoten $v^*$ mit
+\begin{align}
+  \gls{w}\left(x,v^*\right) &= \gls{w}\left(x, u\right) + \gls{w}\left(x, v\right)\\
+  \gls{w}\left(v^*, v^*\right) &= \gls{w}\left(u, u\right) + \gls{w}\left(v, v\right) + 2\gls{w}\left(u,v\right)
+\end{align}
+
+Für einen Graphen \gls{G}, gilt für einen Graphen $H$ der aus \gls{G} verkleinert wurde
 
 \begin{equation}
-  \mathcal{L}_{\text{norm}}(u, v) = \begin{cases}
-    1, & \text{wenn }u = v\text{und }d_v \neq 0\text{,}\\
-    -\frac{1}{\sqrt{d_u d_v}}, & \text{wenn }u\text\ {und }v\ \text{adjazent,}\\
-    0, & \text{sonst.}
-  \end{cases}
-\end{equation}
-
-Der normalisierte Laplacian ist immer noch symmtrisch!
-
-Wenn $G$ $k$-regulär ist, d.h.\ $T = \text{diag}(k)$, dann gilt $\mathcal{L}_{\text{norm}} = I - \frac{1}{k}A$.
-
-Da $\mathcal{L}$ symmetrisch ist, sind seine Eigenwerte alle $\geq 0$ (d.h. $\mathcal{L}$ ist positiv-semidefinit).
-Jede Reihen- und Spaltensumme von $\mathcal{L}$ ist $0$.
-
-Einem gewichtetem ungerichterem Graph $G$ kann eine Gewichtsfunktion $w: V \times V \rightarrow \mathbb{R}$ zugeschrieben werden, sodass $w(u, v) = w(v, u)$ und $w(u, v) \geq 0$.
-Falls $\lbrace u, v \rbrace \notin \mathcal{E}$, dann $w(u, v) = 0$.
-Damit sind ungewichtete Graphen nur ein Spezialfall bei dem alle Gewichte $0$ oder $1$ sind.
-Der Grad $d_v$ eines Knoten $v$ ist dann definiert als
-
-\begin{equation}
-  d_v = \sum_u w(u, v).
-\end{equation}
-
-Dann gilt
-
-\begin{equation}
-  \mathcal{L} = \begin{cases}
-    1 - \frac{w(v, v)}{d_v}, & \text{wenn }u = v\text{und }d_v \neq 0\text{,}\\
-    -\frac{w(u,v)}{\sqrt{d_u d_v}}, & \text{wenn }u\text\ {und }v\ \text{adjazent,}\\
-    0, & \text{sonst.}
-  \end{cases}
-\end{equation}
-
-Bemerke, dass hier Schleifen nicht explizit ausgeschlossen werden!
-
-Eine Verschrumpfung eines Graphen $G$ kann beschrieben werden über zwei verschiedene Knoten $u$ und $v$ zu einem neuen Knoten $v^*$ mit
-
-\begin{equation}
-  w(x,v^*) = w(x, u) + w(x, v)
-\end{equation}
-
-und
-
-\begin{equation}
-  w(v^*, v^*) = w(u, u) + w(v, v) + 2w(u,v)
-\end{equation}
-
-Mit $\lambda_G := \lambda_1$ für einen Graphen $G$, gilt für einen Graphen $H$ der aus $G$ verkleinert wurde
-
-\begin{equation}
-  \lambda_G \leq \lambda_H
+  \lambda_{\gls{G}} \leq \lambda_H
 \end{equation}
 
 \section{Spectral Graph Domain}

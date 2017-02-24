@@ -3,7 +3,7 @@
 Graph Tupel $\gls{G} = \left(\gls{V}, \gls{E}\right)$\\
 $\gls{V} = {\left\{ v_i \right\}}^n_{i=1}$\\
 $\left| \gls{V} \right| = n < \infty$\\
-Merkmalsfunktion $f_G \colon \gls{V} \to \gls{R}^m$\\
+Merkmalsfunktion $f_{\gls{G}} \colon \gls{V} \to \gls{R}^m$\\
 wenn nicht explizit aufgeführt, dann bla bla wir $f_{\gls{G}} \colon \gls{V} \to \gls{R}$\\
 Umschreibung in Tensor/Dense Matrix\\
 $\gls{E} \subseteq \gls{V} \times \gls{V}$\\
@@ -28,7 +28,7 @@ Adjazenzmatrix $\gls{A} \in \gls{R+}^{n \times n}$ eines Graphen $\gls{G}$ mit $
 Wir sagen ein Knoten $v_i$ hat Position $i$ in $\gls{A}$.
 Umschreibung in Sparse Matrix/Tensor\\
 
-\gls{G} ist eindeutig definiert durch \gls{A} und $f_G$.
+\gls{G} ist eindeutig definiert durch \gls{A} und $f_{\gls{G}}$.
 
 Der \emph{Grad} eines Knotens $v$ ist die Anzahl der Knoten, die adjazent zu ihm sind, d.h.
 \begin{equation}
@@ -47,8 +47,6 @@ Die Gradmatrix $\gls{D} \in \gls{R+}^{n \times n}$ eines Graphen \gls{G} ist def
 \end{equation}
 Umschreibung in Sparse Matrix/Tensor
 
-% Ein Knoten $v \in \gls{V}$ eines Graphen \gls{G} heißt genau dann \emph{isoliert}, wenn $\gls{degree}\left(v\right) = 0$.\\
-
 Ein Graph heißt \emph{$k$-regulär} falls $\gls{degree}\left(v_i\right) = k$ für alle $1, \ldots, n$.
 
 Ein \emph{ebener Graph} ist eine konkrete Darstellung eines Graphen auf der zweidimensionalen Ebene $\gls{R}^2$.
@@ -57,12 +55,15 @@ Jedem Knoten $v$ ist eine Positionsfunktion $\gls{p} \colon \gls{V} \to \gls{R}^
 Ein \emph{Weg} ist eine Folge von Knoten $\left( v_{x\left(1\right)}, v_{x\left(2\right)}, \ldots, v_{x\left(k\right)} \right)$, sodass $v_{x\left(i\right)} \gls{adj} v_{x\left(i+1\right)}$ für alle $1 \leq i < k$ mit Länge $k$, wobei $x \colon \left\{ 1, \ldots, n \right\} \to \left\{ 1, \ldots, n \right\}$ eine Permutation auf der Anzahl der Knoten.
 \todo{das stimmt noch nicht ganz, gehen ja auch mehrere Knoten}
 
+\todo{was sind graph komponenten, definieren}
+Ein Graph ist \emph{verbunden}, falls er nur eine Komponente hat.
+Ein Graph ist \emph{verbunden}, falls es von jedem Knoten $u$ einen Weg zu jedem Knoten $v$ gibt.
+Für den weiteren Verlauf dieser Arbeit fordern wir, dass \gls{G} verbunden ist.\
+
 Ein \emph{Pfad} ist ein Weg, sodass $v_{x\left(i\right)} \neq v_{x\left(i+1\right)}$.
 Im Kontext von schleifenlosen Graphen sind die Begriffe Weg und Pfad äquivalent.
 Wir schreiben $\gls{s}\left(u, v\right)$ einer Funktion $\gls{s} \colon \gls{V} \times \gls{V} \to \gls{N}$ für die Länge des kürzesten Pfades von $u$ nach $v$.
 
-Ein Graph ist \emph{verbunden}, falls es von jedem Knoten $u$ einen Weg zu jedem Knoten $v$ gibt.
-Für den weiteren Verlauf dieser Arbeit fordern wir, dass $G$ verbunden ist.\
-
 In Graphen mit \emph{Mehrfachkanten}, auch \emph{Multigraphen} genannt, können zwei Knoten durch mehrere Kanten verbunden sein.
 Multigraphen lassen sich als Tensor über einen Vektor von Adjazenzmatrizen $\left[\gls{A}_1, \ldots, \gls{A}_m\right] \in \gls{R+}^{m \times n \times n}$ schreiben.
+Graphen mit Mehrfachkanten können ebenso als eine Menge von Graphen mit gleicher Knotenmenge betrachtet werden.
