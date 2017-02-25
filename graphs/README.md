@@ -15,6 +15,9 @@
   2015](http://www.cs.yale.edu/homes/spielman/561/)
 * [An Introduction to Sepctral Graph
   Theory](http://math.uchicago.edu/~may/REU2012/REUPapers/JiangJ.pdf)
+* [What's the intuition behind a Laplacian
+  matrix](https://www.quora.com/Graph-Theory-Whats-the-intuition-behind-a-Laplacian-matrix)
+* [The Laplacian](http://www.cs.yale.edu/homes/spielman/561/2009/lect02-09.pdf)
 
 ## Paper
 
