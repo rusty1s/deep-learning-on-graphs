@@ -18,6 +18,10 @@
 * [What's the intuition behind a Laplacian
   matrix](https://www.quora.com/Graph-Theory-Whats-the-intuition-behind-a-Laplacian-matrix)
 * [The Laplacian](http://www.cs.yale.edu/homes/spielman/561/2009/lect02-09.pdf)
+* [Spectral graph theory: Three common 
+  spectra](https://pdfs.semanticscholar.org/c1f1/c063b8d2b2678d6ba961f2f4c236923103d4.pdf)
+* [Spectral Graph Theory by Daniel 
+  Spielman](https://pdfs.semanticscholar.org/3265/e606639c89e64e5cac5e32dd3e9081b387be.pdf)
 
 ## Paper
 
