@@ -9,45 +9,116 @@ Algebraische Methoden sind sehr effektiv bei Graphen, die regulär und symmetris
 
 \subsection{Eigenwerte, Eigenvektoren und Eigenfunktionen}
 
-$\ma{M}\ve{v} = \lambda\ve{v}$\\
-Zu einem Eigenwert $\lambda$ gibt es unendlich viele (skalierte) Eigenvektoren $\ve{v}$
-Eigenvektor $\ve{v}$ ist dann eindeutig definiert mit $\left\|\ve{c}\right\|_2 = 1$
-Wenn $\ma{M}$ symmetrisch ist und $\ve{v}_1$ und $\ve{v}_2$ zwei unterschiedliche Eigenvektoren, dann sind $\ve{v}_1 \gls{ortho} \ve{v}_2$
-Jede symmetrische Matrix hat $n$ Eigenwerte mit $\lambda_0 \leq \cdots \lambda_{n-1}$
+$\ma{M}\gls{eiv} = \gls{lambda}\gls{eiv}$\\
+Zu einem Eigenwert $\gls{lambda}$ gibt es unendlich viele (skalierte) Eigenvektoren \gls{eiv}.
+Wir definieren einen Eigenvektor \gls{eiv} dann eindeutig über $\left\|\gls{eiv}\right\|_2 = 1$.
+Wenn \ma{M} symmetrisch ist und $\gls{eiv}_1$ und $\gls{eiv}_2$ zwei unterschiedliche Eigenvektoren, dann gilt $\gls{eiv}_1 \gls{ortho} \gls{eiv}_2$.
+Jede symmetrische Matrix $\in \gls{R}^{n \times n}$ hat genau $n$ Eigenwerte mit $\gls{lambda}_1 \leq \cdots \leq \gls{lambda}_n$
 
+Wir definieren $\gls{Lambda} = \gls{diag}\left(\left[\gls{lambda}_1, \ldots, \gls{lambda}_n\right]\right)$.
+Wir definieren die orthogonale Matrix $\gls{Eiv} = \left[\gls{eiv}_1, \ldots, \gls{eiv}_n\right]$.
+Dann gilt $\ma{M}\gls{Eiv} = \gls{Eiv}\gls{Lambda}$.
+Daraus folgt sofort
+\begin{equation}
+  \ma{M} = \ma{M}\gls{Eiv}\gls{Eiv}^{\top} = \gls{Eiv}\gls{Lambda}\gls{Eiv}^{\top}
+\end{equation}
+
+mit $\gls{Eiv}\gls{Eiv}^{\top} = \gls{I}$.
+
+\todo{Eigenfunktionen, brauch ich überhaupt?}
 
 \subsection{Der Laplacian und seine Eigenwerte}
 
-Der Graph Laplacian ist eine Generalisierung des Laplacian auf einem Gitter.
+\begin{itemize}
+  \item diskrete Analogie des $\nabla^2$ Operators
+  \item man nimmt eine Funktion und approximiert sie mit Hilfe eines Graphen, so dass Knoten, die dichter beieinander liegen eine größere zweite Ableitung besitzen.
+\end{itemize}
 
-Der Laplacian \gls{L} eines Graphen \gls{G} ist definiert als $\gls{L} = \gls{D} - \gls{A}$~\cite{Chung}.
+Der nicht-normalisierte Laplacian \gls{L} eines Graphen \gls{G} ist definiert als $\gls{L} = \gls{D} - \gls{A}$~\cite{Chung}.
+Er wird auch oft kombinatorischer Laplacian genannt.
 Der normalisierte Laplacian \gls{Lnorm} ist definiert als $\gls{Lnorm} = \gls{D}^{-\frac{1}{2}} \gls{L} \gls{D}^{-\frac{1}{2}}$~\cite{Chung}.
-Es gilt die Konvention, dass ${\left(\gls{D}^{-\frac{1}{2}}\right)}_{ii} = 0$ falls $\gls{D}_{ii} = 0$
+\todo{wie nennt man ihn auch?}
+Es gilt die Konvention, dass ${\left(\gls{D}^{-\frac{1}{2}}\right)}_{ii} = 0$ falls $\gls{D}_{ii} = 0$ (im Falle von isolierten Knoten)
 Für verbundene Graphen gilt weiterhin $\gls{Lnorm} = \gls{I} - \gls{D}^{-\frac{1}{2}} \gls{A} \gls{D}^{-\frac{1}{2}}$~\cite{Chung}.
-Wenn \gls{G} $k$-regulär ist, dann gilt $\gls{Lnorm} = \gls{I} - \frac{1}{k} \gls{A}$.~\cite{Chung}\todo{das gilt natürlich nur im ungewichteten Fall, also weg?}
-\todo{was gilt denn alles im gewichteten?}
+Jeder Eintrag der Diagonalen von \gls{Lnorm} ist damit $1$.
+\gls{Lnorm} ist weiterhin symmetrisch, das wäre bei einer Normierung der Form $\gls{D}^{-1}\gls{L}$ nicht der Fall.
 
 \gls{L} und \gls{Lnorm} sind keine ähnlichen Matrizen.
 Insbesondere sind ihre Eigenvektoren unterschiedlich.
-Die Nutzung des \gls{L} oder \gls{Lnorm} ist damit abhängig von dem Problem, welches man betrachtet.~\cite{Hammond}.
+Die Nutzung von \gls{L} oder \gls{Lnorm} ist damit abhängig von dem Problem, welches man betrachtet.~\cite{Hammond}.
 
-Wir schreiben \gls{Lboth} wenn die Wahl des Laplacian (unnormalisiert, normalisiert) irrelevant ist.
+Wir schreiben \gls{Lboth} wenn die Wahl des Laplacian \gls{L} oder \gls{Lnorm} irrelevant ist.
+
+\subsection{Visuelle Interpretation des Laplacian}
+
+$\nabla^2 f = \nabla \cdot \nabla f$
+
+Die Divergenz eines Vektorfeldes ist ein Skalarfeld, das an jedem Punkt angibt, wie sehr die Vektoren in einer kleinen Umgebung des Punktes auseinanderstreben.
+
+The Laplace operator measures how much a function differs at a point from the average of the values of the function over small spheres centered at that point. As it turns out, the Laplacian of a graph does something completely analogous: namely, it measures how much a function on a graph differs at a vertex from the average of the values of the function over the neighbors of the vertex.
+
+Im $n$-dimensionalen euklischen Raum
+\begin{equation}
+  \nabla^2f = \sum_{i=1}^n \frac{\partial^2f}{\partial x^2_k}
+\end{equation}
+in einer Dimension reduziert sich der Laplace-Operator auf die zweite Ableitung $\nabla^2 f = f^{\prime\prime}$.
+
+Der \emph{diskrete Laplace-Operator} ist eine Analogie zum diskreten Laplace-Operator, der finite Differenzen $x \pm h$ zur Approximation von $\nabla^2 f$ nutzt
+\todo{Laplace-Operator}
+\todo{diskreter Laplace-Operator} Approximation des Laplace-Operators für finite Elemente
+
+Sei $f \colon \gls{V} \to \gls{R}$ eine Funktion auf den Knoten eines Graphen.
+$f$ kann ebenso als Vektor $\ve{f} \in \gls{R}^n$ betrachtet werden mit der Ordnung der Knoten, die die Adjazenzmatrix vorgibt.
+
+Dann gilt für \gls{Lboth}, dass
+\begin{equation}
+  {\left(\gls{Lboth}\ve{f}\right)}_i = \sum^n_{\substack{j=0\\j \neq i}} -\gls{Lboth}_{ij} \left(\ve{f}_i - \ve{f}_j\right)
+\end{equation}
+
+Für einen Graphen, der ein reguläres Gitter aufspannt mit gleichen Kantengewichten $\frac{1}{h^2} \in \gls{R}$ gilt für einen Knoten an Position $\left(x, y\right)$:
+Abusing the index notation
+\begin{equation}
+  {\left(\gls{L}\ve{f}\right)}_{x,y} = \frac{4\ve{f}_{x,y} - \ve{f}_{x+1,y} - \ve{f}_{x-1,y} - \ve{f}_{x,y+1} - \ve{f}_{x,y-1}}{h^2}
+\end{equation}
+beschreibt die \emph{5-Punkte-Stern} Approximation $-\nabla^2 f$.
+mit $\nabla^2 f$ definiert auf den fünf Punkten $\left\{\left(x,y\right), \left(x+h,y\right), \left(x-h,y\right), \left(x,y+h\right),\left(x,y-h\right)\right\}$.
+\begin{equation}
+  \gls{Lboth}f \approx - \nabla^2 f
+\end{equation}
+
+\todo{vertauschen, erst beispiel auf gitter, dann analog zu graphen gitter}
+
+Damit kann der Graph Laplacian als eine Generalisierung des diskreten Laplacian auf einem Gitter verstanden werden.
+
+Eigenwerte und Eigenvektoren werden benutzt, um zu verstehen was passiert, wenn wir einen Operator (hier \gls{Lboth}) mehrfach auf einen Vektor $\ve{x}$ anwenden (hier Merkmal auf den Knoten).
+
+Wir können \ve{x} als Linearkombination der \emph{Eigenbasis} schreiben mit
+\begin{equation}
+  \ve{x} = \sum_i c_i \gls{eiv}_i
+\end{equation}
+und berechnen dann
+\begin{equation}
+  \gls{Lboth}^k \ve{x} = \sum_i c_i \gls{Lboth}^k \gls{eiv}_i = \sum_i = c_i \gls{lambda}_i \gls{Lboth}^{k-1} \gls{eiv}_i = \sum_i c_i \gls{lambda}_i^k \gls{eiv}_i
+\end{equation}
+Wenn wir einen Operator haben, der einen Graphen beschreibt, dann können Eigenschaften dieses Operators und damit des Graphen selber durch dessen Eigenwerte und Eigenvektoren beschrieben werden.
+
+\subsection{Eigenschaften}
 
 Jede Reihen- und Spaltensumme von $\gls{Lboth}$ ist $0$, d.h.\ $\sum_i \gls{Lboth}_{ij} = 0$ und $\sum_i \gls{Lboth}_{ji} = 0$ für alle $i \in \left\{1, \ldots, n\right\}$.
-\todo{stimmt das für \gls{Lnorm}?}
-$\gls{Lboth} \in \gls{R}^{n \times n}$ hat genau $n$ Eigenwerte ${\left\{\lambda_i\right\}}_{i = 0}^{n-1}$.
-\gls{Lboth} ist eine symmetrische reelle Matrix, d.h.\ insbesondere liegen ihre Eigenwerte $\lambda_i$ in $\gls{R+}$.\\
-\todo{positive semidefinitheit}
-\todo{Lambda Ordering}
-Anzahl der Eigenvektoren gleich Null ist die Anzahl an Komponenten, die ein Graph besitzt.
-$0 = \lambda_0 < \lambda_1 \leq \lambda_2 \leq \cdots \leq \lambda_{n-1}$ wenn Graph verbunden.\todo{quelle}\\
-$\lambda_0 = 0$, da $\ve{u}_0 = {\left[1, \ldots, 1\right]}^{\top}$ Eigenvektor von \gls{Lboth}\todo{quelle}\\
-$\gls{Lambda} = \gls{diag}\left(\left[\lambda_0, \ldots, \lambda_{n-1}\right]\right)$\\
-Für einen Graphen \gls{G} definieren wir $\lambda_{\gls{G}} := \lambda_1$ und $\lambda_{\max} := \lambda_{n-1}$
-\todo{lambda upper bound}
-\todo{$\gls{L}^k$}
 
-Für \gls{Lnorm} gilt $\lambda_{\max} \leq 2$\todo{quelle}
+$\gls{Lboth} \in \gls{R}^{n \times n}$ hat genau $n$ Eigenwerte ${\left\{\gls{lambda}_i\right\}}_{i = 1}^n$, wobei die Eigenwerte für gewöhnlich aufsteigend sortiert werden, d.h.\ $\gls{lambda}_i \leq \gls{lambda}_{i+1}$.
+
+\gls{Lboth} ist eine symmetrische reelle Matrix, d.h.\ insbesondere liegen ihre Eigenwerte $\gls{lambda}_i$ in $\gls{R+}$.
+Damit ist \gls{Lboth} positiv semidefinit, d.h. $\ve{x}^{\top}\gls{Lboth}\ve{x} \geq 0$ für alle $\ve{x} \in \gls{R}^n$.\todo{quelle}
+
+Anzahl der Eigenvektoren gleich Null ist die Anzahl an Komponenten, die ein Graph besitzt.
+Insbesondere gilt $\gls{lambda}_1 = 0$, da ${\left[1, \ldots, 1\right]}^{\top} \in \gls{R}^n$ Eigenvektor von \gls{Lboth}\todo{quelle, warum gilt das}\\
+$0 = \gls{lambda}_1 < \gls{lambda}_2 \leq \cdots \leq \gls{lambda}_n$ wenn Graph verbunden.\todo{quelle}\\
+Für einen Graphen \gls{G} definieren wir $\gls{lambda}_{\gls{G}} := \gls{lambda}_2$ und $\gls{lambda}_{\max} := \gls{lambda}_n$
+Für \gls{Lnorm} gilt $\gls{lambda}_{\max} \leq 2$\todo{quelle}
+
+Für $\gls{Lboth}^{k}$ mit $k \in \gls{N}$ gilt ${\left(\gls{Lboth}^k\right)}_{ij} = 0$ genau dann, wenn $\gls{s}\left(v_i, v_j\right) > k$~\cite{Hammond}.
+Damit beschreibt $\gls{Lboth}^k$ bildlich gesprochen die Menge an Knoten, die maximal $k$ Kanten entfernt liegen.
 
 Eine Verschrumpfung eines Graphen \gls{G} kann beschrieben werden über zwei verschiedene Knoten $u$ und $v$ zu einem neuen Knoten $v^*$ mit
 \begin{align}
@@ -55,11 +126,47 @@ Eine Verschrumpfung eines Graphen \gls{G} kann beschrieben werden über zwei ver
   \gls{w}\left(v^*, v^*\right) &= \gls{w}\left(u, u\right) + \gls{w}\left(v, v\right) + 2\gls{w}\left(u,v\right)
 \end{align}
 
-Für einen Graphen \gls{G}, gilt für einen Graphen $H$ der aus \gls{G} verkleinert wurde
-
+Für einen Graphen \gls{G} gilt für einen Graphen $H$, der aus \gls{G} verkleinert wurde,
 \begin{equation}
-  \lambda_{\gls{G}} \leq \lambda_H
+  \gls{lambda}_{\gls{G}} \leq \gls{lambda}_H
 \end{equation}
+
+\section{Graph-Fourier-Transformation}
+
+Directly extending this construction to arbitrary weighted graphs is problematic, as it is unclear
+how to define scaling and translation on an irregular graph.
+We approach this problem by working in the spectral graph domain, i.e.\ the space of eigenfunctions of the graph Laplacian \gls{Lboth}.
+This tool from spectral graph theory, provides an analogue of the Fourier transform for functions on weighted graphs.
+
+Eigenwerte werden als Frequenz aufgefasst, die das Spektrum des Graphen beschreiben.
+Die Eigenvektoren beschreiben beschreiben die Signale zu den gegebenen Frequenzen.
+
+Fourier-Transformation beschreibt die gleiche Funktion $f$, aber in einer völlig anderen Domäne.
+Nicht in der Vertex-Domäne, sondern in der Spectrum-Domäne, d.h.\ auf Basis der Eigenwerte.
+
+Ein Signal in der Fourier-Transformierten wird daher beschrieben durch den \glqq{}Anteil\grqq\ oder die Amplituden der Eigenwerte des Graphen.\todo{das stimmt so nicht}
+
+Fourier Transformation:
+\todo{warum kann man die Fourier Transformation so definieren?}
+\begin{equation}
+  \ve{\hat f}_i = \hat f\left(\gls{lambda}_i\right) = \sum_{j=1}^{n} f\left(v_j\right) {\left(\gls{eiv}_i\right)}_j = \sum_{j=1}^{n} \ve{f}_j {\left(\gls{eiv}_i\right)}_j
+\end{equation}
+oder in Matrixschreibweise
+\begin{equation}
+  \ve{\hat f} = \gls{Eiv}^{\top}\ve{f}
+\end{equation}
+
+Inverse Fourier Transformation
+\begin{equation}
+  \ve{f}_i = f\left(v_i\right) = \sum_{j=1}^n \hat f\left(\gls{lambda}_j\right) {\left(\gls{eiv}_j\right)}_i = \sum_{j=1}^n \ve{\hat f}_j {\left(\gls{eiv}_j\right)}_i
+\end{equation}
+oder in Matrisschreibweise
+\begin{equation}
+  \ve{f} = \gls{Eiv}\ve{\hat f}
+\end{equation}
+
+Fourier-Transformation hat gute Eigenschaften (Faltung ist reine Multiplikation)
+Mittels der Fouriertransformierten kann man die Faltung zweier Funktionen als Produkt ihrer Fouriertransformierten ausdrücken.
 
 \section{Spectral Graph Domain}
 
@@ -96,9 +203,9 @@ Damit kann ein Signal $f$ mit der Multiplikation mit $\mathcal{L}$ als eine Weit
 $\mathcal{L}$ besitzt genau $n$ orthogonal zueinander stehende Eigenvektoren $\lbrace u_l \rbrace_{l=1}^n \in \mathbb{R}^n$.
 Eigenvektoren $u_i$ sind auf $1$ normiert, d.h.\ $||u_i||_2 = 1$.
 Diese werden auch \emph{Graph Fourier Modes} genannt.
-Diesen sind Eigenwete $\lbrace \lambda_l \rbrace_{l=1}^n \in \mathbb{R}$ zugeordnet, die die \glqq{}Frequenzen\grqq\ bzw.\ das Spektrum des Graphen beschreiben oder visuell betrachtet die Ausdehnung des Raumes, den die Eigenvektoren aufspannen.
-Bemerke dass $\lambda_0 = 0$, da für den Eigenvektor $\vec{u_0} = {(1, 1, \ldots, 1)}^T$ gilt, dass $\mathcal{L}\vec{u_0} = 0$.
-$\mathcal{L}$ ist diagonalisierbar über $\mathcal{L} = U \Lambda U^T$, wobei $U = [u_1, \ldots, u_n] \in \mathbb{R}^{n \times n}$ die \emph{Fourier Basis} und $\Lambda = \text{diag}([\lambda_0, \ldots, \lambda_n]) \in \mathbb{R}^{n \times n}$.
+Diesen sind Eigenwete $\lbrace \gls{lambda}_l \rbrace_{l=1}^n \in \mathbb{R}$ zugeordnet, die die \glqq{}Frequenzen\grqq\ bzw.\ das Spektrum des Graphen beschreiben oder visuell betrachtet die Ausdehnung des Raumes, den die Eigenvektoren aufspannen.
+Bemerke dass $\gls{lambda}_0 = 0$, da für den Eigenvektor $\vec{u_0} = {(1, 1, \ldots, 1)}^T$ gilt, dass $\mathcal{L}\vec{u_0} = 0$.
+$\mathcal{L}$ ist diagonalisierbar über $\mathcal{L} = U \Lambda U^T$, wobei $U = [u_1, \ldots, u_n] \in \mathbb{R}^{n \times n}$ die \emph{Fourier Basis} und $\Lambda = \text{diag}([\gls{lambda}_0, \ldots, \gls{lambda}_n]) \in \mathbb{R}^{n \times n}$.
 Die \emph{Fourier Transformation} eines Signals $x \in \mathbb{R}^n$ ist dann definiert als $\hat{x} = U^{T}x$ und die Inverse als $x = U\hat{x}$.
 
 \section{Faltung}
@@ -155,8 +262,8 @@ Das Hadamard-Produkt löst sich auf, wenn $\hat g$ als eine Diagonalmatrix repr�
 
 \begin{equation}
   x *_G g = U \begin{pmatrix}
-    \hat g(\lambda_0) & \cdots & 0\\
-    0 & \cdots & \hat g(\lambda_n)
+    \hat g(\gls{lambda}_0) & \cdots & 0\\
+    0 & \cdots & \hat g(\gls{lambda}_n)
   \end{pmatrix}U^T x = U \hat g(\Lambda) U^T x
 \end{equation}
 
