@@ -1,76 +1,50 @@
-\section{Polynomielle Approxmiation}
-
-\begin{itemize}
-  \item bisheriger Ansatz skaliert nicht gut für große Graphen
-  \item schneller Algorithmus zur Approximation des Filters notwendig $\Rightarrow$ Polynome niedriger Ordnung
-  \item Größe des Filters soll unahängig zu den Daten sein
-  \item approximiere $g(\mathcal{L})$ durch Polynom, dass rekursiv durch $\mathcal{L}$ berechnet werden kann
-\end{itemize}
-
-Beweisidee: $\mathbf{\tilde L}^k = {\left(\mathbf{U}\mathbf{\Lambda}\mathbf{U}^{\top}\right)}^k = \mathbf{U}\mathbf{\Lambda}^k\mathbf{U^{\top}}$~\cite{GCN}.\\
-Das sieht man leicht: $\ma{U} \left(\sum_i \ma{\Lambda}^k \right) \ma{U}^{\top} = \sum_i \ma{U} \ma{\Lambda}^k \ma{U}^{\top} = \sum_i \ma{L}^k$\\
-
-Diese Polynome formen eine Orthogonalbasis
-\todo{stable recurrence property}
-Polynome formen eine Orthogonalbasis für $L^2 \left([-1, 1], \frac{d_x}{\sqrt{1-x^2}}\right)$, auch \emph{Hilbertraum} genannt
-
-Spektrale Filter, die repräsentiert werden durch ein Polynom vom Grad $k$ sind \emph{$k$-lokalisiert}.
-
-\todo{die Grundidee der Polynomialsierung muss hierhin + übergang zu Chebyshev}
-
 \subsection{Tschebyschow-Polynome}
 
 \begin{itemize}
-  \item bisher Filterung eines Signals $\ve{x}$ zu $\ve{y} = \ma{U}g_{\mathbf{\theta}}\left(\ma{\Lambda}\right)\mathbf{U}^{\top}\ve{x} \approx \ma{U}g^{\prime}_{\ma{\theta}^{\prime}}\left(\ma{\Lambda}\right)\ma{U}^{\top}\ve{x} = g^{\prime}_{\ma{\theta}^{\prime}}\left(\ma{L}\right)\ve{x}$
-  \item $g_{\mathbf{\theta}}\left(\mathbf{\Lambda}\right)$ kann über ein Polynom $k$ten Grades $g^{\prime}_{\mathbf{\theta}^{\prime}}\left(\mathbf{\Lambda}\right)$ approximiert werden, $\mathbf{\theta}^{\prime} \in \mathbb{R}^k$
-  \item \underline{Aber:} Filterung ist sehr teuer aufgrund der Multiplikation der dichten Matrix $\mathbf{U}$, d.h.\ $\mathcal{O}\left(n^2\right)$
-  \item \underline{Lösung:} Parametrisiere $g_{\mathbf{\theta}}\left(\mathbf{L}\right)$ als eine polynomielle Funktion, die rekursiv aus $\mathbf{L}$ berechnet werden kann.
-  \item Warum sollte das effizienter sein? $\mathbf{L}$ ist nicht dicht besetzt, und hat nur $\left|\mathcal{E}\right| + n \ll n^2$ Einträge mit $n \leq \left|\mathcal{E}\right|$
+  \item Faltung ist sehr teuer aufgrund der Berechnungen von $\gls{Lboth}^k$
+  \item \underline{Idee:} beschreibe $\hat g^{\prime}\left(\gls{Lboth}\right)$ als eine polynomielle Funktion, die rekursiv aus $\gls{Lboth}$ berechnet werden kann.
+  \item Warum sollte das effizienter sein? $\Rightarrow$ $\gls{Lboth}$ ist nicht dicht besetzt, und hat nur $\left|\gls{E}\right| + n \ll n^2$ Einträge mit $n \leq \left|\gls{E}\right|$
 \end{itemize}
 
-\emph{Tschebyschow-Polynome} (engl. \emph{Chebyshev}) bezeichnen eine Menge von Polynomen $T_n\left(x\right) \colon \gls{R} \to \gls{R}$ mit dem rekursiven Zusammenhang
+\emph{Tschebyschow-Polynome} (engl. \emph{Chebyshev}) bezeichnen eine Menge von Polynomen $\gls{T}_n\left(x\right) \colon \gls{R} \to \gls{R}$ mit dem rekursiven Zusammenhang
 \begin{equation}
-  T_n\left(x\right) = 2x T_{n-1}\left(x\right) - T_{n-2}\left(x\right)
+  \gls{T}_n\left(x\right) = 2x \gls{T}_{n-1}\left(x\right) - \gls{T}_{n-2}\left(x\right)
 \end{equation}
-mit $T_0\left(x\right) = 1$ und $T_1\left(x\right) = x$.
-Ein Tschebyschow-Polynom $T_n$ ist ein Polynom $n$-ten Grads.
+mit $\gls{T}_0\left(x\right) = 1$ und $\gls{T}_1\left(x\right) = x$.
+Ein Tschebyschow-Polynom $\gls{T}_n$ ist ein Polynom $n$-ten Grads.
 
-Für $x \in \left[-1, 1\right]$ gilt $T_k\left(x\right) \in \left[-1, 1\right]$
+Für $x \in \left[-1, 1\right]$ gilt $\gls{T}_k\left(x\right) \in \left[-1, 1\right]$
 
-Rescale $\mathbf{\Lambda}$ zu $\mathbf{\tilde \Lambda} = \frac{2}{\lambda_{\max}} \mathbf{\Lambda} - \mathbf{I} \in {\left[-1, 1\right]}^{n \times n}$.
-$\lambda_{\max}$ ist der Wert des größten Eigenvektors von $\mathbf{L}$.
+Rescale $\gls{Lambda}$ zu $\gls{tLambda} = \frac{2}{\gls{lambda}_{\max}} \gls{Lambda} - \gls{I} \in {\left[-1, 1\right]}^{n \times n}$.\todo{warum nochmal?}
 
-Dann ist $T_k\left(\mathbf{\tilde \Lambda}\right) \in {\left[-1, 1\right]}^{n \times n}$
+Dann ist $\gls{T}_k\left(\gls{tLambda}\right) \in {\left[-1, 1\right]}^{n \times n}$
 
 \begin{equation}
-  g_{\mathbf{\theta}}\left(\mathbf{\Lambda}\right) \approx g^{\prime}_{\mathbf{\theta}^{\prime}}\left(\mathbf{\Lambda}\right) = \sum_{i = 0}^{k-1} \mathbf{\theta}^{\prime}_i T_i \left(\mathbf{\tilde \Lambda}\right)
-\end{equation}
-
-\todo{Beweisidee nachgucken}
-
-Es zeigt sich, dass
-\begin{equation}
-  \mathbf{U} g^{\prime}_{\mathbf{\theta}^{\prime}}\left(\mathbf{\Lambda}\right) \mathbf{U}^{\top} = g^{\prime}_{\mathbf{\theta}^{\prime}}\left(\mathbf{L}\right)
+  \hat g^{\prime}\left(\gls{Lambda}\right) = \sum_{i=0}^k c_i \gls{Lambda}^i = \sum_{i = 0}^k c^{\prime}_i \gls{T}_i \left(\gls{tLambda}\right)
 \end{equation}
 
-wobei $g^{\prime}_{\mathbf{\theta}^{\prime}}\left(\mathbf{L}\right) = \sum_{i=0}^{k-1} \mathbf{\theta}_i T_i\left(\mathbf{\tilde L}\right)$ mit $\mathbf{\tilde L} = \ma{U}\ma{\tilde \Lambda}\ma{U}^{\top} = \frac{2}{\lambda_{\max}}\mathbf{L} - \mathbf{I}$
+Analog lässt sich wiederum $\hat g^{\prime}\left(\gls{Lboth}\right)$ definieren mit
+\begin{equation}
+  \hat g^{\prime}\left(\gls{Lboth}\right) = \sum_{i=0}^k c^{\prime}_i \gls{T}_i\left(\gls{tLboth}\right)
+\end{equation}
+mit $\gls{tLboth} = \gls{Eiv}\gls{tLambda}\gls{Eiv}^{\top} = \frac{2}{\gls{lambda}_{\max}} \gls{Lboth} - \gls{I}$.
 
-Jetzt lässt sich $y = g^{\prime}_{\mathbf{\theta^{\prime}}}\left(\mathbf{L}\right) \mathbf{x} = \sum_{i=0}^{k-1} \mathbf{\theta}^{\prime}_i T_i \left(\mathbf{\tilde L}\right) \mathbf{x}$ sehr schnell berechnen:
+Jetzt lässt sich $\ve{f}_{\mathrm{out}} = \hat g^{\prime}\left(\gls{Lboth}\right) \ve{f}_{\mathrm{in}} = \sum_{i=0}^k c^{\prime}_i \gls{T}_i \left(\gls{tLboth}\right) \ve{f}_{\mathrm{in}}$ sehr schnell berechnen:
 
 \begin{enumerate}
-  \item berechnne $\mathbf{\overline{x}}_i := T_k \left(\mathbf{\tilde L}\right) \mathbf{x}$ für alle $i \in \left\{ 0, 1, \ldots, k-1 \right\}$ mit Hilfe von Rekursion:
+  \item berechnne $\ve{\overline{f}}_i := \gls{T}_i \left(\gls{tLboth}\right) \ve{f}_{\mathrm{in}}$ für alle $i \in \left\{ 0, 1, \ldots, k \right\}$ mit Hilfe von Rekursion:
   \begin{enumerate}
-    \item $\mathbf{\overline{x}}_0 = \mathbf{x}$
-    \item $\mathbf{\overline{x}}_1 = \mathbf{\tilde L} \mathbf{x}$
-    \item $\mathbf{\overline{x}}_i = 2\mathbf{\tilde L} \mathbf{\overline{x}}_{i-1} - \mathbf{\overline{x}}_{i-2}$
+    \item $\ve{\overline{f}}_0 = \ve{f}_{\mathrm{in}}$
+    \item $\ve{\overline{f}}_1 = \gls{tLboth} \ve{f}_{\mathrm{in}}$
+    \item $\ve{\overline{f}}_i = 2\gls{tLboth} \ve{\overline{f}}_{i-1} - \ve{\overline{f}}_{i-2}$
   \end{enumerate}
-\item berechne $\mathbf{y} = \left[\mathbf{\overline{x}}_0, \mathbf{\overline{x}}_1, \ldots, \mathbf{\overline{x}}_{k-1} \right] \mathbf{\theta}^{\prime}$
+\item berechne $\ve{f}_{\mathrm{out}} = \left[\ve{\overline{f}}_0, \ve{\overline{f}}_1, \ldots, \ve{\overline{f}}_{k} \right] \ve{c}^{\prime}$, wobei $\ve{c}^{\prime} = \left[c^{\prime}_0, \ldots, c^{\prime}_k\right] \in \gls{R}^{k+1}$
 \end{enumerate}
 
 \subsubsection{Laufzeit}
 
  \begin{itemize}
-   \item anstatt $\mathbf{L}^k$ zu berechnen mit Komplexität $\mathcal{O}\left(n^2\right)$ haben wir nur noch $k$ Multiplikationen mit der Matrix $\mathbf{\tilde L}$
-   \item da $\mathbf{\tilde L}$ für große Graphen sehr dünnbesetzt ist, d.h.\ $\left|\mathcal{E}\right| \ll n^2$, haben wir bei Verwendung von \emph{dünnbesetzten Matrizen} nur noch eine Laufzeit von $\mathcal{O}\left(k\left|\mathcal{E}\right|\right)$~\cite{Hammond, Defferrard}
-   \item für den zweiten Schritt gilt $\mathcal{O}\left(kn\right)$, mit $n \leq \left|\mathcal{E}\right|$ bedingt damit nur Schritt Eins die Laufzeit
+   \item anstatt $\gls{Lboth}^k$ zu berechnen mit Komplexität $\gls{O}\left(n^2\right)$ haben wir nur noch $k$ Matrix-Vektor-Multiplikationen mit der Matrix $\gls{tLboth}$
+   \item da $\gls{Lboth}$ für große Graphen sehr dünnbesetzt ist, d.h.\ $\left|\gls{E}\right| \ll n^2$, haben wir bei Verwendung von \emph{dünnbesetzten Matrizen} nur noch eine Laufzeit von $\gls{O}\left(k\left|\gls{E}\right|\right)$~\cite{Hammond, Defferrard}
+   \item für den zweiten Schritt gilt $\gls{O}\left(kn\right)$, mit $n \leq \left|\gls{E}\right|$ bedingt damit nur Schritt Eins die Laufzeit
  \end{itemize}

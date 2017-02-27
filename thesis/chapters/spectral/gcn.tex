@@ -2,8 +2,8 @@
 
 \begin{itemize}
   \item aus~\cite{GCN}
-  \item Idee: setze $k = 2$ für alle Faltungsebenen
-  \item Begründung: Faltung über $i < k = 2$ berücksichtigt nur alle Knoten, die zum jeweiligen Faltungsknoten adjazent sind und den Knoten selber (Begründung weiter oben)
+  \item Idee: setze $k = 1$ für alle Faltungsebenen
+  \item Begründung: Faltung über $i \leq k = 1$ berücksichtigt nur alle Knoten, die zum jeweiligen Faltungsknoten adjazent sind und den Knoten selber (Begründung weiter oben)
   \item für CNNs hat sich gezeigt, dass kleine Filtergrößen wie $3 \times 3$ keine negativen Auswirkungen haben
   \item viele kleine Faltungsebenen ohne Pooling propagieren die Informationen weit entfernterer Knoten weiter \todo{VGG Paper, oder he et al, deep residual learning}
   \item kann das Problem des Overfitting reduzieren für Graphen mit hohem Grad

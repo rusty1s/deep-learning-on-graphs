@@ -1,0 +1,125 @@
+\section{Faltung mittels Graph-Fourier-Transformation}
+
+\subsection{Kontinuierliche Fourier-Transformation}
+
+kontinuierliche oder klassische Fourier-Transformation:
+Konvertierung eines Signals in dessen Frequenzspektrum
+Signal $f \colon \gls{R} \to \gls{R}$
+
+Die komplexe Exponentialfunktion $\exp\left(\mathrm{i}\omega t\right)$ der Fourier-Transformation beschreibt die \emph{Eigenfunktionen} des eindimensionalen Laplace-Operators $\nabla^2$.
+\todo{das verstehe ich nicht}
+
+Die inverse Fourier-Transformation
+\begin{equation}
+  f\left(t\right) = \frac{1}{2\pi} \int \hat f\left(\omega\right) \exp\left(\mathrm{i}\omega t\right)\,\mathrm{d}\omega
+\end{equation}
+kann damit als die Ausdehnung von $f$ in Bezug auf die Eigenfunktionen des Laplace-Operators gesehen werden.
+
+\subsection{Graph-Fourier-Transformation}
+
+Wir können die \emph{Graph-Fourier-Transformation} analog dazu definieren.\\
+Eigenwerte beschreiben die Frequenzen des Graphen.
+
+Signal $f \colon \gls{V} \to \gls{R}$ auf Graphen\\
+Signal kann ebenso als Vektor $\ve{f} \in \gls{R}^n$ aufgefasst werden (impliziert Ordnung der Knoten, ist durch Adjazenzmatrix gegeben)\todo{schon weiter oben definiert, eher in grundlagen unterbringen?}\\
+\begin{equation}
+  \hat f(\gls{lambda}_i) = \left\langle \ve{f}, \gls{eiv}_i \right\rangle
+\end{equation}
+bzw.\ als Vektor
+\begin{equation}
+  \ve{\hat f} = \gls{Eiv}^{\top} \ve{f}
+\end{equation}
+
+Die inverse Transformation ist dann definiert als
+\begin{equation}
+  f\left(v_i\right) = \sum_{j=1}^n \hat f\left(\gls{lambda}_j\right) {\left(\gls{eiv}_j\right)}_i
+\end{equation}
+bzw.\ als Vektor
+\begin{equation}
+  \ve{f} = \gls{Eiv}\ve{\hat f}
+\end{equation}
+
+\todo{parseval relation?}
+
+Spectral Graph Domain
+
+\begin{itemize}
+  \item \emph{Spectral Graph Domain}: Der Raum der Eigenfunktionen von $\mathcal{L}$
+  \item Analogon (Nachbildung) einer \emph{Fourier-Transformation} von Funktionen auf gewichteten Graphen
+\end{itemize}
+
+Das ermöglicht uns das Anwenden verschiedener Operation wie Filterung, Translation oder Faltung.\todo{quelle}
+
+Directly extending this construction to arbitrary weighted graphs is problematic, as it is unclear
+how to define scaling and translation on an irregular graph.
+We approach this problem by working in the spectral graph domain, i.e.\ the space of eigenfunctions of the graph Laplacian \gls{Lboth}.
+This tool from spectral graph theory, provides an analogue of the Fourier transform for functions on weighted graphs.
+
+Eigenwerte werden als Frequenz aufgefasst, die das Spektrum des Graphen beschreiben.
+Die Eigenvektoren beschreiben beschreiben die Signale zu den gegebenen Frequenzen.\todo{mmh}
+
+Fourier-Transformation beschreibt die gleiche Funktion $f$, aber in einer völlig anderen Domäne.
+Nicht in der Vertex-Domäne, sondern in der Spectrum-Domäne, d.h.\ auf Basis der Eigenwerte.
+
+In classical Fourier analysis, the eigenvalues carry a specific notion of frequency:
+for $\omega$ close
+to zero (low frequencies), the associated complex exponential
+eigenfunctions are smooth, slowly oscillating functions,
+whereas for $\omega$ far from zero (high frequencies), the associated
+complex exponential eigenfunctions oscillate much more
+rapidly. In the graph setting, the graph Laplacian eigenvalues
+and eigenvectors provide a similar notion of frequency. For
+connected graphs, the Laplacian eigenvector u0 associated
+with the eigenvalue 0 is constant and equal to 1
+at each
+vertex. The graph Laplacian eigenvectors associated with low
+frequencies $\gls{lambda}_2$ vary slowly across the graph; i.e., if two
+vertices are connected by an edge with a large weight, the
+values of the eigenvector at those locations are likely to be
+similar. The eigenvectors associated with larger eigenvalues
+oscillate more rapidly and are more likely to have dissimilar
+values on vertices connected by an edge with high weight.
+
+Graph Fourier Transformation und ihre Inverse gibt uns die Möglichkeit, ein Signal in zwei verschiedenen Domänen zu repräsentieren, nämlich die Knotendomäne (das unveränderte Signal auf der Knotenmenge $\ve{f}$) und der spektralen Domäne (das transformierte Signal in das Spektrum des Graphen).
+Signale, die im Spektrum definiert werden, werden \emph{Kernel} genannt.\todo{ok?}
+
+Die Fourier-Transformation wird unter anderem gerne genutzt, da sie gute Eigenschaften hat.
+
+\todo{bilder bzw.\ grafiken}
+
+\subsection{Faltung}
+
+Es ist schwierig, Faltung auf Graphen zu definieren (wir haben keinen Translationsoperator $\left(x - t\right)$).
+In der Fourier-Domäne ist dies aber sehr einfach.
+
+In der Signalverarbeitung versteht man unter der Frequenzfilterung die Transformation eines Signals in die Fourier-Domäne und der verstärkenden oder dämpfenden Veränderung der Amplituden der Frequenzkomponenten.
+
+Formal betrachtet also
+\begin{equation}
+  \hat f_{\mathrm{out}}\left(\omega\right) = \hat f_{\mathrm{in}}\left(\omega\right)\hat g\left(\omega\right)
+\end{equation}
+
+Es lässt sich zeigen, dass die Multiplikation in der Fourier-Domäne äquivalent ist zu einer Faltung in der Zeitdomäne \todo{quelle}
+\begin{equation}
+  f_{\mathrm{out}}\left(t\right) = \left(f_{\mathrm{in}} \star g\right)\left(t\right)
+\end{equation}
+
+Wir können das spektrale Graphfilterung analog definieren mit
+\begin{equation}
+  \hat f_{\mathrm{out}}\left(\gls{lambda}_i\right) = \hat f_{\mathrm{in}}\left(\gls{lambda}_i\right)\hat g\left(\lambda_i\right)
+\end{equation}
+
+Damit entspricht die Faltung eines Signals auf einem Graphen der elementweisen Multiplikation in der Spectral Graph Domain
+\begin{equation}
+  \ve{f}_{\mathrm{out}} = \ve{f}_{\mathrm{in}} \star \ve{g} = \gls{Eiv}\left(\gls{Eiv}^{\top}\ve{f}_{\mathrm{in}} \gls{hadamard} \gls{Eiv}^{\top}\ve{g}\right)
+\end{equation}
+
+Das lässt sich in Matrixschreibweise (die zweite obrige Formel) umschreiben über
+\begin{equation}
+  \ve{\hat f}_{\mathrm{out}} = \hat g\left(\gls{Lambda}\right) \ve{\hat f}_{\mathrm{in}} = \hat g\left(\gls{Lambda}\right)\gls{Eiv}^{\top}\ve{f}_{\mathrm{in}}
+\end{equation}
+bzw.
+\begin{equation}
+  \ve{f}_{\mathrm{out}} = \gls{Eiv}\hat g\left(\gls{Lambda}\right)\gls{Eiv}^{\top}\ve{f}_{\mathrm{in}}
+\end{equation}
+mit $\hat g\left(\gls{Lambda}\right) = \gls{diag}\left({\left[\hat g\left(\gls{lambda}_1\right), \ldots, \hat g\left(\gls{lambda}_n\right)\right]}^{\top}\right)$

@@ -1,0 +1,107 @@
+\section{Der Laplacian und seine Eigenwerte}
+
+Der \emph{kombinatorische Laplacian} \gls{L} eines Graphen \gls{G} ist definiert als $\gls{L} = \gls{D} - \gls{A}$~\cite{Chung}.
+$\gls{L}$ ist eine symmetrische Matrix.
+
+Der \emph{normalisierte Laplacian} \gls{Lnorm} ist definiert als $\gls{Lnorm} = \gls{D}^{-\frac{1}{2}} \gls{L} \gls{D}^{-\frac{1}{2}}$~\cite{Chung}.
+Es gilt die Konvention, dass ${\left(\gls{D}^{-\frac{1}{2}}\right)}_{ii} = 0$ falls $\gls{D}_{ii} = 0$ (d.h.\ $v_i$ ist isolierter Knoten)
+
+Für verbundene Graphen gilt damit $\gls{Lnorm} = \gls{I} - \gls{D}^{-\frac{1}{2}} \gls{A} \gls{D}^{-\frac{1}{2}}$~\cite{Chung}.
+Jeder Eintrag der Diagonalen von \gls{Lnorm} ist damit $1$.
+\gls{Lnorm} ist weiterhin symmetrisch, das wäre bei einer Normierung der Form $\gls{D}^{-1}\gls{L}$ nicht der Fall.
+
+\gls{L} und \gls{Lnorm} sind keine ähnlichen Matrizen.
+Insbesondere sind ihre Eigenvektoren unterschiedlich.
+Die Nutzung von \gls{L} oder \gls{Lnorm} ist damit abhängig von dem Problem, welches man betrachtet.~\cite{Hammond}.
+
+Wir schreiben \gls{Lboth} wenn die Wahl des Laplacian \gls{L} oder \gls{Lnorm} irrelevant ist.
+
+\subsection{Visuelle Interpretation des Laplacian}
+
+\begin{itemize}
+  \item diskrete Analogie des $\nabla^2$ Operators
+  \item man nimmt eine Funktion und approximiert sie mit Hilfe eines Graphen, so dass Knoten, die dichter beieinander liegen eine größere zweite Ableitung besitzen.
+\end{itemize}
+
+
+$\nabla^2 f = \nabla \cdot \nabla f$
+
+Die Divergenz eines Vektorfeldes ist ein Skalarfeld, das an jedem Punkt angibt, wie sehr die Vektoren in einer kleinen Umgebung des Punktes auseinanderstreben.
+
+The Laplace operator measures how much a function differs at a point from the average of the values of the function over small spheres centered at that point. As it turns out, the Laplacian of a graph does something completely analogous: namely, it measures how much a function on a graph differs at a vertex from the average of the values of the function over the neighbors of the vertex.
+
+Im $n$-dimensionalen euklischen Raum
+\begin{equation}
+  \nabla^2f = \sum_{i=1}^n \frac{\partial^2f}{\partial x^2_k}
+\end{equation}
+in einer Dimension reduziert sich der Laplace-Operator auf die zweite Ableitung $\nabla^2 f = f^{\prime\prime}$.
+
+Der \emph{diskrete Laplace-Operator} ist eine Analogie zum diskreten Laplace-Operator, der finite Differenzen $x \pm h$ zur Approximation von $\nabla^2 f$ nutzt
+\todo{Laplace-Operator}
+\todo{diskreter Laplace-Operator} Approximation des Laplace-Operators für finite Elemente
+
+Sei $f \colon \gls{V} \to \gls{R}$ eine Funktion auf den Knoten eines Graphen.
+$f$ kann ebenso als Vektor $\ve{f} \in \gls{R}^n$ betrachtet werden mit der Ordnung der Knoten, die die Adjazenzmatrix vorgibt.
+
+Dann gilt für \gls{Lboth}, dass
+\begin{equation}
+  {\left(\gls{Lboth}\ve{f}\right)}_i = \sum^n_{\substack{j=0\\j \neq i}} -\gls{Lboth}_{ij} \left(\ve{f}_i - \ve{f}_j\right)
+\end{equation}
+
+Für einen Graphen, der ein reguläres Gitter aufspannt mit gleichen Kantengewichten $\frac{1}{h^2} \in \gls{R}$ gilt für einen Knoten an Position $\left(x, y\right)$:
+Abusing the index notation
+\begin{equation}
+  {\left(\gls{L}\ve{f}\right)}_{x,y} = \frac{4\ve{f}_{x,y} - \ve{f}_{x+1,y} - \ve{f}_{x-1,y} - \ve{f}_{x,y+1} - \ve{f}_{x,y-1}}{h^2}
+\end{equation}
+beschreibt die \emph{5-Punkte-Stern} Approximation $-\nabla^2 f$.
+mit $\nabla^2 f$ definiert auf den fünf Punkten $\left\{\left(x,y\right), \left(x+h,y\right), \left(x-h,y\right), \left(x,y+h\right),\left(x,y-h\right)\right\}$.
+\begin{equation}
+  \gls{Lboth}f \approx - \nabla^2 f
+\end{equation}
+
+\todo{vertauschen, erst beispiel auf gitter, dann analog zu graphen gitter}
+
+Damit kann der Graph Laplacian als eine Generalisierung des diskreten Laplacian auf einem Gitter verstanden werden.
+
+Eigenwerte und Eigenvektoren werden benutzt, um zu verstehen was passiert, wenn wir einen Operator (hier \gls{Lboth}) mehrfach auf einen Vektor $\ve{x}$ anwenden (hier Merkmal auf den Knoten).
+
+Wir können \ve{x} als Linearkombination der \emph{Eigenbasis} schreiben mit
+\begin{equation}
+  \ve{x} = \sum_i c_i \gls{eiv}_i
+\end{equation}
+und berechnen dann
+\begin{equation}
+  \gls{Lboth}^k \ve{x} = \sum_i c_i \gls{Lboth}^k \gls{eiv}_i = \sum_i = c_i \gls{lambda}_i \gls{Lboth}^{k-1} \gls{eiv}_i = \sum_i c_i \gls{lambda}_i^k \gls{eiv}_i
+\end{equation}
+Wenn wir einen Operator haben, der einen Graphen beschreibt, dann können Eigenschaften dieses Operators und damit des Graphen selber durch dessen Eigenwerte und Eigenvektoren beschrieben werden.
+
+\subsection{Eigenschaften}
+
+\gls{Lboth} ist eine reell symmetrische, schwach diagonaldominante Matrix und damit insbesondere positiv semidefinit.
+
+$\gls{Lboth} \in \gls{R}^{n \times n}$ hat genau $n$ Eigenwerte ${\left\{\gls{lambda}_i\right\}}_{i = 1}^n \in \gls{R+}$ mit $\gls{lambda}_i \leq \gls{lambda}_{i+1}$.
+
+Anzahl der Eigenvektoren gleich Null ist die Anzahl an Komponenten, die ein Graph besitzt.
+
+Insbesondere sind jede Reihen- und Spaltensumme von $\gls{Lboth}$ ist $0$, d.h.\ $\sum_j \gls{Lboth}_{ij} = 0$ und $\sum_j \gls{Lboth}_{ji} = 0$ für alle $i \in \left\{1, \ldots, n\right\}$.
+Insbesondere gilt $\gls{lambda}_1 = 0$, da $\gls{eiv}_1 = \frac{1}{\sqrt{n}}{\left[1, \ldots, 1\right]}^{\top} \in \gls{R}^n$ Eigenvektor von \gls{Lboth} mit $\gls{Lboth}\gls{eiv}_1 = 0$.\\
+
+$0 = \gls{lambda}_1 < \gls{lambda}_2 \leq \cdots \leq \gls{lambda}_n$ wenn Graph verbunden.\todo{quelle}\\
+
+\todo{was sagt $\gls{lambda}_2$ aus?}
+Für einen Graphen \gls{G} definieren wir $\gls{lambda}_{\gls{G}} := \gls{lambda}_2$ und $\gls{lambda}_{\max} := \gls{lambda}_n$
+Für \gls{Lnorm} gilt $\gls{lambda}_{\max} \leq 2$\todo{quelle}
+
+Für $\gls{Lboth}^{k}$ mit $k \in \gls{N}$ gilt ${\left(\gls{Lboth}^k\right)}_{ij} = 0$ genau dann, wenn $\gls{s}\left(v_i, v_j\right) > k$~\cite{Hammond}.
+Damit beschreibt $\gls{Lboth}^k$ bildlich gesprochen die Menge an Knoten, die maximal $k$ Kanten entfernt liegen.
+
+Eine Verschrumpfung eines Graphen \gls{G} kann beschrieben werden über zwei verschiedene Knoten $u$ und $v$ zu einem neuen Knoten $v^*$ mit
+\begin{align}
+  \gls{w}\left(x,v^*\right) &= \gls{w}\left(x, u\right) + \gls{w}\left(x, v\right)\\
+  \gls{w}\left(v^*, v^*\right) &= \gls{w}\left(u, u\right) + \gls{w}\left(v, v\right) + 2\gls{w}\left(u,v\right)
+\end{align}
+
+Für einen Graphen \gls{G} gilt für einen Graphen $H$, der aus \gls{G} verkleinert wurde~\cite{Chung},
+\begin{equation}
+  \gls{lambda}_{\gls{G}} \leq \gls{lambda}_H
+\end{equation}
