@@ -10,7 +10,7 @@ Je höher das Gewicht, desto ähnlicher bzw.\ näher sind zwei Knoten.
 
 Ein üblicher Weg die Distanz zweier Knoten zueinander als Kantengewicht darzustellen ist über einen gewichteten \emph{Gaussian-Kernel}~\cite{Shuman}
 \begin{equation}
-  \gls{w}\left(v, u\right) = \exp\left(-\frac{\left\|\gls{p}\left(v\right) - \gls{p}\left(u\right)\right\|_2}{2\theta^2}\right)
+  \gls{w}\left(v, u\right) = \exp\left(-\frac{\left\|\gls{p}\left(v\right) - \gls{p}\left(u\right)\right\|_2^2}{2\theta^2}\right)
 \end{equation}
 
 falls $v \gls{adj} u$ und einem Parameter $\theta \in \gls{R}$.
