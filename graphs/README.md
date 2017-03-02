@@ -18,12 +18,14 @@
 * [What's the intuition behind a Laplacian
   matrix](https://www.quora.com/Graph-Theory-Whats-the-intuition-behind-a-Laplacian-matrix)
 * [The Laplacian](http://www.cs.yale.edu/homes/spielman/561/2009/lect02-09.pdf)
-* [Spectral graph theory: Three common 
+* [Spectral graph theory: Three common
   spectra](https://pdfs.semanticscholar.org/c1f1/c063b8d2b2678d6ba961f2f4c236923103d4.pdf)
-* [Spectral Graph Theory by Daniel 
+* [Spectral Graph Theory by Daniel
   Spielman](https://pdfs.semanticscholar.org/3265/e606639c89e64e5cac5e32dd3e9081b387be.pdf)
 * [The Emerging Field of Signal Processing on
   Graphs](https://arxiv.org/pdf/1211.0053.pdf)
+* [Discrete Laplace-Beltrami Operators for Shape Analysis and
+  Segmentation](reuter.mit.edu/papers/reuter-smi09.pdf)
 
 ## Paper
 

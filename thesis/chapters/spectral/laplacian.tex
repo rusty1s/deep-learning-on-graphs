@@ -78,12 +78,13 @@ Wenn wir einen Operator haben, der einen Graphen beschreibt, dann können Eigens
 \subsection{Eigenschaften}
 
 \gls{Lboth} ist eine reell symmetrische, schwach diagonaldominante Matrix und damit insbesondere positiv semidefinit.
+\todo{nur kombinatorisch ist schwach diagonaldominant}
 
 $\gls{Lboth} \in \gls{R}^{n \times n}$ hat genau $n$ Eigenwerte ${\left\{\gls{lambda}_i\right\}}_{i = 1}^n \in \gls{R+}$ mit $\gls{lambda}_i \leq \gls{lambda}_{i+1}$.
 
 Anzahl der Eigenvektoren gleich Null ist die Anzahl an Komponenten, die ein Graph besitzt.
 
-Insbesondere sind jede Reihen- und Spaltensumme von $\gls{Lboth}$ ist $0$, d.h.\ $\sum_j \gls{Lboth}_{ij} = 0$ und $\sum_j \gls{Lboth}_{ji} = 0$ für alle $i \in \left\{1, \ldots, n\right\}$.
+Insbesondere sind jede Reihen- und Spaltensumme von $\gls{L}$ ist $0$, d.h.\ $\sum_j \gls{Lboth}_{ij} = 0$ und $\sum_j \gls{Lboth}_{ji} = 0$ für alle $i \in \left\{1, \ldots, n\right\}$.\todo{gilt nur für kombinatorischen!}
 Insbesondere gilt $\gls{lambda}_1 = 0$, da $\gls{eiv}_1 = \frac{1}{\sqrt{n}}{\left[1, \ldots, 1\right]}^{\top} \in \gls{R}^n$ Eigenvektor von \gls{Lboth} mit $\gls{Lboth}\gls{eiv}_1 = 0$.\\
 
 $0 = \gls{lambda}_1 < \gls{lambda}_2 \leq \cdots \leq \gls{lambda}_n$ wenn Graph verbunden.\todo{quelle}\\
