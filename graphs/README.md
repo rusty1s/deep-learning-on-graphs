@@ -27,6 +27,9 @@
 * [Discrete Laplace-Beltrami Operators for Shape Analysis and
   Segmentation](https://reuter.mit.edu/papers/reuter-smi09.pdf)
 
+* Attention Algorithmus für Graphen unterschiedlicher Großen
+  * [Gated Graph Sequence Neural Networks](https://arxiv.org/pdf/1511.05493.pdf) (Equation 7)
+
 ## Paper
 
 ### CNNs
