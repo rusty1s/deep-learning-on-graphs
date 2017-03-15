@@ -3,7 +3,7 @@
 
 \begin{document}
 
-\selectlanguage{german}
+\selectlanguage{ngerman}
 
 % Titelseite
 \include{chapters/titelseite}
@@ -19,16 +19,17 @@
 \pagenumbering{arabic}
 
 \include{chapters/inhalt}
-
 \include{chapters/einleitung/main}
 \include{chapters/grundlagen/main}
 \include{chapters/bildgraphen/main}
 \include{chapters/spatial/main}
 \include{chapters/spectral/main}
+\cleardoublepage{}
 
 % Anhang
 \appendix
 \include{chapters/anhang/main}
+\cleardoublepage{}
 
 % Mathematische Notation
 \printglossary[title={Symbolverzeichnis}]
@@ -39,18 +40,11 @@
 \addcontentsline{toc}{chapter}{Abbildungsverzeichnis}
 \cleardoublepage{}
 
-% Algorithmenverzeichnis
-\listofalgorithms{}
-\addcontentsline{toc}{chapter}{Algorithmenverzeichnis}
-\cleardoublepage{}
-
 % Literaturverzeichnis
-\bibliography{bibliography}
-\bibliographystyle{gerplain}
+\printbibliography{}
 \addcontentsline{toc}{chapter}{Literaturverzeichnis}
 \cleardoublepage{}
 
 % Eidesstattliche Versicherung
 \includepdf{chapters/versicherung}
-
 \end{document}

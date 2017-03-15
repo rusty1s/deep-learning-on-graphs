@@ -1,5 +1,6 @@
 .DS_Store
 log_graph
+*.out
 *.aux
 *.log
 *.loa
@@ -13,5 +14,7 @@ log_graph
 *.ist
 *.bbl
 *.blg
+*.bcf
+*.run.xml
 *.ckpt*
 checkpoint
