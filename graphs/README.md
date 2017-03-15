@@ -25,7 +25,7 @@
 * [The Emerging Field of Signal Processing on
   Graphs](https://arxiv.org/pdf/1211.0053.pdf)
 * [Discrete Laplace-Beltrami Operators for Shape Analysis and
-  Segmentation](reuter.mit.edu/papers/reuter-smi09.pdf)
+  Segmentation](https://reuter.mit.edu/papers/reuter-smi09.pdf)
 
 ## Paper
 
