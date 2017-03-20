@@ -4,7 +4,7 @@ Trainingsbilder: 55.000
 
 \begin{itemize}
   \item 10.000 Steps mit Batch Size 64 (ungefähr 12 Epochen)
-  \item Learning Rate 0.001 
+  \item Learning Rate 0.001
   \item klassisches Convolution Neural Network nachgebildet mit Gridgraphen
   \item Conv1: $5 \times 5$, $1 \rightarrow 32$
   \item MaxPool1: Size 2, Stride 2
@@ -18,11 +18,13 @@ Trainingsbilder: 55.000
 \subsection{Auswertung}
 
 \begin{itemize}
-  \item \textbf{2D Conv:} 0.18s pro Batch, Accuracy: 99.189, Cost: 0.03458
+  \item \textbf{2D Conv > Max:} 0.18s pro Batch, Accuracy: 99.189, Cost: 0.03458
+  \item \textbf{2D Conv > 2D Conv > Max:} 0.25s pro Batch, Accuracy: , Cost:
   \item \textbf{Chebyshev $k=25$ GCNN:} 0.91s pro Batch, Accuracy: 98.888, Cost: 0.04329
   \item \textbf{$k=1$ GCNN:}
   \item \textbf{Partitioned GCNN:}
   \begin{itemize}
     \item Conv > Max: 0.45s pro Batch, Accuracy: 98.998, Cost: 0.03198
+    \item Conv > Conv > Max: 2.87s pro Batch, Accuracy: 99.189, Cost: 0.02704
   \end{itemize}
 \end{itemize}
