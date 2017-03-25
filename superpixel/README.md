@@ -52,22 +52,22 @@
   * **Implementations:**
     * [scikit-image: Image processing in Python](http://scikit-image.org/) ([Github](https://github.com/scikit-image/scikit-image))
     * OpenCV >= 3.0.0
-* Quick Shift in [Quick Shift and Kernel Methods for Mode 
+* Quick Shift in [Quick Shift and Kernel Methods for Mode
   Seeking](http://vision.cs.ucla.edu/papers/vedaldiS08quick.pdf)
   * superpixels are not fixed in size or number (a complex image with many fine scale image structures may have many more superpixels than a simple one)
-* [Felzenszwalb: Efficient Graph-Based Image 
+* [Felzenszwalb: Efficient Graph-Based Image
   Segmentation](http://cs.brown.edu/~pff/papers/seg-ijcv.pdf)
   * Segmentierung über Graphstruktur, dessen Kanten die Ähnlichkeit zwischen zwei Knoten beschreiben
   * Segmentierungsalgorithmus ergibt Superpixel-Repräsentation
   * wird oft benutzt
 * [SEEDS: Superpixels Extracted via Energy-Driven
   Sampling](http://www.mvdblive.org/seeds/)
-* [Structured forests for fast edge 
+* [Structured forests for fast edge
   detection](https://www.microsoft.com/en-us/research/wp-content/uploads/2013/12/DollarICCV13edges.pdf)
   * low quantization error
 * [Selective Search for Object Recognition](https://ivi.fnwi.uva.nl/isis/publications/bibtexbrowser.php?key=UijlingsIJCV2013&bib=all.bib)
   * Hierarchische Segmentierung
-* [Convolutional Networks in Scene 
+* [Convolutional Networks in Scene
   Labelling](http://cs231n.stanford.edu/reports/ashwinpp_final_report.pdf)
 
 ### Skimage
@@ -93,6 +93,10 @@
   Spektraltechniken](http://www-home.fh-konstanz.de/~mfranz/ibv_files/lect09_spectr.pdf)
 * [Design and FPGA Implementation of a Perimeter
   Estimator](http://www.maa.org/sites/default/files/images/upload_library/applets/CirclesRedistrict/perimeter.doc)
+* [Convex Hull of Pixel
+  Image](http://scikit-image.org/docs/dev/auto_examples/plot_convex_hull.html)
+  * [Binary image convex hull - algorithm
+    notes](http://blogs.mathworks.com/steve/2011/10/04/binary-image-convex-hull-algorithm-notes/)
 
 ## Feature Selection
 
@@ -100,7 +104,4 @@
   Selection](http://machinelearningmastery.com/an-introduction-to-feature-selection/)
 * [Feature Selection in Python with
   Scikit-Learn](http://machinelearningmastery.com/feature-selection-in-python-with-scikit-learn/)
-* [Convex Hull of Pixel
-  Image](http://scikit-image.org/docs/dev/auto_examples/plot_convex_hull.html)
-  * [Binary image convex hull - algorithm
-    notes](http://blogs.mathworks.com/steve/2011/10/04/binary-image-convex-hull-algorithm-notes/)
+* [Selecting good features](http://blog.datadive.net/selecting-good-features-part-i-univariate-selection/)
