@@ -1,0 +1,15 @@
+\section{Schwächen}
+
+\begin{itemize}
+  \item TensorFlow hat keine gute Anbindung an dynamischen Input (den wir hier aber brauchen)
+  \item Augmentierung nicht mehr einfach möglich
+  \begin{itemize}
+    \item Graphen können nicht ohne weiteres gedreht werden
+    \item Augmentierung der Form-Features oder der Farbe verändert auch den Graphen
+    \item Graphgenerierung im Postprocessing schwierig, weil langsam
+  \end{itemize}
+  \item Jeder Superpixelalgorithmus und jeder Datensatz mit verschiedenen Bildauflösungen fordert eigentlich Neuberechnung der geeignesteten Form Features
+  \item PCA nicht möglich, weil zu teuer (alle Form Features zu berechnen ist utopisch und wiederspricht der Grundidee)
+  \item viel langsamer als ausgereifte Bildimplementierungen
+  \item abhängig von der Anzahl der Form-Features und der Größe des Graphen nicht unbedingt speichereffizienter als ein einzelnes Bild, wir haben aber in der Tat kleinere Convolutions.
+\end{itemize}
