@@ -28,3 +28,22 @@ Trainingsbilder: 55.000
     \item Conv > Conv > Max: 2.87s pro Batch, Accuracy: 99.189, Cost: 0.02704
   \end{itemize}
 \end{itemize}
+
+\subsection{SLIC}
+
+\begin{itemize}
+  \item keine lokale Normierung
+  \item Stddev: $1$
+  \item 4 Level
+  \item Graphkonnektivität: $1$
+  \item Anzahl Segmente: $100$
+  \item Compactness: $10$
+  \item Maximum Iterations: $10$
+  \item Sigma: $0$
+  \item Anzahl Partitionen: 8
+  \item Features: Area, Bbox height, bbox width, Mean Color = $4$ Features
+  \item \textbf{Aufbau}: Conv zu 32, Pool2, Conv zu 64, Pool2, Conv zu 128, Pool2, Conv zu 256, Pool2, AveragePool, FC210
+  \item Meiste zeit wird durch Partitionierung verschwendet.
+  \item \textbf{Ergebnisse}: 0.79s pro Batch, Accuracy: 0,79497, Loss: 0.62814
+  \item enttäuschend!
+\end{itemize}
