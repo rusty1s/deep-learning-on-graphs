@@ -58,16 +58,16 @@ Anhand eines kleineren, vergröberten Graphen $G_{i+1}$ und der eindeutigen Zuwe
 \begin{itemize}
   \item \textbf{Max-Pooling:} $v^* := \max(u, v)$
   \item \textbf{L2-Pooling:} $v^* := \left\| u, v \right\|_2$
+  \item \textbf{Average-Pooling:} \todo{ist das nicht das gleiche wie L2?}
 \end{itemize}
 
-
-
-\subsection{INFORMATIONEN}
+\subsection{Informationen}
 
 Normalized Cut ist daher sinnvoll, dass Kanten als wichtiger gezählt werden, wenn ihre entsprechenden Knoten einen geringen Grad haben, das heißt, von nicht so vielen Knoten abhängen.
-DAS MACHT DURCHAUS SINN.
+Das macht durch Sinn.
 
 Ebenfalls ist der ganze Prozess randomisiert.
 Das heißt wir erreichen bei mehrmaliger Anwendung auf dem gleichen Graphen unterschiedliche Ergebnisse.
 Damit ist eine Augmentierung der Daten bereits in der Pooling-Ebene vorhanden.
-DAS IST SEHTR GUT
+Das ist sehr gut.
+\todo{Effekt geht durch das AveragePooling eh verloren und sonst weiß ich nicht wie gut das überhaupt ist (siehe Email)}
