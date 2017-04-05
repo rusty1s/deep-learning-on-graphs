@@ -65,7 +65,7 @@ Wir können für $K=2$ die Basis-Berechnung durch
 vereinfachen.
 
 \begin{proof}
-  Aufsteigende Gerade der Dreiecksfunktion für ein $p$ ist definiert durch
+  Aufsteigende Gerade der Dreiecksfunktion für $p$, $1 \leq p \leq P$, ist definiert durch
   \begin{equation}
     \frac{\alpha - t\left(p-1\right)}{t\left(p\right) - t\left(p-1\right)} = \frac{P\left(\alpha - t\left(p-1\right)\right)}{2\pi} = \frac{P\alpha - 2\pi\left(p-1\right)}{2\pi} = \frac{P}{2\pi}\alpha - p + 1.
   \end{equation}
@@ -100,7 +100,7 @@ Wir erhalten
 \begin{equation}
 \begin{split}
   \gls{Fout} = & \ {\left(\gls{Adistnorm}\right)}_{ii} \cdot \gls{F} \cdot \ma{W}_{P+1}\\
-  & + \sum_{p=1}^P \gls{Adistnorm} \cdot e^K_p\left(\gls{Arad}\right) \cdot \gls{F} \cdot \ma{W}_{p}
+  & + \sum_{p=1}^P \gls{Adistnorm} \gls{hadamard} e^K_p\left(\gls{Arad}\right) \cdot \gls{F} \cdot \ma{W}_{p}
 \end{split}
 \end{equation}
 
