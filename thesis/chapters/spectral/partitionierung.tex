@@ -58,8 +58,8 @@ Die Größe von $K$ wird deshalb auch oft \emph{lokale Kontrollierbarkeit} genan
 Wir können für $K=2$ die Basis-Berechnung durch
 \begin{equation}
   e_p^2\left(\alpha\right) = \begin{cases}
-    \min\left(\frac{P}{2\pi} \alpha - p + 1, 0\right), & \text{wenn }\alpha \leq t\left(p\right)\text{,}\\
-    \min\left(-\frac{P}{2\pi} \alpha + p + 1, 0\right), & \text{sonst}
+    \max\left(\frac{P}{2\pi} \alpha - p + 1, 0\right), & \text{wenn }\alpha \leq t\left(p\right)\text{,}\\
+    \max\left(-\frac{P}{2\pi} \alpha + p + 1, 0\right), & \text{sonst}
   \end{cases}
 \end{equation}
 vereinfachen.
@@ -69,7 +69,7 @@ vereinfachen.
   \begin{equation}
     \frac{\alpha - t\left(p-1\right)}{t\left(p\right) - t\left(p-1\right)} = \frac{P\left(\alpha - t\left(p-1\right)\right)}{2\pi} = \frac{P\alpha - 2\pi\left(p-1\right)}{2\pi} = \frac{P}{2\pi}\alpha - p + 1.
   \end{equation}
-  $\min \left(\frac{P}{2\pi} \alpha - p + 1, 0\right)$ beschreibt damit die linke Seite des Dreiecks.
+  $\max \left(\frac{P}{2\pi} \alpha - p + 1, 0\right)$ beschreibt damit die linke Seite der Dreiecksfunktion.
   Analog für absteigende Gerade.
 \end{proof}
 
@@ -77,21 +77,21 @@ Die Fallunterscheidung ist unnötig, wir können uns einfach immer für das Mini
 Die Grafik zeigt dies ziemlich eindeutig.
 Das ergibt letztendlich
 \begin{equation}
-  e_p^2\left(\alpha\right) = \min \left( \min\left(\frac{P}{2\pi} \alpha - p + 1, 0\right), \min\left(-\frac{P}{2\pi} \alpha + p + 1, 0\right) \right)\text{.}
+  e_p^2\left(\alpha\right) = \min \left( \max\left(\frac{P}{2\pi} \alpha - p + 1, 0\right), \max\left(-\frac{P}{2\pi} \alpha + p + 1, 0\right) \right)\text{.}
 \end{equation}
 
 \input{figures/bspline-basis-k-2}
 
 Wir haben bisher noch nicht den \emph{Kreis} geschlossen mit unserer Formel.
 
-Das können wir aber leicht tun, indem wir unsere absteigenden Geraden um $2\pi$ nach links verschieben und daraus wiederum das Minimum von $0$ ziehen.
+Das können wir aber leicht tun, indem wir unsere absteigenden Geraden um $2\pi$ nach links verschieben und daraus wiederum das Maximum von $0$ ziehen.
 Dann sind diese Geraden außer für $p = P$ im Gültigkeitsbereich der Funktion allesamt $0$.
 Wir können demnach aus unserer bisherigen Formel und der verschobenen Gerade das Maximum ziehen.
 Wir erhalten
 \begin{equation}
 \begin{split}
-  e_p^2\left(\alpha\right) = \max \biggr( & \min \left( \min\left(\frac{P}{2\pi} \alpha - p + 1, 0\right), \min\left(-\frac{P}{2\pi} \alpha + p + 1, 0\right) \right),\\
-  & \min \left(-\frac{P}{2\pi} \left( \alpha + 2\pi \right) + p + 1, 0\right) \biggr)\text{.}
+  e_p^2\left(\alpha\right) = \max \biggr( & \min \left( \max\left(\frac{P}{2\pi} \alpha - p + 1, 0\right), \max\left(-\frac{P}{2\pi} \alpha + p + 1, 0\right) \right),\\
+  & \max \left(-\frac{P}{2\pi} \left( \alpha + 2\pi \right) + p + 1, 0\right) \biggr)\text{.}
 \end{split}
 \end{equation}
 
