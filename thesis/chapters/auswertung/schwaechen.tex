@@ -8,8 +8,10 @@
     \item Augmentierung der Form-Features oder der Farbe verändert auch den Graphen
     \item Graphgenerierung im Postprocessing schwierig, weil langsam
   \end{itemize}
-  \item Jeder Superpixelalgorithmus und jeder Datensatz mit verschiedenen Bildauflösungen fordert eigentlich Neuberechnung der geeignesteten Form Features
+\item Jeder Superpixelalgorithmus und jeder Datensatz (verschiedene Bildauflösungen/anders Anwendungsgebiet) erfordert eigentlich Neuberechnung der geeignesteten Form Features
   \item PCA nicht möglich, weil zu teuer (alle Form Features zu berechnen ist utopisch und wiederspricht der Grundidee)
   \item viel langsamer als ausgereifte Bildimplementierungen
   \item abhängig von der Anzahl der Form-Features und der Größe des Graphen nicht unbedingt speichereffizienter als ein einzelnes Bild, wir haben aber in der Tat kleinere Convolutions.
+  \item es gibt Superpixelalgorithmen, die bei einer Menge von Bildern unterschiedliche Parameter brauchen für geeignete Superpixelrepräsentationen.
+    Diese Algorithmen sind zum Lernen ungeeignet (z.B.\ Felzenszwalb)
 \end{itemize}
