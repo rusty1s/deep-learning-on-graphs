@@ -47,9 +47,8 @@
   * [Convolutional Neural Networks on Graphs with Fast Localized
     Spectral Filtering](https://arxiv.org/pdf/1606.09375.pdf)
     ([Code](https://github.com/mdeff/cnn_graph))
-  * [Spectral Networks and Deep Locally Connected Networks on
-    Graphs](https://arxiv.org/pdf/1312.6203v3.pdf)
-    * Clustering von Graphen
+  * [Spectral Networks and Deep Locally Connected Networks on Graphs](https://arxiv.org/pdf/1312.6203v3.pdf)
+  * [Deep Convoltional Networks on Graph-Structured Data](https://arxiv.org/pdf/1506.05163.pdf)
 * [Convolutional Networks on Graphs for Learning Molecular
   Fingerprints](https://hips.seas.harvard.edu/files/duvenaud-graphs-nips-2015.pdf)
 * [Graph image representation from convolutional neural
@@ -66,9 +65,9 @@
 
 * Betweeness centrality
   ([YouTube](https://www.youtube.com/watch?v=6V_-xWvpMFk))
-  * [A Set of Measures of Centrality Based on 
+  * [A Set of Measures of Centrality Based on
     Betweenness](http://moreno.ss.uci.edu/23.pdf)
-  * [A Faster Algorithm for Betweenness 
+  * [A Faster Algorithm for Betweenness
     Centrality](http://algo.uni-konstanz.de/publications/b-fabc-01.pdf)
 
 ### Graph Coarsening
