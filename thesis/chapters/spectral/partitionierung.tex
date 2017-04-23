@@ -54,6 +54,17 @@ Die Größe von $K$ wird deshalb auch oft \emph{lokale Kontrollierbarkeit} genan
 
 \input{figures/bspline-basis}
 
+\subsubsection{Effiziente Berechnung für $K=1$}
+
+Eigentlich ist nicht viel zu tun.
+Wir suchen lediglich eine effiziente Implementierung für $e_p^1\left(\alpha\right)$, die auch von TensorFlow verstanden wird und ableitbar ist.
+Es zeigt sich, dass $e_p^1\left(\alpha\right) = 1$ genau dann, wenn $\alpha > 2\pi\frac{p-1}{P}$ und $\alpha \leq 2\pi\frac{p}{P}$.
+Vereinfact damit
+\begin{equation}
+  0 < \frac{P}{2\pi}\alpha + p - 1 \leq 1.
+\end{equation}
+Es bleibt die Ungleichungsüberprüfung.
+
 \subsubsection{Effiziente Berechnung für $K=2$}
 
 Wir können für $K=2$ die Basis-Berechnung durch

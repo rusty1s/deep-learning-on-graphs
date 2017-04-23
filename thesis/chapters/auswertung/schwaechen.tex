@@ -15,3 +15,10 @@
   \item es gibt Superpixelalgorithmen, die bei einer Menge von Bildern unterschiedliche Parameter brauchen für geeignete Superpixelrepräsentationen.
     Diese Algorithmen sind zum Lernen ungeeignet (z.B.\ Felzenszwalb)
 \end{itemize}
+
+\subsection{Übergang zum FC-Layer}
+
+Der Übergang zum Fully-Connected Layer kann durchaus als eine Schwäche im Vergleich zu klassischen CNN auf Bildern angesehen werden.
+Pixel und daraus entstehende Receptive-Fields haben auch im späteren Verlauf der Layer eine Ordnung.
+Diese Ordnung ist auf Graphen und auch auf eingebetten Graphen nicht oder nur bedingt gegeben und man kann diese nicht ausnutzen. (siehe Email)
+Die Lösung für dieses Problem besteht darin, so viele Layer vor dem FC-Layer zu stacken, sodass die Receptive-Field-Größe sehr klein ist und als Merkmale für das gesamte Bild aufgefasst werden können.
