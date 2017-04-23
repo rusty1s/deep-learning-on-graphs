@@ -106,6 +106,8 @@ Wir erhalten
 \end{equation}
 mit $e_p^K(0) = 0$.
 Elementweise Multiplikation mit dünnbesetzten Matrizen \texttt{sparse\_multiply} ist in TensorFlow nicht implementiert.
+Es kann aber intern auf den Daten von dünnbesetzten Matrizen eine elementweise Multiplikation angewendet werden.
+So kann die Faltung ohne Preprocessing implementiert werden.
 
 \todo{$p$ soll bei $0$ anfangen}
 \todo{$A_{ii}$ kann raus, da immer $1$}
