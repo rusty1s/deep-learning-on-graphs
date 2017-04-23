@@ -20,6 +20,7 @@
   f^{\prime}_{iy} = \sum_{x = 1}^X \tilde a_{ii} \cdot f_{ix} \cdot w_{\left(P +1\right)xy} \sum_{n = 1, n \neq i}^N \tilde a_{in} \cdot f_{nx} \cdot b^K_P\left(\alpha_{in}, x, y\right)
 \end{equation}
 wobei $b_P^K$ eine B-Spline-Kurve.
+\todo{$a_{ii}$ kann raus, da immer $1$}
 
 Es ist anzumerken, dass im Summanden der betrachtete Knoten übersprungen wird, da für diesen ein Wert in der Winkelmatrix keinen Sinn ergibt.
 Er wird daher in der Faltung jeweils einzeln mit einem Gewicht multipliziert und dazuaddiert.
@@ -107,5 +108,6 @@ mit $e_p^K(0) = 0$.
 Elementweise Multiplikation mit dünnbesetzten Matrizen \texttt{sparse\_multiply} ist in TensorFlow nicht implementiert.
 
 \todo{$p$ soll bei $0$ anfangen}
+\todo{$A_{ii}$ kann raus, da immer $1$}
 
 \newpage
