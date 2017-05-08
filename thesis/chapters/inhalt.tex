@@ -7,7 +7,6 @@
 Vektoren, Matrizen und Tensoren
 insbesondere dünnbesetzte Matrizen
 \section{Graphentheorie}
-\subsection{Eingebettete Graphen}
 \section{Neuronale Netze}
 \subsection{Convolutional Neural Networks}
 Was ist ein CNN\@?
@@ -18,13 +17,14 @@ Aktivierungsfunktionen?
 Dynamische Eingabegröße? (evtl.\ erst später)
 
 \chapter{Bildrepräsentationen durch Graphen}
+\section{Eingebettete Graphen}
+\subsection{Kantengewichte}
 \section{Gitter}
 \section{Superpixel}
 \subsection{Verfahren}
 \subsubsection{SLIC}
 \subsubsection{Quickshift}
 \subsubsection{Weitere Verfahren}
-\subsection{Kantengewichte}
 \subsection{Adjazenzmatrixbestimmung}
 \subsection{Merkmalsextraktion}
 
@@ -33,7 +33,7 @@ Dynamische Eingabegröße? (evtl.\ erst später)
 \chapter{Räumliches Lernen auf Graphen}
 \section{Räumliche Graphentheorie}
 \subsection{Färbung von Knoten}
-\subsection{Isomorphismus und kanonische Ordnung}
+\subsection{Isomorphie und kanonische Ordnung}
 \section{Räumliche Faltung}
 \subsection{Knotenauswahl}
 \subsection{Nachbarschaftsgruppierung}
@@ -61,30 +61,84 @@ Dynamische Eingabegröße? (evtl.\ erst später)
 \subsection{Clustering von Knoten}
 \subsubsection{Normalized Cut}
 \subsection{Vergröberung von Graphen}
+\subsection{Erweiterung auf eingebettete Graphen}
 \section{Netzarchitektur}
 
 \chapter{Implementierung}
+\section{Verwendete Technologien}
+\section{Vorverarbeitungsschritt}
+
+\chapter{Evaluation}
 \section{Datensätze}
 \subsection{MNIST}
 \subsection{Cifar10}
 \subsection{PascalVOC}
-\section{Merkmalsselektion}
-
-\chapter{Evaluation}
 \section{Metriken}
-\section{Versuchsaufbau}
-\section{Laufzeitanalsyse}
-  \subsection{Vergleich zu anderen Implementierungen}
+\section{Parameterwahl}
+Vorstellung aller Parameter
+Superpixelalgorithmen Parameterwahl
+\section{Merkmalsselektion}
+\newpage
 \section{Ergebnisse}
+\subsection{MNIST}
+\subsubsection{Gitter}
+
+10.000 Steps mit Bach Size 64\\
+Learning-Rate: 0.001\\
+Dropout: 0.5\\
+
+\begin{tabular}{p{2.5cm}p{7.5cm}cc}
+  \hline
+  Verfahren & Netzarchitektur & Dauer & Genauigkeit\\
+  \hline
+  klassisch & C5-32-P4-C5-64-P4-FC1024 & 0.18s & 99.189\\
+  klassisch & C32-C32-P4-C64-C64-P4-FC1024 & 0.25s & 99.139\\
+  Chebyshev & C25-32-P4-C25-64-P4-FC1024 & 0.91s & 98.888\\
+  GCN & C32-C32-P4-C64-C64-P4-FC1024 & 0.22s & 96.675\\
+  E-GCN & C32-C32-P4-C64-C64-P4-FC1024 & 0.77s & 99.145\\
+  \hline
+\end{tabular}
+
+\subsubsection{Superpixel}
+
+\begin{tabular}{p{2.5cm}p{7.5cm}cc}
+  \hline
+  Verfahren & Netzarchitektur & Dauer & Genauigkeit\\
+  \hline
+  SLIC E-GCN & C32-P2-C64-P2-C128-P2-C256-P2-FC128 & 1.12s & 96.124\\
+  \hline
+\end{tabular}
+
+\subsection{Cifar10}
+\subsection{PascalVOC}
+
+Learning-Rate: 0.1\\
+Dropout: 0.5\\
+nur 2000 Steps trainiert!\\
+
+\begin{tabular}{p{2.5cm}p{7.5cm}cc}
+  \hline
+  Verfahren & Netzarchitektur & Dauer & Genauigkeit\\
+  \hline
+  SLIC E-GCN & C32-C32-P2-C64-C64-P2-C128-C128-P2-C256-C256-P2-C512-C512-P2-FC256-FC128 & 29s & 60.546\\
+  \hline
+\end{tabular}
+
+\newpage
+
+  \subsection{Vergleich mit anderen Implementierungen}
+\section{Laufzeitanalyse}
+  \subsection{Vergleich mit anderen Implementierungen}
 \section{Räumlicher Ansatz vs.\ spektraler Ansatz}
 Schwächen und Vorteile beider Ansätze
 
 \chapter{Zusammenfassung}
 
 \chapter{Ausblick}
-\section{Weitere Anwendungsgebiete (z.B. Segmentierung)}
+\section{Weitere Anwendungsgebiete}
+z.B. Segmentierung
 \section{Augmentierung von Graphen}
-\section{Spatial Pyramid Pooling}
+\section{Spatial-Pyramid-Pooling}
 \section{Attention-Algorithmus}
 
 Grundlagen:
