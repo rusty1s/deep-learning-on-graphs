@@ -4,6 +4,7 @@ log_graph
 *.aux
 *.log
 *.loa
+*.lol
 *.lof
 *.thm
 *.toc
