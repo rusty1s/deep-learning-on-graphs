@@ -1,0 +1,86 @@
+\include{header}
+
+\begin{document}
+
+% -------------------------------------------------------------------
+
+% Titelseite
+\pagestyle{empty}
+\pagenumbering{alpha}
+
+\include{kapitel/titelseite}
+
+% -------------------------------------------------------------------
+
+% Inhaltsverzeichnis
+% \pagestyle{plain}
+\pagenumbering{roman}
+
+\cleardoublepage{}
+\tableofcontents
+
+% -------------------------------------------------------------------
+
+% Mathematische Notation
+\pagestyle{empty}
+\pagenumbering{arabic}
+
+\cleardoublepage{}
+\include{kapitel/notation}
+
+% -------------------------------------------------------------------
+
+\pagestyle{headings}
+\pagestyle{fancy}
+
+\cleardoublepage{}
+\include{kapitel/einleitung}
+
+\cleardoublepage{}
+\include{kapitel/kapitel2}
+
+\cleardoublepage{}
+\include{kapitel/kapitel3}
+
+% -------------------------------------------------------------------
+
+% Anhang
+\cleardoublepage{}
+\appendix
+\include{kapitel/anhang}
+
+% -------------------------------------------------------------------
+
+% Abbildungsverzeichnis
+\cleardoublepage{}
+\listoffigures
+\addcontentsline{toc}{chapter}{Abbildungsverzeichnis}
+
+% Algorithmenverzeichnis
+\cleardoublepage{}
+\listofalgorithms{}
+\addcontentsline{toc}{chapter}{Algorithmenverzeichnis}
+
+% Quellcodeverzeichnis
+\cleardoublepage{}
+\renewcommand{\lstlistlistingname}{Quellcodeverzeichnis}
+\lstlistoflistings{}
+\addcontentsline{toc}{chapter}{Quellcodeverzeichnis}
+
+% -------------------------------------------------------------------
+
+% Literaturverzeichnis
+\cleardoublepage{}
+\addcontentsline{toc}{chapter}{Literaturverzeichnis}
+\bibliographystyle{dinatls7}
+\bibliography{literatur}
+
+% -------------------------------------------------------------------
+
+% Eidesstattliche Versicherung
+\cleardoublepage{}
+\includepdf{kapitel/versicherung}
+
+% -------------------------------------------------------------------
+
+\end{document}
