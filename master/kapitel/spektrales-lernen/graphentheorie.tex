@@ -4,6 +4,39 @@
 \subsection{Eigenwerte und Eigenvektoren reell symmetrischer Matrizen}
 \label{eigenwerte_symmetrischer_matrizen}
 
+$\ma{M} \in \gls{R}^{N \times N}$.
+$\gls{eiv} \in \gls{R}^{N}$.
+$\gls{lambda} \in \gls{R}$, $\gls{lambda} \neq 0$.
+Eigenwertproblem $\ma{M}\gls{eiv} = \gls{lambda}\gls{eiv}$.
+Zu einem Eigenwert $\gls{lambda}$ gibt es unendlich viele (skalierte) Eigenvektoren \gls{eiv}.
+Wir definieren den Eigenvektor \gls{eiv} eines Eigenwertes \gls{lambda} daher eindeutig über die Bedingung $\left\|\gls{eiv}\right\|_2 = 1$.
+Sei \ma{M} weiterhin reell symmetrisch, \dhe{} $\ma{M} = \ma{M}^{\top}$.
+Dann gilt für zwei unterschiedliche Eigenvektoren $\gls{eiv}_1$ und $\gls{eiv}_2$, dass $\gls{eiv}_1 \gls{ortho} \gls{eiv}_2$.
+Weiterhin hat \ma{M} genau $N$ reelle Eigenwerte mit ${\left\{\gls{lambda}_i\right\}}_{i=1}^N$.
+
+Wir definieren die orthogonale Eigenvektormatrix $\gls{Eiv} = \left[\gls{eiv}_1, \ldots, \gls{eiv}_n\right] \in \gls{R}^{N \times N}$ mit $\gls{Eiv}\gls{Eiv}^{\top}=\gls{I}$ und dessen korrespondierende Eigenwertdiagonalmatrix $\gls{Lambda} = \gls{diag}\left(\left[\gls{lambda}_1, \ldots, \gls{lambda}_N\right]\right)$.
+Dann gilt $\ma{M}\gls{Eiv} = \gls{Eiv}\gls{Lambda}$ und insbesondere ist \ma{M} diagonalisierbar über
+\begin{equation}
+  \ma{M} = \ma{M}\gls{Eiv}\gls{Eiv}^{\top} = \gls{Eiv}\gls{Lambda}\gls{Eiv}^{\top}.
+\end{equation}
+
+Weiterhin gilt für die $k$te Potenz von $\ma{M}$, $k \in \gls{N}$,
+\begin{equation}
+  \ma{M}^k = {\left(\gls{Eiv}\gls{Lambda}\gls{Eiv}^{\top}\right)}^k = \gls{Eiv}\gls{Lambda}^k\gls{Eiv}^{\top}.
+\end{equation}
+
+Dieser Zusammenhang lässt sicht leicht zeigen, wenn man die Potenz als ausschreibt:
+\begin{equation}
+  {\left(\gls{Eiv}\gls{Lambda}\gls{Eiv}^{\top}\right)}^k = \gls{Eiv}\gls{Lambda}\gls{Eiv}^{\top}\gls{Eiv}\gls{Lambda}\gls{Eiv}^{\top}\prod^{k-2}_{i=1} \gls{Eiv}\gls{Lambda}\gls{Eiv}^{\top} = \gls{Eiv}\gls{Lambda}^2\gls{Eiv}^{\top} \prod^{k-2}_{i=1} \gls{Eiv}\gls{Lambda}\gls{Eiv}^{\top} = \gls{Eiv}\gls{Lambda}^k \gls{Eiv}^{\top}
+\end{equation}
+
+Falls \ma{M} weiterhin \emph{schwach diagonaldominant} ist, \dhe{}
+\begin{equation}
+  \sum_{j=1}^n \left|\ma{M}_{ij}\right| \leq \left|\ma{M}\right|_{ii}\text{ für alle }i \in \left\{1, \ldots, N\right\},
+\end{equation}
+sind ihre Eigenwerte $\lambda_i$ positiv reell und es lässt sich auf diesen eine Ordnung definieren mit $0 \leq \gls{lambda}_1 \leq \cdots \gls{lambda}_N$.
+Insbesondere ist \ma{M} damit \emph{positiv-semidefinit}, \dhe{} $\ve{x}^{\top}\ma{M}\ve{x} \geq 0$ für alle $\ve{x} \in \gls{R}^{N}$.\todo{quelle, weil alle eigenvektoren größer gleich null}
+
 \subsection{Laplace-Matrix}
 \label{laplace_matrix}
 

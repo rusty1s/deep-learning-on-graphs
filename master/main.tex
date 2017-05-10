@@ -27,6 +27,9 @@
 \pagestyle{headings}
 \pagenumbering{arabic}
 
+\include{kapitel/notationen}
+
+\cleardoublepage{}
 \include{kapitel/einleitung/main}
 
 \cleardoublepage{}
@@ -72,9 +75,15 @@
 
 % Literaturverzeichnis
 \cleardoublepage{}
-\addcontentsline{toc}{chapter}{Literaturverzeichnis}
 \bibliographystyle{dinatls7}
 \bibliography{literatur}
+\addcontentsline{toc}{chapter}{Literaturverzeichnis}
+
+% -------------------------------------------------------------------
+
+% Glossar
+
+\printglossary[title={Glossar}]
 
 % -------------------------------------------------------------------
 
