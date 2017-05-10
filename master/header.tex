@@ -1,196 +1,153 @@
-\RequirePackage{ifthen}
+\documentclass[pdftex,12pt,a4paper,twoside,ngerman,numbers=noenddot]{scrbook}
 
-\newcommand \Arbeitsbezeichnung{Master-Thesis}
-\newcommand \Autor{Matthias Fey}
-\newcommand \Arbeitstitel{Convolutional Neural Networks auf Graphrepr{\"a}sentationen von Bildern}
-\newcommand \Erstgutachter{Prof.~Dr.~Heinrich~M{\"u}ller}
-\newcommand \Zweitgutachter{M.Sc.~Jan~Eric~Lenssen}
-\newcommand \Lehrstuhl{Lehrstuhl Informatik VII}
-\newcommand \Lehrstuhltitel{Graphische Systeme}
-\newcommand \Uni{TU Dortmund}
-
-\RequirePackage{ifpdf} \ifpdf
-  \pdfoutput=1
-  \pdftrue
-  \message{pdfLaTeX}
-  \documentclass[pdftex,12pt,a4paper,twoside,ngerman,numbers=noenddot]{scrbook}
-  \usepackage{float}
-  \usepackage[pdftex]{thumbpdf}
-  \usepackage[pdftex]{graphicx}
-  \usepackage[pdftex]{hyperref}
-  \usepackage{pdfpages}
-  \pdfoutput=1
-  \pdfcompresslevel=9
-  \DeclareGraphicsExtensions{.pdf,.jpg,.png}
-\else
-  \pdffalse
-  \message{LaTeX}
-  \documentclass[dvips,12pt,a4paper,twoside,ngerman,numbers=noenddot]{scrbook}
-  \usepackage{float}
-  \usepackage{graphicx}
-  \usepackage{epsf}
-  \usepackage[dvips]{hyperref}
-  \DeclareGraphicsExtensions{.eps}
-\fi
-
-
-% Informationen fuer pdf-File festlegen
-\hypersetup
-{
-    pdfauthor = {\Autor},
-    pdftitle = {\Arbeitstitel},
-    pdfsubject = {\Arbeitsbezeichnung, TU Dortmund, Fakult{\"a}t f{\"u}r Informatik},
-    pdfproducer = {LaTeX},
-    pdfview = FitV,
-    pdfstartview = FitV,
-    pdfhighlight = /I,
-    pdfborder = 0 0 0,
-    colorlinks = false,
-    bookmarksopen,
-    bookmarksopenlevel = 1,
-    bookmarksnumbered = false,
-    plainpages = false
-}%
-
+% -------------------------------------------------------------------
 
 % Seitenformat anpassen
 \usepackage[a4paper,left=3.5cm,right=2.5cm,bottom=3.5cm,top=3cm]{geometry}
 \setlength{\headheight}{15pt}
-% -------------------------------------------------------------------
-% Grafikpakete einbinden
-\usepackage{amsmath,amssymb}
-\usepackage{flafter}
-\usepackage{subfigure}
-\usepackage{pdfpages}
 
 % -------------------------------------------------------------------
-\usepackage{ifthen}
+
+% Fix für alte Pakete mit KOMA Warnung
+\usepackage{scrhack}
 
 % -------------------------------------------------------------------
+
+% Absolute Positionierung für Titelseite
 \usepackage[absolute,overlay]{textpos}
 \setlength{\TPHorizModule}{1mm}
 \setlength{\TPVertModule}{\TPHorizModule}
 \textblockorigin{0mm}{0mm}
-\usepackage{fix-cm}
 \usepackage{setspace}
-\usepackage{scrhack}
+
 % -------------------------------------------------------------------
-% Korrekte Darstellung der Umlaute
-\usepackage[german,ngerman]{babel}
+
+% Schrifteinstellungen
+\usepackage{lmodern}
+\usepackage[english,main=ngerman]{babel}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{ae,aecompl}
 
-
 % -------------------------------------------------------------------
+
 % Bibtex deutsch
 \usepackage[numbers,sort]{natbib}
 
-
 % -------------------------------------------------------------------
+
 % Anführungszeichen
 \usepackage[babel,german=quotes]{csquotes}
 
-
 % -------------------------------------------------------------------
+
 % URLs
 \usepackage{url}
-% Trennung langer urls
-\usepackage[hyphenbreaks]{breakurl}
-\def\UrlBreaks{\do\a\do\b\do\c\do\d\do\e\do\f\do\g\do\h\do\i\do\j\do\k\do\l%
-\do\m\do\n\do\o\do\p\do\q\do\r\do\s\do\t\do\u\do\v\do\w\do\x\do\y\do\z\do\0%
-\do\1\do\2\do\3\do\4\do\5\do\6\do\7\do\8\do\9\do\-}%
 
 % -------------------------------------------------------------------
+
 % Caption anpassen
 \usepackage[margin=0pt,font=small,labelfont=bf]{caption}
 
 % -------------------------------------------------------------------
-% Erweitere Tabellen
-\usepackage{booktabs}
 
-% -------------------------------------------------------------------
 % Zeilenabstand einstellen
 \renewcommand{\baselinestretch}{1.25}
+
 % Floating-Umgebungen anpassen
 \renewcommand{\topfraction}{0.9}
 \renewcommand{\bottomfraction}{0.8}
 
 % -------------------------------------------------------------------
+
 % Keine einzelnen Zeilen beim Anfang eines Abschnitts (Schusterjungen)
 \clubpenalty=10000
 % Keine einzelnen Zeilen am Ende eines Abschnitts (Hurenkinder)
 \widowpenalty=10000
 \displaywidowpenalty=10000
 
+% -------------------------------------------------------------------
+
+% Keine Einrücktiefe der ersten Zeile eines neuen Absatzes.
 \parindent=0cm
 
 % -------------------------------------------------------------------
+
 % Kopfzeile hinzufuegen
-\usepackage{fancyhdr}
-\usepackage{extramarks}
+% \usepackage{fancyhdr}
+% \usepackage{extramarks}
 
-\pagestyle{fancy}
-\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
-\renewcommand{\sectionmark}[1]{\markright{#1}{}}
+% \pagestyle{fancy}
+% \renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+% \renewcommand{\sectionmark}[1]{\markright{#1}{}}
 
-\fancyhf{}
-\fancyhead[LE,RO]{\thepage}
-\fancyhead[RE]{\textit{\nouppercase{\leftmark}}}
-\fancyhead[LO]{\textit{\nouppercase{\rightmark}}}
+% \fancyhf{}
+% \fancyhead[LE,RO]{\thepage}
+% \fancyhead[RE]{\textit{\nouppercase{\leftmark}}}
+% \fancyhead[LO]{\textit{\nouppercase{\rightmark}}}
 
-\fancypagestyle{plain}{ %
-\fancyhf{} % remove everything
-\renewcommand{\headrulewidth}{0pt} % remove lines as well
-\renewcommand{\footrulewidth}{0pt}} \pagestyle{headings}
-
-
+% \fancypagestyle{plain}{ %
+% \fancyhf{} % remove everything
+% \renewcommand{\headrulewidth}{0pt} % remove lines as well
+% \renewcommand{\footrulewidth}{0pt}} \pagestyle{headings}
 
 % -------------------------------------------------------------------
-% Eigene Farben definieren
-\usepackage{color}
+
+% Eigene Farben
+\usepackage{xcolor}
 \definecolor{TUGreen}{rgb}{0.517,0.721,0.094}
-\definecolor{TUOrange}{rgb}{1.0,0.7176,0.0}
-\definecolor{BrightGray}{gray}{0.9}
-\definecolor{DarkGray}{gray}{0.2}
-\definecolor{white}{rgb}{1,1,1}
-\definecolor{black}{rgb}{0,0,0}
 \definecolor{red}{rgb}{1,0,0}
 
-
-
-
 % -------------------------------------------------------------------
-% Programm-Listings einbinden und formatieren
-\usepackage{listings}
 
-\lstdefinestyle{C++}
-{
-language=C++,
-backgroundcolor=\color{BrightGray},
-keywordstyle=\texttt\bfseries,  %\color{TUGreen}\bfseries,
-commentstyle=\color{DarkGray},
-stringstyle=\color{red},
-showstringspaces=false,
-basicstyle=\small\color{black},
-numbers=left,
-captionpos=b,
-tabsize=4,
-breaklines=true
-}
-
-
-% -------------------------------------------------------------------
 % Algorithmen
 \usepackage[plain,chapter]{algorithm}
 \usepackage{algorithmic}
 
-\usepackage{enumerate}
-
-% -------------------------------------------------------------------
 % Algorithmen anpassen
 \renewcommand{\algorithmicrequire}{\textit{Eingabe:}}
 \renewcommand{\algorithmicensure}{\textit{Ausgabe:}}
 \floatname{algorithm}{Algorithmus}
 \renewcommand{\listalgorithmname}{Algorithmenverzeichnis}
 \renewcommand{\algorithmiccomment}[1]{\color{grau}{// #1}}
+
+% -------------------------------------------------------------------
+
+% Grafikpakete einbinden
+\usepackage{subfigure}
+\usepackage{flafter}  % Platziere Figuren immer nach ihrer ersten Referenz
+\usepackage{pdfpages}
+\usepackage{tikz}
+
+% -------------------------------------------------------------------
+
+% Mathematikpakete einbinden
+
+\usepackage{amsmath,amssymb,amsthm}
+
+% -------------------------------------------------------------------
+
+% Todonotes einbinden
+
+\usepackage{todonotes}
+
+% -------------------------------------------------------------------
+
+% Informationen für PDF-Dokument festlegen
+\usepackage[pdfencoding=auto]{hyperref}
+
+\hypersetup{
+  pdfauthor={\Autor},
+  pdftitle={\Titel},
+  pdfsubject={\Arbeit, \Universitaet, \Fakultaet},
+  pdfproducer={LaTeX},
+  pdfview=FitV,
+  pdfstartview=FitV,
+  pdfhighlight=/I,
+  pdfborder=0 0 0,
+  colorlinks=false,
+  bookmarksopen,
+  bookmarksopenlevel=1,
+  bookmarksnumbered=false,
+  plainpages=false
+}

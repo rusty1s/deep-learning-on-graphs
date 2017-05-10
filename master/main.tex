@@ -1,19 +1,21 @@
+\include{commands}
 \include{header}
 
 \begin{document}
 
-% -------------------------------------------------------------------
+% % -------------------------------------------------------------------
 
 % Titelseite
 \pagestyle{empty}
 \pagenumbering{alpha}
 
 \include{kapitel/titelseite}
+\null{}
 
 % -------------------------------------------------------------------
 
 % Inhaltsverzeichnis
-% \pagestyle{plain}
+\pagestyle{plain}
 \pagenumbering{roman}
 
 \cleardoublepage{}
@@ -30,8 +32,8 @@
 
 % -------------------------------------------------------------------
 
+% Kapitel
 \pagestyle{headings}
-\pagestyle{fancy}
 
 \cleardoublepage{}
 \include{kapitel/einleitung}
@@ -56,16 +58,12 @@
 \listoffigures
 \addcontentsline{toc}{chapter}{Abbildungsverzeichnis}
 
+% -------------------------------------------------------------------
+
 % Algorithmenverzeichnis
 \cleardoublepage{}
 \listofalgorithms{}
 \addcontentsline{toc}{chapter}{Algorithmenverzeichnis}
-
-% Quellcodeverzeichnis
-\cleardoublepage{}
-\renewcommand{\lstlistlistingname}{Quellcodeverzeichnis}
-\lstlistoflistings{}
-\addcontentsline{toc}{chapter}{Quellcodeverzeichnis}
 
 % -------------------------------------------------------------------
 
