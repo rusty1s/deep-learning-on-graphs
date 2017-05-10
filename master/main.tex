@@ -27,20 +27,53 @@
 \pagestyle{headings}
 \pagenumbering{arabic}
 
-\include{kapitel/einleitung}
+\include*{kapitel/einleitung/main}
+\include*{kapitel/einleitung/problemstellung}
+\include*{kapitel/einleitung/aufbau}
 
 \cleardoublepage{}
-\include{kapitel/kapitel2}
+\include*{kapitel/grundlagen/main}
+\include*{kapitel/grundlagen/notationen}
+\include*{kapitel/grundlagen/graphentheorie}
+\include*{kapitel/grundlagen/cnn}
 
 \cleardoublepage{}
-\include{kapitel/kapitel3}
+\include*{kapitel/bildgraphen/main}
+\include*{kapitel/bildgraphen/gitter}
+\include*{kapitel/bildgraphen/superpixel}
+
+\cleardoublepage{}
+\include*{kapitel/raeumliches-lernen/main}
+\include*{kapitel/raeumliches-lernen/graphentheorie}
+\include*{kapitel/raeumliches-lernen/faltung}
+\include*{kapitel/raeumliches-lernen/erweiterung}
+\include*{kapitel/raeumliches-lernen/netzarchitektur}
+
+\cleardoublepage{}
+\include*{kapitel/spektrales-lernen/main}
+\include*{kapitel/spektrales-lernen/graphentheorie}
+\include*{kapitel/spektrales-lernen/faltung}
+\include*{kapitel/spektrales-lernen/gcn}
+\include*{kapitel/spektrales-lernen/pooling}
+\include*{kapitel/spektrales-lernen/netzarchitektur}
+
+\cleardoublepage{}
+\include*{kapitel/evaluation/main}
+\include*{kapitel/evaluation/versuchsaufbau}
+\include*{kapitel/evaluation/merkmalsselektion}
+\include*{kapitel/evaluation/ergebnisse}
+\include*{kapitel/evaluation/laufzeitanalyse}
+\include*{kapitel/evaluation/diskussion}
+
+\cleardoublepage{}
+\include*{kapitel/ausblick/main}
 
 % -------------------------------------------------------------------
 
 % Anhang
 \cleardoublepage{}
 \appendix
-\include{kapitel/anhang}
+\include{kapitel/anhang/main}
 
 % -------------------------------------------------------------------
 
