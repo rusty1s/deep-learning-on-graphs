@@ -11,72 +11,61 @@
 
 \include{kapitel/titelseite}
 \null{}
+\cleardoublepage{}
 
 % -------------------------------------------------------------------
 
 % Inhaltsverzeichnis
-\pagestyle{plain}
-\pagenumbering{roman}
-
-\cleardoublepage{}
 \tableofcontents
-
-% -------------------------------------------------------------------
-
-% Mathematische Notation
-\pagestyle{empty}
-\pagenumbering{arabic}
-
 \cleardoublepage{}
-\include{kapitel/notation}
 
 % -------------------------------------------------------------------
 
 % Kapitel
 \pagestyle{headings}
+\pagenumbering{arabic}
 
-\cleardoublepage{}
 \include{kapitel/einleitung}
-
 \cleardoublepage{}
+
 \include{kapitel/kapitel2}
-
 \cleardoublepage{}
+
 \include{kapitel/kapitel3}
+\cleardoublepage{}
 
 % -------------------------------------------------------------------
 
 % Anhang
-\cleardoublepage{}
 \appendix
 \include{kapitel/anhang}
+\cleardoublepage{}
 
 % -------------------------------------------------------------------
 
 % Abbildungsverzeichnis
-\cleardoublepage{}
 \listoffigures
 \addcontentsline{toc}{chapter}{Abbildungsverzeichnis}
+\cleardoublepage{}
 
 % -------------------------------------------------------------------
 
 % Algorithmenverzeichnis
-\cleardoublepage{}
 \listofalgorithms{}
 \addcontentsline{toc}{chapter}{Algorithmenverzeichnis}
+\cleardoublepage{}
 
 % -------------------------------------------------------------------
 
 % Literaturverzeichnis
-\cleardoublepage{}
 \addcontentsline{toc}{chapter}{Literaturverzeichnis}
 \bibliographystyle{dinatls7}
 \bibliography{literatur}
+\cleardoublepage{}
 
 % -------------------------------------------------------------------
 
 % Eidesstattliche Versicherung
-\cleardoublepage{}
 \includepdf{kapitel/versicherung}
 
 % -------------------------------------------------------------------

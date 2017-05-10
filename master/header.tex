@@ -4,7 +4,7 @@
 
 % Seitenformat anpassen
 \usepackage[a4paper,left=3.5cm,right=2.5cm,bottom=3.5cm,top=3cm]{geometry}
-\setlength{\headheight}{15pt}
+\setlength{\headheight}{19pt}
 
 % -------------------------------------------------------------------
 
@@ -73,23 +73,14 @@
 
 % -------------------------------------------------------------------
 
-% Kopfzeile hinzufuegen
-% \usepackage{fancyhdr}
-% \usepackage{extramarks}
+% Kopfzeile hinzufügen
+\usepackage[headsepline]{scrlayer-scrpage}
+\clearpairofpagestyles{}
 
-% \pagestyle{fancy}
-% \renewcommand{\chaptermark}[1]{\markboth{#1}{}}
-% \renewcommand{\sectionmark}[1]{\markright{#1}{}}
-
-% \fancyhf{}
-% \fancyhead[LE,RO]{\thepage}
-% \fancyhead[RE]{\textit{\nouppercase{\leftmark}}}
-% \fancyhead[LO]{\textit{\nouppercase{\rightmark}}}
-
-% \fancypagestyle{plain}{ %
-% \fancyhf{} % remove everything
-% \renewcommand{\headrulewidth}{0pt} % remove lines as well
-% \renewcommand{\footrulewidth}{0pt}} \pagestyle{headings}
+\lehead{\pagemark}
+\rehead{\headmark}
+\rohead{\pagemark}
+\lohead{\headmark}
 
 % -------------------------------------------------------------------
 
@@ -114,6 +105,7 @@
 % -------------------------------------------------------------------
 
 % Grafikpakete einbinden
+\usepackage{graphicx}
 \usepackage{subfigure}
 \usepackage{flafter}  % Platziere Figuren immer nach ihrer ersten Referenz
 \usepackage{pdfpages}
