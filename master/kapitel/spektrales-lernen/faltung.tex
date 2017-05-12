@@ -1,12 +1,94 @@
 \section{Spektraler Faltungsoperator}
 \label{spektraler_faltungsoperator}
 
+Wir interessieren uns dafür ein Signal auf den Knoten eines Graphes $f \colon \gls{V} \to \gls{R}$ zu verarbeiten.
+Dabei kann die Signalfunktion auf den Knoten auch als ein Vektor $\ve{f} \in \gls{R}^N$ verstanden werden mit $\ve{f}_i = f\left(\gls{v}_i\right)$.
+
+\todo{bild mit signalen}
+Signal $f \colon \gls{V} \to \gls{R}$ auf Graphen\\
+Signal kann ebenso als Vektor $\ve{f} \in \gls{R}^n$ aufgefasst werden (impliziert Ordnung der Knoten, ist durch Adjazenzmatrix gegeben)\todo{schon weiter oben definiert, eher in grundlagen unterbringen?}\\
+
 \cite{Shuman}
 \cite{Defferrard}
 \cite{Hammond}
 
+Transformation eines Signals in dessen Frequenzspektrum $f \colon \gls{R} \to \gls{R}$
+
+Die komplexe Exponentialfunktion $\exp\left(\mathrm{i}\omega t\right)$ der Fourier-Transformation beschreibt die \emph{Eigenfunktionen} des eindimensionalen Laplace-Operators $\nabla^2$.
+\todo{das verstehe ich nicht}
+
+Die inverse Fourier-Transformation
+\begin{equation}
+  f\left(t\right) = \frac{1}{2\pi} \int \hat f\left(\omega\right) \exp\left(\mathrm{i}\omega t\right)\,\mathrm{d}\omega
+\end{equation}
+kann damit als die Ausdehnung von $f$ in Bezug auf die Eigenfunktionen des Laplace-Operators verstanden werden.
+
 \subsection{Graph-Fourier-Transformation}
 \label{graph_fourier_transformation}
+
+\paragraph{Die klassische Fourier-Transformation}
+\label{fourier_transformation}
+Die klassische Fourier-Transformation
+\\\\
+Analog lässt sich die \emph{Graph-Fourier-Transformation} einer Funktion $\ve{f} \in \gls{R}^N$ auf den Knoten eines Graphen \gls{G} als Ausdehnung von \ve{f} in Bezug auf die Eigenvektoren der Laplace-Matrix definieren~\cite{Shuman}:
+\begin{equation}
+  \hat f\left(\gls{lambda}_i\right) \coloneqq \left\langle \ve{f}, \gls{eiv}_i \right\rangle \text{ \bzw{} } \ve{\hat f} \coloneqq \gls{Eiv}^{\top}\ve{f}.
+  \label{eq:graph_fourier_transformation}
+\end{equation}
+Die inverse Graph-Fourier-Transformation ergibt sich dann als~\cite{Shuman}
+\begin{equation}
+  f\left(\gls{v}_i\right) = \sum_{j=1}^N \hat f\left(\gls{lambda}_j\right) {\left(\gls{eiv}_j\right)}_i\text{ \bzw{} }\ve{f} = \gls{Eiv}\ve{\hat f}.
+  \label{eq:inverse_graph_fourier_transformation}
+\end{equation}
+
+Die Graph-Fourier-Transformation~\eqref{eq:graph_fourier_transformation} und ihre Inverse~\eqref{eq:inverse_graph_fourier_transformation} bieten uns eine Möglichkeit ein Signal in zwei unterschiedlichen Domänen zu repräsentieren, nämlich die Knotendomäne (das unveränderte Signal auf der Knotenmenge $\ve{f}$) und der spektralen Domäne (das transformierte Signal in das Spektrum des Graphen $\ve{\hat f}$).
+Dabei berücksichtigt eine Transformation eines Signals in der spektralen Domäne des Graphen die Struktur eines Graphen, wohingegen eine solche Transformation eines Signals auf den Knoten nicht möglich wäre.
+
+\todo{parseval relation?}
+
+Spectral Graph Domain
+
+\begin{itemize}
+  \item \emph{Spectral Graph Domain}: Der Raum der Eigenfunktionen von $\mathcal{L}$
+  \item Analogon (Nachbildung) einer \emph{Fourier-Transformation} von Funktionen auf gewichteten Graphen
+\end{itemize}
+
+Das ermöglicht uns das Anwenden verschiedener Operation wie Filterung, Translation oder Faltung.\todo{quelle}
+
+Directly extending this construction to arbitrary weighted graphs is problematic, as it is unclear
+how to define scaling and translation on an irregular graph.
+We approach this problem by working in the spectral graph domain, i.e.\ the space of eigenfunctions of the graph Laplacian \gls{Lboth}.
+This tool from spectral graph theory, provides an analogue of the Fourier transform for functions on weighted graphs.
+
+Eigenwerte werden als Frequenz aufgefasst, die das Spektrum des Graphen beschreiben.
+Die Eigenvektoren beschreiben beschreiben die Signale zu den gegebenen Frequenzen.\todo{mmh}
+
+Fourier-Transformation beschreibt die gleiche Funktion $f$, aber in einer völlig anderen Domäne.
+Nicht in der Vertex-Domäne, sondern in der Spectrum-Domäne, d.h.\ auf Basis der Eigenwerte.
+
+In classical Fourier analysis, the eigenvalues carry a specific notion of frequency:
+for $\omega$ close
+to zero (low frequencies), the associated complex exponential
+eigenfunctions are smooth, slowly oscillating functions,
+whereas for $\omega$ far from zero (high frequencies), the associated
+complex exponential eigenfunctions oscillate much more
+rapidly. In the graph setting, the graph Laplacian eigenvalues
+and eigenvectors provide a similar notion of frequency. For
+connected graphs, the Laplacian eigenvector u0 associated
+with the eigenvalue 0 is constant and equal to 1
+at each
+vertex. The graph Laplacian eigenvectors associated with low
+frequencies $\gls{lambda}_2$ vary slowly across the graph; i.e., if two
+vertices are connected by an edge with a large weight, the
+values of the eigenvector at those locations are likely to be
+similar. The eigenvectors associated with larger eigenvalues
+oscillate more rapidly and are more likely to have dissimilar
+values on vertices connected by an edge with high weight.
+
+Graph Fourier Transformation und ihre Inverse gibt uns die Möglichkeit, ein Signal in zwei verschiedenen Domänen zu repräsentieren, nämlich die Knotendomäne (das unveränderte Signal auf der Knotenmenge $\ve{f}$) und der spektralen Domäne (das transformierte Signal in das Spektrum des Graphen).
+Signale, die im Spektrum definiert werden, werden \emph{Kernel} genannt.\todo{ok?}
+
+Die Fourier-Transformation wird unter anderem gerne genutzt, da sie gute Eigenschaften hat.
 
 \subsection{Polynomielle Approximation}
 \label{polynomielle_approximation}

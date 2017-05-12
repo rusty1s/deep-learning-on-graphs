@@ -49,10 +49,10 @@ Dieser Zusammenhang lässt sich verdeutlichen, wenn man die Potenz ausschreibt:
 Falls \ma{M} weiterhin \emph{schwach diagonaldominant} ist, \dhe{}
 \begin{equation}
   \sum_{\substack{j=1\\j \neq i}}^N \left|\ma{M}_{ij}\right| \leq \left|\ma{M}\right|_{ii},
-  \label{schwach_diagonaldominant}
+  \label{eq:schwach_diagonaldominant}
 \end{equation}
 und $\ma{M}_{ii} \geq 0$ für alle $i \in \left\{1, \ldots, N\right\}$, ist \ma{M} \emph{positiv semidefinit}, \dhe{} $\ve{x}^{\top}\ma{M}\ve{x} \geq 0$ für alle $\ve{x} \in \gls{R}^{N}$.
-Eigenwerte symmetrischer positiv semidefiniter Matrizen $\lambda_i \in \gls{R+}$ sind positiv reell und es lässt sich folglich auf diesen eine Ordnung definieren mit $0 \leq \gls{lambda}_1 \leq \cdots \leq \gls{lambda}_N$.
+Eigenwerte symmetrischer positiv semidefiniter Matrizen $\lambda_i \in \gls{R+}$ sind positiv reell und es lässt sich folglich auf diesen eine Ordnung definieren mit $0 \leq \gls{lambda}_1 \leq \cdots \leq \gls{lambda}_N \coloneqq \gls{lambdamax}$.
 
 \todo{quelle}
 
@@ -96,18 +96,19 @@ Wir schreiben \gls{Lboth} wenn die Wahl der Laplace-Matrix, ob \gls{L} oder \gls
 $\gls{Lboth} \in \gls{R}^{N \times N}$ ist eine reell symmetrisch, positiv semidefinite Matrix~\cite{Chung}.
 Folglich besitzt \gls{Lboth} nach Kapitel~\ref{eigenwerte_symmetrischer_matrizen} genau $N$ positiv reelle Eigenwerte ${\left\{\gls{lambda}_i\right\}}_{i=1}^N$ mit Ordnung $0 \leq \gls{lambda}_1 \leq \cdots \leq \gls{lambda}_N$.
 
-Es ist leicht zu sehen, dass die kombinatorische Laplace-Matrix $\gls{L}$ nach~\eqref{schwach_diagonaldominant} schwach diagonaldominant ist.
+Es ist leicht zu sehen, dass die kombinatorische Laplace-Matrix $\gls{L}$ nach~\eqref{eq:schwach_diagonaldominant} schwach diagonaldominant ist.
 Es zeigt sich sogar, dass sich jede Reihen- und Spaltensumme von \gls{L} zu Null aufsummiert, \dhe{} $\sum_{j=1}^N \gls{L}_{ij} = \sum_{j=1}^N \gls{L}_{ji} = 0$.
 Daraus folgt unmittelbar, dass $\gls{lambda}_1 = 0$, da $\gls{eiv}_1 = \frac{1}{\sqrt{N}}{\left[1, \ldots, 1\right]}^{\top} \in \gls{R}^N$ Eigenvektor von \gls{L} mit $\gls{L}\gls{eiv}_1 = \ve{0}$.
-\gls{Lnorm} hingegen ist nicht unbedingt schwach diagonaldominant.
-Es lässt sich jedoch zeigen, dass auch \gls{Lnorm} den ersten Eigenwert $\gls{lambda}_1 = 0$ besitzt~\cite{Chung}.
+\gls{Lnorm} hingegen ist nicht zwingend schwach diagonaldominant.
+Es lässt sich jedoch zeigen, dass auch für \gls{Lnorm} gilt, dass $\gls{lambda}_1 = 0$~\cite{Chung}.
 
 Eine der interessantesten Eigenschaften eines Graphs ist dessen Konnektivität.
 Die Laplace-Matrix \gls{Lboth} \bzw{} dessen Eigenwerte stellen ein geeignetes Mittel zur Untersuchung dieser Eigenschaft dar.
 So gilt \zB{} für einen verbundenen Graphen \gls{G}, dass $\gls{lambda}_2 > 0$.
 Falls $\gls{lambda}_i = 0$ und $\gls{lambda}_{i+1} \neq 0$, dann besitzt $\gls{G}$ genau $i$ verbundene Komponenten~\cite{Chung}.
-Damit ist die Anzahl der Eigenwerte gleich Null die Anzahl an Komponenten, die ein Graph besitzt.
-Für \gls{Lnorm} lässt sich weiterhin zeigen, dass $\gls{lambda}_N \leq 2$ eine obere Schranke der Eigenwerte ist~\cite{Chung}.
+Damit ist die Anzahl der Null-Eigenwerte äquivalent zu der Anzahl an Komponenten, die ein Graph besitzt.
+Für \gls{Lnorm} lässt sich weiterhin zeigen, dass $\gls{lambdamax} \leq 2$ eine obere Schranke der Eigenwerte ist~\cite{Chung}.
 
-Für $\gls{Lboth}^{k}$ mit $k \in \gls{N}$ gilt $\gls{Lboth}^k_{ij} = 0$ genau dann, wenn $\gls{s}\left(v_i, v_j\right) > k$~\cite{Hammond}.
+Aus der Laplace-Matrix können ebenso Rückschlüsse über die kürzeste Pfadlänge zweier Knoten gewonnen werden.
+So gilt für $\gls{Lboth}^{k}$ mit $k \in \gls{N}$, dass $\gls{Lboth}^k_{ij} = 0$ genau dann, wenn $\gls{s}\left(v_i, v_j\right) > k$~\cite{Hammond}.
 Damit beschreibt $\gls{Lboth}^k_i$ bildlich gesprochen die Menge an Knoten, die maximal $k$ Kanten von $i$ entfernt liegen.
