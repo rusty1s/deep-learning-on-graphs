@@ -1,10 +1,25 @@
-\newglossaryentry{R}{name=\ensuremath{R}, description={Menge der reellen Zahlen}}
-\newglossaryentry{N}{name={N}, description={Menge}}
-\newglossaryentry{lambda}{name=\ensuremath{\lambda}, description={Eigenwert}}
-\newglossaryentry{Lambda}{name=\ma{\Lambda}, description={Diagonalmatrix der Eigenwerte des Laplacian}}
-\newglossaryentry{ortho}{name=\ensuremath{\perp}, description={Orthogonalität}}
-\newglossaryentry{eiv}{name=\ve{u}, description={Eigenvektor mit $\left\|\gls{eiv}\right\|_2 = 1$}}
-\newglossaryentry{Eiv}{name=\ma{U}, description={Eigenvektormatrix}}
-\newglossaryentry{diag}{name=\ensuremath{\mathrm{diag}}, description={Diagonalfunktion}}
+\newglossaryentry{N}{name=\ensuremath{\mathbb{N}}, description={Menge}}
+\newglossaryentry{R}{name=\ensuremath{\mathbb{R}}, description={Menge der reellen Zahlen}}
+\newglossaryentry{R+}{name=\ensuremath{\mathbb{R}^+}, description={Menge der positiven reellen Zahlen inklusive Null}}
+
 \newglossaryentry{I}{name=\ma{I}, description={Identitätsmatrix}}
-\newglossaryentry{R+}{name=\ensuremath{R_+}, description={Menge der positiven reellen Zahlen inklusive Null}}
+
+\newglossaryentry{diag}{name=\ensuremath{\mathrm{diag}}, description={Diagonalfunktion}}
+\newglossaryentry{ortho}{name=\ensuremath{\perp}, description={Orthogonalität}}
+
+\newglossaryentry{G}{name=\ensuremath{G}, description={Graph}}
+\newglossaryentry{V}{name=\ensuremath{\mathcal{V}}, description={Knotenmenge ${\left\{v_i\right\}}^N_{i=1}$ eines Graphen \gls{G}}}
+\newglossaryentry{v}{name={\ensuremath{v}}, description={Knoten eines Graphen}}
+\newglossaryentry{A}{name=\ma{A}, description={Adjazentmatrix eines Graphen \gls{G}}}
+\newglossaryentry{D}{name=\ma{D}, description={gewichtete Gradmatrix}}
+\newglossaryentry{L}{name=\ma{L}, description={Laplacian, unnormalisiert}}
+\newglossaryentry{Lnorm}{name=\ma{\tilde{L}}, description={Laplacian, normalisiert}}
+\newglossaryentry{Lboth}{name=\ma{\mathcal{L}}, description={Laplacian, normalisiert oder unnormalisiert}}
+\newglossaryentry{w}{name=\ensuremath{w}, description={Gewichtsfunktion der Kanten eines Graph \gls{G} mit $\gls{w} \colon \gls{V} \times \gls{V} \to \gls{R+}$}}
+\newglossaryentry{adj}{name=\ensuremath{\sim}, description={Adjazenzrelation zweiter Knoten eines Graphen \gls{G} mit $u \gls{adj} v$ genau dann, wenn $u$ und $v$ adjazent}}
+\newglossaryentry{d}{name=\ensuremath{d}, description={gewichtete Gradfunktion der Knoten eines Graphen \gls{G} mit $\gls{d} \colon \gls{V} \to \gls{R+}$}}
+
+\newglossaryentry{lambda}{name=\ensuremath{\lambda}, description={Eigenwert eines Eigenwertproblems $\ma{M}\ve{u} = \lambda\ve{u}$}}
+\newglossaryentry{Lambda}{name=\ma{\Lambda}, description={Diagonalmatrix der Eigenwerte einer Matrix \ma{M} mit $\mathrm{diag}$}}
+\newglossaryentry{eiv}{name=\ve{u}, description={normierter Eigenvektor zu einem Eigenwert mit $\left\|\gls{eiv}\right\|_2 = 1$}}
+\newglossaryentry{Eiv}{name=\ma{U}, description={Eigenvektormatrix $\left[\ve{u}_1, \ldots, \ve{u}_N \right] \in \mathbb{R}^{N \times N}$ von $N$ Eigenvektoren $\ve{u}_i$}}
