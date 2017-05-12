@@ -47,6 +47,8 @@
   * [Convolutional Neural Networks on Graphs with Fast Localized
     Spectral Filtering](https://arxiv.org/pdf/1606.09375.pdf)
     ([Code](https://github.com/mdeff/cnn_graph)) ([Notebook](http://nbviewer.jupyter.org/github/mdeff/cnn_graph/blob/outputs/usage.ipynb))
+  * [Dynamic Graph Convolutional Networks](https://arxiv.org/pdf/1704.06199.pdf)
+  * [A Generalization of Convolutional Neural Networks to Graph-Structured Data](https://arxiv.org/pdf/1704.08165.pdf)
   * [Spectral Networks and Deep Locally Connected Networks on Graphs](https://arxiv.org/pdf/1312.6203v3.pdf)
   * [Deep Convoltional Networks on Graph-Structured Data](https://arxiv.org/pdf/1506.05163.pdf)
 * [Convolutional Networks on Graphs for Learning Molecular
