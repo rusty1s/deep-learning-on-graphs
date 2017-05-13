@@ -51,37 +51,37 @@ Diese Transformation erlaubt uns die Formulierung fundamentaler Signalverarbeitu
 
 In der Signalverarbeitung versteht man unter der Frequenzfilterung die Transformation eines Eingabesignals in die Fourier-Domäne und der verstärkenden oder dämpfenden Veränderung der Amplituden der Frequenzkomponenten.
 Formal betrachtet ergibt dies
-\begin{equation*}
-  \hat f_{\mathrm{out}}\left(\omega\right) = \hat f_{\mathrm{in}}\left(\omega\right)\hat g\left(\omega\right)
-\end{equation*}
+\begin{equation}
+  \hat f_{\mathrm{out}}\left(\omega\right) \coloneqq \hat f_{\mathrm{in}}\left(\omega\right)\hat g\left(\omega\right)
+  \label{eq:fourier_filtering}
+\end{equation}
 mit Übertragungsfunktion $\hat g \colon \gls{R} \to \gls{R}$.
-Shuman et al\todo{quelle} zeigen, dass die Filterung in der Fourier-Domäne äquivalent ist zu einer Faltung in der Zeitdomäne, \dhe{}
+\citeauthor{Shuman} zeigen, dass die Filterung in der Fourier-Domäne äquivalent ist zu einer Faltung in der Zeitdomäne, \dhe{}
 \begin{equation}
   \left(f_{\mathrm{in}} \star g\right)\left(t\right) \coloneqq \int_{\gls{R}} f_{\mathrm{in}}\left(\tau\right)g\left(t - \tau\right)\, \mathrm{d}\tau = f_{\mathrm{out}}\left(t\right)
+  \label{eq:fourier_faltung}
 \end{equation}
 
-Wir können das spektrale Graphfilterung analog definieren mit
+Wir können die Filterung der Frequenzen in der Fourier-Domäne analog zu~\eqref{eq:fourier_filtering} für die spektrale Domäne auf Graphen über
+\begin{equation*}
+  \hat f_{\mathrm{out}}\left(\gls{lambda}_i\right) \coloneqq \hat f_{\mathrm{in}}\left(\gls{lambda}_i\right)\hat g\left(\lambda_i\right)\,\text{\bzw{} }\ve{\hat f}_{\mathrm{out}} \coloneqq \ve{\hat f}_{\mathrm{in}} \gls{hadamard} \ve{\hat g}
+\end{equation*}
+beschreiben, wobei \gls{hadamard} das elementweise Hadamard-Produkt~\cite{Shuman}.
+$\ve{\hat g} \in \gls{R}^N$ ist damit eine Übertragungsfunktion parametrisiert über die Eigenwerte ${\left\{\gls{lambda}_i\right\}}_{i=1}^N$ der Laplace-Matirx \gls{Lboth}.
+Daraus ergibt sich analog zu~\eqref{eq:fourier_faltung} der \emph{spektrale Faltungsoperator} auf Graphen in der Knotendomäne mit Hilfe der Graph-Fourier-Transformation~\eqref{eq:graph_fourier_transformation} und ihrer Inversen~\eqref{eq:inverse_graph_fourier_transformation} als~\cite{Shuman, Defferrard}
 \begin{equation}
-  \hat f_{\mathrm{out}}\left(\gls{lambda}_i\right) = \hat f_{\mathrm{in}}\left(\gls{lambda}_i\right)\hat g\left(\lambda_i\right)
+  \ve{f}_{\mathrm{in}} \star \ve{\hat g} \coloneqq \gls{Eiv}\left(\gls{Eiv}^{\top}\ve{f}_{\mathrm{in}} \gls{hadamard} \ve{\hat g}\right) = \gls{Eiv} \hat g\left(\gls{Lambda}\right)\gls{Eiv}^{\top}\ve{f}_{\mathrm{in}} = \ve{f}_{\mathrm{out}},
+  \label{eq:spektrale_faltung}
 \end{equation}
-
-Damit entspricht die Faltung eines Signals auf einem Graphen der elementweisen Multiplikation in der Spectral Graph Domain
-\begin{equation}
-  \ve{f}_{\mathrm{out}} = \ve{f}_{\mathrm{in}} \star \ve{g} = \gls{Eiv}\left(\gls{Eiv}^{\top}\ve{f}_{\mathrm{in}} \gls{hadamard} \gls{Eiv}^{\top}\ve{g}\right)
-\end{equation}
-
-Das lässt sich in Matrixschreibweise (die zweite obrige Formel) umschreiben über
-\begin{equation}
-  \ve{\hat f}_{\mathrm{out}} = \hat g\left(\gls{Lambda}\right) \ve{\hat f}_{\mathrm{in}} = \hat g\left(\gls{Lambda}\right)\gls{Eiv}^{\top}\ve{f}_{\mathrm{in}}
-\end{equation}
-bzw.
-\begin{equation}
-  \ve{f}_{\mathrm{out}} = \gls{Eiv}\hat g\left(\gls{Lambda}\right)\gls{Eiv}^{\top}\ve{f}_{\mathrm{in}}
-\end{equation}
-mit $\hat g\left(\gls{Lambda}\right) = \gls{diag}\left({\left[\hat g\left(\gls{lambda}_1\right), \ldots, \hat g\left(\gls{lambda}_n\right)\right]}^{\top}\right)$
+mit $\hat g\left(\gls{Lambda}\right) = \gls{diag}\left({\left[\hat g\left(\gls{lambda}_1\right), \ldots, \hat g\left(\gls{lambda}_N\right)\right]}^{\top}\right)$.
 
 \subsection{Polynomielle Approximation}
 \label{polynomielle_approximation}
+
+Schwächen:
+berechnungsteuer, Multiplikation mit der Eigenvektor Matrix U ist N2
+Computing the eigendecomposition of L in the first place might be expensive too
+Learning Complexity ist in O(n), der Dimensionalität der Eingangsdaten
 
 \paragraph{Tschebyschow-Polynome}
 \label{tschebyschow_polynome}

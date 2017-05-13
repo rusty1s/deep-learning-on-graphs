@@ -141,6 +141,14 @@
 
 % -------------------------------------------------------------------
 
+% Fix für \left und \right Abstände
+\let\originalleft\left
+\let\originalright\right
+\def\left#1{\mathopen{}\originalleft#1}
+\def\right#1{\originalright#1\mathclose{}}
+
+% -------------------------------------------------------------------
+
 % Informationen für PDF-Dokument festlegen
 \usepackage[pdfencoding=auto]{hyperref}
 
