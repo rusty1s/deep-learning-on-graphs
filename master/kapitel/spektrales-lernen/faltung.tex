@@ -70,18 +70,18 @@ beschreiben, wobei \gls{hadamard} das elementweise Hadamard-Produkt~\cite{Shuman
 $\ve{\hat g} \in \gls{R}^N$ ist damit eine Übertragungsfunktion parametrisiert über die Eigenwerte ${\left\{\gls{lambda}_i\right\}}_{i=1}^N$ der Laplace-Matirx \gls{Lboth}.
 Daraus ergibt sich analog zu~\eqref{eq:fourier_faltung} der \emph{spektrale Faltungsoperator} auf Graphen in der Knotendomäne mit Hilfe der Graph-Fourier-Transformation~\eqref{eq:graph_fourier_transformation} und ihrer Inversen~\eqref{eq:inverse_graph_fourier_transformation} als~\cite{Shuman, Defferrard}
 \begin{equation}
-  \ve{f}_{\mathrm{in}} \star \ve{\hat g} \coloneqq \gls{Eiv}\left(\gls{Eiv}^{\top}\ve{f}_{\mathrm{in}} \gls{hadamard} \ve{\hat g}\right) = \gls{Eiv} \hat g\left(\gls{Lambda}\right)\gls{Eiv}^{\top}\ve{f}_{\mathrm{in}} = \ve{f}_{\mathrm{out}},
+  \ve{f}_{\mathrm{in}} \star \ve{\hat g} \coloneqq \gls{Eiv}\left(\gls{Eiv}^{\top}\ve{f}_{\mathrm{in}} \gls{hadamard} \ve{\hat g}\right) = \gls{Eiv} \hat g\left(\gls{Lambda}\right)\gls{Eiv}^{\top}\ve{f}_{\mathrm{in}} = \ve{f}_{\mathrm{out}}
   \label{eq:spektrale_faltung}
 \end{equation}
 mit $\hat g\left(\gls{Lambda}\right) = \gls{diag}\left({\left[\hat g\left(\gls{lambda}_1\right), \ldots, \hat g\left(\gls{lambda}_N\right)\right]}^{\top}\right)$.
 
-$\hat g$ ist Filter!!\todo{hier erwähnen}
+$\hat g$ ist Filter!!\todo{hier erwähnen} NICHT PARAMETRISCH
 
 \subsection{Polynomielle Approximation}
 \label{polynomielle_approximation}
 
 Schwächen:
-berechnungsteuer, Multiplikation mit der Eigenvektor Matrix U ist N2
+berechnungsintensiv, Multiplikation mit der Eigenvektor Matrix U ist N2
 Computing the eigendecomposition of L in the first place might be expensive too
 Filtergröße bzw. Learning Complexity ist in O(n), der Dimensionalität der Eingangsdaten
 
