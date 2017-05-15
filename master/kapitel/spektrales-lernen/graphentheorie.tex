@@ -18,25 +18,20 @@ Es gibt 2 große Quellen hier:
 \subsection{Eigenwerte und Eigenvektoren reell symmetrischer Matrizen}
 \label{eigenwerte_symmetrischer_matrizen}
 
-\todo{intro}
-
-$\ma{M} \in \gls{R}^{N \times N}$.
-$\gls{eiv} \in \gls{R}^{N}$, $\gls{eiv} \neq \mathbf{0}$.
-$\gls{lambda} \in \gls{R}$.
-\emph{Eigenwertproblem} $\ma{M}\gls{eiv} = \gls{lambda}\gls{eiv}$.
-Zu einem \emph{Eigenwert} $\gls{lambda}$ gibt es unendlich viele (skalierte) \emph{Eigenvektoren} \gls{eiv}.
+Das \emph{Eigenwertproblem} einer Matrix $\ma{M} \in \gls{R}^{N \times N}$ ist definiert als $\ma{M}\gls{eiv} = \gls{lambda}\gls{eiv}$, wobei $\gls{eiv} \in \gls{R}^{N}$, $\gls{eiv} \neq \mathbf{0}$ \emph{Eigenvektor} und $\gls{lambda} \in \gls{R}$ der entsprechende \emph{Eigenwert} zu \gls{eiv} genannt werden.
+Ein Eigenvektor \gls{eiv} beschreibt damit einen Vektor, dessen Richtung durch die Abbildung $\ma{M}\gls{eiv}$ nicht verändert, sondern lediglich um den Faktor \gls{lambda} skaliert wird.
+Zu einem Eigenwert $\gls{lambda}$ gibt es unendlich viele (skalierte) Eigenvektoren \gls{eiv}.
 Wir definieren den Eigenvektor \gls{eiv} eines Eigenwertes \gls{lambda} daher eindeutig über die Bedingung $\left\|\gls{eiv}\right\|_2 = 1$.
 Sei \ma{M} weiterhin symmetrisch, \dhe{} $\ma{M} = \ma{M}^{\top}$.
-Dann gilt für zwei unterschiedliche Eigenvektoren $\gls{eiv}_1$ und $\gls{eiv}_2$, dass $\gls{eiv}_1 \gls{ortho} \gls{eiv}_2$.
+Dann gilt für zwei unterschiedliche Eigenvektoren $\gls{eiv}_1$ und $\gls{eiv}_2$, dass diese orthogonal zueinander stehen, \dhe{} $\gls{eiv}_1 \gls{ortho} \gls{eiv}_2$.
 Weiterhin hat \ma{M} genau $N$ reelle Eigenwerte mit ${\left\{\gls{lambda}_i\right\}}_{i=1}^N$.
-
-Wir definieren zu \ma{M} die orthogonale \emph{Eigenvektormatrix} $\gls{Eiv} \coloneqq \left[\gls{eiv}_1, \ldots, \gls{eiv}_n\right] \in \gls{R}^{N \times N}$, wobei $\gls{Eiv}\gls{Eiv}^{\top}=\gls{I}$, und dessen korrespondierende Eigenwertdiagonalmatrix $\gls{Lambda} \coloneqq \gls{diag}\left({\left[\gls{lambda}_1, \ldots, \gls{lambda}_N\right]}^{\top}\right)$, \dhe{} $\gls{Lambda}_{ii} = \gls{lambda}_i$.
+Wir definieren demnach zu \ma{M} die orthogonale \emph{Eigenvektormatrix} $\gls{Eiv} \coloneqq \left[\gls{eiv}_1, \ldots, \gls{eiv}_n\right] \in \gls{R}^{N \times N}$, \dhe{} $\gls{Eiv}\gls{Eiv}^{\top}=\gls{I}$, und dessen Eigenwertdiagonalmatrix $\gls{Lambda} \coloneqq \gls{diag}\left({\left[\gls{lambda}_1, \ldots, \gls{lambda}_N\right]}^{\top}\right)$, \dhe{} $\gls{Lambda}_{ii} = \gls{lambda}_i$.
 Dann gilt $\ma{M}\gls{Eiv} = \gls{Eiv}\gls{Lambda}$ und insbesondere ist \ma{M} diagonalisierbar über
 \begin{equation*}
   \ma{M} = \ma{M}\gls{Eiv}\gls{Eiv}^{\top} = \gls{Eiv}\gls{Lambda}\gls{Eiv}^{\top}.
 \end{equation*}
 
-Weiterhin gilt für die $k$te Potenz von $\ma{M}$, $k \in \gls{N}$,
+Weiterhin gilt für die $k$-te Potenz von $\ma{M}$, $k \in \gls{N}$,
 \begin{equation}
   \ma{M}^k = {\left(\gls{Eiv}\gls{Lambda}\gls{Eiv}^{\top}\right)}^k = \gls{Eiv}\gls{Lambda}^k\gls{Eiv}^{\top}.
   \label{eq:matrix_potenz}
@@ -80,11 +75,10 @@ Für verbundene Graphen kann \gls{Lnorm} vereinfacht werden zu $\gls{Lnorm} \col
 Jeder Eintrag auf der Diagonalen der normalisierten Laplace-Matrix ist folglich Eins.
 \gls{Lnorm} ist damit normalisiert auf den (gewichteten) Grad zweier adjazenter Knoten $\gls{v}_i$ und $\gls{v}_j$.
 Es ist anzumerken, dass \gls{L} und insbesondere \gls{Lnorm} symmetrisch sind, wohingegen eine Normalisierung der Form $\gls{D}^{-1}\gls{L}$ dies in der Regel nicht wäre~\cite{Reuter}.
-
 \gls{L} und \gls{Lnorm} sind keine ähnlichen Matrizen.
 Insbesondere sind ihre Eigenvektoren unterschiedlich.
 Die Nutzung von \gls{L} oder \gls{Lnorm} ist damit abhängig von dem Problem, welches man betrachtet~\cite{Hammond}.
-Wir schreiben \gls{Lboth} wenn die Wahl der Laplace-Matrix, ob \gls{L} oder \gls{Lnorm}, für die weitere Berechnung zwar fest, aber irrelevant ist.
+Wir schreiben \gls{Lboth} wenn die Wahl der Laplace-Matrix, ob \gls{L} oder \gls{Lnorm}, für die weitere Berechnung irrelevant ist.
 
 \paragraph{Interpretation}
 \label{laplace_interpretation}
@@ -92,7 +86,7 @@ Wir schreiben \gls{Lboth} wenn die Wahl der Laplace-Matrix, ob \gls{L} oder \gls
 \todo{kurz laplace beltrami}
 
 Sei $\ve{f} \in \gls{R}^N$ eine Funktion \bzw{} ein Signal auf den Knoten eines Graphen \gls{G}.
-Dann kann für die kombinatorische Laplace-Matrix \gls{L} verifiziert werden, dass \gls{L} die Gleichung
+Dann kann für die kombinatorische Laplace-Matrix \gls{L} verifiziert werden, dass sie die Gleichung
 \begin{equation*}
   {\left(\gls{L}\ve{f}\right)}_i = \sum_{i \gls{adj} j} \gls{w}\left(\gls{v}_i, \gls{v}_j\right) \left(\ve{f}_i - \ve{f}_j\right)
 \end{equation*}
@@ -120,12 +114,12 @@ Somit können Eigenschaften von \gls{Lboth} und damit des Graphen selber durch d
 \paragraph{Eigenschaften}
 \label{laplace_eigenschaften}
 
-$\gls{Lboth} \in \gls{R}^{N \times N}$ ist eine reell symmetrisch, positiv semidefinite Matrix~\cite{Chung}.
-Folglich besitzt \gls{Lboth} nach Kapitel~\ref{eigenwerte_symmetrischer_matrizen} genau $N$ positiv reelle Eigenwerte ${\left\{\gls{lambda}_i\right\}}_{i=1}^N$ mit Ordnung $0 \leq \gls{lambda}_1 \leq \cdots \leq \gls{lambda}_N$ und $N$ korrespondierende orthogonale Eigenvektoren ${\left\{\gls{eiv}_i\right\}}_{i=1}^N$.
+$\gls{Lboth} \in \gls{R}^{N \times N}$ ist eine reell symmetrische, positiv semidefinite Matrix~\cite{Chung}.
+Folglich besitzt \gls{Lboth} nach Kapitel~\ref{eigenwerte_symmetrischer_matrizen} genau $N$ positiv reelle Eigenwerte ${\left\{\gls{lambda}_i\right\}}_{i=1}^N$ mit Ordnung $0 \leq \gls{lambda}_1 \leq \cdots \leq \gls{lambda}_N$ und $N$ korrespondierenden orthogonalen Eigenvektoren ${\left\{\gls{eiv}_i\right\}}_{i=1}^N$.
 
 Die kombinatorische Laplace-Matrix $\gls{L}$ ist nach~\eqref{eq:schwach_diagonaldominant} weiterhin schwach diagonaldominant.
 Insbesondere summiert sich jede Reihen- und Spaltensumme von \gls{L} zu Null auf, \dhe{} $\sum_{j=1}^N \gls{L}_{ij} = \sum_{j=1}^N \gls{L}_{ji} = 0$.
-Daraus folgt unmittelbar, dass $\gls{lambda}_1 = 0$, da $\gls{eiv}_1 = \frac{1}{\sqrt{N}}{\left[1, \ldots, 1\right]}^{\top} \in \gls{R}^N$ Eigenvektor von \gls{L} mit $\gls{L}\gls{eiv}_1 = \ve{0}$.
+Daraus folgt unmittelbar, dass $\gls{lambda}_1 = 0$, da $\gls{eiv}_1 = \frac{1}{\sqrt{N}}{\left[1, \ldots, 1\right]}^{\top} \in \gls{R}^N$ Eigenvektor von \gls{L} mit $\gls{L}\gls{eiv}_1 = \ve{0}$~\cite{Shuman}.
 \gls{Lnorm} hingegen ist nicht zwingend schwach diagonaldominant.
 Es lässt sich jedoch zeigen, dass auch für \gls{Lnorm} gilt, dass $\gls{lambda}_1 = 0$~\cite{Chung}.
 

@@ -5,7 +5,7 @@ Sei $\ve{f} \in \gls{R}^N$ ein Signal auf den Knoten eines Graphen \gls{G}, welc
 Es ist jedoch nicht selbstverständlich, wie recht einfache, dennoch fundamentale Signalverarbeitungsprozesse wie Translation oder Filterung und die daraus entstehende Faltung in der Domäne des Graphen definiert werden können~\cite{Shuman}.
 So kann \zB{} ein analoges Signal $f\left(t\right)$ mittels $f\left(t-3\right)$ um $3$ nach rechts verschoben werden.
 Es ist hingegen völlig unklar was es bedeutet, ein Graphsignal auf den Knoten um $3$ nach rechts zu bewegen (\vgl{}~\cite{Shuman}).
-Die spektrale Graphentheorie bietet uns dafür einen Ausweg, in dem Eingabesignale in das Spektrum des Graphen zerlegt \bzw{} abgebildet, modifiziert und wieder retransformiert werden können.
+Die spektrale Graphentheorie bietet uns dafür einen geeigneten Weg, in dem Eingabesignale in das Spektrum des Graphen zerlegt \bzw{} abgebildet, modifiziert und wieder retransformiert werden können.
 
 \subsection{Graph-Fourier-Transformation}
 \label{graph_fourier_transformation}
@@ -59,7 +59,7 @@ Formal betrachtet ergibt dies
 mit dem Filter $\hat g \colon \gls{R} \to \gls{R}$.
 \citeauthor{Shuman} zeigen, dass die Filterung in der Fourier-Domäne äquivalent zu einer Faltung in der Zeitdomäne ist, \dhe{}
 \begin{equation}
-  \left(f_{\mathrm{in}} \star g\right)\left(t\right) \coloneqq \int_{\gls{R}} f_{\mathrm{in}}\left(\tau\right)g\left(t - \tau\right)\, \mathrm{d}\tau = f_{\mathrm{out}}\left(t\right)
+  \left(f_{\mathrm{in}} \star g\right)\left(t\right) \coloneqq \int_{\gls{R}} f_{\mathrm{in}}\left(\tau\right)g\left(t - \tau\right)\, \mathrm{d}\tau = f_{\mathrm{out}}\left(t\right).
   \label{eq:fourier_faltung}
 \end{equation}
 
@@ -67,7 +67,7 @@ Wir können die Filterung der Frequenzen in der Fourier-Domäne analog zu~\eqref
 \begin{equation*}
   \hat f_{\mathrm{out}}\left(\gls{lambda}_i\right) \coloneqq \hat f_{\mathrm{in}}\left(\gls{lambda}_i\right)\hat g\left(\lambda_i\right)\,\text{\bzw{} }\ve{\hat f}_{\mathrm{out}} \coloneqq \ve{\hat f}_{\mathrm{in}} \gls{hadamard} \ve{\hat g}
 \end{equation*}
-beschreiben, wobei \gls{hadamard} das elementweise Hadamard-Produkt~\cite{Shuman}.
+beschreiben, wobei \gls{hadamard} das elementweise Hadamard-Produkt ist~\cite{Shuman}.
 $\ve{\hat g} \in \gls{R}^N$ ist damit ein \emph{nicht-parametrischer} Filter, \dhe{} ein Filter, dessen Werte für alle Frequenzen ${\left\{\gls{lambda}_i\right\}}_{i=1}^N$ frei wählbar sind~\cite{Defferrard}.
 Daraus ergibt sich analog zu~\eqref{eq:fourier_faltung} der \emph{spektrale Faltungsoperator} auf Graphen in der Knotendomäne mit Hilfe der Graph-Fourier-Transformation~\eqref{eq:graph_fourier_transformation} und ihrer Inversen~\eqref{eq:inverse_graph_fourier_transformation} als~\cite{Shuman, Defferrard}
 \begin{equation}
@@ -97,10 +97,14 @@ $\ve{f}_{\mathrm{in}} \star \ve{\hat g}$ ergibt sich dann mittels~\eqref{eq:matr
 \end{equation}
 Insbesondere ist die spektrale Faltung damit nicht mehr abhängig von der Berechnung der Eigenwerte \bzw{} Eigenvektoren von \gls{Lboth}.
 Mittels Kapitel~\ref{laplace_eigenschaften} kann $\ve{f}_{\mathrm{in}} \star \ve{\hat g}$ in der Knotendomäne nun als eine \emph{lokaliserte lineare Transformation} interpretiert werden.
-So sammelt ein Summand des spektraler Filters $\gls{Lboth}^k\ve{f}_{\mathrm{in}}$ an einem Knoten \gls{v} genau die Signale von Knoten auf, die maximal $k$ Kanten von \gls{v} entfernt liegen~\cite{Hammond}.
+So sammelt ein Summand $\gls{Lboth}^k\ve{f}_{\mathrm{in}}$ des spektralen Filters an einem Knoten \gls{v} genau die Signale von Knoten auf, die maximal $k$ Kanten von \gls{v} entfernt liegen~\cite{Hammond}.
 
 \paragraph{Tschebyschow-Polynome}
 \label{tschebyschow_polynome}
 
+\todo{fettes todo}
+
 \paragraph{Tensorimplementierung}
 \label{tschebyschow_tensor}
+
+\todo{fettes todo}
