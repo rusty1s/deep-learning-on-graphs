@@ -1,0 +1,26 @@
+
+\begin{figure}[t]
+  \centering
+  \subfigure[]{
+    \begin{tikzpicture}
+      \tikzstyle{node}=[circle,draw, minimum width=5pt, inner sep=0pt, fill=white]
+      \tikzstyle{root}=[fill=black]
+
+      \node[node, root] (root) at (0,0) {};
+      \node[node, label={}] (a) at (-2, 0) {};
+      \node[node, label={}] (b) at (2, 0) {};
+      \node[node, label={}] (c) at (0, -2) {};
+      \node[node, label={}] (d) at (0, 2) {};
+
+      \path (root) edge node {$\frac{1}{\delta^2}$} (a);
+      \path (root) edge node {$\frac{1}{\delta^2}$} (b);
+      \path (root) edge node {$\frac{1}{\delta^2}$} (c);
+      \path (root) edge node {$\frac{1}{\delta^2}$} (d);
+    \end{tikzpicture}
+  }
+  \hspace{1cm}
+  \subfigure[]{
+  }
+  \caption[Testbilder]{Testbilder}
+  \label{fig:testbild}
+\end{figure}
