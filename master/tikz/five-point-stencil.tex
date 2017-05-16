@@ -1,25 +1,7 @@
 
 \begin{figure}[t]
   \centering
-  \subfigure[]{
-    \begin{tikzpicture}
-      \tikzstyle{node}=[circle,draw, minimum width=5pt, inner sep=0pt, fill=white]
-      \tikzstyle{root}=[fill=black]
-
-      \node[node, root] (root) at (0,0) {};
-      \node[node, label={}] (a) at (-2, 0) {};
-      \node[node, label={}] (b) at (2, 0) {};
-      \node[node, label={}] (c) at (0, -2) {};
-      \node[node, label={}] (d) at (0, 2) {};
-
-      \path (root) edge node[above] {$1/\delta^2$} (a);
-      \path (root) edge node[below] {$1/\delta^2$} (b);
-      \path (root) edge node[left] {$1/\delta^2$} (c);
-      \path (root) edge node[right] {$1/\delta^2$} (d);
-    \end{tikzpicture}
-  }
-  \hspace{1cm}
-  \subfigure[]{
+  \subfigure[Gitterrepräsentation]{
     \begin{tikzpicture}
       \tikzstyle{node}=[circle,draw, minimum width=5pt, inner sep=0pt, fill=white]
       \tikzstyle{root}=[fill=black]
@@ -36,6 +18,24 @@
       \path (root) edge (d);
     \end{tikzpicture}
   }
-  \caption[bla]{Testbilder}
-  \label{fig:testbild}
+  \hspace{1cm}
+  \subfigure[Graphrepräsentation]{
+    \begin{tikzpicture}
+      \tikzstyle{node}=[circle,draw, minimum width=5pt, inner sep=0pt, fill=white]
+      \tikzstyle{root}=[fill=black]
+
+      \node[node, root] (root) at (0,0) {};
+      \node[node, label={}] (a) at (-2, 0) {};
+      \node[node, label={}] (b) at (2, 0) {};
+      \node[node, label={}] (c) at (0, -2) {};
+      \node[node, label={}] (d) at (0, 2) {};
+
+      \path (root) edge node[above] {$1/\delta^2$} (a);
+      \path (root) edge node[below] {$1/\delta^2$} (b);
+      \path (root) edge node[left] {$1/\delta^2$} (c);
+      \path (root) edge node[right] {$1/\delta^2$} (d);
+    \end{tikzpicture}
+  }
+  \caption[Illustration des 5-Punkte-Sterns]{Illustration des 5-Punkte-Sterns in zwei Dimensionen mit gleicher Approximation des $\nabla^2$ Operators (bei umgekehrtem Vorzeichen), einmal mit der 5-Punkte-Stern Approximation auf regulären Gittern (a) und einmal mit der kombinatorischen Laplace-Matrix \gls{L} auf Graphen (b).}
+  \label{fig:5_punkte_stern}
 \end{figure}
