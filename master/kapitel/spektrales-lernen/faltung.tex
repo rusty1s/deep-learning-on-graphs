@@ -41,7 +41,7 @@ Die inverse Graph-Fourier-Transformation ergibt sich dann als~\cite{Shuman}
 
 In der klassischen Fourier-Analyse sind für die Eigenwerte ${\left\{{\left(2\pi \omega\right)}^2\right\}}_{\omega \in \gls{R}}$ in~\eqref{eq:laplace_eigenfunktionen} nahe bei Null die korrespondieren Eigenfunktionen kleine, weich schwingende Funktionen, wohingegen für größere Eigenwerte \bzw{} Frequenzen die Eigenfunktionen sehr schnell und zügig anfangen zu oszillieren.
 Bei der Graph-Fourier-Transformation ist dies ähnlich.
-So ist für \gls{L} der erste Eigenvektor $\gls{eiv}_1 = \frac{1}{\sqrt{N}}{\left[1, \ldots, 1\right]}^{\top}$ zum Eigenwert $\gls{lambda}_1 = 0$ konstant und an jedem Knoten gleich.
+So ist für \gls{L} der erste Eigenvektor $\gls{eiv}_1 = 1/\sqrt{N}{\left[1, \ldots, 1\right]}^{\top}$ zum Eigenwert $\gls{lambda}_1 = 0$ konstant und an jedem Knoten gleich.
 Generell zeigt sich, dass die Eigenvektoren geringer Frequenzen nur geringfügig im Graph variieren, wohingegen Eigenvektoren größerer Eigenwerte immer unähnlicher werden (\vgl{}~\cite{Shuman}).
 \\\\
 Die Graph-Fourier-Transformation~\eqref{eq:graph_fourier_transformation} und ihre Inverse~\eqref{eq:inverse_graph_fourier_transformation} bieten uns eine Möglichkeit ein Signal in zwei unterschiedlichen Domänen zu repräsentieren, nämlich der Knotendomäne, \dhe{} das unveränderte Signal auf der Knotenmenge $f\left(\gls{v}_i\right)$, und der spektralen Domäne, \dhe{} das transformierte Signal in das Spektrum des Graphen $\hat f\left(\gls{lambda}_i\right)$.
@@ -106,5 +106,7 @@ So sammelt ein Summand $\gls{Lboth}^k\ve{f}_{\mathrm{in}}$ des spektralen Filter
 
 \paragraph{Tensorimplementierung}
 \label{tschebyschow_tensor}
+
+numerisch stabel im Intervall $\left[-1, 1\right]$
 
 \todo{fettes todo}
