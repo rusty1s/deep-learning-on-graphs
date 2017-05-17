@@ -102,13 +102,13 @@ Eine Faltung über $f_{\mathrm{in}}\left(\gls{v}_i\right)$ wird damit als Linear
 \begin{equation*}
   f_{\mathrm{out}}\left(\gls{v}_i\right) \approx b_{ii} f_{\mathrm{in}}\left(\gls{v}_i\right) + \sum_{\gls{v}_j \in \gls{Neighbor}_K\left(\gls{v}_i\right)} b_{ij} f_{\mathrm{in}}\left(\gls{v}_j\right)
 \end{equation*}
-über dessen $k$-lokalisierte Nachbarschaft $\gls{Neighbor}_K\left(\gls{v}_i\right) \coloneqq \left\lbrace \gls{v}_j \mid \gls{Lboth}^K_{ij} > 0 \right\rbrace$ beschrieben mit $b_{ij} \coloneqq \sum_{k=0}^K c_k \gls{Lboth}^k_{ij}$~\cite{Shuman}.
+über dessen $k$-lokalisierte Nachbarschaft $\gls{Neighbor}_K\left(\gls{v}_i\right) \coloneqq \left\{ \gls{v}_j \mid \gls{Lboth}^K_{ij} > 0 \right\}$ beschrieben mit $b_{ij} \coloneqq \sum_{k=0}^K c_k \gls{Lboth}^k_{ij}$~\cite{Shuman}.
 
 \paragraph{Tschebyschow-Polynome}
 \label{tschebyschow_polynome}
 
 Obwohl der Aufwand zur Bestimmung von $\ve{f}_{\mathrm{in}} \star \ve{\hat g}$ durch die polynomielle Approximation und insbesondere durch den Wegfall der Berechnung der Eigenvektormatrix \gls{Eiv} deutlich reduziert wurde, ist diese immer noch recht teuer aufgrund der Berechnung der $K$-ten Potenz von $\gls{Lboth}$.
-So ist zwar \gls{Lboth} eine dünnbesetzte Matrix mit $\left|\gls{E}\right| + N \ll N^2$, $N \leq \left|\gls{E}\right|$, Einträgen, $\gls{Lboth}^K$ ist dies jedoch zwangsläufig nicht.
+So ist \gls{Lboth} zwar eine dünnbesetzte Matrix mit $\left|\gls{E}\right| + N \ll N^2$, $N \leq \left|\gls{E}\right|$, Einträgen, $\gls{Lboth}^K$ ist dies jedoch zwangsläufig nicht.
 Eine Lösung zu diesem Problem ist die Benutzung eines Polynoms mit einer rekursiven Formulierung.
 Ein rekursives Polynom, dass dafür üblicherweise genutzt wird, ist das Tschebyschow-Polynom, da sich dieses zusätzlich durch einen sehr günstigen Fehlerverlauf auszeichnet (\vgl{}~\cite{Hammond}).
 
@@ -117,7 +117,7 @@ Ein rekursives Polynom, dass dafür üblicherweise genutzt wird, ist das Tscheby
   \gls{T}_k\left(x\right) = 2x\, \gls{T}_{k-1}\left(x\right) - \gls{T}_{k-2}\left(x\right)
 \end{equation*}
 mit $\gls{T}_0\left(x\right) = 1$ und $\gls{T}_1\left(x\right) = x$~\cite{Hammond}.
-Ein Tschebyschow-Polynom $\gls{T}_k$ ist ein Polynom $k$-ten Grades und ist numerisch stabil im Intervall $\left[-1, 1\right]$, \dhe{} $\gls{T}_k\left(x\right) \in \left[-1, 1\right]$ für $x \in \left[-1, 1\right]$~\cite{Hammond}.
+Ein Tschebyschow-Polynom $\gls{T}_k$ ist ein Polynom $k$-ten Grades und gilt im Intervall $\left[-1, 1\right]$ als numerisch stabil, \dhe{} $\gls{T}_k\left(x\right) \in \left[-1, 1\right]$ für $x \in \left[-1, 1\right]$~\cite{Hammond}.
 Die spektrale Faltung mittels Tschebyschow-Polynomen ergibt sich dann zu
 \begin{equation}
   \ve{f}_{\mathrm{in}} \star \ve{\hat g} \approx \sum_{k=0}^K c_k\gls{Eiv}\gls{T}_k\left(\gls{Lambdatilde}\right)\gls{Eiv}^{\top}\ve{f}_{\mathrm{in}},
@@ -133,10 +133,20 @@ Für \gls{Lboth} kann $\gls{lambdamax} \leq 2$ auf dessen obere Schranke, \dhe{}
 Der rekursive Zusammenhang von $\gls{T}_k$ hilft uns nun dabei, $\ve{f}_{\mathrm{in}} \star \ve{\hat g}$ effizient zu berechnen.
 Berechne dafür $\ve{\bar f}_k \coloneqq \gls{T}_k\left(\gls{Lbothtilde}\right)\ve{f}_{\mathrm{in}} \in \gls{R}^N$ für alle $k \in \left\lbrace0, \ldots, K\right\rbrace$ rekursiv mit $\ve{\bar f}_0 = \ve{f}_{\mathrm{in}}$, $\ve{\bar f}_1 = \gls{Lbothtilde}\,\ve{f}_{\mathrm{in}}$ und $\ve{\bar f}_k = 2 \gls{Lbothtilde}\,\ve{\bar f}_{k-1} - \ve{\bar f}_{k - 2}$.
 Dann ergibt sich $\ve{f}_{\mathrm{out}} = \left[\ve{\bar f}_0, \ve{\bar f}_1, \ldots, \ve{\bar f}_K\right]\ve{c} \in \gls{R}^N$ mit $\ve{c} \coloneqq {\left[c_0, c_1, \ldots, c_K\right]}^{\top} \in \gls{R}^{K+1}$ (\vgl{}~\cite{Hammond}).
-$\ve{f}_{\mathrm{out}}$ lässt sich damit über $K + 1$ Multiplikationen einer dünnbesetzen Matrix mit einem Vektor und einer finalen Vektormultplikation beschreiben.
-Mit $N \leq \left|\gls{E}\right|$ ergibt dies eine finale Laufzeit der spektralen Faltung von $\gls{O}\left(K\left|\gls{E}\right|\right)$.
+$\ve{f}_{\mathrm{out}}$ lässt sich damit über $K + 1$ Multiplikationen einer dünnbesetzen Matrix mit einem Vektor und einer abschließenden Vektormultplikation beschreiben.
+Mit $N \leq \left|\gls{E}\right|$ ergibt dies eine finale Laufzeit der spektralen Faltung von $\gls{O}\left(K\left|\gls{E}\right|\right)$~\cite{Defferrard}.
 
 \paragraph{Tensorimplementierung}
 \label{tschebyschow_tensor}
+
+$\gls{F}_{\mathrm{in}} \in \gls{R}^{N \times M_{\mathrm{in}}}$
+$\gls{F}_{\mathrm{out}} \in \gls{R}^{N \times M_{\mathrm{out}}}$
+$\gls{W} \in \gls{R}^{K+1, M_{\mathrm{in}} \times M_{\mathrm{out}}}$\\
+
+$\ma{\bar F}_0 = \gls{F}_{\mathrm{in}}\gls{W}_0$\\
+$\ma{\bar F}_1 = \gls{Lbothtilde}\gls{F}_{\mathrm{in}}\gls{W}_1$\\
+$\ma{\bar F}_k = \left(2\gls{Lbothtilde}\ma{\bar F}_{k -1} -  \ma{\bar F}_{k - 2}\right)\gls{W}_k$\\
+$\gls{F}_{\mathrm{out}} = \sum_{k=0}^K \ma{\bar F}_k$
+
 
 \todo{fettes todo}
