@@ -79,7 +79,7 @@ Daraus ergibt sich analog zu~\eqref{eq:fourier_faltung} der \emph{spektrale Falt
 \label{polynomielle_approximation}
 
 Es zeigt sich, dass die Benutzung des spektralen Faltungsoperators in~\eqref{eq:spektraler_faltungsoperator} im Kontext eines \glspl{CNN} auf Graphen mehrere Schwächen aufweist.
-Es ist \zB{} leicht ersichtlich, dass die Auswertung von $\ve{f}_{\mathrm{in}} \star \ve{\hat g}$ extrem berechnungsintensiv ist.
+Es ist \zB{} leicht ersichtlich, dass die Auswertung von $\ve{f}_{\mathrm{out}} \star \ve{\hat g}$ extrem berechnungsintensiv ist.
 So liegt die Laufzeit der Multiplikation mit der dichtbesetzten Eigenvektormatrix \gls{Eiv} in $\gls{O}\left(N^2\right)$, zudem muss \gls{Eiv} zuerst bestimmt werden — ein kostspieliger Aufwand für Graphen mit möglicherweise weit mehr als hundert Knoten~\cite{gcn}.
 Desweiteren führt ein Filter $\ve{\hat g} \in \gls{R}^N$ der Größe $N$ zu einem Lernaufwand in $\gls{O}\left(N\right)$, \dhe{} der Dimensionalität der Eingabedaten~\cite{Defferrard}.
 Ebenso kann $\ve{\hat g}$ so nicht für das Lernen auf unterschiedlich großen Graphen verwendet werden.
@@ -98,15 +98,45 @@ $\ve{f}_{\mathrm{in}} \star \ve{\hat g}$ ergibt sich dann mittels~\eqref{eq:matr
 Insbesondere ist die spektrale Faltung damit nicht mehr abhängig von der Berechnung der Eigenwerte \bzw{} Eigenvektoren von \gls{Lboth}.
 Mittels Kapitel~\ref{laplace_eigenschaften} kann $\ve{f}_{\mathrm{in}} \star \ve{\hat g}$ in der Knotendomäne nun als eine \emph{lokaliserte lineare Transformation} interpretiert werden.
 So sammelt ein Summand $\gls{Lboth}^k\ve{f}_{\mathrm{in}}$ des spektralen Filters an einem Knoten \gls{v} genau die Signale von Knoten auf, die maximal $k$ Kanten von \gls{v} entfernt liegen~\cite{Hammond}.
+Eine Faltung über $f_{\mathrm{in}}\left(\gls{v}_i\right)$ wird damit als Linearkombination
+\begin{equation*}
+  f_{\mathrm{out}}\left(\gls{v}_i\right) \approx b_{ii} f_{\mathrm{in}}\left(\gls{v}_i\right) + \sum_{\gls{v}_j \in \gls{Neighbor}_K\left(\gls{v}_i\right)} b_{ij} f_{\mathrm{in}}\left(\gls{v}_j\right)
+\end{equation*}
+über dessen $k$-lokalisierte Nachbarschaft $\gls{Neighbor}_K\left(\gls{v}_i\right) \coloneqq \left\lbrace \gls{v}_j \mid \gls{Lboth}^K_{ij} > 0 \right\rbrace$ beschrieben mit $b_{ij} \coloneqq \sum_{k=0}^K c_k \gls{Lboth}^k_{ij}$~\cite{Shuman}.
 
 \paragraph{Tschebyschow-Polynome}
 \label{tschebyschow_polynome}
 
-\todo{fettes todo}
+Obwohl der Aufwand zur Bestimmung von $\ve{f}_{\mathrm{in}} \star \ve{\hat g}$ durch die polynomielle Approximation und insbesondere durch den Wegfall der Berechnung der Eigenvektormatrix \gls{Eiv} deutlich reduziert wurde, ist diese immer noch recht teuer aufgrund der Berechnung der $K$-ten Potenz von $\gls{Lboth}$.
+So ist zwar \gls{Lboth} eine dünnbesetzte Matrix mit $\left|\gls{E}\right| + N \ll N^2$, $N \leq \left|\gls{E}\right|$, Einträgen, $\gls{Lboth}^K$ ist dies jedoch zwangsläufig nicht.
+Eine Lösung zu diesem Problem ist die Benutzung eines Polynoms mit einer rekursiven Formulierung.
+Ein rekursives Polynom, dass dafür üblicherweise genutzt wird, ist das Tschebyschow-Polynom, da sich dieses zusätzlich durch einen sehr günstigen Fehlerverlauf auszeichnet (\vgl{}~\cite{Hammond}).
+
+\emph{Tschebyschow-Polynome} (engl. \emph{Chebyshev}) bezeichnen eine Menge von Polynomen $\gls{T}_k\left(x\right) \colon \gls{R} \to \gls{R}$ mit dem rekursiven Zusammenhang
+\begin{equation*}
+  \gls{T}_k\left(x\right) = 2x\, \gls{T}_{k-1}\left(x\right) - \gls{T}_{k-2}\left(x\right)
+\end{equation*}
+mit $\gls{T}_0\left(x\right) = 1$ und $\gls{T}_1\left(x\right) = x$~\cite{Hammond}.
+Ein Tschebyschow-Polynom $\gls{T}_k$ ist ein Polynom $k$-ten Grades und ist numerisch stabil im Intervall $\left[-1, 1\right]$, \dhe{} $\gls{T}_k\left(x\right) \in \left[-1, 1\right]$ für $x \in \left[-1, 1\right]$~\cite{Hammond}.
+Die spektrale Faltung mittels Tschebyschow-Polynomen ergibt sich dann zu
+\begin{equation}
+  \ve{f}_{\mathrm{in}} \star \ve{\hat g} \approx \sum_{k=0}^K c_k\gls{Eiv}\gls{T}_k\left(\gls{Lambdatilde}\right)\gls{Eiv}^{\top}\ve{f}_{\mathrm{in}},
+  \label{eq:tschebyschow_faltung}
+\end{equation}
+wobei $c_0, \ldots, c_K \in \gls{R}$ nun Koeffizienten der Tschebyschow-Polynome $\gls{T}_k\left(\gls{Lambdatilde}\right) \in \gls{R}^{N \times N}$ angewendet auf die skalierten Eigenwerte $\gls{Lambdatilde} \coloneqq 2\gls{Lambda}/\gls{lambdamax} - \gls{I} \in {\left[-1, 1\right]}^{N \times N}$~\cite{Defferrard}.
+Dann kann~\eqref{eq:tschebyschow_faltung} mit $\gls{Lbothtilde} \coloneqq \gls{Eiv}\gls{Lambdatilde}\gls{Eiv}^{\top} = 2\gls{Lboth}/\gls{lambdamax} - \gls{I}$ weiter vereinfacht werden zu~\cite{Defferrard}
+\begin{equation*}
+  \ve{f}_{\mathrm{in}} \star \ve{\hat g} \approx \sum_{k=0}^K c_k\gls{T}_k\left(\gls{Lbothtilde}\right)\ve{f}_{\mathrm{in}}.
+\end{equation*}
+Für \gls{Lboth} kann $\gls{lambdamax} \leq 2$ auf dessen obere Schranke, \dhe{} $\gls{lambdamax} \coloneqq 2$, gesetzt werden um die Berechnung von \gls{lambdamax} zu vermeiden ohne die numerische Stabilität von $\gls{T}_k$ zu verletzen.
+
+Der rekursive Zusammenhang von $\gls{T}_k$ hilft uns nun dabei, $\ve{f}_{\mathrm{in}} \star \ve{\hat g}$ effizient zu berechnen.
+Berechne dafür $\ve{\bar f}_k \coloneqq \gls{T}_k\left(\gls{Lbothtilde}\right)\ve{f}_{\mathrm{in}} \in \gls{R}^N$ für alle $k \in \left\lbrace0, \ldots, K\right\rbrace$ rekursiv mit $\ve{\bar f}_0 = \ve{f}_{\mathrm{in}}$, $\ve{\bar f}_1 = \gls{Lbothtilde}\,\ve{f}_{\mathrm{in}}$ und $\ve{\bar f}_k = 2 \gls{Lbothtilde}\,\ve{\bar f}_{k-1} - \ve{\bar f}_{k - 2}$.
+Dann ergibt sich $\ve{f}_{\mathrm{out}} = \left[\ve{\bar f}_0, \ve{\bar f}_1, \ldots, \ve{\bar f}_K\right]\ve{c} \in \gls{R}^N$ mit $\ve{c} \coloneqq {\left[c_0, c_1, \ldots, c_K\right]}^{\top} \in \gls{R}^{K+1}$ (\vgl{}~\cite{Hammond}).
+$\ve{f}_{\mathrm{out}}$ lässt sich damit über $K + 1$ Multiplikationen einer dünnbesetzen Matrix mit einem Vektor und einer finalen Vektormultplikation beschreiben.
+Mit $N \leq \left|\gls{E}\right|$ ergibt dies eine finale Laufzeit der spektralen Faltung von $\gls{O}\left(K\left|\gls{E}\right|\right)$.
 
 \paragraph{Tensorimplementierung}
 \label{tschebyschow_tensor}
-
-numerisch stabel im Intervall $\left[-1, 1\right]$
 
 \todo{fettes todo}

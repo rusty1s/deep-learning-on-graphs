@@ -1,7 +1,7 @@
 \section{Graph Convolutional Networks}
 \label{graph_convolutional_networks}
 
-\citeauthor{gcn} motivieren einen weiteren Ansatz zur Faltung auf Graphen, genannt \emph{\gls{GCN}}, der auf der Methodik des spekralen Faltungsoperators aus Kapitel~\ref{spektraler_faltungsoperator} aufbaut, und dabei wie eine \enquote{differenzierbare und parametriesierte Generalisierung des eindimensionalen Weisfeiler-Lehman Algorithmus auf Graphen} fungiert~\cite{gcn}.
+\citeauthor{gcn} motivieren einen weiteren Ansatz zur Faltung auf Graphen, genannt \emph{\gls{GCN}}, der auf der Methodik des spekralen Faltungsoperators aus Kapitel~\ref{spektraler_faltungsoperator} aufbaut und dabei wie eine \enquote{differenzierbare und parametriesierte Generalisierung des eindimensionalen Weisfeiler-Lehman Algorithmus auf Graphen} fungiert~\cite{gcn}.
 
 \subsection{Faltungsoperator}
 \label{gcn_faltungsoperator}
@@ -10,7 +10,7 @@ Sei $\ve{f}_{\mathrm{in}} \star \ve{\hat g} \approx \sum_{k=0}^K c_k \gls{T}_k\l
 Dann ist $\ve{f}_{\mathrm{in}} \star \ve{\hat g}$ eine lineare Funktion \bzgl{} \gls{Lboth} und damit eine lineare Funktion auf dem Spektrum des Graphen~\cite{gcn}.
 Mit $K=1$ betrachtet der spektrale Faltungsoperator nur noch die lokale Nachbarschaft eines jeden Knoten (\vgl{}~\ref{polynomielle_approximation}).
 Es ist anzumerken, dass dies in der Regel keinen Nachteil darstellt.
-So hat es sich bei gegenwärtigen \enquote{State-of-the-Art}-\glspl{CNN} auf Bildern ebenfalls eingebürgert, nur noch über minimale $3\times3$ Fenster zu falten und stattdessen mehr Informationen über die mehrfache Aneinanderreihung der Faltungsschichten mittels tieferer Netze zu gewinnen~(\vgl{}~\cite{gcn, vgg, He}).
+So hat es sich bei gegenwärtigen \enquote{State-of-the-Art}-\glspl{CNN} auf Bildern ebenfalls eingebürgert, nur noch über minimale $3\times3$ Fenster zu falten und stattdessen Informationen weit entfernterer Knoten über die mehrfache Aneinanderreihung der Faltungsschichten mittels tieferer Netze zu gewinnen~(\vgl{}~\cite{gcn, vgg, He}).
 Unter dieser Restriktion vereinfacht sich $\ve{f}_{\mathrm{in}} \star \ve{\hat g}$ zu
 \begin{equation}
   \ve{f}_{\mathrm{in}} \star \ve{\hat g} \approx c_0\, \ve{f}_{\mathrm{in}} + c_1 \left(\frac{2}{\gls{lambdamax}}\gls{Lboth} - \gls{I}\right)\ve{f}_{\mathrm{in}}
@@ -27,7 +27,7 @@ Um die Gefahr des Overfittings und die Anzahl an Berechnungen pro Schicht weiter
 \begin{equation*}
   \ve{f}_{\mathrm{in}} \star \ve{\hat g} \approx c \left(\gls{I} + \gls{D}^{-1/2} \gls{A} \gls{D}^{-1/2} \right) \ve{f}_{\mathrm{in}}.
 \end{equation*}
-Die reskalierten Eigenwerte von \gls{Lambdatilde} liegen auf Grund der Addition mit \gls{I} nun im Intervall $\left[0, 2\right]$ (\vgl{}~\cite{gcn}).
+Die skalierten Eigenwerte von \gls{Lambdatilde} liegen auf Grund der Addition mit \gls{I} nun im Intervall $\left[0, 2\right]$ (\vgl{}~\cite{gcn}).
 Demnach können wiederholte Anwendungen des Faltungsoperators zu \enquote{numerischen Instabilitäten und folglich zu explodierenden oder verschwindenen Gradienten} führen~\cite{gcn}.
 \citeauthor{gcn} führen zur Behebung dieses Problems die folgende Renormalisierung durch: $\gls{I} + \gls{D}^{-1/2} \gls{A} \gls{D}^{-1/2} \rightarrow \gls{Dtilde}^{-1/2} \gls{Atilde} \gls{Dtilde}^{-1/2}$ mit $\gls{Atilde} \coloneqq \gls{A} + \gls{I}$ und $\gls{Dtilde}_{ii} \coloneqq \sum_{j=1}^N \gls{Atilde}_{ij}$.
 Der entgültige Faltungsoperator des \glspl{GCN} ergibt sich dann als
