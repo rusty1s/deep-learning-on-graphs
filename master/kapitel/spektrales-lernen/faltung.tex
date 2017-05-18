@@ -4,7 +4,7 @@
 Sei $\ve{f} \in \gls{R}^N$ ein Signal auf den Knoten eines Graphen \gls{G}, welches abhängig von der Struktur des Graphen weiter verarbeitet werden soll.
 Es ist jedoch nicht selbstverständlich, wie recht einfache, dennoch fundamentale Signalverarbeitungsprozesse wie Translation oder Filterung und die daraus entstehende Faltung in der Domäne des Graphen definiert werden können~\cite{Shuman}.
 So kann \zB{} ein analoges Signal $f\left(t\right)$ mittels $f\left(t-3\right)$ um $3$ nach rechts verschoben werden.
-Es ist hingegen völlig unklar was es bedeutet, ein Graphsignal auf den Knoten um $3$ nach rechts zu bewegen (\vgl{}~\cite{Shuman}).
+Es ist hingegen völlig unklar, was es bedeutet, ein Graphsignal auf den Knoten um $3$ nach rechts zu bewegen (\vgl{}~\cite{Shuman}).
 Die spektrale Graphentheorie bietet uns dafür einen geeigneten Weg, in dem Eingabesignale in das Spektrum des Graphen zerlegt \bzw{} abgebildet, modifiziert und wieder retransformiert werden können.
 
 \subsection{Graph-Fourier-Transformation}
@@ -30,12 +30,20 @@ $\hat f$ kann damit als die Ausdehnung von $f$ in Bezug auf die Eigenfunktionen 
 \\\\
 Analog lässt sich die \emph{Graph-Fourier-Transformation} einer Funktion $f \colon \gls{V} \to \gls{R}$ \bzw{} $\ve{f} \in \gls{R}^N$ auf den Knoten eines Graphen \gls{G} als Ausdehnung von $f$ in Bezug auf die Eigenvektoren ${\left\{\gls{eiv}_i\right\}}_{i=1}^N$ der Laplace-Matrix \gls{Lboth} definieren~\cite{Shuman}:
 \begin{equation}
-  \hat f\left(\gls{lambda}_i\right) \coloneqq \left\langle \ve{f}, \gls{eiv}_i \right\rangle\, \text{\bzw{} } \ve{\hat f} \coloneqq \gls{Eiv}^{\top}\ve{f}.
+  \hat f\left(\gls{lambda}_i\right) \coloneqq \left\langle \ve{f}, \gls{eiv}_i \right\rangle
+  \qquad
+  \text{\bzw{}}
+  \qquad
+  \ve{\hat f} \coloneqq \gls{Eiv}^{\top}\ve{f}.
   \label{eq:graph_fourier_transformation}
 \end{equation}
 Die inverse Graph-Fourier-Transformation ergibt sich dann als~\cite{Shuman}
 \begin{equation}
-  f\left(\gls{v}_i\right) = \sum_{j=1}^N \hat f\left(\gls{lambda}_j\right) {\left(\gls{eiv}_j\right)}_i\,\text{\bzw{} }\ve{f} = \gls{Eiv}\ve{\hat f}.
+  f\left(\gls{v}_i\right) = \sum_{j=1}^N \hat f\left(\gls{lambda}_j\right) {\left(\gls{eiv}_j\right)}_i
+  \qquad
+  \text{\bzw{}}
+  \qquad
+  \ve{f} = \gls{Eiv}\ve{\hat f}.
   \label{eq:inverse_graph_fourier_transformation}
 \end{equation}
 
@@ -65,7 +73,11 @@ mit dem Filter $\hat g \colon \gls{R} \to \gls{R}$.
 
 Wir können die Filterung der Frequenzen in der Fourier-Domäne analog zu~\eqref{eq:fourier_filtering} für die spektrale Domäne auf Graphen über
 \begin{equation*}
-  \hat f_{\mathrm{out}}\left(\gls{lambda}_i\right) \coloneqq \hat f_{\mathrm{in}}\left(\gls{lambda}_i\right)\hat g\left(\lambda_i\right)\,\text{\bzw{} }\ve{\hat f}_{\mathrm{out}} \coloneqq \ve{\hat f}_{\mathrm{in}} \gls{hadamard} \ve{\hat g}
+  \hat f_{\mathrm{out}}\left(\gls{lambda}_i\right) \coloneqq \hat f_{\mathrm{in}}\left(\gls{lambda}_i\right)\hat g\left(\lambda_i\right)
+  \qquad
+  \text{\bzw{}}
+  \qquad
+  \ve{\hat f}_{\mathrm{out}} \coloneqq \ve{\hat f}_{\mathrm{in}} \gls{hadamard} \ve{\hat g}
 \end{equation*}
 beschreiben, wobei \gls{hadamard} das elementweise Hadamard-Produkt ist~\cite{Shuman}.
 $\ve{\hat g} \in \gls{R}^N$ ist damit ein \emph{nicht-parametrischer} Filter, \dhe{} ein Filter, dessen Werte für alle Frequenzen ${\left\{\gls{lambda}_i\right\}}_{i=1}^N$ frei wählbar sind~\cite{Defferrard}.
@@ -82,15 +94,14 @@ Es zeigt sich, dass die Benutzung des spektralen Faltungsoperators in~\eqref{eq:
 So ist \zB{} die Auswertung von $\ve{f}_{\mathrm{out}} \star \ve{\hat g}$ extrem berechnungsintensiv ist, denn die Multiplikation mit der dichtbesetzten Eigenvektormatrix \gls{Eiv} liegt in $\gls{O}\left(N^2\right)$.
 Zudem muss \gls{Eiv} zuerst bestimmt werden — ein kostspieliger Aufwand für Graphen mit möglicherweise weit mehr als hundert Knoten~\cite{gcn}.
 Desweiteren führt ein Filter $\ve{\hat g} \in \gls{R}^N$ der Größe $N$ zu einem Lernaufwand in $\gls{O}\left(N\right)$, \dhe{} der Dimensionalität der Eingabedaten~\cite{Defferrard}.
-Ebenso kann $\ve{\hat g}$ so nicht für das Lernen auf unterschiedlich großen Graphen verwendet werden.
-
+Ebenso kann $\ve{\hat g}$ so nicht für das Lernen auf Graphen mit variierendem $N$ verwendet werden.
 Um die oben genannten Schwächen zu umgehen kann $\hat g\left(\gls{lambda}_i\right)$ über ein Polynom\begin{equation}
   \hat g\left(\gls{lambda}_i\right) \approx \sum_{k=0}^K c_k\gls{lambda}_i^k \eqqcolon \hat g^{\prime}\left(\gls{lambda}\right)
   \label{eq:spektraler_filter_approximation}
 \end{equation}
 vom Grad $K$ mit Koeffizienten $c_0, \ldots, c_K \in \gls{R}$ approximiert werden~\cite{Hammond, Defferrard}.
-Die Filtergröße von $\hat g^{\prime}$ sinkt somit auf einen konstanten Faktor $K$ mit Lernaufwand $\gls{O}\left(K\right)$, \dhe{} dem gleichen Aufwand klassischer zweidimensionaler \glspl{CNN}~\cite{Defferrard}.
-$\ve{f}_{\mathrm{in}} \star \ve{\hat g}$ ergibt sich dann mittels~\eqref{eq:matrix_potenz},~\eqref{eq:spektraler_faltungsoperator} und~\eqref{eq:spektraler_filter_approximation} approximiert durch~\cite{Defferrard}
+Die Filtergröße von $\hat g^{\prime}$ sinkt somit auf einen konstanten Faktor $K$ mit Lernaufwand $\gls{O}\left(K\right)$, dem gleichen Aufwand klassischer zweidimensionaler \glspl{CNN}~\cite{Defferrard}.
+$\ve{f}_{\mathrm{in}} \star \ve{\hat g}$ ergibt dann nach~\eqref{eq:matrix_potenz},~\eqref{eq:spektraler_faltungsoperator} und~\eqref{eq:spektraler_filter_approximation} approximiert durch~\cite{Defferrard}
 \begin{equation}
   \ve{f}_{\mathrm{in}} \star \ve{\hat g} \approx \sum_{k=0}^K c_k\gls{Eiv}\gls{Lambda}^k\gls{Eiv}^{\top}\ve{f}_{\mathrm{in}} = \sum_{k=0}^K c_k \gls{Lboth}^k \ve{f}_{\mathrm{in}}.
   \label{eq:spektraler_faltungsoperator_approximation}
@@ -102,7 +113,7 @@ Eine Faltung über $f_{\mathrm{in}}\left(\gls{v}_i\right)$ wird damit als Linear
 \begin{equation*}
   f_{\mathrm{out}}\left(\gls{v}_i\right) \approx b_{ii} f_{\mathrm{in}}\left(\gls{v}_i\right) + \sum_{\gls{v}_j \in \gls{Neighbor}_K\left(\gls{v}_i\right)} b_{ij} f_{\mathrm{in}}\left(\gls{v}_j\right)
 \end{equation*}
-über dessen $k$-lokalisierte Nachbarschaft $\gls{Neighbor}_K\left(\gls{v}_i\right) \coloneqq \left\{ \gls{v}_j \mid \gls{Lboth}^K_{ij} > 0 \right\}$ beschrieben mit $b_{ij} \coloneqq \sum_{k=0}^K c_k \gls{Lboth}^k_{ij}$~\cite{Shuman}.
+über dessen $k$-lokalisierte Nachbarschaft $\gls{Neighbor}_K\left(\gls{v}_i\right) \coloneqq \left\{ \gls{v}_j \in \gls{V}, i \neq j \mid \gls{Lboth}^K_{ij} > 0 \right\}$ beschrieben mit $b_{ij} \coloneqq \sum_{k=0}^K c_k \gls{Lboth}^k_{ij}$~\cite{Shuman}.
 
 \paragraph{Tschebyschow-Polynome}
 \label{tschebyschow_polynome}
@@ -110,28 +121,27 @@ Eine Faltung über $f_{\mathrm{in}}\left(\gls{v}_i\right)$ wird damit als Linear
 Obwohl der Aufwand zur Bestimmung von $\ve{f}_{\mathrm{in}} \star \ve{\hat g}$ durch die polynomielle Approximation und insbesondere durch den Wegfall der Berechnung der Eigenvektormatrix \gls{Eiv} deutlich reduziert wurde, ist diese immer noch recht teuer aufgrund der Berechnung der $K$-ten Potenz von $\gls{Lboth}$.
 So ist \gls{Lboth} zwar eine dünnbesetzte Matrix mit $\left|\gls{E}\right| + N \ll N^2$, $N \leq \left|\gls{E}\right|$, Einträgen, $\gls{Lboth}^K$ ist dies jedoch zwangsläufig nicht.
 Eine Lösung zu diesem Problem ist die Benutzung eines Polynoms mit einer rekursiven Formulierung.
-Ein rekursives Polynom, dass dafür üblicherweise genutzt wird, ist das Tschebyschow-Polynom, da sich dieses zusätzlich durch einen sehr günstigen Fehlerverlauf auszeichnet (\vgl{}~\cite{Hammond}).
-
-\emph{Tschebyschow-Polynome} (engl. \emph{Chebyshev}) bezeichnen eine Menge von Polynomen $\gls{T}_k\left(x\right) \colon \gls{R} \to \gls{R}$ mit dem rekursiven Zusammenhang
+Ein rekursives Polynom, dass dafür üblicherweise genutzt wird, ist das \emph{Tschebyschow-Polynom}, da sich dieses zusätzlich durch einen sehr günstigen Fehlerverlauf auszeichnet (\vgl{}~\cite{Hammond}).
+Tschebyschow-Polynome bezeichnen eine Menge von Polynomen $\gls{T}_k\left(x\right) \colon \gls{R} \to \gls{R}$ mit dem rekursiven Zusammenhang
 \begin{equation*}
   \gls{T}_k\left(x\right) = 2x\, \gls{T}_{k-1}\left(x\right) - \gls{T}_{k-2}\left(x\right)
 \end{equation*}
 mit $\gls{T}_0\left(x\right) = 1$ und $\gls{T}_1\left(x\right) = x$~\cite{Hammond}.
 Ein Tschebyschow-Polynom $\gls{T}_k$ ist ein Polynom $k$-ten Grades und gilt im Intervall $\left[-1, 1\right]$ als numerisch stabil, \dhe{} $\gls{T}_k\left(x\right) \in \left[-1, 1\right]$ für $x \in \left[-1, 1\right]$~\cite{Hammond}.
-Die spektrale Faltung mittels Tschebyschow-Polynomen ergibt sich dann zu
+Die spektrale Faltung mittels Tschebyschow-Polynomen ergibt sich dann nach~\eqref{eq:spektraler_faltungsoperator_approximation} als
 \begin{equation}
   \ve{f}_{\mathrm{in}} \star \ve{\hat g} \approx \sum_{k=0}^K c_k\gls{Eiv}\gls{T}_k\left(\gls{Lambdatilde}\right)\gls{Eiv}^{\top}\ve{f}_{\mathrm{in}},
   \label{eq:tschebyschow_faltung}
 \end{equation}
-wobei $c_0, \ldots, c_K \in \gls{R}$ nun Koeffizienten der Tschebyschow-Polynome $\gls{T}_k\left(\gls{Lambdatilde}\right) \in \gls{R}^{N \times N}$ angewendet auf die skalierten Eigenwerte $\gls{Lambdatilde} \coloneqq 2\gls{Lambda}/\gls{lambdamax} - \gls{I} \in {\left[-1, 1\right]}^{N \times N}$~\cite{Defferrard}.
+wobei $c_0, \ldots, c_K \in \gls{R}$ nun Koeffizienten der Tschebyschow-Polynome $\gls{T}_k\left(\gls{Lambdatilde}\right) \in \gls{R}^{N \times N}$ angewendet auf die skalierten Eigenwerte $\gls{Lambdatilde} \coloneqq 2\gls{Lambda}/\gls{lambdamax} - \gls{I}$ mit $\gls{Lambdatilde} \in {\left[-1, 1\right]}^{N \times N}$~\cite{Defferrard}.
 Dann kann~\eqref{eq:tschebyschow_faltung} mit $\gls{Lbothtilde} \coloneqq \gls{Eiv}\gls{Lambdatilde}\gls{Eiv}^{\top} = 2\gls{Lboth}/\gls{lambdamax} - \gls{I}$ weiter vereinfacht werden zu~\cite{Defferrard}
 \begin{equation}
   \ve{f}_{\mathrm{in}} \star \ve{\hat g} \approx \sum_{k=0}^K c_k\gls{T}_k\left(\gls{Lbothtilde}\right)\ve{f}_{\mathrm{in}}.
   \label{eq:tschebyschow_faltung_L}
 \end{equation}
-Für \gls{Lboth} kann $\gls{lambdamax} \leq 2$ auf dessen obere Schranke, \dhe{} $\gls{lambdamax} \coloneqq 2$, gesetzt werden um die Berechnung von \gls{lambdamax} zu vermeiden ohne die numerische Stabilität von $\gls{T}_k$ zu verletzen.
+Für \gls{Lboth} kann $\gls{lambdamax} \leq 2$ auf dessen obere Schranke, \dhe{} $\gls{lambdamax} \coloneqq 2$, gesetzt werden um die Berechnung von \gls{lambdamax} zu vermeiden ohne die numerische Stabilität von $\gls{T}_k$ im Intervall $\left[-1, 1\right]$ zu verletzen.
 
-Der rekursive Zusammenhang von $\gls{T}_k$ hilft uns nun dabei, $\ve{f}_{\mathrm{in}} \star \ve{\hat g}$ effizient zu berechnen.
+Der rekursive Zusammenhang von $\gls{T}_k$ hilft uns dabei, $\ve{f}_{\mathrm{in}} \star \ve{\hat g}$ effizient zu bestimmen.
 Berechne dafür $\ve{\bar f}_k \coloneqq \gls{T}_k\left(\gls{Lbothtilde}\right)\ve{f}_{\mathrm{in}} \in \gls{R}^N$ für alle $k \in \left\lbrace0, \ldots, K\right\rbrace$ rekursiv mit $\ve{\bar f}_0 = \ve{f}_{\mathrm{in}}$, $\ve{\bar f}_1 = \gls{Lbothtilde}\,\ve{f}_{\mathrm{in}}$ und $\ve{\bar f}_k = 2 \gls{Lbothtilde}\,\ve{\bar f}_{k-1} - \ve{\bar f}_{k - 2}$.
 Dann ergibt sich $\ve{f}_{\mathrm{out}} = \left[\ve{\bar f}_0, \ve{\bar f}_1, \ldots, \ve{\bar f}_K\right]\ve{c} \in \gls{R}^N$ mit $\ve{c} \coloneqq {\left[c_0, c_1, \ldots, c_K\right]}^{\top} \in \gls{R}^{K+1}$ (\vgl{}~\cite{Hammond}).
 $\ve{f}_{\mathrm{out}}$ lässt sich damit über $K + 1$ Multiplikationen einer dünnbesetzen Matrix mit einem Vektor und einer abschließenden Vektormultplikation beschreiben.
@@ -142,7 +152,7 @@ Mit $N \leq \left|\gls{E}\right|$ ergibt dies eine finale Laufzeit der spektrale
 
 Für gewöhnlich besteht eine \gls{CNN}-Schicht nicht nur aus einem, sondern aus $M_{\mathrm{in}}$ vielen Signalen \bzw{} Merkmalen pro Knoten mit jeweils unterschiedlichen Filtern \bzw{} Gewichten pro Ein- und Ausgabekarte.
 In klassichen zweidimensionalen \glspl{CNN} werden diese Merkmale auf $M_{\mathrm{out}}$ viele Merkmale abgebildet, in dem für jede Ausgabekarte über jede Eingabekarte gefaltet und dessen Ergebnisse sukzessive aufsummiert werden (\vgl{} Kapitel~\ref{convolutional_neural_networks}).
-Modellieren wir diesen Fall für den spektralen Faltungsoperator, dann erhalten wir rekursiv für eine Merkmalsmatrix $\gls{F}_{\mathrm{in}} \in \gls{R}^{N \times M_{\mathrm{in}}}$ auf den $N$ Knoten eines Graphen \gls{G} gefaltet auf eine Merkmalsmatrix $\gls{F}_{\mathrm{out}} \in \gls{R}^{N \times M_{\mathrm{out}}}$ mittels des Filtertensors $\gls{W} \in \gls{R}^{K+1 \times M_{\mathrm{in}} \times M_{\mathrm{out}}}$
+Modellieren wir diesen Fall für den spektralen Faltungsoperator, dann erhalten wir rekursiv für eine Merkmalsmatrix $\gls{F}_{\mathrm{in}} \in \gls{R}^{N \times M_{\mathrm{in}}}$ gefaltet auf eine Merkmalsmatrix $\gls{F}_{\mathrm{out}} \in \gls{R}^{N \times M_{\mathrm{out}}}$ über den $N$ Knoten eines Graphen \gls{G} mittels des Filtertensors $\gls{W} \in \gls{R}^{K+1 \times M_{\mathrm{in}} \times M_{\mathrm{out}}}$
 \begin{equation*}
   \gls{F}_{\mathrm{out}} \coloneqq \sum_{k=0}^K \ma{\bar F}_k,
 \end{equation*}

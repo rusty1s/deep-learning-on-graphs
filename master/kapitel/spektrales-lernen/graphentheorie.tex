@@ -2,12 +2,11 @@
 \label{spektrale_graphentheorie}
 
 Die spektrale Graphentheorie beschäftigt sich mit der Konstruktion, Analyse und Manipulation von Graphen.
-Sie zeigt sich dabei als besonders nützlich in Anwendungsgebieten wie der Charakterisierung von Expandergraphen, dem Graphenzeichnen oder dem spektralen Clustering~(\vgl{}~\cite{Shuman}).
+Sie beweist sich dabei als besonders nützlich in Anwendungsgebieten wie der Charakterisierung von Expandergraphen, dem Graphenzeichnen oder dem spektralen Clustering~(\vgl{}~\cite{Shuman}).
+Weiterhin hat die spektrale Graphentheorie \zB{} auch Anwendungsgebiete in der Chemie, bei der die Eigenwerte des Spektrums des Graphen mit der Stabilität von Molekülen assoziert werden (\vgl{}~\cite{Chung}).
 
 Es zeigt sich, dass die Eigenwerte des Spektrums eines Graphen eng mit den Eigenschaften eines Graphen verwandt sind.
-Als spektrale Graphentheorie versteht man damit insbesondere die Studie über die Beziehungen dieser beiden Bereiche.
-So hat die spektrale Graphentheorie \zB{} auch Anwendungsgebiete in der Chemie, bei der die Eigenwerte mit der Stabilität von Molekülen assoziert werden (\vgl{}~\cite{Chung}).
-
+Als spektrale Graphentheorie versteht man damit insbesondere die Studie über die gemeinsamen Beziehungen dieser beiden Bereiche.
 Dieses Kapitel gibt eine Einführung in die wichtigsten Definitionen und Intuitionen der spektralen Graphentheorie, die es uns schlussendlich erlauben, die spektrale Faltung auf Graphen zu formulieren.
 
 \subsection{Eigenwerte und Eigenvektoren reell symmetrischer Matrizen}
@@ -18,8 +17,7 @@ Ein Eigenvektor \gls{eiv} beschreibt damit einen Vektor, dessen Richtung durch d
 Zu einem Eigenwert $\gls{lambda}$ gibt es unendlich viele (skalierte) Eigenvektoren \gls{eiv}.
 Wir definieren den Eigenvektor \gls{eiv} eines Eigenwertes \gls{lambda} daher eindeutig über die Bedingung $\left\|\gls{eiv}\right\|_2 = 1$.
 Sei \ma{M} weiterhin symmetrisch, \dhe{} $\ma{M} = \ma{M}^{\top}$.
-Dann gilt für zwei unterschiedliche Eigenvektoren $\gls{eiv}_1$ und $\gls{eiv}_2$, dass diese orthogonal zueinander stehen, \dhe{} $\gls{eiv}_1 \gls{ortho} \gls{eiv}_2$.
-Weiterhin hat \ma{M} genau $N$ reelle Eigenwerte mit ${\left\{\gls{lambda}_i\right\}}_{i=1}^N$.
+Dann gilt für zwei unterschiedliche Eigenvektoren $\gls{eiv}_1$ und $\gls{eiv}_2$, dass diese orthogonal zueinander stehen, \dhe{} $\gls{eiv}_1 \gls{ortho} \gls{eiv}_2$, und \ma{M} hat genau $N$ reelle Eigenwerte mit ${\left\{\gls{lambda}_i\right\}}_{i=1}^N$.
 Wir definieren demnach zu \ma{M} die orthogonale \emph{Eigenvektormatrix} $\gls{Eiv} \coloneqq \left[\gls{eiv}_1, \ldots, \gls{eiv}_n\right] \in \gls{R}^{N \times N}$, \dhe{} $\gls{Eiv}\gls{Eiv}^{\top}=\gls{I}$, und dessen Eigenwertdiagonalmatrix $\gls{Lambda} \coloneqq \gls{diag}\left({\left[\gls{lambda}_1, \ldots, \gls{lambda}_N\right]}^{\top}\right)$, \dhe{} $\gls{Lambda}_{ii} = \gls{lambda}_i$.
 Dann gilt $\ma{M}\gls{Eiv} = \gls{Eiv}\gls{Lambda}$ und insbesondere ist \ma{M} diagonalisierbar über
 \begin{equation*}
@@ -32,7 +30,7 @@ Weiterhin gilt für die $k$-te Potenz von $\ma{M}$, $k \in \gls{N}$,
   \label{eq:matrix_potenz}
 \end{equation}
 
-Dieser Zusammenhang lässt sich verdeutlichen, wenn man die Potenz ausschreibt:
+Dieser Zusammenhang lässt sich verdeutlichen, wenn die Potenz ausgeschrieben wird:
 \begin{equation*}
   {\left(\gls{Eiv}\gls{Lambda}\gls{Eiv}^{\top}\right)}^k = \gls{Eiv}\gls{Lambda}\gls{Eiv}^{\top}\gls{Eiv}\gls{Lambda}\gls{Eiv}^{\top}\prod^{k-2}_{i=1} \gls{Eiv}\gls{Lambda}\gls{Eiv}^{\top} = \gls{Eiv}\gls{Lambda}^2\gls{Eiv}^{\top} \prod^{k-2}_{i=1} \gls{Eiv}\gls{Lambda}\gls{Eiv}^{\top} = \gls{Eiv}\gls{Lambda}^k \gls{Eiv}^{\top}.
 \end{equation*}
@@ -49,8 +47,8 @@ Eigenwerte symmetrischer positiv semidefiniter Matrizen $\lambda_i \in \gls{R+}$
 \label{laplace_matrix}
 
 Die Laplace-Matrix ist in der spektralen Graphentheorie eine Matrix, die die Beziehungen der Knoten und Kanten eines beliebigen Graphen \gls{G} in einer generalisierten und normalisierten Form beschreibt.
-Viele der Eigenschaften von \gls{G} können durch die Eigenwerte dessen Laplace-Matrix beschrieben werden, wohingegen dies \zB{} für die Eigenwerte der Adjazenzmatrix \gls{A} von \gls{G} nur bedingt zutrifft und insbesondere nicht verallgemeinbar für beliebge Graphen ist~\cite{Chung}.
-Dies ist vorallem dem Fakt geschuldet, dass die Eigenwerte der Laplace-Matrix konsistent sind mit den Eigenwerten des Laplace-Beltrami Operators in der spektralen Geometrie~\cite{Chung}.
+Viele der Eigenschaften von \gls{G} können durch die Eigenwerte ihrer Laplace-Matrix beschrieben werden, wohingegen dies \zB{} für die Eigenwerte der Adjazenzmatrix \gls{A} von \gls{G} nur bedingt zutrifft und insbesondere nicht verallgemeinbar für beliebge Graphen ist~\cite{Chung}.
+Dies ist vorallem dem Fakt geschuldet, dass die Eigenwerte der Laplace-Matrix konsistent sind mit den Eigenwerten des Laplace-Beltrami Operators $\nabla^2$ in der spektralen Geometrie~\cite{Chung}.
 Die Laplace-Matrix ist damit ein geeignetes Mittel zur Betrachtung und Analyse eines Graphen.
 
 Für einen schleifenlosen, ungerichteteten, gewichtet oder ungewichteten Graphen \gls{G} und dessen Adjazenzmatrix \gls{A} mit Gradmatrix \gls{D} ist die \emph{kombinatorische Laplace-Matrix} \gls{L} definiert als $\gls{L} \coloneqq \gls{D} - \gls{A}$~\cite{Chung}.
@@ -67,8 +65,7 @@ Für verbundene Graphen kann \gls{Lnorm} vereinfacht werden zu $\gls{Lnorm} \col
 Jeder Eintrag auf der Diagonalen der normalisierten Laplace-Matrix ist folglich Eins.
 \gls{Lnorm} ist damit normalisiert auf den (gewichteten) Grad zweier adjazenter Knoten $\gls{v}_i$ und $\gls{v}_j$.
 Es ist anzumerken, dass \gls{L} und insbesondere \gls{Lnorm} symmetrisch sind, wohingegen eine Normalisierung der Form $\gls{D}^{-1}\gls{L}$ dies in der Regel nicht wäre~\cite{Reuter}.
-\gls{L} und \gls{Lnorm} sind keine ähnlichen Matrizen.
-Insbesondere sind ihre Eigenvektoren unterschiedlich.
+\gls{L} und \gls{Lnorm} sind desweiteren keine ähnlichen Matrizen, insbesondere sind ihre Eigenvektoren verschieden.
 Die Nutzung von \gls{L} oder \gls{Lnorm} ist damit abhängig von dem Problem, welches man betrachtet~\cite{Hammond}.
 Wir schreiben \gls{Lboth} wenn die Wahl der Laplace-Matrix, ob \gls{L} oder \gls{Lnorm}, für die weitere Berechnung irrelevant ist.
 
@@ -83,13 +80,13 @@ Dann kann für die kombinatorische Laplace-Matrix \gls{L} verifiziert werden, da
   {\left(\gls{L}\ve{f}\right)}_i = \sum_{i \gls{adj} j} \gls{w}\left(\gls{v}_i, \gls{v}_j\right) \left(\ve{f}_i - \ve{f}_j\right)
 \end{equation*}
 erfüllt~\cite{Hammond}.
-Sei $\gls{G}$ nun ein Graph, der aus einem (unendlichen) zweidimensionalen regulärem Gitter entstanden ist, \dhe{} jeder Knoten $\gls{v}_i$ besitzt genau vier achsenparallele rechtwinklige Nachbarn mit gleichem Kantengewichten $1/\delta^2$, wobei $\delta \in \gls{R}$ eine beliebige Konstante.
+Sei $\gls{G}$ nun ein Graph, der aus einem (unendlichen) zweidimensionalen regulärem Gitter entstanden ist, \dhe{} jeder Knoten $\gls{v}_i$ besitzt genau vier achsenparallele rechtwinklige Nachbarn mit gleichen Kantengewichten $1/\delta^2$, wobei $\delta \in \gls{R}$ eine beliebige Konstante.
 Zur einfacheren Veranschaulichung benutzen wir dabei für die Signalstärke $\ve{f}_i$ eines Knoten $v_i$ an Position $\left(x, y\right)$ die Indexnotation $\ve{f}_{x,y}$.
 Dann beschreibt
 \begin{equation*}
   {\left(\gls{L}\ve{f}\right)}_{x,y} = \frac{4\ve{f}_{x,y} - \ve{f}_{x+1,y} - \ve{f}_{x-1,y} - \ve{f}_{x,y+1} - \ve{f}_{x,y-1}}{h^2}
 \end{equation*}
-die \emph{5-Punkte-Stern} Approximation $-\nabla^2 f$ (bei umgekehrtem Vorzeichen) definiert auf den Punkten $\left\{\left(x,y\right), \left(x+\delta,y\right), \left(x-\delta,y\right), \left(x,\delta+h\right),\left(x,y-\delta\right)\right\}$~\cite{Hammond} (\vgl{} Abbildung~\ref{fig:5_punkte_stern}).
+die \emph{5-Punkte-Stern} Approximation $\nabla^2 f$ (bei umgekehrtem Vorzeichen) definiert auf den Punkten $\left\{\left(x,y\right), \left(x+\delta,y\right), \left(x-\delta,y\right), \left(x,\delta+h\right),\left(x,y-\delta\right)\right\}$~\cite{Hammond} (\vgl{} Abbildung~\ref{fig:5_punkte_stern}).
 Ähnlich zu einem regulären Gitter lässt sich ein Graph \gls{G} auch über beliebig viele Abtastpunkte einer differenzierbaren Mannigfaltigkeit konstruieren.
 Es zeigt sich, dass mit steigender Abtastdichte und geeigneter Wahl der Kantengewichte die normalisierte Laplace-Matrix \gls{Lnorm} zu dem kontinuierlichem Laplace-Beltrami Operator $\nabla^2$ konvergiert~\cite{Hammond}.
 Damit kann $\gls{Lnorm}$ als die diskrete Analogie des $\nabla^2$ Operators auf Graphen verstanden werden.
@@ -115,7 +112,7 @@ Daraus folgt unmittelbar, dass $\gls{lambda}_1 = 0$, da $\gls{eiv}_1 = 1/\sqrt{N
 \gls{Lnorm} hingegen ist nicht zwingend schwach diagonaldominant.
 Es lässt sich jedoch zeigen, dass auch für \gls{Lnorm} gilt, dass $\gls{lambda}_1 = 0$~\cite{Chung}.
 
-Eine der interessantesten Eigenschaften eines Graphs ist dessen Konnektivität.
+Eine der interessantesten Eigenschaften eines Graphen ist dessen Konnektivität.
 Die Laplace-Matrix \gls{Lboth} \bzw{} dessen Eigenwerte stellen ein geeignetes Mittel zur Untersuchung dieser Eigenschaft dar.
 So gilt \zB{} für einen verbundenen Graphen \gls{G}, dass $\gls{lambda}_2 > 0$.
 Falls $\gls{lambda}_i = 0$ und $\gls{lambda}_{i+1} \neq 0$, dann besitzt $\gls{G}$ genau $i$ verbundene Komponenten~\cite{Chung}.
