@@ -79,8 +79,8 @@ Daraus ergibt sich analog zu~\eqref{eq:fourier_faltung} der \emph{spektrale Falt
 \label{polynomielle_approximation}
 
 Es zeigt sich, dass die Benutzung des spektralen Faltungsoperators in~\eqref{eq:spektraler_faltungsoperator} im Kontext eines \glspl{CNN} auf Graphen mehrere Schwächen aufweist.
-Es ist \zB{} leicht ersichtlich, dass die Auswertung von $\ve{f}_{\mathrm{out}} \star \ve{\hat g}$ extrem berechnungsintensiv ist.
-So liegt die Laufzeit der Multiplikation mit der dichtbesetzten Eigenvektormatrix \gls{Eiv} in $\gls{O}\left(N^2\right)$, zudem muss \gls{Eiv} zuerst bestimmt werden — ein kostspieliger Aufwand für Graphen mit möglicherweise weit mehr als hundert Knoten~\cite{gcn}.
+So ist \zB{} die Auswertung von $\ve{f}_{\mathrm{out}} \star \ve{\hat g}$ extrem berechnungsintensiv ist, denn die Multiplikation mit der dichtbesetzten Eigenvektormatrix \gls{Eiv} liegt in $\gls{O}\left(N^2\right)$.
+Zudem muss \gls{Eiv} zuerst bestimmt werden — ein kostspieliger Aufwand für Graphen mit möglicherweise weit mehr als hundert Knoten~\cite{gcn}.
 Desweiteren führt ein Filter $\ve{\hat g} \in \gls{R}^N$ der Größe $N$ zu einem Lernaufwand in $\gls{O}\left(N\right)$, \dhe{} der Dimensionalität der Eingabedaten~\cite{Defferrard}.
 Ebenso kann $\ve{\hat g}$ so nicht für das Lernen auf unterschiedlich großen Graphen verwendet werden.
 
@@ -125,9 +125,10 @@ Die spektrale Faltung mittels Tschebyschow-Polynomen ergibt sich dann zu
 \end{equation}
 wobei $c_0, \ldots, c_K \in \gls{R}$ nun Koeffizienten der Tschebyschow-Polynome $\gls{T}_k\left(\gls{Lambdatilde}\right) \in \gls{R}^{N \times N}$ angewendet auf die skalierten Eigenwerte $\gls{Lambdatilde} \coloneqq 2\gls{Lambda}/\gls{lambdamax} - \gls{I} \in {\left[-1, 1\right]}^{N \times N}$~\cite{Defferrard}.
 Dann kann~\eqref{eq:tschebyschow_faltung} mit $\gls{Lbothtilde} \coloneqq \gls{Eiv}\gls{Lambdatilde}\gls{Eiv}^{\top} = 2\gls{Lboth}/\gls{lambdamax} - \gls{I}$ weiter vereinfacht werden zu~\cite{Defferrard}
-\begin{equation*}
+\begin{equation}
   \ve{f}_{\mathrm{in}} \star \ve{\hat g} \approx \sum_{k=0}^K c_k\gls{T}_k\left(\gls{Lbothtilde}\right)\ve{f}_{\mathrm{in}}.
-\end{equation*}
+  \label{eq:tschebyschow_faltung_L}
+\end{equation}
 Für \gls{Lboth} kann $\gls{lambdamax} \leq 2$ auf dessen obere Schranke, \dhe{} $\gls{lambdamax} \coloneqq 2$, gesetzt werden um die Berechnung von \gls{lambdamax} zu vermeiden ohne die numerische Stabilität von $\gls{T}_k$ zu verletzen.
 
 Der rekursive Zusammenhang von $\gls{T}_k$ hilft uns nun dabei, $\ve{f}_{\mathrm{in}} \star \ve{\hat g}$ effizient zu berechnen.
@@ -136,17 +137,13 @@ Dann ergibt sich $\ve{f}_{\mathrm{out}} = \left[\ve{\bar f}_0, \ve{\bar f}_1, \l
 $\ve{f}_{\mathrm{out}}$ lässt sich damit über $K + 1$ Multiplikationen einer dünnbesetzen Matrix mit einem Vektor und einer abschließenden Vektormultplikation beschreiben.
 Mit $N \leq \left|\gls{E}\right|$ ergibt dies eine finale Laufzeit der spektralen Faltung von $\gls{O}\left(K\left|\gls{E}\right|\right)$~\cite{Defferrard}.
 
-\paragraph{Tensorimplementierung}
+\paragraph{Implementierung}
 \label{tschebyschow_tensor}
 
-$\gls{F}_{\mathrm{in}} \in \gls{R}^{N \times M_{\mathrm{in}}}$
-$\gls{F}_{\mathrm{out}} \in \gls{R}^{N \times M_{\mathrm{out}}}$
-$\gls{W} \in \gls{R}^{K+1, M_{\mathrm{in}} \times M_{\mathrm{out}}}$\\
-
-$\ma{\bar F}_0 = \gls{F}_{\mathrm{in}}\gls{W}_0$\\
-$\ma{\bar F}_1 = \gls{Lbothtilde}\gls{F}_{\mathrm{in}}\gls{W}_1$\\
-$\ma{\bar F}_k = \left(2\gls{Lbothtilde}\ma{\bar F}_{k -1} -  \ma{\bar F}_{k - 2}\right)\gls{W}_k$\\
-$\gls{F}_{\mathrm{out}} = \sum_{k=0}^K \ma{\bar F}_k$
-
-
-\todo{fettes todo}
+Für gewöhnlich besteht eine \gls{CNN}-Schicht nicht nur aus einem, sondern aus $M_{\mathrm{in}}$ vielen Signalen \bzw{} Merkmalen pro Knoten mit jeweils unterschiedlichen Filtern \bzw{} Gewichten pro Ein- und Ausgabekarte.
+In klassichen zweidimensionalen \glspl{CNN} werden diese Merkmale auf $M_{\mathrm{out}}$ viele Merkmale abgebildet, in dem für jede Ausgabekarte über jede Eingabekarte gefaltet und dessen Ergebnisse sukzessive aufsummiert werden (\vgl{} Kapitel~\ref{convolutional_neural_networks}).
+Modellieren wir diesen Fall für den spektralen Faltungsoperator, dann erhalten wir rekursiv für eine Merkmalsmatrix $\gls{F}_{\mathrm{in}} \in \gls{R}^{N \times M_{\mathrm{in}}}$ auf den $N$ Knoten eines Graphen \gls{G} gefaltet auf eine Merkmalsmatrix $\gls{F}_{\mathrm{out}} \in \gls{R}^{N \times M_{\mathrm{out}}}$ mittels des Filtertensors $\gls{W} \in \gls{R}^{K+1 \times M_{\mathrm{in}} \times M_{\mathrm{out}}}$
+\begin{equation*}
+  \gls{F}_{\mathrm{out}} \coloneqq \sum_{k=0}^K \ma{\bar F}_k,
+\end{equation*}
+wobei $\ma{\bar F}_k = \left(2\gls{Lbothtilde}\,\ma{\bar F}_{k -1} -  \ma{\bar F}_{k - 2}\right)\gls{W}_k \in \gls{R}^{N \times M_{\mathrm{out}}}$ mit $\ma{\bar F}_0 = \gls{F}_{\mathrm{in}}\gls{W}_0$ und $\ma{\bar F}_1 = \gls{Lbothtilde}\,\gls{F}_{\mathrm{in}}\gls{W}_1$.

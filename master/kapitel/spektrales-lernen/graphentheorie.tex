@@ -1,7 +1,14 @@
 \section{Spektrale Graphentheorie}
 \label{spektrale_graphentheorie}
 
-\todo{intro, was ist das überhaupt}
+Die spektrale Graphentheorie beschäftigt sich mit der Konstruktion, Analyse und Manipulation von Graphen.
+Sie zeigt sich dabei als besonders nützlich in Anwendungsgebieten wie der Charakterisierung von Expandergraphen, dem Graphenzeichnen oder dem spektralen Clustering~(\vgl{}~\cite{Shuman}).
+
+Es zeigt sich, dass die Eigenwerte des Spektrums eines Graphen eng mit den Eigenschaften eines Graphen verwandt sind.
+Als spektrale Graphentheorie versteht man damit insbesondere die Studie über die Beziehungen dieser beiden Bereiche.
+So hat die spektrale Graphentheorie \zB{} auch Anwendungsgebiete in der Chemie, bei der die Eigenwerte mit der Stabilität von Molekülen assoziert werden (\vgl{}~\cite{Chung}).
+
+Dieses Kapitel gibt eine Einführung in die wichtigsten Definitionen und Intuitionen der spektralen Graphentheorie, die es uns schlussendlich erlauben, die spektrale Faltung auf Graphen zu formulieren.
 
 \subsection{Eigenwerte und Eigenvektoren reell symmetrischer Matrizen}
 \label{eigenwerte_symmetrischer_matrizen}
@@ -38,16 +45,13 @@ Falls \ma{M} weiterhin \emph{schwach diagonaldominant} ist, \dhe{}
 und weiterhin $\ma{M}_{ii} \geq 0$ für alle $i \in \left\{1, \ldots, N\right\}$, dann ist \ma{M} \emph{positiv semidefinit}, \dhe{} $\ve{x}^{\top}\ma{M}\ve{x} \geq 0$ für alle $\ve{x} \in \gls{R}^{N}$.
 Eigenwerte symmetrischer positiv semidefiniter Matrizen $\lambda_i \in \gls{R+}$ sind positiv reell und es lässt sich folglich auf diesen eine Ordnung definieren mit $0 \leq \gls{lambda}_1 \leq \cdots \leq \gls{lambda}_N \coloneqq \gls{lambdamax}$.
 
-\todo{quelle}
-
 \subsection{Laplace-Matrix}
 \label{laplace_matrix}
 
-Our eigenvalues relate well to other graph invariants for general graphs in a way that other definitions (such as the eigenvalues of adjacency matrices) often fail to do.
-The advantages of this definition are perhaps due to the fact that it is consistent with the eigenvalues in spectral geometry and in stochastic processes.
-Many results which were only known for regular graphs can be generalized to all graphs~\cite{Chung}.
-
-\todo{intro}
+Die Laplace-Matrix ist in der spektralen Graphentheorie eine Matrix, die die Beziehungen der Knoten und Kanten eines beliebigen Graphen \gls{G} in einer generalisierten und normalisierten Form beschreibt.
+Viele der Eigenschaften von \gls{G} können durch die Eigenwerte dessen Laplace-Matrix beschrieben werden, wohingegen dies \zB{} für die Eigenwerte der Adjazenzmatrix \gls{A} von \gls{G} nur bedingt zutrifft und insbesondere nicht verallgemeinbar für beliebge Graphen ist~\cite{Chung}.
+Dies ist vorallem dem Fakt geschuldet, dass die Eigenwerte der Laplace-Matrix konsistent sind mit den Eigenwerten des Laplace-Beltrami Operators in der spektralen Geometrie~\cite{Chung}.
+Die Laplace-Matrix ist damit ein geeignetes Mittel zur Betrachtung und Analyse eines Graphen.
 
 Für einen schleifenlosen, ungerichteteten, gewichtet oder ungewichteten Graphen \gls{G} und dessen Adjazenzmatrix \gls{A} mit Gradmatrix \gls{D} ist die \emph{kombinatorische Laplace-Matrix} \gls{L} definiert als $\gls{L} \coloneqq \gls{D} - \gls{A}$~\cite{Chung}.
 Die \emph{normalisierte Laplace-Matrix} \gls{Lnorm} ist definiert als $\gls{Lnorm} \coloneqq \gls{D}^{-1/2} \gls{L} \gls{D}^{-1/2}$ mit der Konvention, dass $\gls{D}^{-1/2}_{ii} = 0$ für isolierte Knoten $\gls{v}_i \in \gls{V}$ in \gls{G}, \dhe{} $\gls{D}_{ii} = 0$~\cite{Chung}.
@@ -73,9 +77,7 @@ Wir schreiben \gls{Lboth} wenn die Wahl der Laplace-Matrix, ob \gls{L} oder \gls
 
 \input{tikz/five-point-stencil}
 
-\todo{kurz laplace beltrami}
-
-Sei $\ve{f} \in \gls{R}^N$ eine Funktion \bzw{} ein Signal auf den Knoten eines Graphen \gls{G}.
+Sei $f \colon \gls{V} \to \gls{R}$ \bzw{} $\ve{f} \in \gls{R}^N$ mit $f\left(\gls{v}_i\right) = \ve{f}_i$ eine Funktion \bzw{} ein Signal auf den Knoten eines Graphen \gls{G}.
 Dann kann für die kombinatorische Laplace-Matrix \gls{L} verifiziert werden, dass sie die Gleichung
 \begin{equation*}
   {\left(\gls{L}\ve{f}\right)}_i = \sum_{i \gls{adj} j} \gls{w}\left(\gls{v}_i, \gls{v}_j\right) \left(\ve{f}_i - \ve{f}_j\right)
@@ -89,9 +91,9 @@ Dann beschreibt
 \end{equation*}
 die \emph{5-Punkte-Stern} Approximation $-\nabla^2 f$ (bei umgekehrtem Vorzeichen) definiert auf den Punkten $\left\{\left(x,y\right), \left(x+\delta,y\right), \left(x-\delta,y\right), \left(x,\delta+h\right),\left(x,y-\delta\right)\right\}$~\cite{Hammond} (\vgl{} Abbildung~\ref{fig:5_punkte_stern}).
 Ähnlich zu einem regulären Gitter lässt sich ein Graph \gls{G} auch über beliebig viele Abtastpunkte einer differenzierbaren Mannigfaltigkeit konstruieren.
-Es zeigt sich, dass mit steigender Abtastdichte und geeigneter Wahl der Kantengewichte die normalisierte Laplace-Matrix \gls{Lnorm} zu dem kontinuierlichem Laplace-Beltrami Operator konvergiert~\cite{Hammond}.
+Es zeigt sich, dass mit steigender Abtastdichte und geeigneter Wahl der Kantengewichte die normalisierte Laplace-Matrix \gls{Lnorm} zu dem kontinuierlichem Laplace-Beltrami Operator $\nabla^2$ konvergiert~\cite{Hammond}.
 Damit kann $\gls{Lnorm}$ als die diskrete Analogie des $\nabla^2$ Operators auf Graphen verstanden werden.
-Der Laplace-Beltrami Operator misst dabei, in wie weit sich eine Funktion $f$ an einem Punkt $x$ von dem Durchschnitt aller Funktionspunkte um einen kleinen Bereich um $x$ unterscheidet.
+Der Laplace-Beltrami Operator $\nabla^2 f\left(p\right)$ misst dabei, in wie weit sich eine Funktion $f$ an einem Punkt $p$ von dem Durchschnitt aller Funktionspunkte um einen kleinen Bereich um $p$ unterscheidet.
 Die Laplace-Matrix operiert dabei völlig analog, in dem sie misst, wie sehr sich eine (diskrete) Funktion um einen Knoten im Vergleich zu seinen Nachbarknoten unterscheidet.
 
 Eigenwerte und Eigenvektoren von \gls{Lboth} helfen uns dabei, die lineare Transformation einer Funktion \ve{f} (mehrfach) angewendet auf \gls{Lboth} besser zu verstehen.
