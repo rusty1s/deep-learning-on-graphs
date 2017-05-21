@@ -37,7 +37,9 @@ Im Folgenden lässt sich der Faltungsoperator der \glspl{GCN} aber insofern modi
 \paragraph{Partitionierung}
 \label{partitionierung}
 
-Sei \gls{G} ein Graph im zweidimensionalen euklidschen Raum, eindeutig definiert über $\gls{Adist} \in \gls{R+}^{N \times N}$ und $\gls{Arad} \in {\left[0, 2\pi\right]}^{N \times N}$.
+\input{tikz/partitionierung}
+
+Sei \gls{G} ein Graph im zweidimensionalen euklidschen Raum, eindeutig definiert über $\gls{Adist} \in {\left[0, 1\right)}^{N \times N}$ und $\gls{Arad} \in {\left[0, 2\pi\right]}^{N \times N}$.
 Dann lässt sich \gls{G} in $P \in \gls{N}$ Bereiche ${\left\{\gls{A}_p\right\}}_{p=1}^P$ \emph{partitionieren}, sodass
 \begin{equation}
   {\left(\gls{A}_p\right)}_{ij} \coloneqq \begin{cases}
@@ -46,14 +48,18 @@ Dann lässt sich \gls{G} in $P \in \gls{N}$ Bereiche ${\left\{\gls{A}_p\right\}}
   \end{cases}
   \label{eq:partitionierung}
 \end{equation}
-Damit beschreiben die Matrizen ${\left\{\gls{A}_p\right\}}_{p=1}^P$ disjunkte Partionen der Kanten des Graphen \gls{G} abhängig von ihren Ausrichtungen im Raum mit $\gls{Adist} = \sum_{p=1}^P \gls{A}_p$.
+Damit beschreiben die Matrizen ${\left\{\gls{A}_p\right\}}_{p=1}^P$ disjunkte Partitionen der Kanten des Graphen \gls{G} abhängig von ihren Ausrichtungen im Raum mit $\gls{Adist} = \sum_{p=1}^P \gls{A}_p$.
 $\gls{A}_p$ ist insbesondere nicht zwingend symmetrisch, da ${\left(\gls{Arad}\right)}_{ij} \neq {\left(\gls{Arad}\right)}_{ji}$ für alle $\gls{v}_i, \gls{v}_j \in \gls{V}$ mit $\gls{v}_i \gls{adj} \gls{v}_j$.
-Abbildung~\ref{fig:partitionierung} veranschaulicht den Prozess der Partitionierung mit $P = 8$ Bereichen bei gleichmäßigen Innenwinkeln $\pi/4$.
+Abbildung~\ref{fig:partitionierung} veranschaulicht den Prozess der Partitionierung.
+Mit $P = 8$ erhalten die jeweiligen Bereiche einen gleichmäßigen Innenwinkel von $\pi/4$.
 
-\input{tikz/partitionierung}
-
-% Warum ist der Algorithmus nicht so gut~\cite{gcn_review}?
-% filters are rotation invariant, and (2) filters are not directly transferrable to a different graph.
+Es lässt sich nun analog zu Kapitel~\ref{graph_convolutional_networks} ein Faltungsoperator definieren, bei dem nun aber jeder Partition ein eigener frei trainierbarer Parameter zugeordnet wird.
+Der Parameter einer Partition hat damit folglich eine eindeutige Örtlichkeitszuweisung über das Intervall \bzw{} den Bereich der Richtungen seiner Kanten.
+Analog zu~\eqref{eq:gcn_renorm} muss dafür zuerst die (Re-)normalisierung der Form
+\begin{equation*}
+  \gls{Ddisttilde}^{-\frac{1}{2}}\gls{Adisttilde}\gls{Ddisttilde}^{-\frac{1}{2}} = \gls{Ddisttilde}^{-1} + \sum_{p=1}^P \gls{Ddisttilde}^{-\frac{1}{2}}\gls{A}_p\gls{Ddisttilde}^{-\frac{1}{2}}
+\end{equation*}
+mit $\gls{Adisttilde} \coloneqq \gls{Adist} + \gls{I}$, ${\left(\gls{Ddisttilde}\right)}_{ii} \coloneqq \sum_{j=1}^N {\left(\gls{Adisttilde}\right)}_{ij}$ und $\gls{Ddisttilde}^{-1/2}\gls{Ddisttilde}^{-1/2} = \gls{Ddisttilde}^{-1}$ durchgeführt werden.
 
 % \begin{equation}
 %   f^{\prime}_{iy} = \sum_{x = 1}^X \tilde a_{ii} \cdot f_{ix} \cdot w_{\left(P +1\right)xy} \sum_{n = 1, n \neq i}^N \tilde a_{in} \cdot f_{nx} \cdot b^K_P\left(\alpha_{in}, x, y\right)

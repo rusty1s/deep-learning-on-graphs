@@ -31,9 +31,10 @@ Die skalierten Eigenwerte von \gls{Lambdatilde} liegen auf Grund der Addition mi
 Demnach können wiederholte Anwendungen des Faltungsoperators zu \enquote{numerischen Instabilitäten und folglich zu explodierenden oder verschwindenen Gradienten} führen~\cite{gcn}.
 \citeauthor{gcn} führen zur Behebung dieses Problems die folgende Renormalisierung durch: $\gls{I} + \gls{D}^{-1/2} \gls{A} \gls{D}^{-1/2} \rightarrow \gls{Dtilde}^{-1/2} \gls{Atilde} \gls{Dtilde}^{-1/2}$ mit $\gls{Atilde} \coloneqq \gls{A} + \gls{I}$ und $\gls{Dtilde}_{ii} \coloneqq \sum_{j=1}^N \gls{Atilde}_{ij}$.
 Der entgültige Faltungsoperator des \glspl{GCN} ergibt sich dann als
-\begin{equation*}
+\begin{equation}
   \ve{f}_{\mathrm{in}} \star \ve{\hat g} \approx c\, \gls{Dtilde}^{-\frac{1}{2}} \gls{Atilde} \gls{Dtilde}^{-\frac{1}{2}} \ve{f}_{\mathrm{in}}
-\end{equation*}
+  \label{eq:gcn_renorm}
+\end{equation}
 auf einem einzigen freien Parameter $c \in \gls{R}$.
 
 \paragraph{Implementierung}

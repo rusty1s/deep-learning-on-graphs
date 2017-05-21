@@ -1,10 +1,10 @@
 \begin{figure}[t]
 \centering
 \begin{tikzpicture}
-  % Kreis
+  % Kreis.
   \draw[dotted] (0, 0) circle (3);
 
-  % Partitionierungen
+  % Partitionierungen.
   \draw[dotted] (0, 0) -- (0:3);
   \draw[dotted] (0, 0) -- (45:3);
   \draw[dotted] (0, 0) -- (90:3);
@@ -14,6 +14,7 @@
   \draw[dotted] (0, 0) -- (270:3);
   \draw[dotted] (0, 0) -- (315:3);
 
+  % Graph.
   \tikzstyle{node}=[circle,draw, minimum width=5pt, inner sep=0pt, fill=white]
   \tikzstyle{root}=[fill=black]
 
@@ -35,6 +36,14 @@
   \path (root) edge (f);
   \path (root) edge (g);
   \path (root) edge (h);
+
+  % Winkel.
+  \coordinate (O) at (0, 0);
+  \coordinate (A) at (2, 0);
+  \coordinate (B) at (2, 2);
+
+  \draw (0.7, -0.7) arc (-45:0:1);
+  \node[] at (-22.5:1.2) {$\frac{\pi}{4}$};
 \end{tikzpicture}
 \caption[Partitionierung eines Graphknotens]{Partitionierung eines Graphknotens in $P = 8$ gleichmäßige Bereiche mit Innenwinkeln $\pi/4$.}
 \label{fig:partitionierung}
