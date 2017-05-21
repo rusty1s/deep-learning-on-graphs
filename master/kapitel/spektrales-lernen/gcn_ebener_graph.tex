@@ -11,8 +11,10 @@ Es ist jedoch anzumerken, dass die spektrale Faltung im Gegensatz zur klassische
 Das ist in der Regel für generelle Graphen keine Schwäche, schließlich kann den Knoten \bzw{} Kanten eines Graphen, kodiert als Adjazenzmatrix, keine Örtlichkeit \bzw{} Richtung (wie links, rechts, oben oder unten) zugeordnet werden.
 Die Rotationsinvarianz kann folglich sowohl als Einschränkung oder Vorteil interpretiert werden, abhängig von dem Problem, welches man betrachtet~\cite{Defferrard}.
 
+\input{tikz/gcn_review}
+
 Im Kontext dieser Arbeit, dem Lernen auf Graphen im zweidimensionalen euklidschen Raum, bei denen Graphknoten eine eindeutige Position besitzen, ist die Rotationsinvarianz weitestgehend unerwünscht.
-Das kann leicht verifiziert werden, indem wir den Filter des \glspl{GCN} auf einer Gitterrepräsentation mit Abstand $\left\|1\right\|_2$ und einer Konnektivität von $8$ visualisieren (vgl. Abbildung~\ref{nothing}).
+Das kann leicht verifiziert werden, indem wir den Filter des \glspl{GCN} auf einer Graphrepräsentation eines Gitters mit Abstand $\left\|1\right\|_2$ visualisieren (vgl. Abbildung~\ref{fig:gcn_review}).
 Diese Repräsentation entspricht damit genau dem Problem der zweidimensionalen Faltung auf Bildern mit einer Filtergröße von $3 \times 3$.
 Hier zeigt jedoch besonders deutlich die Limitierung des Netzes durch die Rotationsinvarianz.
 Wohingegen wir bei klassischen \glspl{CNN} $3 \times 3$ unterschiedliche Parameter mit eindeutiger Örtlichkeit auf den benachbarten Bildpixeln trainieren, reduziert sich der Filter des \glspl{GCN} (vereinfacht ohne Normalisierung mit $\gls{Dtilde}^{-1/2}$) effektiv zu einer Filtermatrix der Form
