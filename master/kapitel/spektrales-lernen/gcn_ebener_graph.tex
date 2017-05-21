@@ -3,19 +3,19 @@
 
 Die Ansätze von~\citeauthor{Defferrard} aus Kapitel~\ref{spektraler_faltungsoperator} und~\citeauthor{gcn} aus Kapitel~\ref{graph_convolutional_networks} zeigen konkurrenzfähige Resultate auf einer Reihe von Datensätzen auf Graphen (\vgl{}~\cite{Defferrard, gcn}).
 \todo{welche?}
-Die Faltung des \glspl{GCN} zeichnet sich durch ihre besonders effiziente Berechnung und einfache Interpretation durch die Analogie zum Weisfeiler-Lehman Algorithmus aus, indem die Anzahl der zu trainierenden Parameter auf Eins reduziert wurde.
+Die Faltung des \glspl{GCN} zeichnet sich durch ihre besonders effiziente Berechnung und einfache Interpretation durch die Analogie zum Weisfeiler-Lehman Algorithmus aus, bei dem die Anzahl der zu trainierenden Parameter auf Eins reduziert wurde.
 \todo{gcn welche}
 
-Die spektrale Faltung auf Graphen entspricht einer Generalisierung der Faltung auf zweidimensionalen Bildern~\cite{gcn_review}.
-Es ist jedoch anzumerken, dass die spektrale Faltung im Gegensatz zur zweidimensionalen Faltung auf einem regulären Gitter insbesondere rotationsinvariant ist.
+Die spektrale Faltung auf Graphen entspricht einer Generalisierung der Faltung klassischer \glspl{CNN} auf zweidimensionalen Bildern~\cite{gcn_review}.
+Es ist jedoch anzumerken, dass die spektrale Faltung im Gegensatz zur klassischen Faltung auf einem regulären Gitter insbesondere rotationsinvariant ist.
 Das ist in der Regel für generelle Graphen keine Schwäche, schließlich kann den Knoten \bzw{} Kanten eines Graphen, kodiert als Adjazenzmatrix, keine Örtlichkeit \bzw{} Richtung (wie links, rechts, oben oder unten) zugeordnet werden.
 Die Rotationsinvarianz kann folglich sowohl als Einschränkung oder Vorteil interpretiert werden, abhängig von dem Problem, welches man betrachtet~\cite{Defferrard}.
 
 Im Kontext dieser Arbeit, dem Lernen auf Graphen im zweidimensionalen euklidschen Raum, bei denen Graphknoten eine eindeutige Position besitzen, ist die Rotationsinvarianz weitestgehend unerwünscht.
 Das kann leicht verifiziert werden, indem wir den Filter des \glspl{GCN} auf einer Gitterrepräsentation mit Abstand $\left\|1\right\|_2$ und einer Konnektivität von $8$ visualisieren (vgl. Abbildung~\ref{nothing}).
 Diese Repräsentation entspricht damit genau dem Problem der zweidimensionalen Faltung auf Bildern mit einer Filtergröße von $3 \times 3$.
-Auf regulären Gittern zeigt sich jedoch deutlich die Limitierung dieses Ansatzes.
-Wohingegen wir auf Bildpixeln $3 \times 3$ unterschiedliche Parameter mit eindeutiger Örtlichkeit trainieren, reduziert sich der Filter des \glspl{GCN} (vereinfacht ohne Normalisierung mit $\gls{Dtilde}^{-1/2}$) effektiv zu einer Filtermatrix der Form
+Hier zeigt jedoch besonders deutlich die Limitierung des Netzes durch die Rotationsinvarianz.
+Wohingegen wir bei klassischen \glspl{CNN} $3 \times 3$ unterschiedliche Parameter mit eindeutiger Örtlichkeit auf den benachbarten Bildpixeln trainieren, reduziert sich der Filter des \glspl{GCN} (vereinfacht ohne Normalisierung mit $\gls{Dtilde}^{-1/2}$) effektiv zu einer Filtermatrix der Form
 \begin{equation*}
   \begin{bmatrix}
     c \frac{2}{\gls{sigma}^2} & c \frac{1}{\gls{sigma}^2} & c \frac{2}{\gls{sigma}^2}\\
@@ -27,26 +27,15 @@ Wohingegen wir auf Bildpixeln $3 \times 3$ unterschiedliche Parameter mit eindeu
     \frac{2}{\gls{sigma}^2} & \frac{1}{\gls{sigma}^2} & \frac{2}{\gls{sigma}^2}
   \end{bmatrix}
 \end{equation*}
-mit einem einzigen trainierbaren Parameter $c \in \gls{R}$ bei horizontalen \bzw{} vertikalen Kantengewichten $1/\gls{sigma}^2 \in \gls{R}$ und respektive $2/\gls{sigma}^2 \in \gls{R}$ für die Diagonalen.
-Damit reduziert sich das Training lediglich auf eine Skalarmultiplikation und es erscheint folglich fast unmöglich mit diesem Ansatz komplexe Probleme wie Bildsegementierung oder ähnlichem zu lösen~(\vgl{}~\cite{gcn_review}).
+mit einem einzigen trainierbaren Parameter $c \in \gls{R}$ bei horizontalen \bzw{} vertikalen Kantengewichten $1/\gls{sigma}^2 \in \gls{R}$ und respektive $2/\gls{sigma}^2 \in \gls{R}$ bei den Diagonalen.
+Damit reduziert sich das Training einer Faltungsschicht eines solchen \glspl{GCN} letztendlich auf eine Skalarmultiplikation.
+Es erscheint fast unmöglich mit diesem Ansatz komplexe Probleme wie \zB{} Bildsegementierung oder ähnlichem zu lösen~(\vgl{}~\cite{gcn_review}).
+Ein Vergleich zwischen der spektralen Faltung auf regulären Graphen und der klassischen zweidimensionalen Faltung auf Bildern wird der spektralen Faltung aber nicht gerecht, schließlich wurden die klassischen \glspl{CNN} speziell für die Anwendung auf Gittern entwickelt.
+So ist es zu erwarten, dass durch die Formulierung einer Faltung für generelle Graphen gewisse Einschränkungen in Kauf genommen werden müssen.
+Im Folgenden lässt sich der Faltungsoperator der \glspl{GCN} aber insofern modifizieren, dass sich dieser für beliebige Graphen in einem zweidimensionalen euklischen Raum äquivalent zu der klassischen Formulierung auf regulären Gittern verhält.
 
-
-
-
-Veranschaulichen wir das Problem
-
-Betr
-Betrachten wir
-
-wohingegen den Kanten eines regulären
-Betrachten wir dazu
-
-Ein Filter des \glspl{GCN}, der auf einer Gitterrepräsentation eines Grauwertbildes mit einer Konnektivität von $8$
-
-
-
-
-Es scheint
+\paragraph{Partitionierung}
+\label{partitionierung}
 
 \input{tikz/partitionierung}
 
