@@ -1,0 +1,41 @@
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}
+% Kreis
+\draw[dotted] (0, 0) circle (3);
+
+% Partitionierungen
+\draw[dotted] (0, 0) -- (0:3);
+\draw[dotted] (0, 0) -- (45:3);
+\draw[dotted] (0, 0) -- (90:3);
+\draw[dotted] (0, 0) -- (135:3);
+\draw[dotted] (0, 0) -- (180:3);
+\draw[dotted] (0, 0) -- (225:3);
+\draw[dotted] (0, 0) -- (270:3);
+\draw[dotted] (0, 0) -- (315:3);
+
+\tikzstyle{node}=[circle,draw, minimum width=5pt, inner sep=0pt, fill=white]
+\tikzstyle{root}=[fill=black]
+
+\node[node, root] (root) at (0,0) {};
+\node[node] (a) at (10:2.8) {};
+\node[node] (b) at (30:2.6) {};
+\node[node] (c) at (70:1.8) {};
+\node[node] (d) at (120:1.4) {};
+\node[node] (e) at (150:2.5) {};
+\node[node] (f) at (210:2.7) {};
+\node[node] (g) at (250:2.3) {};
+\node[node] (h) at (300:3) {};
+
+\path (root) edge (a);
+\path (root) edge (b);
+\path (root) edge (c);
+\path (root) edge (d);
+\path (root) edge (e);
+\path (root) edge (f);
+\path (root) edge (g);
+\path (root) edge (h);
+\end{tikzpicture}
+\caption[Partitionierung eines Graphknotens]{Partitionierung eines Graphknotens in $8$ gleichmäßige Bereiche mit Innenwinkeln $\pi/4$.}
+\label{fig:5_punkte_stern}
+\end{figure}
