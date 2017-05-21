@@ -2,9 +2,7 @@
 \label{gcn_erweiterung}
 
 Die Ansätze von~\citeauthor{Defferrard} aus Kapitel~\ref{spektraler_faltungsoperator} und~\citeauthor{gcn} aus Kapitel~\ref{graph_convolutional_networks} zeigen konkurrenzfähige Resultate auf einer Reihe von Datensätzen auf Graphen (\vgl{}~\cite{Defferrard, gcn}).
-\todo{welche?}
-Die Faltung des \glspl{GCN} zeichnet sich durch ihre besonders effiziente Berechnung und einfache Interpretation durch die Analogie zum Weisfeiler-Lehman Algorithmus aus, bei dem die Anzahl der zu trainierenden Parameter auf Eins reduziert wurde.
-\todo{gcn welche}
+So erreicht das \gls{GCN} \zB{} in der teilweise-überwachten Knotenklassifizierung von Referenz-Graphen, \dhe{} einer Menge von Knoten, die Dokumente über eine Reihe von Bag-of-Words-Merkmalen repräsentieren und (ungerichtet) über dessen Referenzierungen miteinander verbunden sind, beachtliche Ergebnisse und schneidet in diesen sogar knapp besser ab als über die Tschebyschow-Approximation mit $K=2$ und $K=3$~\cite{gcn}.
 
 Die spektrale Faltung auf Graphen entspricht einer Generalisierung der Faltung klassischer \glspl{CNN} auf zweidimensionalen Bildern~\cite{gcn_review}.
 Es ist jedoch anzumerken, dass die spektrale Faltung im Gegensatz zur klassischen Faltung auf einem regulären Gitter insbesondere rotationsinvariant ist.
@@ -16,7 +14,7 @@ Die Rotationsinvarianz kann folglich sowohl als Einschränkung oder Vorteil inte
 Im Kontext dieser Arbeit, dem Lernen auf Graphen im zweidimensionalen euklidschen Raum, bei denen Graphknoten eine eindeutige Position besitzen, ist die Rotationsinvarianz weitestgehend unerwünscht.
 Das kann leicht verifiziert werden, indem wir den Filter des \glspl{GCN} auf einer Graphrepräsentation eines Gitters mit Abstand $\left\|1\right\|_2$ visualisieren (vgl. Abbildung~\ref{fig:gcn_review}).
 Diese Repräsentation entspricht damit genau dem Problem der zweidimensionalen Faltung auf Bildern mit einer Filtergröße von $3 \times 3$.
-Hier zeigt jedoch besonders deutlich die Limitierung des Netzes durch die Rotationsinvarianz.
+Hier zeigt sich jedoch besonders deutlich die Limitierung des Netzes durch die Rotationsinvarianz.
 Wohingegen wir bei klassischen \glspl{CNN} $3 \times 3$ unterschiedliche Parameter mit eindeutiger Örtlichkeit auf den benachbarten Bildpixeln trainieren, reduziert sich der Filter des \glspl{GCN} (vereinfacht ohne Normalisierung mit $\gls{Dtilde}^{-1/2}$) effektiv zu einer Filtermatrix der Form
 \begin{equation*}
   \begin{bmatrix}
@@ -39,46 +37,56 @@ Im Folgenden lässt sich der Faltungsoperator der \glspl{GCN} aber insofern modi
 \paragraph{Partitionierung}
 \label{partitionierung}
 
+Sei \gls{G} ein Graph im zweidimensionalen euklidschen Raum, eindeutig definiert über $\gls{Adist} \in \gls{R+}^{N \times N}$ und $\gls{Arad} \in {\left[0, 2\pi\right]}^{N \times N}$.
+Dann lässt sich \gls{G} in $P \in \gls{N}$ Bereiche ${\left\{\gls{A}_p\right\}}_{p=1}^P$ \emph{partitionieren}, sodass
+\begin{equation}
+  {\left(\gls{A}_p\right)}_{ij} \coloneqq \begin{cases}
+    {\left(\gls{Adist}\right)}_{ij}, & \text{wenn } {\left(\gls{Arad}\right)}_{ij} \in \left(\frac{2\pi}{P}\left(p-1\right), \frac{2\pi}{P}p\right]\\
+    0, & \text{sonst.}
+  \end{cases}
+  \label{eq:partitionierung}
+\end{equation}
+
 \input{tikz/partitionierung}
 
 % Warum ist der Algorithmus nicht so gut~\cite{gcn_review}?
 % filters are rotation invariant, and (2) filters are not directly transferrable to a different graph.
 
-\begin{equation}
-  f^{\prime}_{iy} = \sum_{x = 1}^X \tilde a_{ii} \cdot f_{ix} \cdot w_{\left(P +1\right)xy} \sum_{n = 1, n \neq i}^N \tilde a_{in} \cdot f_{nx} \cdot b^K_P\left(\alpha_{in}, x, y\right)
-\end{equation}
-wobei $b_P^K$ eine B-Spline-Kurve.
-\todo{$a_{ii}$ kann raus, da immer $1$}
+% \begin{equation}
+%   f^{\prime}_{iy} = \sum_{x = 1}^X \tilde a_{ii} \cdot f_{ix} \cdot w_{\left(P +1\right)xy} \sum_{n = 1, n \neq i}^N \tilde a_{in} \cdot f_{nx} \cdot b^K_P\left(\alpha_{in}, x, y\right)
+% \end{equation}
+% wobei $b_P^K$ eine B-Spline-Kurve.
+% \todo{$a_{ii}$ kann raus, da immer $1$}
 
-Es ist anzumerken, dass im Summanden der betrachtete Knoten übersprungen wird, da für diesen ein Wert in der Winkelmatrix keinen Sinn ergibt.
-Er wird daher in der Faltung jeweils einzeln mit einem Gewicht multipliziert und dazuaddiert.
+% Es ist anzumerken, dass im Summanden der betrachtete Knoten übersprungen wird, da für diesen ein Wert in der Winkelmatrix keinen Sinn ergibt.
+% Er wird daher in der Faltung jeweils einzeln mit einem Gewicht multipliziert und dazuaddiert.
 
-\paragraph{B-Spline-Kurven}
-\label{bspline}
+% \paragraph{B-Spline-Kurven}
+% \label{bspline}
 
-$b_P^K \colon \left(0, 2\pi\right]\to\gls{R}$ ist eine \emph{B-Spline-Kurve} der Ordnung $K \in \gls{N}$ mit $P \in \gls{N}$ Kontrollpunkten auf den Kantenwinkeln $\left(0, 2\pi\right]$ eines Graphknotens $\gls{v}_i$ zu seinen adjazenten Knoten $\gls{v}_j$.
-Es ist wichtig anzumerken, dass Null für Winkel ausgeschlossen werden und stattdessen der Winkel $2\pi$ benutzt wird, so dass wir nicht mit der Bedeutung von $0$ in Adjazenzmatrizen in die Quere kommen.
-\\\\
-\begin{equation}
-  b_P^K\left(\alpha, x, y \right) = \sum_{p=1}^P w_{pxy} \cdot e_p^K\left(\alpha\right)
-\end{equation}
-wobei die Basisfunktion $e_p^K$ rekursiv über $K$ definiert ist mit Initialisierung
-\begin{equation}
-  e_p^1\left(\alpha\right) = \begin{cases}
-    1, & \text{wenn }\alpha \in \left] t\left(p-1\right), t\left(p\right)\right]\text{,}\\
-    0, & \text{sonst}
-  \end{cases}
-\end{equation}
-und Rekursionsschritt
-\begin{equation}
-  e_p^k\left(\alpha\right) = \frac{\alpha - t\left(p - 1\right)}{t\left(p+k-2\right) - t\left(p - 1\right)} e_p^{k-1}\left(\alpha\right) + \frac{t\left(i\left(p + k - 1\right)\right) - \alpha}{t\left(p+k - 1\right) - t\left(p\right)} e_{i\left(p+1\right)}^{k-1}\left(\alpha\right)
-\end{equation}
-wobei $t \colon \gls{N} \to \gls{R}$ mit $t\left(p\right) = 2\pi\frac{p}{P}$ und $i\left(p\right) = \gls{modulo}\left(p-1, P\right) + 1$.
-Es ist anzumerken, dass wir $t$ und $i$ dabei für den Rekursionsschritt über die Grenze $P$ hinaus definieren.
-Das hilft uns, die B-Spline-Kurve \emph{kreisförmig} abzuschließen.
+% $b_P^K \colon \left(0, 2\pi\right]\to\gls{R}$ ist eine \emph{B-Spline-Kurve} der Ordnung $K \in \gls{N}$ mit $P \in \gls{N}$ Kontrollpunkten auf den Kantenwinkeln $\left(0, 2\pi\right]$ eines Graphknotens $\gls{v}_i$ zu seinen adjazenten Knoten $\gls{v}_j$.
+% Es ist wichtig anzumerken, dass Null für Winkel ausgeschlossen werden und stattdessen der Winkel $2\pi$ benutzt wird, so dass wir nicht mit der Bedeutung von $0$ in Adjazenzmatrizen in die Quere kommen.
+% \\\\
+% \begin{equation}
+%   b_P^K\left(\alpha, x, y \right) = \sum_{p=1}^P w_{pxy} \cdot e_p^K\left(\alpha\right)
+% \end{equation}
+% wobei die Basisfunktion $e_p^K$ rekursiv über $K$ definiert ist mit Initialisierung
+% \begin{equation}
+%   e_p^1\left(\alpha\right) = \begin{cases}
+%     1, & \text{wenn }\alpha \in \left] t\left(p-1\right), t\left(p\right)\right]\text{,}\\
+%     0, & \text{sonst}
+%   \end{cases}
+% \end{equation}
+% und Rekursionsschritt
+% \begin{equation}
+%   e_p^k\left(\alpha\right) = \frac{\alpha - t\left(p - 1\right)}{t\left(p+k-2\right) - t\left(p - 1\right)} e_p^{k-1}\left(\alpha\right) + \frac{t\left(i\left(p + k - 1\right)\right) - \alpha}{t\left(p+k - 1\right) - t\left(p\right)} e_{i\left(p+1\right)}^{k-1}\left(\alpha\right)
+% \end{equation}
+% wobei $t \colon \gls{N} \to \gls{R}$ mit $t\left(p\right) = 2\pi\frac{p}{P}$ und $i\left(p\right) = \gls{modulo}\left(p-1, P\right) + 1$.
+% Es ist anzumerken, dass wir $t$ und $i$ dabei für den Rekursionsschritt über die Grenze $P$ hinaus definieren.
+% Das hilft uns, die B-Spline-Kurve \emph{kreisförmig} abzuschließen.
 
-Je größer $K$ gesetzt wird, umso mehr Anteile anderer benachbarter Stützpunkte fließen in die Berechnung mit ein.
-Die Größe von $K$ wird deshalb auch oft \emph{lokale Kontrollierbarkeit} genannt.
+% Je größer $K$ gesetzt wird, umso mehr Anteile anderer benachbarter Stützpunkte fließen in die Berechnung mit ein.
+% Die Größe von $K$ wird deshalb auch oft \emph{lokale Kontrollierbarkeit} genannt.
 
-\paragraph{Faltungsoperator}
-\label{ebener_faltungsoperator}
+% \paragraph{Faltungsoperator}
+% \label{ebener_faltungsoperator}
