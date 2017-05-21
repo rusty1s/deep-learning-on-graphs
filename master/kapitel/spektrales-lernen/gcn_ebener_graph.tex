@@ -20,16 +20,16 @@ Hier zeigt jedoch besonders deutlich die Limitierung des Netzes durch die Rotati
 Wohingegen wir bei klassischen \glspl{CNN} $3 \times 3$ unterschiedliche Parameter mit eindeutiger Örtlichkeit auf den benachbarten Bildpixeln trainieren, reduziert sich der Filter des \glspl{GCN} (vereinfacht ohne Normalisierung mit $\gls{Dtilde}^{-1/2}$) effektiv zu einer Filtermatrix der Form
 \begin{equation*}
   \begin{bmatrix}
-    2c/\gls{sigma}^2 & c/\gls{sigma}^2 & 2c/\gls{sigma}^2\\
-    c/\gls{sigma}^2 & c  & c/\gls{sigma}^2\\
-    2c/\gls{sigma}^2 & c/\gls{sigma}^2 & 2c/\gls{sigma}^2
+    ce^{-2/\gls{sigma}^2} & ce^{-1/\gls{sigma}^2} & ce^{-2/\gls{sigma}^2}\\
+    ce^{-1/\gls{sigma}^2} & c & ce^{-1/\gls{sigma}^2}\\
+    ce^{-2/\gls{sigma}^2} & ce^{-1/\gls{sigma}^2} & ce^{-2/\gls{sigma}^2}
   \end{bmatrix} = c \begin{bmatrix}
-    2/\gls{sigma}^2 & 1/\gls{sigma}^2 & 2/\gls{sigma}^2\\
-    1/\gls{sigma}^2 & 1  & 1/\gls{sigma}^2\\
-    2/\gls{sigma}^2 & 1/\gls{sigma}^2 & 2/\gls{sigma}^2
+    e^{-2/\gls{sigma}^2} & e^{-1/\gls{sigma}^2} & e^{-2/\gls{sigma}^2}\\
+    e^{-1/\gls{sigma}^2} & 1 & e^{-1/\gls{sigma}^2}\\
+    e^{-2/\gls{sigma}^2} & e^{-1/\gls{sigma}^2} & e^{-2/\gls{sigma}^2}
   \end{bmatrix}
 \end{equation*}
-mit einem einzigen trainierbaren Parameter $c \in \gls{R}$ bei horizontalen \bzw{} vertikalen Kantengewichten $1/\gls{sigma}^2 \in \gls{R}$ und respektive $2/\gls{sigma}^2 \in \gls{R}$ bei den Diagonalen.
+mit einem einzigen trainierbaren Parameter $c \in \gls{R}$ bei horizontalen \bzw{} vertikalen Kantengewichten $\exp\left(-1/\gls{sigma}^2\right) \in \gls{R}$ und respektive $\exp\left(-2/\gls{sigma}^2\right) \in \gls{R}$ bei den Diagonalen.
 Damit reduziert sich das Training einer Faltungsschicht eines solchen \glspl{GCN} letztendlich auf eine Skalarmultiplikation.
 Es erscheint fast unmöglich mit diesem Ansatz komplexe Probleme wie \zB{} Bildsegementierung oder ähnlichem zu lösen~(\vgl{}~\cite{gcn_review}).
 Ein Vergleich zwischen der spektralen Faltung auf regulären Graphen und der klassischen zweidimensionalen Faltung auf Bildern wird der spektralen Faltung aber nicht gerecht, schließlich wurden die klassischen \glspl{CNN} speziell für die Anwendung auf Gittern entwickelt.
