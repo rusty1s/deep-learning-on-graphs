@@ -20,13 +20,13 @@ Hier zeigt jedoch besonders deutlich die Limitierung des Netzes durch die Rotati
 Wohingegen wir bei klassischen \glspl{CNN} $3 \times 3$ unterschiedliche Parameter mit eindeutiger Örtlichkeit auf den benachbarten Bildpixeln trainieren, reduziert sich der Filter des \glspl{GCN} (vereinfacht ohne Normalisierung mit $\gls{Dtilde}^{-1/2}$) effektiv zu einer Filtermatrix der Form
 \begin{equation*}
   \begin{bmatrix}
-    c \frac{2}{\gls{sigma}^2} & c \frac{1}{\gls{sigma}^2} & c \frac{2}{\gls{sigma}^2}\\
-    c \frac{1}{\gls{sigma}^2} & c  & c \frac{1}{\gls{sigma}^2}\\
-    c \frac{2}{\gls{sigma}^2} & c \frac{1}{\gls{sigma}^2} & c \frac{2}{\gls{sigma}^2}
+    2c/\gls{sigma}^2 & c/\gls{sigma}^2 & 2c/\gls{sigma}^2\\
+    c/\gls{sigma}^2 & c  & c/\gls{sigma}^2\\
+    2c/\gls{sigma}^2 & c/\gls{sigma}^2 & 2c/\gls{sigma}^2
   \end{bmatrix} = c \begin{bmatrix}
-    \frac{2}{\gls{sigma}^2} & \frac{1}{\gls{sigma}^2} & \frac{2}{\gls{sigma}^2}\\
-    \frac{1}{\gls{sigma}^2} & 1  & \frac{1}{\gls{sigma}^2}\\
-    \frac{2}{\gls{sigma}^2} & \frac{1}{\gls{sigma}^2} & \frac{2}{\gls{sigma}^2}
+    2/\gls{sigma}^2 & 1/\gls{sigma}^2 & 2/\gls{sigma}^2\\
+    1/\gls{sigma}^2 & 1  & 1/\gls{sigma}^2\\
+    2/\gls{sigma}^2 & 1/\gls{sigma}^2 & 2/\gls{sigma}^2
   \end{bmatrix}
 \end{equation*}
 mit einem einzigen trainierbaren Parameter $c \in \gls{R}$ bei horizontalen \bzw{} vertikalen Kantengewichten $1/\gls{sigma}^2 \in \gls{R}$ und respektive $2/\gls{sigma}^2 \in \gls{R}$ bei den Diagonalen.
