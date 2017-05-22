@@ -17,11 +17,11 @@ Ein Eigenvektor \gls{eiv} beschreibt damit einen Vektor, dessen Richtung durch d
 Zu einem Eigenwert $\gls{lambda}$ gibt es unendlich viele (skalierte) Eigenvektoren \gls{eiv}.
 Wir definieren den Eigenvektor \gls{eiv} eines Eigenwertes \gls{lambda} daher eindeutig über die Bedingung $\left\|\gls{eiv}\right\|_2 = 1$.
 Sei \ma{M} weiterhin symmetrisch, \dhe{} $\ma{M} = \ma{M}^{\top}$.
-Dann gilt für zwei unterschiedliche Eigenvektoren $\gls{eiv}_1$ und $\gls{eiv}_2$, dass diese orthogonal zueinander stehen, \dhe{} $\gls{eiv}_1 \gls{ortho} \gls{eiv}_2$, und \ma{M} hat genau $N$ reelle Eigenwerte mit ${\left\{\gls{lambda}_i\right\}}_{i=1}^N$.
-Wir definieren demnach zu \ma{M} die orthogonale \emph{Eigenvektormatrix} $\gls{Eiv} \coloneqq \left[\gls{eiv}_1, \ldots, \gls{eiv}_n\right] \in \gls{R}^{N \times N}$, \dhe{} $\gls{Eiv}\gls{Eiv}^{\top}=\gls{I}$, und dessen Eigenwertdiagonalmatrix $\gls{Lambda} \coloneqq \gls{diag}\left({\left[\gls{lambda}_1, \ldots, \gls{lambda}_N\right]}^{\top}\right)$, \dhe{} $\gls{Lambda}_{ii} = \gls{lambda}_i$.
+Dann gilt für zwei unterschiedliche Eigenvektoren $\gls{eiv}_1$ und $\gls{eiv}_2$, dass diese orthogonal zueinander stehen, \dhe{} $\gls{eiv}_1 \gls{ortho} \gls{eiv}_2$, und \ma{M} genau $N$ reelle Eigenwerte mit ${\left\{\gls{lambda}_i\right\}}_{i=1}^N$ hat.
+Wir definieren demnach zu \ma{M} die orthogonale \emph{Eigenvektormatrix} $\gls{Eiv} \coloneqq \left[\gls{eiv}_1, \ldots, \gls{eiv}_n\right] \in \gls{R}^{N \times N}$, \dhe{} $\gls{Eiv}\gls{Eiv}^{\top}=\gls{Eiv}^{\top}\gls{Eiv}=\gls{I}$, und dessen Eigenwertdiagonalmatrix $\gls{Lambda} \coloneqq \gls{diag}\left({\left[\gls{lambda}_1, \ldots, \gls{lambda}_N\right]}^{\top}\right)$, \dhe{} $\gls{Lambda}_{ii} = \gls{lambda}_i$.
 Dann gilt $\ma{M}\gls{Eiv} = \gls{Eiv}\gls{Lambda}$ und insbesondere ist \ma{M} diagonalisierbar über
 \begin{equation*}
-  \ma{M} = \ma{M}\gls{Eiv}\gls{Eiv}^{\top} = \gls{Eiv}\gls{Lambda}\gls{Eiv}^{\top}.
+  \ma{M} = \left(\ma{M}\gls{Eiv}\right)\gls{Eiv}^{\top} = \left(\gls{Eiv}\gls{Lambda}\right)\gls{Eiv}^{\top}.
 \end{equation*}
 
 Weiterhin gilt für die $k$-te Potenz von $\ma{M}$, $k \in \gls{N}$,
@@ -30,9 +30,9 @@ Weiterhin gilt für die $k$-te Potenz von $\ma{M}$, $k \in \gls{N}$,
   \label{eq:matrix_potenz}
 \end{equation}
 
-Dieser Zusammenhang lässt sich verdeutlichen, wenn die Potenz ausgeschrieben wird:
+auf Grund der Induktion von $k - 1 \rightarrow k$ mit
 \begin{equation*}
-  {\left(\gls{Eiv}\gls{Lambda}\gls{Eiv}^{\top}\right)}^k = \gls{Eiv}\gls{Lambda}\gls{Eiv}^{\top}\gls{Eiv}\gls{Lambda}\gls{Eiv}^{\top}\prod^{k-2}_{i=1} \gls{Eiv}\gls{Lambda}\gls{Eiv}^{\top} = \gls{Eiv}\gls{Lambda}^2\gls{Eiv}^{\top} \prod^{k-2}_{i=1} \gls{Eiv}\gls{Lambda}\gls{Eiv}^{\top} = \gls{Eiv}\gls{Lambda}^k \gls{Eiv}^{\top}.
+  {\left(\gls{Eiv}\gls{Lambda}\gls{Eiv}^{\top}\right)}^k = {\left(\gls{Eiv}\gls{Lambda}\gls{Eiv}^{\top}\right)}^{k-1}\gls{Eiv}\gls{Lambda}\gls{Eiv}^{\top} = \gls{Eiv}\gls{Lambda}^{k-1}\gls{Eiv}^{\top}\gls{Eiv}\gls{Lambda}\gls{Eiv} = \gls{Eiv}\gls{Lambda}^k\gls{Eiv}^{\top}.
 \end{equation*}
 
 Falls \ma{M} weiterhin \emph{schwach diagonaldominant} ist, \dhe{}
@@ -48,7 +48,7 @@ Eigenwerte symmetrischer positiv semidefiniter Matrizen $\lambda_i \in \gls{R+}$
 
 Die Laplace-Matrix ist in der spektralen Graphentheorie eine Matrix, die die Beziehungen der Knoten und Kanten eines beliebigen Graphen \gls{G} in einer generalisierten und normalisierten Form beschreibt.
 Viele der Eigenschaften von \gls{G} können durch die Eigenwerte ihrer Laplace-Matrix beschrieben werden, wohingegen dies \zB{} für die Eigenwerte der Adjazenzmatrix \gls{A} von \gls{G} nur bedingt zutrifft und insbesondere nicht verallgemeinbar für beliebge Graphen ist~\cite{Chung}.
-Dies ist vorallem dem Fakt geschuldet, dass die Eigenwerte der Laplace-Matrix konsistent sind mit den Eigenwerten des Laplace-Beltrami Operators $\nabla^2$ in der spektralen Geometrie~\cite{Chung}.
+Dies ist vor allem dem Fakt geschuldet, dass die Eigenwerte der Laplace-Matrix konsistent sind mit den Eigenwerten des Laplace-Beltrami Operators $\nabla^2$ in der spektralen Geometrie~\cite{Chung}.
 Die Laplace-Matrix ist damit ein geeignetes Mittel zur Betrachtung und Analyse eines Graphen.
 
 Für einen schleifenlosen, ungerichteteten, gewichtet oder ungewichteten Graphen \gls{G} und dessen Adjazenzmatrix \gls{A} mit Gradmatrix \gls{D} ist die \emph{kombinatorische Laplace-Matrix} \gls{L} definiert als $\gls{L} \coloneqq \gls{D} - \gls{A}$~\cite{Chung}.
@@ -57,11 +57,11 @@ Daraus ergibt sich die elementweise Definition
 \begin{equation*}
   \gls{Lnorm}_{ij} \coloneqq \begin{cases}
   1, & \text{wenn }i = j,\\
-    -\frac{\gls{w}\left(\gls{v}_i, \gls{v}_j\right)}{\sqrt{\gls{d}\left(\gls{v}_i\right)\gls{d}\left(\gls{v}_j\right)}}, & \text{wenn }\gls{v}_i \gls{adj} \gls{v}_j,\\
+    -\frac{\gls{w}\left(\gls{v}_i, \gls{v}_j\right)}{\sqrt{\gls{d}\left(\gls{v}_i\right)\gls{d}\left(\gls{v}_j\right)}}, & \text{wenn }\gls{v}_j \in \gls{Neighbor}\left(\gls{v}_i\right),\\
   0, & \text{sonst.}
 \end{cases}
 \end{equation*}
-Für verbundene Graphen kann \gls{Lnorm} vereinfacht werden zu $\gls{Lnorm} \coloneqq \gls{I} - \gls{D}^{-1/2} \gls{A} \gls{D}^{-1/2}$~\cite{Chung}.
+Für zusammenhängende Graphen kann \gls{Lnorm} vereinfacht werden zu $\gls{Lnorm} \coloneqq \gls{I} - \gls{D}^{-1/2} \gls{A} \gls{D}^{-1/2}$~\cite{Chung}.
 Jeder Eintrag auf der Diagonalen der normalisierten Laplace-Matrix ist folglich Eins.
 \gls{Lnorm} ist damit normalisiert auf den (gewichteten) Grad zweier adjazenter Knoten $\gls{v}_i$ und $\gls{v}_j$.
 Es ist anzumerken, dass \gls{L} und insbesondere \gls{Lnorm} symmetrisch sind, wohingegen eine Normalisierung der Form $\gls{D}^{-1}\gls{L}$ dies in der Regel nicht wäre~\cite{Reuter}.
@@ -77,7 +77,7 @@ Wir schreiben \gls{Lboth} wenn die Wahl der Laplace-Matrix, ob \gls{L} oder \gls
 Sei $f \colon \gls{V} \to \gls{R}$ \bzw{} $\ve{f} \in \gls{R}^N$ mit $f\left(\gls{v}_i\right) = \ve{f}_i$ eine Funktion \bzw{} ein Signal auf den Knoten eines Graphen \gls{G}.
 Dann kann für die kombinatorische Laplace-Matrix \gls{L} verifiziert werden, dass sie die Gleichung
 \begin{equation*}
-  {\left(\gls{L}\ve{f}\right)}_i = \sum_{i \gls{adj} j} \gls{w}\left(\gls{v}_i, \gls{v}_j\right) \left(\ve{f}_i - \ve{f}_j\right)
+  {\left(\gls{L}\ve{f}\right)}_i = \sum_{\gls{v}_j \in \gls{Neighbor}\left(\gls{v}_i\right)} \gls{w}\left(\gls{v}_i, \gls{v}_j\right) \left(\ve{f}_i - \ve{f}_j\right)
 \end{equation*}
 erfüllt~\cite{Hammond}.
 Sei $\gls{G}$ nun ein Graph, der aus einem (unendlichen) zweidimensionalen regulärem Gitter entstanden ist, \dhe{} jeder Knoten $\gls{v}_i$ besitzt genau vier achsenparallele rechtwinklige Nachbarn mit gleichen Kantengewichten $1/\delta^2$, wobei $\delta \in \gls{R}$ eine beliebige Konstante.
@@ -113,9 +113,9 @@ Daraus folgt unmittelbar, dass $\gls{lambda}_1 = 0$, da $\gls{eiv}_1 = 1/\sqrt{N
 Es lässt sich jedoch zeigen, dass auch für \gls{Lnorm} gilt, dass $\gls{lambda}_1 = 0$~\cite{Chung}.
 
 Eine der interessantesten Eigenschaften eines Graphen ist dessen Konnektivität.
-Die Laplace-Matrix \gls{Lboth} \bzw{} dessen Eigenwerte stellen ein geeignetes Mittel zur Untersuchung dieser Eigenschaft dar.
-So gilt \zB{} für einen verbundenen Graphen \gls{G}, dass $\gls{lambda}_2 > 0$.
-Falls $\gls{lambda}_i = 0$ und $\gls{lambda}_{i+1} \neq 0$, dann besitzt $\gls{G}$ genau $i$ verbundene Komponenten~\cite{Chung}.
+Die Laplace-Matrix \gls{Lboth} \bzw{} deren Eigenwerte stellen ein geeignetes Mittel zur Untersuchung dieser Eigenschaft dar.
+So gilt \zB{} für einen zusammenhängenden Graphen \gls{G}, dass $\gls{lambda}_2 > 0$.
+Falls $\gls{lambda}_i = 0$ und $\gls{lambda}_{i+1} \neq 0$, dann besitzt $\gls{G}$ genau $i$ zusammenhängende Komponenten~\cite{Chung}.
 Damit ist die Anzahl der Null-Eigenwerte äquivalent zu der Anzahl an Komponenten, die ein Graph besitzt.
 Für \gls{Lnorm} lässt sich weiterhin zeigen, dass $\gls{lambdamax} \leq 2$ eine obere Schranke ihrer Eigenwerte ist~\cite{Chung}.
 

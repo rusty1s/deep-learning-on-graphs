@@ -142,10 +142,16 @@
 % -------------------------------------------------------------------
 
 % Fix für \left und \right Abstände
-\let\originalleft\left
-\let\originalright\right
-\def\left#1{\mathopen{}\originalleft#1}
-\def\right#1{\originalright#1\mathclose{}}
+\let\oldleft\left
+\let\oldright\right
+\def\left#1{\mathopen{}\oldleft#1}
+\def\right#1{\oldright#1\mathclose{}}
+
+% -------------------------------------------------------------------
+
+% Füge einen Punkt an Paragraph-Überschriften
+\let\oldparagraph=\paragraph
+\renewcommand\paragraph[1]{\oldparagraph{#1.}}
 
 % -------------------------------------------------------------------
 

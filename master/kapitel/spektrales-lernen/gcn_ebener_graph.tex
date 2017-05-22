@@ -30,7 +30,7 @@ Wohingegen wir bei klassischen \glspl{CNN} $3 \times 3$ unterschiedliche Paramet
 mit einem einzigen trainierbaren Parameter $c \in \gls{R}$ bei horizontalen \bzw{} vertikalen Kantengewichten $\exp\left(-1/\gls{sigma}^2\right) \in \gls{R}$ und respektive $\exp\left(-2/\gls{sigma}^2\right) \in \gls{R}$ bei den Diagonalen.
 Damit reduziert sich das Training einer Faltungsschicht eines solchen \glspl{GCN} letztendlich auf eine Skalarmultiplikation.
 Es erscheint fast unmöglich mit diesem Ansatz komplexe Probleme wie \zB{} Bildsegementierung oder ähnlichem zu lösen~(\vgl{}~\cite{gcn_review}).
-Ein Vergleich zwischen der spektralen Faltung auf regulären Graphen und der klassischen zweidimensionalen Faltung auf Bildern wird der spektralen Faltung aber nicht gerecht, schließlich wurden die klassischen \glspl{CNN} speziell für die Anwendung auf Gittern entwickelt.
+Ein Vergleich zwischen der spektralen Faltung auf regulären Gittergraphen und der klassischen zweidimensionalen Faltung auf Bildern wird der spektralen Faltung aber nicht gerecht, schließlich wurden die klassischen \glspl{CNN} speziell für die Anwendung auf Gittern entwickelt.
 So ist es zu erwarten, dass durch die Formulierung einer Faltung für generelle Graphen gewisse Einschränkungen in Kauf genommen werden müssen.
 Im Folgenden lässt sich der Faltungsoperator der \glspl{GCN} aber insofern modifizieren, dass sich dieser für beliebige Graphen in einem zweidimensionalen euklischen Raum äquivalent zu der klassischen Formulierung auf regulären Gittern verhält.
 
@@ -49,17 +49,41 @@ Dann lässt sich \gls{G} in $P \in \gls{N}$ Bereiche ${\left\{\gls{A}_p\right\}}
   \label{eq:partitionierung}
 \end{equation}
 Damit beschreiben die Matrizen ${\left\{\gls{A}_p\right\}}_{p=1}^P$ disjunkte Partitionen der Kanten des Graphen \gls{G} abhängig von ihren Ausrichtungen im Raum mit $\gls{Adist} = \sum_{p=1}^P \gls{A}_p$.
-$\gls{A}_p$ ist insbesondere nicht zwingend symmetrisch, da ${\left(\gls{Arad}\right)}_{ij} \neq {\left(\gls{Arad}\right)}_{ji}$ für alle $\gls{v}_i, \gls{v}_j \in \gls{V}$ mit $\gls{v}_i \gls{adj} \gls{v}_j$.
+$\gls{A}_p$ ist insbesondere nicht zwingend symmetrisch, da ${\left(\gls{Arad}\right)}_{ij} \neq {\left(\gls{Arad}\right)}_{ji}$ für alle $\gls{v}_i, \gls{v}_j \in \gls{V}$ mit $\gls{v}_j \in \gls{Neighbor}\left(\gls{v}_i\right)$.
 Abbildung~\ref{fig:partitionierung} veranschaulicht den Prozess der Partitionierung.
 Mit $P = 8$ erhalten die jeweiligen Bereiche einen gleichmäßigen Innenwinkel von $\pi/4$.
 
-Es lässt sich nun analog zu Kapitel~\ref{graph_convolutional_networks} ein Faltungsoperator definieren, bei dem nun aber jeder Partition ein eigener frei trainierbarer Parameter zugeordnet wird.
+Es lässt sich analog zu Kapitel~\ref{graph_convolutional_networks} ein Faltungsoperator definieren, bei dem nun aber jeder Partition ein eigener frei trainierbarer Parameter zugeordnet wird.
 Der Parameter einer Partition hat damit folglich eine eindeutige Örtlichkeitszuweisung über das Intervall \bzw{} den Bereich der Richtungen seiner Kanten.
 Analog zu~\eqref{eq:gcn_renorm} muss dafür zuerst die (Re-)normalisierung der Form
 \begin{equation*}
   \gls{Ddisttilde}^{-\frac{1}{2}}\gls{Adisttilde}\gls{Ddisttilde}^{-\frac{1}{2}} = \gls{Ddisttilde}^{-1} + \sum_{p=1}^P \gls{Ddisttilde}^{-\frac{1}{2}}\gls{A}_p\gls{Ddisttilde}^{-\frac{1}{2}}
 \end{equation*}
-mit $\gls{Adisttilde} \coloneqq \gls{Adist} + \gls{I}$, ${\left(\gls{Ddisttilde}\right)}_{ii} \coloneqq \sum_{j=1}^N {\left(\gls{Adisttilde}\right)}_{ij}$ und $\gls{Ddisttilde}^{-1/2}\gls{Ddisttilde}^{-1/2} = \gls{Ddisttilde}^{-1}$ durchgeführt werden.
+mit $\gls{Adisttilde} \coloneqq \gls{Adist} + \gls{I}$ und ${\left(\gls{Ddisttilde}\right)}_{ii} \coloneqq \sum_{j=1}^N {\left(\gls{Adisttilde}\right)}_{ij}$ durchgeführt werden.
+Dies lässt sich mit Hilfe von $\gls{Adist} = \sum_{p=1}^P \gls{A}_p$ und $\gls{Ddisttilde}^{-1/2}\gls{Ddisttilde}^{-1/2} = \gls{Ddisttilde}^{-1}$ verifizieren.
+Im Folgenden sei $\gls{Atilde}_p \coloneqq \gls{Ddisttilde}^{-1/2}\gls{A}_p\gls{Ddisttilde}^{-1/2}$ für $p \in \left\{1, \ldots, P \right\}$ und $\gls{Atilde}_0 \coloneqq \gls{Ddisttilde}^{-1}$.
+Dann folgt sofort für den Faltungsoperatur $\ve{f}_{\mathrm{in}} \star \ve{\hat g}$ auf Graphen im zweidimensionalen euklidschen Raum, dass dieser
+\begin{equation}
+  \ve{f}_{\mathrm{in}} \star \ve{\hat g} \approx \sum_{p=0}^P c_p \gls{Atilde}_p \ve{f}_{\mathrm{in}}
+\end{equation}
+mit den freien Parametern $c_0, \ldots, c_P \in \gls{R}$ erfüllt.
+
+Es stellt sich heraus, dass die Faltung auf den Partitionierungen eines regulären Gittergraphen mit $P=8$ äquivalent zu der klassischen Faltung auf einem regulären Gitter mit Filtergröße $3 \times 3$ ist.
+\begin{proof}
+  Sei \gls{G} ein (unendlicher) regulärer Gittergraph mit Konnektivität $8$ bei Kantengewichten $\exp\left(-1/\gls{sigma}^2\right)$ respektive $\exp\left(-2/\gls{sigma}^2\right)$, $\gls{W} \in \gls{R}^{3 \times 3}$ Filtermatrix der klassischen Faltung und $\ve{f}_{\mathrm{in}}$ Merkmalsvektor auf dem Graphen mit Koordinatenindexnotation ${\left(\ve{f}_{\mathrm{in}}\right)}_{x,y}$.
+  Die klassische Faltung an einem Gitterpunkt $\left(x, y\right)$ ist dann gegeben als
+  \begin{equation}
+    {\left(\ve{f}_{\mathrm{out}}\right)}_{x,y} = \sum_{i,j \in \left\{1, 2, 3\right\}} {\left(\ve{f}_{\mathrm{in}}\right)}_{x+i-2, y+j-2} \gls{W}_{i, j}
+  \end{equation}
+  $\gls{Atilde}_p$ besitzt aufgrund von $P = 8$ genau einen Eintrag pro Matrixreihe.
+
+
+
+  % $\gls{v}_{x,y}$ ein Knoten in \gls{G}. Mit $\gls{Atilde}_0 = \gls{Ddisttilde}^{-1}$ folgt, dass ${\left(\ve{f}_{\mathrm{out}}\right)}_{x,y} = $
+\end{proof}
+
+Obwohl
+Eine Lösung zu diesem Problem ist die Interpolation der Innenwinkel über die Basisfunktionen einer B-Spline-Kurve.
 
 % \begin{equation}
 %   f^{\prime}_{iy} = \sum_{x = 1}^X \tilde a_{ii} \cdot f_{ix} \cdot w_{\left(P +1\right)xy} \sum_{n = 1, n \neq i}^N \tilde a_{in} \cdot f_{nx} \cdot b^K_P\left(\alpha_{in}, x, y\right)
