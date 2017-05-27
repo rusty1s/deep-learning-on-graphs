@@ -89,7 +89,7 @@ Mit der Zuordnung
     c_5\theta_2 & c_4\theta_1 & c_3\theta_2
   \end{bmatrix}
 \end{equation*}
-für die Faltung $\ve{f}_{\mathrm{in}} \star \ve{\hat g}$ aus~\eqref{eq:partitionierung_faltung} mit den Parametern $c_0, \ldots, c_8 \in \gls{R}$
+für den Faltungsoperator $\ve{f}_{\mathrm{in}} \star \ve{\hat g}$ aus~\eqref{eq:partitionierung_faltung} mit den Parametern $c_0, \ldots, c_8 \in \gls{R}$
 folgt damit sofort die Äquivalenz zu $\gls{conv2d}\left(\ve{f}_{\mathrm{in}}\right)$ auf regulären Gittern.
 \end{proof}
 
@@ -104,11 +104,20 @@ beschreiben.
 Es ist anzumerken, dass die Multiplikation mit den dünnbesetzten partitionierten Adjazenzmatrizen extrem effizient ist, da $\left|\gls{Atilde}_p\right| \ll \left|\gls{E}\right|$ und insbesondere $\sum_{p=0}^P \left|\gls{Atilde}_p\right| = \left|\gls{E}\right| + N$.
 Die Laufzeit erhöht sich jedoch im Vergleich zu~\eqref{eq:gcn_tensor} durch die $P$-fache Multiplikation mit der Filtermatrix $\gls{W}_p$ zu $\gls{O}\left(PM_{\mathrm{in}}M_{\mathrm{out}}\left|\gls{E}\right|\right)$.
 \\\\
-Obwohl die Faltung auf den Partitionen eines Graphen insbesondere durch die Äquivalenz zur klassischen Faltung auf regulären Gittern vielversprechend erscheint, gehen dennoch Informationen über die Ausrichtung von Kanten verloren.
-So werden Kanten mit Ausrichtungen im Intervall $\left(2\pi\left(p-1\right)/P, 2\pi p/P\right]$ stets gleich behandelt, auch wenn sich diese \evtl{} extrem unterscheiden.
-Eine Lösung zu diesem Problem ist sicherlich, $P$ insoweit zu erhöhen, dass das Intervall der Innenwinkel der Partitionen entsprechend klein wird.
+Obwohl die Faltung auf den Partitionen eines Graphen insbesondere durch die Äquivalenz zur klassischen Faltung auf regulären Gittern vielversprechend erscheint, gehen dabei dennoch Informationen über die Ausrichtung der Kanten im Raum verloren.
+Unterschiedliche Kanten mit Richtungen im Intervall $\left(2\pi\left(p-1\right)/P, 2\pi p/P\right]$ werden dabei stets gleich behandelt, auch wenn sich diese \evtl{} extrem unterscheiden.
+Eine Lösung zu diesem Problem ist sicherlich, $P$ insoweit zu erhöhen, dass die Innenwinkel der einzelnen Partitionen entsprechend klein werden.
+Dies erscheint jedoch für beliebige, unbekannte Graphstrukturen nicht zwangsläufig sinnvoll.
+Neben dem erhöhten Aufwand der Faltung erhalten wir im schlimmsten Fall viele Partitionsmatrizen $\gls{A}_p$, die eine Nullmatrix \ma{0} darstellen oder nur extrem wenige Kanten beinhalten.
+Kleinste Veränderungen in den Ausrichtungen der Kanten sorgen dann schließlich dafür, dass eine komplett andere Filtermatrix angesprochen wird.
+Ein alternativer Ansatz dazu ist die Interpolation des Filters über stückweise stetiger Polynome zwischen den Partitionsgrenzen des Graphen mit Hilfe von B-Spline-Kurven.
 
-Eine Lösung zu diesem Problem ist die Interpolation der Innenwinkel über die Basisfunktionen einer B-Spline-Kurve.
+\paragraph{B-Spline-Kurven}
+\label{bspline}
+
+Seien $2\pi/P, 4\pi/P, \ldots, 2\pi \in \gls{R}$ genau $P$ viele Stützstellen.
+
+
 
 % \begin{equation}
 %   f^{\prime}_{iy} = \sum_{x = 1}^X \tilde a_{ii} \cdot f_{ix} \cdot w_{\left(P +1\right)xy} \sum_{n = 1, n \neq i}^N \tilde a_{in} \cdot f_{nx} \cdot b^K_P\left(\alpha_{in}, x, y\right)
@@ -119,8 +128,6 @@ Eine Lösung zu diesem Problem ist die Interpolation der Innenwinkel über die B
 % Es ist anzumerken, dass im Summanden der betrachtete Knoten übersprungen wird, da für diesen ein Wert in der Winkelmatrix keinen Sinn ergibt.
 % Er wird daher in der Faltung jeweils einzeln mit einem Gewicht multipliziert und dazuaddiert.
 
-% \paragraph{B-Spline-Kurven}
-% \label{bspline}
 
 % $b_P^K \colon \left(0, 2\pi\right]\to\gls{R}$ ist eine \emph{B-Spline-Kurve} der Ordnung $K \in \gls{N}$ mit $P \in \gls{N}$ Kontrollpunkten auf den Kantenwinkeln $\left(0, 2\pi\right]$ eines Graphknotens $\gls{v}_i$ zu seinen adjazenten Knoten $\gls{v}_j$.
 % Es ist wichtig anzumerken, dass Null für Winkel ausgeschlossen werden und stattdessen der Winkel $2\pi$ benutzt wird, so dass wir nicht mit der Bedeutung von $0$ in Adjazenzmatrizen in die Quere kommen.
