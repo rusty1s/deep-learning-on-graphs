@@ -40,12 +40,15 @@ auf einem einzigen freien Parameter $c \in \gls{R}$.
 \paragraph{Implementierung}
 \label{gcn_tensor}
 
-Die Faltung des \glspl{GCN} auf Merkmalsmatrizen lässt sich analog zur Tensorimplementierung des spektralen Faltungsoperators in Kapitel~\ref{polynomielle_approximation} beschreiben, mit dem Unterschied, dass wir aufgrund der Festlegung von $K=1$ keinen Gewichtstensor, sondern lediglich eine Gewichtsmatrix $\gls{W} \in \gls{R}^{M_{\mathrm{in}} \times M_{\mathrm{out}}}$ nutzen.
+Die Faltung des \glspl{GCN} auf Merkmalsmatrizen lässt sich analog zur Tensorimplementierung des spektralen Faltungsoperators in Kapitel~\ref{polynomielle_approximation} beschreiben, mit dem Unterschied, dass wir aufgrund der Festlegung von $K=1$ keinen Filtertensor, sondern lediglich eine Filtermatrix $\gls{W} \in \gls{R}^{M_{\mathrm{in}} \times M_{\mathrm{out}}}$ nutzen.
 Die Faltung einer Eingabemerkmalsmatrix $\gls{F}_{\mathrm{in}} \in \gls{R}^{N \times M_{\mathrm{in}}}$ auf eine Ausgabemerkmalsmatrix $\gls{F}_{\mathrm{out}} \in \gls{R}^{N \times M_{\mathrm{out}}}$ ergibt sich dann als
-\begin{equation*}
+\begin{equation}
   \ma{F}_{\mathrm{out}} \coloneqq \gls{Dtilde}^{-\frac{1}{2}} \gls{Atilde} \gls{Dtilde}^{-\frac{1}{2}}\, \ma{F}_{\mathrm{in}} \gls{W}
-\end{equation*}
+  \label{eq:gcn_tensor}
+\end{equation}
 mit Faltungsaufwand $\gls{O}\left(M_{\mathrm{in}}M_{\mathrm{out}}\left|\gls{E}\right|\right)$, weil $\gls{Atilde}\ma{F}_{\mathrm{in}}$ effizient mit der Multiplikation einer dünnbesetzten mit einer dichtbesetzten Matrix implementiert werden kann~\cite{gcn}.
 
 \paragraph{Weisfeiler-Lehman Analogie}
 \label{weisfeiler_lehman_analogie}
+
+\todo{fettes todo}

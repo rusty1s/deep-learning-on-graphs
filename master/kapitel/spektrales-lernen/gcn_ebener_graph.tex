@@ -2,7 +2,7 @@
 \label{gcn_erweiterung}
 
 Die Ansätze von~\citeauthor{Defferrard} aus Kapitel~\ref{spektraler_faltungsoperator} und~\citeauthor{gcn} aus Kapitel~\ref{graph_convolutional_networks} zeigen konkurrenzfähige Resultate auf einer Reihe von Datensätzen auf Graphen (\vgl{}~\cite{Defferrard, gcn}).
-So erreicht das \gls{GCN} \zB{} in der teilweise-überwachten Knotenklassifizierung von Referenz-Graphen, \dhe{} einer Menge von Knoten, die Dokumente über eine Reihe von Bag-of-Words-Merkmalen repräsentieren und (ungerichtet) über dessen Referenzierungen miteinander verbunden sind, beachtliche Ergebnisse und schneidet in diesen sogar knapp besser ab als über die Tschebyschow-Approximation mit $K=2$ und $K=3$~\cite{gcn}.
+So erreicht das \gls{GCN} \zB{} in der teilweise-überwachten Knotenklassifizierung von \emph{Referenzgraphen}, \dhe{} einer Menge von Knoten, die Dokumente über eine Reihe von Bag-of-Words-Merkmalen repräsentieren und (ungerichtet) über dessen Referenzierungen miteinander verbunden sind, beachtliche Ergebnisse und schneidet in diesen sogar knapp besser ab als über die Tschebyschow-Approximation mit $K=2$ und $K=3$~\cite{gcn}.
 
 Die spektrale Faltung auf Graphen entspricht einer Generalisierung der Faltung klassischer \glspl{CNN} auf zweidimensionalen Bildern~\cite{gcn_review}.
 Es ist jedoch anzumerken, dass die spektrale Faltung im Gegensatz zur klassischen Faltung auf einem regulären Gitter insbesondere rotationsinvariant ist.
@@ -29,7 +29,7 @@ Wohingegen wir bei klassischen \glspl{CNN} $3 \times 3$ unterschiedliche Paramet
 \end{equation*}
 mit einem einzigen trainierbaren Parameter $c \in \gls{R}$ bei horizontalen \bzw{} vertikalen Kantengewichten $\exp\left(-1/\gls{sigma}^2\right) \in \gls{R}$ und respektive $\exp\left(-2/\gls{sigma}^2\right) \in \gls{R}$ bei den Diagonalen.
 Damit reduziert sich das Training einer Faltungsschicht eines solchen \glspl{GCN} letztendlich auf eine Skalarmultiplikation.
-Es erscheint fast unmöglich mit diesem Ansatz komplexe Probleme wie \zB{} Bildsegementierung oder ähnlichem zu lösen~(\vgl{}~\cite{gcn_review}).
+Es erscheint fast unmöglich mit diesem Ansatz komplexe Probleme wie \zB{} das Segmentieren eines Bildes zu lösen~(\vgl{}~\cite{gcn_review}).
 Ein Vergleich zwischen der spektralen Faltung auf regulären Gittergraphen und der klassischen zweidimensionalen Faltung auf Bildern wird der spektralen Faltung aber nicht gerecht, schließlich wurden die klassischen \glspl{CNN} speziell für die Anwendung auf Gittern entwickelt.
 So ist es zu erwarten, dass durch die Formulierung einer Faltung für generelle Graphen gewisse Einschränkungen in Kauf genommen werden müssen.
 Im Folgenden lässt sich der Faltungsoperator der \glspl{GCN} aber insofern modifizieren, dass sich dieser für beliebige Graphen in einem zweidimensionalen euklischen Raum äquivalent zu der klassischen Formulierung auf regulären Gittern verhält.
@@ -96,10 +96,13 @@ folgt damit sofort die Äquivalenz zu $\gls{conv2d}\left(\ve{f}_{\mathrm{in}}\ri
 \paragraph{Implementierung}
 \label{partitionierung_implementierung}
 
-\begin{equation}
+Analog zu~\eqref{eq:gcn_tensor} lässt sich die Faltung für Merkmalsmatrizen $\ma{F}_{\mathrm{in}} \in \gls{R}^{N \times M_{\mathrm{in}}}$ und $\ma{F}_{\mathrm{out}} \in \gls{R}^{N \times M_{\mathrm{out}}}$ über einem Filtertensor $\gls{W} \in \gls{R}^{P \times M_{\mathrm{in}} \times M_{\mathrm{out}}}$ als
+\begin{equation*}
   \ma{F}_{\mathrm{out}} \coloneqq \sum_{p=0}^P \gls{Atilde}_p\ma{F}_{\mathrm{in}}\gls{W}_p
-\end{equation}
-wadawd
+\end{equation*}
+beschreiben.
+Es ist anzumerken, dass die Multiplikation mit den dünnbesetzten partitionierten Adjazenzmatrizen extrem effizient ist, da $\left|\gls{Atilde}_p\right| \ll \left|\gls{E}\right|$ und insbesondere $\sum_{p=0}^P \left|\gls{Atilde}_p\right| = \left|\gls{E}\right| + N$.
+Die Laufzeit erhöht sich jedoch im Vergleich zu~\eqref{eq:gcn_tensor} durch die $P$-fache Multiplikation mit der Filtermatrix $\gls{W}_p$ zu $\gls{O}\left(PM_{\mathrm{in}}M_{\mathrm{out}}\left|\gls{E}\right|\right)$.
 \\\\
 Obwohl
 Eine Lösung zu diesem Problem ist die Interpolation der Innenwinkel über die Basisfunktionen einer B-Spline-Kurve.
