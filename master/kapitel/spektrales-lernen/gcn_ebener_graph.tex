@@ -41,13 +41,12 @@ Im Folgenden lässt sich der Faltungsoperator der \glspl{GCN} aber insofern modi
 
 Sei \gls{G} ein Graph im zweidimensionalen euklidschen Raum, eindeutig definiert über dessen Adjazenzmatrizen $\gls{Adist} \in {\left[0, 1\right)}^{N \times N}$ und $\gls{Arad} \in {\left[0, 2\pi\right]}^{N \times N}$.
 Dann lässt sich \gls{G} in $P \in \gls{N}$ Bereiche ${\left\{\gls{A}_p\right\}}_{p=1}^P$ \emph{partitionieren}, sodass
-\begin{equation}
+\begin{equation*}
   {\left(\gls{A}_p\right)}_{ij} \coloneqq \begin{cases}
     {\left(\gls{Adist}\right)}_{ij}, & \text{wenn } {\left(\gls{Arad}\right)}_{ij} \in \left(\frac{2\pi}{P}\left(p-1\right), \frac{2\pi}{P}p\right]\\
     0, & \text{sonst.}
   \end{cases}
-  \label{eq:partitionierung}
-\end{equation}
+\end{equation*}
 Damit beschreiben die Matrizen ${\left\{\gls{A}_p\right\}}_{p=1}^P$ disjunkte Partitionen der Kanten des Graphen \gls{G} abhängig von ihren Ausrichtungen im Raum mit $\gls{Adist} = \sum_{p=1}^P \gls{A}_p$.
 $\gls{A}_p$ ist insbesondere nicht zwingend symmetrisch, da ${\left(\gls{Arad}\right)}_{ij} \neq {\left(\gls{Arad}\right)}_{ji}$ für alle $\gls{v}_i, \gls{v}_j \in \gls{V}$ mit $\gls{v}_j \in \gls{Neighbor}\left(\gls{v}_i\right)$.
 Abbildung~\ref{fig:partitionierung} veranschaulicht den Prozess der Partitionierung.
@@ -71,16 +70,27 @@ mit den freien Parametern $c_0, \ldots, c_P \in \gls{R}$ erfüllt.
 
 Es stellt sich heraus, dass die Faltung in~\eqref{eq:partitionierung_faltung} auf den Partitionierungen eines regulären Gittergraphen mit $P=8$ äquivalent zu der klassischen Faltung auf einem regulären Gitter mit Filtergröße $3 \times 3$ ist.
 \begin{proof}
-  Sei \gls{G} ein (unendlicher) regulärer Gittergraph mit Konnektivität $8$ bei Kantengewichten $\exp\left(-1/\gls{sigma}^2\right)$ respektive $\exp\left(-2/\gls{sigma}^2\right)$, $\gls{W} \in \gls{R}^{3 \times 3}$ Filtermatrix der klassischen Faltung und $\ve{f}_{\mathrm{in}}$ Merkmalsvektor auf dem Graphen mit Koordinatenindexnotation ${\left(\ve{f}_{\mathrm{in}}\right)}_{x,y}$.
-  Die klassische Faltung an einem Gitterpunkt $\left(x, y\right)$ ist dann gegeben als
-  \begin{equation}
-    {\left(\ve{f}_{\mathrm{out}}\right)}_{x,y} = \sum_{i,j \in \left\{1, 2, 3\right\}} {\left(\ve{f}_{\mathrm{in}}\right)}_{x+i-2, y+j-2} \gls{W}_{i, j}
-  \end{equation}
-  $\gls{Atilde}_p$ besitzt aufgrund von $P = 8$ genau einen Eintrag pro Matrixreihe.
-
-
-
-  % $\gls{v}_{x,y}$ ein Knoten in \gls{G}. Mit $\gls{Atilde}_0 = \gls{Ddisttilde}^{-1}$ folgt, dass ${\left(\ve{f}_{\mathrm{out}}\right)}_{x,y} = $
+Sei \gls{G} ein (unendlicher) regulärer Gittergraph bei einer Konnektivität von $8$ und $\ve{f}_{\mathrm{in}}$ Merkmalsvektor auf dem Graphen mit Koordinatenindexnotation ${\left(\ve{f}_{\mathrm{in}}\right)}_{x,y}$.
+  Die klassische Faltung \gls{conv2d} an einem Gitterpunkt $\left(x, y\right)$ ist damit gegeben als
+\begin{equation*}
+  {\gls{conv2d}\left({\ve{f}_{\mathrm{in}}}\right)}_{x,y} = \sum_{i,j \in \left\{1, 2, 3\right\}} {\left(\ve{f}_{\mathrm{in}}\right)}_{x+i-2, y+j-2} \gls{W}_{i, j},
+\end{equation*}
+wobei $\gls{W} \in \gls{R}^{3 \times 3}$ Filtermatrix der Größe $3 \times 3$.
+Da \gls{Adisttilde} ein reguläres Gitter beschreibt sind die Einträge jeder Matrixreihe äquivalent unter unterschiedlicher Permutation und folglich sind die Einträge auf der Diagonalen von \gls{Ddisttilde} identisch (\oBdA{} entfällt hier die Randknotenbetrachtung).
+Aufgrund der Partitionierung von \gls{Adist} in $8$ disjunkte Bereiche ${\left\{\gls{Atilde}_p\right\}}_{p=1}^8$ enthält $\gls{Atilde}_p$ genau einen Eintrag pro Matrixreihe korrespondierend zu einer Kante des regulären Gitters.
+Für $p \in \left\{2, 4, 6, 8\right\}$ beschreibt $\gls{Atilde}_p$ die horizontalen und vertikalen Kanten des Graphen mit jeweils gleichen Einträgen $\theta_1 \in \gls{R}$.
+Analog verweist $\gls{Atilde}_p$ für $p \in \left\{1, 3, 5, 7\right\}$ auf die diagonalen Kanten des Graphen mit den festen Einträgen $\theta_2 \in \gls{R}$.
+Sei weiterhin \oBdA{} $\theta_0 \coloneqq {\left(\gls{Ddisttilde}^{-1}\right)}_{ii}$ für beliebiges $i \in \left\{0, \ldots, N\right\}$.
+Mit der Zuordnung
+\begin{equation*}
+  \gls{W} = \begin{bmatrix}
+    c_7\theta_2 & c_8\theta_1 & c_1\theta_2\\
+    c_6\theta_1 & c_0\theta_0 & c_2\theta_1\\
+    c_5\theta_2 & c_4\theta_1 & c_3\theta_2
+  \end{bmatrix}
+\end{equation*}
+für die Faltung $\ve{f}_{\mathrm{in}} \star \ve{\hat g}$ aus~\eqref{eq:partitionierung_faltung} mit den Parametern $c_0, \ldots, c_8 \in \gls{R}$
+folgt damit sofort die Äquivalenz zu $\gls{conv2d}\left(\ve{f}_{\mathrm{in}}\right)$ auf regulären Gittern.
 \end{proof}
 
 \paragraph{Implementierung}
