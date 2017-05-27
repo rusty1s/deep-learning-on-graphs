@@ -104,7 +104,10 @@ beschreiben.
 Es ist anzumerken, dass die Multiplikation mit den dünnbesetzten partitionierten Adjazenzmatrizen extrem effizient ist, da $\left|\gls{Atilde}_p\right| \ll \left|\gls{E}\right|$ und insbesondere $\sum_{p=0}^P \left|\gls{Atilde}_p\right| = \left|\gls{E}\right| + N$.
 Die Laufzeit erhöht sich jedoch im Vergleich zu~\eqref{eq:gcn_tensor} durch die $P$-fache Multiplikation mit der Filtermatrix $\gls{W}_p$ zu $\gls{O}\left(PM_{\mathrm{in}}M_{\mathrm{out}}\left|\gls{E}\right|\right)$.
 \\\\
-Obwohl
+Obwohl die Faltung auf den Partitionen eines Graphen insbesondere durch die Äquivalenz zur klassischen Faltung auf regulären Gittern vielversprechend erscheint, gehen dennoch Informationen über die Ausrichtung von Kanten verloren.
+So werden Kanten mit Ausrichtungen im Intervall $\left(2\pi\left(p-1\right)/P, 2\pi p/P\right]$ stets gleich behandelt, auch wenn sich diese \evtl{} extrem unterscheiden.
+Eine Lösung zu diesem Problem ist sicherlich, $P$ insoweit zu erhöhen, dass das Intervall der Innenwinkel der Partitionen entsprechend klein wird.
+
 Eine Lösung zu diesem Problem ist die Interpolation der Innenwinkel über die Basisfunktionen einer B-Spline-Kurve.
 
 % \begin{equation}
