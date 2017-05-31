@@ -28,12 +28,24 @@
   \draw[color=orange] (2.5,1.5) node[above] {$\gls{basis}_1^2$};
   \draw[color=olive] (3.5,1.5) node[above] {$\gls{basis}_2^2$};
   \draw[color=magenta] (0.5,1.5) node[above] {$\gls{basis}_3^2$};
-  \draw[thick,color=magenta] plot [smooth] coordinates {(0,1)(0.25,1.375)(0.5,1.5)(0.75,1.375)(1,1)(1.25,0.5625)(1.5,0.25)(1.75,0.0625)(2,0)};
-  \draw[thick,color=olive] plot [smooth] coordinates {(0,1)(0.25,0.5625)(0.5,0.25)(0.75,0.0625)(1,0)};
-  \draw[thick,color=blue] plot [smooth] coordinates {(0,0)(0.25,0.0625)(0.5,0.25)(0.75,0.5625)(1,1)(1.25,1.375)(1.5,1.5)(1.75,1.375)(2,1)(2.25,0.5625)(2.5,0.25)(2.75,0.0625)(3,0)};
-  \draw[thick,color=orange] plot [smooth] coordinates {(1,0)(1.25,0.0625)(1.5,0.25)(1.75,0.5625)(2,1)(2.25,1.375)(2.5,1.5)(2.75,1.375)(3,1)(3.25,0.5625)(3.5,0.25)(3.75,0.0625)(4,0)};
-  \draw[thick,color=olive] plot [smooth] coordinates {(2,0)(2.25,0.0625)(2.5,0.25)(2.75,0.5625)(3,1)(3.25,1.375)(3.5,1.5)(3.75,1.375)(4,1)};
-  \draw[thick,color=magenta] plot [smooth] coordinates {(3,0)(3.25,0.0625)(3.5,0.25)(3.75,0.5625)(4,1)};
+
+  \draw [thick,color=magenta,domain=0:1] plot (\x,(-2*\x^2+2*\x+1);
+  \draw [thick,color=magenta,domain=1:2] plot (\x,(\x^2-4*\x+4);
+
+  \draw [thick,color=olive,domain=0:1] plot (\x,(\x^2-2*\x+1);
+
+  \draw [thick,color=blue,domain=0:1] plot (\x,\x^2);
+  \draw [thick,color=blue,domain=1:2] plot (\x,-2*\x^2+6*\x-3);
+  \draw [thick,color=blue,domain=2:3] plot (\x,\x^2-6*\x+9);
+
+  \draw [thick,color=orange,domain=1:2] plot (\x,(\x^2-2*\x+1);
+  \draw [thick,color=orange,domain=2:3] plot (\x,(-2*\x^2+10*\x-11);
+  \draw [thick,color=orange,domain=3:4] plot (\x,(\x^2-8*\x+16);
+
+  \draw [thick,color=olive,domain=2:3] plot (\x,(\x^2-4*\x+4);
+  \draw [thick,color=olive,domain=3:4] plot (\x,(-2*\x^2+14*\x-23);
+
+  \draw [thick,color=magenta,domain=3:4] plot (\x,(\x^2-6*\x+9);
 
   \draw[->] (-0.4, 0) -- (4.4, 0) node[right] {$\alpha$};
   \draw[->] (0, -0.4) -- (0, 2.4);

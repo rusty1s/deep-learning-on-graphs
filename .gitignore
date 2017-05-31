@@ -20,3 +20,4 @@ log_graph
 *.run.xml
 *.ckpt*
 checkpoint
+*.gnuplot
