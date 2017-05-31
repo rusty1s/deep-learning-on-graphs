@@ -21,3 +21,4 @@ log_graph
 *.ckpt*
 checkpoint
 *.gnuplot
+*.bst
