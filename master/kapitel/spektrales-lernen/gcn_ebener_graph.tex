@@ -40,14 +40,14 @@ Im Folgenden lässt sich der Faltungsoperator der \glspl{GCN} aber insofern modi
 \input{tikz/partitionierung}
 
 Sei \gls{G} ein Graph im zweidimensionalen euklidschen Raum, eindeutig definiert über dessen Adjazenzmatrizen $\gls{Adist} \in {\left[0, 1\right)}^{N \times N}$ und $\gls{Arad} \in {\left[0, 2\pi\right]}^{N \times N}$.
-Dann lässt sich \gls{G} in $P \in \gls{N}$ Bereiche ${\left\{\gls{A}_p\right\}}_{p=1}^P$ \emph{partitionieren}, sodass
+Dann lässt sich \gls{G} in $P \in \gls{N}$ Bereiche ${\left\{\gls{A}_p\right\}}_{p=0}^{P-1}$ \emph{partitionieren}, sodass
 \begin{equation*}
   {\left(\gls{A}_p\right)}_{ij} \coloneqq \begin{cases}
-    {\left(\gls{Adist}\right)}_{ij}, & \text{wenn } {\left(\gls{Arad}\right)}_{ij} \in \left(\frac{2\pi}{P}\left(p-1\right), \frac{2\pi}{P}p\right]\\
+    {\left(\gls{Adist}\right)}_{ij}, & \text{wenn } {\left(\gls{Arad}\right)}_{ij} \in \left(\frac{2\pi}{P}p, \frac{2\pi}{P}\left(p+1\right)\right]\\
     0, & \text{sonst.}
   \end{cases}
 \end{equation*}
-Damit beschreiben die Matrizen ${\left\{\gls{A}_p\right\}}_{p=1}^P$ disjunkte Partitionen der Kanten des Graphen \gls{G} abhängig von ihren Ausrichtungen im Raum mit $\gls{Adist} = \sum_{p=1}^P \gls{A}_p$.
+Damit beschreiben die Matrizen ${\left\{\gls{A}_p\right\}}_{p=0}^{P-1}$ disjunkte Partitionen der Kanten des Graphen \gls{G} abhängig von ihren Ausrichtungen im Raum mit $\gls{Adist} = \sum_{p=0}^{P-1} \gls{A}_p$.
 $\gls{A}_p$ ist insbesondere nicht zwingend symmetrisch, da ${\left(\gls{Arad}\right)}_{ij} \neq {\left(\gls{Arad}\right)}_{ji}$ für alle $\gls{v}_i, \gls{v}_j \in \gls{V}$ mit $\gls{v}_j \in \gls{Neighbor}\left(\gls{v}_i\right)$.
 Abbildung~\ref{fig:partitionierung} veranschaulicht den Prozess der Partitionierung.
 Mit $P = 8$ erhalten die jeweiligen Bereiche einen gleichmäßigen Innenwinkel der Größe $\pi/4$.
@@ -56,17 +56,17 @@ Es lässt sich analog zu Kapitel~\ref{graph_convolutional_networks} ein Faltungs
 Der Parameter einer Partition hat damit folglich eine eindeutige Örtlichkeitszuweisung über das Intervall \bzw{} den Bereich der Richtungen seiner Kanten.
 Analog zu~\eqref{eq:gcn_renorm} muss dafür zuerst die (Re-)normalisierung der Form
 \begin{equation*}
-  \gls{Ddisttilde}^{-\frac{1}{2}}\gls{Adisttilde}\gls{Ddisttilde}^{-\frac{1}{2}} = \gls{Ddisttilde}^{-1} + \sum_{p=1}^P \gls{Ddisttilde}^{-\frac{1}{2}}\gls{A}_p\gls{Ddisttilde}^{-\frac{1}{2}}
+  \gls{Ddisttilde}^{-\frac{1}{2}}\gls{Adisttilde}\gls{Ddisttilde}^{-\frac{1}{2}} = \gls{Ddisttilde}^{-1} + \sum_{p=0}^{P-1} \gls{Ddisttilde}^{-\frac{1}{2}}\gls{A}_p\gls{Ddisttilde}^{-\frac{1}{2}}
 \end{equation*}
 mit $\gls{Adisttilde} \coloneqq \gls{Adist} + \gls{I}$ und ${\left(\gls{Ddisttilde}\right)}_{ii} \coloneqq \sum_{j=1}^N {\left(\gls{Adisttilde}\right)}_{ij}$ durchgeführt werden.
-Dies lässt sich mit Hilfe von $\gls{Adist} = \sum_{p=1}^P \gls{A}_p$ und $\gls{Ddisttilde}^{-1/2}\gls{Ddisttilde}^{-1/2} = \gls{Ddisttilde}^{-1}$ verifizieren.
-Im Folgenden sei $\gls{Atilde}_p \coloneqq \gls{Ddisttilde}^{-1/2}\gls{A}_p\gls{Ddisttilde}^{-1/2}$ für $p \in \left\{1, \ldots, P \right\}$ und $\gls{Atilde}_0 \coloneqq \gls{Ddisttilde}^{-1}$.
-Dann folgt sofort für den Faltungsoperatur $\ve{f}_{\mathrm{in}} \star \ve{\hat g}$ auf Graphen im zweidimensionalen euklidschen Raum, dass dieser
+Dies lässt sich mit Hilfe von $\gls{Adist} = \sum_{p=0}^{P-1} \gls{A}_p$ und $\gls{Ddisttilde}^{-1/2}\gls{Ddisttilde}^{-1/2} = \gls{Ddisttilde}^{-1}$ verifizieren.
+Im Folgenden sei $\gls{Atilde}_p \coloneqq \gls{Ddisttilde}^{-1/2}\gls{A}_p\gls{Ddisttilde}^{-1/2}$ für $p \in \left\{0, \ldots, P-1 \right\}$ und $\gls{Atilde}_P \coloneqq \gls{Ddisttilde}^{-1}$.
+Dann folgt für den Faltungsoperatur $\ve{f}_{\mathrm{in}} \star \ve{\hat g}$ auf Graphen im zweidimensionalen euklidschen Raum, dass dieser über
 \begin{equation}
   \ve{f}_{\mathrm{in}} \star \ve{\hat g} \approx \sum_{p=0}^P c_p \gls{Atilde}_p \ve{f}_{\mathrm{in}}
   \label{eq:partitionierung_faltung}
 \end{equation}
-mit den freien Parametern $c_0, \ldots, c_P \in \gls{R}$ erfüllt.
+mit den freien Parametern $\left(c_0, \ldots, c_P\right) \in \gls{R}$ beschrieben werden kann.
 
 Es stellt sich heraus, dass die Faltung in~\eqref{eq:partitionierung_faltung} auf den Partitionierungen eines regulären Gittergraphen mit $P=8$ äquivalent zu der klassischen Faltung auf einem regulären Gitter mit Filtergröße $3 \times 3$ ist.
 \begin{proof}
@@ -77,16 +77,16 @@ Sei \gls{G} ein (unendlicher) regulärer Gittergraph bei einer Konnektivität vo
 \end{equation*}
 wobei $\gls{W} \in \gls{R}^{3 \times 3}$ Filtermatrix der Größe $3 \times 3$.
 Da \gls{Adisttilde} ein reguläres Gitter beschreibt sind die Einträge jeder Matrixreihe äquivalent unter unterschiedlicher Permutation und folglich sind die Einträge auf der Diagonalen von \gls{Ddisttilde} identisch (\oBdA{} entfällt hier die Randknotenbetrachtung).
-Aufgrund der Partitionierung von \gls{Adist} in $8$ disjunkte Bereiche ${\left\{\gls{Atilde}_p\right\}}_{p=1}^8$ enthält $\gls{Atilde}_p$ genau einen Eintrag pro Matrixreihe korrespondierend zu einer Kante des regulären Gitters.
-Für $p \in \left\{2, 4, 6, 8\right\}$ beschreibt $\gls{Atilde}_p$ die horizontalen und vertikalen Kanten des Graphen mit jeweils gleichen Einträgen $\theta_1 \in \gls{R}$.
-Analog verweist $\gls{Atilde}_p$ für $p \in \left\{1, 3, 5, 7\right\}$ auf die diagonalen Kanten des Graphen mit den festen Einträgen $\theta_2 \in \gls{R}$.
-Sei weiterhin \oBdA{} $\theta_0 \coloneqq {\left(\gls{Ddisttilde}^{-1}\right)}_{ii}$ für beliebiges $i \in \left\{0, \ldots, N\right\}$.
+Aufgrund der Partitionierung von \gls{Adist} in $8$ disjunkte Bereiche ${\left\{\gls{Atilde}_p\right\}}_{p=0}^7$ enthält $\gls{Atilde}_p$ genau einen Eintrag pro Matrixreihe korrespondierend zu einer Kante des regulären Gitters.
+Für $p \in \left\{1, 3, 5, 7\right\}$ beschreibt $\gls{Atilde}_p$ die horizontalen und vertikalen Kanten des Graphen mit jeweils gleichen Einträgen $\theta_0 \in \gls{R}$.
+Analog verweist $\gls{Atilde}_p$ für $p \in \left\{0, 2, 4, 6\right\}$ auf die diagonalen Kanten des Graphen mit den festen Einträgen $\theta_1 \in \gls{R}$.
+Sei weiterhin \oBdA{} $\theta_2 \coloneqq {\left(\gls{Ddisttilde}^{-1}\right)}_{ii}$ für beliebiges $i \in \left\{0, \ldots, N\right\}$.
 Mit der Zuordnung
 \begin{equation*}
   \gls{W} = \begin{bmatrix}
-    c_7\theta_2 & c_8\theta_1 & c_1\theta_2\\
-    c_6\theta_1 & c_0\theta_0 & c_2\theta_1\\
-    c_5\theta_2 & c_4\theta_1 & c_3\theta_2
+    c_6\theta_1 & c_7\theta_0 & c_0\theta_1\\
+    c_5\theta_0 & c_8\theta_2 & c_1\theta_0\\
+    c_4\theta_1 & c_3\theta_0 & c_2\theta_1
   \end{bmatrix}
 \end{equation*}
 für den Faltungsoperator $\ve{f}_{\mathrm{in}} \star \ve{\hat g}$ aus~\eqref{eq:partitionierung_faltung} mit den Parametern $c_0, \ldots, c_8 \in \gls{R}$
@@ -105,18 +105,63 @@ Es ist anzumerken, dass die Multiplikation mit den dünnbesetzten partitionierte
 Die Laufzeit erhöht sich jedoch im Vergleich zu~\eqref{eq:gcn_tensor} durch die $P$-fache Multiplikation mit der Filtermatrix $\gls{W}_p$ zu $\gls{O}\left(PM_{\mathrm{in}}M_{\mathrm{out}}\left|\gls{E}\right|\right)$.
 \\\\
 Obwohl die Faltung auf den Partitionen eines Graphen insbesondere durch die Äquivalenz zur klassischen Faltung auf regulären Gittern vielversprechend erscheint, gehen dabei dennoch Informationen über die Ausrichtung der Kanten im Raum verloren.
-Unterschiedliche Kanten mit Richtungen im Intervall $\left(2\pi\left(p-1\right)/P, 2\pi p/P\right]$ werden dabei stets gleich behandelt, auch wenn sich diese \evtl{} extrem unterscheiden.
+Kanten mit verschiedenen Richtungen im Intervall $\left(2\pi p/P, 2\pi \left(p+1\right)/P\right]$ landen jeweils in der gleichen Partition $p$, auch wenn sich diese \evtl{} extrem unterscheiden.
 Eine Lösung zu diesem Problem ist sicherlich, $P$ insoweit zu erhöhen, dass die Innenwinkel der einzelnen Partitionen entsprechend klein werden.
 Dies erscheint jedoch für beliebige, unbekannte Graphstrukturen nicht zwangsläufig sinnvoll.
 Neben dem erhöhten Aufwand der Faltung erhalten wir im schlimmsten Fall viele Partitionsmatrizen $\gls{A}_p$, die eine Nullmatrix \ma{0} darstellen oder nur extrem wenige Kanten beinhalten.
 Kleinste Veränderungen in den Ausrichtungen der Kanten sorgen dann schließlich dafür, dass eine komplett andere Filtermatrix angesprochen wird.
-Ein alternativer Ansatz dazu ist die Interpolation des Filters über stückweise stetiger Polynome zwischen den Partitionsgrenzen des Graphen mit Hilfe von B-Spline-Kurven.
+Ein dazu alternativ entwickelter Ansatz ist die Approximation des Filters über stückweise stetiger Polynome zwischen den Partitionsgrenzen des Graphen mit Hilfe von B-Spline-Kurven.
 
-\paragraph{B-Spline-Kurven}
+\subsection{Polynomielle Approximation über B-Spline-Kurven}
 \label{bspline}
 
-Seien $2\pi/P, 4\pi/P, \ldots, 2\pi \in \gls{R}$ genau $P$ viele Stützstellen.
+Eine \emph{offene B-Spline-Kurve} $\gls{spline}\left(t\right)$ beschreibt die stückweise polynomielle Approximation einer Kurve vom Grad $K$ über $m + 1$ Kontrollpunkten $\ve{d}_0, \ldots, \ve{d}_m \in \gls{R}^d$ auf dem Intervall $t \in \left[t_K, t_{m+1}\right]$ mit
+\begin{equation}
+  \gls{spline}\left(t\right) \coloneqq \sum_{i = 0}^m \ve{d}_i \gls{basis}_i^K\left(t\right),
+    \label{eq:bspline}
+\end{equation}
+wobei ${\left\{\gls{basis}_i^K\right\}}_{i=0}^m$ \emph{Basisfunktionen} von $\gls{spline}$ zu einem \emph{Knotenvektor} $\ve{\tau} = \left(t_0, \ldots, t_{m+K+1}\right)$ mit $t_i < t_{i+1}$~\cite{deBoor}.
+Eine Basisfunktion $\gls{basis}_i^K \colon \left[t_0, t_{m+1}\right] \to \left[0, 1\right]$ ist dabei rekursiv definiert über $K$ mit der Initialisierung für $k=0$
+\begin{equation}
+  \gls{basis}_i^0\left(t\right) \coloneqq \begin{cases}
+    1, & \text{falls }t \in \left[t_i, t_{i+1}\right),\\
+    0, & \text{sonst}
+    \label{eq:bspline_basis_init}
+  \end{cases}
+\end{equation}
+und dem Rekursionsschritt $k - 1 \rightarrow k$
+\begin{equation}
+  \gls{basis}_i^k\left(t\right) \coloneqq \frac{t-t_i}{t_{i+k} - t_i}\gls{basis}^{k-1}_i\left(t\right) + \frac{t_{i+k+1} - t}{t_{i+k+1} - t_{i+1}} \gls{basis}_{i+1}^{k-1}\left(t\right)
+    \label{eq:bspline_basis_schritt}
+\end{equation}
+für $i \in \left\{ 0, \ldots, m \right\}$ und $k \in \left\{1, \ldots, K \right\}$~\cite{deBoor}.
+Ein Kontrollpunkt $\ve{d}_i$ beeinflusst die Kurve damit lediglich im Intervall $t_i < t < t_{i+k}$.
+Die Größe von $K$ wird deshalb auch oft \emph{lokale Kontrollierbarkeit} genannt.
 
+Wir können die Definition der B-Spline-Kurve $\gls{spline}\left(t\right)$ aus~\eqref{eq:bspline} nutzen, um sie aufbauend auf Kapitel~\ref{partitionierung} auf das Anwendungsgebiet eines stückweisen polynomiellen Filters $\gls{spline}\left(\alpha\right)$ auf die Richtungen \bzw{} Winkel in \gls{Arad} zu übertragen.
+Sei dafür $\gls{spline} \colon \left[0, 2\pi\right] \to \gls{R}$ eine B-Spline-Kurve auf den Winkeln der Graphkanten mit
+\begin{equation}
+  \gls{spline}\left(\alpha\right) \coloneqq \sum_{p=0}^{P-1} c_p N_p^K\left(\alpha\right),
+\end{equation}
+wobei die freien Parameter $\left(c_0, \ldots, c_{P-1}\right) \in \gls{R}$ aus~\eqref{eq:partitionierung_faltung} nun die Koeffizienten der Basisfunktionen ${\left\{N_p^K\right\}}_{p=0}^{P-1}$ bilden.
+Insbesondere setzen wir $\gls{spline}\left(0\right) = 0$ um nicht mit der Bedeutung von $0$ in Adjazenzmatrizen in die Quere zu kommen.
+Wir können uns $\gls{spline}\left(\alpha\right)$ damit weiterhin als eine $P$-fache Partitionierung von \gls{G} auf Basis seiner Kantenausrichtungen vorstellen, mit dem Unterschied, dass $\gls{spline}\left(\alpha\right)$ nun eine lokale Kontrollierbarkeit inne hält.
+Kanten, die vorher zwar in einer gleichen Partition lagen, sich jedoch \evtl{} stark in ihrer Ausrichtung unterschieden, sind nun \enquote{eindeutig} differenzierbar über ihre abweichenden Auswertungen von ${\left\{\gls{basis}_p^K\right\}}_{p=0}^{P-1}$ entsprechend ihrer unterschiedlichen Winkel.
+
+\input{tikz/bspline}
+
+Die Definitionen~\eqref{eq:bspline_basis_init} und~\eqref{eq:bspline_basis_schritt} der Basisfunktionen sind lediglich für offene Kurven konzipiert.
+Im Kontext von Winkeln müssen wir die Basisfunktionen $\gls{basis}_p^K\left(\alpha\right)$ aber insofern modifizieren, dass diese eine geschlossene Kurve beschreiben können.
+Abbildung~\ref{fig:bspline} soll dabei das Konzept geschlossener Basisfunktionen auf Winkeln veranschaulichen.
+
+
+
+
+
+
+
+
+% Seien $2\pi/P, 4\pi/P, \ldots, 2\pi \in \gls{R}$ genau $P$ viele Stützstellen.
 
 
 % \begin{equation}
