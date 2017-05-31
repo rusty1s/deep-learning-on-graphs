@@ -150,9 +150,23 @@ Kanten, die vorher zwar in einer gleichen Partition lagen, sich jedoch \evtl{} s
 
 \input{tikz/bspline}
 
-Die Definitionen~\eqref{eq:bspline_basis_init} und~\eqref{eq:bspline_basis_schritt} der Basisfunktionen sind lediglich für offene Kurven konzipiert.
+Die Definitionen~\eqref{eq:bspline_basis_init} und~\eqref{eq:bspline_basis_schritt} der Basisfunktionen sind lediglich für offene B-Spline-Kurven konzipiert.
 Im Kontext von Winkeln müssen wir die Basisfunktionen $\gls{basis}_p^K\left(\alpha\right)$ aber insofern modifizieren, dass diese eine geschlossene Kurve beschreiben können.
 Abbildung~\ref{fig:bspline} soll dabei das Konzept geschlossener Basisfunktionen auf Winkeln veranschaulichen.
+% Im Gegensatz zu offenen B-Spline-Kurven reduziert sich bei geschlossenen B-Spline-Kurven die Kardinalität des Knotenvektors $\left|\ve{\tau}\right|$ zu $P+1$.
+Mit der expliziten Forderung gleichmäßig verteiler Knoten im Intervallbereich ergibt sich dann $\ve{\tau} \coloneqq \left(\alpha_0, \ldots, \alpha_{P+K+1}\right)$ mit $\alpha_i \coloneqq 2\pi i / P$.
+Damit kann $\gls{basis}_p^K\left(\alpha\right)$ modifiziert werden zu
+\begin{align}
+  \gls{basis}_p^0\left(\alpha\right) \coloneqq & \begin{cases}
+    1, \text{wenn } \alpha \in \left(\alpha_p, \alpha_{p+1}\right],\\
+    0, \text{sonst}
+  \end{cases}\\
+  \gls{basis}_p^k\left(\alpha\right) \coloneqq & \frac{\alpha - \alpha_p}{\alpha_{p+k} - \alpha_p} \gls{basis}_p^{k-1}\left(\alpha\right) + \frac{\alpha_{p+k+1} - \alpha}{\alpha_{p+k+1} - \alpha_{p+1}}\gls{basis}_{p+1}^{k-1}\left(\alpha\right),
+\end{align}
+\todo{hier fehlt alles an modulo!}
+wobei.
+\\\\
+Für $K=0$ entspricht die Implementierung der Faltung über B-Splines der Faltung über die reinen Partitionen des Graphen aus~\eqref{eq:partitionierung_faltung}.
 
 
 
