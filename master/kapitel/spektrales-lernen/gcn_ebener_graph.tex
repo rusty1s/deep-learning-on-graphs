@@ -7,7 +7,7 @@ So erreicht das \gls{GCN} \zB{} in der teilweise-überwachten Knotenklassifizier
 Die spektrale Faltung auf Graphen entspricht einer Generalisierung der Faltung klassischer \glspl{CNN} auf zweidimensionalen Bildern~\cite{gcn_review}.
 Es ist jedoch anzumerken, dass die spektrale Faltung im Gegensatz zur klassischen Faltung auf einem regulären Gitter insbesondere rotationsinvariant ist.
 Das ist in der Regel für generelle Graphen keine Schwäche, schließlich kann den Knoten \bzw{} Kanten eines Graphen, kodiert als Adjazenzmatrix, keine Örtlichkeit \bzw{} Richtung (wie links, rechts, oben oder unten) zugeordnet werden.
-Die Rotationsinvarianz kann folglich sowohl als Einschränkung oder Vorteil interpretiert werden, abhängig von dem Problem, welches man betrachtet~\cite{Defferrard}.
+Die Rotationsinvarianz kann folglich, abhängig von dem Problem, welches man betrachtet, sowohl als Einschränkung oder Vorteil interpretiert werden~\cite{Defferrard}.
 
 \input{tikz/gcn_review}
 
@@ -29,7 +29,7 @@ Wohingegen wir bei klassischen \glspl{CNN} $3 \times 3$ unterschiedliche Paramet
 \end{equation*}
 mit einem einzigen trainierbaren Parameter $c \in \gls{R}$ bei horizontalen \bzw{} vertikalen Kantengewichten $\exp\left(-1/\gls{sigma}^2\right) \in \gls{R}$ und respektive $\exp\left(-2/\gls{sigma}^2\right) \in \gls{R}$ bei den Diagonalen.
 Damit reduziert sich das Training einer Faltungsschicht eines solchen \glspl{GCN} letztendlich auf eine Skalarmultiplikation.
-Es erscheint fast unmöglich mit diesem Ansatz komplexe Probleme wie \zB{} das Segmentieren eines Bildes zu lösen~(\vgl{}~\cite{gcn_review}).
+Es scheint schwer vorstellbar mit diesem Ansatz komplexe Probleme wie \zB{} das Segmentieren eines Bildes zu lösen~(\vgl{}~\cite{gcn_review}).
 Ein Vergleich zwischen der spektralen Faltung auf regulären Gittergraphen und der klassischen zweidimensionalen Faltung auf Bildern wird der spektralen Faltung aber nicht gerecht, schließlich wurden die klassischen \glspl{CNN} speziell für die Anwendung auf Gittern entwickelt.
 So ist es zu erwarten, dass durch die Formulierung einer Faltung für generelle Graphen gewisse Einschränkungen in Kauf genommen werden müssen.
 Im Folgenden lässt sich der Faltungsoperator der \glspl{GCN} aber insofern modifizieren, dass sich dieser für beliebige Graphen in einem zweidimensionalen euklischen Raum äquivalent zu der klassischen Formulierung auf regulären Gittern verhält.
@@ -48,14 +48,14 @@ Dann lässt sich \gls{G} in $P \in \gls{N}$ Bereiche ${\left\{\gls{A}_p\right\}}
   \end{cases}
 \end{equation*}
 Damit beschreiben die Matrizen ${\left\{\gls{A}_p\right\}}_{p=0}^{P-1}$ disjunkte Partitionen der Kanten des Graphen \gls{G} abhängig von ihren Ausrichtungen im Raum mit $\gls{Adist} = \sum_{p=0}^{P-1} \gls{A}_p$.
-$\gls{A}_p$ ist insbesondere nicht zwingend symmetrisch, da ${\left(\gls{Arad}\right)}_{ij} \neq {\left(\gls{Arad}\right)}_{ji}$ für alle $\gls{v}_i, \gls{v}_j \in \gls{V}$ mit $\gls{v}_j \in \gls{Neighbor}\left(\gls{v}_i\right)$.
+$\gls{A}_p$ ist insbesondere nicht symmetrisch, da ${\left(\gls{Arad}\right)}_{ij} \neq {\left(\gls{Arad}\right)}_{ji}$ für alle $\gls{v}_i, \gls{v}_j \in \gls{V}$ mit $\gls{v}_j \in \gls{Neighbor}\left(\gls{v}_i\right)$.
 Abbildung~\ref{fig:partitionierung} veranschaulicht den Prozess der Partitionierung.
-Mit $P = 8$ erhalten die jeweiligen Bereiche einen gleichmäßigen Innenwinkel der Größe $\pi/4$.
+Mit $P = 8$ erhalten die jeweiligen Bereiche \zB{} einen gleichmäßigen Innenwinkel der Größe $\pi/4$.
 
 \paragraph{Faltungsoperator}
 \label{partitionierung_faltungsoperator}
 
-Es lässt sich analog zu Kapitel~\ref{graph_convolutional_networks} ein Faltungsoperator definieren, bei dem nun aber jeder Partition ein eigener frei trainierbarer Parameter zugeordnet wird.
+Es lässt sich analog zu Kapitel~\ref{graph_convolutional_networks} ein Faltungsoperator definieren, bei dem nun jeder Partition ein eigener frei trainierbarer Parameter zugeordnet wird.
 Der Parameter einer Partition hat damit folglich eine eindeutige Örtlichkeitszuweisung über das Intervall \bzw{} den Bereich der Richtungen seiner Kanten.
 Analog zu~\eqref{eq:gcn_renorm} muss dafür zuerst die (Re-)normalisierung der Form
 \begin{equation*}
@@ -71,7 +71,7 @@ Dann folgt für den Faltungsoperatur $\ve{f}_{\mathrm{in}} \star \ve{\hat g}$ au
 \end{equation}
 mit den freien Parametern $\left(c_0, \ldots, c_P\right) \in \gls{R}$ beschrieben werden kann.
 \\\\
-Es stellt sich heraus, dass die Faltung in~\eqref{eq:partitionierung_faltung} auf den Partitionierungen eines regulären Gittergraphen mit $P=8$ äquivalent zu der klassischen Faltung auf einem regulären Gitter mit Filtergröße $3 \times 3$ ist.
+Es stellt sich heraus, dass die Faltung in~\eqref{eq:partitionierung_faltung} auf den Partitionen eines regulären Gittergraphen mit $P=8$ äquivalent zu der klassischen Faltung auf einem regulären Gitter mit Filtergröße $3 \times 3$ ist.
 \begin{proof}
 Sei \gls{G} ein (unendlicher) regulärer Gittergraph bei einer Konnektivität von $8$ und $\ve{f}_{\mathrm{in}}$ Merkmalsvektor auf dem Graphen mit Koordinatenindexnotation ${\left(\ve{f}_{\mathrm{in}}\right)}_{x,y}$.
   Die klassische Faltung \gls{conv2d} an einem Gitterpunkt $\left(x, y\right)$ ist damit gegeben als
@@ -79,7 +79,7 @@ Sei \gls{G} ein (unendlicher) regulärer Gittergraph bei einer Konnektivität vo
   {\gls{conv2d}\left({\ve{f}_{\mathrm{in}}}\right)}_{x,y} = \sum_{i,j \in \left\{1, 2, 3\right\}} {\left(\ve{f}_{\mathrm{in}}\right)}_{x+i-2, y+j-2} \gls{W}_{i, j},
 \end{equation*}
 wobei $\gls{W} \in \gls{R}^{3 \times 3}$ Filtermatrix der Größe $3 \times 3$.
-Da \gls{Adisttilde} ein reguläres Gitter beschreibt sind die Einträge jeder Matrixreihe äquivalent unter unterschiedlicher Permutation und folglich sind die Einträge auf der Diagonalen von \gls{Ddisttilde} identisch (\oBdA{} entfällt hier die Randknotenbetrachtung).
+Da \gls{Adisttilde} ein reguläres Gitter beschreibt sind die Einträge ihrer Matrixreihen äquivalent unter unterschiedlicher Permutation und folglich sind die Einträge auf der Diagonalen von \gls{Ddisttilde} identisch (\oBdA{} entfällt hier die Randknotenbetrachtung).
 Aufgrund der Partitionierung von \gls{Adist} in $8$ disjunkte Bereiche ${\left\{\gls{Atilde}_p\right\}}_{p=0}^7$ enthält $\gls{Atilde}_p$ genau einen Eintrag pro Matrixreihe korrespondierend zu einer Kante des regulären Gitters.
 Für $p \in \left\{1, 3, 5, 7\right\}$ beschreibt $\gls{Atilde}_p$ die horizontalen und vertikalen Kanten des Graphen mit jeweils gleichen Einträgen $\theta_0 \in \gls{R}$.
 Analog verweist $\gls{Atilde}_p$ für $p \in \left\{0, 2, 4, 6\right\}$ auf die diagonalen Kanten des Graphen mit den festen Einträgen $\theta_1 \in \gls{R}$.
@@ -123,7 +123,7 @@ Eine \emph{offene B-Spline-Kurve} $\gls{spline}\left(t\right)$ beschreibt die st
   \gls{spline}\left(t\right) \coloneqq \sum_{i = 0}^m \ve{d}_i \gls{basis}_i^K\left(t\right),
     \label{eq:bspline}
 \end{equation}
-wobei ${\left\{\gls{basis}_i^K\right\}}_{i=0}^m$ \emph{Basisfunktionen} von $\gls{spline}$ zu einem \emph{Knotenvektor} $\ve{\tau} = \left(t_0, \ldots, t_{m+K+1}\right)$ mit $t_i < t_{i+1}$~\cite{deBoor}.
+wobei ${\left\{\gls{basis}_i^K\right\}}_{i=0}^m$ \emph{Basisfunktionen} von $\gls{spline}$ zu einem \emph{Knotenvektor} $\ve{\tau} = \left(t_0, \ldots, t_{m+K+1}\right)$ mit $t_i \leq t_{i+1}$~\cite{deBoor}.
 Eine Basisfunktion $\gls{basis}_i^K \colon \left[t_0, t_{m+1}\right] \to \left[0, 1\right]$ ist dabei rekursiv definiert über $K$ mit der Initialisierung für $k=0$
 \begin{equation}
   \gls{basis}_i^0\left(t\right) \coloneqq \begin{cases}
@@ -138,7 +138,7 @@ und dem Rekursionsschritt $k - 1 \rightarrow k$
     \label{eq:bspline_basis_schritt}
 \end{equation}
 für $i \in \left\{ 0, \ldots, m \right\}$ und $k \in \left\{1, \ldots, K \right\}$~\cite{deBoor}.
-Ein Kontrollpunkt $\ve{d}_i$ beeinflusst die Kurve damit lediglich im Intervall $t_i < t < t_{i+k}$.
+Ein Kontrollpunkt $\ve{d}_i$ beeinflusst die Kurve damit lediglich im Intervall $t_i \leq t < t_{i+k}$.
 Die Größe von $K$ wird deshalb auch oft \emph{lokale Kontrollierbarkeit} genannt.
 Weiterhin gilt für die Aufsummierung der Basisfunktionen für $t \in \gls{R}$ und $k \in \gls{N}$, dass $\sum_{i=0}^m \gls{basis}_i^K\left(t\right) = 1$~\cite{deBoor}.
 
@@ -155,7 +155,7 @@ Kanten, die vorher zwar in einer gleichen Partition lagen, sich jedoch \evtl{} s
 \input{tikz/bspline}
 
 Die Definitionen~\eqref{eq:bspline_basis_init} und~\eqref{eq:bspline_basis_schritt} der Basisfunktionen sind lediglich für offene B-Spline-Kurven konzipiert.
-Im Kontext von Winkeln müssen wir die Basisfunktionen $\gls{basis}_p^K\left(\alpha\right)$ aber insofern modifizieren, dass diese eine geschlossene Kurve beschreiben können.
+Im Kontext von Winkeln müssen wir die Basisfunktionen $\gls{basis}_p^K\left(\alpha\right)$ aber insofern modifizieren, dass diese eine geschlossene Kurve, \dhe{} einen Kreis, beschreiben können.
 Abbildung~\ref{fig:bspline} soll dabei das Konzept geschlossener Basisfunktionen auf Winkeln veranschaulichen.
 Mit der expliziten Forderung gleichmäßig verteiler Knoten im Intervallbereich ergibt sich dann der Knotenvektor $\ve{\tau} \coloneqq \left(\alpha_0, \ldots, \alpha_{P+K}\right)$ mit $\alpha_p \coloneqq 2\pi p/P$.
 Damit kann $\gls{basis}_p^K\left(\alpha\right)$ modifiziert werden zu
@@ -171,9 +171,9 @@ Damit kann $\gls{basis}_p^K\left(\alpha\right)$ modifiziert werden zu
 \end{equation}
 indem die Indexierungen des Knotenvektors und der Basisfunktion im rechten Summanden im Vergleich zu~\eqref{eq:bspline_basis_schritt} über den Modulo-Operator $\gls{modulo}\left(\cdot,\cdot\right)$ angepasst werden.
 $\gls{basis}_p^K$ setzt sich dabei analog aus den Basisfunktionen$\gls{basis}_p^K$ und $\gls{basis}_{p+1}^K$ zusammen, \dhe{} den Basisfunktionen der betrachteten Partition und der rechts darauf folgenden.
-Für die aktuelle Partition $p$ im linken Summanden muss daher keine Veränderung vorgenommen werden und kann analog zu~\eqref{eq:bspline_basis_schritt} übernommen werden.
+Für die aktuelle Partition $p$ im linken Summanden muss keine Veränderung vorgenommen werden und kann analog zu~\eqref{eq:bspline_basis_schritt} übernommen werden.
 Lediglich im rechten Summanden muss darauf geachtet werden, \enquote{nicht über die Grenzen hinaus zu laufen}.
-Für den Grenzfall $p = P-1$ wird daher im zweiten Summanden die Basisfunktion $\gls{basis}_0^k\left(\alpha\right)$ addressiert.
+Für den Grenzfall $p = P-1$ wird daher im zweiten Summanden die Basisfunktion $\gls{basis}_0^{k-1}\left(\alpha\right)$ addressiert.
 Analog muss der Zähler des Koeffizienten auf den korrekten Winkel von $\alpha_{p+k+1}$ verweisen.
 Für die Nenner muss aufgrund der streng monotonen Definition des Knotenvektors $\ve{\tau}$ keine Änderung vorgenommen werden.
 
@@ -187,7 +187,7 @@ Mit $\gls{Adisttilde} \in \gls{R}^{N \times N}$ und $\gls{Ddisttilde} \in \gls{R
 \end{equation*}
 mit den freien Parametern $\left(c_0, \ldots, c_P\right) \in \gls{R}$, wobei $\gls{basis}_p^K$ elementweise auf die Matrix \gls{Arad} angewendet wird.
 $\ve{f}_{\mathrm{in}} \star \ve{\hat g}$ sammelt dabei die aktuellen Merkmale an den einzelnen Knoten über $c_P \gls{Ddisttilde}^{-1}\ve{f}_{\mathrm{in}}$ und aggreriert diese mit den Merkmalen der lokalen Nachbarschaft über den polynomiellen Filter $\left(c_p\gls{basis}_p^K \left(\gls{Arad}\right)\right) \gls{hadamard} \left(\gls{Ddisttilde}^{-1/2}\gls{Adisttilde}\gls{Ddisttilde}^{-1/2}\right)$, der so die Länge und Richtungen der Kanten berücksichtigt.
-Für $K=0$ ist die Faltung über den B-Splines äquivalent zu der Faltung über den Partitionen des Graphen aus~\eqref{eq:partitionierung_faltung} aufgrund der Rechteckfunktionen $\gls{basis}_p^0\left(\alpha\right)$.
+Für $K=0$ ist die Faltung über den B-Splines äquivalent zu der Faltung über den Partitionen des Graphen aus~\eqref{eq:partitionierung_faltung} aufgrund der Rechteckfunktionen ${\left\{\gls{basis}_p^0\left(\alpha\right)\right\}}_{p=0}^{P-1}$.
 
 \paragraph{Implementierung}
 \label{bspline_implementierung}
@@ -211,7 +211,7 @@ So gilt, dass $\gls{basis}_p^1\left(\alpha\right)$ zu
 \end{equation*}
 vereinfacht werden kann.
 \begin{proof}
-  Die kreisförmige Dreiecksfunktion im Intervall $\left[0, 2\pi\right]$ kann als Verknüpfung dreier Geraden verstanden werden — zwei Geraden, die das Dreieck im Intervall $\left[2\pi p/P, 2\pi \left(p+2\right)/P\right]$ aufspannen, und eine absteigende Gerade, die um $2\pi$ nach links verschoben wurde und dafür sorgt, die Basisfunktion für $p=P-1$ kreisförmig abzuschließen und in allen anderen Fällen keinen Anteil im Gültigkeitsbereich der Funktion $\gls{basis}_p^1 \colon \left(0,2\pi\right] \to \left[0,1\right]$ besitzen (\vgl{} Abbildung~\ref{fig:bspline_beweis}).
+  Die kreisförmige Dreiecksfunktion im Intervall $\left[0, 2\pi\right]$ kann als Verknüpfung dreier Geraden verstanden werden — zwei Geraden, die das Dreieck im Intervall $\left[2\pi p/P, 2\pi \left(p+2\right)/P\right]$ aufspannen, und eine absteigende Gerade, die um $2\pi$ nach links verschoben wurde und dafür sorgt, die Basisfunktion für $p=P-1$ kreisförmig abzuschließen und in allen anderen Fällen keinen Anteil im Gültigkeitsbereich der Funktion $\gls{basis}_p^1 \colon \left(0,2\pi\right] \to \left[0,1\right]$ besitzt (\vgl{} Abbildung~\ref{fig:bspline_beweis}).
 Den Geraden kann die Steigung $P/2\pi$ respektive $-P/2\pi$ zugeordnet werden und sie können damit folglich über
 \begin{equation*}
   \begin{split}
