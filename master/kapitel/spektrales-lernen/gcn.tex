@@ -48,7 +48,23 @@ Die Faltung einer Eingabemerkmalsmatrix $\gls{F}_{\mathrm{in}} \in \gls{R}^{N \t
 \end{equation}
 mit Faltungsaufwand $\gls{O}\left(M_{\mathrm{in}}M_{\mathrm{out}}\left|\gls{E}\right|\right)$, weil $\gls{Atilde}\ma{F}_{\mathrm{in}}$ effizient mit der Multiplikation einer dünnbesetzten mit einer dichtbesetzten Matrix implementiert werden kann~\cite{gcn}.
 
-\paragraph{Weisfeiler-Lehman Analogie}
-\label{weisfeiler_lehman_analogie}
+\paragraph{Beziehung zum Weisfeiler-Lehman Algorithmus}
+\label{weisfeiler_lehman_beziehung}
 
-\todo{todo}
+
+\begin{algorithm}[t]
+% \centering
+\begin{algorithmic}
+  \REQUIRE{} Initiale Knotenverfärbung $\ve{h}^{\left(1\right)} \in \gls{R}^N$
+  \ENSURE{} Finale Knotenverfärbung $\ve{h}^{\left(T\right)} \in \gls{R}^N$ nach $T$ Durchläufen
+\STATE $z = 2$
+\WHILE{$(z < 10)$}
+\STATE $x = x + z$
+\FOR{$(1 \leq a \leq z-1)$}
+\STATE $z = z + 1$
+\ENDFOR
+\ENDWHILE
+\end{algorithmic}
+\caption[Ein Algorithmus]{Algorithmus}
+\label{algo_1}
+\end{algorithm}

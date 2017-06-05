@@ -99,7 +99,7 @@ Um die oben genannten Schwächen zu umgehen kann $\hat g\left(\gls{lambda}_i\rig
   \hat g\left(\gls{lambda}_i\right) \approx \sum_{k=0}^K c_k\gls{lambda}_i^k
   \label{eq:spektraler_filter_approximation}
 \end{equation}
-vom Grad $K$ mit Koeffizienten $\left(c_0, \ldots, c_K\right) \in \gls{R}$ approximiert werden~\cite{Hammond, Defferrard}.
+vom Grad $K$ mit Koeffizienten ${\left[c_0, \ldots, c_K\right]}^{\top} \in \gls{R}^{K+1}$ approximiert werden~\cite{Hammond, Defferrard}.
 Die Filtergröße sinkt somit auf einen konstanten Faktor $K$ mit Lernaufwand $\gls{O}\left(K\right)$, dem gleichen Aufwand klassischer zweidimensionaler \glspl{CNN}~\cite{Defferrard}.
 $\ve{f}_{\mathrm{in}} \star \ve{\hat g}$ ergibt dann nach~\eqref{eq:matrix_potenz},~\eqref{eq:spektraler_faltungsoperator} und~\eqref{eq:spektraler_filter_approximation} approximiert durch~\cite{Defferrard}
 \begin{equation}
@@ -134,8 +134,8 @@ Die spektrale Faltung mittels Tschebyschow-Polynomen ergibt sich dann nach~\eqre
   \ve{f}_{\mathrm{in}} \star \ve{\hat g} \approx \sum_{k=0}^K c_k\gls{Eiv}\gls{T}_k\left(\gls{Lambdatilde}\right)\gls{Eiv}^{\top}\ve{f}_{\mathrm{in}},
   \label{eq:tschebyschow_faltung}
 \end{equation}
-wobei die Werte $\left(c_0, \ldots, c_K\right) \in \gls{R}$ nun die Koeffizienten der Tschebyschow-Polynome $\gls{T}_k\left(\gls{Lambdatilde}\right) \in \gls{R}^{N \times N}$ bilden~\cite{Defferrard}.
-$\gls{Eiv}\gls{T}_k\left(\gls{Lambdatilde}\right)\gls{Eiv}^{\top}$ kann aufgrund der polynomiellen Form von $\gls{T}_k$ und~\eqref{eq:matrix_potenz} ebenso auf $\gls{T}_k\left(\gls{Lbothtilde}\right)$ angewendet werden mit $\gls{Lbothtilde} \coloneqq \gls{Eiv}\gls{Lambdatilde}\gls{Eiv}^{\top} = \frac{2}{\gls{lambdamax}}\gls{Lboth} - \gls{I}$~\cite{Defferrard}.
+wobei die Werte ${\left[c_0, \ldots, c_K\right]}^{\top} \in \gls{R}^{K+1}$ nun die Koeffizienten der Tschebyschow-Po\-ly\-no\-me $\gls{T}_k\left(\gls{Lambdatilde}\right) \in \gls{R}^{N \times N}$ bilden~\cite{Defferrard}.
+$\gls{Eiv}\gls{T}_k\left(\gls{Lambdatilde}\right)\gls{Eiv}^{\top}$ kann aufgrund der polynomiellen Form von $\gls{T}_k$ und~\eqref{eq:matrix_potenz} ebenso auf $\gls{T}_k\left(\gls{Lbothtilde}\right)$ mit $\gls{Lbothtilde} \coloneqq \gls{Eiv}\gls{Lambdatilde}\gls{Eiv}^{\top} = \frac{2}{\gls{lambdamax}}\gls{Lboth} - \gls{I}$ angewendet werden~\cite{Defferrard}.
 Damit kann~\eqref{eq:tschebyschow_faltung} weiter vereinfacht werden zu
 \begin{equation}
   \ve{f}_{\mathrm{in}} \star \ve{\hat g} \approx \sum_{k=0}^K c_k\gls{T}_k\left(\gls{Lbothtilde}\right)\ve{f}_{\mathrm{in}}.

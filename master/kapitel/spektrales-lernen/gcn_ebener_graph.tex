@@ -69,7 +69,7 @@ Dann folgt für den Faltungsoperatur $\ve{f}_{\mathrm{in}} \star \ve{\hat g}$ au
   \ve{f}_{\mathrm{in}} \star \ve{\hat g} \approx \sum_{p=0}^P c_p \gls{Atilde}_p \ve{f}_{\mathrm{in}}
   \label{eq:partitionierung_faltung}
 \end{equation}
-mit den freien Parametern $\left(c_0, \ldots, c_P\right) \in \gls{R}$ beschrieben werden kann.
+mit den freien Parametern ${\left[c_0, \ldots, c_P\right]}^{\top} \in \gls{R}^{P+1}$ beschrieben werden kann.
 \\\\
 Es stellt sich heraus, dass die Faltung in~\eqref{eq:partitionierung_faltung} auf den Partitionen eines regulären Gittergraphen mit $P=8$ äquivalent zu der klassischen Faltung auf einem regulären Gitter mit Filtergröße $3 \times 3$ ist.
 \begin{proof}
@@ -92,7 +92,7 @@ Mit der Zuordnung
     c_4\theta_1 & c_3\theta_0 & c_2\theta_1
   \end{bmatrix}
 \end{equation*}
-für den Faltungsoperator $\ve{f}_{\mathrm{in}} \star \ve{\hat g}$ aus~\eqref{eq:partitionierung_faltung} mit den Parametern $c_0, \ldots, c_8 \in \gls{R}$
+  für den Faltungsoperator $\ve{f}_{\mathrm{in}} \star \ve{\hat g}$ aus~\eqref{eq:partitionierung_faltung} mit den Parametern ${\left[c_0, \ldots, c_8\right]}^{\top} \in \gls{R}^9$
 folgt damit sofort die Äquivalenz zu $\gls{conv2d}\left(\ve{f}_{\mathrm{in}}\right)$ auf regulären Gittern.
 \end{proof}
 
@@ -123,8 +123,8 @@ Eine \emph{offene B-Spline-Kurve} $\gls{spline}\left(t\right)$ beschreibt die st
   \gls{spline}\left(t\right) \coloneqq \sum_{i = 0}^m \ve{d}_i \gls{basis}_i^K\left(t\right),
     \label{eq:bspline}
 \end{equation}
-wobei ${\left\{\gls{basis}_i^K\right\}}_{i=0}^m$ \emph{Basisfunktionen} von $\gls{spline}$ zu einem \emph{Knotenvektor} $\ve{\tau} = \left(t_0, \ldots, t_{m+K+1}\right)$ mit $t_i \leq t_{i+1}$~\cite{deBoor}.
-Eine Basisfunktion $\gls{basis}_i^K \colon \left[t_0, t_{m+1}\right] \to \left[0, 1\right]$ ist dabei rekursiv definiert über $K$ mit der Initialisierung für $k=0$
+wobei ${\left\{\gls{basis}_i^K\right\}}_{i=0}^m$ \emph{Basisfunktionen} von $\gls{spline}$~\cite{deBoor}.
+Eine Basisfunktion $\gls{basis}_i^K \colon \left[t_0, t_{m+1}\right] \to \left[0, 1\right]$ ist dabei mit Hilfe eines \emph{Knotenvektors} $\ve{\tau} = {\left[t_0, \ldots, t_{m+K+1}\right]}^{\top} \in \gls{R+}^{m+K+2}$, $t_i \leq t_{i+1}$, rekursiv über $K$ definiert mit der Initialisierung für $k=0$
 \begin{equation}
   \gls{basis}_i^0\left(t\right) \coloneqq \begin{cases}
     1, & \text{falls }t \in \left[t_i, t_{i+1}\right),\\
@@ -147,17 +147,17 @@ Sei dafür $\gls{spline} \colon \left[0, 2\pi\right] \to \gls{R}$ eine B-Spline-
 \begin{equation}
   \gls{spline}\left(\alpha\right) \coloneqq \sum_{p=0}^{P-1} c_p N_p^K\left(\alpha\right),
 \end{equation}
-wobei die freien Parameter $\left(c_0, \ldots, c_{P-1}\right) \in \gls{R}$ aus~\eqref{eq:partitionierung_faltung} nun die Koeffizienten der Basisfunktionen ${\left\{N_p^K\right\}}_{p=0}^{P-1}$ bilden.
+wobei die freien Parameter ${\left[c_0, \ldots, c_{P-1}\right]}^{\top} \in \gls{R}^{P}$ aus~\eqref{eq:partitionierung_faltung} nun die Koeffizienten der Basisfunktionen ${\left\{N_p^K\right\}}_{p=0}^{P-1}$ bilden.
 Insbesondere setzen wir $\gls{spline}\left(0\right) = 0$ um nicht mit der Bedeutung von $0$ in Adjazenzmatrizen in die Quere zu kommen.
 Wir können uns $\gls{spline}\left(\alpha\right)$ damit weiterhin als eine $P$-fache Partitionierung von \gls{G} auf Basis seiner Kantenausrichtungen vorstellen, mit dem Unterschied, dass $\gls{spline}\left(\alpha\right)$ nun eine lokale Kontrollierbarkeit inne hält.
-Kanten, die vorher zwar in einer gleichen Partition lagen, sich jedoch \evtl{} stark in ihrer Ausrichtung unterschieden, sind nun \enquote{eindeutig} differenzierbar über ihre abweichenden Auswertungen von ${\left\{\gls{basis}_p^K\right\}}_{p=0}^{P-1}$ \bzw{} ihrer Anteile von $\left(c_0, \ldots, c_{P-1}\right)$ an $\gls{spline}\left(\alpha\right)$ entsprechend ihrer unterschiedlichen Winkel.
+Kanten, die vorher zwar in einer gleichen Partition lagen, sich jedoch \evtl{} stark in ihrer Ausrichtung unterschieden, sind nun \enquote{eindeutig} differenzierbar über ihre abweichenden Auswertungen von ${\left\{\gls{basis}_p^K\right\}}_{p=0}^{P-1}$ \bzw{} ihrer Anteile von ${\left[c_0, \ldots, c_{P-1}\right]}^{\top}$ an $\gls{spline}\left(\alpha\right)$ entsprechend ihrer unterschiedlichen Winkel.
 
 \input{tikz/bspline}
 
 Die Definitionen~\eqref{eq:bspline_basis_init} und~\eqref{eq:bspline_basis_schritt} der Basisfunktionen sind lediglich für offene B-Spline-Kurven konzipiert.
 Im Kontext von Winkeln müssen wir die Basisfunktionen $\gls{basis}_p^K\left(\alpha\right)$ aber insofern modifizieren, dass diese eine geschlossene Kurve, \dhe{} einen Kreis, beschreiben können.
 Abbildung~\ref{fig:bspline} soll dabei das Konzept geschlossener Basisfunktionen auf Winkeln veranschaulichen.
-Mit der expliziten Forderung gleichmäßig verteiler Knoten im Intervallbereich ergibt sich dann der Knotenvektor $\ve{\tau} \coloneqq \left(\alpha_0, \ldots, \alpha_{P+K}\right)$ mit $\alpha_p \coloneqq 2\pi p/P$.
+Mit der expliziten Forderung gleichmäßig verteiler Knoten im Intervallbereich ergibt sich dann der Knotenvektor $\ve{\tau} \coloneqq {\left[\alpha_0, \ldots, \alpha_{P+K}\right]}^{\top} \in \gls{R+}^{P+K+1}$ mit $\alpha_p \coloneqq 2\pi p/P$.
 Damit kann $\gls{basis}_p^K\left(\alpha\right)$ modifiziert werden zu
 \begin{equation}
 \begin{split}
@@ -185,7 +185,7 @@ Mit $\gls{Adisttilde} \in \gls{R}^{N \times N}$ und $\gls{Ddisttilde} \in \gls{R
 \begin{equation*}
   \ve{f}_{\mathrm{in}} \star \ve{\hat g} \approx c_P \gls{Ddisttilde}^{-1}\ve{f}_{\mathrm{in}} + \sum_{p=0}^{P-1} \left(\left(c_p \gls{basis}_p^K\left(\gls{Arad}\right)\right)\gls{hadamard}\left(\gls{Ddisttilde}^{-\frac{1}{2}}\gls{Adisttilde}\gls{Ddisttilde}^{-\frac{1}{2}}\right)\right)\ve{f}_{\mathrm{in}}
 \end{equation*}
-mit den freien Parametern $\left(c_0, \ldots, c_P\right) \in \gls{R}$, wobei $\gls{basis}_p^K$ elementweise auf die Matrix \gls{Arad} angewendet wird.
+mit den freien Parametern ${\left[c_0, \ldots, c_P\right]}^{\top} \in \gls{R}^{P+1}$, wobei $\gls{basis}_p^K$ elementweise auf die Matrix \gls{Arad} angewendet wird.
 $\ve{f}_{\mathrm{in}} \star \ve{\hat g}$ sammelt dabei die aktuellen Merkmale an den einzelnen Knoten über $c_P \gls{Ddisttilde}^{-1}\ve{f}_{\mathrm{in}}$ und aggreriert diese mit den Merkmalen der lokalen Nachbarschaft über den polynomiellen Filter $\left(c_p\gls{basis}_p^K \left(\gls{Arad}\right)\right) \gls{hadamard} \left(\gls{Ddisttilde}^{-1/2}\gls{Adisttilde}\gls{Ddisttilde}^{-1/2}\right)$, der so die Länge und Richtungen der Kanten berücksichtigt.
 Für $K=0$ ist die Faltung über den B-Splines äquivalent zu der Faltung über den Partitionen des Graphen aus~\eqref{eq:partitionierung_faltung} aufgrund der Rechteckfunktionen ${\left\{\gls{basis}_p^0\left(\alpha\right)\right\}}_{p=0}^{P-1}$.
 
