@@ -124,7 +124,7 @@ Eine \emph{offene B-Spline-Kurve} $\gls{spline}\left(t\right)$ beschreibt die st
     \label{eq:bspline}
 \end{equation}
 wobei ${\left\{\gls{basis}_i^K\right\}}_{i=0}^m$ \emph{Basisfunktionen} von $\gls{spline}$~\cite{deBoor}.
-Eine Basisfunktion $\gls{basis}_i^K \colon \left[t_0, t_{m+1}\right] \to \left[0, 1\right]$ ist dabei mit Hilfe eines \emph{Knotenvektors} $\ve{\tau} = {\left[t_0, \ldots, t_{m+K+1}\right]}^{\top} \in \gls{R+}^{m+K+2}$, $t_i \leq t_{i+1}$, rekursiv über $K$ definiert mit der Initialisierung für $k=0$
+Eine Basisfunktion $\gls{basis}_i^K \colon \left[t_0, t_{m+1}\right] \to \left[0, 1\right]$ ist dabei mit Hilfe eines \emph{Knotenvektors} $\ve{\tau} \coloneqq {\left[t_0, \ldots, t_{m+K+1}\right]}^{\top} \in \gls{R+}^{m+K+2}$, $t_i \leq t_{i+1}$, rekursiv über $K$ definiert mit der Initialisierung für $k=0$
 \begin{equation}
   \gls{basis}_i^0\left(t\right) \coloneqq \begin{cases}
     1, & \text{falls }t \in \left[t_i, t_{i+1}\right),\\
