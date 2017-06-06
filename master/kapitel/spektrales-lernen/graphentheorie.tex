@@ -12,25 +12,25 @@ Dieses Kapitel gibt eine Einführung in die wichtigsten Definitionen und Intuiti
 \subsection{Eigenwerte und Eigenvektoren reell symmetrischer Matrizen}
 \label{eigenwerte_symmetrischer_matrizen}
 
-Das \emph{Eigenwertproblem} einer Matrix $\ma{M} \in \gls{R}^{N \times N}$ ist definiert als $\ma{M}\gls{eiv} = \gls{lambda}\gls{eiv}$, wobei $\gls{eiv} \in \gls{R}^{N}$, $\gls{eiv} \neq \mathbf{0}$ \emph{Eigenvektor} und $\gls{lambda} \in \gls{R}$ der entsprechende \emph{Eigenwert} zu \gls{eiv} genannt werden.
+Das \emph{Eigenwertproblem} einer Matrix $\ma{M} \in \gls{R}^{N \times N}$ ist definiert als $\ma{M}\gls{eiv} = \gls{lambda}\gls{eiv}$, wobei $\gls{eiv} \in \gls{R}^{N}$, $\gls{eiv} \neq \mathbf{0}$ \emph{Eigenvektor} und $\gls{lambda} \in \gls{R}$ der entsprechende \emph{Eigenwert} zu \gls{eiv} genannt werden~\cite{linear}.
 Ein Eigenvektor \gls{eiv} beschreibt damit einen Vektor, dessen Richtung durch die Abbildung $\ma{M}\gls{eiv}$ nicht verändert, sondern lediglich um den Faktor \gls{lambda} skaliert wird.
 Zu einem Eigenwert $\gls{lambda}$ gibt es unendlich viele (skalierte) Eigenvektoren \gls{eiv}.
 Wir definieren den Eigenvektor \gls{eiv} eines Eigenwertes \gls{lambda} daher eindeutig über die Bedingung $\left\|\gls{eiv}\right\|_2 = 1$.
-Sei \ma{M} weiterhin symmetrisch, \dhe{} $\ma{M} = \ma{M}^{\top}$.
-Dann gilt für zwei unterschiedliche Eigenvektoren $\gls{eiv}_1$ und $\gls{eiv}_2$, dass diese orthogonal zueinander stehen, \dhe{} $\gls{eiv}_1 \gls{ortho} \gls{eiv}_2$, und \ma{M} genau $N$ reelle Eigenwerte mit ${\left\{\gls{lambda}_i\right\}}_{i=1}^N$ hat.
-Wir definieren demnach zu \ma{M} die orthogonale \emph{Eigenvektormatrix} $\gls{Eiv} \coloneqq \left[\gls{eiv}_1, \ldots, \gls{eiv}_n\right] \in \gls{R}^{N \times N}$, \dhe{} $\gls{Eiv}\gls{Eiv}^{\top}=\gls{Eiv}^{\top}\gls{Eiv}=\gls{I}$, und dessen Eigenwertdiagonalmatrix $\gls{Lambda} \coloneqq \gls{diag}\left({\left[\gls{lambda}_1, \ldots, \gls{lambda}_N\right]}^{\top}\right)$, \dhe{} $\gls{Lambda}_{ii} = \gls{lambda}_i$.
-Dann gilt $\ma{M}\gls{Eiv} = \gls{Eiv}\gls{Lambda}$ und insbesondere ist \ma{M} diagonalisierbar über
+Sei \ma{M} weiterhin symmetrisch, \dhe{} $\ma{M} = \ma{M}^{\top}$~\cite{linear}.
+Dann gilt für zwei unterschiedliche Eigenvektoren $\gls{eiv}_1$ und $\gls{eiv}_2$, dass diese orthogonal zueinander stehen, \dhe{} $\gls{eiv}_1 \gls{ortho} \gls{eiv}_2$, und \ma{M} genau $N$ reelle Eigenwerte mit ${\left\{\gls{lambda}_i\right\}}_{i=1}^N$ hat~\cite{linear}.
+Wir definieren demnach zu \ma{M} die orthogonale \emph{Eigenvektormatrix} $\gls{Eiv} \coloneqq \left[\gls{eiv}_1, \ldots, \gls{eiv}_n\right] \in \gls{R}^{N \times N}$, \dhe{} $\gls{Eiv}\gls{Eiv}^{\top}=\gls{Eiv}^{\top}\gls{Eiv}=\gls{I}$, und dessen Eigenwertdiagonalmatrix $\gls{Lambda} \coloneqq \gls{diag}\left({\left[\gls{lambda}_1, \ldots, \gls{lambda}_N\right]}^{\top}\right)$, \dhe{} $\gls{Lambda}_{ii} = \gls{lambda}_i$~\cite{Defferrard}.
+Dann gilt $\ma{M}\gls{Eiv} = \gls{Eiv}\gls{Lambda}$ und insbesondere ist \ma{M} diagonalisierbar über~\cite{linear}
 \begin{equation*}
   \ma{M} = \left(\ma{M}\gls{Eiv}\right)\gls{Eiv}^{\top} = \left(\gls{Eiv}\gls{Lambda}\right)\gls{Eiv}^{\top}.
 \end{equation*}
 
-Weiterhin gilt für die $k$-te Potenz von $\ma{M}$, $k \in \gls{N}$,
+Weiterhin gilt für die $k$-te Potenz von $\ma{M}$, $k \in \gls{N}$,~\cite{gcn}
 \begin{equation}
   \ma{M}^k = {\left(\gls{Eiv}\gls{Lambda}\gls{Eiv}^{\top}\right)}^k = \gls{Eiv}\gls{Lambda}^k\gls{Eiv}^{\top}.
   \label{eq:matrix_potenz}
 \end{equation}
 
-auf Grund der Induktion von $k - 1 \rightarrow k$ mit
+auf Grund der Induktion ($k - 1 \rightarrow k$)
 \begin{equation*}
   {\left(\gls{Eiv}\gls{Lambda}\gls{Eiv}^{\top}\right)}^k = {\left(\gls{Eiv}\gls{Lambda}\gls{Eiv}^{\top}\right)}^{k-1}\gls{Eiv}\gls{Lambda}\gls{Eiv}^{\top} = \gls{Eiv}\gls{Lambda}^{k-1}\gls{Eiv}^{\top}\gls{Eiv}\gls{Lambda}\gls{Eiv} = \gls{Eiv}\gls{Lambda}^k\gls{Eiv}^{\top}.
 \end{equation*}
@@ -40,8 +40,8 @@ Falls \ma{M} weiterhin \emph{schwach diagonaldominant} ist, \dhe{}
   \sum_{\substack{j=1\\j \neq i}}^N \left|\ma{M}_{ij}\right| \leq \left|\ma{M}\right|_{ii},
   \label{eq:schwach_diagonaldominant}
 \end{equation}
-und weiterhin $\ma{M}_{ii} \geq 0$ für alle $i \in \left\{1, \ldots, N\right\}$, dann ist \ma{M} \emph{positiv semidefinit}, \dhe{} $\ve{x}^{\top}\ma{M}\ve{x} \geq 0$ für alle $\ve{x} \in \gls{R}^{N}$.
-Eigenwerte symmetrischer positiv semidefiniter Matrizen $\lambda_i \in \gls{R+}$ sind positiv reell und es lässt sich folglich auf diesen eine Ordnung definieren mit $0 \leq \gls{lambda}_1 \leq \cdots \leq \gls{lambda}_N \coloneqq \gls{lambdamax}$.
+und weiterhin $\ma{M}_{ii} \geq 0$ für alle $i \in \left\{1, \ldots, N\right\}$, dann ist \ma{M} \emph{positiv semidefinit}, \dhe{} $\ve{x}^{\top}\ma{M}\ve{x} \geq 0$ für alle $\ve{x} \in \gls{R}^{N}$~\cite{linear}.
+Eigenwerte symmetrischer positiv semidefiniter Matrizen $\lambda_i \in \gls{R+}$ sind positiv reell und es lässt sich folglich auf diesen eine Ordnung definieren mit $0 \leq \gls{lambda}_1 \leq \cdots \leq \gls{lambda}_N \coloneqq \gls{lambdamax}$~\cite{linear}.
 
 \subsection{Laplace-Matrix}
 \label{laplace_matrix}
@@ -61,7 +61,11 @@ Daraus ergibt sich die elementweise Definition
   0, & \text{sonst.}
 \end{cases}
 \end{equation*}
-Für zusammenhängende Graphen kann \gls{Lnorm} vereinfacht werden zu $\gls{Lnorm} \coloneqq \gls{I} - \gls{D}^{-1/2} \gls{A} \gls{D}^{-1/2}$~\cite{Chung}.
+Für zusammenhängende Graphen kann \gls{Lnorm} vereinfacht werden zu~\cite{Chung}
+\begin{equation}
+  \gls{Lnorm} \coloneqq \gls{I} - \gls{D}^{-1/2} \gls{A} \gls{D}^{-1/2}.
+  \label{eq:laplace_norm_connected}
+\end{equation}
 Jeder Eintrag auf der Diagonalen der normalisierten Laplace-Matrix ist folglich Eins.
 \gls{Lnorm} ist damit normalisiert auf den (gewichteten) Grad zweier adjazenter Knoten $\gls{v}_i$ und $\gls{v}_j$.
 Es ist anzumerken, dass \gls{L} und insbesondere \gls{Lnorm} symmetrisch sind, wohingegen eine Normalisierung der Form $\gls{D}^{-1}\gls{L}$ dies in der Regel nicht wäre~\cite{Reuter}.

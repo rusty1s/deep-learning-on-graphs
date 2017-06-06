@@ -7,7 +7,7 @@ So erreicht das \gls{GCN} \zB{} in der teilweise-überwachten Knotenklassifizier
 Die spektrale Faltung auf Graphen entspricht einer Generalisierung der Faltung klassischer \glspl{CNN} auf zweidimensionalen Bildern~\cite{gcn_review}.
 Es ist jedoch anzumerken, dass die spektrale Faltung im Gegensatz zur klassischen Faltung auf einem regulären Gitter insbesondere rotationsinvariant ist.
 Das ist in der Regel für generelle Graphen keine Schwäche, schließlich kann den Knoten \bzw{} Kanten eines Graphen, kodiert als Adjazenzmatrix, keine Örtlichkeit \bzw{} Richtung (wie links, rechts, oben oder unten) zugeordnet werden.
-Die Rotationsinvarianz kann folglich, abhängig von dem Problem, welches man betrachtet, sowohl als Einschränkung oder Vorteil interpretiert werden~\cite{Defferrard}.
+Die Rotationsinvarianz kann folglich sowohl als Einschränkung als auch als Vorteil interpretiert werden, abhängig von dem Problem, welches man betrachtet~\cite{Defferrard}.
 
 \input{tikz/gcn_review}
 
@@ -27,7 +27,7 @@ Wohingegen wir bei klassischen \glspl{CNN} $3 \times 3$ unterschiedliche Paramet
     e^{-2/\gls{sigma}^2} & e^{-1/\gls{sigma}^2} & e^{-2/\gls{sigma}^2}
   \end{bmatrix}
 \end{equation*}
-mit einem einzigen trainierbaren Parameter $c \in \gls{R}$ bei horizontalen \bzw{} vertikalen Kantengewichten $\exp\left(-1/\gls{sigma}^2\right) \in \gls{R}$ und respektive $\exp\left(-2/\gls{sigma}^2\right) \in \gls{R}$ bei den Diagonalen.
+mit einem einzigen trainierbaren Parameter $c \in \gls{R}$ bei horizontalen \bzw{} vertikalen Kantengewichten $\exp\left(-1/\gls{sigma}^2\right) \in \gls{R}$ \bzw{} $\exp\left(-2/\gls{sigma}^2\right) \in \gls{R}$ bei den Diagonalen.
 Damit reduziert sich das Training einer Faltungsschicht eines solchen \glspl{GCN} letztendlich auf eine Skalarmultiplikation.
 Es scheint schwer vorstellbar mit diesem Ansatz komplexe Probleme wie \zB{} das Segmentieren eines Bildes zu lösen~(\vgl{}~\cite{gcn_review}).
 Ein Vergleich zwischen der spektralen Faltung auf regulären Gittergraphen und der klassischen zweidimensionalen Faltung auf Bildern wird der spektralen Faltung aber nicht gerecht, schließlich wurden die klassischen \glspl{CNN} speziell für die Anwendung auf Gittern entwickelt.
@@ -43,7 +43,7 @@ Sei \gls{G} ein Graph im zweidimensionalen euklidschen Raum, eindeutig definiert
 Dann lässt sich \gls{G} in $P \in \gls{N}$ Bereiche ${\left\{\gls{A}_p\right\}}_{p=0}^{P-1}$ \emph{partitionieren}, sodass
 \begin{equation*}
   {\left(\gls{A}_p\right)}_{ij} \coloneqq \begin{cases}
-    {\left(\gls{Adist}\right)}_{ij}, & \text{wenn } {\left(\gls{Arad}\right)}_{ij} \in \left(\frac{2\pi}{P}p, \frac{2\pi}{P}\left(p+1\right)\right]\\
+    {\left(\gls{Adist}\right)}_{ij}, & \text{wenn } {\left(\gls{Arad}\right)}_{ij} \in \left(2\pi p/P, 2\pi\left(p+1\right)/P\right]\\
     0, & \text{sonst.}
   \end{cases}
 \end{equation*}
@@ -72,13 +72,12 @@ Dann folgt für den Faltungsoperatur $\ve{f}_{\mathrm{in}} \star \ve{\hat g}$ au
 mit den freien Parametern ${\left[c_0, \ldots, c_P\right]}^{\top} \in \gls{R}^{P+1}$ beschrieben werden kann.
 \\\\
 Es stellt sich heraus, dass die Faltung in~\eqref{eq:partitionierung_faltung} auf den Partitionen eines regulären Gittergraphen mit $P=8$ äquivalent zu der klassischen Faltung auf einem regulären Gitter mit Filtergröße $3 \times 3$ ist.
-\begin{proof}
-Sei \gls{G} ein (unendlicher) regulärer Gittergraph bei einer Konnektivität von $8$ und $\ve{f}_{\mathrm{in}}$ Merkmalsvektor auf dem Graphen mit Koordinatenindexnotation ${\left(\ve{f}_{\mathrm{in}}\right)}_{x,y}$.
+Sei dafür \gls{G} ein (unendlicher) regulärer Gittergraph bei einer Konnektivität von $8$ und $\ve{f}_{\mathrm{in}}$ Merkmalsvektor auf dem Graphen mit Koordinatenindexnotation ${\left(\ve{f}_{\mathrm{in}}\right)}_{x,y}$.
   Die klassische Faltung \gls{conv2d} an einem Gitterpunkt $\left(x, y\right)$ ist damit gegeben als
 \begin{equation*}
   {\gls{conv2d}\left({\ve{f}_{\mathrm{in}}}\right)}_{x,y} = \sum_{i,j \in \left\{1, 2, 3\right\}} {\left(\ve{f}_{\mathrm{in}}\right)}_{x+i-2, y+j-2} \gls{W}_{i, j},
 \end{equation*}
-wobei $\gls{W} \in \gls{R}^{3 \times 3}$ Filtermatrix der Größe $3 \times 3$.
+wobei $\gls{W} \in \gls{R}^{3 \times 3}$ eine Filtermatrix der Größe $3 \times 3$ ist.
 Da \gls{Adisttilde} ein reguläres Gitter beschreibt sind die Einträge ihrer Matrixreihen äquivalent unter unterschiedlicher Permutation und folglich sind die Einträge auf der Diagonalen von \gls{Ddisttilde} identisch (\oBdA{} entfällt hier die Randknotenbetrachtung).
 Aufgrund der Partitionierung von \gls{Adist} in $8$ disjunkte Bereiche ${\left\{\gls{Atilde}_p\right\}}_{p=0}^7$ enthält $\gls{Atilde}_p$ genau einen Eintrag pro Matrixreihe korrespondierend zu einer Kante des regulären Gitters.
 Für $p \in \left\{1, 3, 5, 7\right\}$ beschreibt $\gls{Atilde}_p$ die horizontalen und vertikalen Kanten des Graphen mit jeweils gleichen Einträgen $\theta_0 \in \gls{R}$.
@@ -94,7 +93,6 @@ Mit der Zuordnung
 \end{equation*}
   für den Faltungsoperator $\ve{f}_{\mathrm{in}} \star \ve{\hat g}$ aus~\eqref{eq:partitionierung_faltung} mit den Parametern ${\left[c_0, \ldots, c_8\right]}^{\top} \in \gls{R}^9$
 folgt damit sofort die Äquivalenz zu $\gls{conv2d}\left(\ve{f}_{\mathrm{in}}\right)$ auf regulären Gittern.
-\end{proof}
 
 \paragraph{Implementierung}
 \label{partitionierung_implementierung}
@@ -104,7 +102,7 @@ Analog zu~\eqref{eq:gcn_tensor} lässt sich die Faltung für Merkmalsmatrizen $\
   \ma{F}_{\mathrm{out}} \coloneqq \sum_{p=0}^P \gls{Atilde}_p\ma{F}_{\mathrm{in}}\gls{W}_{p+1}
 \end{equation*}
 beschreiben.
-Es ist anzumerken, dass die Multiplikation mit den dünnbesetzten partitionierten Adjazenzmatrizen extrem effizient ist, da $\left|\gls{Atilde}_p\right| \ll \left|\gls{E}\right|$ und insbesondere $\sum_{p=0}^P \left|\gls{Atilde}_p\right| = \left|\gls{E}\right| + N$.
+Es ist anzumerken, dass die Multiplikation mit den dünnbesetzten partitionierten Adjazenzmatrizen ${\left\{\gls{Atilde}_p\right\}}_{p=0}^P$ extrem effizient ist, da $\left|\gls{E}_p\right| \ll \left|\gls{E}\right|$ und insbesondere $\sum_{p=0}^P \left|\gls{E}_p\right| = \left|\gls{E}\right| + N$ gilt, wobei $\gls{E}_p \in \gls{V} \times \gls{V}$ die Kantenmenge der Adjazenzmatrix $\gls{Atilde}_p$ beschreibt.
 Die Laufzeit erhöht sich jedoch im Vergleich zu~\eqref{eq:gcn_tensor} durch die $P$-fache Multiplikation mit der Filtermatrix $\gls{W}_p$ zu $\gls{O}\left(PM_{\mathrm{in}}M_{\mathrm{out}}\left|\gls{E}\right|\right)$.
 \\\\
 Obwohl die Faltung auf den Partitionen eines Graphen insbesondere durch die Äquivalenz zur klassischen Faltung auf regulären Gittern vielversprechend erscheint, gehen dabei dennoch Informationen über die Ausrichtung der Kanten im Raum verloren.
@@ -123,8 +121,8 @@ Eine \emph{offene B-Spline-Kurve} $\gls{spline}\left(t\right)$ beschreibt die st
   \gls{spline}\left(t\right) \coloneqq \sum_{i = 0}^m \ve{d}_i \gls{basis}_i^K\left(t\right),
     \label{eq:bspline}
 \end{equation}
-wobei ${\left\{\gls{basis}_i^K\right\}}_{i=0}^m$ \emph{Basisfunktionen} von $\gls{spline}$~\cite{deBoor}.
-Eine Basisfunktion $\gls{basis}_i^K \colon \left[t_0, t_{m+1}\right] \to \left[0, 1\right]$ ist dabei mit Hilfe eines \emph{Knotenvektors} $\ve{\tau} \coloneqq {\left[t_0, \ldots, t_{m+K+1}\right]}^{\top} \in \gls{R+}^{m+K+2}$, $t_i \leq t_{i+1}$, rekursiv über $K$ definiert mit der Initialisierung für $k=0$
+wobei ${\left\{\gls{basis}_i^K\right\}}_{i=0}^m$ die \emph{Basisfunktionen} zu einem \emph{Knotenvektor} $\ve{\tau} \in \gls{R}^{m+K+2}$ mit $\ve{\tau} \coloneqq {\left[t_0, \ldots, t_{m+K+1}\right]}^{\top}$, $t_i \leq t_{i+1}$~\cite{deBoor}.
+Eine Basisfunktion $\gls{basis}_i^K \colon \left[t_0, t_{m+1}\right] \to \left[0, 1\right]$ ist dabei rekursiv über $K$ definiert mit der Initialisierung ($k=0$)
 \begin{equation}
   \gls{basis}_i^0\left(t\right) \coloneqq \begin{cases}
     1, & \text{falls }t \in \left[t_i, t_{i+1}\right),\\
@@ -132,7 +130,7 @@ Eine Basisfunktion $\gls{basis}_i^K \colon \left[t_0, t_{m+1}\right] \to \left[0
     \label{eq:bspline_basis_init}
   \end{cases}
 \end{equation}
-und dem Rekursionsschritt $k - 1 \rightarrow k$
+und dem Rekursionsschritt ($k - 1 \rightarrow k$)
 \begin{equation}
   \gls{basis}_i^k\left(t\right) \coloneqq \frac{t-t_i}{t_{i+k} - t_i}\gls{basis}^{k-1}_i\left(t\right) + \frac{t_{i+k+1} - t}{t_{i+k+1} - t_{i+1}} \gls{basis}_{i+1}^{k-1}\left(t\right)
     \label{eq:bspline_basis_schritt}
@@ -148,14 +146,14 @@ Sei dafür $\gls{spline} \colon \left[0, 2\pi\right] \to \gls{R}$ eine B-Spline-
   \gls{spline}\left(\alpha\right) \coloneqq \sum_{p=0}^{P-1} c_p N_p^K\left(\alpha\right),
 \end{equation}
 wobei die freien Parameter ${\left[c_0, \ldots, c_{P-1}\right]}^{\top} \in \gls{R}^{P}$ aus~\eqref{eq:partitionierung_faltung} nun die Koeffizienten der Basisfunktionen ${\left\{N_p^K\right\}}_{p=0}^{P-1}$ bilden.
-Insbesondere setzen wir $\gls{spline}\left(0\right) = 0$ um nicht mit der Bedeutung von $0$ in Adjazenzmatrizen in die Quere zu kommen.
+Insbesondere definieren wir $\gls{spline}\left(0\right) \coloneqq 0$ um nicht mit der Bedeutung von $0$ in Adjazenzmatrizen in die Quere zu kommen.
 Wir können uns $\gls{spline}\left(\alpha\right)$ damit weiterhin als eine $P$-fache Partitionierung von \gls{G} auf Basis seiner Kantenausrichtungen vorstellen, mit dem Unterschied, dass $\gls{spline}\left(\alpha\right)$ nun eine lokale Kontrollierbarkeit inne hält.
 Kanten, die vorher zwar in einer gleichen Partition lagen, sich jedoch \evtl{} stark in ihrer Ausrichtung unterschieden, sind nun \enquote{eindeutig} differenzierbar über ihre abweichenden Auswertungen von ${\left\{\gls{basis}_p^K\right\}}_{p=0}^{P-1}$ \bzw{} ihrer Anteile von ${\left[c_0, \ldots, c_{P-1}\right]}^{\top}$ an $\gls{spline}\left(\alpha\right)$ entsprechend ihrer unterschiedlichen Winkel.
 
 \input{tikz/bspline}
 
 Die Definitionen~\eqref{eq:bspline_basis_init} und~\eqref{eq:bspline_basis_schritt} der Basisfunktionen sind lediglich für offene B-Spline-Kurven konzipiert.
-Im Kontext von Winkeln müssen wir die Basisfunktionen $\gls{basis}_p^K\left(\alpha\right)$ aber insofern modifizieren, dass diese eine geschlossene Kurve, \dhe{} einen Kreis, beschreiben können.
+Im Kontext von Winkeln müssen wir die Basisfunktionen $\gls{basis}_p^K\left(\alpha\right)$ aber insofern modifizieren, dass diese eine geschlossene Kurve beschreiben können.
 Abbildung~\ref{fig:bspline} soll dabei das Konzept geschlossener Basisfunktionen auf Winkeln veranschaulichen.
 Mit der expliziten Forderung gleichmäßig verteiler Knoten im Intervallbereich ergibt sich dann der Knotenvektor $\ve{\tau} \coloneqq {\left[\alpha_0, \ldots, \alpha_{P+K}\right]}^{\top} \in \gls{R+}^{P+K+1}$ mit $\alpha_p \coloneqq 2\pi p/P$.
 Damit kann $\gls{basis}_p^K\left(\alpha\right)$ modifiziert werden zu
@@ -169,7 +167,7 @@ Damit kann $\gls{basis}_p^K\left(\alpha\right)$ modifiziert werden zu
 \end{split}
 \label{eq:bspline_basis_winkel}
 \end{equation}
-indem die Indexierungen des Knotenvektors und der Basisfunktion im rechten Summanden im Vergleich zu~\eqref{eq:bspline_basis_schritt} über den Modulo-Operator $\gls{modulo}\left(\cdot,\cdot\right)$ angepasst werden.
+indem die Indexierungen des Knotenvektors und der Basisfunktion im rechten Summanden im Vergleich zu~\eqref{eq:bspline_basis_schritt} über den Modulo-Operator $\gls{modulo}\left(a,b\right) \coloneqq a - qb$ mit $\gls{modulo}\left(a,b\right) < b$ für $a,b\in \gls{R+}$, $q \in \gls{N}$ angepasst werden.
 $\gls{basis}_p^K$ setzt sich dabei analog aus den Basisfunktionen$\gls{basis}_p^K$ und $\gls{basis}_{p+1}^K$ zusammen, \dhe{} den Basisfunktionen der betrachteten Partition und der rechts darauf folgenden.
 Für die aktuelle Partition $p$ im linken Summanden muss keine Veränderung vorgenommen werden und kann analog zu~\eqref{eq:bspline_basis_schritt} übernommen werden.
 Lediglich im rechten Summanden muss darauf geachtet werden, \enquote{nicht über die Grenzen hinaus zu laufen}.
@@ -181,7 +179,7 @@ Für die Nenner muss aufgrund der streng monotonen Definition des Knotenvektors 
 \label{bspline_faltungsoperator}
 
 Es kann folglich analog zu~\eqref{eq:partitionierung_faltung} der Faltungsoperator $\ve{f}_{\mathrm{in}} \star \ve{\hat g}$ auf Basis eines stückweisen polynomiellen Filters beschrieben werden.
-Mit $\gls{Adisttilde} \in \gls{R}^{N \times N}$ und $\gls{Ddisttilde} \in \gls{R}^{N \times N}$ ergibt sich dann $\ve{f}_{\mathrm{in}} \star \ve{\hat g}$ als
+Mit $\gls{Adisttilde} \in \gls{R}^{N \times N}$ und $\gls{Ddisttilde} \in \gls{R}^{N \times N}$ ergibt sich $\ve{f}_{\mathrm{in}} \star \ve{\hat g}$ dann als
 \begin{equation*}
   \ve{f}_{\mathrm{in}} \star \ve{\hat g} \approx c_P \gls{Ddisttilde}^{-1}\ve{f}_{\mathrm{in}} + \sum_{p=0}^{P-1} \left(\left(c_p \gls{basis}_p^K\left(\gls{Arad}\right)\right)\gls{hadamard}\left(\gls{Ddisttilde}^{-\frac{1}{2}}\gls{Adisttilde}\gls{Ddisttilde}^{-\frac{1}{2}}\right)\right)\ve{f}_{\mathrm{in}}
 \end{equation*}
@@ -192,7 +190,7 @@ Für $K=0$ ist die Faltung über den B-Splines äquivalent zu der Faltung über 
 \paragraph{Implementierung}
 \label{bspline_implementierung}
 
-Für Mermalsmatrizen $\ma{F}_{\mathrm{in}} \in \gls{R}^{N \times M_{\mathrm{in}}}$ und $\ma{F}_{\mathrm{out}} \in \gls{R}^{N \times M_{\mathrm{out}}}$ kann die Faltung über einem Filtertensor $\gls{W} \in \gls{R}^{P+1 \times M_{\mathrm{in}} \times M_{\mathrm{out}}}$ als
+Für Merkmalsmatrizen $\ma{F}_{\mathrm{in}} \in \gls{R}^{N \times M_{\mathrm{in}}}$ und $\ma{F}_{\mathrm{out}} \in \gls{R}^{N \times M_{\mathrm{out}}}$ kann die Faltung über einem Filtertensor $\gls{W} \in \gls{R}^{P+1 \times M_{\mathrm{in}} \times M_{\mathrm{out}}}$ als
 \begin{equation*}
   \ma{F}_{\mathrm{out}} \coloneqq \gls{Ddisttilde}^{-1}\ma{F}_{\mathrm{in}}\gls{W}_{P+1} + \sum_{p=0}^{P-1} \left(\gls{basis}_p^K\left(\gls{Arad}\right) \gls{hadamard}\left(\gls{Ddisttilde}^{-\frac{1}{2}}\gls{Adisttilde}\gls{Ddisttilde}^{-\frac{1}{2}}\right)\right)\ma{F}_{\mathrm{in}}\ma{W}_{p+1}
 \end{equation*}
@@ -210,18 +208,16 @@ So gilt, dass $\gls{basis}_p^1\left(\alpha\right)$ zu
   \end{split}
 \end{equation*}
 vereinfacht werden kann.
-\begin{proof}
-  Die kreisförmige Dreiecksfunktion im Intervall $\left[0, 2\pi\right]$ kann als Verknüpfung dreier Geraden verstanden werden — zwei Geraden, die das Dreieck im Intervall $\left[2\pi p/P, 2\pi \left(p+2\right)/P\right]$ aufspannen, und eine absteigende Gerade, die um $2\pi$ nach links verschoben wurde und dafür sorgt, die Basisfunktion für $p=P-1$ kreisförmig abzuschließen und in allen anderen Fällen keinen Anteil im Gültigkeitsbereich der Funktion $\gls{basis}_p^1 \colon \left(0,2\pi\right] \to \left[0,1\right]$ besitzt (\vgl{} Abbildung~\ref{fig:bspline_beweis}).
-Den Geraden kann die Steigung $P/2\pi$ respektive $-P/2\pi$ zugeordnet werden und sie können damit folglich über
+Dies lässt sich verifizieren, in dem die kreisförmige Dreiecksfunktion im Intervall $\left(0, 2\pi\right]$ als Verknüpfung dreier Geraden verstanden wird — zwei Geraden, die das Dreieck im Intervall $\left(2\pi p/P, 2\pi \left(p+2\right)/P\right]$ aufspannen, und einer absteigenden Geraden, die um $2\pi$ nach links verschoben wurde und dafür sorgt, die Basisfunktion für $p=P-1$ kreisförmig abzuschließen und in allen anderen Fällen keinen Anteil im Gültigkeitsbereich der Funktion $\gls{basis}_p^1 \colon \left(0,2\pi\right] \to \left[0,1\right]$ besitzt (\vgl{} Abbildung~\ref{fig:bspline_beweis}).
+Den Geraden kann die Steigung $P/2\pi$ \bzw{} $-P/2\pi$ zugeordnet werden und sie können damit folglich über
 \begin{equation*}
-  \begin{split}
-    f_1\left(\alpha\right) \coloneqq & \frac{P}{2\pi}\left(\alpha - 2\pi\frac{p}{P}\right) = \frac{P}{2\pi}\alpha - p\\
-    f_2\left(\alpha\right) \coloneqq & - \frac{P}{2\pi}\left(\alpha - 2\pi\frac{p+2}{P}\right) = - \frac{P}{2\pi}\alpha + p + 2\\
-    f_3\left(\alpha\right) \coloneqq & - \frac{P}{2\pi}\left(\alpha - 2\pi\frac{p+2}{P} + 2\pi\right) = - \frac{P}{2\pi}\alpha + p + 2 - P
-  \end{split}
+\begin{split}
+  f_1\left(\alpha\right) \coloneqq & \frac{P}{2\pi}\left(\alpha - 2\pi\frac{p}{P}\right) = \frac{P}{2\pi}\alpha - p\\
+  f_2\left(\alpha\right) \coloneqq & - \frac{P}{2\pi}\left(\alpha - 2\pi\frac{p+2}{P}\right) = - \frac{P}{2\pi}\alpha + p + 2\\
+  f_3\left(\alpha\right) \coloneqq & - \frac{P}{2\pi}\left(\alpha - 2\pi\frac{p+2}{P} + 2\pi\right) = - \frac{P}{2\pi}\alpha + p + 2 - P
+\end{split}
 \end{equation*}
 beschrieben werden.
 Mittels $\max\left(f_i\left(\alpha\right), 0\right) \in \gls{R+}$ können diese auf den positiven reellen Raum eingegrenzt werden.
-  $f_{\triangle} \coloneqq \min\left(\max\left(f_1, 0\right), \max\left(f_2, 0\right)\right)$ beschreibt damit die Dreiecksfunktion, indem sie sich stets für das Minimum von $\max\left(f_1, 0\right)$ \bzw{} $\max\left(f_2,0\right)$ entscheidet.
-  Folglich beschreibt $\max\left(\max\left(f_3,0\right), f_{\triangle}\right)$ die Basisfunktion $\gls{basis}_p^1$ im Intervall $\left(0, 2\pi\right]$ für alle $p \in \left\{0, \ldots, P-1\right\}$.
-\end{proof}
+$f_{\triangle} \coloneqq \min\left(\max\left(f_1, 0\right), \max\left(f_2, 0\right)\right)$ beschreibt damit die Dreiecksfunktion, indem sie sich stets für das Minimum von $\max\left(f_1, 0\right)$ \bzw{} $\max\left(f_2,0\right)$ entscheidet.
+Folglich beschreibt $\max\left(\max\left(f_3,0\right), f_{\triangle}\right)$ die Basisfunktion $\gls{basis}_p^1$ im Intervall $\left(0, 2\pi\right]$ für alle $p \in \left\{0, \ldots, P-1\right\}$.

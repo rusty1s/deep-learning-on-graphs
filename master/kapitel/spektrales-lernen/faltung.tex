@@ -91,7 +91,7 @@ Daraus ergibt sich analog zu~\eqref{eq:fourier_faltung} der \emph{spektrale Falt
 \label{polynomielle_approximation}
 
 Es zeigt sich, dass die Benutzung des spektralen Faltungsoperators in~\eqref{eq:spektraler_faltungsoperator} im Kontext eines \glspl{CNN} auf Graphen mehrere Schwächen aufweist.
-So ist \zB{} die Auswertung von $\ve{f}_{\mathrm{out}} \star \ve{\hat g}$ extrem berechnungsintensiv ist, denn die Multiplikation mit der dichtbesetzten Eigenvektormatrix \gls{Eiv} liegt in $\gls{O}\left(N^2\right)$~\cite{Defferrard}.
+So ist \zB{} die Auswertung von $\ve{f}_{\mathrm{in}} \star \ve{\hat g}$ extrem berechnungsintensiv ist, denn die Multiplikation mit der dichtbesetzten Eigenvektormatrix \gls{Eiv} liegt in $\gls{O}\left(N^2\right)$~\cite{Defferrard}.
 Zudem muss \gls{Eiv} zuerst bestimmt werden — ein kostspieliger Aufwand für Graphen mit möglicherweise weit mehr als hundert Knoten~\cite{gcn}.
 Desweiteren führt ein Filter $\ve{\hat g} \in \gls{R}^N$ der Größe $N$ zu einem Lernaufwand in $\gls{O}\left(N\right)$, \dhe{} der Dimensionalität der Eingabedaten~\cite{Defferrard}.
 Ebenso kann $\ve{\hat g}$ so nicht für das Lernen auf Graphen mit variierendem $N$ verwendet werden.

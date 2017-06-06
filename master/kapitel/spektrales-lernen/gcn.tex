@@ -17,7 +17,7 @@ Unter dieser Restriktion vereinfacht sich $\ve{f}_{\mathrm{in}} \star \ve{\hat g
   \label{eq:gcn_faltung_both}
 \end{equation}
 mit zwei freien Parametern $c_0$ und $c_1$~\cite{gcn}.
-Für $\gls{Lnorm}$ auf einem zusammenhängenden Graphen \gls{G} gilt dann nach~\eqref{eq:gcn_faltung_both} weiter
+Für $\gls{Lnorm}$ auf einem zusammenhängenden Graphen \gls{G} gilt dann nach~\eqref{eq:laplace_norm_connected} und~\eqref{eq:gcn_faltung_both} weiter
 \begin{equation}
   \ve{f}_{\mathrm{in}} \star \ve{\hat g} \approx c_0 \, \ve{f}_{\mathrm{in}} + c_1 \left(\gls{Lnorm} - \gls{I}\right)\ve{f}_{\mathrm{in}} = c_0 \, \ve{f}_{\mathrm{in}} - c_1 \gls{D}^{-\frac{1}{2}} \gls{A} \gls{D}^{-\frac{1}{2}} \ve{f}_{\mathrm{in}},
   \label{eq:gcn_faltung_norm}
@@ -64,18 +64,18 @@ mit Faltungsaufwand $\gls{O}\left(M_{\mathrm{in}}M_{\mathrm{out}}\left|\gls{E}\r
     \STATE{} $t \leftarrow t + 1$
   \UNTIL{Konvergenz}
 \end{algorithmic}
-  \caption[Weisfeiler-Lehman Algorithmus]{Eindimensionaler Weisfeiler-Lehman Algorithmus auf einer initialen Knotenfärbung $\ve{h}^{\left(0\right)} \in \gls{R}^N$ eines Graphen \gls{G} mit $\gls{v}_i \in \gls{Neighbor}\left(\gls{v}_i\right)$~\cite{wl}.}
+  \caption[Weisfeiler-Lehman Algorithmus]{Eindimensionaler Weisfeiler-Lehman Algorithmus auf einer initialen Knotenfärbung $\ve{h}^{\left(0\right)} \in \gls{R}^N$ eines Graphen \gls{G} mit $\gls{v}_i \in \gls{Neighbor}\left(\gls{v}_i\right)$~\cite{wl}. Der Prozes der Verfärbung eines Knotens $\gls{v}_i$ auf Basis der Farben seiner lokalen Nachbarsknoten wird solange wiederholt, bis sie konvergiert.}
 \label{alg:wl}
 \end{algorithm}
 
-Der \emph{eindimensionale Weis\-fei\-ler-Lehman Algorithmus} beschreibt eine weit-untersuchte Methode zur Knotenklassifizierung eines Graphen basierend auf einer intialen Färbung \bzw{} Merkmalsverteilung auf den Knoten eines Graphen \gls{G}, die unteranderem zur Bestimmung von Graphisomorphismen genutzt wird~\cite{douglas}.
-Basierend auf einer intialen Knotenfärbung $\ve{h}^{\left(0\right)} \in \gls{R}^N$ wird die Farbe eines jeden Knotens $\gls{v}_i \in \gls{V}$ sukzessive mit Hilfe einer Hashfunktion $\mathrm{hash}\left(\cdot\right)$ so angepasst, dass sie die vorangegangene Farbe des Knotens zusammen mit den Farben seiner lokalen Nachbarschaft repräsentiert.
+Der \emph{eindimensionale Weis\-fei\-ler-Lehman Algorithmus} beschreibt eine weit-untersuchte Methode zur Knotenklassifizierung eines Graphen basierend auf einer initialen Färbung \bzw{} Merkmalsverteilung auf den Knoten eines Graphen \gls{G}, die unter anderem zur Bestimmung von Graphisomorphismen genutzt wird~\cite{douglas}.
+Basierend auf einer initialen Knotenfärbung $\ve{h}^{\left(0\right)} \in \gls{R}^N$ wird die Farbe eines jeden Knotens $\gls{v}_i \in \gls{V}$ sukzessive mit Hilfe einer Hashfunktion $\mathrm{hash}\left(\cdot\right)$ so angepasst, dass sie die vorangegangene Farbe des Knotens zusammen mit den Farben seiner lokalen Nachbarschaft repräsentiert.
 Dieser Prozess wiederholt sich solange, bis eine stabile Knotenfärbung gefunden wurde, \dhe{} die gefundene Färbung des Graphen konvergiert (\vgl{} Algorithmus~\ref{alg:wl}).
 
-Sei die Hashfunktion gegeben als eine differenzierbare, nicht-lineare Aktivierungsfunktion $\gls{act}\left(\cdot\right)$ eines neuronalen Netzes.
-Dann ergibt sich die Faltung des \glspl{GCN} als
+Sei die Hashfunktion nun gegeben als eine differenzierbare, nicht-lineare Aktivierungsfunktion $\gls{act} \colon \gls{R} \to \gls{R}$ eines neuronalen Netzes wie \zB{} $\gls{relu}\left(\cdot\right) \coloneqq \max\left(\cdot, 0\right)$.
+Dann ergibt sich eine Faltungsschicht des \glspl{GCN} durch Komposition des Faltungsoperators bei anschließender Aktivierung als
 \begin{equation*}
-  \ve{h}^{\left(t+1\right)}_i = \gls{act}\left(\sum_{\gls{v}_j \in \gls{Neighbor}\left(\gls{v}_i\right)} \frac{1}{\sqrt{d_i d_j}} \ve{h}^{\left(l\right)}_j \gls{W} \right),
+  \ve{h}^{\left(t+1\right)}_i = \gls{act}\left(\sum_{\gls{v}_j \in \gls{Neighbor}\left(\gls{v}_i\right)} \frac{1}{\sqrt{d_i d_j}} \ve{h}^{\left(t\right)}_j \gls{W}^(\left(t\right)) \right),
 \end{equation*}
-wobei $1/\sqrt{d_i d_j} \in \gls{R}$ eine Normalisierungskonstante für die Kante $\left(\gls{v}_i, \gls{v}_j\right) \in \gls{E}$ ist~\cite{gcn}.
-Damit kann die Faltung des \glspl{GCN} als \enquote{differenzierbare und parametrisierte Generalisierung des eindimensionalen Weisfeiler-Lehman Algorithmus auf Graphen} verstanden werden~\cite{gcn}.
+wobei $1/\sqrt{d_i d_j} \in \gls{R}$ die Normalisierungskonstante für die Kante $\left(\gls{v}_i, \gls{v}_j\right) \in \gls{E}$ entsprechend der Normalisierung $\gls{Dtilde}^{-1/2}\gls{Atilde}\gls{Dtilde}^{-1/2}$ aus~\eqref{eq:gcn_renorm} und $\gls{W}^{\left(t\right)} \in \gls{R}^{N \times N}$ die Filtermatrix der $t$-en Faltungsschicht beschreibt~\cite{gcn}.
+Folglich kann die Faltung des \glspl{GCN} als \enquote{differenzierbare und parametrisierte Generalisierung des eindimensionalen Weisfeiler-Lehman Algorithmus auf Graphen} verstanden werden~\cite{gcn}.
