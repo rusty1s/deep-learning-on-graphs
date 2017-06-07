@@ -17,7 +17,7 @@ Ein Eigenvektor \gls{eiv} beschreibt damit einen Vektor, dessen Richtung durch d
 Zu einem Eigenwert $\gls{lambda}$ gibt es unendlich viele (skalierte) Eigenvektoren \gls{eiv}.
 Wir definieren den Eigenvektor \gls{eiv} eines Eigenwertes \gls{lambda} daher eindeutig über die Bedingung $\left\|\gls{eiv}\right\|_2 = 1$.
 Sei \ma{M} weiterhin symmetrisch, \dhe{} $\ma{M} = \ma{M}^{\top}$~\cite{linear}.
-Dann gilt für zwei unterschiedliche Eigenvektoren $\gls{eiv}_1$ und $\gls{eiv}_2$, dass diese orthogonal zueinander stehen, \dhe{} $\gls{eiv}_1 \gls{ortho} \gls{eiv}_2$, und \ma{M} genau $N$ reelle Eigenwerte mit ${\left\{\gls{lambda}_i\right\}}_{i=1}^N$ hat~\cite{linear}.
+Dann gilt für zwei unterschiedliche Eigenvektoren $\gls{eiv}_1$ und $\gls{eiv}_2$, dass diese orthogonal zueinander stehen, \dhe{} $\gls{eiv}_1 \gls{ortho} \gls{eiv}_2$, und \ma{M} genau $N$ reelle Eigenwerte mit ${\left\{\gls{lambda}_n\right\}}_{n=1}^N$ hat~\cite{linear}.
 Wir definieren demnach zu \ma{M} die orthogonale \emph{Eigenvektormatrix} $\gls{Eiv} \coloneqq \left[\gls{eiv}_1, \ldots, \gls{eiv}_n\right] \in \gls{R}^{N \times N}$, \dhe{} $\gls{Eiv}\gls{Eiv}^{\top}=\gls{Eiv}^{\top}\gls{Eiv}=\gls{I}$, und dessen Eigenwertdiagonalmatrix $\gls{Lambda} \coloneqq \gls{diag}\left({\left[\gls{lambda}_1, \ldots, \gls{lambda}_N\right]}^{\top}\right)$, \dhe{} $\gls{Lambda}_{ii} = \gls{lambda}_i$~\cite{Defferrard}.
 Dann gilt $\ma{M}\gls{Eiv} = \gls{Eiv}\gls{Lambda}$ und insbesondere ist \ma{M} diagonalisierbar über~\cite{linear}
 \begin{equation*}
@@ -47,7 +47,7 @@ Eigenwerte symmetrischer positiv semidefiniter Matrizen $\lambda_i \in \gls{R+}$
 \label{laplace_matrix}
 
 Die Laplace-Matrix ist in der spektralen Graphentheorie eine Matrix, die die Beziehungen der Knoten und Kanten eines beliebigen Graphen \gls{G} in einer generalisierten und normalisierten Form beschreibt.
-Viele der Eigenschaften von \gls{G} können durch die Eigenwerte ihrer Laplace-Matrix beschrieben werden, wohingegen dies \zB{} für die Eigenwerte der Adjazenzmatrix \gls{A} von \gls{G} nur bedingt zutrifft und insbesondere nicht verallgemeinbar für beliebge Graphen ist~\cite{Chung}.
+Viele der Eigenschaften von \gls{G} können durch die Eigenwerte ihrer Laplace-Matrix beschrieben werden, wohingegen dies \bspw{} für die Eigenwerte der Adjazenzmatrix \gls{A} von \gls{G} nur bedingt zutrifft und insbesondere nicht verallgemeinbar für beliebge Graphen ist~\cite{Chung}.
 Dies ist vor allem dem Fakt geschuldet, dass die Eigenwerte der Laplace-Matrix konsistent sind mit den Eigenwerten des Laplace-Beltrami Operators $\nabla^2$ in der spektralen Geometrie~\cite{Chung}.
 Die Laplace-Matrix ist damit ein geeignetes Mittel zur Betrachtung und Analyse eines Graphen.
 
@@ -84,23 +84,23 @@ Dann kann für die kombinatorische Laplace-Matrix \gls{L} verifiziert werden, da
   {\left(\gls{L}\ve{f}\right)}_i = \sum_{\gls{v}_j \in \gls{Neighbor}\left(\gls{v}_i\right)} \gls{w}\left(\gls{v}_i, \gls{v}_j\right) \left(\ve{f}_i - \ve{f}_j\right)
 \end{equation*}
 erfüllt~\cite{Hammond}.
-Sei $\gls{G}$ nun ein Graph, der aus einem (unendlichen) zweidimensionalen regulärem Gitter entstanden ist, \dhe{} jeder Knoten $\gls{v}_i$ besitzt genau vier achsenparallele rechtwinklige Nachbarn mit gleichen Kantengewichten $1/\delta^2$, wobei $\delta \in \gls{R}$ eine beliebige Konstante.
+Sei $\gls{G}$ nun ein Graph, der aus einem (unendlichen) zweidimensionalen regulärem Gitter entstanden ist, \dhe{} jeder Knoten $\gls{v}_i$ besitzt genau vier achsenparallele rechtwinklige Nachbarn mit gleichen Kantengewichten $1/\delta^2$, wobei $\delta \in \gls{R}$ den Abstand der Knoten zueinander beschreibt.
 Zur einfacheren Veranschaulichung benutzen wir dabei für die Signalstärke $\ve{f}_i$ eines Knoten $v_i$ an Position $\left(x, y\right)$ die Indexnotation $\ve{f}_{x,y}$.
 Dann beschreibt
 \begin{equation*}
   {\left(\gls{L}\ve{f}\right)}_{x,y} = \frac{4\ve{f}_{x,y} - \ve{f}_{x+1,y} - \ve{f}_{x-1,y} - \ve{f}_{x,y+1} - \ve{f}_{x,y-1}}{h^2}
 \end{equation*}
-die \emph{5-Punkte-Stern} Approximation $\nabla^2 f$ (bei umgekehrtem Vorzeichen) definiert auf den Punkten $\left\{\left(x,y\right), \left(x+\delta,y\right), \left(x-\delta,y\right), \left(x,\delta+h\right),\left(x,y-\delta\right)\right\}$~\cite{Hammond} (\vgl{} Abbildung~\ref{fig:5_punkte_stern}).
+die \emph{5-Punkte-Stern} Approximation $\nabla^2 f$ (bei umgekehrtem Vorzeichen) definiert auf den Punkten $\left\{\left(x,y\right), \left(x+\delta,y\right), \left(x-\delta,y\right), \left(x,y + \delta\right),\left(x,y-\delta\right)\right\}$~\cite{Hammond} (\vgl{} Abbildung~\ref{fig:5_punkte_stern}).
 Ähnlich zu einem regulären Gitter lässt sich ein Graph \gls{G} auch über beliebig viele Abtastpunkte einer differenzierbaren Mannigfaltigkeit konstruieren.
 Es zeigt sich, dass mit steigender Abtastdichte und geeigneter Wahl der Kantengewichte die normalisierte Laplace-Matrix \gls{Lnorm} zu dem kontinuierlichem Laplace-Beltrami Operator $\nabla^2$ konvergiert~\cite{Hammond}.
 Damit kann $\gls{Lnorm}$ als die diskrete Analogie des $\nabla^2$ Operators auf Graphen verstanden werden.
 Der Laplace-Beltrami Operator $\nabla^2 f\left(p\right)$ misst dabei, in wie weit sich eine Funktion $f$ an einem Punkt $p$ von dem Durchschnitt aller Funktionspunkte um einen kleinen Bereich um $p$ unterscheidet.
 Die Laplace-Matrix operiert dabei völlig analog, in dem sie misst, wie sehr sich eine (diskrete) Funktion um einen Knoten im Vergleich zu seinen Nachbarknoten unterscheidet.
 
-Eigenwerte und Eigenvektoren von \gls{Lboth} helfen uns dabei, die lineare Transformation einer Funktion \ve{f} (mehrfach) angewendet auf \gls{Lboth} besser zu verstehen.
-Wir können dafür \ve{f} als Linearkombination der Eigenbasis $\sum_i c_i \gls{eiv}_i$ schreiben und erhalten
+Die Eigenwerte und Eigenvektoren von \gls{Lboth} helfen uns beim Verständnis der linearen Transformation einer Funktion \ve{f} (mehrfach) angewendet auf \gls{Lboth}.
+Wir können dafür \ve{f} als Linearkombination der Eigenbasis $\ve{f} = \sum_{n=1}^N a_n \gls{eiv}_n$, $a_n \in \gls{R}$ schreiben und erhalten
 \begin{equation*}
-  \gls{Lboth}^k \ve{f} = \sum_i c_i \gls{Lboth}^k \gls{eiv}_i = \sum_i c_i \gls{lambda}_i^k \gls{eiv}_i.
+  \gls{Lboth}^k \ve{f} = \sum_{n=1}^N a_n \gls{Lboth}^k \gls{eiv}_n = \sum_{n=1}^N a_n \gls{lambda}_n^k \gls{eiv}_n.
 \end{equation*}
 Somit können Eigenschaften von \gls{Lboth} und damit des Graphen selber durch dessen Eigenwerte und Eigenvektoren beschrieben werden.
 
@@ -108,7 +108,7 @@ Somit können Eigenschaften von \gls{Lboth} und damit des Graphen selber durch d
 \label{laplace_eigenschaften}
 
 $\gls{Lboth} \in \gls{R}^{N \times N}$ ist eine reell symmetrische, positiv semidefinite Matrix~\cite{Chung}.
-Folglich besitzt \gls{Lboth} nach Kapitel~\ref{eigenwerte_symmetrischer_matrizen} genau $N$ positiv reelle Eigenwerte ${\left\{\gls{lambda}_i\right\}}_{i=1}^N$ mit Ordnung $0 \leq \gls{lambda}_1 \leq \cdots \leq \gls{lambda}_N$ und $N$ korrespondierenden orthogonalen Eigenvektoren ${\left\{\gls{eiv}_i\right\}}_{i=1}^N$.
+Folglich besitzt \gls{Lboth} nach Kapitel~\ref{eigenwerte_symmetrischer_matrizen} genau $N$ positiv reelle Eigenwerte ${\left\{\gls{lambda}_n\right\}}_{n=1}^N$ mit Ordnung $0 \leq \gls{lambda}_1 \leq \cdots \leq \gls{lambda}_N$ und $N$ korrespondierenden orthogonalen Eigenvektoren ${\left\{\gls{eiv}_n\right\}}_{n=1}^N$.
 
 Die kombinatorische Laplace-Matrix $\gls{L}$ ist nach~\eqref{eq:schwach_diagonaldominant} weiterhin schwach diagonaldominant.
 Insbesondere summiert sich jede Reihen- und Spaltensumme von \gls{L} zu Null auf, \dhe{} $\sum_{j=1}^N \gls{L}_{ij} = \sum_{j=1}^N \gls{L}_{ji} = 0$.
@@ -118,11 +118,11 @@ Es lässt sich jedoch zeigen, dass auch für \gls{Lnorm} gilt, dass $\gls{lambda
 
 Eine der interessantesten Eigenschaften eines Graphen ist dessen Konnektivität.
 Die Laplace-Matrix \gls{Lboth} \bzw{} deren Eigenwerte stellen ein geeignetes Mittel zur Untersuchung dieser Eigenschaft dar.
-So gilt \zB{} für einen zusammenhängenden Graphen \gls{G}, dass $\gls{lambda}_2 > 0$.
+So gilt \bspw{} für einen zusammenhängenden Graphen \gls{G}, dass $\gls{lambda}_2 > 0$.
 Falls $\gls{lambda}_i = 0$ und $\gls{lambda}_{i+1} \neq 0$, dann besitzt $\gls{G}$ genau $i$ zusammenhängende Komponenten~\cite{Chung}.
 Damit ist die Anzahl der Null-Eigenwerte äquivalent zu der Anzahl an Komponenten, die ein Graph besitzt.
 Für \gls{Lnorm} lässt sich weiterhin zeigen, dass $\gls{lambdamax} \leq 2$ eine obere Schranke ihrer Eigenwerte ist~\cite{Chung}.
 
 Aus der Laplace-Matrix können ebenso Rückschlüsse über die kürzeste Pfaddistanz zweier Knoten gewonnen werden.
 So gilt für $\gls{Lboth}^{k}$ mit $k \in \gls{N}$, dass $\gls{Lboth}^k_{ij} = 0$ genau dann, wenn $\gls{s}\left(v_i, v_j\right) > k$~\cite{Hammond}.
-Damit beschreibt $\gls{Lboth}^k_i$ bildlich gesprochen die Menge an Knoten, die maximal $k$ Kanten von $i$ entfernt liegen.
+Damit beschreibt $\gls{Lboth}^k_i$ bildlich gesprochen die Menge an Knoten, die maximal $k$ Kanten von $\gls{v}_i$ entfernt liegen.

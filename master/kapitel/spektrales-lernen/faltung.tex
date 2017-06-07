@@ -3,14 +3,14 @@
 
 Sei $\ve{f} \in \gls{R}^N$ ein Signal auf den Knoten eines Graphen \gls{G}, welches abhängig von der Struktur des Graphen weiter verarbeitet werden soll.
 Es ist jedoch nicht selbstverständlich, wie recht einfache, dennoch fundamentale Signalverarbeitungsprozesse wie Translation oder Filterung und die daraus entstehende Faltung in der Domäne des Graphen definiert werden können~\cite{Shuman}.
-So kann \zB{} ein analoges Signal $f\left(t\right)$ mittels $f\left(t-3\right)$ um $3$ nach rechts verschoben werden.
+So kann ein analoges Signal $f\left(t\right)$ \bspw{} mittels $f\left(t-3\right)$ um $3$ nach rechts verschoben werden.
 Es ist hingegen völlig unklar, was es bedeutet, ein Graphsignal auf den Knoten um $3$ nach rechts zu bewegen (\vgl{}~\cite{Shuman}).
 Die spektrale Graphentheorie bietet uns dafür einen geeigneten Weg, indem Eingabesignale in das Spektrum des Graphen zerlegt \bzw{} abgebildet, modifiziert und wieder retransformiert werden können.
 
 \subsection{Graph-Fourier-Transformation}
 \label{graph_fourier_transformation}
 
-Das Spektrum eines Graphen \gls{G} bilden die Eigenwerte ${\left\{\gls{lambda}_i\right\}}_{i=1}^N$ der Laplace-Matrix \gls{Lboth} von \gls{G}.
+Das Spektrum eines Graphen \gls{G} bilden die Eigenwerte ${\left\{\gls{lambda}_n\right\}}_{n=1}^N$ der Laplace-Matrix \gls{Lboth} von \gls{G}.
 Diese werden deshalb auch oft als die \emph{Frequenzen} von \gls{G} betitelt.
 In der spektralen Domäne können wir ein Eingabeignal \ve{f} über \gls{G} dann analog wie ein zeitdiskretes Abtastsignal in der Fourier-Domäne behandeln.
 
@@ -28,7 +28,7 @@ Die komplexen Exponentiale $e^{2\pi i\omega t}$ beschreiben dabei die Eigenfunkt
 \end{equation}
 $\hat f$ kann damit als die Ausdehnung von $f$ in Bezug auf die Eigenfunktionen des Laplace-Beltrami Operators $\nabla^2$ verstanden werden~\cite{Hammond}.
 \\\\
-Analog lässt sich die \emph{Graph-Fourier-Transformation} einer Funktion $f \colon \gls{V} \to \gls{R}$ \bzw{} $\ve{f} \in \gls{R}^N$ auf den Knoten eines Graphen \gls{G} als Ausdehnung von $f$ in Bezug auf die Eigenvektoren ${\left\{\gls{eiv}_i\right\}}_{i=1}^N$ der Laplace-Matrix \gls{Lboth} definieren~\cite{Shuman}:
+Analog lässt sich die \emph{Graph-Fourier-Transformation} einer Funktion $f \colon \gls{V} \to \gls{R}$ \bzw{} $\ve{f} \in \gls{R}^N$ auf den Knoten eines Graphen \gls{G} als Ausdehnung von $f$ in Bezug auf die Eigenvektoren ${\left\{\gls{eiv}_n\right\}}_{n=1}^N$ der Laplace-Matrix \gls{Lboth} definieren~\cite{Shuman}:
 \begin{equation}
   \hat f\left(\gls{lambda}_i\right) \coloneqq \left\langle \ve{f}, \gls{eiv}_i \right\rangle
   \qquad
@@ -39,7 +39,7 @@ Analog lässt sich die \emph{Graph-Fourier-Transformation} einer Funktion $f \co
 \end{equation}
 Die inverse Graph-Fourier-Transformation ergibt sich dann als~\cite{Shuman}
 \begin{equation}
-  f\left(\gls{v}_i\right) = \sum_{j=1}^N \hat f\left(\gls{lambda}_j\right) {\left(\gls{eiv}_j\right)}_i
+  f\left(\gls{v}_i\right) = \sum_{n=1}^N \hat f\left(\gls{lambda}_n\right) {\left(\gls{eiv}_n\right)}_i
   \qquad
   \text{\bzw{}}
   \qquad
@@ -80,7 +80,7 @@ Wir können die Filterung der Frequenzen in der Fourier-Domäne analog zu~\eqref
   \ve{\hat f}_{\mathrm{out}} \coloneqq \ve{\hat f}_{\mathrm{in}} \gls{hadamard} \ve{\hat g}
 \end{equation*}
 beschreiben, wobei \gls{hadamard} das elementweise Hadamard-Produkt ist~\cite{Shuman}.
-$\ve{\hat g} \in \gls{R}^N$ ist damit ein \emph{nicht-parametrischer} Filter, \dhe{} ein Filter, dessen Werte für alle Frequenzen ${\left\{\gls{lambda}_i\right\}}_{i=1}^N$ frei wählbar sind~\cite{Defferrard}.
+$\ve{\hat g} \in \gls{R}^N$ ist damit ein \emph{nicht-parametrischer} Filter, \dhe{} ein Filter, dessen Werte für alle Frequenzen ${\left\{\gls{lambda}_n\right\}}_{n=1}^N$ frei wählbar sind~\cite{Defferrard}.
 Daraus ergibt sich analog zu~\eqref{eq:fourier_faltung} der \emph{spektrale Faltungsoperator} auf Graphen in der Knotendomäne mit Hilfe der Graph-Fourier-Transformation~\eqref{eq:graph_fourier_transformation} und ihrer Inversen~\eqref{eq:inverse_graph_fourier_transformation} als~\cite{Shuman, Defferrard}
 \begin{equation}
   \ve{f}_{\mathrm{in}} \star \ve{\hat g} \coloneqq \gls{Eiv}\left(\left(\gls{Eiv}^{\top}\ve{f}_{\mathrm{in}}\right) \gls{hadamard} \ve{\hat g}\right) = \ve{f}_{\mathrm{out}}.
@@ -113,7 +113,7 @@ Eine Faltung über $f_{\mathrm{in}}\left(\gls{v}_i\right)$ wird damit als Linear
 \begin{equation*}
   f_{\mathrm{out}}\left(\gls{v}_i\right) \approx b_{ii} f_{\mathrm{in}}\left(\gls{v}_i\right) + \sum_{\gls{v}_j \in \gls{Neighbor}_K\left(\gls{v}_i\right)} b_{ij} f_{\mathrm{in}}\left(\gls{v}_j\right)
 \end{equation*}
-über dessen $k$-lokalisierte Nachbarschaft $\gls{Neighbor}_K\left(\gls{v}_i\right)$ mit den Koeffizienten $b_{ij} \coloneqq \sum_{k=0}^K c_k \gls{Lboth}^k_{ij}$ beschrieben~\cite{Shuman}.
+über dessen $k$-lokalisierte Nachbarschaft $\gls{Neighbor}_K\left(\gls{v}_i\right)$ mit $b_{ij} \coloneqq \sum_{k=0}^K c_k \gls{Lboth}^k_{ij}$ beschrieben~\cite{Shuman}.
 
 \paragraph{Tschebyschow-Polynome}
 \label{tschebyschow_polynome}
@@ -155,7 +155,7 @@ Mit $N \leq \left|\gls{E}\right|$ ergibt dies eine finale Laufzeit der spektrale
 
 Für gewöhnlich besteht eine \gls{CNN}-Schicht nicht nur aus einem, sondern aus $M_{\mathrm{in}}$ vielen Signalen \bzw{} Merkmalen pro Knoten mit jeweils unterschiedlichen Filtern \bzw{} Gewichten pro Ein- und Ausgabekarte.
 In klassichen zweidimensionalen \glspl{CNN} werden diese Merkmale auf $M_{\mathrm{out}}$ viele Merkmale abgebildet, in dem für jede Ausgabekarte über jede Eingabekarte gefaltet und dessen Ergebnisse sukzessive aufsummiert werden (\vgl{} Kapitel~\ref{convolutional_neural_networks}).
-Modellieren wir diesen Fall für den spektralen Faltungsoperator, dann erhalten wir rekursiv für eine Merkmalsmatrix $\gls{F}_{\mathrm{in}} \in \gls{R}^{N \times M_{\mathrm{in}}}$ gefaltet auf eine Merkmalsmatrix $\gls{F}_{\mathrm{out}} \in \gls{R}^{N \times M_{\mathrm{out}}}$ über den $N$ Knoten eines Graphen \gls{G} mittels des Filtertensors $\gls{W} \in \gls{R}^{K+1 \times M_{\mathrm{in}} \times M_{\mathrm{out}}}$
+Modellieren wir diesen Fall für den spektralen Faltungsoperator, dann erhalten wir rekursiv für eine Merkmalsmatrix $\gls{F}_{\mathrm{in}} \in \gls{R}^{N \times M_{\mathrm{in}}}$ gefaltet auf eine Merkmalsmatrix $\gls{F}_{\mathrm{out}} \in \gls{R}^{N \times M_{\mathrm{out}}}$ über den $N$ Knoten eines Graphen \gls{G} mittels des Filtertensors $\gls{W} \in \gls{R}^{\left(K+1\right) \times M_{\mathrm{in}} \times M_{\mathrm{out}}}$
 \begin{equation*}
   \gls{F}_{\mathrm{out}} \coloneqq \sum_{k=0}^K \ma{\bar F}_k,
 \end{equation*}

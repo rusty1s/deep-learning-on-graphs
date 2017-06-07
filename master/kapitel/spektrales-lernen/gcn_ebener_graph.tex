@@ -97,7 +97,7 @@ folgt damit sofort die Äquivalenz zu $\gls{conv2d}\left(\ve{f}_{\mathrm{in}}\ri
 \paragraph{Implementierung}
 \label{partitionierung_implementierung}
 
-Analog zu~\eqref{eq:gcn_tensor} lässt sich die Faltung für Merkmalsmatrizen $\ma{F}_{\mathrm{in}} \in \gls{R}^{N \times M_{\mathrm{in}}}$ und $\ma{F}_{\mathrm{out}} \in \gls{R}^{N \times M_{\mathrm{out}}}$ über einem Filtertensor $\gls{W} \in \gls{R}^{P+1 \times M_{\mathrm{in}} \times M_{\mathrm{out}}}$ als
+Analog zu~\eqref{eq:gcn_tensor} lässt sich die Faltung für Merkmalsmatrizen $\ma{F}_{\mathrm{in}} \in \gls{R}^{N \times M_{\mathrm{in}}}$ und $\ma{F}_{\mathrm{out}} \in \gls{R}^{N \times M_{\mathrm{out}}}$ über einem Filtertensor $\gls{W} \in \gls{R}^{\left(P+1\right) \times M_{\mathrm{in}} \times M_{\mathrm{out}}}$ als
 \begin{equation*}
   \ma{F}_{\mathrm{out}} \coloneqq \sum_{p=0}^P \gls{Atilde}_p\ma{F}_{\mathrm{in}}\gls{W}_{p+1}
 \end{equation*}
@@ -146,7 +146,7 @@ Sei dafür $\gls{spline} \colon \left[0, 2\pi\right] \to \gls{R}$ eine B-Spline-
   \gls{spline}\left(\alpha\right) \coloneqq \sum_{p=0}^{P-1} c_p N_p^K\left(\alpha\right),
 \end{equation}
 wobei die freien Parameter ${\left[c_0, \ldots, c_{P-1}\right]}^{\top} \in \gls{R}^{P}$ aus~\eqref{eq:partitionierung_faltung} nun die Koeffizienten der Basisfunktionen ${\left\{N_p^K\right\}}_{p=0}^{P-1}$ bilden.
-Insbesondere definieren wir $\gls{spline}\left(0\right) \coloneqq 0$ um nicht mit der Bedeutung von $0$ in Adjazenzmatrizen in die Quere zu kommen.
+Insbesondere definieren wir $\gls{spline}\left(0\right) \coloneqq 0$, da der Winkel ${\left(\gls{Arad}\right)}_{ij} = 0$ weiterhin bedeuten soll, dass $\left(\gls{v}_i, \gls{v}_j\right) \notin \gls{E}$.
 Wir können uns $\gls{spline}\left(\alpha\right)$ damit weiterhin als eine $P$-fache Partitionierung von \gls{G} auf Basis seiner Kantenausrichtungen vorstellen, mit dem Unterschied, dass $\gls{spline}\left(\alpha\right)$ nun eine lokale Kontrollierbarkeit inne hält.
 Kanten, die vorher zwar in einer gleichen Partition lagen, sich jedoch \evtl{} stark in ihrer Ausrichtung unterschieden, sind nun \enquote{eindeutig} differenzierbar über ihre abweichenden Auswertungen von ${\left\{\gls{basis}_p^K\right\}}_{p=0}^{P-1}$ \bzw{} ihrer Anteile von ${\left[c_0, \ldots, c_{P-1}\right]}^{\top}$ an $\gls{spline}\left(\alpha\right)$ entsprechend ihrer unterschiedlichen Winkel.
 
@@ -190,7 +190,7 @@ Für $K=0$ ist die Faltung über den B-Splines äquivalent zu der Faltung über 
 \paragraph{Implementierung}
 \label{bspline_implementierung}
 
-Für Merkmalsmatrizen $\ma{F}_{\mathrm{in}} \in \gls{R}^{N \times M_{\mathrm{in}}}$ und $\ma{F}_{\mathrm{out}} \in \gls{R}^{N \times M_{\mathrm{out}}}$ kann die Faltung über einem Filtertensor $\gls{W} \in \gls{R}^{P+1 \times M_{\mathrm{in}} \times M_{\mathrm{out}}}$ als
+Für Merkmalsmatrizen $\ma{F}_{\mathrm{in}} \in \gls{R}^{N \times M_{\mathrm{in}}}$ und $\ma{F}_{\mathrm{out}} \in \gls{R}^{N \times M_{\mathrm{out}}}$ kann die Faltung über einem Filtertensor $\gls{W} \in \gls{R}^{\left(P+1\right) \times M_{\mathrm{in}} \times M_{\mathrm{out}}}$ als
 \begin{equation*}
   \ma{F}_{\mathrm{out}} \coloneqq \gls{Ddisttilde}^{-1}\ma{F}_{\mathrm{in}}\gls{W}_{P+1} + \sum_{p=0}^{P-1} \left(\gls{basis}_p^K\left(\gls{Arad}\right) \gls{hadamard}\left(\gls{Ddisttilde}^{-\frac{1}{2}}\gls{Adisttilde}\gls{Ddisttilde}^{-\frac{1}{2}}\right)\right)\ma{F}_{\mathrm{in}}\ma{W}_{p+1}
 \end{equation*}
@@ -199,7 +199,7 @@ Im Vergleich zu Kapitel~\eqref{partitionierung_implementierung} erhöht sich der
 
 \input{tikz/bspline_beweis}
 
-Für $K=1$ lässt sich weiterhin die \enquote{kreisförmige} Dreiecksfunktion $\gls{basis}_p^1\left(\alpha\right)$ anstatt rekursiv aus einer Reihe von Minimum- und Maximumfunktionen effizient implementieren.
+Für $K=1$ lässt sich weiterhin die \enquote{kreisförmige} Dreiecksfunktion $\gls{basis}_p^1\left(\alpha\right)$ aus einer Reihe von Minimum- und Maximumfunktionen effizient implementieren.
 So gilt, dass $\gls{basis}_p^1\left(\alpha\right)$ zu
 \begin{equation*}
   \begin{split}
