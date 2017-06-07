@@ -1,7 +1,7 @@
 \section{Erweiterung auf Graphen im zweidimensionalen Raum}
 \label{gcn_erweiterung}
 
-Die Ansätze von~\citeauthor{Defferrard} aus Kapitel~\ref{spektraler_faltungsoperator} und~\citeauthor{gcn} aus Kapitel~\ref{graph_convolutional_networks} zeigen konkurrenzfähige Resultate auf einer Reihe von Datensätzen auf Graphen (\vgl{}~\cite{Defferrard, gcn}).
+Die Ansätze von~\citeauthor{Defferrard} aus Kapitel~\ref{spektraler_faltungsoperator} und von~\citeauthor{gcn} aus Kapitel~\ref{graph_convolutional_networks} zeigen konkurrenzfähige Resultate auf einer Reihe von Datensätzen auf Graphen (\vgl{}~\cite{Defferrard, gcn}).
 So erreicht das \gls{GCN} \zB{} in der teilweise-überwachten Knotenklassifizierung von \emph{Referenzgraphen}, \dhe{} einer Menge von Knoten, die Dokumente über eine Reihe von Bag-of-Words-Merkmalen repräsentieren und (ungerichtet) über dessen Referenzierungen miteinander verbunden sind, beachtliche Ergebnisse und schneidet in diesen sogar knapp besser ab als über die Tschebyschow-Approximation mit $K=2$ und $K=3$~\cite{gcn}.
 
 Die spektrale Faltung auf Graphen entspricht einer Generalisierung der Faltung klassischer \glspl{CNN} auf zweidimensionalen Bildern~\cite{gcn_review}.
@@ -146,7 +146,7 @@ Sei dafür $\gls{spline} \colon \left[0, 2\pi\right] \to \gls{R}$ eine B-Spline-
   \gls{spline}\left(\alpha\right) \coloneqq \sum_{p=0}^{P-1} c_p N_p^K\left(\alpha\right),
 \end{equation}
 wobei die freien Parameter ${\left[c_0, \ldots, c_{P-1}\right]}^{\top} \in \gls{R}^{P}$ aus~\eqref{eq:partitionierung_faltung} nun die Koeffizienten der Basisfunktionen ${\left\{N_p^K\right\}}_{p=0}^{P-1}$ bilden.
-Insbesondere definieren wir $\gls{spline}\left(0\right) \coloneqq 0$, da der Winkel ${\left(\gls{Arad}\right)}_{ij} = 0$ weiterhin bedeuten soll, dass $\left(\gls{v}_i, \gls{v}_j\right) \notin \gls{E}$.
+Insbesondere definieren wir $\gls{spline}\left(0\right) \coloneqq 0$, da der Winkel $0$ in der Adjazenzmatrix $\gls{Arad}$ weiterhin angeben soll, dass $\left(\gls{v}_i, \gls{v}_j\right) \notin \gls{E}$.
 Wir können uns $\gls{spline}\left(\alpha\right)$ damit weiterhin als eine $P$-fache Partitionierung von \gls{G} auf Basis seiner Kantenausrichtungen vorstellen, mit dem Unterschied, dass $\gls{spline}\left(\alpha\right)$ nun eine lokale Kontrollierbarkeit inne hält.
 Kanten, die vorher zwar in einer gleichen Partition lagen, sich jedoch \evtl{} stark in ihrer Ausrichtung unterschieden, sind nun \enquote{eindeutig} differenzierbar über ihre abweichenden Auswertungen von ${\left\{\gls{basis}_p^K\right\}}_{p=0}^{P-1}$ \bzw{} ihrer Anteile von ${\left[c_0, \ldots, c_{P-1}\right]}^{\top}$ an $\gls{spline}\left(\alpha\right)$ entsprechend ihrer unterschiedlichen Winkel.
 
