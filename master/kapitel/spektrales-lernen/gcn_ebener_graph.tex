@@ -116,64 +116,42 @@ Ein dazu alternativ entwickelter Ansatz ist die Approximation des Filters über 
 \subsection{Polynomielle Approximation über B-Spline-Kurven}
 \label{bspline}
 
-Eine \emph{offene B-Spline-Kurve} $\gls{spline}\left(t\right)$ beschreibt die stückweise polynomielle Approximation einer Kurve vom Grad $K$ über $m + 1$ Kontrollpunkten $\ve{d}_0, \ldots, \ve{d}_m \in \gls{R}^d$ auf dem Intervall $t \in \left[t_0, t_{m+1}\right)$ mit
+Eine B-Spline-Kurve beschreibt eine stückweise polynomielle Approximation einer Kurve vom Grad $K \in \gls{N}$ über $M + 1$ Kontrollpunkten $\ve{d}_0, \ldots, \ve{d}_M \in \gls{R}^d$~\cite{deBoor}.
+Eine B-Spline Kurve kann dabei offen, \dhe{} mit beliebigen Endpunkten, sowie geschlossen, \dhe{} mit gleichem Anfangs- und Endpunkt, beschrieben werden~\cite{gm}.
+Die \emph{geschlossene B-Spline-Kurve} $\gls{spline}\left(t\right)$ ist auf dem Intervall $t \in \left(t_0, t_{M+1}\right]$ definiert als
 \begin{equation}
-  \gls{spline}\left(t\right) \coloneqq \sum_{i = 0}^m \ve{d}_i \gls{basis}_i^K\left(t\right),
+  \gls{spline}\left(t\right) \coloneqq \sum_{m = 0}^M \ve{d}_m \gls{basis}_m^K\left(t\right),
     \label{eq:bspline}
 \end{equation}
-wobei ${\left\{\gls{basis}_i^K\right\}}_{i=0}^m$ die \emph{Basisfunktionen} zu einem \emph{Knotenvektor} $\ve{\tau} \in \gls{R}^{m+K+2}$ mit $\ve{\tau} \coloneqq {\left[t_0, \ldots, t_{m+K+1}\right]}^{\top}$, $t_i \leq t_{i+1}$~\cite{deBoor}.
-Eine Basisfunktion $\gls{basis}_i^K \colon \left[t_0, t_{m+1}\right] \to \left[0, 1\right]$ ist dabei rekursiv über $K$ definiert mit der Initialisierung ($k=0$)
-\begin{equation}
-  \gls{basis}_i^0\left(t\right) \coloneqq \begin{cases}
-    1, & \text{falls }t \in \left[t_i, t_{i+1}\right),\\
+mit den \emph{B-Spline-Funktionen} ${\left\{\gls{basis}_m^K\right\}}_{m=0}^M$ zu einem \emph{Knotenvektor} $\ve{\tau} \in \gls{R}^{M+K+2}$ der Form $\ve{\tau} \coloneqq {\left[t_0, \ldots, t_{M+K+1}\right]}^{\top}$ mit der Bedingung, dass $t_{M+k+2} \coloneqq t_{M+k+1} + \left(t_{k+1} - t_k\right)$ für $k \in \left\{0, \ldots, K-1\right\}$~\cite{gm}.
+Die B-Spline-Funktion $\gls{basis}_m^K \colon \left(t_0, t_{m+1}\right] \to \left[0, 1\right]$ ist rekursiv über $k \in \left\{0, \ldots, K \right\}$ definiert mit der Initialisierung ($k=0$)
+\begin{equation*}
+  \gls{basis}_m^0\left(t\right) \coloneqq \begin{cases}
+    1, & \text{falls }t \in \left(t_m, t_{m+1}\right],\\
     0, & \text{sonst}
-    \label{eq:bspline_basis_init}
   \end{cases}
-\end{equation}
+\end{equation*}
 und dem Rekursionsschritt ($k - 1 \rightarrow k$)
-\begin{equation}
-  \gls{basis}_i^k\left(t\right) \coloneqq \frac{t-t_i}{t_{i+k} - t_i}\gls{basis}^{k-1}_i\left(t\right) + \frac{t_{i+k+1} - t}{t_{i+k+1} - t_{i+1}} \gls{basis}_{i+1}^{k-1}\left(t\right)
-    \label{eq:bspline_basis_schritt}
-\end{equation}
-für $i \in \left\{ 0, \ldots, m \right\}$ und $k \in \left\{1, \ldots, K \right\}$~\cite{deBoor}.
-Ein Kontrollpunkt $\ve{d}_i$ beeinflusst die Kurve damit lediglich im Intervall $t_i \leq t < t_{i+k}$.
+\begin{equation*}
+  \gls{basis}_m^k\left(t\right) \coloneqq \frac{t-t_m}{t_{m+k} - t_m}\gls{basis}^{k-1}_m\left(t\right) + \frac{t_{m+k+1} - t}{t_{m+k+1} - t_{m+1}} \gls{basis}_{m+1}^{k-1}\left(t\right)
+\end{equation*}
+für $t \in \left(t_m, t_{M+1}\right]$ sowie $\gls{basis}_m^k\left(t\right) \coloneqq \gls{basis}_m^k\left(t - t_0 + t_{M+1}\right)$ für $t \in \left(t_0, t_m\right]$~\cite{gm}.
+Ein Kontrollpunkt $\ve{d}_m$ beeinflusst die Kurve damit lediglich im Intervall $t_m < t \leq t_{m+K+1}$.
 Die Größe von $K$ wird deshalb auch oft \emph{lokale Kontrollierbarkeit} genannt.
-Weiterhin gilt für die Aufsummierung der Basisfunktionen für $t \in \gls{R}$ und $k \in \gls{N}$, dass $\sum_{i=0}^m \gls{basis}_i^K\left(t\right) = 1$~\cite{deBoor}.
+Weiterhin gilt für die Aufsummierung der B-Spline-Funktionen ${\left\{\gls{basis}_m^K\right\}}_{m=0}^M$, dass $\sum_{m=0}^M \gls{basis}_m^K\left(t\right) = 1$ für beliebige $K \in \gls{N}$ und $t \in \left(t_0, t_{M+1}\right]$~\cite{deBoor}.
 
-Wir können die Definition der B-Spline-Kurve $\gls{spline}\left(t\right)$ aus~\eqref{eq:bspline} nutzen, um sie aufbauend auf Kapitel~\ref{partitionierung} auf das Anwendungsgebiet eines stückweisen polynomiellen Filters $\gls{spline}\left(\alpha\right)$ auf die Richtungen \bzw{} Winkel eines Graphen \gls{G}, beschrieben durch \gls{Adist} und \gls{Arad}, zu übertragen.
-Sei dafür $\gls{spline} \colon \left[0, 2\pi\right] \to \gls{R}$ eine B-Spline-Kurve auf den Winkeln der Graphkanten mit
-\begin{equation}
+Wir können die Definition der B-Spline-Kurve $\gls{spline}\left(t\right)$ aus~\eqref{eq:bspline} nutzen, um sie aufbauend auf Kapitel~\ref{partitionierung} in das Anwendungsgebiet eines stückweisen polynomiellen Filters $\gls{spline}\left(\alpha\right)$ auf den Richtungen \bzw{} Winkeln eines Graphen \gls{G}, beschrieben durch \gls{Adist} und \gls{Arad}, zu übertragen.
+Sei dafür $\gls{spline} \colon \left[0, 2\pi\right] \to \gls{R}$ im Folgenden eine B-Spline-Kurve auf den Winkeln der Graphkanten mit
+\begin{equation*}
   \gls{spline}\left(\alpha\right) \coloneqq \sum_{p=0}^{P-1} c_p N_p^K\left(\alpha\right),
-\end{equation}
-wobei die freien Parameter ${\left[c_0, \ldots, c_{P-1}\right]}^{\top} \in \gls{R}^{P}$ aus~\eqref{eq:partitionierung_faltung} nun die Koeffizienten der Basisfunktionen ${\left\{N_p^K\right\}}_{p=0}^{P-1}$ bilden.
+\end{equation*}
+wobei die freien Parameter ${\left[c_0, \ldots, c_{P-1}\right]}^{\top} \in \gls{R}^{P}$ aus~\eqref{eq:partitionierung_faltung} nun die Koeffizienten der B-Spline-Funktionen ${\left\{N_p^K\right\}}_{p=0}^{P-1}$ bilden.
 Insbesondere definieren wir $\gls{spline}\left(0\right) \coloneqq 0$, da der Winkel $0$ in der Adjazenzmatrix $\gls{Arad}$ weiterhin angeben soll, dass $\left(\gls{v}_i, \gls{v}_j\right) \notin \gls{E}$.
 Wir können uns $\gls{spline}\left(\alpha\right)$ damit weiterhin als eine $P$-fache Partitionierung von \gls{G} auf Basis seiner Kantenausrichtungen vorstellen, mit dem Unterschied, dass $\gls{spline}\left(\alpha\right)$ nun eine lokale Kontrollierbarkeit inne hält.
 Kanten, die vorher zwar in einer gleichen Partition lagen, sich jedoch \evtl{} stark in ihrer Ausrichtung unterschieden, sind nun \enquote{eindeutig} differenzierbar über ihre abweichenden Auswertungen von ${\left\{\gls{basis}_p^K\right\}}_{p=0}^{P-1}$ \bzw{} ihrer Anteile von ${\left[c_0, \ldots, c_{P-1}\right]}^{\top}$ an $\gls{spline}\left(\alpha\right)$ entsprechend ihrer unterschiedlichen Winkel.
-
+Abbildung~\ref{fig:bspline} soll dabei das Konzept geschlossener B-Spline-Funktionen auf Winkeln veranschaulichen.
 \input{tikz/bspline}
-
-Die Definitionen~\eqref{eq:bspline_basis_init} und~\eqref{eq:bspline_basis_schritt} der Basisfunktionen sind lediglich für offene B-Spline-Kurven konzipiert.
-Im Kontext von Winkeln müssen wir die Basisfunktionen $\gls{basis}_p^K\left(\alpha\right)$ aber insofern modifizieren, dass diese eine geschlossene Kurve beschreiben können.
-Abbildung~\ref{fig:bspline} soll dabei das Konzept geschlossener Basisfunktionen auf Winkeln veranschaulichen.
-Mit der expliziten Forderung gleichmäßig verteiler Knoten im Intervallbereich ergibt sich dann der Knotenvektor $\ve{\tau} \coloneqq {\left[\alpha_0, \ldots, \alpha_{P+K}\right]}^{\top} \in \gls{R+}^{P+K+1}$ mit $\alpha_p \coloneqq 2\pi p/P$.
-Damit kann $\gls{basis}_p^K\left(\alpha\right)$ modifiziert werden zu
-\begin{equation}
-\begin{split}
-  \gls{basis}_p^0\left(\alpha\right) \coloneqq & \begin{cases}
-    1, \text{wenn } \alpha \in \left(\alpha_p, \alpha_{p+1}\right],\\
-    0, \text{sonst}
-  \end{cases}\\
-  \gls{basis}_p^k\left(\alpha\right) \coloneqq & \frac{\alpha - \alpha_p}{\alpha_{p+k} - \alpha_p} \gls{basis}_p^{k-1}\left(\alpha\right) + \frac{\gls{modulo}\left(\alpha_{p+k+1}, 2\pi\right) - \alpha}{\alpha_{p+k+1} - \alpha_{p+1}}\gls{basis}_{\gls{modulo}\left(p+1,P\right)}^{k-1}\left(\alpha\right),
-\end{split}
-\label{eq:bspline_basis_winkel}
-\end{equation}
-indem die Indexierungen des Knotenvektors und der Basisfunktion im rechten Summanden im Vergleich zu~\eqref{eq:bspline_basis_schritt} über den Modulo-Operator $\gls{modulo}\left(a,b\right) \coloneqq a - qb$ mit $\gls{modulo}\left(a,b\right) < b$ für $a,b\in \gls{R+}$, $q \in \gls{N}$ angepasst werden.
-$\gls{basis}_p^K$ setzt sich dabei analog aus den Basisfunktionen$\gls{basis}_p^K$ und $\gls{basis}_{p+1}^K$ zusammen, \dhe{} den Basisfunktionen der betrachteten Partition und der rechts darauf folgenden.
-Für die aktuelle Partition $p$ im linken Summanden muss keine Veränderung vorgenommen werden und kann analog zu~\eqref{eq:bspline_basis_schritt} übernommen werden.
-Lediglich im rechten Summanden muss darauf geachtet werden, \enquote{nicht über die Grenzen hinaus zu laufen}.
-Für den Grenzfall $p = P-1$ wird daher im zweiten Summanden die Basisfunktion $\gls{basis}_0^{k-1}\left(\alpha\right)$ addressiert.
-Analog muss der Zähler des Koeffizienten auf den korrekten Winkel von $\alpha_{p+k+1}$ verweisen.
-Für die Nenner muss aufgrund der streng monotonen Definition des Knotenvektors $\ve{\tau}$ keine Änderung vorgenommen werden.
+Mit der expliziten Forderung gleichmäßig verteiler Knoten im Intervallbereich ergibt sich dann der Knotenvektor $\ve{\tau} \coloneqq {\left[\alpha_0, \ldots, \alpha_{P+K}\right]}^{\top} \in \gls{R+}^{P+K+1}$ mit $\alpha_p \coloneqq 2\pi p/P$ und erfüllt damit insbesondere die Bedingungen aus~\eqref{eq:bspline}.
 
 \paragraph{Faltungsoperator}
 \label{bspline_faltungsoperator}
@@ -185,12 +163,12 @@ Mit $\gls{Adisttilde} \in \gls{R}^{N \times N}$ und $\gls{Ddisttilde} \in \gls{R
 \end{equation*}
 mit den freien Parametern ${\left[c_0, \ldots, c_P\right]}^{\top} \in \gls{R}^{P+1}$, wobei $\gls{basis}_p^K$ elementweise auf die Matrix \gls{Arad} angewendet wird.
 $\ve{f}_{\mathrm{in}} \star \ve{\hat g}$ sammelt dabei die aktuellen Merkmale an den einzelnen Knoten über $c_P \gls{Ddisttilde}^{-1}\ve{f}_{\mathrm{in}}$ und aggreriert diese mit den Merkmalen der lokalen Nachbarschaft über den polynomiellen Filter $\left(c_p\gls{basis}_p^K \left(\gls{Arad}\right)\right) \gls{hadamard} \left(\gls{Ddisttilde}^{-1/2}\gls{Adisttilde}\gls{Ddisttilde}^{-1/2}\right)$, der so die Länge und Richtungen der Kanten berücksichtigt.
-Für $K=0$ ist die Faltung über den B-Splines äquivalent zu der Faltung über den Partitionen des Graphen aus~\eqref{eq:partitionierung_faltung} aufgrund der Rechteckfunktionen ${\left\{\gls{basis}_p^0\left(\alpha\right)\right\}}_{p=0}^{P-1}$.
+Für $K=0$ ist die Faltung über den B-Splines äquivalent zu der Faltung über den Partitionen des Graphen aus~\eqref{eq:partitionierung_faltung} aufgrund der Rechteckfunktionen ${\left\{\gls{basis}_p^0\right\}}_{p=0}^{P-1}$.
 
 \paragraph{Implementierung}
 \label{bspline_implementierung}
 
-Für Merkmalsmatrizen $\ma{F}_{\mathrm{in}} \in \gls{R}^{N \times M_{\mathrm{in}}}$ und $\ma{F}_{\mathrm{out}} \in \gls{R}^{N \times M_{\mathrm{out}}}$ kann die Faltung über einem Filtertensor $\gls{W} \in \gls{R}^{\left(P+1\right) \times M_{\mathrm{in}} \times M_{\mathrm{out}}}$ als
+Für Merkmalsmatrizen $\ma{F}_{\mathrm{in}} \in \gls{R}^{N \times M_{\mathrm{in}}}$ und $\ma{F}_{\mathrm{out}} \in \gls{R}^{N \times M_{\mathrm{out}}}$ kann die Faltung über einem Filtertensor $\gls{W} \in \gls{R}^{\left(P+1\right) \times M_{\mathrm{in}} \times M_{\mathrm{out}}}$ damit als
 \begin{equation*}
   \ma{F}_{\mathrm{out}} \coloneqq \gls{Ddisttilde}^{-1}\ma{F}_{\mathrm{in}}\gls{W}_{P+1} + \sum_{p=0}^{P-1} \left(\gls{basis}_p^K\left(\gls{Arad}\right) \gls{hadamard}\left(\gls{Ddisttilde}^{-\frac{1}{2}}\gls{Adisttilde}\gls{Ddisttilde}^{-\frac{1}{2}}\right)\right)\ma{F}_{\mathrm{in}}\ma{W}_{p+1}
 \end{equation*}
@@ -208,7 +186,7 @@ So gilt, dass $\gls{basis}_p^1\left(\alpha\right)$ zu
   \end{split}
 \end{equation*}
 vereinfacht werden kann.
-Dies lässt sich verifizieren, in dem die kreisförmige Dreiecksfunktion im Intervall $\left(0, 2\pi\right]$ als Verknüpfung dreier Geraden verstanden wird — zwei Geraden, die das Dreieck im Intervall $\left(2\pi p/P, 2\pi \left(p+2\right)/P\right]$ aufspannen, und einer absteigenden Geraden, die um $2\pi$ nach links verschoben wurde und dafür sorgt, die Basisfunktion für $p=P-1$ kreisförmig abzuschließen und in allen anderen Fällen keinen Anteil im Gültigkeitsbereich der Funktion $\gls{basis}_p^1 \colon \left(0,2\pi\right] \to \left[0,1\right]$ besitzt (\vgl{} Abbildung~\ref{fig:bspline_beweis}).
+Dies lässt sich verifizieren, in dem die kreisförmige Dreiecksfunktion im Intervall $\left(0, 2\pi\right]$ als Verknüpfung dreier Geraden verstanden wird — zwei Geraden, die das Dreieck im Intervall $\left(2\pi p/P, 2\pi \left(p+2\right)/P\right]$ aufspannen, und einer absteigenden Geraden, die um $2\pi$ nach links verschoben wurde und dafür sorgt, die B-Spline-Funktion für $p=P-1$ kreisförmig abzuschließen und in allen anderen Fällen keinen Anteil im Gültigkeitsbereich der Funktion $\gls{basis}_p^1 \colon \left(0,2\pi\right] \to \left[0,1\right]$ besitzt (\vgl{} Abbildung~\ref{fig:bspline_beweis}).
 Den Geraden kann die Steigung $P/2\pi$ \bzw{} $-P/2\pi$ zugeordnet werden und sie können damit folglich über
 \begin{equation*}
 \begin{split}
@@ -220,4 +198,4 @@ Den Geraden kann die Steigung $P/2\pi$ \bzw{} $-P/2\pi$ zugeordnet werden und si
 beschrieben werden.
 Mittels $\max\left(f_i\left(\alpha\right), 0\right) \in \gls{R+}$ können diese auf den positiven reellen Raum eingegrenzt werden.
 $f_{\triangle} \coloneqq \min\left(\max\left(f_1, 0\right), \max\left(f_2, 0\right)\right)$ beschreibt damit die Dreiecksfunktion, indem sie sich stets für das Minimum von $\max\left(f_1, 0\right)$ \bzw{} $\max\left(f_2,0\right)$ entscheidet.
-Folglich beschreibt $\max\left(\max\left(f_3,0\right), f_{\triangle}\right)$ die Basisfunktion $\gls{basis}_p^1$ im Intervall $\left(0, 2\pi\right]$ für alle $p \in \left\{0, \ldots, P-1\right\}$.
+Folglich beschreibt $\max\left(\max\left(f_3,0\right), f_{\triangle}\right)$ die B-Spline-Funktion $\gls{basis}_p^1$ im Intervall $\left(0, 2\pi\right]$ für alle $p \in \left\{0, \ldots, P-1\right\}$.
