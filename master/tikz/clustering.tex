@@ -1,7 +1,7 @@
 \begin{figure}[t]
 \centering
 \subfigure[Graph mit zufälliger Ordnung]{\begin{tikzpicture}
-  \fill [gray] (-3, -4) rectangle (2, 3) node {};  % Zentriere Graph.
+  \fill [white] (-3, -3) rectangle (2, 2) node {};  % Zentriere Graph.
   \tikzstyle{node}=[circle,draw, minimum width=5pt, inner sep=3pt, fill=white]
   \tikzstyle{label}=[fill=white, inner sep=1pt]
 
@@ -23,20 +23,20 @@
 \end{tikzpicture}
 }
 \hspace{1cm}
-\subfigure[Bestimmung des Normalized-Cuts]{\begin{tabular}{ccc}
+\subfigure[Bestimmung des Normalized-Cuts]{\begin{tabular}[b]{ccc}
   \toprule
   Kante & Gewicht & Normalized-Cut\\
   \toprule
-  $\left(1,3\right)$ & 2 & $1.\overline{3}\,\,\,$\\
+  $\left(1,3\right)$ & 2 & $\mathbf{1.\overline{3}}\,\,\,$\\
   $\left(1,4\right)$ & 2 & $0.\overline{3}\,\,\,$\\
   $\left(1,7\right)$ & 2 & $0.8\overline{3}$\\
   \midrule
-  $\left(2,6\right)$ & $1$ & $1.2\,\,\,$\\
+  $\left(2,6\right)$ & $1$ & $\mathbf{1.2}\,\,\,$\\
   \midrule
-  $\left(4,5\right)$ & $2$ & $1.\overline{3}\,\,\,$\\
+  $\left(4,5\right)$ & $2$ & $\mathbf{1.\overline{3}}\,\,\,$\\
   $\left(4,6\right)$ & $2$ & $0.7\overline{3}$\\
   \midrule
-  $\left(6,7\right)$ & $2$ & $0.9\,\,\,$\\
+  $\left(6,7\right)$ & $2$ & $\mathbf{0.9}\,\,\,$\\
   \bottomrule
 \end{tabular}
 }
@@ -89,6 +89,6 @@
   \path (2) edge node[label] {$2$} (4);
 \end{tikzpicture}
 }
-\caption[Graphvergröberung mittels Normalized-Cut]{Graphvergröberung mittels Normalized-Cut}
+\caption[Graphvergröberung mittels Normalized-Cut]{Vergröberung eines Graphen \gls{G} mittels Normalized-Cut.}
 \label{fig:clustering}
 \end{figure}
