@@ -2,11 +2,11 @@
 \label{pooling}
 
 Neben den Faltungsschichten gehören die sogenannten Pooling-Schichten zu den fundamentalen Schichten eines \glspl{CNN}.
-Pooling-Schichten eines Netzes, üblicherweise über Max-Pooling realisiert, werden dabei für gewöhnlich direkt nach einer Faltungsschicht benutzt und sorgen dafür die Ausgabe der Faltung zu filtern \bzw{} zu vereinfachen~\cite{Nielsen}.
+Pooling-Schichten eines Netzes, üblicherweise über Max-Pooling realisiert, werden dabei für gewöhnlich direkt nach einer Faltungsschicht benutzt und sorgen dafür, die Ausgabe der Faltung zu filtern \bzw{} zu reduzieren~\cite{Nielsen}.
 
 Eine Pooling-Operation auf Graphen erfordert dafür analog zum Pooling auf einem regulären Gitter eine logische Zusammenfassung von Knoten zu Clustern~\cite{Defferrard}.
 Der zu verwendende Clusteralgorithmus hat dabei jedoch einige Anforderungen, um als Pooling-Operation in einem Netz genutzt werden zu könnnen.
-So muss dieser vorallem als ein mehrstufiges Clustering fungieren, bei dem jede Stufe eines Graphen den Blick auf den Graphen bei einer unterschiedlichen \enquote{Auflösung} zeigt und insbesondere die zu Grunde liegende Geometrie des Graphen erhält~\cite{Defferrard}.
+So muss dieser vorallem als ein mehrstufiges Clustering fungieren, bei dem jede Stufe eines Graphen den Blick auf den Graphen bei einer unterschiedlichen \enquote{Auflösung} zeigt und insbesondere die zugrunde liegende Geometrie des Graphen erhält~\cite{Defferrard}.
 Das Clustering von Knoten wird daher in dieser Arbeit auch oft als \emph{Vergröberung} eines Graphen betitelt.
 Die mehrfache Anwendung eines Clusteralgorithmus erlaubt damit die mehrfache Benutzung von Pooling-Schichten im Netz.
 Es ist weiterhin notwendig, dass die Pooling-Operation benutzerspezifische Pooling-Größen ermöglicht.
@@ -29,7 +29,7 @@ Die Auswahl der Untermengen erfolgt gierig.
 Die Knoten des Graphen $\gls{G}_l$ werden als unmarkiert initialisert und zufällig durchlaufen.
 Für jeden Knoten $\gls{v}_i \in \gls{V}_l$, der noch unmarkiert ist, wird ein lokaler, ebenfalls noch unmarkierter, Nachbarschaftsknoten $\gls{v}_j \in \gls{Neighbor}\left(\gls{v}_i\right)$ nach einer zuvor definierten Strategie bestimmt und $\gls{v}_i$ sowie $\gls{v}_j$ zu einem Superknoten $\gls{v}^* \coloneqq \left\{ \gls{v}_i, \gls{v}_j \right\} \in \gls{V}_{l+1}$ verschmelzt.
 Anschließend werden $\gls{v}_i$ sowie $\gls{v}_j$ markiert.
-Falls $\gls{v}_i$ keinen unmarkierten Nachbarsknoten besitzt, wird $\gls{v}_i$ alleine als Superknoten $\gls{v}^* \coloneqq \left\{ v \right\} \in \gls{V}_{l+1}$ deklariert und markiert.
+Falls $\gls{v}_i$ keinen unmarkierten Nachbarsknoten besitzt, wird $\gls{v}_i$ alleine als Superknoten $\gls{v}^* \coloneqq \left\{ \gls{v}_i \right\} \in \gls{V}_{l+1}$ deklariert und markiert.
 Der Algorithmus ist abgeschlossen, sobald alle Knoten erfolgreich markiert wurden~\cite{graclus}.
 Bei weiteren Anwendungen des Clusteralgorithmus werden die Knoten im Folgenden anhand ihrer aufsteigenden Knotengrade durchlaufen~\cite{Defferrard}.
 
@@ -38,15 +38,38 @@ Eine darauf aufbauende Strategie ist der \emph{Normalized-Cut}
 \begin{equation*}
   \gls{ncut}\left(\gls{v}_i, \gls{v}_j\right) \coloneqq \gls{w}\left(\gls{v}_i, \gls{v}_j \right) \left(\frac{1}{\gls{d}\left(\gls{v}_i\right)} + \frac{1}{\gls{d}\left(\gls{v}_j\right)}\right),
 \end{equation*}
-der die Kantengewichte relativ zum Knotengrad gewichtet~\cite{Defferrard, graclus}.
-Der Normalized-Cut sorgt dafür, dass Kanten als wichtiger gezählt werden, wenn ihre entsprechenden Knoten einen geringen Grad besitzen und damit folglich als unwahrscheinlicher gelten, mit einem anderen Superknoten zu verschmelzen.
+der die Kantengewichte relativ zu ihrem Knotengrad gewichtet~\cite{Defferrard, graclus}.
+Der Normalized-Cut sorgt dafür, dass Kanten als wichtiger gezählt werden, wenn ihre entsprechenden Knoten einen geringen Grad besitzen und damit folglich als unwahrscheinlicher gelten, mit einem anderen Knoten zu verschmelzen.
 
 Graclus reduziert die Knotenanzahl eines beliebigen Graphen näherungsweise um die Hälfte, \dhe{} $2 \left|\gls{V}_{l+1}\right| \approx \left|\gls{V}_l\right|$.
-In der Praxis zeigt sich jedoch, dass Graclus nur sehr wenige Superknoten mit einem einzigen Knoten generiert~\cite{Defferrard}.
-Weiterhin ist anzumerken, dass der Algorithmus bei mehrmaliger Anwendung auf dem gleichen Graphen aufgrund seiner zufälligen Iteration auf den Knoten zwei verschiedene, vergröberte Graphen generiert.
+Es können jedoch vereinzelt Superknoten entstehen, die nur aus einem einzigen Knoten der vorangegangenen Schicht gebildet wurden.
+In der Praxis zeigt sich jedoch, dass Graclus nur sehr wenige solcher Superknoten generiert~\cite{Defferrard}.
+Es ist weiterhin wichtig anzumerken, dass der Algorithmus bei mehrmaliger Anwendung auf dem gleichen Graphen aufgrund seiner zufälligen Iteration auf den Knoten zwei verschiedene, vergröberte Graphen erzeugen kann.
 Damit kann der Prozess des Clusterings bereits als ein Augmentierungsschritt der Eingabedaten verstanden werden.
 
+\subsection{Effizientes Pooling mittels binärer Bäumen}
+\label{pooling_mit_baeumen}
+
+Ein tiefes neuronales Netz besitzt für gewöhnlich viele Pooling-Schichten.
+Eine Poo\-ling-Operation auf den Merkmalen der Graphknoten muss folglich vorallem effizient sein.
+Ein naiver Ansatz dafür ist eine \enquote{Lookup}-Tabelle, in der die Verbindungen der Knoten zu ihren Superknoten gespeichert sind.
+Eine Pooling-Operation muss demnach für jedes Cluster ihre Knoten in der Tabelle referenzieren und ihre Operation auf diesen vollführen.
+Das resultiert in einer extrem speicherineffizienten, langsamen und schwer zu parallelisierenden Implementierung~\cite{Defferrard}.
+Es ist jedoch möglich, die Knoten des Graphen so anzuordnen, dass eine Pooling-Operation auf diesen in linearer Zeit, \dhe{} $\gls{O}\left(N\right)$, realisiert werden kann~\cite{Defferrard}.
+
 \input{tikz/pooling}
+
+Nach jedem Vergröberungsschritt besitzt ein Knoten entweder genau einen oder zwei Kinder, jenachdem ob es zum Zeitpunkt der Betrachtung noch einen unmarkierten Nachbarn gibt.
+Falls ein Knoten \gls{v} im Graphen $\gls{G}_{l+1}$ nur ein Kind besitzt, so wird ein \enquote{Fake}-Knoten ohne Kanten in den Graphen $\gls{G}_l$ hinzugefügt~\cite{Defferrard}.
+Damit besitzt jeder Knoten folglich nun immer zwei Kinder.
+Foglich kann über die Eltern-Kind-Beziehung von der $L$-ten bis zur $0$-ten Stufe ein balancierter, binärer Baum aufgebaut werden.
+Reguläre Knoten aus dem Graphen besitzen damit entweder (a) genau zwei reguläre Knoten, (b) einen regulären Knoten und einen \enquote{Fake}-Knoten als Kinder und (c) \enquote{Fake-Knoten} besitzen immer genau zwei \enquote{Fake}-Knoten als Kinder~\cite{Defferrard}.
+Abbildung~\ref{fig:pooling} illustriert die Konstruktion eines solchen Baumes.
+Die Merkmale an den \enquote{Fake}-Knoten eines Graphen werden mit einem neutralen Wert initialisiert, \dhe{} \zB{} mit Null bei einem Netz mit \gls{relu}-Aktivierungsfunktion und der Verwendung von Max-Pooling als Pooling-Operation~\cite{Defferrard}.
+Ebenso kann auf diesen \enquote{Fake}-Knoten weiterhin ohne Einschränkungen gefaltet werden, da sie keinerlei Nachbarsknoten besitzen.
+Die Anordnung der Knoten zu einem balancierten, binären Baum liefert uns eine Ordnung auf den Knoten von $\gls{G}_0$ bis $\gls{G}_{L-1}$, auf der wir eine Pooling-Operation völlig analog zu einem eindimensionalen Gitter mit einer Größe und Schrittweise von zwei definieren können~\cite{Defferrard}.
+Diese Anordnung der Knoten macht den Prozess des Poolings extrem effizient und erlaubt ebenso eine parallele Verarbeitungsarchikektur auf GPUs~\cite{Defferrard}.
+Größere Pooling-Größen müssen ein Vielfaches von zwei sein und können dann ebenso leicht über eine tieferstufigere Vergröberung implementiert werden.
 
 \subsection{Erweiterung auf Graphen im zweidimensionalen Raum}
 \label{pooling_erweiterung}
