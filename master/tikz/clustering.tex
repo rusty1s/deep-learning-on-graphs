@@ -2,7 +2,7 @@
 \centering
 \subfigure[Graph mit zufälliger Ordnung]{\begin{tikzpicture}
   \fill [white] (-3, -3) rectangle (2, 2) node {};  % Zentriere Graph.
-  \tikzstyle{node}=[circle,draw, minimum width=5pt, inner sep=3pt, fill=white]
+  \tikzstyle{node}=[circle,draw, minimum width=18pt, inner sep=0pt, fill=white]
   \tikzstyle{label}=[fill=white, inner sep=1pt]
 
   \node[node] (1) at (-3, 1)  {$3$};
@@ -43,7 +43,7 @@
 \hspace{1cm}
 \subfigure[Clustering der Knoten]{\begin{tikzpicture}
   \fill [white] (-3.5, -2.5) rectangle (2.5, 1.5) node {};  % Zentriere Graph.
-  \tikzstyle{node}=[circle,draw, minimum width=5pt, inner sep=3pt, fill=white]
+  \tikzstyle{node}=[circle,draw, minimum width=18pt, inner sep=0pt, fill=white]
   \tikzstyle{color1}=[fill=orange]
   \tikzstyle{color2}=[fill=olive]
   \tikzstyle{color3}=[fill=cyan]
@@ -71,7 +71,7 @@
 \subfigure[vergröberter Graph]{\begin{tikzpicture}
   \fill [white] (-3.5, -2.5) rectangle (2.5, 1.5) node {};  % Zentriere Graph.
 
-  \tikzstyle{node}=[circle,draw, minimum width=5pt, inner sep=3pt, fill=white]
+  \tikzstyle{node}=[circle,draw, minimum width=18pt, inner sep=0pt, fill=white]
   \tikzstyle{color1}=[fill=orange]
   \tikzstyle{color2}=[fill=olive]
   \tikzstyle{color3}=[fill=cyan]
@@ -89,6 +89,8 @@
   \path (2) edge node[label] {$2$} (4);
 \end{tikzpicture}
 }
-\caption[Graphvergröberung mittels Normalized-Cut]{Vergröberung eines Graphen \gls{G} mittels Normalized-Cut.}
+\caption[Graphvergröberung mittels Normalized-Cut]{Vergröberung eines Graphen \gls{G} mittels Normalized-Cut bei zufälliger Knotenordung, hier angegeben über die Knotenindizes von \gls{G} (a).
+Die Maxima des Normalized-Cuts (b) zwischen den Knoten und deren lokalen Nachbarschaften bestimmen in aufsteigender Reihenfolge das höchstens paarweise Clustering von \gls{V} (c).
+Der vergröberte Graph ergibt sich dann als clusterweise Aufsummierung der Kanten ohne Schleifen (d).}
 \label{fig:clustering}
 \end{figure}
