@@ -1,13 +1,50 @@
 \section{Pooling auf Graphen}
 \label{pooling}
 
+Neben den Faltungsschichten gehören die sogenannten Pooling-Schichten zu den fundamentalen Schichten eines \glspl{CNN}.
+Pooling-Schichten eines Netzes, üblicherweise über Max-Pooling realisiert, werden dabei für gewöhnlich direkt nach einer Faltungsschicht benutzt und sorgen dafür die Ausgabe der Faltung zu filtern \bzw{} zu vereinfachen~\cite{Nielsen}.
+
+Eine Pooling-Operation auf Graphen erfordert dafür analog zum Pooling auf einem regulären Gitter eine logische Zusammenfassung von Knoten zu Clustern~\cite{Defferrard}.
+Der zu verwendende Clusteralgorithmus hat dabei jedoch einige Anforderungen, um als Pooling-Operation in einem Netz genutzt werden zu könnnen.
+So muss dieser vorallem als ein mehrstufiges Clustering fungieren, bei dem jede Stufe eines Graphen den Blick auf den Graphen bei einer unterschiedlichen \enquote{Auflösung} zeigt und insbesondere die zu Grunde liegende Geometrie des Graphen erhält~\cite{Defferrard}.
+Das Clustering von Knoten wird daher in dieser Arbeit auch oft als \emph{Vergröberung} eines Graphen betitelt.
+Die mehrfache Anwendung eines Clusteralgorithmus erlaubt damit die mehrfache Benutzung von Pooling-Schichten im Netz.
+Es ist weiterhin notwendig, dass die Pooling-Operation benutzerspezifische Pooling-Größen ermöglicht.
+Hier erscheinen vorallem Clustertechniken sinnvoll, die die Größe eines Graphen um den Faktor zwei reduzieren~\cite{Defferrard}.
+Damit können größere Pooling-Größen über die mehrfache Anwendung des Clusteralgorithmus realisiert werden.
+
 \subsection{Graphvergröberung}
 \label{graphvergroeberung}
 
-\paragraph{Clustering von Knoten}
-\label{clustering_von_knoten}
-
+Es existieren eine Reihe von Clustertechniken auf Graphen~\cite{Luxburg, graclus, Defferrard}.
+\citeauthor{Defferrard} benutzen für die Pooling-Schicht eines Netzes auf Graphen die \emph{Vergröberungsphase} des mehrstufigen Clusteralgorithmus \emph{Graclus}~\cite{graclus}.
+Graclus zeigt sich dabei als besonders erfolgreich über einer Vielzahl von Graphen bei minimaler berechnungsintensiver Komplexität~\cite{Defferrard}.
+Abbildung~\ref{fig:clustering} illustriert den Ablauf des Algorithmus.
 \input{tikz/clustering}
+Dabei wird ein initialer Graph $\gls{G}_0$ sukzessive in kleinere Graphen $\gls{G}_1, \gls{G}_2, \ldots, \gls{G}_L$ mit $\left|\gls{V}_0\right| > \left|\gls{V}_1\right| > \cdots > |\gls{V}_L|$, $L \in \gls{N}$, transformiert~\cite{graclus}.
+Für die Transformation von einem Graphen $\gls{G}_l$ zu einem Graphen $\gls{G}_{l+1}$ mit kleinerer Knotenanzahl $\left|\gls{V}_{l+1}\right| < \left|\gls{V}_l\right|$ werden aus disjunkten Knotenuntermengen von $\gls{V}_l$ \emph{Superknoten} für $\gls{V}_{l+1}$ gebildet~\cite{graclus}.
+Die Kantengewichte $\gls{E}_{l+1}$ werden dann über die Summe der Kantengewichte der jeweiligen Knotenuntermengen ohne Schleifen gebildet~\cite{graclus}.
+
+Die Auswahl der Untermengen erfolgt gierig.
+Die Knoten des Graphen $\gls{G}_l$ werden als unmarkiert initialisert und zufällig durchlaufen.
+Für jeden Knoten $\gls{v}_i \in \gls{V}_l$, der noch unmarkiert ist, wird ein lokaler, ebenfalls noch unmarkierter, Nachbarschaftsknoten $\gls{v}_j \in \gls{Neighbor}\left(\gls{v}_i\right)$ nach einer zuvor definierten Strategie bestimmt und $\gls{v}_i$ sowie $\gls{v}_j$ zu einem Superknoten $\gls{v}^* \coloneqq \left\{ \gls{v}_i, \gls{v}_j \right\} \in \gls{V}_{l+1}$ verschmelzt.
+Anschließend werden $\gls{v}_i$ sowie $\gls{v}_j$ markiert.
+Falls $\gls{v}_i$ keinen unmarkierten Nachbarsknoten besitzt, wird $\gls{v}_i$ alleine als Superknoten $\gls{v}^* \coloneqq \left\{ v \right\} \in \gls{V}_{l+1}$ deklariert und markiert.
+Der Algorithmus ist abgeschlossen, sobald alle Knoten erfolgreich markiert wurden~\cite{graclus}.
+Bei weiteren Anwendungen des Clusteralgorithmus werden die Knoten im Folgenden anhand ihrer aufsteigenden Knotengrade durchlaufen~\cite{Defferrard}.
+
+Strategien für die Nachbarschaftsauswahl basieren üblicherweise auf der Maximierung von $\gls{w}\left(\gls{v}_i, \gls{v}_j \right)$~\cite{graclus}.
+Eine darauf aufbauende Strategie ist der \emph{Normalized-Cut}
+\begin{equation*}
+  \gls{ncut}\left(\gls{v}_i, \gls{v}_j\right) \coloneqq \gls{w}\left(\gls{v}_i, \gls{v}_j \right) \left(\frac{1}{\gls{d}\left(\gls{v}_i\right)} + \frac{1}{\gls{d}\left(\gls{v}_j\right)}\right),
+\end{equation*}
+der die Kantengewichte relativ zum Knotengrad gewichtet~\cite{Defferrard, graclus}.
+Der Normalized-Cut sorgt dafür, dass Kanten als wichtiger gezählt werden, wenn ihre entsprechenden Knoten einen geringen Grad besitzen und damit folglich als unwahrscheinlicher gelten, mit einem anderen Superknoten zu verschmelzen.
+
+Graclus reduziert die Knotenanzahl eines beliebigen Graphen näherungsweise um die Hälfte, \dhe{} $2 \left|\gls{V}_{l+1}\right| \approx \left|\gls{V}_l\right|$.
+In der Praxis zeigt sich jedoch, dass Graclus nur sehr wenige Superknoten mit einem einzigen Knoten generiert~\cite{Defferrard}.
+Weiterhin ist anzumerken, dass der Algorithmus bei mehrmaliger Anwendung auf dem gleichen Graphen aufgrund seiner zufälligen Iteration auf den Knoten zwei verschiedene, vergröberte Graphen generiert.
+Damit kann der Prozess des Clusterings bereits als ein Augmentierungsschritt der Eingabedaten verstanden werden.
 
 \input{tikz/pooling}
 
