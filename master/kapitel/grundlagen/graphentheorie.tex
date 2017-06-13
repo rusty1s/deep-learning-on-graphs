@@ -28,9 +28,9 @@ Wir schreiben $\gls{s}\left(\gls{v}_i, \gls{v}_j\right)$ mit Hilfe der \emph{Abs
 $\gls{v}_j$ ist von $\gls{v}_i$ aus \emph{erreichbar}, wenn $\gls{s}\left(\gls{v}_i, \gls{v}_j\right) \in \gls{N}$.
 Die Relation der Erreichbarkeit in der Knotenmenge \gls{V} eines Graphen ist eine Äquivalenzrelation.
 Die Äquivalenzklassen der Erreichbarkeitsrelation heißen die \emph{Zusammenhangskomponenten} des Graphen \gls{G}.
-Wir nennen \gls{G} \emph{zusammenhängend}, wenn er genau eine Zusammenhangskomponente besitzt, \dhe{} zu jedem Knoten $\gls{v}_i$ existiert mindestens ein Weg zu jedem anderen Knoten $\gls{v}_j \in \gls{V}$.
+Wir nennen \gls{G} \emph{zusammenhängend}, wenn \gls{G} genau eine Zusammenhangskomponente besitzt, \dhe{} zu jedem Knoten $\gls{v}_i$ existiert mindestens ein Weg zu jedem anderen Knoten $\gls{v}_j \in \gls{V}$.
 Es lässt sich weiter die Nachbarschaftsfunktion \gls{Neighbor} zu einer \emph{$K$-lokalisierten Nachbarschaftsfunktion} $\gls{Neighbor}_K \subseteq \gls{V}$ mit $\gls{Neighbor}_K\left(\gls{v}_i\right) \coloneqq \left\{ \gls{v}_j | \gls{s}\left(\gls{v}_i, \gls{v}_j\right) \leq K \right\}$ generalisieren.
 
 Eine Funktion $f \colon \gls{V} \to \gls{R}$ auf den Knoten eines Graphen \gls{G} heißt \emph{Merkmalsfunktion}.
-Eine Merkmalsfunktion $f$ kann ebenso als Vektor $\ve{f} \in \gls{R}^N$ mit $f\left(\gls{v}_n\right) = \ve{f}_n$ geschrieben werden.
-Bildet $f$ weiterhin auf eine Menge von Merkmalen $f \colon \gls{V} \to \gls{R}^M$, $M \in \gls{N}$, ab, so kann diese analog als eine \emph{Merkmalsmatrix} $\ma{F} \in \gls{R}^{N \times M}$ mit $\ma{F}_{nm} = {\left(f\left(\gls{v}_n\right)\right)}_m$ definiert werden.
+Eine Merkmalsfunktion $f$ kann ebenso als Vektor $\ve{f} \in \gls{R}^N$ mit $ \ve{f}_n \coloneqq f\left(\gls{v}_n\right)$ geschrieben werden.
+Bildet $f$ weiterhin auf eine Menge von Merkmalen $f \colon \gls{V} \to \gls{R}^M$, $M \in \gls{N}$, ab, so kann diese analog über eine \emph{Merkmalsmatrix} $\ma{F} \in \gls{R}^{N \times M}$ mit $\ma{F}_{nm} \coloneqq {\left(f\left(\gls{v}_n\right)\right)}_m$ definiert werden.
