@@ -70,7 +70,7 @@ Ebenso kann auf diesen \enquote{Fake}-Knoten weiterhin ohne Einschränkungen gef
 Die Anordnung der Knoten zu einem balancierten, binären Baum liefert uns eine Ordnung auf den Knoten von $\gls{G}_0$ bis $\gls{G}_{L-1}$, auf der wir eine Pooling-Operation völlig analog zu einem eindimensionalen Gitter mit einer Größe und Schrittweise von zwei definieren können~\cite{Defferrard}.
 Diese Anordnung der Knoten macht den Prozess des Poolings extrem effizient und erlaubt ebenso eine parallele Verarbeitungsarchikektur auf GPUs~\cite{Defferrard}.
 
-Größere Pooling-Größen müssen ein Vielfaches von zwei sein und können dann ebenso leicht über eine tieferstufigere Vergröberung implementiert werden.
+Größere Pooling-Größen müssen ein Vielfaches von zwei sein und können dann ebenso leicht über eine tieferstufigere Vergröberung implementiert werden (\vgl{} Abbildung~\ref{fig:pooling}).
 
 \subsection{Erweiterung auf Graphen im zweidimensionalen Raum}
 \label{pooling_erweiterung}
