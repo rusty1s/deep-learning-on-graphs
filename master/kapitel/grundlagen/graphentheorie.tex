@@ -1,9 +1,36 @@
 \section{Graphentheorie}
 \label{graphentheorie}
 
-k lokalisierte nachbarschaft
-zusammenhängend
-zusammehängende Komponenten
-regulärer gittergraph (konnektivität)
+Ein \emph{Graph} $\gls{G} = \left(\gls{V}, \gls{E}\right)$ bezeichnet eine endliche Menge $\gls{V} = {\left\{ \gls{v}_n \right\}}^N_{n=1}$ von $N \in \gls{N}$ Knoten, $\left| \gls{V} \right| = N < \infty$, zusammen mit einer Menge geordneter Knotenpaare \bzw{} Kanten $\gls{E} \subseteq \gls{V} \times \gls{V}$.
+Seien $\gls{v}_i, \gls{v}_j \in \gls{V}$ im Folgenden zwei beliebige Knoten.
+Falls $\left( \gls{v}_i, \gls{v}_j \right) \in \gls{E}$, dann ist $\gls{v}_j$ \emph{adjazent} zu $\gls{v}_i$.
+Zu einem Graphen \gls{G} definiert die \emph{Nachbarschaftsfunktion} $\gls{Neighbor}\left(\gls{v}_i\right) \subseteq \gls{V}$ über $\gls{Neighbor}\left(\gls{v}_i\right) \coloneqq \left\{\gls{v}_j \mid \left(\gls{v}_i, \gls{v}_j\right) \in \gls{E}\right\}$ die Nachbarschaftsmenge von $\gls{v}_i$.
 
-was heißt $\left|\gls{A}\right|$
+Ein \emph{gewichteter Graph} $\gls{G} = \left(\gls{V}, \gls{E}, \gls{w}\right)$ ist ein Graph, der zusätzlich eine \emph{Gewichtsfunktion} $\gls{w} \colon \gls{E} \to \gls{R+}$ auf den Kanten des Graphen definiert, sodass $\left( \gls{v}_i, \gls{v}_j  \right) \notin \gls{E}$ \gdw{} $\gls{w}\left(\gls{v}_i, \gls{v}_j\right) = 0$.
+Im Falle eines ungewichteten Graphen ist die Gewichtsfunktion \gls{w} implizit durch $\gls{E}$ über $\gls{w} \colon \gls{E} \to \left\{ 0, 1 \right\}$ gegeben.
+
+Ein Graph heißt \emph{ungerichtet}, falls $\gls{w}\left(\gls{v}_i, \gls{v}_j\right) = \gls{w}\left(\gls{v}_j, \gls{v}_i\right)$.
+Als \emph{Schleife} wird eine Kante bezeichnet, die einen Knoten mit sich selbst verbindet, \dhe{} $\gls{w}\left(\gls{v}, \gls{v}\right) > 0$ für einen Knoten $\gls{v} \in \gls{V}$.
+Ein Graph ohne Schleifen wird \emph{schleifenloser Graph} genannt.
+Für den weiteren Verlauf dieser Arbeit fordern wir, solange nicht explizit anders angegeben, gewichtete, ungerichtete sowie schleifenlose Graphen.
+
+Ein Graph $\gls{G} = \left(\gls{V}, \gls{E}, \gls{w}\right)$ kann weiterhin eindeutig über dessen (in der Regel dünnbesetzte) \emph{Adjazenzmatrix} $\gls{A} \in \gls{R+}^{N \times N}$ mit $\gls{A}_{ij} \coloneqq \gls{w}\left(\gls{v}_i, \gls{v}_j\right)$ definiert werden.
+Als \emph{Grad} eines Knotens $\gls{v} \in \gls{V}$ wird die Anzahl der Knoten bezeichnet, die adjazent zu ihm sind, \dhe{} $\gls{degree}\left(\gls{v}\right) \coloneqq \left|\gls{Neighbor}\left(\gls{v}\right)\right|$.
+Im Falle von gewichteten Graphen wird der Grad eines Knotens von $\gls{v}_i \in \gls{V}$ auch oft über $\gls{d}\left(v_i\right) \coloneqq \sum^N_{j=1} \gls{A}_{ij}$ definiert.
+Die unterschiedliche Notation macht deutlich, wann wir welchen Grad eines Knotens meinen.
+Die \emph{Gradmatrix} $\gls{D} \in \gls{R+}^{N \times N}$ eines Graphen \gls{G} ist dann definiert als Diagonalmatrix $\gls{D} \coloneqq \gls{diag}\left( {\left[ \gls{d}\left(v_1\right), \ldots, \gls{d}\left(v_N\right) \right]}^{\top} \right)$ \bzw{} $\gls{D}_{ii} = \gls{d}\left(\gls{v}_i\right)$.
+Ein Knoten $\gls{v} \in \gls{V}$ heißt \emph{isoliert}, falls dieser keinen Nachbarsknoten besitzt, \dhe{} $\gls{degree}\left(\gls{v}\right) = 0$.
+
+Ein \emph{Weg} der Länge $K$ auf \gls{G} ist eine Folge von Knoten $\left(\gls{v}_{x\left(1\right)}, \gls{v}_{x\left(2\right)}, \ldots, \gls{v}_{x\left(K\right)}\right)$, sodass $\left(v_{x\left(k\right)}, v_{x\left(k+1\right)}\right) \in \gls{E}$ für alle $1 \leq k < K$, wobei $x \colon \left\{ 1, \ldots, K \right\} \to \left\{ 1, \ldots, N \right\}$ eine Abbildung auf die Indizes der Knoten ${\left\{ \gls{v}_n \right\}}^N_{n=1}$.
+Ein \emph{Pfad} ist ein Weg mit der Bedingung, dass $\gls{v}_{x\left(k\right)} \neq \gls{v}_{x\left(k+1\right)}$.
+Im Kontext von schleifenlosen Graphen sind die Begriffe Weg und Pfad äquivalent.
+Wir schreiben $\gls{s}\left(\gls{v}_i, \gls{v}_j\right)$ mit Hilfe der \emph{Abstandsfunktion} $\gls{s} \colon \gls{V} \times \gls{V} \to \gls{N} \cup \left\{\infty\right\}$ für die Länge des kürzesten Pfades von $\gls{v}_i$ nach $\gls{v}_j$, \dhe{} die minimale Anzahl an Kanten, die zwischen $\gls{v}_i$ und $\gls{v}_j$ liegen.
+$\gls{v}_j$ ist von $\gls{v}_i$ aus \emph{erreichbar}, wenn $\gls{s}\left(\gls{v}_i, \gls{v}_j\right) \in \gls{N}$.
+Die Relation der Erreichbarkeit in der Knotenmenge \gls{V} eines Graphen ist eine Äquivalenzrelation.
+Die Äquivalenzklassen der Erreichbarkeitsrelation heißen die \emph{Zusammenhangskomponenten} des Graphen \gls{G}.
+Wir nennen \gls{G} \emph{zusammenhängend}, wenn er genau eine Zusammenhangskomponente besitzt, \dhe{} zu jedem Knoten $\gls{v}_i$ existiert mindestens ein Weg zu jedem anderen Knoten $\gls{v}_j \in \gls{V}$.
+Es lässt sich weiter die Nachbarschaftsfunktion \gls{Neighbor} zu einer \emph{$K$-lokalisierten Nachbarschaftsfunktion} $\gls{Neighbor}_K \subseteq \gls{V}$ mit $\gls{Neighbor}_K\left(\gls{v}_i\right) \coloneqq \left\{ \gls{v}_j | \gls{s}\left(\gls{v}_i, \gls{v}_j\right) \leq K \right\}$ generalisieren.
+
+Eine Funktion $f \colon \gls{V} \to \gls{R}$ auf den Knoten eines Graphen \gls{G} heißt \emph{Merkmalsfunktion}.
+Eine Merkmalsfunktion $f$ kann ebenso als Vektor $\ve{f} \in \gls{R}^N$ mit $f\left(\gls{v}_n\right) = \ve{f}_n$ geschrieben werden.
+Bildet $f$ weiterhin auf eine Menge von Merkmalen $f \colon \gls{V} \to \gls{R}^M$, $M \in \gls{N}$, ab, so kann diese analog als eine \emph{Merkmalsmatrix} $\ma{F} \in \gls{R}^{N \times M}$ mit $\ma{F}_{nm} = {\left(f\left(\gls{v}_n\right)\right)}_m$ definiert werden.
