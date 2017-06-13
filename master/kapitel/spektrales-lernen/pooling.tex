@@ -75,7 +75,7 @@ Größere Pooling-Größen müssen ein Vielfaches von zwei sein und können dann
 \subsection{Erweiterung auf Graphen im zweidimensionalen Raum}
 \label{pooling_erweiterung}
 
-Sei $\gls{G}_l = \left(\gls{V}_l, \gls{E}_l\right)$ ein Graph im zweidimensionalen euklidischen Raum, wobei die Position der Knoten des Graphen eindeutig über die Funktion $\gls{p}_l \colon \gls{V}_l \to \gls{R}^2$ bestimmt ist.
+Sei $\gls{G}_l = \left(\gls{V}_l, \gls{E}_l, \gls{p}_l\right)$ ein Graph im zweidimensionalen euklidschen Raum, wobei die Position der Knoten des Graphen eindeutig über die Funktion $\gls{p}_l \colon \gls{V}_l \to \gls{R}^2$ bestimmt ist (\vgl{} Kapitel~\ref{graphrepraesentationen_von_bildern}).
 Dann lässt sich der mehrstufige Clusteralgorithmus Graclus aus Kapitel~\ref{graphvergroeberung} insofern anpassen, dass dieser die Vergröberung eines Graphen auch in Bezug auf die Position seiner Superknoten in der Ebene wiederspiegelt.
 Sei dafür weiterhin $\gls{v}^* \coloneqq \left\{ \gls{v}_i, \gls{v}_j \right\} \in \gls{V}_{l+1}$, ein Superknoten der Knoten $\gls{v}_i, \gls{v}_j \in \gls{V}_l$.
 Dann ergibt sich die neue Position von $\gls{v}^*$ als
@@ -85,8 +85,9 @@ Dann ergibt sich die neue Position von $\gls{v}^*$ als
 Für Superknoten $\gls{v}^* \coloneqq \left\{\gls{v}_i\right\} \in \gls{V}_{l+1}$ mit einem einzigen Knoten $\gls{v}_i \in \gls{V}_l$ bleibt die Position unverändert mit $\gls{p}_{l+1}\left(\gls{v}^*\right) \coloneqq \gls{p}_l\left(\gls{v}_i\right)$.
 Die Adjazenzmatrizen $\gls{Adist} \in {\left[0, 1\right)}^{N \times N}$ und $\gls{Arad} \in {\left[0, 2\pi\right]}^{N \times N}$ zu $\gls{G}_{l+1}$ können dann analog zu Kapitel~\ref{graphrepraesentationen_von_bildern} aus $\gls{V}_{l+1}$, $\gls{E}_{l+1}$ und $\gls{p}_{l+1}$ gewonnen werden.
 
-Wohnt den Knoten $\gls{v} \in \gls{V}_l$ zusätzlich wie in Kapitel~\ref{superpixel} eine Masse $\gls{m}_l \colon \gls{V}_l \to \gls{R}$ bei, so gewichtet sich die Position des Superknotens $\gls{v}^*$ abhängig der Massen $\gls{m}\left(\gls{v}_i\right)$ und $\gls{m}\left(\gls{v}_j\right)$ als
+Wohnt den Knoten in $\gls{G}_l = \left(\gls{V}_l, \gls{E}_l, \gls{p}_l, \gls{m}_l\right)$ wie in Kapitel~\ref{superpixel} zusätzlich eine Masse $\gls{m}_l \colon \gls{V}_l \to \gls{R}$ bei, so gewichtet sich die Position des Superknotens $\gls{v}^* \in \gls{V}_{l+1}$ abhängig der Massen $\gls{m}\left(\gls{v}_i\right)$ und $\gls{m}\left(\gls{v}_j\right)$ als
 \begin{equation*}
   \gls{p}_{l+1}\left(\gls{v}^*\right) \coloneqq \frac{\gls{m}_l\left(\gls{v}_i\right) \gls{p}_l\left(\gls{v}_i\right) + \gls{m}_l\left(\gls{v}_j\right) \gls{p}_l\left(\gls{v}_j\right)}{\gls{m}_l\left(\gls{v}_i\right) + \gls{m}_l\left(\gls{v}_j\right)}.
 \end{equation*}
-Die Masse des Superknotens ergibt sich dann als $\gls{m}_{l+1}\left(\gls{v}^*\right) \coloneqq \gls{m}_l\left(\gls{v}_i\right) + \gls{m}_l\left(\gls{v}_j\right)$.
+Die neue Masse des Superknotens ergibt sich dann als Vereinigung der Massen $\gls{m}_{l+1}\left(\gls{v}^*\right) \coloneqq \gls{m}_l\left(\gls{v}_i\right) + \gls{m}_l\left(\gls{v}_j\right)$.
+Damit erhält der vergröberte Graph $\gls{G}_{l+1}$ die Positionen und Massen seiner Vorgängerknoten des Graphen $\gls{G}_l$ im zweidimensionalen euklidschen Raum.
