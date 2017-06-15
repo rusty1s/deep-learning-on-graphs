@@ -2,10 +2,11 @@
 \label{spektrale_netzarchitektur}
 
 Die Architektur eines neuronalen Netzes auf Graphen mit spektralen Faltungen verhält sich durch die ähnliche Formulierung einer Faltungs- und einer Poo\-ling\-sch\-icht analog zu der Netzarchitektur klassischer \glspl{CNN}.
-Dabei werden wie gewohnt mehrere Faltungsschichten hintereinander gestapelt und über zwischenzeitlich platzierte Poolingschichten die Anzahl der zu betrachtenden Knoten sukzessive reduziert, wobei sich die Anzahl der Merkmale dabei stetig erhöht.
-Im Anschluss darauf finden sich dann für gewöhnlich zwei bis drei vollverbundene Schichten, die die Merkmalsgröße dann schlussendlich auf die gewünschte Ausgabegröße reduziert (\vgl{}~\cite{Nielsen}).
+Dabei werden wie gewohnt mehrere Faltungsschichten mit stetig erhöhter Merkmalsausbreitung aneinander gereiht und an einigen Stellen über Poolingschichten getrennt, die die Anzahl der zu betrachtenden Knoten sukzessive reduzieren.
+Im Anschluss darauf finden sich im Allgemeinen zwei bis drei vollverbundene Schichten, die die Merkmalsgröße dann schlussendlich auf die gewünschte Ausgabegröße reduzieren~\cite{Nielsen}.
+Die mehrmalige Verkettung von Faltungsschichten sorgt dafür, dass auch bei einer relativ kleinen Faltung über die lokale Nachbarschaft eines jeden Knoten Merkmale weit entfernterer Knoten gewonnen werden können.
 
-\glspl{CNN} auf Bildern erfordern dabei eine feste Eingabegröße.
+\glspl{CNN} auf Bildern erfordern dabei in einer analogen Netzarchitektur eine feste Eingabegröße.
 Dafür werden die Bildermengen in der Regel insofern skaliert und zugeschnitten, dass diese alle die gleiche Bildgröße besitzen (\zB{} $224 \times 224$)~\cite{spp}.
 Es erscheint jedoch schwierig, eine Menge von Graphen soweit anzupassen, dass diese alle die gleiche Anzahl an Knoten aufweisen.
 So ist es zwar vorstellbar, zusätzliche \enquote{Fake}-Knoten zu jedem Graphen hinzufügen, damit diese alle eine feste Anzahl an Knoten aufweisen.
@@ -13,10 +14,10 @@ Neben dem erhöhtem Speicheraufwand ist dieser Ansatz jedoch insbesondere nicht 
 So können diese \evtl{} eine größere Anzahl als die zuvor festgelegte Größe aufweisen.
 Ebenso liefert uns der Prozess der Graphvergröberung eine stets unterschiedliche Repräsentation eines Graphen, die wohlmöglich bereits eine größere Menge an \enquote{Fake}-Knoten hinzufügt und dabei die festgelegte Knotengröße der Graphen überschreitet.
 Es ist weiterhin schwierig, einen Graphen auf eine feste Größe zuzuschneiden.
-So ist es nicht ersichtlich, welche Knoten aus einem Graphen entfernt oder zusammengefasst werden können.
+So ist es insbesondere nicht ersichtlich, welche Knoten aus einem Graphen entfernt oder zusammengefasst werden können.
 
 Die Architektur eines neuronalen Netzes auf Graphen erfordert folglich eine Struktur, die auf dynamischen Eingabegrößen operiert.
-
+Dazu muss vorerst geklärt werden, warum ein klassisches \gls{CNN} auf Bildern eine feste Eingabegröße erfordert.
 Eine einfache und elegante Lösung dazu bietet uns das \emph{Average-Pooling}, \dhe{} die Durchschnittsbildung eines Merkmals über allen Knoten.
 Da die Anzahl der betrachteten Merkmale pro Knoten in jeder Schicht fest ist, liefert uns das Average-Pooling zwischen den Faltungs- und den vollverbundenen Schichten eines Netzes
 
