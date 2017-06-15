@@ -7,13 +7,14 @@ Im Anschluss darauf finden sich dann für gewöhnlich zwei bis drei vollverbunde
 
 \glspl{CNN} auf Bildern erfordern dabei eine feste Eingabegröße.
 Dafür werden die Bildermengen in der Regel insofern skaliert und zugeschnitten, dass diese alle die gleiche Bildgröße besitzen (\zB{} $224 \times 224$)~\cite{spp}.
-Auf einer Menge von Graphen erscheint es schwierig, diese so anzupassen, dass diese alle die gleiche Anzahl an Knoten aufweisen.
-So ist es zwar vorstellbar, zusätzliche \enquote{Fake}-Knoten zu einem Graphen hinzufügen, sodass diese alle eine feste Anzahl an Knoten aufweisen.
-Neben dem erhöhtem Speicheraufwand ist dieser Ansatz nicht geeignet für unbekannte Graphen, die in das Netz eingespeist werden.
+Es erscheint jedoch schwierig, eine Menge von Graphen soweit anzupassen, dass diese alle die gleiche Anzahl an Knoten aufweisen.
+So ist es zwar vorstellbar, zusätzliche \enquote{Fake}-Knoten zu jedem Graphen hinzufügen, damit diese alle eine feste Anzahl an Knoten aufweisen.
+Neben dem erhöhtem Speicheraufwand ist dieser Ansatz jedoch insbesondere nicht geeignet für unbekannte Graphen, die in das Netz eingespeist werden.
 So können diese \evtl{} eine größere Anzahl als die zuvor festgelegte Größe aufweisen.
-Ebenso liefert uns der Prozess der Graphvergröberung eine stets unterschiedliche Rerpräsentation eines Graphen, die wohlmöglich eine größere Menge an \enquote{Fake}-Knoten erfordert und damit die Größe eines Graphen in die Höhe treibt.
+Ebenso liefert uns der Prozess der Graphvergröberung eine stets unterschiedliche Repräsentation eines Graphen, die wohlmöglich eine größere Menge an \enquote{Fake}-Knoten erfordert und damit die feste Größe eines Graphen überschreitet.
 Es ist weiterhin schwierig, einen Graphen auf eine feste Größe zuzuschneiden.
-So lässt es sich nie mit Sicherheit sagen, welche Knoten aus dem Graphen entfernt oder zusammengefasst werden können.
-Die Architektur eines neuronalen Netzes auf Graphen erfordert deshalb eine Struktur, die auf dynamische Eingabegrößen funktioniert.
+So lässt es sich nicht einfach festlegen, welche Knoten aus einem Graphen entfernt oder zusammengefasst werden können.
+
+Die Architektur eines neuronalen Netzes auf Graphen erfordert folglich eine Struktur, die auf dynamischen Eingabegrößen funktioniert.
 
 Alternative Architekturen, auch im Hinblick auf die Ersetzungsmöglichkeiten \bzgl{} des Average-Poolings, werden in Kapitel~\ref{ausblick} diskutiert.
