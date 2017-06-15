@@ -1,23 +1,23 @@
 \section{Pooling auf Graphen}
 \label{pooling}
 
-Neben den Faltungsschichten gehören die sogenannten Pooling-Schichten zu den fundamentalen Schichten eines \glspl{CNN}.
-Pooling-Schichten eines Netzes, üblicherweise über Max-Pooling realisiert, werden dabei für gewöhnlich direkt nach einer Faltungsschicht benutzt und sorgen dafür, die Ausgabe der Faltung zu filtern \bzw{} zu reduzieren~\cite{Nielsen}.
+Neben den Faltungsschichten gehören die sogenannten Poolingschichten zu den fundamentalen Schichten eines \glspl{CNN}.
+Poolingschichten eines Netzes, üblicherweise über Max-Pooling realisiert, werden dabei für gewöhnlich direkt nach einer Faltungsschicht benutzt und sorgen dafür, die Ausgabe der Faltung zu filtern \bzw{} zu reduzieren~\cite{Nielsen}.
 
 Eine Pooling-Operation auf Graphen erfordert dafür analog zum Pooling auf einem regulären Gitter eine logische Zusammenfassung von Knoten zu Clustern~\cite{Defferrard}.
-Der zu verwendende Clusteralgorithmus hat dabei jedoch einige Anforderungen, um als Pooling-Operation in einem Netz genutzt werden zu könnnen.
+Der zu verwendende Clusteralgorithmus hat dabei jedoch einige Anforderungen, um als Poolingoperation in einem Netz genutzt werden zu könnnen.
 So muss dieser vorallem als ein mehrstufiges Clustering fungieren, bei dem jede Stufe eines Graphen den Blick auf den Graphen bei einer unterschiedlichen \enquote{Auflösung} zeigt und insbesondere die zugrunde liegende Geometrie des Graphen erhält~\cite{Defferrard}.
 Das Clustering von Knoten wird daher in dieser Arbeit auch oft als \emph{Vergröberung} eines Graphen betitelt.
-Die mehrfache Anwendung eines Clusteralgorithmus erlaubt damit die mehrfache Benutzung von Pooling-Schichten im Netz.
-Es ist weiterhin notwendig, dass die Pooling-Operation benutzerspezifische Pooling-Größen ermöglicht.
+Die mehrfache Anwendung eines Clusteralgorithmus erlaubt damit die mehrfache Benutzung von Poolingschichten im Netz.
+Es ist weiterhin notwendig, dass die Poolingoperation benutzerspezifische Poolinggrößen ermöglicht.
 Hier erscheinen vorallem Clustertechniken sinnvoll, die die Größe eines Graphen um den Faktor zwei reduzieren~\cite{Defferrard}.
-Damit können größere Pooling-Größen über die mehrfache Anwendung des Clusteralgorithmus realisiert werden.
+Damit können größere Poolinggrößen über die mehrfache Anwendung des Clusteralgorithmus realisiert werden.
 
 \subsection{Graphvergröberung}
 \label{graphvergroeberung}
 
 Es existieren eine Reihe von Clustertechniken auf Graphen~\cite{Luxburg, graclus, Defferrard}.
-\citeauthor{Defferrard} benutzen für die Pooling-Schicht eines Netzes auf Graphen die \emph{Vergröberungsphase} des mehrstufigen Clusteralgorithmus \emph{Graclus}~\cite{graclus}.
+\citeauthor{Defferrard} benutzen für die Poolingschicht eines Netzes auf Graphen die \emph{Vergröberungsphase} des mehrstufigen Clusteralgorithmus \emph{Graclus}~\cite{graclus}.
 Graclus zeigt sich dabei als besonders erfolgreich über einer Vielzahl von Graphen bei minimaler berechnungsintensiver Komplexität~\cite{Defferrard}.
 Abbildung~\ref{fig:clustering} illustriert den Ablauf des Algorithmus.
 \input{tikz/clustering}
@@ -50,12 +50,12 @@ Damit kann der Prozess des Clusterings bereits als ein Augmentierungsschritt der
 \subsection{Effizientes Pooling mittels binärer Bäumen}
 \label{pooling_mit_baeumen}
 
-Ein tiefes neuronales Netz besitzt für gewöhnlich viele Pooling-Schichten.
+Ein tiefes neuronales Netz besitzt für gewöhnlich viele Poolingschichten.
 Eine Poo\-ling-Operation auf den Merkmalen der Graphknoten muss folglich vorallem effizient sein.
 Ein naiver Ansatz dafür ist eine \enquote{Lookup}-Tabelle, in der die Verbindungen der Knoten zu ihren Superknoten gespeichert sind.
-Eine Pooling-Operation muss demnach für jedes Cluster ihre Knoten in der Tabelle referenzieren und ihre Operation auf diesen vollführen.
+Eine Poolingoperation muss demnach für jedes Cluster ihre Knoten in der Tabelle referenzieren und ihre Operation auf diesen vollführen.
 Das resultiert in einer extrem speicherineffizienten, langsamen und schwer zu parallelisierenden Implementierung~\cite{Defferrard}.
-Es ist jedoch möglich, die Knoten des Graphen so anzuordnen, dass eine Pooling-Operation auf diesen in linearer Zeit, \dhe{} $\gls{O}\left(N\right)$, realisiert werden kann~\cite{Defferrard}.
+Es ist jedoch möglich, die Knoten des Graphen so anzuordnen, dass eine Poolingoperation auf diesen in linearer Zeit, \dhe{} $\gls{O}\left(N\right)$, realisiert werden kann~\cite{Defferrard}.
 
 \input{tikz/pooling}
 
@@ -65,12 +65,12 @@ Damit besitzt jeder Knoten folglich nun immer zwei Kinder.
 Foglich kann über die Eltern-Kind-Beziehung von der $L$-ten bis zur $0$-ten Stufe ein balancierter, binärer Baum aufgebaut werden.
 Reguläre Knoten aus dem Graphen besitzen damit entweder (a) genau zwei reguläre Knoten, (b) einen regulären Knoten und einen \enquote{Fake}-Knoten als Kinder und (c) \enquote{Fake-Knoten} besitzen immer genau zwei \enquote{Fake}-Knoten als Kinder~\cite{Defferrard}.
 Abbildung~\ref{fig:pooling} illustriert die Konstruktion eines solchen Baumes.
-Die Merkmale an den \enquote{Fake}-Knoten eines Graphen werden mit einem neutralen Wert initialisiert, \dhe{} \zB{} mit Null bei einem Netz mit \gls{relu}-Aktivierungsfunktion und der Verwendung von Max-Pooling als Pooling-Operation~\cite{Defferrard}.
+Die Merkmale an den \enquote{Fake}-Knoten eines Graphen werden mit einem neutralen Wert initialisiert, \dhe{} \zB{} mit Null bei einem Netz mit \gls{relu}-Aktivierungsfunktion und der Verwendung von Max-Pooling als Poolingoperation~\cite{Defferrard}.
 Ebenso kann auf diesen \enquote{Fake}-Knoten weiterhin ohne Einschränkungen gefaltet werden, da sie keinerlei Nachbarsknoten besitzen.
-Die Anordnung der Knoten zu einem balancierten, binären Baum liefert uns eine Ordnung auf den Knoten von $\gls{G}_0$ bis $\gls{G}_{L-1}$, auf der wir eine Pooling-Operation völlig analog zu einem eindimensionalen Gitter mit einer Größe und Schrittweise von zwei definieren können~\cite{Defferrard}.
+Die Anordnung der Knoten zu einem balancierten, binären Baum liefert uns eine Ordnung auf den Knoten von $\gls{G}_0$ bis $\gls{G}_{L-1}$, auf der wir eine Poolingoperation völlig analog zu einem eindimensionalen Gitter mit einer Größe und Schrittweise von zwei definieren können~\cite{Defferrard}.
 Diese Anordnung der Knoten macht den Prozess des Poolings extrem effizient und erlaubt ebenso eine parallele Verarbeitungsarchikektur auf GPUs~\cite{Defferrard}.
 
-Größere Pooling-Größen müssen ein Vielfaches von zwei sein und können dann ebenso leicht über eine tieferstufigere Vergröberung implementiert werden (\vgl{} Abbildung~\ref{fig:pooling}).
+Größere Poolinggrößen müssen ein Vielfaches von zwei sein und können dann ebenso leicht über eine tieferstufigere Vergröberung implementiert werden (\vgl{} Abbildung~\ref{fig:pooling}).
 
 \subsection{Erweiterung auf Graphen im zweidimensionalen Raum}
 \label{pooling_erweiterung}
