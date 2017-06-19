@@ -2,7 +2,7 @@
 \label{superpixel}
 
 Eine Superpixelrepräsentation eines Bildes
-Die Segmentierungsmaske $\gls{S} \in {\left\{1, \ldots, S\right\}}^{H \times W}$ eines Bildes $\gls{B} \in {\left[0, 1\right]}^{H \times W \times C}$, wobei $S \in \gls{N}$ die Anzahl an Segmenten beschreibt.
+Die Segmentierungsmaske $\gls{S} \in {\left\{1, \ldots, S\right\}}^{Y \times X}$ eines Bildes $\gls{B} \in {\left[0, 1\right]}^{Y \times X \times C}$, wobei $S \in \gls{N}$ die Anzahl an Segmenten beschreibt.
 Massefunktion $\gls{m} \colon \gls{V} \to \gls{N}$
 $\gls{G} = \left(\gls{V}, \gls{E}, \gls{p}, \gls{m}\right)$
 
@@ -38,6 +38,38 @@ $\gls{G} = \left(\gls{V}, \gls{E}, \gls{p}, \gls{m}\right)$
 \subsection{Merkmalsextraktion}
 \label{merkmalsextraktion}
 
-Aufgrund der geringeren Menge an Knoten über die Darstellung eines Bildes über die Superpixelrepräsentation als Graph benötigen
+Die Darstellung eines Bildes über einen Graphen \gls{G}, der aus einer Superpixelrepräsentation \gls{S} gewonnen wurde, besitzt in der Regel weitaus weniger Knoten im Gegensatz zu der reinen Darstellung des Bildes über eine Gitterrepräsentation.
+Die Superpixel \bzw{} die Regionen der Segmentierungsmaske können jedoch die willkürlichsten Formen annehmen und besitzen dabei lediglich die Einschränkung, dass diese stets zusammenhängend sind und keinerlei Löcher besitzen.
+Die Form eines Superpixels muss demnach bestmöglichst eingefangen \bzw{} beschrieben werden können — ein Prozess, der in der Bildverarbeitung als \emph{Merkmalsextraktion} bekannt ist~\cite{momente}.
+Ein geeigntes Mittel zur Beschreibung einzelner Objekte in einem segmentierten Bild sind die \emph{Momente}, welche in nicht-zentrierte, translationsinvariante, skalierungsinvariante und rotationsinvariante Momente unterschieden werden~\cite{momente}.
+
+\paragraph{Nicht-zentrierte Momente}
+\label{nicht_zentrierte_momente}
+
+Zu einer binären Segmentierungsmaske $\gls{S} \in {\left\{0, 1\right\}}^{Y \times X}$ sind die \emph{nicht-zentrierten Momente} vom Grad $\left(i+j\right)$, $i,j\in\gls{N}$, definiert als~\cite{momente}
+\begin{equation*}
+  \gls{M}_{ij} \coloneqq \sum_y^Y \sum_x^X y^i x^j \gls{S}_{yx}.
+\end{equation*}
+Obwohl der Grad eines Moments beliebig hoch gewählt werden kann, so reichen in der Praxis meist wenige Momente niedrigen Grades aus ($\le 3$), um eine Region hinreichend genau zu charakterisieren~\cite{momente}.
+Bildeigenschaften, die durch nicht-zentrierte Momente beschrieben werden können, sind unter anderem dessen Fläche über $\gls{M}_{00}$ sowie dessen absoluter Schwerpunkt $\left\{\bar{x}, \bar{y}\right\} = \left\{ \gls{M}_{01}/\gls{M}_{00}, \gls{M}_{10}/\gls{M}_{00}\right\}$~\cite{momente}.
+Nicht-zentrierte Momente sind aufgrund ihrer Berücksichtigung der Position einer Region im Bild meist unerwünscht, sie helfen aber für die weitere Definition von translationsinvarianten Momenten.
+
+\paragraph{Translationsinvariante Momente}
+\label{translationsinvariante_momente}
+
+Mit Hilfe der absoluten Schwerpunktskoordinaten können die \emph{translationsinvarianten Momente} über
+\begin{equation*}
+  \gls{mu}_{ij} \coloneqq \sum_y^Y \sum_x^X {\left(y - \bar{y}\right)}^i {\left(x - \bar{x}\right)}^j \gls{S}_{yx}.
+\end{equation*}
+definiert werden~\cite{momente}.
+
+\paragraph{Skalierungsinvariante Momente}
+\label{skalierungsinvariante_zentrierte_momente}
+
+\paragraph{Rotationsinvariante Momente}
+\label{rotationsinvariante_momente}
+
+
+
+
 \cite{Siedhoff}
-\cite{momente}
