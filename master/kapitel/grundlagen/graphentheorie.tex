@@ -6,8 +6,8 @@ Seien $\gls{v}_i, \gls{v}_j \in \gls{V}$ im Folgenden zwei beliebige Knoten.
 Falls $\left( \gls{v}_i, \gls{v}_j \right) \in \gls{E}$, dann ist $\gls{v}_j$ \emph{adjazent} zu $\gls{v}_i$~\cite{Biggs}.
 Zu einem Graphen \gls{G} definiert die \emph{Nachbarschaftsfunktion} $\gls{Neighbor}\left(\gls{v}_i\right) \subseteq \gls{V}$ über $\gls{Neighbor}\left(\gls{v}_i\right) \coloneqq \left\{\gls{v}_j \mid \left(\gls{v}_i, \gls{v}_j\right) \in \gls{E}\right\}$ die Nachbarschaftsmenge von $\gls{v}_i$~\cite{Shuman}.
 
-Ein \emph{gewichteter Graph} $\gls{G} = \left(\gls{V}, \gls{E}, \gls{w}\right)$ ist ein Graph, der zusätzlich eine \emph{Gewichtsfunktion} $\gls{w} \colon \gls{E} \to \gls{R+}$ auf den Kanten des Graphen definiert, sodass $\left( \gls{v}_i, \gls{v}_j  \right) \notin \gls{E}$ \gdw{} $\gls{w}\left(\gls{v}_i, \gls{v}_j\right) = 0$~\cite{Biggs}.
-Im Falle eines ungewichteten Graphen ist die Gewichtsfunktion \gls{w} implizit durch $\gls{E}$ über $\gls{w} \colon \gls{E} \to \left\{ 0, 1 \right\}$ gegeben.
+Ein \emph{gewichteter Graph} $\gls{G} = \left(\gls{V}, \gls{E}, \gls{w}\right)$ ist ein Graph, der zusätzlich eine \emph{Gewichtsfunktion} $\gls{w} \colon \gls{V} \times \gls{V} \to \gls{R+}$ auf den Kanten des Graphen definiert, sodass $\left( \gls{v}_i, \gls{v}_j  \right) \notin \gls{E}$ \gdw{} $\gls{w}\left(\gls{v}_i, \gls{v}_j\right) = 0$~\cite{Biggs}.
+Im Falle eines ungewichteten Graphen ist die Gewichtsfunktion \gls{w} implizit durch $\gls{E}$ über $\gls{w} \colon \gls{V} \times \gls{V} \to \left\{ 0, 1 \right\}$ gegeben.
 
 Ein Graph heißt \emph{ungerichtet}, falls $\gls{w}\left(\gls{v}_i, \gls{v}_j\right) = \gls{w}\left(\gls{v}_j, \gls{v}_i\right)$~\cite{Biggs}.
 Als \emph{Schleife} wird eine Kante bezeichnet, die einen Knoten mit sich selbst verbindet, \dhe{} $\gls{w}\left(\gls{v}, \gls{v}\right) > 0$ für einen Knoten $\gls{v} \in \gls{V}$.

@@ -2,48 +2,49 @@
 \label{graphrepraesentationen_von_bildern}
 
 Als eine \emph{Graphrepräsentation eines Bildes} $\gls{B} \in {\left[0, 1\right]}^{H \times W \times C}$ wird eine Darstellung von \gls{B} als ein gewichteter, ungerichteter sowie schleifenloser Graph \gls{G} verstanden, deren Knoten Informationen zu ausgewählten Bereichen von \gls{B} über eine Merkmalsmatrix $\ma{F} \in \gls{R}^{N \times M}$ speichern und deren Kanten eine Aussage über die örtlichen Nachbarschaften eines jeden Bildbereichs inne wohnt.
-Formal lässt sich eine Graphrepräsentation eines Bildes damit als ein \emph{Graph im zweidimensionalen euklidischen Raum} $\gls{G} = \left(\gls{V}, \gls{E}, \gls{p}\right)$ verstehen, dem zusätzlich zu seinen Knoten- und Kantenmengen anstatt einer Gewichtsfunktion $\gls{w} \colon \gls{E} \to \gls{R}$ eine Positionsfunktion $\gls{p} \colon \gls{V} \to \gls{R}^2$ auf seinen Knoten in den zweidimensionalen euklidischen Raum $\gls{R}^2$ zugeordnet ist.
-Das Gewicht $\gls{w} \colon \gls{E} \to \left[0, 1\right]$ einer Kante ergibt sich dann implizit als \enquote{Abstandsfunktion} mit Hilfe von \gls{p} und der euklidischen Norm $\left\|\gls{p}\left(\gls{v}_i\right) - \gls{p}\left(\gls{v}_j\right) \right\|_2 \coloneqq \sqrt{{\left({\gls{p}\left(\gls{v}_i\right)}_1 - {\gls{p}\left(\gls{v}_j\right)}_1\right)}^2 + {\left({\gls{p}\left(\gls{v}_i\right)}_2 - {\gls{p}\left(\gls{v}_j\right)}_2\right)}^2}$ als
+Formal lässt sich eine Graphrepräsentation eines Bildes damit als ein \emph{Graph im zweidimensionalen euklidischen Raum} $\gls{G} = \left(\gls{V}, \gls{E}, \gls{p}\right)$ verstehen, dem zusätzlich zu seinen Knoten- und Kantenmengen anstatt einer Gewichtsfunktion $\gls{w} \colon \gls{V} \times \gls{V} \to \gls{R}$ eine Positionsfunktion $\gls{p} \colon \gls{V} \to \gls{R}^2$ auf seinen Knoten in den zweidimensionalen euklidischen Raum $\gls{R}^2$ zugeordnet ist.
+Das Gewicht $\gls{w} \colon \gls{E} \to \left[0, 1\right]$ einer Kante ergibt sich dann implizit als \enquote{Abstandsfunktion} mit Hilfe der euklidischen Norm $\left\|\cdot\right\|_2$ auf den Positionen des Knotens über
+\begin{equation*}
+  \left\|\gls{p}\left(\gls{v}_i\right) - \gls{p}\left(\gls{v}_j\right) \right\|_2 \coloneqq \sqrt{{\left({\gls{p}\left(\gls{v}_i\right)}_1 - {\gls{p}\left(\gls{v}_j\right)}_1\right)}^2 + {\left({\gls{p}\left(\gls{v}_i\right)}_2 - {\gls{p}\left(\gls{v}_j\right)}_2\right)}^2}
+\end{equation*}
+und der \emph{Gaußfunktion} als
 \begin{equation}
   \gls{w}\left(\gls{v}_i, \gls{v}_j\right) \coloneqq \begin{cases}
-    \exp\left(-\frac{\left\|\gls{p}\left(\gls{v}_i\right) - \gls{p}\left(\gls{v}_j\right)\right\|_2^2}{2\gls{sigma}^2}\right), & \text{wenn }\left(\gls{v}_i, \gls{v}_j\right) \in \gls{E}\\
+    \exp\left(-\frac{\left\|\gls{p}\left(\gls{v}_i\right) - \gls{p}\left(\gls{v}_j\right)\right\|_2^2}{2\gls{sigma}^2}\right), & \text{wenn }\left(\gls{v}_i, \gls{v}_j\right) \in \gls{E},\\
     0, & \text{sonst},
   \end{cases}
   \label{gauss}
 \end{equation}
-wobei die \emph{Gaußfunktion} $\exp\left(-x^2 / 2 \gls{sigma}^2\right)$ den Abstand zweier Knoten mit Hilfe eines festen Parameters $\gls{sigma} \in \gls{R}$ zueinander invertiert, sodass Knoten die weiter von einander entfernt liegen ein geringeres Gewicht besitzen~\cite{Shuman}.
-Das korrespondiert mit der
-Abbildung 5.1 veranschaulicht den Invertierungsprozess anhand unterschiedlich gewählter $\theta$.
-Aufgrund der Symmetrie von ${\left\|\cdot\right\|}_2$ folgt damit sofort die Ungerichtheit des Graphen \gls{G}, \dhe{} $\gls{w}\left(\gls{v}_i, \gls{v}_j\right) = \gls{w}\left(\gls{v}_j, \gls{v}_i\right)$.
+wobei $\gls{sigma} \in \gls{R}$ ein frei wählbarer Parameter ist~\cite{Shuman}.
+Abbildung~\ref{fig:gauss} veranschaulicht die Gewichtsfunktion anhand unterschiedlich gewählter $\gls{sigma}$.
+\input{tikz/gauss}
+Aufgrund der Symmetrie von ${\left\|\cdot\right\|}_2$ folgt insbesondere sofort die Ungerichtheit des Graphen \gls{G}, \dhe{} $\gls{w}\left(\gls{v}_i, \gls{v}_j\right) = \gls{w}\left(\gls{v}_j, \gls{v}_i\right)$.
+Die Gaußfunktion \enquote{invertiert} dabei den Abstand zweier Knoten zueinander, sodass Knoten die weiter voneinander entfernt liegen ein geringeres Gewicht besitzen.
+Das korrespondiert mit dem üblichen Verständnis eines Kantengewichts in Graphen.
+Knoten, die näher am Ursprungsknoten liegen, gelten als \enquote{wichtiger} und bekommen deshalb ein größeres Gewicht.
+Insbesondere stimmt dies mit der Konvention überein, dass $\gls{w}\left(\gls{v}_i, \gls{v}_j\right) = 0$ für $\left(\gls{v}_i, \gls{v}_j\right) \notin \gls{E}$.
+Damit lässt sich weiterhin die korrespondierende Adjazenzmatrix $\gls{Adist} \in \left[0, 1\right] \in \gls{R}^{N \times N}$ wie bekannt als ${\left(\gls{Adist}\right)}_{ij} \coloneqq \gls{w}\left(\gls{v}_i, \gls{v}_j\right)$ definieren.
 
-Damit lässt sich die Korrespondieren adjazenzmatrik Adist aus g() über
-Zusätzlich lässt sich die Richtung der Kanten eines Graphen
+Zusätzlich zu dem Abstand der Knoten \bzw{} der Länge der Kanten eines Graphen im zweidimensionalen euklidischen Raum $\gls{G} = \left(\gls{V}, \gls{E}, \gls{p}\right)$ lassen sich die Ausrichtungen der Kanten über die Positionen der Knoten von \gls{G} festhalten.
+Aus $p \colon \gls{V} \to \gls{R}$ wird folglich über
+\begin{equation*}
+  \gls{winkel}\left(\gls{v}_i, \gls{v}_j\right) \coloneqq \begin{cases}
+    \mathrm{atan2}\left({\gls{p}\left(\gls{v}_j - \gls{v}_i\right)}_1, {\gls{p}\left(\gls{v}_j - \gls{v}_i\right)}_2\right) + \pi, & \text{wenn }\left(\gls{v}_i, \gls{v}_j\right) \in \gls{E},\\
+    0, & \text{sonst}
+  \end{cases}
+\end{equation*}
+eine \emph{Winkelfunktion} $\gls{winkel} \colon \gls{V} \times \gls{V} \to \left[0, 2\pi\right]$ auf den Kanten von \gls{G} im Uhrzeigersinn definiert, wobei $\mathrm{atan2}\left(x, y\right) \in \left[-\pi, \pi\right]$ den Arkustangens von $x/y$ berechnet, aber im Gegensatz zu $\mathrm{atan}\left(\cdot\right)$ die Vorzeichen beider Parameter beachtet und so den Quadranten des Ergebnisses bestimmen kann.
+Der Winkel Null wird dabei explizit als $2\pi$ definiert, sodass weiterhin $\gls{winkel}\left(\gls{v}_i, \gls{v}_j\right) = 0$ gilt, falls $\left(\gls{v}_i, \gls{v}_j\right) \notin \gls{E}$.
+Analog zu \gls{Adist} lässt sich damit die Adjazenzmatrix $\gls{Arad} \in {\left[0, 2\pi\right]}^{N \times N}$ über ${\left(\gls{Arad}\right)}_{ij} \coloneqq \gls{winkel}\left(\gls{v}_i, \gls{v}_j\right)$ definieren.
+Es ist anzumerken, dass die Winkelfunktion \gls{winkel} im Gegensatz zur Gewichtsfunktion \gls{w} nicht symmetrisch \bzw{} ungerichtet ist, \dhe{} $\gls{winkel}\left(\gls{v}_i, \gls{v}_i\right) \neq \gls{winkel}\left(\gls{v}_j, \gls{v}_i\right)$.
+Insbesondere definiert \gls{Arad} damit einen gerichteten Graphen.
 
-Es ist insbesondere anzumerken, dass die winkelfubktion im gegensatz zur abstandsfunktion w nicht symmetrisch ist, d.h. ...
-Weiterhin bildet die Winkelfunktion
+Die beiden Adjazenzmatrizen \gls{Adist} und \gls{Arad} beschreiben den Graphen $\gls{G} = \left(\gls{V}, \gls{E}, \gls{p}\right)$ bis auf Translation eindeutig.
+Eine Veränderung einer Position $\gls{p}\left(\gls{v}\right)$ eines Knotens $\gls{v} \in \gls{V}$ führt sowohl zu einer Veränderung in \gls{Adist} als auch in \gls{Arad}.
+Eine Translation aller Knoten um $\ve{\delta} \in \gls{R}^2$, \dhe{} $\gls{p}\left(\gls{v}\right) \rightarrow \gls{p}\left(\gls{v}\right) + \ve{\delta}$, generiert hingegen vollkommen äquivalente Adjazenzmatrizen \gls{Adist} sowie \gls{Arad}.
+In der Regel ist dies kein Nachteil, denn nur in den seltensten Fällen interessieren uns die absoluten Positionen der Knoten in \gls{G}, wohingegen der Abstand und die Ausrichtungen der Knoten zueinander eine größere Bedeutung genießen.
 
-
-
-Sooo
-Graphen im zweidimensionalen raum
-Definieren p, arad adist
-Gaus
-
-Gitter mit merkmalsfunktion f
-Dann lokale oder globale normierung
-
-Dann segmentierung
-
-
-$\gls{G} = \left(\gls{V}, \gls{E}, \gls{p}\right)$
-
-lokale oder globale Normierung
-
-Ein \emph{ebener Graph} ist eine konkrete Darstellung eines Graphen auf der zweidimensionalen Ebene $\gls{R}^2$.
-Jedem Knoten $v$ ist eine Positionsfunktion $\gls{p} \colon \gls{V} \to \gls{R}^2$ zugeordnet, die die Position eines Knotens auf der Ebene eindeutig definiert.
-
-\gls{Adist} und \gls{Arad} machen Graphen translationsinvariant und abhängig von Sigma auch skalierungsinvariant
-
+Im Folgenden werden basierend auf der Definition eines Graphen im zweidimensionalen  euklidischen Raum zwei Ansätze für eine Graphrepräsentation von Bildern vorgestellt — der Repräsentation über ein reguläres Gitter sowie der Repräsentation über die Bildung von Superpixeln eines Bildes.
 
 \input{kapitel/bildgraphen/gitter}
 \input{kapitel/bildgraphen/superpixel}
