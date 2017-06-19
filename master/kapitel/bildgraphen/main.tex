@@ -23,7 +23,7 @@ Die Gaußfunktion \enquote{invertiert} dabei den Abstand zweier Knoten zueinande
 Das korrespondiert mit dem üblichen Verständnis eines Kantengewichts in Graphen.
 Knoten, die näher am Ursprungsknoten liegen, gelten als \enquote{wichtiger} und bekommen deshalb ein größeres Gewicht.
 Insbesondere stimmt dies mit der Konvention überein, dass $\gls{w}\left(\gls{v}_i, \gls{v}_j\right) = 0$ für $\left(\gls{v}_i, \gls{v}_j\right) \notin \gls{E}$.
-Damit lässt sich weiterhin die korrespondierende Adjazenzmatrix $\gls{Adist} \in \left[0, 1\right] \in \gls{R}^{N \times N}$ wie bekannt als ${\left(\gls{Adist}\right)}_{ij} \coloneqq \gls{w}\left(\gls{v}_i, \gls{v}_j\right)$ definieren.
+Damit lässt sich weiterhin die korrespondierende Adjazenzmatrix $\gls{Adist} \in \left[0, 1\right] \in \gls{R}^{N \times N}$ wie bekannt mit ${\left(\gls{Adist}\right)}_{ij} \coloneqq \gls{w}\left(\gls{v}_i, \gls{v}_j\right)$ definieren.
 
 Zusätzlich zu dem Abstand der Knoten \bzw{} der Länge der Kanten eines Graphen im zweidimensionalen euklidischen Raum $\gls{G} = \left(\gls{V}, \gls{E}, \gls{p}\right)$ lassen sich die Ausrichtungen der Kanten über die Positionen der Knoten von \gls{G} festhalten.
 Aus $p \colon \gls{V} \to \gls{R}$ wird folglich über
@@ -33,9 +33,9 @@ Aus $p \colon \gls{V} \to \gls{R}$ wird folglich über
     0, & \text{sonst}
   \end{cases}
 \end{equation*}
-eine \emph{Winkelfunktion} $\gls{winkel} \colon \gls{V} \times \gls{V} \to \left[0, 2\pi\right]$ auf den Kanten von \gls{G} im Uhrzeigersinn definiert, wobei $\mathrm{atan2}\left(x, y\right) \in \left[-\pi, \pi\right]$ den Arkustangens von $x/y$ berechnet, aber im Gegensatz zu $\mathrm{atan}\left(\cdot\right)$ die Vorzeichen beider Parameter beachtet und so den Quadranten des Ergebnisses bestimmen kann.
+eine \emph{Winkelfunktion} $\gls{winkel} \colon \gls{V} \times \gls{V} \to \left[0, 2\pi\right]$ auf den Kanten von \gls{G} im Uhrzeigersinn definiert, wobei $\mathrm{atan2}\left(x, y\right) \in \left[-\pi, \pi\right]$ den Arkustangens von $x/y$ berechnet, aber im Gegensatz zu $\mathrm{atan}\left(\cdot\right)$ die Vorzeichen beider Parameter beachtet und so den Quadranten des Ergebnisses bestimmen kann (\vgl{}~\cite{atan2}).
 Der Winkel Null wird dabei explizit als $2\pi$ definiert, sodass weiterhin $\gls{winkel}\left(\gls{v}_i, \gls{v}_j\right) = 0$ gilt, falls $\left(\gls{v}_i, \gls{v}_j\right) \notin \gls{E}$.
-Analog zu \gls{Adist} lässt sich damit die Adjazenzmatrix $\gls{Arad} \in {\left[0, 2\pi\right]}^{N \times N}$ über ${\left(\gls{Arad}\right)}_{ij} \coloneqq \gls{winkel}\left(\gls{v}_i, \gls{v}_j\right)$ definieren.
+Analog zu \gls{Adist} lässt sich damit die Adjazenzmatrix $\gls{Arad} \in {\left[0, 2\pi\right]}^{N \times N}$ mit ${\left(\gls{Arad}\right)}_{ij} \coloneqq \gls{winkel}\left(\gls{v}_i, \gls{v}_j\right)$ definieren.
 Es ist anzumerken, dass die Winkelfunktion \gls{winkel} im Gegensatz zur Gewichtsfunktion \gls{w} nicht symmetrisch \bzw{} ungerichtet ist, \dhe{} $\gls{winkel}\left(\gls{v}_i, \gls{v}_i\right) \neq \gls{winkel}\left(\gls{v}_j, \gls{v}_i\right)$.
 Insbesondere definiert \gls{Arad} damit einen gerichteten Graphen.
 
