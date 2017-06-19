@@ -75,7 +75,7 @@ Größere Poolinggrößen müssen ein Vielfaches von zwei sein und können dann 
 \subsection{Erweiterung auf Graphen im zweidimensionalen Raum}
 \label{pooling_erweiterung}
 
-Sei $\gls{G}_l = \left(\gls{V}_l, \gls{E}_l, \gls{p}_l\right)$ ein Graph im zweidimensionalen euklidschen Raum, wobei die Position der Knoten des Graphen eindeutig über die Funktion $\gls{p}_l \colon \gls{V}_l \to \gls{R}^2$ bestimmt ist (\vgl{} Kapitel~\ref{graphrepraesentationen_von_bildern}).
+Sei $\gls{G}_l = \left(\gls{V}_l, \gls{E}_l, \gls{p}_l\right)$ ein Graph im zweidimensionalen euklidischen Raum, wobei die Position der Knoten des Graphen eindeutig über die Funktion $\gls{p}_l \colon \gls{V}_l \to \gls{R}^2$ bestimmt ist (\vgl{} Kapitel~\ref{graphrepraesentationen_von_bildern}).
 Dann lässt sich der mehrstufige Clusteralgorithmus Graclus aus Kapitel~\ref{graphvergroeberung} insofern anpassen, dass dieser die Vergröberung eines Graphen auch in Bezug auf die Position seiner Superknoten in der Ebene wiederspiegelt.
 Sei dafür weiterhin $\gls{v}^* \coloneqq \left\{ \gls{v}_i, \gls{v}_j \right\} \in \gls{V}_{l+1}$, ein Superknoten der Knoten $\gls{v}_i, \gls{v}_j \in \gls{V}_l$.
 Dann ergibt sich die neue Position von $\gls{v}^*$ als
@@ -90,4 +90,4 @@ Wohnt den Knoten in $\gls{G}_l = \left(\gls{V}_l, \gls{E}_l, \gls{p}_l, \gls{m}_
   \gls{p}_{l+1}\left(\gls{v}^*\right) \coloneqq \frac{\gls{m}_l\left(\gls{v}_i\right) \gls{p}_l\left(\gls{v}_i\right) + \gls{m}_l\left(\gls{v}_j\right) \gls{p}_l\left(\gls{v}_j\right)}{\gls{m}_l\left(\gls{v}_i\right) + \gls{m}_l\left(\gls{v}_j\right)}.
 \end{equation*}
 Die neue Masse des Superknotens ergibt sich dann als Vereinigung der Massen $\gls{m}_{l+1}\left(\gls{v}^*\right) \coloneqq \gls{m}_l\left(\gls{v}_i\right) + \gls{m}_l\left(\gls{v}_j\right)$.
-Damit erhält der vergröberte Graph $\gls{G}_{l+1}$ die Positionen und Massen seiner Vorgängerknoten des Graphen $\gls{G}_l$ im zweidimensionalen euklidschen Raum.
+Damit erhält der vergröberte Graph $\gls{G}_{l+1}$ die Positionen und Massen seiner Vorgängerknoten des Graphen $\gls{G}_l$ im zweidimensionalen euklidischen Raum.

@@ -11,35 +11,35 @@ Die Rotationsinvarianz kann folglich sowohl als Einschränkung als auch als Vort
 
 \input{tikz/gcn_review}
 
-Im Kontext dieser Arbeit, dem Lernen auf Graphen im zweidimensionalen euklidschen Raum, bei denen Graphknoten eine eindeutige Position besitzen, ist die Rotationsinvarianz weitestgehend unerwünscht.
+Im Kontext dieser Arbeit, dem Lernen auf Graphen im zweidimensionalen euklidischen Raum, bei denen Graphknoten eine eindeutige Position besitzen, ist die Rotationsinvarianz weitestgehend unerwünscht.
 Das kann leicht verifiziert werden, indem wir den Filter des \glspl{GCN} auf einer Graphrepräsentation eines Gitters mit Abstand $\left\|1\right\|_2$ visualisieren (vgl. Abbildung~\ref{fig:gcn_review}).
 Diese Repräsentation entspricht damit genau dem Problem der zweidimensionalen Faltung auf Bildern mit einer Filtergröße von $3 \times 3$.
 Hier zeigt sich jedoch besonders deutlich die Limitierung des Netzes durch die Rotationsinvarianz.
 Wohingegen wir bei klassischen \glspl{CNN} $3 \times 3$ unterschiedliche Parameter mit eindeutiger Örtlichkeit auf den benachbarten Bildpixeln trainieren, reduziert sich der Filter des \glspl{GCN} (vereinfacht ohne Normalisierung mit $\gls{Dtilde}^{-1/2}$) effektiv zu einer Filtermatrix der Form
 \begin{equation*}
   \begin{bmatrix}
-    ce^{-2/\gls{sigma}^2} & ce^{-1/\gls{sigma}^2} & ce^{-2/\gls{sigma}^2}\\
-    ce^{-1/\gls{sigma}^2} & c & ce^{-1/\gls{sigma}^2}\\
-    ce^{-2/\gls{sigma}^2} & ce^{-1/\gls{sigma}^2} & ce^{-2/\gls{sigma}^2}
+    ce^{-1/\gls{sigma}^2} & ce^{-1/2\gls{sigma}^2} & ce^{-1/\gls{sigma}^2}\\
+    ce^{-1/2\gls{sigma}^2} & c & ce^{-1/2\gls{sigma}^2}\\
+    ce^{-1/\gls{sigma}^2} & ce^{-1/2\gls{sigma}^2} & ce^{-1/\gls{sigma}^2}
   \end{bmatrix} = c \begin{bmatrix}
-    e^{-2/\gls{sigma}^2} & e^{-1/\gls{sigma}^2} & e^{-2/\gls{sigma}^2}\\
-    e^{-1/\gls{sigma}^2} & 1 & e^{-1/\gls{sigma}^2}\\
-    e^{-2/\gls{sigma}^2} & e^{-1/\gls{sigma}^2} & e^{-2/\gls{sigma}^2}
+    e^{-1/\gls{sigma}^2} & e^{-1/2\gls{sigma}^2} & e^{-1/\gls{sigma}^2}\\
+    e^{-1/2\gls{sigma}^2} & 1 & e^{-1/2\gls{sigma}^2}\\
+    e^{-1/\gls{sigma}^2} & e^{-1/2\gls{sigma}^2} & e^{-1/\gls{sigma}^2}
   \end{bmatrix}
 \end{equation*}
-mit einem einzigen trainierbaren Parameter $c \in \gls{R}$ bei horizontalen \bzw{} vertikalen Kantengewichten $\exp\left(-1/\gls{sigma}^2\right) \in \gls{R}$ \bzw{} $\exp\left(-2/\gls{sigma}^2\right) \in \gls{R}$ bei den Diagonalen.
+mit einem einzigen trainierbaren Parameter $c \in \gls{R}$ bei horizontalen \bzw{} vertikalen Kantengewichten nach~\eqref{gauss} mit $\exp\left(-1/2\gls{sigma}^2\right) \in \gls{R}$ \bzw{} mit $\exp\left(-1/\gls{sigma}^2\right) \in \gls{R}$ bei den Diagonalen.
 Damit reduziert sich das Training einer Faltungsschicht eines solchen \glspl{GCN} letztendlich auf eine Skalarmultiplikation.
 Es scheint schwer vorstellbar mit diesem Ansatz komplexe Probleme wie \zB{} das Segmentieren eines Bildes zu lösen~(\vgl{}~\cite{gcn_review}).
 Ein Vergleich zwischen der spektralen Faltung auf regulären Gittergraphen und der klassischen zweidimensionalen Faltung auf Bildern wird der spektralen Faltung aber nicht gerecht, schließlich wurden die klassischen \glspl{CNN} speziell für die Anwendung auf Gittern entwickelt.
 So ist es zu erwarten, dass durch die Formulierung einer Faltung für generelle Graphen gewisse Einschränkungen in Kauf genommen werden müssen.
-Im Folgenden lässt sich der Faltungsoperator der \glspl{GCN} aber insofern modifizieren, dass sich dieser für beliebige Graphen in einem zweidimensionalen euklischen Raum äquivalent zu der klassischen Formulierung auf regulären Gittern verhält.
+Im Folgenden lässt sich der Faltungsoperator der \glspl{GCN} aber insofern modifizieren, dass sich dieser für beliebige Graphen in einem zweidimensionalen euklidischen Raum äquivalent zu der klassischen Formulierung auf regulären Gittern verhält.
 
 \subsection{Partitionierung}
 \label{partitionierung}
 
 \input{tikz/partitionierung}
 
-Sei \gls{G} ein Graph im zweidimensionalen euklidschen Raum, definiert über dessen Adjazenzmatrizen $\gls{Adist} \in {\left[0, 1\right)}^{N \times N}$ und $\gls{Arad} \in {\left[0, 2\pi\right]}^{N \times N}$ (\vgl{} Kapitel~\ref{graphrepraesentationen_von_bildern}).
+Sei \gls{G} ein Graph im zweidimensionalen euklidischen Raum, definiert über dessen Adjazenzmatrizen $\gls{Adist} \in {\left[0, 1\right)}^{N \times N}$ und $\gls{Arad} \in {\left[0, 2\pi\right]}^{N \times N}$ (\vgl{} Kapitel~\ref{graphrepraesentationen_von_bildern}).
 Dann lässt sich \gls{G} in $P \in \gls{N}$ Bereiche ${\left\{\gls{A}_p\right\}}_{p=0}^{P-1}$ \emph{partitionieren}, sodass
 \begin{equation*}
   {\left(\gls{A}_p\right)}_{ij} \coloneqq \begin{cases}
@@ -64,7 +64,7 @@ Analog zu~\eqref{eq:gcn_renorm} muss dafür zuerst die (Re-)normalisierung der F
 mit $\gls{Adisttilde} \coloneqq \gls{Adist} + \gls{I}$ und ${\left(\gls{Ddisttilde}\right)}_{ii} \coloneqq \sum_{j=1}^N {\left(\gls{Adisttilde}\right)}_{ij}$ durchgeführt werden.
 Dies lässt sich mit Hilfe von $\gls{Adist} = \sum_{p=0}^{P-1} \gls{A}_p$ und $\gls{Ddisttilde}^{-1/2}\gls{Ddisttilde}^{-1/2} = \gls{Ddisttilde}^{-1}$ verifizieren.
 Im Folgenden sei $\gls{Atilde}_p \coloneqq \gls{Ddisttilde}^{-1/2}\gls{A}_p\gls{Ddisttilde}^{-1/2}$ für $p \in \left\{0, \ldots, P-1 \right\}$ und $\gls{Atilde}_P \coloneqq \gls{Ddisttilde}^{-1}$.
-Dann folgt für den Faltungsoperatur $\ve{f}_{\mathrm{in}} \star \ve{\hat g}$ auf Graphen im zweidimensionalen euklidschen Raum, dass dieser über
+Dann folgt für den Faltungsoperatur $\ve{f}_{\mathrm{in}} \star \ve{\hat g}$ auf Graphen im zweidimensionalen euklidischen Raum, dass dieser über
 \begin{equation}
   \ve{f}_{\mathrm{in}} \star \ve{\hat g} \approx \sum_{p=0}^P c_p \gls{Atilde}_p \ve{f}_{\mathrm{in}}
   \label{eq:partitionierung_faltung}

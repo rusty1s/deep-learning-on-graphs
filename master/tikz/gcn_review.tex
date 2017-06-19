@@ -28,16 +28,16 @@
   \node[node] (21) at (0, -2) {};
   \node[node] (22) at (2, -2) {};
 
-  \path (10) edge node[shift={(-0.3, 0.3)}]  {$e^{-1/\gls{sigma}^2}$} (11);
-  \path (11) edge node[shift={(0.3, -0.33)}]  {$e^{-1/\gls{sigma}^2}$} (12);
-  \path (01) edge node[shift={(0.65, 0.5)}]   {$e^{-1/\gls{sigma}^2}$} (11);
-  \path (11) edge node[shift={(-0.65, -0.5)}] {$e^{-1/\gls{sigma}^2}$} (21);
-  \path (00) edge node[shift={(-1, 0.2)}]    {$e^{-2/\gls{sigma}^2}$} (11);
-  \path (02) edge node[shift={(1, 0.2)}]     {$e^{-2/\gls{sigma}^2}$} (11);
-  \path (11) edge node[shift={(1, -0.2)}]    {$e^{-2/\gls{sigma}^2}$} (22);
-  \path (20) edge node[shift={(-1, -0.2)}]   {$e^{-2/\gls{sigma}^2}$} (11);
+  \path (10) edge node[shift={(-0.3, 0.3)}]  {$e^{-1/2\gls{sigma}^2}$} (11);
+  \path (11) edge node[shift={(0.3, -0.33)}]  {$e^{-1/2\gls{sigma}^2}$} (12);
+  \path (01) edge node[shift={(0.65, 0.5)}]   {$e^{-1/2\gls{sigma}^2}$} (11);
+  \path (11) edge node[shift={(-0.65, -0.5)}] {$e^{-1/2\gls{sigma}^2}$} (21);
+  \path (00) edge node[shift={(-1, 0.2)}]    {$e^{-1/\gls{sigma}^2}$} (11);
+  \path (02) edge node[shift={(1, 0.2)}]     {$e^{-1/\gls{sigma}^2}$} (11);
+  \path (11) edge node[shift={(1, -0.2)}]    {$e^{-1/\gls{sigma}^2}$} (22);
+  \path (20) edge node[shift={(-1, -0.2)}]   {$e^{-1/\gls{sigma}^2}$} (11);
 \end{tikzpicture}
 }
-\caption[Graphrepräsentation eines regulären Gitters]{Illustration (a) eines $3 \times 3$ großen regulären Gitters zentriert um den Punkt $\left(0, 0\right)$ und (b) dessen lokale Nachbarschaft der entsprechenden Graphrepräsentation mit einer Konnektivität von $8$ bei horizontalen \bzw{} vertikalen Kantengewichten $\exp\left(-1/\gls{sigma}^2\right) \in \gls{R}$ \bzw{} $\exp\left(-2/\gls{sigma}^2\right) \in \gls{R}$ bei den Diagonalen.}
+\caption[Graphrepräsentation eines regulären Gitters]{Illustration (a) eines $3 \times 3$ großen regulären Gitters zentriert um den Punkt $\left(0, 0\right)$ und (b) dessen lokale Nachbarschaft der entsprechenden Graphrepräsentation mit einer Konnektivität von $8$ bei horizontalen \bzw{} vertikalen Kantengewichten mit $\exp\left(-1/2\gls{sigma}^2\right) \in \gls{R}$ \bzw{} mit $\exp\left(-1/\gls{sigma}^2\right) \in \gls{R}$ bei den Diagonalen.}
 \label{fig:gcn_review}
 \end{figure}
