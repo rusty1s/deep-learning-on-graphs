@@ -23,7 +23,7 @@ Falls sich \bspw{} die Werte in $\gls{Smaske}_{y+1,x}$ und $\gls{Smaske}_{y,x}$ 
 \dhe{} $\gls{Smaske}_{y,x} \neq \gls{Smaske}_{y+1,x}$ mit $\gls{Smaske}_{y,x} = i$ und $\gls{Smaske}_{y+1,x}=j$, dann wird den Knoten $\gls{v}_i, \gls{v}_j \in \gls{V}$ über $\left(\gls{v}_i, \gls{v}_j\right) \in \gls{E}$ eine Kante in \gls{G} zugeordnet.
 Formal lassen sich dabei erneut die zwei Konnektivitäten $4$ und $8$ unterscheiden.
 In der Praxis zeigt sich jedoch, dass die Wahl der Konnektivität relativ irrelevant ist und in der Regel aufgrund des erhöhten Flächeninhalts der Superpixel im Vergleich zu einer Gitterrepräsentation annäherend äquivalente Graphrepräsentationen generiert.
-\input{fig/superpixel_graph}
+\input{figures/superpixel_graph}
 Abbildung~\ref{fig:superpixel_graph} illustriert den beschriebenen Prozess der Graphgenerierung aus der Superpixelrepräsentation eines Bildes.
 
 Zusätzlich zu der Positionsfunktion $p$ auf den Superpixelknoten kann der Graph \gls{G} um eine \emph{Massefunktion} $\gls{m} \colon \gls{V} \to \gls{N}$ mit $\gls{m}\left(\gls{v}_n\right) \coloneqq \left|S_n\right|$ zu $\gls{G} = \left(\gls{V}, \gls{E}, \gls{p}, \gls{m}\right)$ erweitert werden, die die Masse \bzw{} den Flächeninhalt der einzelnen Superpixelregionen beschreibt.
