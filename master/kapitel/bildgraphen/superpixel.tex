@@ -37,8 +37,8 @@ Das kann bei der Transformation solcher Graphen in die Adjazenzmatrixrepräsenta
 Eine statische Wahl des Parameters \gls{sigma} führt dann \ggf{} zu Einträgen in \gls{Adist}, die stets sehr nahe bei Eins \bzw{} Null liegen.
 Eine Normierung der Kantenlängen erscheint daher für die Transformation nach \gls{Adist} sinnvoll.
 Eine \emph{Normierung} eines Graphen \gls{G} sieht dafür bei der Transformation nach \gls{Adist} eine Skalierung von ${\left\|\gls{p}\left(\gls{v}_i\right) - \gls{p}\left(\gls{v}_j\right)\right\|}_2^2 \in \gls{R}$ in das Intervall $\left[0, 1\right]$ vor.
-Eine \emph{globale Normierung} von \gls{G} skaliert dabei ${\left\|\gls{p}\left(\gls{v}_i\right) - \gls{p}\left(\gls{v}_j\right)\right\|}_2^2$ über die maximale Kantenlänge ${\left\|\cdot\right\|}_2^2$ des Graphen \gls{G}, wohingegen die \emph{lokale Normierung} eine Skalierung über die maximale Kantenlänge der ausgehenden Kanten von $\gls{v}_i \in \gls{V}$ vorsieht.
-Durch die lokale Normierung wird die Adjazenzmatrix \gls{Adist} insbesondere gerichtet.
+Eine \emph{globale Normierung} von \gls{G} skaliert dabei ${\left\|\gls{p}\left(\gls{v}_i\right) - \gls{p}\left(\gls{v}_j\right)\right\|}_2^2$ über die maximale Kantenlänge ${\left\|\cdot\right\|}_2^2$ aller Kanten des Graphen, wohingegen die \emph{lokale Normierung} lediglich eine Skalierung über die maximale Kantenlänge der ausgehenden Kanten von $\gls{v}_i \in \gls{V}$ vorsieht.
+Durch die lokale Normierung ist die Adjazenzmatrix \gls{Adist} insbesondere gerichtet.
 Ein üblicher Trick, um dem entgegenzuwirken, ist die Aufsummierung von \gls{Adist} mit ihrer transponierten Matrix $\gls{Adist}^{\top}$ und der anschließenden Halbierung ihrer Werte, \dhe{} $\frac{1}{2}\left(\gls{Adist} + \gls{Adist}^{\top}\right)$~\cite{Reuter}.
 
 Es ist anzumerken, dass der normierte Graph, repräsentiert über \gls{Adist}, neben der bereits vorhandenen Translationsinvarianz insbesondere skalierungsinvariant ist.
