@@ -21,8 +21,7 @@ eine eindeutige Position in der Ebene über deren absoluten Schwerpunkt zu.
 Die Kantenrelation \gls{E} des Graphen \gls{G} wird abschließend über die örtlichen Nachbarschaften der Superpixel basierend auf einem $3 \times 3$ Fenster um jeden Pixel in \gls{Smaske} definiert.
 Falls sich \bspw{} die Werte in $\gls{Smaske}_{y+1,x}$ und $\gls{Smaske}_{y,x}$ unterscheiden,
 \dhe{} $\gls{Smaske}_{y,x} \neq \gls{Smaske}_{y+1,x}$ mit $\gls{Smaske}_{y,x} = i$ und $\gls{Smaske}_{y+1,x}=j$, dann wird den Knoten $\gls{v}_i, \gls{v}_j \in \gls{V}$ über $\left(\gls{v}_i, \gls{v}_j\right) \in \gls{E}$ eine Kante in \gls{G} zugeordnet.
-Formal lassen sich dabei erneut die zwei Konnektivitäten $4$ und $8$ unterscheiden.
-In der Praxis zeigt sich jedoch, dass die Wahl der Konnektivität relativ irrelevant ist und in der Regel aufgrund des erhöhten Flächeninhalts der Superpixel im Vergleich zu einer Gitterrepräsentation annäherend äquivalente Graphrepräsentationen generiert.
+Formal lassen sich dabei erneut die zwei Konnektivitäten $4$ und $8$ unterscheiden, für die in der Praxis lediglich ein Unterschied in Bereichen erkennbar ist, deren Superpixelregionen rechteckig aneinander liegen.
 \input{figures/superpixel_graph}
 Abbildung~\ref{fig:superpixel_graph} illustriert den beschriebenen Prozess der Graphgenerierung aus der Superpixelrepräsentation eines Bildes.
 
@@ -41,7 +40,7 @@ Eine \emph{globale Normierung} von \gls{G} skaliert dabei ${\left\|\gls{p}\left(
 Durch die lokale Normierung ist die Adjazenzmatrix \gls{Adist} insbesondere gerichtet.
 Ein üblicher Trick, um dem entgegenzuwirken, ist die Aufsummierung von \gls{Adist} mit ihrer transponierten Matrix $\gls{Adist}^{\top}$ und der anschließenden Halbierung ihrer Werte, \dhe{} $\frac{1}{2}\left(\gls{Adist} + \gls{Adist}^{\top}\right)$~\cite{Reuter}.
 
-Es ist anzumerken, dass der normierte Graph, repräsentiert über \gls{Adist}, neben der bereits vorhandenen Translationsinvarianz insbesondere skalierungsinvariant ist.
+Es ist anzumerken, dass der normierte Graph, repräsentiert als \gls{Adist}, neben der bereits vorhandenen Translationsinvarianz insbesondere skalierungsinvariant ist.
 Im weiteren Verlauf dieser Arbeit wird der Prozess der Normierung eines Graphen implizit angenommen.
 
 \paragraph{Effiziente Kantenbestimmung}
@@ -50,16 +49,13 @@ Im weiteren Verlauf dieser Arbeit wird der Prozess der Normierung eines Graphen 
 Die Bestimmung der Kantenrelation \gls{E} kann aufgrund der Faltung über ein $3 \times 3$ Fenster recht teuer werden.
 Ein eleganteres Verfahren
 
-
 \subsection{Verfahren}
 \label{superpixel_verfahren}
 
 \paragraph{SLIC}
 \label{slic}
 
-\cite{slic}
-
-\emph{Simple Linear Iterative Clustering} (SLIC)
+\emph{\gls{SLIC}}~\cite{slic}
 
 \paragraph{Quickshift}
 \label{quickshift}
