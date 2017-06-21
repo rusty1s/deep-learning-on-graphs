@@ -1,7 +1,7 @@
 \section{Superpixel}
 \label{superpixel}
 
-Superpixel erfreuen sich in allen Anwendungen der Bildverarbeitung, insbesondere als Vorverarbeitungsschritt, immer größerer Beliebtheit, da sie die Eingabegröße eines Problems reduzieren~\cite{Gadde}.
+Superpixel erfreuen sich in allen Anwendungen der Bildverarbeitung, insbesondere als Vorverarbeitungsschritt, immer größerer Beliebtheit, da sie die Eingabegröße eines Problems mit oftmals zu vernachlässigen Fehlern reduzieren~\cite{Gadde}.
 Superpixel fassen dabei ein Bild in logische, räumliche Gruppen anhand ausgewählter Metriken zusammen, auf denen weitergearbeitet werden kann und dessen Pixel sich innerhalb einer Gruppe bestimmte Eigenschaften teilen.
 
 Formal besteht eine \emph{Superpixelrepräsentation} eines Bildes $\gls{B}^{H \times W \times C}$ aus einer Menge von $N \in \gls{N}$ \emph{Superpixeln} \bzw{} \emph{Regionen} $\gls{Smenge} \coloneqq {\left\{\gls{Smenge}_k\right\}}_{n=1}^N$ mit $\gls{Smenge}_n \subseteq W \times H$, sodass $\gls{Smenge}_i \cap \gls{Smenge}_j = \emptyset$ und $\bigcup\limits_{\gls{Smenge}_n \in \gls{Smenge}} \gls{Smenge}_n = W \times H$~\cite{super}.
