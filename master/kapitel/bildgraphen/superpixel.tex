@@ -18,7 +18,7 @@ Die Positionsfunktion $\gls{p} \colon \gls{V} \to \gls{R}^2$ ordnet den einzelne
   \gls{p}\left(\gls{v}_n\right) \coloneqq {\left[\bar{x}, \bar{y}\right]}^{\top} =  \frac{1}{\left|\gls{Smenge}_n\right|}\sum_{\left(x,y\right) \in \gls{Smenge}_n} {\left[x, y\right]}^{\top}
 \end{equation*}
 eine eindeutige Position in der Ebene über deren absoluten Schwerpunkt zu.
-Die Kantenrelation \gls{E} des Graphen \gls{G} wird abschließend über die örtlichen Nachbarschaften der Superpixel basierend auf einem $3 \times 3$ Fenster um jeden Pixel in \gls{Smaske} definiert.
+Die Kantenrelation \gls{E} des Graphen \gls{G} wird abschließend über die örtlichen Nachbarschaften der Superpixel basierend auf einem $3 \times 3$ Fenster um jedes Pixel in \gls{Smaske} definiert.
 Falls sich \bspw{} die Werte in $\gls{Smaske}_{y+1,x}$ und $\gls{Smaske}_{y,x}$ unterscheiden,
 \dhe{} $\gls{Smaske}_{y,x} \neq \gls{Smaske}_{y+1,x}$ mit $\gls{Smaske}_{y,x} = i$ und $\gls{Smaske}_{y+1,x}=j$, dann wird den Knoten $\gls{v}_i, \gls{v}_j \in \gls{V}$ über $\left(\gls{v}_i, \gls{v}_j\right) \in \gls{E}$ eine Kante in \gls{G} zugeordnet.
 Formal lassen sich dabei erneut die zwei Konnektivitäten $4$ und $8$ unterscheiden, für die in der Praxis lediglich ein Unterschied in Bereichen erkennbar ist, deren Superpixelregionen rechteckig als Gitter aneinander liegen.
@@ -43,11 +43,19 @@ Ein üblicher Trick, um dem entgegenzuwirken, ist die Aufsummierung von \gls{Adi
 Es ist anzumerken, dass der normierte Graph, repräsentiert als \gls{Adist}, neben der bereits vorhandenen Translationsinvarianz insbesondere skalierungsinvariant ist.
 Im weiteren Verlauf dieser Arbeit wird der Prozess der Normierung eines Graphen implizit angenommen.
 
-\paragraph{Effiziente Kantenbestimmung}
-\label{kantenbestimmung}
+\paragraph{Effiziente Adjazenzbestimmung}
+\label{adjazenzbestimmung}
 
-Die Bestimmung der Kantenrelation \gls{E} kann aufgrund der Faltung über ein $3 \times 3$ Fenster recht teuer werden.
-Ein eleganteres Verfahren
+Die Bestimmung einer Kantenrelation \gls{E} auf einer Superpixelrepräsentation kann aufgrund der pixelweisen Iteration auf der Segmentierungsmaske und dem sukzessiven Vergleich mit den jeweiligen Nachbarspixeln über ein $3 \times 3$ Fenster recht teuer werden.
+Eine effizientere und zugleich elegantere Bestimmung einer Kantenrelation als ungewichtete Adjazenzmatrix kann über eine versetzte Überlagerung der Segmentierungsmasken gewonnen werden.
+Sei dafür $\gls{Smaske} \in {\left\{1, \ldots N\right\}}^{H \times W}$ eine Segmentierungsmaske.
+Dann wird für die vertikale Adjazenzbestimmung die oberste und unterste Reihe aus \gls{Smaske} abgeschnitten und in $\gls{Smaske}_{\uparrow}, \gls{Smaske}_{\downarrow} \in {\left\{1, \ldots N\right\}}^{H-1 \times W}$ gespeichert.
+$\gls{Smaske}_{\uparrow}$ und $\gls{Smaske}_{\downarrow}$ werden anschließend paarweise auf Ungleichheit getestet und dessen boolsches Ergebnis in einer Binärmaske gespeichert.
+Liegen dabei ungleiche Einträge vor, so ist eine vertikale Adjazenz zwischen zwei unterschiedlichen Regionen vorhanden.
+Die unterschiedlichen Einträge $i,j \in \left\{1, \ldots N \right\}$ in $\gls{Smaske}_{\uparrow}$ und $\gls{Smaske}_{\downarrow}$ an den Indizes der wahren Einträge in der Binärmaske bilden folglich die Knotenindizes einer Kante benachbarter Regionen und werden in eine Adjazenzmatrix übertragen.
+Analog wird für die horizontale Adjazenzbestimmung vorgegangen.
+Die Veroderung $\gls{A} \vee \gls{A}^{\top}$ liefert dann die resultierende ungerichtete, ungewichtete Adjazenzmatrix.
+Abbildung~\ref{fig:adjazenz} illustriert das Verfahren anhand eines einfachen Beispiels.
 
 \subsection{Verfahren}
 \label{superpixel_verfahren}
