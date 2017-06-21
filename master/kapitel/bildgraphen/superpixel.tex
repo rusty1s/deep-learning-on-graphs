@@ -21,7 +21,7 @@ eine eindeutige Position in der Ebene über deren absoluten Schwerpunkt zu.
 Die Kantenrelation \gls{E} des Graphen \gls{G} wird abschließend über die örtlichen Nachbarschaften der Superpixel basierend auf einem $3 \times 3$ Fenster um jeden Pixel in \gls{Smaske} definiert.
 Falls sich \bspw{} die Werte in $\gls{Smaske}_{y+1,x}$ und $\gls{Smaske}_{y,x}$ unterscheiden,
 \dhe{} $\gls{Smaske}_{y,x} \neq \gls{Smaske}_{y+1,x}$ mit $\gls{Smaske}_{y,x} = i$ und $\gls{Smaske}_{y+1,x}=j$, dann wird den Knoten $\gls{v}_i, \gls{v}_j \in \gls{V}$ über $\left(\gls{v}_i, \gls{v}_j\right) \in \gls{E}$ eine Kante in \gls{G} zugeordnet.
-Formal lassen sich dabei erneut die zwei Konnektivitäten $4$ und $8$ unterscheiden, für die in der Praxis lediglich ein Unterschied in Bereichen erkennbar ist, deren Superpixelregionen rechteckig aneinander liegen.
+Formal lassen sich dabei erneut die zwei Konnektivitäten $4$ und $8$ unterscheiden, für die in der Praxis lediglich ein Unterschied in Bereichen erkennbar ist, deren Superpixelregionen rechteckig als Gitter aneinander liegen.
 \input{figures/superpixel_graph}
 Abbildung~\ref{fig:superpixel_graph} illustriert den beschriebenen Prozess der Graphgenerierung aus der Superpixelrepräsentation eines Bildes.
 
