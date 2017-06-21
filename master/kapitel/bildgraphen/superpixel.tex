@@ -44,6 +44,13 @@ Ein üblicher Trick, um dem entgegenzuwirken, ist die Aufsummierung von \gls{Adi
 Es ist anzumerken, dass der normierte Graph, repräsentiert über \gls{Adist}, neben der bereits vorhandenen Translationsinvarianz insbesondere skalierungsinvariant ist.
 Im weiteren Verlauf dieser Arbeit wird der Prozess der Normierung eines Graphen implizit angenommen.
 
+\paragraph{Effiziente Kantenbestimmung}
+\label{kantenbestimmung}
+
+Die Bestimmung der Kantenrelation \gls{E} kann aufgrund der Faltung über ein $3 \times 3$ Fenster recht teuer werden.
+Ein eleganteres Verfahren
+
+
 \subsection{Verfahren}
 \label{superpixel_verfahren}
 
@@ -76,9 +83,6 @@ and certain neighboring pixels are connected by undirected edges. Weights on eac
 edge measure the dissimilarity between pixels. However, unlike the classical methods,
 our technique adaptively adjusts the segmentation criterion based on the degree of
 variability in neighboring regions of the image~\cite{felzenszwalb}
-
-\subsection{Adjazenzmatrixbestimmung}
-\label{adjazenzmatrixbestimmung}
 
 \subsection{Merkmalsextraktion}
 \label{merkmalsextraktion}
