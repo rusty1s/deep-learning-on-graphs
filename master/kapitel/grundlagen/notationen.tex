@@ -6,5 +6,14 @@
 % Diagonalmatrix
 % skalarprodukt
 
-Ein Bild kann folglich durch einen dreidimensionalen Tensor $\gls{B} \in {\left[0, 1\right]}^{H \times W \times C}$ repräsentiert werden, wobei $H, W \in \gls{N}$ die Höhe \bzw{} Breite des Bildes angeben und $C \in \left\{1, 3\right\}$ die Anzahl der Farbkanäle des Bildes beschreibt, \dhe{} ein Graubild mit nur einem Kanal oder ein Farbbild mit drei Kanälen (\zB{} über das RGB-Farbmodell).
+\paragraph{Bilder}
+
+Ein \emph{Bild} kann folglich durch einen dreidimensionalen Tensor $\gls{B} \in {\left[0, 1\right]}^{H \times W \times C}$ repräsentiert werden, wobei $H, W \in \gls{N}$ die Höhe \bzw{} Breite des Bildes angeben und $C \in \left\{1, 3\right\}$ die Anzahl der Farbkanäle des Bildes beschreibt, \dhe{} ein Graubild mit nur einem Kanal oder ein Farbbild mit drei Kanälen (\zB{} über das RGB-Farbmodell).
 Die Werte der einzelnen Farbkanäle des Bildes werden dabei auf $\left[0, 1\right]$ skaliert.
+
+\paragraph{Dünnbesetzte Matrizen}
+
+Eine \emph{dünnbesetzte} oder \emph{schwachbesetzte Matrix} ist eine Matrix, bei der so viele Einträge aus Nullen bestehen, dass diese nicht explizit mitgespeichert werden müssen.
+In der Regel gilt eine Matrix $\ma{M}\in \gls{R}^{N \times N}$ als dünnbesetzt, wenn diese nicht aus mehr als $N$ oder $N \log N$ Einträgen ungleich Null besteht.
+Damit ergeben sich Möglichkeiten hinsichtlich Operationen und Speicherung, schneller zu sein, da nicht alle Werte der Matrix betrachtet werden müssen.
+Es gibt jedoch auch Operationen, die nicht auf dünnbesetzten Matritzen definiert sind, sodass diese vorher in eine \emph{dichte} Matrix überführt werden müssen (\vgl{}~\cite{Saad}).

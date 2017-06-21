@@ -1,9 +1,10 @@
 \section{Superpixel}
 \label{superpixel}
 
-\todo{intro}
+Superpixel erfreuen sich in allen Anwendungen der Bildverarbeitung, insbesondere als Vorverarbeitungsschritt, immer größerer Beliebtheit, da sie die Eingabegröße eines Problems reduzieren~\cite{Gadde}.
+Superpixel fassen dabei ein Bild in logische, räumliche Gruppen anhand ausgewählter Metriken zusammen, auf denen weitergearbeitet werden kann und dessen Pixel sich innerhalb einer Gruppe bestimmte Eigenschaften teilen.
 
-Eine \emph{Superpixelrepräsentation} eines Bildes $\gls{B}^{H \times W \times C}$ besteht aus einer Menge von $N \in \gls{N}$ \emph{Superpixeln} \bzw{} \emph{Regionen} $\gls{Smenge} \coloneqq {\left\{\gls{Smenge}_k\right\}}_{n=1}^N$ mit $\gls{Smenge}_n \subseteq W \times H$, sodass $\gls{Smenge}_i \cap \gls{Smenge}_j = \emptyset$ und $\bigcup\limits_{\gls{Smenge}_n \in \gls{Smenge}} \gls{Smenge}_n = W \times H$~\cite{super}.
+Formal besteht eine \emph{Superpixelrepräsentation} eines Bildes $\gls{B}^{H \times W \times C}$ aus einer Menge von $N \in \gls{N}$ \emph{Superpixeln} \bzw{} \emph{Regionen} $\gls{Smenge} \coloneqq {\left\{\gls{Smenge}_k\right\}}_{n=1}^N$ mit $\gls{Smenge}_n \subseteq W \times H$, sodass $\gls{Smenge}_i \cap \gls{Smenge}_j = \emptyset$ und $\bigcup\limits_{\gls{Smenge}_n \in \gls{Smenge}} \gls{Smenge}_n = W \times H$~\cite{super}.
 Für eine gültige Superpixelsegmentierung fordern wir desweiteren, dass $\gls{Smenge}_n$ zusammenhängend ist~\cite{super}.
 Aus der Menge an Superpixeln \gls{Smenge} lässt sich damit eine \emph{Segmentierungsmaske} $\gls{Smaske} \in {\left\{1, \ldots, N\right\}}^{H \times W}$ über
 \begin{equation*}
@@ -13,12 +14,12 @@ gewinnen, die jedem Pixel in \gls{B} eine eindeutige Superpixelzugehörigkeit $n
 
 Aus einer Superpixelrepräsentation \gls{Smenge} \bzw{} \gls{Smaske} eines Bildes \gls{B} kann ein Graph im zweidimensionalen euklidischen Raum $\gls{G}=\left(\gls{V}, \gls{E}, \gls{p}\right)$ wie folgt definiert werden.
 Seien dafür die einzelnen Superpixel $\gls{Smenge} = {\left\{\gls{Smenge}_n\right\}}_{n=1}^N$ die Knoten $\gls{V} = {\left\{\gls{v}_n\right\}}_{n=1}^N$ des Graphen \gls{G}, \dhe{} $\gls{v}_n = \gls{Smenge}_n$.
-Die Positionsfunktion $\gls{p} \colon \gls{V} \to \gls{R}^2$ ordnet den einzelnen Superpixeln über
+Dann ordnet die Positionsfunktion $\gls{p} \colon \gls{V} \to \gls{R}^2$ den einzelnen Superpixeln über
 \begin{equation*}
   \gls{p}\left(\gls{v}_n\right) \coloneqq {\left[\bar{x}, \bar{y}\right]}^{\top} =  \frac{1}{\left|\gls{Smenge}_n\right|}\sum_{\left(x,y\right) \in \gls{Smenge}_n} {\left[x, y\right]}^{\top}
 \end{equation*}
 eine eindeutige Position in der Ebene über deren absoluten Schwerpunkt zu.
-Die Kantenrelation \gls{E} des Graphen \gls{G} wird abschließend über die örtlichen Nachbarschaften der Superpixel basierend auf einem $3 \times 3$ Fenster um jedes Pixel in \gls{Smaske} definiert.
+Die Kantenrelation \gls{E} des Graphen \gls{G} wird desweiteren über die örtlichen Nachbarregionen der Superpixel basierend auf einem $3 \times 3$ Fenster um die Pixel in \gls{Smaske} definiert.
 Falls sich \bspw{} die Werte in $\gls{Smaske}_{y+1,x}$ und $\gls{Smaske}_{y,x}$ unterscheiden,
 \dhe{} $\gls{Smaske}_{y,x} \neq \gls{Smaske}_{y+1,x}$ mit $\gls{Smaske}_{y,x} = i$ und $\gls{Smaske}_{y+1,x}=j$, dann wird den Knoten $\gls{v}_i, \gls{v}_j \in \gls{V}$ über $\left(\gls{v}_i, \gls{v}_j\right) \in \gls{E}$ eine Kante in \gls{G} zugeordnet.
 Formal lassen sich dabei erneut die zwei Konnektivitäten $4$ und $8$ unterscheiden, für die in der Praxis lediglich ein Unterschied in Bereichen erkennbar ist, deren Superpixelregionen rechteckig als Gitter aneinander liegen.
@@ -48,7 +49,6 @@ Im weiteren Verlauf dieser Arbeit wird der Prozess der Normierung eines Graphen 
 
 Die Bestimmung einer Kantenrelation \gls{E} auf einer Superpixelrepräsentation kann aufgrund der pixelweisen Iteration auf der Segmentierungsmaske und dem sukzessiven Vergleich mit den jeweiligen Nachbarspixeln über ein $3 \times 3$ Fenster recht teuer werden.
 Eine effizientere und zugleich elegantere Bestimmung einer Kantenrelation als ungewichtete Adjazenzmatrix kann über eine versetzte Überlagerung der Segmentierungsmasken gewonnen werden.
-\input{tikz/adjazenz}
 Sei dafür $\gls{Smaske} \in {\left\{1, \ldots N\right\}}^{H \times W}$ eine Segmentierungsmaske.
 Dann wird für die vertikale Adjazenzbestimmung die oberste und unterste Reihe aus \gls{Smaske} abgeschnitten und in $\gls{Smaske}_{\uparrow}, \gls{Smaske}_{\downarrow} \in {\left\{1, \ldots N\right\}}^{H-1 \times W}$ gespeichert.
 $\gls{Smaske}_{\uparrow}$ und $\gls{Smaske}_{\downarrow}$ werden anschließend paarweise auf Ungleichheit getestet und dessen boolsches Ergebnis in einer Binärmaske $\left(\gls{Smaske}_{\uparrow} \neq \gls{Smaske}_{\downarrow}\right)$ gespeichert.
@@ -56,6 +56,7 @@ Liegen dabei wahre, \dhe{} ungleiche Einträge vor, so ist eine vertikale Adjaze
 Die Einträge $i,j \in \left\{1, \ldots N \right\}$ in $\gls{Smaske}_{\uparrow}$ und $\gls{Smaske}_{\downarrow}$ an den Indizes der wahren Einträge in der Binärmaske bilden folglich die Knotenindizes einer Kante benachbarter Regionen und werden in eine Adjazenzmatrix übertragen.
 Analog wird für die horizontale Adjazenzbestimmung vorgegangen.
 Die Veroderung $\gls{A} \vee \gls{A}^{\top}$ liefert dann die resultierende ungerichtete, ungewichtete Adjazenzmatrix (\vgl{}~\cite{stackoverflow}).
+\input{tikz/adjazenz}
 Abbildung~\ref{fig:adjazenz} illustriert das Verfahren anhand eines einfachen Beispiels.
 
 \subsection{Verfahren}
@@ -66,6 +67,8 @@ Abbildung~\ref{fig:adjazenz} illustriert das Verfahren anhand eines einfachen Be
 
 \emph{\gls{SLIC}}~\cite{slic}
 
+Practically, we use the SLIC superpixels for their runtime and for their lower quantization error to decompose the image into superpixels~\cite{Gadde}.
+
 \paragraph{Quickshift}
 \label{quickshift}
 
@@ -74,7 +77,7 @@ Abbildung~\ref{fig:adjazenz} illustriert das Verfahren anhand eines einfachen Be
 \paragraph{Weitere Verfahren}
 \label{weitere_superpixel_verfahren}
 
-In der Literatur finden sich zahlreiche weitere Verfahren zur Bestimmung einer Superpixelrepräsentation aus einem Bild mit jeweils unterschiedlichen Stärken und Schwächen~\cite{super, super2}.
+In der Literatur finden sich zahlreiche weitere Verfahren zur Bestimmung einer Superpixelrepräsentation aus einem Bild mit jeweils unterschiedlichen Stärken und Schwächen~\cite{super, slic}.
 While the past few years have seen considerable progress in eigenvector-based
 methods of image segmentation, these methods are too slow to be
 practical for many applications.~\cite{felzenszwalb}.
@@ -93,7 +96,7 @@ variability in neighboring regions of the image~\cite{felzenszwalb}
 \label{merkmalsextraktion}
 
 Die Darstellung eines Bildes über einen Graphen \gls{G}, der aus einer Superpixelrepräsentation \gls{Smenge} gewonnen wurde, besitzt in der Regel weitaus weniger Knoten im Gegensatz zu der reinen Darstellung des Bildes über eine Gitterrepräsentation.
-Die Superpixel \bzw{} die Regionen der Segmentierungsmaske können dabei die willkürlichsten Formen annehmen und besitzen lediglich die Einschränkung, dass diese stets zusammenhängend sind und keinerlei Löcher besitzen.
+Die Superpixel \bzw{} die Regionen der Segmentierungsmaske können dabei die willkürlichsten Formen annehmen und besitzen lediglich die Einschränkung, dass diese stets zusammenhängend sind.
 Die Form eines Superpixels muss demnach bestmöglichst eingefangen \bzw{} beschrieben werden können — ein Prozess, der in der Bildverarbeitung als \emph{Merkmalsextraktion} bekannt ist~\cite{momente}.
 Ein geeigntes Mittel zur Beschreibung einzelner Objekte in einem segmentierten Bild sind die \emph{Momente}, welche in nicht-zentrierte, translationsinvariante, skalierungsinvariante und rotationsinvariante Momente unterschieden werden~\cite{momente}.
 
