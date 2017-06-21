@@ -1,0 +1,48 @@
+\begin{figure}[t]
+\centering
+\subfigure[]{
+$\begin{aligned}
+  \gls{Smaske} = \begin{bmatrix}
+    1 & 1 & 2 & 3\\
+    1 & 2 & 2 & 3\\
+    1 & 1 & 4 & 4
+  \end{bmatrix}
+\end{aligned}$
+\begin{tikzpicture}[overlay]
+  \draw[thick] (-1.85, 0.39) -- (-1.35, 0.39);
+  \draw[thick] (-1.85, -0.125) -- (-0.275, -0.125);
+\end{tikzpicture}
+}
+\subfigure[]{
+$\begin{aligned}
+  \gls{Smaske}_{\uparrow} = & \begin{bmatrix}
+      1 & 2 & 2 & 3\\
+      1 & 1 & 4 & 4
+    \end{bmatrix}\\
+      \gls{Smaske}_{\downarrow} = & \begin{bmatrix}
+      1 & 1 & 2 & 3\\
+      1 & 2 & 2 & 3
+    \end{bmatrix}\\
+    \left(\gls{Smaske}_{\uparrow} \neq \gls{Smaske}_{\downarrow}\right) = & \begin{bmatrix}
+      \times & \checkmark & \times & \times\\
+      \times & \checkmark & \checkmark & \checkmark\\
+    \end{bmatrix}
+\end{aligned}$
+}
+\subfigure[]{
+  $\begin{aligned}
+    \left(2,1\right) \in \gls{E},\,\,\,\, & \left(1,2\right) \in \gls{E}\\
+    \left(4,2\right) \in \gls{E},\,\,\,\, & \left(4,3\right) \in \gls{E}\\
+    \left(\gls{A} \vee \gls{A}^{\top}\right) = & \begin{bmatrix}
+    0 & 1 & 0 & 0\\
+    1 & 0 & 0 & 1\\
+    0 & 0 & 0 & 1\\
+    0 & 1 & 1 & 0
+  \end{bmatrix}
+\end{aligned}$
+}
+  \caption[Effiziente Adjazenzbestimmung einer Segmentierungsmaske]{Adjazenzbestimmung einer Segmentierungsmaske $\gls{Smaske} \in {\left\{1,2,3,4\right\}}^{3 \times 4}$ mit eingezeichneten vertikalen Adjazenzen (a).
+  Daraus lassen sich $\gls{Smaske}_{\uparrow}$, $\gls{Smaske}_{\downarrow}$ sowie $\gls{Smaske}_{\uparrow} \neq \gls{Smaske}_{\downarrow}$ bestimmen (b).
+  Die Einträge in $\gls{Smaske}_{\uparrow}$ und $\gls{Smaske}_{\downarrow}$ an den Indizes der wahren Werte in $\gls{Smaske}_{\uparrow} \neq \gls{Smaske}_{\downarrow}$ bilden jeweils eine Kante im Graphen (c).}
+\label{fig:adjazenz}
+\end{figure}
