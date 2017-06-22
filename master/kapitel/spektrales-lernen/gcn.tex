@@ -10,7 +10,7 @@ Sei $\ve{f}_{\mathrm{in}} \star \ve{\hat g} \approx \sum_{k=0}^K c_k \gls{T}_k\l
 Dann ist $\ve{f}_{\mathrm{in}} \star \ve{\hat g}$ eine lineare Funktion \bzgl{} \gls{Lboth} und damit eine lineare Funktion auf dem Spektrum des Graphen~\cite{gcn}.
 Mit $K=1$ betrachtet der spektrale Faltungsoperator nur noch die lokale Nachbarschaft eines jeden Knotens (\vgl{}~\ref{polynomielle_approximation}).
 Es ist anzumerken, dass dies in der Regel keinen Nachteil darstellt.
-So hat es sich bei gegenwärtigen \enquote{State-of-the-Art}-\glspl{CNN} auf Bildern ebenfalls eingebürgert, nur noch über minimale $3\times3$ Filtergrößen zu falten und stattdessen Merkmale weit entfernterer Knoten über die mehrfache Aneinanderreihung der Faltungsschichten mittels tieferer Netze zu gewinnen~(\vgl{}~\cite{gcn, vgg, He}).
+So hat es sich bei gegenwärtigen \enquote{State-of-the-Art}-\glspl{CNN} auf Bildern ebenfalls bewährt, nur noch über minimale $3\times3$ Filtergrößen zu falten und stattdessen Merkmale weit entfernterer Knoten über die mehrfache Aneinanderreihung der Faltungsschichten mittels tieferer Netze zu gewinnen~(\vgl{}~\cite{gcn, vgg, He}).
 Unter dieser Restriktion vereinfacht sich $\ve{f}_{\mathrm{in}} \star \ve{\hat g}$ zu
 \begin{equation}
   \ve{f}_{\mathrm{in}} \star \ve{\hat g} \approx c_0\, \ve{f}_{\mathrm{in}} + c_1 \left(\frac{2}{\gls{lambdamax}}\gls{Lboth} - \gls{I}\right)\ve{f}_{\mathrm{in}}
@@ -75,7 +75,7 @@ Dieser Prozess wiederholt sich solange, bis eine stabile Knotenfärbung gefunden
 Sei die Hashfunktion nun gegeben als eine differenzierbare, nicht-lineare Aktivierungsfunktion $\gls{act} \colon \gls{R} \to \gls{R}$, \bspw{} $\gls{relu}\left(\cdot\right) \coloneqq \max\left(\cdot, 0\right)$, eines neuronalen Netzes.
 Dann ergibt sich eine Faltungsschicht des \glspl{GCN} durch die Verkettung des Faltungsoperators mit anschließender Aktivierung als
 \begin{equation*}
-  \ve{h}^{\left(t+1\right)}_i = \gls{act}\left(\sum_{\gls{v}_j \in \gls{Neighbor}\left(\gls{v}_i\right)} \frac{1}{\sqrt{d_i d_j}} \ve{h}^{\left(t\right)}_j \gls{W}^(\left(t\right)) \right),
+  \ve{h}^{\left(t+1\right)}_i = \gls{act}\left(\sum_{\gls{v}_j \in \gls{Neighbor}\left(\gls{v}_i\right)} \frac{1}{\sqrt{d_i d_j}} \ve{h}^{\left(t\right)}_j \gls{W}^{\left(t\right)} \right),
 \end{equation*}
 wobei $1/\sqrt{d_i d_j} \in \gls{R}$ die Normalisierungskonstante für die Kante $\left(\gls{v}_i, \gls{v}_j\right) \in \gls{E}$ entsprechend der Normalisierung $\gls{Dtilde}^{-1/2}\gls{Atilde}\gls{Dtilde}^{-1/2}$ aus~\eqref{eq:gcn_renorm} und $\gls{W}^{\left(t\right)} \in \gls{R}^{N \times N}$ die Filtermatrix der $t$-en Faltungsschicht beschreibt~\cite{gcn}.
 Folglich kann die Faltung des \glspl{GCN} als \enquote{differenzierbare und parametrisierte Generalisierung des eindimensionalen Weisfeiler-Lehman Algorithmus auf Graphen} verstanden werden~\cite{gcn}.

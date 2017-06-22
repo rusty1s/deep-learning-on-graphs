@@ -18,7 +18,7 @@ Damit können größere Poolinggrößen über die mehrfache Anwendung des Cluste
 
 Es existieren eine Reihe von Clustertechniken auf Graphen~\cite{Luxburg, graclus, Defferrard}.
 \citeauthor{Defferrard} benutzen für die Poolingschicht eines Netzes auf Graphen die \emph{Vergröberungsphase} des mehrstufigen Clusteralgorithmus \emph{Graclus}~\cite{graclus}.
-Graclus zeigt sich dabei als besonders erfolgreich über einer Vielzahl von Graphen bei minimaler berechnungsintensiver Komplexität~\cite{Defferrard}.
+Graclus zeigt sich dabei als besonders erfolgreich über einer Vielzahl von Graphen bei minimaler Berechnungskomplexität~\cite{Defferrard}.
 Abbildung~\ref{fig:clustering} illustriert den Ablauf des Algorithmus.
 \input{tikz/clustering}
 Dabei wird ein initialer Graph $\gls{G}_0$ sukzessive in kleinere Graphen $\gls{G}_1, \gls{G}_2, \ldots, \gls{G}_L$ mit $\left|\gls{V}_0\right| > \left|\gls{V}_1\right| > \cdots > |\gls{V}_L|$, $L \in \gls{N}$, transformiert~\cite{graclus}.
@@ -52,21 +52,21 @@ Damit kann der Prozess des Clusterings bereits als ein Augmentierungsschritt der
 
 Ein tiefes neuronales Netz besitzt für gewöhnlich viele Poolingschichten.
 Eine Poo\-ling-Operation auf den Merkmalen der Graphknoten muss folglich vorallem effizient sein.
-Ein naiver Ansatz dafür ist eine \enquote{Lookup}-Tabelle, in der die Verbindungen der Knoten zu ihren Superknoten gespeichert sind.
+Ein naiver Ansatz dafür ist eine \emph{Lookup-Tabelle}, in der die Verbindungen der Knoten zu ihren Superknoten gespeichert sind.
 Eine Poolingoperation muss demnach für jedes Cluster ihre Knoten in der Tabelle referenzieren und ihre Operation auf diesen vollführen.
 Das resultiert in einer extrem speicherineffizienten, langsamen und schwer zu parallelisierenden Implementierung~\cite{Defferrard}.
 Es ist jedoch möglich, die Knoten des Graphen so anzuordnen, dass eine Poolingoperation auf diesen in linearer Zeit, \dhe{} $\gls{O}\left(N\right)$, realisiert werden kann~\cite{Defferrard}.
 
 \input{tikz/pooling}
 
-Nach jedem Vergröberungsschritt besitzt ein Knoten entweder genau einen oder zwei Kinder, jenachdem ob es zum Zeitpunkt der Betrachtung noch einen unmarkierten Nachbarn gibt.
-Falls ein Knoten \gls{v} im Graphen $\gls{G}_{l+1}$ nur ein Kind besitzt, so wird ein \enquote{Fake}-Knoten ohne Kanten in den Graphen $\gls{G}_l$ hinzugefügt~\cite{Defferrard}.
+Nach jedem Vergröberungsschritt besitzt ein Knoten entweder genau einen oder zwei Kinder, je nachdem ob es zum Zeitpunkt der Betrachtung noch einen unmarkierten Nachbarn gibt.
+Falls ein Knoten \gls{v} im Graphen $\gls{G}_{l+1}$ nur ein Kind besitzt, so wird ein \emph{Fakeknoten} ohne Kanten in den Graphen $\gls{G}_l$ hinzugefügt~\cite{Defferrard}.
 Damit besitzt jeder Knoten folglich nun immer zwei Kinder.
 Foglich kann über die Eltern-Kind-Beziehung von der $L$-ten bis zur $0$-ten Stufe ein balancierter, binärer Baum aufgebaut werden.
-Reguläre Knoten aus dem Graphen besitzen damit entweder (a) genau zwei reguläre Knoten, (b) einen regulären Knoten und einen \enquote{Fake}-Knoten als Kinder und (c) \enquote{Fake-Knoten} besitzen immer genau zwei \enquote{Fake}-Knoten als Kinder~\cite{Defferrard}.
+Reguläre Knoten aus dem Graphen besitzen damit entweder (a) genau zwei reguläre Knoten, (b) einen regulären Knoten und einen Fakeknoten als Kinder und (c) Fakeknoten besitzen immer genau zwei Fakeknoten als Kinder~\cite{Defferrard}.
 Abbildung~\ref{fig:pooling} illustriert die Konstruktion eines solchen Baumes.
-Die Merkmale an den \enquote{Fake}-Knoten eines Graphen werden mit einem neutralen Wert initialisiert, \dhe{} \zB{} mit Null bei einem Netz mit \gls{relu}-Aktivierungsfunktion und der Verwendung von Max-Pooling als Poolingoperation~\cite{Defferrard}.
-Ebenso kann auf diesen \enquote{Fake}-Knoten weiterhin ohne Einschränkungen gefaltet werden, da sie keinerlei Nachbarsknoten besitzen.
+Die Merkmale an den Fakeknoten eines Graphen werden mit einem neutralen Wert initialisiert, \dhe{} \zB{} mit Null bei einem Netz mit \gls{relu}-Aktivierungsfunktion und der Verwendung von Max-Pooling als Poolingoperation~\cite{Defferrard}.
+Ebenso kann auf diesen Fakeknoten weiterhin ohne Einschränkungen gefaltet werden, da sie keinerlei Nachbarsknoten besitzen.
 Die Anordnung der Knoten zu einem balancierten, binären Baum liefert uns eine Ordnung auf den Knoten von $\gls{G}_0$ bis $\gls{G}_{L-1}$, auf der wir eine Poolingoperation völlig analog zu einem eindimensionalen Gitter mit einer Größe und Schrittweise von zwei definieren können~\cite{Defferrard}.
 Diese Anordnung der Knoten macht den Prozess des Poolings extrem effizient und erlaubt ebenso eine parallele Verarbeitungsarchikektur auf GPUs~\cite{Defferrard}.
 

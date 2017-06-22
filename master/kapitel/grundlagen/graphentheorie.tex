@@ -17,7 +17,7 @@ Für den weiteren Verlauf dieser Arbeit fordern wir, solange nicht explizit ande
 Ein Graph $\gls{G} = \left(\gls{V}, \gls{E}, \gls{w}\right)$ kann weiterhin eindeutig über dessen (in der Regel dünnbesetzte) \emph{Adjazenzmatrix} $\gls{A} \in \gls{R+}^{N \times N}$ mit $\gls{A}_{ij} \coloneqq \gls{w}\left(\gls{v}_i, \gls{v}_j\right)$ definiert werden~\cite{Defferrard}.
 Als \emph{Grad} eines Knotens $\gls{v} \in \gls{V}$ wird die Anzahl der Knoten bezeichnet, die adjazent zu ihm sind, \dhe{} $\gls{degree}\left(\gls{v}\right) \coloneqq \left|\gls{Neighbor}\left(\gls{v}\right)\right|$.
 Im Falle von gewichteten Graphen wird der Grad eines Knotens von $\gls{v}_i \in \gls{V}$ auch oft über $\gls{d}\left(v_i\right) \coloneqq \sum^N_{j=1} \gls{A}_{ij}$ definiert~\cite{Defferrard}.
-Die unterschiedliche Notation macht deutlich, wann wir welchen Grad eines Knotens meinen.
+Die unterschiedliche Notation macht deutlich, welcher Grad eines Knotens gemeint ist.
 Die \emph{Gradmatrix} $\gls{D} \in \gls{R+}^{N \times N}$ eines Graphen \gls{G} ist dann definiert als Diagonalmatrix $\gls{D} \coloneqq \gls{diag}\left( {\left[ \gls{d}\left(v_1\right), \ldots, \gls{d}\left(v_N\right) \right]}^{\top} \right)$ \bzw{} $\gls{D}_{ii} = \gls{d}\left(\gls{v}_i\right)$~\cite{Defferrard}.
 Ein Knoten $\gls{v} \in \gls{V}$ heißt \emph{isoliert}, falls dieser keinen Nachbarsknoten besitzt, \dhe{} $\gls{degree}\left(\gls{v}\right) = 0$~\cite{Defferrard}.
 
@@ -31,6 +31,6 @@ Die Äquivalenzklassen der Erreichbarkeitsrelation heißen die \emph{Zusammenhan
 Wir nennen \gls{G} \emph{zusammenhängend}, wenn \gls{G} genau eine Zusammenhangskomponente besitzt, \dhe{} zu jedem Knoten $\gls{v}_i$ existiert mindestens ein Weg zu jedem anderen Knoten $\gls{v}_j \in \gls{V}$~\cite{Hammond}.
 Es lässt sich weiter die Nachbarschaftsfunktion \gls{Neighbor} zu einer \emph{$K$-lokalisierten Nachbarschaftsfunktion} $\gls{Neighbor}_K \subseteq \gls{V}$ mit $\gls{Neighbor}_K\left(\gls{v}_i\right) \coloneqq \left\{ \gls{v}_j | \gls{s}\left(\gls{v}_i, \gls{v}_j\right) \leq K \right\}$ generalisieren~\cite{Hammond}.
 
-Eine Funktion $f \colon \gls{V} \to \gls{R}$ auf den Knoten eines Graphen \gls{G} heißt \emph{Merkmalsfunktion}.
-Eine Merkmalsfunktion $f$ kann ebenso als Vektor $\ve{f} \in \gls{R}^N$ mit $ \ve{f}_i \coloneqq f\left(\gls{v}_i\right)$ geschrieben werden~\cite{Shuman}.
-Bildet $f$ weiterhin auf eine Menge von Merkmalen $f \colon \gls{V} \to \gls{R}^M$, $M \in \gls{N}$, ab, so kann diese analog über eine \emph{Merkmalsmatrix} $\ma{F} \in \gls{R}^{N \times M}$ über $\ma{F}_{im} \coloneqq {\left(f\left(\gls{v}_i\right)\right)}_m$ definiert werden.
+Eine Funktion $f \colon \gls{V} \to \gls{R}^M$ auf den Knoten eines Graphen \gls{G}, die auf einen $M$-dimensionalen Vektor abbildet, heißt \emph{Merkmalsfunktion} der Knotenmenge.
+Eine Merkmalsfunktion $f$ kann ebenso als \emph{Merkmalsmatrix} $\ma{F} \in \gls{R}^{N \times M}$ mit $ \ma{F}_{im} \coloneqq {f\left(\gls{v}_i\right)}_m$ interpretiert werden~\cite{Shuman}.
+Bildet $f$ lediglich auf ein einziges Element ab, \dhe{} $M=1$ und folglich $f \colon \gls{V} \to \gls{R}$, ergibt sich daraus analog ein \emph{Merkmalsvektor} $\ve{f} \in \gls{R}^N$ mit $\ve{f}_i \coloneqq f\left(\gls{v}_i\right)$.

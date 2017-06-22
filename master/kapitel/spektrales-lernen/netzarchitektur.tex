@@ -9,10 +9,10 @@ Die mehrmalige Verkettung von Faltungsschichten sorgt dafür, dass auch bei eine
 Ein \gls{CNN} auf Bildern erfordert dabei in einer analogen Netzarchitektur eine feste Eingabegröße.
 Dafür werden die Bildermengen in der Regel skaliert und zugeschnitten, so dass diese alle die gleiche Bildgröße besitzen (\zB{} $224 \times 224$)~\cite{spp}.
 Es erscheint jedoch schwierig, eine Menge von Graphen insofern anzupassen, dass diese alle die gleiche Anzahl an Knoten aufweisen.
-So ist es zwar vorstellbar, zusätzliche \enquote{Fake}-Knoten zu jedem Graphen hinzufügen, damit diese alle eine feste Anzahl an Knoten aufweisen.
+So ist es zwar vorstellbar, zusätzliche Fakeknoten zu jedem Graphen hinzufügen, damit diese alle eine feste Anzahl an Knoten aufweisen.
 Neben dem erhöhtem Speicheraufwand ist dieser Ansatz jedoch insbesondere nicht geeignet für unbekannte Graphen, die in das Netz eingespeist werden.
 So können diese \evtl{} eine größere Anzahl als die zuvor festgelegte Größe aufweisen.
-Ebenso liefert uns der Prozess der Graphvergröberung eine stets unterschiedliche Repräsentation eines Graphen, die wohlmöglich bereits eine größere Menge an \enquote{Fake}-Knoten hinzufügt und dabei die festgelegte Knotengröße der Graphen überschreitet.
+Ebenso liefert uns der Prozess der Graphvergröberung eine stets unterschiedliche Repräsentation eines Graphen, die wohlmöglich bereits eine größere Menge an Fakeknoten hinzufügt und dabei die festgelegte Knotengröße der Graphen überschreitet.
 Es ist weiterhin schwierig, einen Graphen auf eine feste Größe zuzuschneiden.
 So ist es insbesondere nicht ersichtlich, welche Knoten aus einem Graphen entfernt oder zusammengefasst werden können.
 
@@ -21,10 +21,10 @@ Dazu muss jedoch zuerst geklärt werden, warum ein klassisches \gls{CNN} auf Bil
 Die vollverbundenen Schichten jedoch brauchen rein nach ihrer Definition eine feste Eingabegröße~\cite{spp}.
 Dadurch ergibt sich die Bedingung einer festen Eingabegröße lediglich durch den Übergang von einer Faltungs- zu einer vollverbundenen Schicht~\cite{spp}.
 Eine einfache und elegante Lösung zur Umgehung dieses Problems bietet uns eine weitere Schicht, die zwischen der Faltungs- und vollverbundenen Schicht des Netzes hängt und dafür sorgt, die Ausgabekarten der letzten Faltungsschicht auf eine feste Größe zu projizieren.
-Djie Operation, die dafür üblicherweise genutzt wird, ist die Durchschnittsbildung eines Merkmals über all seinen Knoten.
+Die Operation, die dafür üblicherweise genutzt wird, ist die Durchschnittsbildung eines Merkmals über all seinen Knoten.
 Da die Anzahl der betrachteten Merkmale pro Knoten in jeder Schicht fest ist, liefert uns die Durchschnittsbildung zwischen der Faltungs- und der vollverbundenen Schicht eines Netzes stets eine feste Anzahl an zu betrachtenden Merkmalen.
 Es ist jedoch anzumerken, dass diese Operation auf Bildern insbesondere translationsinvariant ist und folglich die Position der Merkmale im Bild verloren gehen.
-Auf Graphen ist dies jedoch nicht weiter tragisch, da die Graphen, kodiert als Adjazenzmatrizen \gls{Adist} und \gls{Arad}, bereits translationsinvariant sind.
+Graphen, kodiert als Adjazenzmatrizen \gls{Adist} und \gls{Arad}, sind jedoch bereits translationsinvariant und folglich gehen dabei keine Informationen verloren.
 Es ist jedoch darauf zu achten, dass die Anzahl der Knoten in der letzten Faltungsschicht relativ klein und Merkmale auf den Knoten folglich bereits den globalen Graphen abdecken sollten.
 
 Abbildung~\ref{fig:netzarchitektur_spectal} veranschaulicht die beschriebene typische spektrale Netzarchitektur.
