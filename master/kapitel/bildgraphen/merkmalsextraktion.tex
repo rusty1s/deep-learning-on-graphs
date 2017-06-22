@@ -37,9 +37,34 @@ Dafür wird das entsprechende translationsinvariante Moment $\gls{mu}_{ij}$ durc
   \gls{eta}_{ij} = \frac{\gls{mu}_{ij}}{\gls{mu}_{00}^{\left(1+\left(i+j\right)/2\right)}}.
 \end{equation*}
 
-\paragraph{Rotationsinvariante Hu-Momente}
+\paragraph{(Rotationsinvariante) Hu-Momente}
 \label{rotationsinvariante_momente}
 
+\citeauthor{Hu} verwendet eine nichtlineare Kombination der skalierungsinvarianten Momente bis zum Grad $3$, um aus ihnen zusätzlich eine Rotationsinvarianz zu gewinnen~\cite{Hu, momente}.
+Daraus ergeben sich sieben \emph{rotationsinvariante Momente} oder \emph{Hu-Momente}.
+\begin{equation*}
+\begin{split}
+  \gls{hu}_1 & = \gls{eta}_{20} + \gls{eta}_{02}\\
+  \gls{hu}_2 & = {\left(\gls{eta}_{20} - \gls{eta}_{02}\right)}^2 + {\left(2\gls{eta}_{11}\right)}^2\\
+  \gls{hu}_3 & = {\left(\gls{eta}_{30} - 3\gls{eta}_{12}\right)}^2 + {\left(3\gls{eta}_{21} - \gls{eta}_{03}\right)}^2\\
+  \gls{hu}_4 & = {\left(\gls{eta}_{30} + \gls{eta}_{12}\right)}^2 + {\left(\gls{eta}_{21} + \gls{eta}_{03}\right)}^2\\
+  \gls{hu}_5 & = \left(\gls{eta}_{30} - 3\gls{eta}_{12}\right)\left(\gls{eta}_{30} + \gls{eta}_{12}\right) \left({\left(\gls{eta}_{30} + \gls{eta}_{12}\right)}^2 - 3{\left(\gls{eta}_{21} + \gls{eta}_{03}\right)}^2\right)\\
+  & + \left(3\gls{eta}_{21} - \gls{eta}_{03}\right)\left(\gls{eta}_{21} + \gls{eta}_{03}\right) \left(3{\left(\gls{eta}_{30} + \gls{eta}_{12}\right)}^2 - {\left(\gls{eta}_{21} + \gls{eta}_{03}\right)}^2\right)\\
+  \gls{hu}_6 & = \left(\gls{eta}_{20} - \gls{eta}_{02}\right)\left({\left(\gls{eta}_{30} + \gls{eta}_{12}\right)}^2 - {\left(\gls{eta}_{21} + \gls{eta}_{03}\right)}^2\right) + 4\gls{eta}_{11}\left(\gls{eta}_{30} + \gls{eta}_{12}\right)\left(\gls{eta}_{21} + \gls{eta}_{03}\right)\\
+  \gls{hu}_7 & = \left(3\gls{eta}_{21} - \gls{eta}_{03}\right)\left(\gls{eta}_{30} + \gls{eta}_{12}\right) \left({\left(\gls{eta}_{30} + \gls{eta}_{12}\right)}^2 - 3{\left(\gls{eta}_{21} + \gls{eta}_{03}\right)}^2\right)\\
+  & + \left(\gls{eta}_{03} - 3\gls{eta}_{12}\right)\left(\gls{eta}_{21} + \gls{eta}_{03}\right) \left(3{\left(\gls{eta}_{30} + \gls{eta}_{12}\right)}^2 - {\left(\gls{eta}_{21} + \gls{eta}_{03}\right)}^2\right)
+\end{split}
+\end{equation*}
+
+\paragraph{Interpretation}
+\label{interpretation_momente}
+
 \todo{kovarianzmatrix \bzw{} inertia tensor}
+
+\paragraph{Weitere Merkmale}
+\label{weitere_merkmale}
+
+\paragraph{Caching}
+\label{Caching}
 
 \cite{Siedhoff}
