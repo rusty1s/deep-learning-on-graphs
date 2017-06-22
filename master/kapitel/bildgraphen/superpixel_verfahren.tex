@@ -1,0 +1,32 @@
+\subsection{Verfahren}
+\label{superpixel_verfahren}
+
+\paragraph{SLIC}
+\label{slic}
+
+\emph{\gls{SLIC}}~\cite{slic}
+
+Practically, we use the SLIC superpixels for their runtime and for their lower quantization error to decompose the image into superpixels~\cite{Gadde}.
+
+\paragraph{Quickshift}
+\label{quickshift}
+
+\cite{quickshift}
+
+\paragraph{Weitere Verfahren}
+\label{weitere_superpixel_verfahren}
+
+In der Literatur finden sich zahlreiche weitere Verfahren zur Bestimmung einer Superpixelrepräsentation aus einem Bild mit jeweils unterschiedlichen Stärken und Schwächen~\cite{super, slic}.
+While the past few years have seen considerable progress in eigenvector-based
+methods of image segmentation, these methods are too slow to be
+practical for many applications.~\cite{felzenszwalb}.
+While there are other approaches to image segmentation that are highly efficient, these
+methods generally fail to capture perceptually important non-local properties of an
+image~\cite{felzenszwalb}.
+Namenshaft zu erwähnen sei hier noch die \emph{effiziente graphbasierte Bildsegmentierung} von Felzenszwalb, in der Regel unter dem Namen \emph{Felzenszwalb-Segmentierung} bekannt~\cite{felzenszwalb}.
+As with certain classical clustering methods, our method is based on
+selecting edges from a graph, where each pixel corresponds to a node in the graph,
+and certain neighboring pixels are connected by undirected edges. Weights on each
+edge measure the dissimilarity between pixels. However, unlike the classical methods,
+our technique adaptively adjusts the segmentation criterion based on the degree of
+variability in neighboring regions of the image~\cite{felzenszwalb}
