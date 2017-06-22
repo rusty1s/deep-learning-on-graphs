@@ -61,12 +61,38 @@ Daraus ergeben sich die sieben \emph{rotationsinvariante Momente} \bzw{} die \em
 
 \todo{kovarianzmatrix \bzw{} inertia tensor}
 
+\cite{Siedhoff}
+eccentricity
+major\_minor\_axislinght
+orientation
+
 \paragraph{Weitere Merkmale}
 \label{weitere_merkmale}
+
+Neben den Merkmalen, die sich aus den Momenten ergeben, können noch zahlreiche weitere Merkmale aus den Formen einer Region gewonnen werden~(\vgl{}~\cite{Siedhoff}).
+Beispiele dafür sind unter anderem die Merkmale des \emph{minimalen Hüllkörpers} (\engl{} \emph{Bounding-Box}) einer Region, \dhe{} dem kleinsten waagerechten Rechteck, welches die Region umschließt.
+Die Breite, Höhe und Fläche dieses Hüllkörpers können aus einer binären Segmentierungsmaske $\gls{Smaske} \in {\left\{0,1\right\}}^{H \times W}$ über
+\begin{equation*}
+\begin{split}
+  \mathrm{box}_x & \coloneqq \max\left(\left\{x \mid \gls{Smaske}_{yx} = 1\right\}\right) - \min\left(\left\{x \mid \gls{Smaske}_{yx} = 1\right\}\right)\\
+  \mathrm{box}_y & \coloneqq \max\left(\left\{y \mid \gls{Smaske}_{yx} = 1\right\}\right) - \min\left(\left\{y \mid \gls{Smaske}_{yx} = 1\right\}\right)\\
+  \mathrm{box}_{\,\,\,} & \coloneqq \mathrm{box}_x \mathrm{box}_y
+\end{split}
+\end{equation*}
+gewonnen werden.
+Das \emph{Ausmaß} einer Region (\engl{} \emph{Extent}) ist weiterhin definiert als $\mathrm{ext} \coloneqq \gls{M}_{00}/\mathrm{box}$~\cite{Siedhoff}.
+Der \emph{gleichwertige Durchmesser} (engl. \emph{Equivalent-Di\-a\-me\-ter}) zu der Fläche einer Region lässt sich über $\mathrm{dia} \coloneqq \sqrt{4 \gls{M}_{00}/\pi}$ beschreiben~\cite{Siedhoff}.
+Abschließend lassen sich die absoluten Schwerpunktskoordianten $\left\{\bar{x}, \bar{y}\right\}$ in relative, \dhe{} translationsinvariante, Schwerpunktskoordinaten $\left\{\hat{x}, \hat{y}\right\}$ mittels
+\begin{equation*}
+  \hat{x} \coloneqq \bar{x} - \min\left(\left\{x \mid \gls{Smaske}_{yx} = 1\right\}\right)
+  \qquad
+  \hat{y} \coloneqq \bar{y} - \min\left(\left\{y \mid \gls{Smaske}_{yx} = 1\right\}\right)
+\end{equation*}
+überführen.
+Insgesamt ergeben sich daraus $38$ Merkmale, die die Form eines einzelnen Superpixels beschreiben (\vgl{} Abbildung~\ref{fig:merkmals_caching}).
+Zusätzlich zu diesen beschreiben drei weitere Merkmale die Durchschnittsfarbe jedes Farbkanals eines Superpixels.
 
 \paragraph{Caching}
 \label{Caching}
 
 \input{tikz/merkmals_caching}
-
-\cite{Siedhoff}
