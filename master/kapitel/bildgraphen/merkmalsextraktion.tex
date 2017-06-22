@@ -9,12 +9,12 @@ Ein geeigntes Mittel zur Beschreibung einzelner Objekte in einem segmentierten B
 \paragraph{Nicht-zentrierte Momente}
 \label{nicht_zentrierte_momente}
 
-Zu einer binären Segmentierungsmaske $\gls{Smaske} \in {\left\{0, 1\right\}}^{Y \times X}$ sind die \emph{nicht-zentrierten Momente} vom Grad $\left(i+j\right)$, $i,j\in\gls{N}$, definiert als~\cite{momente}
+Zu der binären Segmentierungsmaske $\gls{Smaske} \in {\left\{0, 1\right\}}^{H \times W}$ sind die \emph{nicht-zentrierten Momente} vom Grad $\left(i+j\right)$, $i,j\in\gls{N}$, definiert als~\cite{momente}
 \begin{equation*}
-  \gls{M}_{ij} \coloneqq \sum_y^Y \sum_x^X y^i x^j \gls{Smaske}_{yx}.
+  \gls{M}_{ij} \coloneqq \sum_x^W \sum_y^H x^i y^j \gls{Smaske}_{yx}.
 \end{equation*}
 Obwohl der Grad eines Moments beliebig hoch gewählt werden kann, so reichen in der Praxis meist wenige Momente niedrigen Grades aus ($\le 3$), um eine Region hinreichend genau zu charakterisieren~\cite{momente}.
-Bildeigenschaften, die durch nicht-zentrierte Momente beschrieben werden können, sind unter anderem dessen Fläche über $\gls{M}_{00}$ sowie dessen absoluter Schwerpunkt $\left\{\bar{x}, \bar{y}\right\} = \left\{ \gls{M}_{01}/\gls{M}_{00}, \gls{M}_{10}/\gls{M}_{00}\right\}$~\cite{momente}.
+Bildeigenschaften, die durch nicht-zentrierte Momente beschrieben werden können, sind unter anderem dessen Fläche über $\gls{M}_{00}$ sowie dessen absoluter Schwerpunkt $\left\{\bar{x}, \bar{y}\right\} = \left\{ \gls{M}_{10}/\gls{M}_{00}, \gls{M}_{01}/\gls{M}_{00}\right\}$~\cite{momente}.
 
 \paragraph{Translationsinvariante (zentrale) Momente}
 \label{translationsinvariante_momente}
@@ -22,16 +22,20 @@ Bildeigenschaften, die durch nicht-zentrierte Momente beschrieben werden können
 Nicht-zentrierte Momente sind aufgrund ihrer Berücksichtigung der Position einer Region im Bild meist unerwünscht, sie helfen aber für die weitere Definition von translationsinvarianten Momenten.
 Mit Hilfe der absoluten Schwerpunktskoordinaten $\left\{ \bar{x}, \bar{y} \right\}$ können die \emph{translationsinvarianten Momente} über
 \begin{equation*}
-  \gls{mu}_{ij} \coloneqq \sum_y^Y \sum_x^X {\left(y - \bar{y}\right)}^i {\left(x - \bar{x}\right)}^j \gls{Smaske}_{yx}.
+  \gls{mu}_{ij} \coloneqq \sum_x^W \sum_y^H {\left(x - \bar{x}\right)}^i {\left(y - \bar{y}\right)}^j \gls{Smaske}_{yx}.
 \end{equation*}
 definiert werden~\cite{momente}.
 Sie lassen sich weiterhin direkt aus $\gls{M}_{ij}$ ermitteln.
-So gilt \zB{}, dass $\gls{mu}_{00} = \gls{M}_{00}$ oder $\gls{mu}_{11} = \gls{M}_{11} - \bar{x}\gls{M}_{10} = \gls{M}_{11} - \bar{y}\gls{M}_{01}$ (\vgl{}~\cite{momente}).
-
-\todo{index ändern}
+So gilt \zB{}, dass $\gls{mu}_{00} = \gls{M}_{00}$ oder $\gls{mu}_{11} = \gls{M}_{11} - \bar{x}\gls{M}_{01} = \gls{M}_{11} - \bar{y}\gls{M}_{10}$ (\vgl{}~\cite{momente}).
 
 \paragraph{Skalierungsinvariante Momente}
 \label{skalierungsinvariante_zentrierte_momente}
+
+Für $i+j \geq 2$ können desweiteren die skalierungsinvarianten Momente $\gls{eta}_{ij}$ konstruiert werden, die invariant \bzgl{} Skalierung und Translation sind.
+Dafür wird das entsprechende translationsinvariante Moment $\gls{mu}_{ij}$ durch die entsprechende Fläche $\gls{M}_{00}$ \bzw{} $\gls{mu}_{00}$ des Segments geteilt, \dhe{}~\cite{momente}
+\begin{equation*}
+  \gls{eta}_{ij} = \frac{\gls{mu}_{ij}}{\gls{mu}_{00}^{\left(1+\left(i+j\right)/2\right)}}.
+\end{equation*}
 
 \paragraph{Rotationsinvariante Hu-Momente}
 \label{rotationsinvariante_momente}
