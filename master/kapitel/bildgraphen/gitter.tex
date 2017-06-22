@@ -1,6 +1,28 @@
 \section{Gitter}
 \label{gitter}
 
-\todo{todo gitter}
-regulärer gittergraph (konnektivität)
-Gitter mit merkmalsfunktion f
+Die einfachste Form einer Graphrepräsentation \gls{G} eines Bildes $\gls{B} \in {\left[0,1\right]}^{H \times W \times C}$ ist die Repräsentation des Bildes über einen regulären Gittergraphen, denn dafür müssen keine Berechnungen am Bild vorgenommen werden.
+Ein \emph{regulärer Gittergraph im zweidimensionalen euklidischen Raum} ist ein Graph $\gls{G} = \left(\gls{V}, \gls{E}, \gls{p}\right)$, der aus einem regulären Gitter gewonnen wurde und demnach genau $N \coloneqq H \times W$ Knoten enthält, \dhe{} einen Knoten für jedes Pixel in \gls{B}~\cite{Defferrard}.
+Die Positionsfunktion der Knoten $\gls{p} \colon \gls{V} \to \gls{R}^2$ entspricht damit genau der Koordinate des korrespondierenden Pixels im Urpsprungsbild.
+Sei dafür $\gls{v} \in \gls{V}$ der Knoten zu dem Bildpunkt an Position $\left(x,y\right)$.
+Folglich gilt für die Position des Knotens $\gls{p}\left(\gls{v}\right) \coloneqq {\left[x,y\right]}^{\top}$.
+Die örtlich um den Knoten $\gls{v} \in \gls{V}$ liegenden Knoten gelten dann auch im Gittergraph als benachbart und werden über eine Kante in \gls{E} verbunden.
+Dabei unterscheidet man zwischen zwei frei wählbaren \emph{Konnektivitäten} des Graphen~\cite{Defferrard}.
+Eine Konnektivität von $4$ bedeutet, dass ein Knoten (ohne Berücksichtigung der Randknoten) genau vier Nachbarn besitzt, die horizontal und vertikal zu im stehen.
+Bei einer Konnektivität von $8$ gelten zusätzlich die vier diagonal zu ihm stehenden Knoten als Nachbarn und die Nachbarschaft wird folglich als ein $3 \times 3$ Fenster um den Knoten \gls{v} verstanden.
+
+Analog zu den Daten der Farbkanäle an den einzelnen Pixeln des Bildes hängt auch an den Knoten über einer Merkmalsfunktion $f \colon \gls{V} \to {\left[0,1\right]}^C$ \bzw{} einer Merkmalsmatrix $\ma{F} \in {\left[0,1\right]}^{N \times C}$ diese Information mit $f\left(\gls{v}\right) \coloneqq \gls{B}_{{p\left(\gls{v}\right)}_2,{p\left(\gls{v}\right)}_1}$.
+
+\paragraph{Effiziente Adjazenzbestimmung}
+\label{adjazenzbestimmung_gitter}
+
+Entgegen der Pixelanordnung in einem Bild ist die Anordnung der Knoten in einem Gittergraphen völlig irrelevant und kann willkürlich gewählt werden.
+Ein Aufbau der Kantenmenge \gls{E} \bzw{} der korrespondierenden, ungewichteten Adjazenzmatrix \gls{A} kann jedoch besonders effizient gestaltet werden, wenn die Knoten reihenweise entsprechend ihrer Bildkoordinate angeordnet werden.
+Dafür wird das Bild \gls{B} zunächst an dessen Rändern um eine zusätzliche Spalte \bzw{} Reihe erweitert, \dhe{} $\gls{B} \in {\left[0, 1\right]}^{\left(H + 2\right) \times \left(W + 2\right) \times C}$.
+Dann besitzt die ungewichtete Adjazenzmatrix $\gls{A} \in {\left\{0, 1\right\}}^{N \times N}$ mit $N \coloneqq \left(H+2\right)\left(W+2\right)$ in den Reihen $W+3 < i < N - W - 3$ an den Spaltenindizes $\left\{i-W-2, i-1, i+1, i+W+2\right\}$ \bzw{}
+\begin{equation*}
+  \left\{i-W-3, i-W-2, i-W-1, i-1, i+1, i+W+1, i+W+2, i+W+3\right\}
+\end{equation*}
+genau einen Eintrag gleich Eins (für eine Konnektivität von $4$ \bzw{} $8$).
+Anschließend müssen die ungültigen Knoten aus \gls{A} reihen- und spaltenweise schrittweise über eine Größe von $W$ mit Schrittweite $W+2$ gefiltert werden.
+Dabei müssen natürlich zunächst die ersten und letzten $W + 3$ Knoten aus \gls{A} gelöscht werden.

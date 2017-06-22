@@ -2,7 +2,7 @@
 \label{superpixel}
 
 Superpixel erfreuen sich in allen Anwendungen der Bildverarbeitung, insbesondere als Vorverarbeitungsschritt, immer größerer Beliebtheit, da sie die Eingabegröße eines Problems mit oftmals zu vernachlässigem Fehler reduzieren~\cite{Gadde}.
-Superpixel fassen dabei ein Bild in logische, räumliche Gruppen anhand ausgewählter Metriken zusammen, auf denen weitergearbeitet werden kann und dessen Pixel sich innerhalb einer Gruppe bestimmte Eigenschaften teilen.
+Superpixel fassen dabei ein Bild in logische, räumliche Gruppen anhand ausgewählter Metriken zusammen, sodass sich Pixel innerhalb einer Gruppe besonders ähnlich sind.
 
 Formal besteht eine \emph{Superpixelrepräsentation} eines Bildes $\gls{B}^{H \times W \times C}$ aus einer Menge von $N \in \gls{N}$ \emph{Superpixeln} \bzw{} \emph{Regionen} $\gls{Smenge} \coloneqq {\left\{\gls{Smenge}_k\right\}}_{n=1}^N$ mit $\gls{Smenge}_n \subseteq W \times H$, sodass $\gls{Smenge}_i \cap \gls{Smenge}_j = \emptyset$ und $\bigcup\limits_{\gls{Smenge}_n \in \gls{Smenge}} \gls{Smenge}_n = W \times H$~\cite{super}.
 Für eine gültige Superpixelsegmentierung fordern wir desweiteren, dass $\gls{Smenge}_n$ zusammenhängend ist~\cite{super}.
@@ -45,7 +45,7 @@ Es ist anzumerken, dass der normierte Graph, repräsentiert als \gls{Adist}, neb
 Im weiteren Verlauf dieser Arbeit wird der Prozess der Normierung eines Graphen implizit angenommen.
 
 \paragraph{Effiziente Adjazenzbestimmung}
-\label{adjazenzbestimmung}
+\label{adjazenzbestimmung_superpixel}
 
 Die Bestimmung einer Kantenrelation \gls{E} auf einer Superpixelrepräsentation kann aufgrund der pixelweisen Iteration auf der Segmentierungsmaske und dem sukzessiven Vergleich mit den jeweiligen Nachbarspixeln über ein $3 \times 3$ Fenster recht teuer werden.
 Eine effizientere und zugleich elegantere Bestimmung einer Kantenrelation als ungewichtete Adjazenzmatrix kann über eine versetzte Überlagerung der Segmentierungsmasken gewonnen werden.
@@ -53,10 +53,10 @@ Sei dafür $\gls{Smaske} \in {\left\{1, \ldots N\right\}}^{H \times W}$ eine Seg
 Dann wird für die vertikale Adjazenzbestimmung die oberste und unterste Reihe aus \gls{Smaske} abgeschnitten und in $\gls{Smaske}_{\uparrow}, \gls{Smaske}_{\downarrow} \in {\left\{1, \ldots N\right\}}^{H-1 \times W}$ gespeichert.
 $\gls{Smaske}_{\uparrow}$ und $\gls{Smaske}_{\downarrow}$ werden anschließend paarweise auf Ungleichheit getestet und dessen boolsches Ergebnis in einer Binärmaske $\left(\gls{Smaske}_{\uparrow} \neq \gls{Smaske}_{\downarrow}\right)$ gespeichert.
 Liegen dabei wahre, \dhe{} ungleiche Einträge vor, so ist eine vertikale Adjazenz zwischen zwei unterschiedlichen Regionen vorhanden.
-Die Einträge $i,j \in \left\{1, \ldots N \right\}$ in $\gls{Smaske}_{\uparrow}$ und $\gls{Smaske}_{\downarrow}$ an den Indizes der wahren Einträge in der Binärmaske bilden folglich die Knotenindizes einer Kante benachbarter Regionen und werden in eine Adjazenzmatrix übertragen.
+Die Einträge $i,j \in \left\{1, \ldots N \right\}$ in $\gls{Smaske}_{\uparrow}$ und $\gls{Smaske}_{\downarrow}$ an den Koordinaten der wahren Einträge in der Binärmaske bilden folglich die Knotenindizes einer Kante benachbarter Regionen und werden in eine Adjazenzmatrix mit $\gls{A}_{ij}=1$ übertragen.
 Analog wird für die horizontale Adjazenzbestimmung vorgegangen.
-Die Veroderung $\gls{A} \vee \gls{A}^{\top}$ liefert dann die resultierende ungerichtete, ungewichtete Adjazenzmatrix (\vgl{}~\cite{stackoverflow}).
 \input{tikz/adjazenz}
+Die Veroderung $\gls{A} \vee \gls{A}^{\top}$ liefert dann die resultierende ungerichtete, ungewichtete Adjazenzmatrix (\vgl{}~\cite{stackoverflow}).
 Abbildung~\ref{fig:adjazenz} illustriert das Verfahren anhand eines einfachen Beispiels.
 
 \subsection{Verfahren}
@@ -96,7 +96,7 @@ variability in neighboring regions of the image~\cite{felzenszwalb}
 \label{merkmalsextraktion}
 
 Die Darstellung eines Bildes über einen Graphen \gls{G}, der aus einer Superpixelrepräsentation \gls{Smenge} gewonnen wurde, besitzt in der Regel weitaus weniger Knoten im Gegensatz zu der reinen Darstellung des Bildes über eine Gitterrepräsentation.
-Die Superpixel \bzw{} die Regionen der Segmentierungsmaske können dabei die willkürlichsten Formen annehmen und besitzen lediglich die Einschränkung, dass diese stets zusammenhängend sind.
+Die Superpixel \bzw{} die Regionen der Segmentierungsmaske können dabei jedoch die willkürlichsten Formen annehmen und besitzen lediglich die Einschränkung, dass diese stets zusammenhängend sind.
 Die Form eines Superpixels muss demnach bestmöglichst eingefangen \bzw{} beschrieben werden können — ein Prozess, der in der Bildverarbeitung als \emph{Merkmalsextraktion} bekannt ist~\cite{momente}.
 Ein geeigntes Mittel zur Beschreibung einzelner Objekte in einem segmentierten Bild sind die \emph{Momente}, welche in nicht-zentrierte, translationsinvariante, skalierungsinvariante und rotationsinvariante Momente unterschieden werden~\cite{momente}.
 
