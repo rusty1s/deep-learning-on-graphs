@@ -1,17 +1,60 @@
 \subsection{Verfahren}
 \label{superpixel_verfahren}
 
+\todo{was schreiben über viele Verfahren blabla, KURZ}
+
 \paragraph{SLIC}
 \label{slic}
 
-\emph{\gls{SLIC}}~\cite{slic}
-
+Der Superpixelalgorithmus \emph{\gls{SLIC}} ist ein recht einfach gehaltener \emph{$K$-Means}-Clustering-Ansatz, welcher sich dennoch durch seine Geschwindigkeit, seine Speichereffizienz und insbesondere durch seine erfolgreiche Segmentierung hinsichtlich der Grenzen seiner Superpixel im Vergleich zu anderen \enquote{State-of-the-Art}-Algorithmen auszeichnet~\cite{slic}.
 Practically, we use the SLIC superpixels for their runtime and for their lower quantization error to decompose the image into superpixels~\cite{Gadde}.
+
+Anwender:~\cite{Gadde, supercnn}.
+By default, the only parameter of the algorithm is k, the desired number of approximately equally-sized superpixels.\todo{compactness, etc}
+Ein Bild $\gls{B} \in \gls{R}^{H \times C \times 3}$ im \emph{Lab-Farbraum}.
+Initialisierungsschritt mit $K$ vielen Clusterzentren $\ve{c}_k = {\left[l_k, a_k, b_k, x_k, y_k\right]}^{\top}$ auf einem regulären Gitter der Größe $H \times W$ mit jeweils gleichmäßigem Abstand $S \coloneqq \sqrt{WH/K}$~\cite{slic}.
+Die Clusterzentren werden anschließend an die Position des geringsten Gradienten in ihrer $3 \times 3$ Nachbarschaft verschoben.
+Damit reduziert sich die Wahrscheinlichkeit, dass sich die Clusterzentren ${\left\{\ve{c}_k\right\}}_{k=1}^K$ auf einer Kante befinden~\cite{slic}.
+Daraufhin werden in einem iterativen Prozess die Zugehörigkeiten der Pixel zu ihren jeweiligen Clustern über eine Distanzmetrik $D$ bestimmt und die Clusterzentren angepasst.
+Entgegen der konventionellen $k$-Means-Formulierung werden dabei aber nicht die Distanzen jedes Pixels zu jedem Clusterzentrum berechnet, sondern lediglich für die Pixel, die sich in der Region der Größe $2S \times 2S$ um $\ve{c}_k$ befinden~\cite{slic}.
+Dies führt folglich zu einer drastischen Reduzierung der Anzahl an Distanzberechnungen und zu einem effizienten Algorithmus.
+Wurde zu jedem Pixel dessen ähnlichstes Clusterzentrum bestimmt, werden die Zentren über die Durchschnittsbildung all seiner zugehörigen Pixel neu justiert.
+Nach einer festgelegten Anzahl an Iterationsschritten (üblicherweise $10$) bricht der Algorithmus schließlich ab~\cite{slic}.
+Das gesamte Verfahren ist in Algorithmus~\ref{alg:slic} zusammengefasst.
+
+\begin{algorithm}[t]
+\centering
+\begin{algorithmic}
+  \REQUIRE{} Bild $\gls{B} \in \gls{R}^{H \times W \times 3}$ im Lab-Farbraum, Anzahl der Cluster $K$
+  \ENSURE{} Segmentierungsmaske $\gls{Smaske} \in \gls{N}^{H \times W}$
+  \STATE{} Initialisiere $K$ Clusterzentren ${\left\{\ve{c}_k\right\}}_{k=1}^K$ mit gleichmäßigem Abstand $S$.
+  \STATE{} Bewege Clusterzentren zu der Position des geringsten Gradienten in $3 \times 3$ Nachbarschaft.
+  \STATE{} $\gls{Smaske}_{yx} \leftarrow -1$ für jedes Pixel in \gls{B} an $\left(x,y\right)$.
+  \STATE{} $\ma{D}_{yx} \leftarrow \infty$ für jedes Pixel in \gls{B} an $\left(x,y\right)$.
+  \REPEAT{}
+    \FOR{$\ve{c}_k \in {\left\{\ve{c}_k\right\}}_{k=1}^K$}
+      \FOR{Pixel in \gls{B} an $\left(x,y\right)$ in $2S \times 2S$ Region um $\ve{c}_k$}
+        \STATE{} Berechne Distanz $D$ zwischen $\ve{c}_k$ und Pixel.
+        \IF{$D < \ma{D}_{yx}$}
+          \STATE{} $\ma{D}_{yx} \leftarrow D$
+          \STATE{} $\gls{Smaske}_{yx} \leftarrow k$
+        \ENDIF{}
+      \ENDFOR{}
+    \ENDFOR{}
+    \STATE{} Justiere Clusterzentren ${\left\{\ve{c}_k\right\}}_{k=1}^K$.
+  \UNTIL{Endbedingung}
+\end{algorithmic}
+\caption[\gls{SLIC}]{}
+\label{alg:slic}
+\end{algorithm}
+
+
 
 \paragraph{Quickshift}
 \label{quickshift}
 
 \cite{quickshift}
+Anwender:~\cite{Fulkerson}.
 
 \paragraph{Weitere Verfahren}
 \label{weitere_superpixel_verfahren}
