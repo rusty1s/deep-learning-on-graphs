@@ -10,7 +10,7 @@ Beide Verfahren werden im Folgenden näher vorgestellt.
 
 Der Superpixelalgorithmus \emph{\gls{SLIC}} ist ein recht einfach gehaltener \emph{$K$-Means}-Clustering-Ansatz, welcher sich dennoch durch seine Geschwindigkeit, seine Speichereffizienz und insbesondere durch seine erfolgreiche Segmentierung hinsichtlich der Farbabgrenzen seiner Superpixel im Vergleich zu anderen \enquote{State-of-the-Art}-Algorithmen auszeichnet~\cite{slic, Gadde}.
 
-Ein Bild $\gls{B} \in \gls{R}^{H \times C \times 3}$ im \emph{Lab-Farbraum} wird dazu initial in $K$ viele Clusterzentren $\ve{c}_k \coloneqq {\left[l_k, a_k, b_k, x_k, y_k\right]}^{\top}$  mit jeweils gleichmäßigem Abstand $S \coloneqq \sqrt{WH/K}$ zerlegt~\cite{slic}.
+Ein Bild $\gls{B} \in \gls{R}^{H \times C \times 3}$ im \emph{Lab-Farbraum} wird dazu initial in $K \in \gls{N}$ viele Clusterzentren $\ve{c}_k \coloneqq {\left[l_k, a_k, b_k, x_k, y_k\right]}^{\top}$  mit jeweils gleichmäßigem Abstand $S \coloneqq \sqrt{WH/K}$ zerlegt~\cite{slic}.
 % Die Clusterzentren werden anschließend an die Position des geringsten Gradienten in ihrer $3 \times 3$ Nachbarschaft verschoben.
 % Damit reduziert sich die Wahrscheinlichkeit, dass sich die Clusterzentren ${\left\{\ve{c}_k\right\}}_{k=1}^K$ auf einer Kante befinden~\cite{slic}.
 Daraufhin werden in einem iterativen Prozess die Zugehörigkeiten der Pixel zu ihren jeweiligen Clustern über eine Distanzmetrik $D$ bestimmt und die Clusterzentren entsprechend ihrer neuen Gruppierungen angepasst.
@@ -59,7 +59,7 @@ Damit ergibt sich $D$ als~\cite{slic}
 \end{split}
 \end{equation*}
 Die Normalisierungskonstante $C$ kann damit auch als Gewichtung zwischen der Form und den Farbabgrenzungen der Superpixel verstanden werden.
-Falls $M$ sehr klein gewählt wird, respektieren die Superpixel Farbabgrenzungen besser, aber besitzen im Allgemeinen auch eine eher unreguläre Form~\cite{slic}.
+Falls $C$ sehr klein gewählt wird, respektieren die Superpixel Farbabgrenzungen besser, aber besitzen im Allgemeinen auch eine eher unreguläre Form~\cite{slic}.
 
 Damit ist \gls{SLIC} ein $\gls{O}\left(WH\right)$ effizienter Algorithmus mit nur zwei frei wählbaren Parametern $K$ und $C$~\cite{slic}.
 Viele Anwendungen im Bereich der Bildverarbeitung machen sich daher \gls{SLIC} zu Nutze (\vgl{}~\cite{Gadde, supercnn, super}).
