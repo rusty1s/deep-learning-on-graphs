@@ -8,7 +8,6 @@
 
 Der Superpixelalgorithmus \emph{\gls{SLIC}} ist ein recht einfach gehaltener \emph{$K$-Means}-Clustering-Ansatz, welcher sich dennoch durch seine Geschwindigkeit, seine Speichereffizienz und insbesondere durch seine erfolgreiche Segmentierung hinsichtlich der Grenzen seiner Superpixel im Vergleich zu anderen \enquote{State-of-the-Art}-Algorithmen auszeichnet~\cite{slic}.
 Practically, we use the SLIC superpixels for their runtime and for their lower quantization error to decompose the image into superpixels~\cite{Gadde}.
-
 Anwender:~\cite{Gadde, supercnn}.
 By default, the only parameter of the algorithm is k, the desired number of approximately equally-sized superpixels.\todo{compactness, etc}
 Ein Bild $\gls{B} \in \gls{R}^{H \times C \times 3}$ im \emph{Lab-Farbraum}.
@@ -48,7 +47,24 @@ Das gesamte Verfahren ist in Algorithmus~\ref{alg:slic} zusammengefasst.
 \label{alg:slic}
 \end{algorithm}
 
+Die Distanzmetrik $D$ basiert auf der euklidischen Norm ${\left\|\cdot\right\|}_2$ im fünfdimensionalen Raum ${\left[l,a,b,x,y\right]}^{\top}$ auf den Farben und den Positionen der Pixel \bzw{} der Clusterzentren.
+Dabei ergeben sich jedoch Inkonsistenten für unterschiedliche Superpixelgrößen.
+Bei großen Superpixeln führt dies zu einer stärkeren Gewichtung der räumlichen Positionen der Superpixel, wohingegen bei kleinen Superpixeln genau das Gegenteil der Fall ist~\cite{slic}.
+Es ist daher notwendig, die Distanzen der Positionen $D_S$ und Farben $D_C$ getrennt voneinander zu betrachten und mittels dem Abstand $S$ der initialen Cluster zueinander und einer Normalisierungskonstante $C \in \gls{R}$ \bzgl{} der Farben zu normieren.
+Damit ergibt sich $D$ als~\cite{slic}
+\begin{equation*}
+\begin{split}
+  D & \coloneqq \sqrt{{\left(\frac{D_S}{S}\right)}^2 + {\left(\frac{D_C}{C}\right)}^2}\\
+  D_S & \coloneqq {\left\|{\left[x_i, y_i\right]}^{\top} - {\left[x_j, y_j\right]}^{\top}\right\|}_2\\
+  D_C & \coloneqq {\left\|{\left[l_i, a_i, b_i\right]}^{\top} - {\left[l_j, a_j, b_j\right]}^{\top}\right\|}_2.
+\end{split}
+\end{equation*}
+Die Normalisierungskonstante $C$ kann damit auch als Gewichtung zwischen der Form und den Farbabgrenzungen der Superpixel verstanden werden.
+Falls $M$ sehr klein gewählt wird, respektieren die Superpixel Farbabgrenzungen besser, aber besitzen im Allgemeinen auch eine sehr unreguläre Form~\cite{slic}.
 
+Um \enquote{verwaiste} Pixel in der Segmentierungsmaske zu vermeiden, welche nicht zu dem gleichen Clusterzentrum
+
+Abbildung~\ref{fig:slic_quickshift} (a) zeigt zwei Resulte des \gls{SLIC}-Algorithmus bei einer unterschiedlich gewählten Anzahl an Clusterzentren~\cite{slic}.
 
 \paragraph{Quickshift}
 \label{quickshift}

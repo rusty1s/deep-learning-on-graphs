@@ -1,7 +1,7 @@
 \section{Gitter}
 \label{gitter}
 
-Die einfachste Form einer Graphrepräsentation \gls{G} eines Bildes $\gls{B} \in {\left[0,1\right]}^{H \times W \times C}$ ist die Repräsentation des Bildes über einen regulären Gittergraphen, denn dafür müssen keine Berechnungen am Bild vorgenommen werden.
+Die einfachste Form einer Graphrepräsentation \gls{G} eines Bildes $\gls{B} \in \gls{R}^{H \times W \times C}$ ist die Repräsentation des Bildes über einen regulären Gittergraphen, denn dafür müssen keine Berechnungen am Bild vorgenommen werden.
 Ein \emph{regulärer Gittergraph im zweidimensionalen euklidischen Raum} ist ein Graph $\gls{G} = \left(\gls{V}, \gls{E}, \gls{p}\right)$, der aus einem regulären Gitter gewonnen wurde und demnach genau $N \coloneqq H \times W$ Knoten enthält, \dhe{} einen Knoten für jedes Pixel in \gls{B}~\cite{Defferrard}.
 Die Positionsfunktion der Knoten $\gls{p} \colon \gls{V} \to \gls{R}^2$ entspricht damit genau der Koordinate des korrespondierenden Pixels im Urpsprungsbild.
 Sei dafür $\gls{v} \in \gls{V}$ der Knoten zu dem Bildpunkt an Position $\left(x,y\right)$.
