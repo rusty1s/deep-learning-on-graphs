@@ -1,7 +1,7 @@
 \section{Graph Convolutional Networks}
 \label{graph_convolutional_networks}
 
-\citeauthor{gcn} motivieren einen weiteren Ansatz zur Faltung auf Graphen, genannt \emph{\gls{GCN}}, der auf der Methodik des spekralen Faltungsoperators aus Kapitel~\ref{spektraler_faltungsoperator} aufbaut und dabei wie eine \enquote{differenzierbare und parametrisierte Generalisierung des eindimensionalen Weisfeiler-Lehman Algorithmus auf Graphen} fungiert~\cite{gcn}.
+\citeauthor{gcn} motivieren einen weiteren Ansatz zur Faltung auf Graphen, genannt \emph{\gls{GCN}}, der auf der Methodik des spekralen Faltungsoperators aus Kapitel~\ref{spektraler_faltungsoperator} aufbaut und dabei wie eine \enquote{differenzierbare und parametrisierte Generalisierung des eindimensionalen Weisfeiler-Lehman-Algorithmus auf Graphen} fungiert~\cite{gcn}.
 
 \paragraph{Faltungsoperator}
 \label{gcn_faltungsoperator}
@@ -48,7 +48,7 @@ Die Faltung einer Eingabemerkmalsmatrix $\gls{F}_{\mathrm{in}} \in \gls{R}^{N \t
 \end{equation}
 mit Faltungsaufwand $\gls{O}\left(M_{\mathrm{in}}M_{\mathrm{out}}\left|\gls{E}\right|\right)$, weil $\gls{Atilde}\ma{F}_{\mathrm{in}}$ effizient mit der Multiplikation einer dünnbesetzten mit einer dichtbesetzten Matrix implementiert werden kann~\cite{gcn}.
 
-\paragraph{Beziehung zum Weisfeiler-Lehman Algorithmus}
+\paragraph{Beziehung zum Weisfeiler-Lehman-Algorithmus}
 \label{weisfeiler_lehman_beziehung}
 
 \begin{algorithm}[t]
@@ -64,7 +64,7 @@ mit Faltungsaufwand $\gls{O}\left(M_{\mathrm{in}}M_{\mathrm{out}}\left|\gls{E}\r
     \STATE{} $t \leftarrow t + 1$
   \UNTIL{Konvergenz}
 \end{algorithmic}
-  \caption[Weisfeiler-Lehman Algorithmus]{Eindimensionaler Weisfeiler-Lehman Algorithmus auf einer initialen Knotenfärbung $\ve{h}^{\left(0\right)} \in \gls{R}^N$ eines Graphen \gls{G} mit $\gls{v}_i \in \gls{Neighbor}\left(\gls{v}_i\right)$~\cite{wl}. Der Prozess der Verfärbung eines jeden Knotens $\gls{v}_i$ auf Basis der Farben seiner lokalen Nachbarsknoten wird solange wiederholt, bis diese konvergieren.}
+  \caption[Weisfeiler-Lehman]{Eindimensionaler Weisfeiler-Lehman-Algorithmus auf einer initialen Knotenfärbung $\ve{h}^{\left(0\right)} \in \gls{R}^N$ eines Graphen \gls{G} mit $\gls{v}_i \in \gls{Neighbor}\left(\gls{v}_i\right)$~\cite{wl}. Der Prozess der Verfärbung eines jeden Knotens $\gls{v}_i$ auf Basis der Farben seiner lokalen Nachbarsknoten wird solange wiederholt, bis diese konvergieren.}
 \label{alg:wl}
 \end{algorithm}
 
@@ -78,4 +78,4 @@ Dann ergibt sich eine Faltungsschicht des \glspl{GCN} durch die Verkettung des F
   \ve{h}^{\left(t+1\right)}_i = \gls{act}\left(\sum_{\gls{v}_j \in \gls{Neighbor}\left(\gls{v}_i\right)} \frac{1}{\sqrt{d_i d_j}} \ve{h}^{\left(t\right)}_j \gls{W}^{\left(t\right)} \right),
 \end{equation*}
 wobei $1/\sqrt{d_i d_j} \in \gls{R}$ die Normalisierungskonstante für die Kante $\left(\gls{v}_i, \gls{v}_j\right) \in \gls{E}$ entsprechend der Normalisierung $\gls{Dtilde}^{-1/2}\gls{Atilde}\gls{Dtilde}^{-1/2}$ aus~\eqref{eq:gcn_renorm} und $\gls{W}^{\left(t\right)} \in \gls{R}^{N \times N}$ die Filtermatrix der $t$-en Faltungsschicht beschreibt~\cite{gcn}.
-Folglich kann die Faltung des \glspl{GCN} als \enquote{differenzierbare und parametrisierte Generalisierung des eindimensionalen Weisfeiler-Lehman Algorithmus auf Graphen} verstanden werden~\cite{gcn}.
+Folglich kann die Faltung des \glspl{GCN} als \enquote{differenzierbare und parametrisierte Generalisierung des eindimensionalen Weisfeiler-Lehman-Algorithmus auf Graphen} verstanden werden~\cite{gcn}.
