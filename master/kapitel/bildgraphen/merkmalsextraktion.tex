@@ -56,18 +56,25 @@ Daraus ergeben sich die sieben \emph{rotationsinvariante Momente} \bzw{} die \em
 \end{split}
 \end{equation*}
 
-\paragraph{Interpretation}
-\label{interpretation_momente}
-
-\todo{kovarianzmatrix \bzw{} inertia tensor}
-
-\cite{Siedhoff}
-eccentricity
-major\_minor\_axislinght
-orientation
-
 \paragraph{Weitere Merkmale}
 \label{weitere_merkmale}
+
+Aus den skalierungsinvarianten Momenten lassen sich weitere Merkmale gewinnen, denen insbesondere eine anschauliche Interpretation zu Grunde liegt.
+Sei dafür die \emph{Kovarianzmatrix} der binären Segmentierungsmaske definiert über
+\begin{equation*}
+  \begin{bmatrix}
+    \gls{mu}^{\prime}_{20} & \gls{mu}^{\prime}_{11}\\
+    \gls{mu}^{\prime}_{11} & \gls{mu}^{\prime}_{02}
+  \end{bmatrix},
+\end{equation*}
+wobei $\gls{mu}^{\prime}_{20} \coloneqq \gls{mu}_{20}/\gls{mu}_{00}$, $\gls{mu}^{\prime}_{02} \coloneqq \gls{mu}_{02}/\gls{mu}_{00}$ und $\gls{mu}^{\prime}_{11} \coloneqq \gls{mu}_{11}/\gls{mu}_{00}$~\cite{momente}.
+Die beiden Eigenvektoren dieser Matrix
+\begin{equation*}
+  \gls{lambda}_i = \frac{\gls{mu}^{\prime}_{20} + \gls{mu}^{\prime}_{02}}{2} \mp \frac{\sqrt{4\gls{mu}^{\prime}_{11} + {\left(\gls{mu}^{\prime}_{20} - \gls{mu}^{\prime}_{02}\right)}^2}}{2}
+\end{equation*}
+entsprechen der Länge der großen \bzw{} kleinen Halbachse einer Ellipse, die die Region minimal umschließt~\cite{momente}.
+Damit kann die \emph{Ausrichtung} oder \emph{Orientierung} der Region aus dem Winkel des Eigenvektors des größten Eigenwerts mit Hilfe des Arkustangens über $\mathrm{ori} \coloneqq \mathrm{atan}\left(2\gls{mu}^{\prime}_{11}/\left(\gls{mu}^{\prime}_{20} - \gls{mu}^{\prime}_{02}\right)\right)/2$ berechnet werden.
+Ähnlich dazu lässt sich die \emph{Exzentrizität} $\mathrm{ecc} \coloneqq \sqrt{1 - \gls{lambda}_1/\gls{lambda}_2}$ als das Verhältnis der beiden Hauptachen zueinander definieren~\cite{Siedhoff}.
 
 Neben den Merkmalen, die sich aus den Momenten ergeben, können noch zahlreiche weitere Merkmale aus den Formen einer Region gewonnen werden~(\vgl{}~\cite{Siedhoff}).
 Beispiele dafür sind unter anderem die Merkmale des \emph{minimalen Hüllkörpers} (\engl{} \emph{Bounding-Box}) einer Region, \dhe{} dem kleinsten waagerechten Rechteck, welches die Region umschließt.
