@@ -27,12 +27,12 @@ Das gesamte Verfahren ist in Algorithmus~\ref{alg:slic} zusammengefasst.
   \ENSURE{} Segmentierungsmaske $\gls{Smaske} \in \gls{N}^{H \times W}$
   \STATE{} Initialisiere $K$ Clusterzentren ${\left\{\ve{c}_k\right\}}_{k=1}^K$ mit gleichmäßigem Abstand $S$.
   % \STATE{} Bewege Clusterzentren zu der Position des geringsten Gradienten in $3 \times 3$ Nachbarschaft.
-  \STATE{} $\gls{Smaske}_{yx} \leftarrow -1$ für jedes Pixel in \gls{B} an $\left(x,y\right)$.
-  \STATE{} $\ma{D}_{yx} \leftarrow \infty$ für jedes Pixel in \gls{B} an $\left(x,y\right)$.
+  \STATE{} $\gls{Smaske}_{yx} \leftarrow -1$ für jedes Pixel $\gls{B}_{yx}$ an $\left(x,y\right)$.
+  \STATE{} $\ma{D}_{yx} \leftarrow \infty$ für jedes Pixel $\gls{B}_{yx}$ an $\left(x,y\right)$.
   \REPEAT{}
     \FOR{$\ve{c}_k \in {\left\{\ve{c}_k\right\}}_{k=1}^K$}
-      \FOR{Pixel in \gls{B} an $\left(x,y\right)$ in $2S \times 2S$ Region um $\ve{c}_k$}
-        \STATE{} Berechne Distanz $D$ zwischen $\ve{c}_k$ und Pixel.
+      \FOR{Pixel $\gls{B}_{yx}$ an $\left(x,y\right)$ in $2S \times 2S$ Region um $\ve{c}_k$}
+        \STATE{} Berechne Distanz $D$ zwischen $\ve{c}_k$ und $\gls{B}_{yx}$.
         \IF{$D < \ma{D}_{yx}$}
           \STATE{} $\ma{D}_{yx} \leftarrow D$
           \STATE{} $\gls{Smaske}_{yx} \leftarrow k$
