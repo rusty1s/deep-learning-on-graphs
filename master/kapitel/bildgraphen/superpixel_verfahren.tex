@@ -49,19 +49,19 @@ Das gesamte Verfahren ist in Algorithmus~\ref{alg:slic} zusammengefasst.
 Die Distanzmetrik $D$ basiert auf der euklidischen Norm ${\left\|\cdot\right\|}_2$ im fünfdimensionalen Raum ${\left[l,a,b,x,y\right]}^{\top}$ auf den Farben und den Positionen der Pixel \bzw{} der Clusterzentren.
 Dabei ergeben sich jedoch Inkonsistenten für unterschiedliche Superpixelgrößen.
 Bei großen Superpixeln führt dies zu einer stärkeren Gewichtung der räumlichen Positionen der Superpixel, wohingegen bei kleinen Superpixeln genau das Gegenteil der Fall ist~\cite{slic}.
-Es ist daher notwendig, die Distanzen der Positionen $D_S$ und Farben $D_C$ getrennt voneinander zu betrachten und mittels dem Abstand $S$ der initialen Clusterzentren und einer Normalisierungskonstante $C \in \gls{R}$ \bzgl{} der Gwewichtung der Farben zu normieren.
+Es ist daher notwendig, die Distanzen der Positionen $D_S$ und Farben $D_F$ getrennt voneinander zu betrachten und mittels dem Abstand $S$ der initialen Clusterzentren und einer Normalisierungskonstante $F \in \gls{R}$ \bzgl{} der Gewichtung der Farben zu normieren.
 Damit ergibt sich $D$ als~\cite{slic}
 \begin{equation*}
 \begin{split}
-  D & \coloneqq \sqrt{{\left(\frac{D_S}{S}\right)}^2 + {\left(\frac{D_C}{C}\right)}^2}\\
+  D & \coloneqq \sqrt{{\left(\frac{D_S}{S}\right)}^2 + {\left(\frac{D_F}{F}\right)}^2}\\
   D_S & \coloneqq {\left\|{\left[x, y\right]}^{\top} - {\left[x_k, y_k\right]}^{\top}\right\|}_2\\
   D_C & \coloneqq {\left\|{\left[l, a, b\right]}^{\top} - {\left[l_k, a_k, b_k\right]}^{\top}\right\|}_2.
 \end{split}
 \end{equation*}
-Die Normalisierungskonstante $C$ kann damit auch als Gewichtung zwischen der Form und den Farbabgrenzungen der Superpixel verstanden werden.
-Falls $C$ sehr klein gewählt wird, respektieren die Superpixel Farbabgrenzungen besser, aber besitzen im Allgemeinen auch eine eher unreguläre Form~\cite{slic}.
+Die Normalisierungskonstante $F$ kann damit auch als Gewichtung zwischen der Form und den Farbabgrenzungen der Superpixel verstanden werden.
+Falls $F$ sehr klein gewählt wird, respektieren die Superpixel Farbabgrenzungen besser, aber besitzen im Allgemeinen auch eine eher unreguläre Form~\cite{slic}.
 
-Damit ist \gls{SLIC} ein $\gls{O}\left(WH\right)$ effizienter Algorithmus mit nur zwei frei wählbaren Parametern $K$ und $C$~\cite{slic}.
+Damit ist \gls{SLIC} ein $\gls{O}\left(WH\right)$ effizienter Algorithmus mit nur zwei frei wählbaren Parametern $K$ und $F$~\cite{slic}.
 Viele Anwendungen im Bereich der Bildverarbeitung machen sich daher \gls{SLIC} zu Nutze (\vgl{}~\cite{Gadde, supercnn, super}).
 Abbildung~\ref{fig:slic_quickshift} (a) zeigt ein Beispielresultat des \gls{SLIC}-Algorithmus bei unterschiedlich gewählten Anzahlen an Clusterzentren.
 
