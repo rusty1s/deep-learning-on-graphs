@@ -3,7 +3,7 @@
 
 Eine \emph{ungeordnete Menge} $\mathcal{A} \coloneqq \left\{a_1, \ldots, a_N\right\} = {\left\{a\right\}}_{n=1}^N$, $N \in \gls{N}$, beschreibt eine Gruppierung von $N$ Elementen $a_n \in \mathcal{A}$.
 Eine Menge $\mathcal{A}$ heißt \emph{geordnet}, wenn auf dessen Elementen eine reflexive, transitive und antisymmetrische Ordnung $\mathcal{A} \times \mathcal{A}$ definiert ist~\cite{linear}.
-Eine geordnete Menge $\mathcal{A}$ mit $N$ Elementen wird über $\mathcal{A} \coloneqq \left(a_1, \ldots, a_N\right)$ gekennzeichnet, wobei die Reihenfolge der Elemente in $\left(a_1, \ldots, a_N\right)$ dessen Ordnung beschreiben.
+Eine geordnete Menge $\mathcal{A}$ mit $N$ Elementen wird über $\mathcal{A} \coloneqq \left(a_1, \ldots, a_N\right)$ gekennzeichnet, wobei die Reihenfolge der Elemente $\left(a_1, \ldots, a_N\right)$ dessen Ordnung beschreiben.
 
 Sei $\ve{v} \in \gls{R}^N$, $N \in \gls{N}$, mit $\ve{v} = {\left[v_1, \ldots, v_n \right]}^{\top}$ ein \emph{Vektor} mit $N$ reellen Elementen ${\left\{v_n\right\}}_{n=1}^N$, $v_n \in \gls{R}$, wobei $\ve{v}_n = v_n$ das $n$-te Element von $\ve{v}$ referenziert.
 Zu zwei Vektoren $\ve{v}, \ve{w} \in \gls{R}^N$ ist das \emph{Skalarprodukt} $\left\langle \ve{v}, \ve{w} \right\rangle$ definiert als $\left\langle \ve{v}, \ve{w}\right\rangle \coloneqq \sum_{n=1}^N \ve{v}_n \ve{w}_n$~\cite{linear}.
@@ -35,8 +35,13 @@ So wird \zB{} eine Diagonalmatrix \emph{immer} als eine dünnbesetzte Matrix imp
 
 \paragraph{Tensoren}
 
-
-Tensor, was bedeutet z.B. $\gls{W}_i$
+Ein \emph{Tensor} $\ma{T} \in \gls{R}^{N_1 \times \cdots \times N_R}$, $N_1, \ldots, N_R \in \gls{N}$, ist ein mathematisches Objekt, der das Konzept der Vektoren und Matrizen auf beliebig viele Dimensionen erweitert.
+Die Anzahl der Dimensionen $R$ eines Tensors wird auch \emph{Rang} genannt~\cite{linear}.
+Vektoren können damit insbesondere als Tensor mit Rang $1$ sowie Matrizen als Tensor mit Rang $2$ verstanden werden.
+Ein Tensor mit Rang $0$ beschreibt ein Skalar.
+Aus einem Tensor $\ma{T} \in \gls{R}^{N_1 \times \cdots \times N_R}$ können über die Indexnotation Tensoren mit geringerer Dimension gefiltert werden.
+So beschreibt $\ma{T}_{n_1 \cdots n_r}$ einen Tensor mit Rang $0$ \bzw{} das Element des Tensors an Position $n_1, \ldots, n_r$.
+Analog beschreibt \zB{} $\ma{T}_{n_1} \in \gls{R}^{N_2 \times \cdots \times N_R}$ einen Tensor mit Rang $R-1$, bei dem die erste Dimension über $n_1$ festgehalten wird.
 
 \paragraph{Bilder}
 
