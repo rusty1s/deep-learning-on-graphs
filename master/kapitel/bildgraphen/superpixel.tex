@@ -47,7 +47,7 @@ Abbildung~\ref{fig:adjazenz} illustriert das Verfahren anhand eines einfachen Be
 \label{globale_lokale_normierung}
 
 Eine Menge generierter Graphen aus den Superpixelrepräsentationen einer Bildermenge können sich zu Teilen extrem unterscheiden, \bspw{} durch variierende Auflösungen der Bilder.
-So besitzt ein Graph möglicherweise nur sehr \enquote{kurze} Kanten, wohingegen ein anderer ausschließlich im Vergleich dazu aus \enquote{längeren} Kanten besteht.
+So besitzt ein Graph möglicherweise nur sehr \enquote{kurze} Kanten, wohingegen ein anderer im Vergleich dazu ausschließlich aus \enquote{längeren} Kanten besteht.
 Das kann bei der Transformation solcher Graphen in die Adjazenzmatrixrepräsentation $\gls{Adist} \in {\left[0, 1\right]}^{N \times N}$ aufgrund der Wahl des Parameters $\gls{sigma} \in \gls{R}$ zu Problemen führen.
 Eine statische Wahl des Parameters \gls{sigma} führt dann \ggf{} zu Einträgen in \gls{Adist}, die stets sehr nahe bei Eins \bzw{} Null liegen.
 Eine Normierung der Kantenlängen erscheint daher für die Transformation nach \gls{Adist} sinnvoll.

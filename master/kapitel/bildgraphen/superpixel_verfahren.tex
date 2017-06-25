@@ -93,7 +93,7 @@ Die verbundene Menge an Knoten repräsentiert dann schließlich einen Superpixel
 Quickshift segmentiert damit ein Bild auf Basis von drei Parametern — $\gls{sigma}$ für die  Standardabweichung der Gaußfunktion, $\alpha$ zur Gewichtung des Farbterms sowie $S$ zur Einschränkung der Berechnung über ein Fenster der Größe $S \times S$.
 
 Die Superpixel, die Quickshift produziert, besitzen im Gegensatz zu den Superpixeln in \gls{SLIC} keine Einschränkung in ihrer Anzahl, Form oder Größe.
-Ein segmentiertes Bild mit feinen Strukturen besitzt dann wohlmöglich weitaus mehr Superpixel, als ein Bild mit großen gleichfarbigen Flächen, welches nur sehr wenige, großflächige Superpixel generiert.
+Ein segmentiertes Bild mit feinen Strukturen enthält dann wohlmöglich weitaus mehr Superpixel als ein Bild mit großen gleichfarbigen Flächen, welches nur sehr wenige, großflächige Superpixel generiert.
 Ebenso gibt es im Gegensatz zu \gls{SLIC} keinen Parameter, der die Form der Superpixel steuern kann, sodass Quickshift Superpixel aller erdenklichen Formen produzieren kann.
 Abbildung~\ref{fig:slic_quickshift} (b) illustriert ein Resultat einer Quickshift-Segmentierung und insbesondere den Vergleich zu dem entsprechenden \gls{SLIC}-Äquivalent.
 
