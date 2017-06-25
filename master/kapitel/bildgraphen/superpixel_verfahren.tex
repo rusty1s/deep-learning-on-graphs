@@ -39,7 +39,7 @@ Das gesamte Verfahren ist in Algorithmus~\ref{alg:slic} zusammengefasst.
     \STATE{} Justiere Clusterzentren ${\left\{\ve{c}_k\right\}}_{k=1}^K$.
   \UNTIL{Endbedingung}
 \end{algorithmic}
-  \caption[\gls{SLIC}]{\gls{SLIC}-Algorithmus, der eine Segmentierungsmaske $\gls{Smaske} \in \gls{N}^{H \times W}$ in den Ausmaßen des Eingabebildes $\gls{B} \in \gls{R}^{H \times W \times 3}$ über ein lokales $K$-Means-Clustering bei $K$ gleichmäßig verteilten initialen Clusterzentren generiert.}
+\caption[\gls{SLIC}]{\gls{SLIC}-Algorithmus, der eine Segmentierungsmaske $\gls{Smaske} \in \gls{N}^{H \times W}$ in den Ausmaßen des Eingabebildes $\gls{B} \in \gls{R}^{H \times W \times 3}$ über ein lokales $K$-Means-Clustering bei $K$ gleichmäßig verteilten initialen Clusterzentren generiert.}
 \label{alg:slic}
 \end{algorithm}
 
@@ -67,8 +67,34 @@ Abbildung~\ref{fig:slic_quickshift} (a) zeigt ein Beispielresultat des \gls{SLIC
 \paragraph{Quickshift}
 \label{quickshift}
 
-\cite{quickshift}
-Anwender:~\cite{Fulkerson}.
+Ein weiteres Verfahren zur Bildsegmentierung ist der gradientenbasierte Algorithmus \emph{Quickshift}, der unter anderem bereits zur Objektlokalisierung auf Basis von Superpixeln benutzt wurde~\cite{quickshift,Fulkerson}.
+
+Quickshift startet dabei mit der Berechnung der \emph{Parzen-Dichteschätzung} $p$ eines Bildes $\gls{B} \in \gls{R}^{H \times W \times 3}$ für jedes Pixel $\gls{B}_{yx} \in \gls{R}^3$ im fünfdimensionalen Raum über die Gaußfunktion, \dhe{}
+\begin{equation*}
+  p\left(x,y, \gls{B}\right) = \sum_{\substack{1 \leq i \leq W\\1 \leq j \leq H}}
+  \frac{1}{{\left(2\pi\gls{sigma}\right)}^5} \exp\left(-\frac{1}{2\gls{sigma}^2}{\left\|\begin{pmatrix}
+    x - x_i\\
+    y - y_i\\
+    \alpha \left(\gls{B}_{yx} - \gls{B}_{y_i x_i}\right)
+  \end{pmatrix}\right\|}_2^2\right),
+\end{equation*}
+mit der Standardabweichung $\gls{sigma} \in \gls{R}$ und der Gewichtung des Farbeinflusses über $\alpha \in \gls{R}$~\cite{quickshift}.
+Je größer \gls{sigma} gewählt wird, umso größer wird der Anteil weitentfernter Pixel zu der Dichte des jeweils betrachteten Pixels.
+In der Praxis kann, analog wie bei \gls{SLIC}, eine Fenstergröße $S \times S$ zur Einschränkung der Betrachtung der Pixel um einen Pixel definiert werden~\cite{super}.
+Obwohl Quickshift standardmäßig $S$ auf $\infty$ setzt, lohnt es sich aus Effizienzgründen eine Größe in Abhängigkeit zu \gls{sigma} zu wählen~\cite{quickshift}.
+
+Basierend auf den Dichten des Bildes generiert Quickshift einen Baum, der jedem Pixel $\gls{B}_{y_i x_i}$ seinen nächsten Nachbarn $\gls{B}_{y_j x_j}$ zuordnet, welcher einen höheren Dichtewert besitzt, \dhe{}
+\begin{equation*}
+  p\left(x_j, y_j, \gls{B}\right) > p\left(x_i, y_i, \gls{B}\right).
+\end{equation*}
+Falls $\gls{B}_{y_i x_i}$ kein solches Pixel zugeordnet werden kann, wird es mit keinem Pixel verbunden.
+Die verbundene Menge an Knoten repräsentiert dann schließlich einen Superpixel des Bildes.
+
+Quickshift segmentiert damit ein Bild auf Basis von drei Parametern — $\gls{sigma}$ für die  Standardabweichung der Gaußfunktion, $\alpha$ zur Gewichtung des Farbterms sowie $S$ zur Einschränkung der Berechnung über ein Fenster der Größe $S \times S$.
+Die Superpixel, die Quickshift produziert, besitzen aber im Gegensatz zu den Superpixeln in \gls{SLIC} keine Einschränkung in ihrer Anzahl, Form oder Größe.
+Ein segmentiertes Bild mit feinen Strukturen besitzt dann wohlmöglich weitaus mehr Superpixel, als ein Bild mit großen gleichfarbigen Flächen, welches nur sehr wenige, großflächige Superpixel generiert.
+Ebenso gibt es im Gegensatz zu \gls{SLIC} keinen Parameter, der die Form der Superpixel steuern kann, sodass Quickshift Superpixel aller erdenklichen Formen produzieren kann.
+Abbildung~\ref{fig:slic_quickshift} (b) illustriert ein Resultat einer Quickshift-Segmentierung und insbesondere den Vergleich zu dem entsprechenden \gls{SLIC}-Äquivalent.
 
 \paragraph{Weitere Verfahren}
 \label{weitere_superpixel_verfahren}
