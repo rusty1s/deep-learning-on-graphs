@@ -68,8 +68,8 @@ mit Faltungsaufwand $\gls{O}\left(M_{\mathrm{in}}M_{\mathrm{out}}\left|\gls{E}\r
 \label{alg:wl}
 \end{algorithm}
 
-Der \emph{eindimensionale Weis\-fei\-ler-Lehman Algorithmus} beschreibt eine weit-untersuchte Methode zur Knotenklassifizierung eines Graphen basierend auf einer initialen Färbung \bzw{} Merkmalsverteilung auf den Knoten eines Graphen \gls{G}, die unter anderem zur Bestimmung von Graphisomorphismen genutzt wird~\cite{douglas}.
-Basierend auf einer initialen Knotenfärbung $\ve{h}^{\left(0\right)} \in \gls{R}^N$ wird die Farbe eines jeden Knotens $\gls{v}_i \in \gls{V}$ sukzessive mit Hilfe einer Hashfunktion $\mathrm{hash}\left(\cdot\right)$ so angepasst, dass sie die vorangegangene Farbe des Knotens zusammen mit den Farben seiner lokalen Nachbarschaft repräsentiert.
+Der \emph{eindimensionale Weis\-fei\-ler-Lehman Algorithmus} beschreibt eine weit untersuchte Methode zur Knotenklassifizierung eines Graphen basierend auf einer initialen Färbung \bzw{} Merkmalsverteilung auf den Knoten eines Graphen \gls{G}, die unter anderem zur Bestimmung von Graphisomorphismen genutzt wird~\cite{douglas}.
+Basierend auf einer initialen kontinuierlichen Knotenfärbung $\ve{h}^{\left(0\right)} \in \gls{R}^N$ wird die Farbe eines jeden Knotens $\gls{v}_i \in \gls{V}$ sukzessive mit Hilfe einer Hashfunktion $\mathrm{hash}\left(\cdot\right)$ so angepasst, dass sie die vorangegangene Farbe des Knotens zusammen mit den Farben seiner lokalen Nachbarschaft repräsentiert.
 Dieser Prozess wiederholt sich solange, bis eine stabile Knotenfärbung gefunden wurde, \dhe{} die gefundene Färbung des Graphen konvergiert (\vgl{} Algorithmus~\ref{alg:wl}).
 
 Sei die Hashfunktion nun gegeben als eine differenzierbare, nicht-lineare Aktivierungsfunktion $\gls{act} \colon \gls{R} \to \gls{R}$, \bspw{} $\gls{relu}\left(\cdot\right) \coloneqq \max\left(\cdot, 0\right)$, eines neuronalen Netzes.
