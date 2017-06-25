@@ -106,8 +106,8 @@ Zusätzlich zu diesen beschreiben drei weitere Merkmale die Durchschnittsfarbe d
 
 Viele der $38$ ermittelten Merkmale werden über bereits definierte Merkmale beschrieben.
 So bauen insbesondere die Momente sukzessive über die zusätzlichen Stufen der Invarianz aufeinander auf.
-Weiterhin erfordern Merkmale wie die Orientierung oder die Exzentrizität gleichermaßen die Berechnung der skalierungsinvarianten Momente.
-Auch bei Merkmalen, die nicht über die Momente beschrieben sind, wie \zB{} die Berechnung des minimalen Hüllkörpers und der relativen Schwerpunktskoordinaten, lassen sich Gemeinsamkeiten in der Berechnung wiederfinden, \zB{} über die Eckpunktkoordinate des Hüllkörpers.
-Obwohl eine Berechnung aller Merkmale auf Grund der stetigen Wiederverwertung der Daten redundant erscheint und die Menge der zu benutzenden Merkmale für ein spezifisches Problem auf eine Untermenge reduziert werden sollte (\vgl{} Kapitel~\ref{merkmalsselektion}), zeigt es sich dennoch als lohnenswert, alle bereits errechneten Daten für die weiteren Berechnungen zu cachen.
+Weiterhin erfordern Merkmale wie die Orientierung oder die Exzentrizität gleichermaßen die Berechnung der translationsinvarianten Momente sowie dessen Kovarianzmatrix.
+Auch bei Merkmalen, die nicht über die Momente beschrieben sind, wie \zB{} die Berechnung des minimalen Hüllkörpers und der relativen Schwerpunktskoordinaten, lassen sich Gemeinsamkeiten in der Berechnung wiederfinden, \zB{} über die Eckpunktkoordinaten des Hüllkörpers.
+Obwohl eine Berechnung aller Merkmale aufgrund der stetigen Wiederverwertung der Daten redundant erscheint und die Menge der zu benutzenden Merkmale für ein spezifisches Problem auf eine Untermenge reduziert werden sollte (\vgl{} Kapitel~\ref{merkmalsselektion}), zeigt es sich dennoch als lohnenswert, alle bereits errechneten Daten für die weiteren Berechnungen zu cachen.
 Abbildung~\ref{fig:merkmals_caching} illustriert dabei den enormen Laufzeitgewinn gegenüber einer Berechnung ohne Verwendung eines Caches.
 Es ist jedoch anzumerken, dass der Laufzeitgewinn mit den Kosten eines erhöhten Speicheraufwands verbunden ist.
