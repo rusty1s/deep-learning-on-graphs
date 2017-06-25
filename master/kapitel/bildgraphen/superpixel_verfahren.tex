@@ -74,16 +74,10 @@ Anwender:~\cite{Fulkerson}.
 \label{weitere_superpixel_verfahren}
 
 In den letzten Jahren wurden desweiteren zahlreiche eigenvektorbasierte Verfahren zur Bildsegmentierung entwickelt~\cite{super, felzenszwalb}.
-Obwohl diese vielversprechende Resultate aufweisen, sind diese jedoch entsprechend langsam um von praktischem Nutzen für die meisten Anwendungen zu sein~\cite{felzenszwalb}.
+Obwohl diese vielversprechende Resultate aufweisen, sind sie jedoch entsprechend langsam um von praktischem Nutzen für die meisten Anwendungen zu sein~\cite{felzenszwalb}.
 Andere Algorithmen wiederum zeigen sich als besonders berechnungseffizient, liefern aber dementsprechend unzufriedenstellende Ergebnisse~\cite{felzenszwalb}.
 Namenshaft zu erwähnen sei noch die \emph{effiziente graphbasierte Bildsegmentierung} von \citeauthor{felzenszwalb}, die in der Regel unter dem Namen \emph{Felzenszwalb-Segmentierung} bekannt ist~\cite{felzenszwalb}.
 Der Algorithmus von \citeauthor{felzenszwalb} zeichnet sich dabei durch seine geringe Berechnungskomplexität aus und versucht gleichzeitig, globale Eigenschaften des Bildes zu erhalten.
-
-As with certain classical clustering methods, our method is based on
-selecting edges from a graph, where each pixel corresponds to a node in the graph,
-and certain neighboring pixels are connected by undirected edges. Weights on each
-edge measure the dissimilarity between pixels. However, unlike the classical methods,
-our technique adaptively adjusts the segmentation criterion based on the degree of
-variability in neighboring regions of the image~\cite{felzenszwalb}.
-
-Die Felzenszwalb-Segementierung zeigte sich aber in Tests auf einer Reihe von Bildern weniger geeignet, da dessen Parameter für jedes Bild eine spezielle Anpassung benötigen und folglich eine statische Wahl dieser Parameter zu unbrauchbaren Ergebnissen führte.
+Dafür wird das Bild als regulärer Gittergraph initialisiert, bei dem die Kantengewichte eine Aussage über den Unterschied in Helligkeit und Farbe der benachbarten Pixel treffen.
+Der Algorithmus versucht daraufhin, Knoten insofern zu verschmelzen, dass der Unterschied zwischen den Kantengewichtungen innerhalb einer Region möglichst gering bleibt und zwischen benachbarten Regionen möglichst groß wird (\vgl{}~\cite{felzenszwalb}).
+Die Felzenszwalb-Segmentierung zeigte sich aber in Tests auf einer Reihe von Bildern weniger geeignet, da dessen Parameter für jedes Bild eine spezielle Anpassung benötigen und folglich eine statische Wahl dieser Parameter zu unbrauchbaren Ergebnissen führte.
