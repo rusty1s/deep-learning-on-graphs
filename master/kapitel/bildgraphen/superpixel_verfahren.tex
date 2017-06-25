@@ -2,17 +2,15 @@
 \label{superpixel_verfahren}
 
 In der Literatur finden sich zahlreiche Verfahren zur Bestimmung einer Superpixelrepräsentation aus einem Bild mit jeweils unterschiedlichen Stärken und Schwächen~\cite{super, slic}.
-Zwei beliebte Verfahren, die aufgrund ihrer im Allgemeinen guten Resultate bei geringer Komplexität immer wieder zu finden sind, sind der SLIC- sowie der Quickshift-Algorithmus~\cite{slic, super, Gadde, supercnn, Fulkerson}.
+Zwei beliebte Verfahren, die aufgrund ihrer im Allgemeinen guten Resultate bei geringer Berechnungskomplexität immer wieder zu finden sind, sind der SLIC- sowie der Quickshift-Algorithmus~\cite{slic, super, Gadde, supercnn, Fulkerson}.
 Beide Verfahren werden im Folgenden näher vorgestellt.
 
 \paragraph{SLIC}
 \label{slic}
 
-Der Superpixelalgorithmus \emph{\gls{SLIC}} ist ein recht einfach gehaltener \emph{$K$-Means}-Clustering-Ansatz, welcher sich dennoch durch seine Geschwindigkeit, seine Speichereffizienz und insbesondere durch seine erfolgreiche Segmentierung hinsichtlich der Farbabgrenzen seiner Superpixel im Vergleich zu anderen \enquote{State-of-the-Art}-Algorithmen auszeichnet~\cite{slic, Gadde}.
+Der Superpixelalgorithmus \emph{\gls{SLIC}} ist ein recht einfach gehaltener lokaler \emph{$K$-Means}-Clustering-Ansatz, welcher sich dennoch durch seine Geschwindigkeit, seine Speichereffizienz und insbesondere durch seine erfolgreiche Segmentierung hinsichtlich der Farbabgrenzen seiner Superpixel im Vergleich zu anderen \enquote{State-of-the-Art}-Algorithmen auszeichnet~\cite{slic, Gadde}.
 
 Ein Bild $\gls{B} \in \gls{R}^{H \times C \times 3}$ im \emph{Lab-Farbraum} wird dazu initial in $K \in \gls{N}$ viele Clusterzentren $\ve{c}_k \coloneqq {\left[l_k, a_k, b_k, x_k, y_k\right]}^{\top}$  mit jeweils gleichmäßigem Abstand $S \coloneqq \sqrt{WH/K}$ zerlegt~\cite{slic}.
-% Die Clusterzentren werden anschließend an die Position des geringsten Gradienten in ihrer $3 \times 3$ Nachbarschaft verschoben.
-% Damit reduziert sich die Wahrscheinlichkeit, dass sich die Clusterzentren ${\left\{\ve{c}_k\right\}}_{k=1}^K$ auf einer Kante befinden~\cite{slic}.
 Daraufhin werden in einem iterativen Prozess die Zugehörigkeiten der Pixel zu ihren jeweiligen Clustern über eine Distanzmetrik $D$ bestimmt und die Clusterzentren entsprechend ihrer neuen Gruppierungen angepasst.
 Entgegen der konventionellen $k$-Means-Formulierung werden dabei aber nicht die Distanzen jedes Pixels zu jedem Clusterzentrum berechnet, sondern lediglich für die Pixel, die sich in der Region der Größe $2S \times 2S$ um $\ve{c}_k$ befinden~\cite{slic}.
 Dies führt folglich zu einer drastischen Reduzierung der Anzahl an Distanzberechnungen und zu einem effizienteren Algorithmus.
@@ -26,7 +24,6 @@ Das gesamte Verfahren ist in Algorithmus~\ref{alg:slic} zusammengefasst.
   \REQUIRE{} Bild $\gls{B} \in \gls{R}^{H \times W \times 3}$ im Lab-Farbraum, Anzahl der Cluster $K$
   \ENSURE{} Segmentierungsmaske $\gls{Smaske} \in \gls{N}^{H \times W}$
   \STATE{} Initialisiere $K$ Clusterzentren ${\left\{\ve{c}_k\right\}}_{k=1}^K$ mit gleichmäßigem Abstand $S$.
-  % \STATE{} Bewege Clusterzentren zu der Position des geringsten Gradienten in $3 \times 3$ Nachbarschaft.
   \STATE{} $\gls{Smaske}_{yx} \leftarrow -1$ für jedes Pixel $\gls{B}_{yx}$ an $\left(x,y\right)$.
   \STATE{} $\ma{D}_{yx} \leftarrow \infty$ für jedes Pixel $\gls{B}_{yx}$ an $\left(x,y\right)$.
   \REPEAT{}
@@ -42,7 +39,7 @@ Das gesamte Verfahren ist in Algorithmus~\ref{alg:slic} zusammengefasst.
     \STATE{} Justiere Clusterzentren ${\left\{\ve{c}_k\right\}}_{k=1}^K$.
   \UNTIL{Endbedingung}
 \end{algorithmic}
-  \caption[\gls{SLIC}]{\gls{SLIC}-Algorithmus, der eine Segmentierungsmaske $\gls{Smaske} \in \gls{N}^{H \times W}$ in den Ausmaßen des Eingabebildes $\gls{B} \in \gls{R}^{H \times W \times 3}$ über ein $K$-Means-Clustering bei $K$ gleichmäßig verteilten initialen Clusterzentren generiert.}
+  \caption[\gls{SLIC}]{\gls{SLIC}-Algorithmus, der eine Segmentierungsmaske $\gls{Smaske} \in \gls{N}^{H \times W}$ in den Ausmaßen des Eingabebildes $\gls{B} \in \gls{R}^{H \times W \times 3}$ über ein lokales $K$-Means-Clustering bei $K$ gleichmäßig verteilten initialen Clusterzentren generiert.}
 \label{alg:slic}
 \end{algorithm}
 
@@ -76,18 +73,17 @@ Anwender:~\cite{Fulkerson}.
 \paragraph{Weitere Verfahren}
 \label{weitere_superpixel_verfahren}
 
-In der Literatur finden sich zahlreiche weitere Verfahren zur Bestimmung einer Superpixelrepräsentation aus einem Bild mit jeweils unterschiedlichen Stärken und Schwächen~\cite{super, slic}.
-While the past few years have seen considerable progress in eigenvector-based
-methods of image segmentation, these methods are too slow to be
-practical for many applications.~\cite{felzenszwalb}.
-While there are other approaches to image segmentation that are highly efficient, these
-methods generally fail to capture perceptually important non-local properties of an
-image~\cite{felzenszwalb}.
-Namenshaft zu erwähnen sei hier noch die \emph{effiziente graphbasierte Bildsegmentierung} von Felzenszwalb, die in der Regel unter dem Namen \emph{Felzenszwalb-Segmentierung} bekannt ist~\cite{felzenszwalb}.
+In den letzten Jahren wurden desweiteren zahlreiche eigenvektorbasierte Verfahren zur Bildsegmentierung entwickelt~\cite{super, felzenszwalb}.
+Obwohl diese vielversprechende Resultate aufweisen, sind diese jedoch entsprechend langsam um von praktischem Nutzen für die meisten Anwendungen zu sein~\cite{felzenszwalb}.
+Andere Algorithmen wiederum zeigen sich als besonders berechnungseffizient, liefern aber dementsprechend unzufriedenstellende Ergebnisse~\cite{felzenszwalb}.
+Namenshaft zu erwähnen sei noch die \emph{effiziente graphbasierte Bildsegmentierung} von \citeauthor{felzenszwalb}, die in der Regel unter dem Namen \emph{Felzenszwalb-Segmentierung} bekannt ist~\cite{felzenszwalb}.
+Der Algorithmus von \citeauthor{felzenszwalb} zeichnet sich dabei durch seine geringe Berechnungskomplexität aus und versucht gleichzeitig, globale Eigenschaften des Bildes zu erhalten.
+
 As with certain classical clustering methods, our method is based on
 selecting edges from a graph, where each pixel corresponds to a node in the graph,
 and certain neighboring pixels are connected by undirected edges. Weights on each
 edge measure the dissimilarity between pixels. However, unlike the classical methods,
 our technique adaptively adjusts the segmentation criterion based on the degree of
 variability in neighboring regions of the image~\cite{felzenszwalb}.
-Die Felzenszwalb-Segementierung ist aber für die Anwendung auf einer Reihe von Bildern weniger geeignet, da dessen Parameter für jedes Bild eine spezielle Anpassung benötigen und folglich eine statischen Wahl dieser Parameter zu unbrauchbaren Ergebnissen führt.
+
+Die Felzenszwalb-Segementierung zeigte sich aber in Tests auf einer Reihe von Bildern weniger geeignet, da dessen Parameter für jedes Bild eine spezielle Anpassung benötigen und folglich eine statische Wahl dieser Parameter zu unbrauchbaren Ergebnissen führte.
