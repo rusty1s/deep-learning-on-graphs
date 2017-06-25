@@ -1,11 +1,27 @@
 \section{Mathematische Notationen}
 \label{mathematische_notationen}
 
-\paragraph{Vektoren}
-skalarprodukt
+Eine \emph{ungeordnete Menge} $\mathcal{A} \coloneqq \left\{a_1, \ldots, a_N\right\} = {\left\{a\right\}}_{n=1}^N$, $N \in \gls{N}$, beschreibt eine Gruppierung von $N$ Elementen $a_n \in \mathcal{A}$.
+Eine Menge $\mathcal{A}$ heißt \emph{geordnet}, wenn auf dessen Elementen eine reflexive, transitive und antisymmetrische Ordnung $\mathcal{A} \times \mathcal{A}$ definiert ist~\cite{linear}.
+Eine geordnete Menge $\mathcal{A}$ mit $N$ Elementen wird über $\mathcal{A} \coloneqq \left(a_1, \ldots, a_N\right)$ gekennzeichnet, wobei die Reihenfolge der Elemente in $\left(a_1, \ldots, a_N\right)$ dessen Ordnung beschreiben.
 
-\paragraph{Matrizen}
-Diagonalmatrix
+Sei $\ve{v} \in \gls{R}^N$, $N \in \gls{N}$, mit $\ve{v} = {\left[v_1, \ldots, v_n \right]}^{\top}$ ein \emph{Vektor} mit $N$ reellen Elementen ${\left\{v_n\right\}}_{n=1}^N$, $v_n \in \gls{R}$, wobei $\ve{v}_n = v_n$ das $n$-te Element von $\ve{v}$ referenziert.
+Zu zwei Vektoren $\ve{v}, \ve{w} \in \gls{R}^N$ ist das \emph{Skalarprodukt} $\left\langle \ve{v}, \ve{w} \right\rangle$ definiert als $\left\langle \ve{v}, \ve{w}\right\rangle \coloneqq \sum_{n=1}^N \ve{v}_n \ve{w}_n$~\cite{linear}.
+$\ve{v}$ und $\ve{w}$ stehen \emph{orthogonal} zueinander, \dhe{} $\ve{v} \gls{ortho} \ve{w}$, \gdw{} $\left\langle \ve{v}, \ve{w} \right\rangle = 0$~\cite{linear}.
+
+Eine \emph{Matrix} $\ma{M} \in \gls{R}^{N \times M}$, $N, M \in \gls{N}$, erweitert einen Vektor um $M$ Spalten.
+Der Wert $\ma{M}_{nm} \in \gls{R}$ beschreibt damit das Element in der $n$-ten Zeile und $m$-ten Spalte von \ma{M}.
+Die \emph{transponierte Matrix} $\ma{M}^{\top} \in \gls{R}^{M \times N}$ ist eine Matrix, die aus $\ma{M} \in \gls{R}^{N \times N}$ durch Vertauschen der Zeilen und Spalten entsteht, \dhe{} $\ma{M}^{\top}_{mn} = \ma{M}_{nm}$~\cite{linear}.
+Zu einem Vektor $\ve{v} \in \gls{R}^{N}$ lässt sich weiterhin dessen korrespondiere quadratische \emph{Diagonalmatrix} $\gls{diag}\left(\ve{v}\right) \in \gls{R}^{N \times N}$
+über
+\begin{equation*}
+  \gls{diag}\left(\ve{v}\right) \coloneqq \begin{bmatrix}
+  \ve{v}_1 & & \ve{0}\\
+  & \ddots & \\
+  \ve{0} & & \ve{v}_N
+  \end{bmatrix}
+\end{equation*}
+\bzw{} ${\gls{diag}\left(\ve{v}\right)}_{nn} \coloneqq \ve{v}_n$ definieren~\cite{Defferrard}.
 
 \paragraph{Dünnbesetzte Matrizen}
 
@@ -18,15 +34,11 @@ Im Laufe dieser Arbeit haben wir es oft mit dünnbesetzten Matrizen zu tun.
 So wird \zB{} eine Diagonalmatrix \emph{immer} als eine dünnbesetzte Matrix implementiert.
 
 \paragraph{Tensoren}
+
+
 Tensor, was bedeutet z.B. $\gls{W}_i$
 
 \paragraph{Bilder}
 
 Ein \emph{Bild} kann folglich durch einen dreidimensionalen Tensor $\gls{B} \in \gls{R}^{H \times W \times C}$ repräsentiert werden, wobei $H, W \in \gls{N}$ die Höhe \bzw{} Breite des Bildes angeben und $C \in \left\{1, 3\right\}$ die Anzahl der Farbkanäle des Bildes beschreibt, \dhe{} ein Graubild mit nur einem Kanal oder ein Farbbild mit drei Kanälen (\zB{} über das RGB- oder Lab-Farbmodell).
 Ein \emph{Pixel} eines Bildes \gls{B} an der Position $\left(x, y\right)$ mit $1 \leq x \leq W, 1 \leq y \leq H$ kann folglich über $\gls{B}_{yx} \in \gls{R}^C$ angesprochen werden.
-
-\paragraph{Mengen}
-
-Eine ungeordnete Menge $\mathcal{A} = {\left\{a\right\}}_{n=1}^N \coloneqq \left\{a_1, \ldots, a_N\right\}$ mit $N$ Elementen, $a_n \in \mathcal{A}$.
-Geordnete Menge $\left(\right)$
-Eine geordnete Menge kann ebenso als Vektor, Matrix \bzw{} Tensor je nach Dimensionalität der Daten verstanden werden.
