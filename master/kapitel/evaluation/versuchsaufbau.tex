@@ -1,11 +1,20 @@
 \section{Versuchsaufbau}
 \label{versuchsaufbau}
 
+Generelle Netzstruktur, softmax auf Klassen abgebildet
+Conv mit MaxPool gefolgt von AveragePool auf Fully Connect auf Softmax
+
 \subsection{Datensätze}
 \label{datensaetze}
 
 \paragraph{MNIST}
 \label{MNIST}
+
+Bei den Datensätzen insbesondere auch die Superpixelalgorithmen erwähnen
+das heißt wie viele Superpixel
+welche Parameter
+mean/max Knotengrad
+Wie viele Merkmale und welche?
 
 \cite{mnist}
 
@@ -13,6 +22,9 @@
 \label{cifar_10}
 
 \cite{cifar_10}
+
+\paragraph{TinyImageNet}
+\label{tiny_image_net}
 
 \paragraph{Pascal VOC}
 \label{pascal_voc}
@@ -26,7 +38,20 @@
 \label{parameterwahl}
 
 Vorstellung aller Parameter
-Superpixelalgorithmen Parameterwahl
+Was gibt es denn hier überhaupt?
+Dropout, L2 Regularisierung?
+BatchSize?
+Globale/normale Lokalisierung
+Standardabweichung für Gauß
+
+Alle Faltungen wurden dabei mit einer Partitionsgröße von $8$ bei $K=0$ und $K=1$ implementiert, um ein \gls{CNN} mit einem $3 \times 3$ Filter zu simulieren.
+Es erscheint jedoch vorstellbar die Filtergröße bei größerer lokaler Kontrollierbarkeit, \dhe{} $K > 1$, weiter zu reduzieren und die Gefahr des Overfittings damit aufgrund der kleineren Anzahl an Trainingsparametern einzuschränken.
 
 \paragraph{Augmentierung von Graphen}
 \label{augmentierung_von_graphen}
+
+hier auf die Formeln von TensorFlow referenzieren, d.h. TensorFlow Quelle angeben
+\cite{tensorflow}
+
+\paragraph{Vorverarbeitung und Eingabe der Daten}
+\label{vorverarbeitung}

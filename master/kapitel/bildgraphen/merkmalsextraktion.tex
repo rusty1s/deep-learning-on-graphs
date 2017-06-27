@@ -70,7 +70,7 @@ Sei dafür die \emph{Kovarianzmatrix} der binären Segmentierungsmaske definiert
 wobei $\gls{mu}^{\prime}_{20} \coloneqq \gls{mu}_{20}/\gls{mu}_{00}$, $\gls{mu}^{\prime}_{02} \coloneqq \gls{mu}_{02}/\gls{mu}_{00}$ und $\gls{mu}^{\prime}_{11} \coloneqq \gls{mu}_{11}/\gls{mu}_{00}$~\cite{momente}.
 Die beiden Eigenvektoren dieser Matrix
 \begin{equation*}
-  \gls{lambda}_i = \frac{\gls{mu}^{\prime}_{20} + \gls{mu}^{\prime}_{02}}{2} \mp \frac{\sqrt{4\gls{mu}^{\prime}_{11} + {\left(\gls{mu}^{\prime}_{20} - \gls{mu}^{\prime}_{02}\right)}^2}}{2}
+  \gls{lambda}_i = \frac{\gls{mu}^{\prime}_{20} + \gls{mu}^{\prime}_{02}}{2} \pm \frac{\sqrt{4\gls{mu}^{\prime}_{11} + {\left(\gls{mu}^{\prime}_{20} - \gls{mu}^{\prime}_{02}\right)}^2}}{2}
 \end{equation*}
 entsprechen der Länge der großen \bzw{} kleinen Halbachse einer Ellipse, die die Region minimal umschließt~\cite{momente}.
 Damit kann die \emph{Ausrichtung} oder \emph{Orientierung} der Region aus dem Winkel des Eigenvektors des größten Eigenwerts mit Hilfe des Arkustangens über $\mathrm{ori} \coloneqq \mathrm{atan}\left(2\gls{mu}^{\prime}_{11}/\left(\gls{mu}^{\prime}_{20} - \gls{mu}^{\prime}_{02}\right)\right)/2$ berechnet werden.

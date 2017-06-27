@@ -1,6 +1,9 @@
 \chapter{Räumliches Lernen auf Graphen}
 \label{raeumliches_lernen}
 
+Spatially sliding a filter on the vertices, as you would slide a filter on a 2D image or a 1D audio signal (the pixels form a grid graph, the time forms a line graph), i.e. the straightforward application of the definition of a convolution. This approach however presents two challenges: (1) the definition of a receptive field / neighbourhood, because sampling on arbitrary graphs is not necessarily uniform and (2), the ordering of nodes, because problem-specific ordering, e.g. spatially ordered pixels or time ordered samples, is missing. These recent works, who present the same ideas differently, spatially define the convolution operator on graphs:
+
+
 \input{kapitel/raeumliches-lernen/graphentheorie}
 \input{kapitel/raeumliches-lernen/faltung}
 \input{kapitel/raeumliches-lernen/erweiterung}
