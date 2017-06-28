@@ -60,7 +60,7 @@
   \IF{$\left|\gls{Neighbor}\right| < K$}
     \STATE{} $\gls{Neighbor}_{\mathrm{out}} \leftarrow \gls{Neighbor}_{\mathrm{out}}$ und zusätzlichen $K - \left|\gls{Neighbor}\right|$ Fakeknoten.
   \ENDIF{}
-  \STATE{} $\gls{G}^{\prime} \leftarrow$ Generiere Teilgraph aus den $K$ Knoten in $\gls{Neighbor}_{\mathrm{out}}$.
+  \STATE{} $\gls{G}^{\prime} \leftarrow$ Generiere Teilgraph von \gls{G} aus den $K$ Knoten in $\gls{Neighbor}_{\mathrm{out}} \subseteq \gls{V}$.
   \STATE{} $\gls{Neighbor}_{\mathrm{out}} \leftarrow$ Kanonisiere $\gls{G}^{\prime}$, wobei die Ordnung von $\gls{Neighbor}_{\mathrm{out}}$ erhalten bleibt.
   \RETURN{$\gls{Neighbor}_{\mathrm{out}}$}
 \end{algorithmic}
