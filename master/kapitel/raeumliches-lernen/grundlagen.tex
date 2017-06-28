@@ -1,0 +1,42 @@
+\section{Grundlagen}
+\label{raeumliche_grundlagen}
+
+Für die Definition eines räumlichen Faltungsoperators auf Graphen werden verschiedene Konstrukute der Graphentheorie benötigt.
+Die
+
+
+einer Abtastfolge \bzw{} einer Knotenauswahl sowie einer Nachbarschaftsgruppierung mit einer Ordnung
+todo{hier einleiten}
+
+\paragraph{Färbung von Knoten}
+\label{faerbung_von_knoten}
+
+Eine \emph{Knotenfärbung} $\gls{l}$ ist eine nicht zwingend injektive Funktion $\gls{l} \colon \gls{V} \to \gls{C}$ auf den Knoten eines Graphen \gls{G}, die jedem Knoten in \gls{V} eine \emph{Farbe} einer endlich abzählbaren Menge $\gls{C} \subseteq \gls{R}$ zuordnet~\cite{patchy}.
+Mit Hilfe der Knotenfärbung lässt sich folglich eine Ordungsrelation $>_{\gls{l}}$ auf der Knotenmenge von \gls{G} definieren, wobei $\gls{v}_i >_{\gls{l}} \gls{v}_j$ genau dann, wenn $\gls{l}\left(\gls{v}_i\right) < \gls{l}\left(\gls{v}_j\right)$~\cite{patchy}.
+Falls \gls{l} weiterhin injektiv ist, so spricht man von einer \emph{totalen Ordnung} und die Knoten $\gls{v} \in \gls{V}$ können insbesondere so permutiert werden, dass sie die Ordnung von $>_{\gls{l}}$ respektieren~\cite{patchy}.
+
+Beispiele für eine Knotenfärbung sind Metriken, die die Wichtigkeit der einzelnen Knoten beschreiben.
+Eine naive Metrik dafür ist \zB{} der Knotengrad \gls{degree} \bzw{} \gls{d}, der die \emph{Zentralität} der Knoten beschreibt~\cite{patchy}.
+Komplexere Metriken für die Zentralität der Knoten sind unter anderem die Nähe, die Betweenness-Zentralität sowie die Eigenvektorzentralität~\cite{patchy, centrality}.
+Letztere ist eng mit dem \emph{PageRank}-Algorithmus von Google verwandt ist~\cite{centrality}.
+Die \emph{Nähe} (\engl{} \emph{Closeness})
+\begin{equation*}
+  c\left(\gls{v}\right) \coloneqq \frac{1}{\sum_{\gls{v}_i \in \gls{V}, \gls{v} \neq \gls{v}_i} \gls{s}\left(\gls{v}, \gls{v}_i\right)}
+\end{equation*}
+ist ein Maß für die durchschnittliche Länge zwischen einem Knoten und allen weiteren Knoten in \gls{V}~\cite{centrality}.
+Je \emph{näher} ein Knoten sich an der Knotenmenge befindet, als desto zentraler gilt er.
+Die \emph{Betweeness-Zentralität} eines Knotens $\gls{v} \in \gls{V}$ ist über
+\begin{equation*}
+  c\left(\gls{v}\right) \coloneqq \sum_{\gls{v}_i \neq \gls{v} \neq \gls{v}_j} \frac{\kappa_{ij}\left(\gls{v}\right)}{\kappa_{ij}}
+\end{equation*}
+definiert, wobei $\kappa_{ij} \in \gls{N}$ die Anzahl an kürzesten Pfaden von $\gls{v}_i$ nach $\gls{v}_j$ angibt und $\kappa_{ij}\left(\gls{v}\right) \in \gls{N}$ die Anzahl dieser Pfade beschreibt, die durch \gls{v} führen~\cite{centrality}.
+Nach der Methode der \emph{Eigenvektorzentralität} gilt ein Knoten als umso wichtiger, je wichtiger seine Nachbarknoten sind~\cite{centrality}.
+Sie ist definiert über
+\begin{equation*}
+  c\left(\gls{v}\right) = \frac{1}{\gls{lambda}} \sum_{\gls{v}_i \in \gls{Neighbor}\left(\gls{v}\right)} c\left(\gls{v}_i\right),
+\end{equation*}
+wobei $\gls{lambda} \in \gls{R}$.
+Mit der Darstellung der Eigenvektorzentralität $c\left(\cdot\right) \colon \gls{V} \to \gls{R+}$ als Vektor $\ve{c} \in \gls{R+}^N$ und \gls{G} als ungewichtete Adjazenzmatrix $\gls{A} \in {\left\{0,1\right\}}^{N \times N}$ kann die Bestimmung von \gls{lambda} \bzw{} \ve{c} als Eigenwertproblem $\gls{A}\ve{c} = \gls{lambda}\ve{c}$ aufgefasst werden.
+
+\paragraph{Isomorphie und kanonische Ordnung}
+\label{isomorphie_und_kanonische_ordnung}

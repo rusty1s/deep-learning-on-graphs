@@ -1,9 +1,34 @@
 \section{Räumliche Faltung}
 \label{raeumliche_faltung}
 
-
 \paragraph{Knotenauswahl}
 \label{knotenauswahl}
+
+\begin{algorithm}[t]
+\centering
+\begin{algorithmic}
+  \REQUIRE{} Knoten \gls{V}, Knotenfärbung $\gls{l} \colon \gls{V} \to \gls{C} \subseteq \gls{R}$, Länge $l \in \gls{N}$, Schrittweite $s \in \gls{N}$
+  \ENSURE{} geordnete Knotenmenge $\gls{V}_{\mathrm{out}}$ mit $\left|\gls{V}_{\mathrm{out}}\right| \leq l$
+  \STATE{} $\gls{V}_\mathrm{out} \leftarrow \emptyset$
+  \STATE{} $\gls{V}_{\mathrm{sort}} \leftarrow$ sortiere \gls{V} \bzgl{} \gls{l}
+  \STATE{} $i, j \leftarrow 1$
+  \WHILE{$i < l$}
+    \IF{$j \leq \left|\gls{V}_{\mathrm{sort}}\right|$}
+      \STATE{} $\gls{V}_{\mathrm{out}}\left[i\right] \leftarrow \gls{V}_{\mathrm{sort}}\left[j\right]$
+    \ENDIF{}
+  \ENDWHILE{}
+  \STATE{} $i \leftarrow i + 1$
+  \STATE{} $j \leftarrow j + s$
+  % \REPEAT{}
+  %   \FOR{$\gls{v}_i \in \gls{V}$}
+  %     \STATE{} $\ve{f}^{\left(t+1\right)}_i \leftarrow \mathrm{hash}\left(\sum_{\gls{v}_j \in \gls{Neighbor}\left(\gls{v}_i\right)} \ve{f}^{\left(t\right)}_j\right)$
+  %   \ENDFOR{}
+  %   \STATE{} $t \leftarrow t + 1$
+  % \UNTIL{Konvergenz}
+\end{algorithmic}
+\caption[]{}
+\label{alg:knotenauswahl}
+\end{algorithm}
 
 awdawd
 
