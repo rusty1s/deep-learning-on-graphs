@@ -10,6 +10,19 @@
 nicht nur bei MNIST
 auch bei pascal voc slic? (\zB{} Regelmäßigkeiten erkennen)
 
+Problem kanten bzw knoten mit sehr vielen kanten enthalten wenig information und sind meist hintergrundsknoten, die eine grosse gleichfarvige fläche bilden (das ist natürlich nicht immer der fall)
+Wir können diese knoten über einen treshhold entfernen (zb 20)
+Laufen jedoch gefahr isolierte knoten zu schaffen bzw einen nicht verbundenen graphen (zeige beispiel)
+ Eine weitere idee ist für jeden knoten einen threshold an anzahl an kanten zusetzen und die längsten kanten zu entfernen. Dann bleibt aber der unnütze hintergrundknoten erhalten.
+
+Im falle von mnist kann mn hintergrundsknoten leicht über farbe ermitteln.
+In anderen interessanteren datensätzen ist dies nicht so einfach.
+
+Gibt es weitere ideen?
+Kann man isolierte graphen leicht ermitteln? Was tun in so einem fall?
+
+Testen über Eigenvektoren ob Graph zusammenhängend ist
+
 \paragraph{Spatial-Pyramid-Pooling}
 \label{spatial_pyramid_pooling}
 

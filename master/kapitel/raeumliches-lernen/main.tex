@@ -1,8 +1,11 @@
 \chapter{Räumliches Lernen auf Graphen}
 \label{raeumliches_lernen}
 
-Spatially sliding a filter on the vertices, as you would slide a filter on a 2D image or a 1D audio signal (the pixels form a grid graph, the time forms a line graph), i.e. the straightforward application of the definition of a convolution. This approach however presents two challenges: (1) the definition of a receptive field / neighbourhood, because sampling on arbitrary graphs is not necessarily uniform and (2), the ordering of nodes, because problem-specific ordering, e.g. spatially ordered pixels or time ordered samples, is missing. These recent works, who present the same ideas differently, spatially define the convolution operator on graphs:
+Das \emph{räumliche Lernen auf Graphen} basiert auf der direkten Überführung der Definition einer Faltung auf zweidimensionalen Bildern \bzw{} regulären Gittern über ein räumlich verschiebbares Fenster.
+Ähnlich wie die Faltung in \glspl{CNN} wird dafür über eine Anordnung der Knoten mit festgelegter Schrittweite iteriert und für diese jeweils eine feste Menge an Nachbarsknoten bestimmt, die das Fenster \bzw{} das Receptive-Field eines jeden Knotens beschreiben~\cite{patchy}.
+Aufgrund der gleichmäßigen räumlichen Anordnung der Pixel \bzw{} Knoten auf einem regulären Gitter ist die Definition einer Abtastfolge der Knoten und einer jeweiligen Nachbarschaftsbestimmung mit fester Größe und Ordnung recht trivial, wohingegen solche Definitionen im Kontext von willkürlichen Graphen aufgrund ihrer \ggf{} fehlenden räumlichen (oder zeitlichen) Anordnung nicht gleich ersichtlich erscheinen.
 
+\citeauthor{patchy} definieren in ihrer Arbeit~\cite{patchy} einen solchen räumlichen Faltungsoperator auf Graphen, der im Folgenden vorgestellt und anschließend in den Kontext von Graphen im zweidimensionalen euklidischen Raum überführt wird.
 
 \input{kapitel/raeumliches-lernen/graphentheorie}
 \input{kapitel/raeumliches-lernen/faltung}
