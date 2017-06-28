@@ -63,6 +63,7 @@ mit Faltungsaufwand $\gls{O}\left(M_{\mathrm{in}}M_{\mathrm{out}}\left|\gls{E}\r
     \ENDFOR{}
     \STATE{} $t \leftarrow t + 1$
   \UNTIL{Konvergenz}
+  \RETURN{$\ve{f}^{\left(T\right)}$}
 \end{algorithmic}
   \caption[Weisfeiler-Lehman]{Eindimensionaler Weisfeiler-Lehman-Algorithmus auf einer initialen Knotenfärbung \bzw{} Merkmalsfunktion $\ve{f}^{\left(0\right)} \in \gls{R}^N$ eines Graphen \gls{G} mit $\gls{v}_i \in \gls{Neighbor}\left(\gls{v}_i\right)$~\cite{wl}. Der Prozess der Verfärbung eines jeden Knotens $\gls{v}_i$ auf Basis der Farben seiner lokalen Nachbarsknoten wird solange wiederholt, bis diese konvergieren.}
 \label{alg:wl}

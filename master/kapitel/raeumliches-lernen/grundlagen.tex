@@ -36,7 +36,10 @@ Sie ist definiert über
   c\left(\gls{v}\right) = \frac{1}{\gls{lambda}} \sum_{\gls{v}_i \in \gls{Neighbor}\left(\gls{v}\right)} c\left(\gls{v}_i\right),
 \end{equation*}
 wobei $\gls{lambda} \in \gls{R}$.
-Mit der Darstellung der Eigenvektorzentralität $c\left(\cdot\right) \colon \gls{V} \to \gls{R+}$ als Vektor $\ve{c} \in \gls{R+}^N$ und \gls{G} als ungewichtete Adjazenzmatrix $\gls{A} \in {\left\{0,1\right\}}^{N \times N}$ kann die Bestimmung von \gls{lambda} \bzw{} \ve{c} als Eigenwertproblem $\gls{A}\ve{c} = \gls{lambda}\ve{c}$ aufgefasst werden.
+Mit der Darstellung der Eigenvektorzentralität $c \colon \gls{V} \to \gls{R+}$ als Vektor $\ve{c} \in \gls{R+}^N$ und \gls{G} als ungewichtete Adjazenzmatrix $\gls{A} \in {\left\{0,1\right\}}^{N \times N}$ kann die Bestimmung von \gls{lambda} \bzw{} \ve{c} als Eigenwertproblem $\gls{A}\ve{c} = \gls{lambda}\ve{c}$ aufgefasst werden.
+Dann beschreibt der größte Eigenwert \gls{lambda} die Eigenvektorzentralität der Knoten über dessen Eigenvektor~\cite{centrality}.
 
 \paragraph{Isomorphie und kanonische Ordnung}
 \label{isomorphie_und_kanonische_ordnung}
+
+\citeauthor{patchy} nutzen die Bibliothek Nauty, die zusätzlich eine Knotenfärbung respektiert.

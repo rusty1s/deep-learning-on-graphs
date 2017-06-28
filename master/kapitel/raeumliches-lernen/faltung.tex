@@ -7,37 +7,72 @@
 \begin{algorithm}[t]
 \centering
 \begin{algorithmic}
-  \REQUIRE{} Knoten \gls{V}, Knotenfärbung $\gls{l} \colon \gls{V} \to \gls{C} \subseteq \gls{R}$, Länge $l \in \gls{N}$, Schrittweite $s \in \gls{N}$
-  \ENSURE{} geordnete Knotenmenge $\gls{V}_{\mathrm{out}}$ mit $\left|\gls{V}_{\mathrm{out}}\right| \leq l$
-  \STATE{} $\gls{V}_\mathrm{out} \leftarrow \emptyset$
-  \STATE{} $\gls{V}_{\mathrm{sort}} \leftarrow$ sortiere \gls{V} \bzgl{} \gls{l}
+  \REQUIRE{} Knotenmenge \gls{V}, Färbung $\gls{l} \colon \gls{V} \to \gls{C} \subseteq \gls{R}$, Länge $L \in \gls{N}$, Schrittweite $S \in \gls{N}$
+  \ENSURE{} geordnete Knotenmenge $\gls{V}_{\mathrm{out}} \subseteq \gls{V}$ mit $\left|\gls{V}_{\mathrm{out}}\right| \leq l$
+  \STATE{} $\gls{V}_\mathrm{out} \leftarrow \left[\,\,\right]$
+  \STATE{} $\gls{V}_{\mathrm{sort}} \leftarrow$ Sortiere \gls{V} absteigend \bzgl{} \gls{l}.
   \STATE{} $i, j \leftarrow 1$
-  \WHILE{$i < l$}
+  \WHILE{$i < L$}
     \IF{$j \leq \left|\gls{V}_{\mathrm{sort}}\right|$}
       \STATE{} $\gls{V}_{\mathrm{out}}\left[i\right] \leftarrow \gls{V}_{\mathrm{sort}}\left[j\right]$
     \ENDIF{}
+    \STATE{} $i \leftarrow i + 1$
+    \STATE{} $j \leftarrow j + S$
   \ENDWHILE{}
-  \STATE{} $i \leftarrow i + 1$
-  \STATE{} $j \leftarrow j + s$
-  % \REPEAT{}
-  %   \FOR{$\gls{v}_i \in \gls{V}$}
-  %     \STATE{} $\ve{f}^{\left(t+1\right)}_i \leftarrow \mathrm{hash}\left(\sum_{\gls{v}_j \in \gls{Neighbor}\left(\gls{v}_i\right)} \ve{f}^{\left(t\right)}_j\right)$
-  %   \ENDFOR{}
-  %   \STATE{} $t \leftarrow t + 1$
-  % \UNTIL{Konvergenz}
+  \RETURN{$\gls{V}_{\mathrm{out}}$}
 \end{algorithmic}
-\caption[]{}
+\caption[Knotenauswahl der räumlichen Faltung]{}
 \label{alg:knotenauswahl}
 \end{algorithm}
-
-awdawd
 
 \paragraph{Nachbarschaftsgruppierung}
 \label{nachbarschaftsgruppierung}
 
-awdawd
+\begin{algorithm}[t]
+\centering
+\begin{algorithmic}
+  \REQUIRE{} Knoten $\gls{v} \in \gls{V}$, Nachbarschaftsgröße $K \in \gls{N}$
+  \ENSURE{} Nachbarschaftsmenge $\gls{Neighbor}_{\gls{v}} \subseteq \gls{V}$
+  \STATE{} $\gls{Neighbor}_{\gls{v}}, \mathcal{T} \leftarrow \left\{\gls{v}\right\}$
+  \WHILE{$\left|\gls{Neighbor}_{\gls{v}}\right| < K$ und $\left|\mathcal{T}\right| > 0$}
+    \STATE{} $\mathcal{T} \leftarrow \bigcup_{\gls{v} \in \mathcal{T}} \gls{Neighbor}\left(\gls{v}, 1\right)$
+    \STATE{} $\gls{Neighbor}_{\gls{v}} \leftarrow \gls{Neighbor}_{\gls{v}} \cup \mathcal{T}$
+  \ENDWHILE{}
+  \RETURN{$\gls{Neighbor}_{\gls{v}}$}
+\end{algorithmic}
+\caption[Nachbarschaftsgruppierung der räumlichen Faltung]{}
+\label{alg:knotenauswahl}
+\end{algorithm}
 
 \paragraph{Normalisierung}
 \label{normalisierung}
+
+\begin{algorithm}[t]
+\centering
+\begin{algorithmic}
+  \REQUIRE{} Graph \gls{G}, Knoten $\gls{v} \in \gls{V}$, Nachbarschaftsmenge $\gls{Neighbor} \subseteq \gls{V}$, Nachbarschaftsgröße $K \in \gls{N}$, Färbung $\gls{l} \colon \gls{V} \to \mathcal{C} \subseteq \gls{R}$
+  \ENSURE{} geordnete Nachbarschaftsmenge $\gls{Neighbor}_{\mathrm{out}}$ mit $\left|\gls{Neighbor}_{\mathrm{out}}\right| = K$
+  \STATE{} Generiere Knotenfärbung $\gls{l}_{\gls{s}} \colon \gls{Neighbor} \to \gls{N}$ mit $\gls{l}\left(\gls{v}_i\right) = \gls{s}\left(\gls{v}, \gls{v}_i\right)$.
+  \STATE{} $\gls{Neighbor}_{\mathrm{out}} \leftarrow$ Sortiere $\gls{Neighbor}$ aufsteigend \bzgl{} $\gls{l}_{\gls{s}}$ und absteigend \bzgl{} \gls{l}, falls $\gls{l}_{\gls{s}}\left(\gls{v}_i\right) = \gls{l}_{\gls{s}}\left(\gls{v}_j\right)$.
+  \IF{$\left|\gls{Neighbor}\right| > K$}
+    \STATE{} $\gls{Neighbor}_{\mathrm{out}} \leftarrow \gls{Neighbor}_{\mathrm{out}}\left[0:K\right]$
+  \ENDIF{}
+  \IF{$\left|\gls{Neighbor}\right| < K$}
+    \STATE{} $\gls{Neighbor}_{\mathrm{out}} \leftarrow \gls{Neighbor}_{\mathrm{out}}$ und zusätzlichen $K - \left|\gls{Neighbor}\right|$ Fakeknoten.
+  \ENDIF{}
+  \STATE{} $\gls{G}^{\prime} \leftarrow$ Generiere Teilgraph aus den $K$ Knoten in $\gls{Neighbor}_{\mathrm{out}}$.
+  \STATE{} $\gls{Neighbor}_{\mathrm{out}} \leftarrow$ Kanonisiere $\gls{G}^{\prime}$, wobei die Ordnung von $\gls{Neighbor}_{\mathrm{out}}$ erhalten bleibt.
+  \RETURN{$\gls{Neighbor}_{\mathrm{out}}$}
+\end{algorithmic}
+\caption[Normalisierungsschritt der räumlichen Faltung]{}
+\label{alg:normalisierung}
+\end{algorithm}
+
+\todo{grap bild figure 3 nachmachen}
+
+Nodes of any two graphs should have similar position in the
+adjacency matrices iff their structural roles are similar
+
+Canonalisierung wird nur benutzt im Ties zu brechen  LOL
 
 awdawd
