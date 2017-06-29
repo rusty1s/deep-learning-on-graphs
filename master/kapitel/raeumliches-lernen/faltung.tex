@@ -1,8 +1,14 @@
 \section{Räumliche Faltung}
 \label{raeumliche_faltung}
 
+Der räumliche Faltungsoperator von~\cite{patchy} hat das Ziel, den Graphen in einen dreidimensionalen Tensor zu konvertieren, sodass die klassische Faltungsoperation \gls{conv2d} auf diesen angewendet werden kann.
+Der Prozess zur \emph{Vektorisierung} eines Graphen besteht dabei aus drei Schritten: (1) Bestimme eine Knotenauswahl des Graphen mit einer definierten Länge, (2) finde für jeden ausgewählten Knoten eine Nachbarschaftsgruppierung und (3) normalisiere die jeweiligen Nachbarschaften zu einer festlegten Größe und bestimme auf diesen eine Ordnung, sodass Graphen mit ähnlichen Nachbarschaftsstrukturen eine äquivalente Ordnung erzeugen~\cite{patchy}.
+Im Folgenden werden die drei Schritte näher erläutert.
+
 \paragraph{Knotenauswahl}
 \label{knotenauswahl}
+
+Die Knotenauswahl beschreibt den Prozess
 
 \begin{algorithm}[t]
 \centering
@@ -73,3 +79,5 @@ adjacency matrices iff their structural roles are similar
 Canonalisierung wird nur benutzt im Ties zu brechen, damit ist der Aufwand zu vernachlässigen mit der Vorraussetzung, dass nur wenige Äquivalenzen aufgelöst werden müssen.
 
 awdawd
+\\
+Damit lässt die klassische Faltungsoperation \gls{conv2d} auch auf Graphen anwenden, da diese in ein festes Format mit festen Nachbarschaften zugeordnet wurde.
