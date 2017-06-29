@@ -50,22 +50,22 @@
 \begin{algorithm}[t]
 \centering
 \begin{algorithmic}
-  \REQUIRE{} Graph \gls{G}, Knoten $\gls{v} \in \gls{V}$, Nachbarschaftsmenge $\gls{Neighbor} \subseteq \gls{V}$, Nachbarschaftsgröße $K \in \gls{N}$, Färbung $\gls{l} \colon \gls{V} \to \mathcal{C} \subseteq \gls{R}$
+  \REQUIRE{} Graph \gls{G}, Knoten $\gls{v} \in \gls{V}$, Nachbarschaftsmenge $\gls{Neighbor}_{\gls{v}} \subseteq \gls{V}$, Nachbarschaftsgröße $K \in \gls{N}$, Färbung $\gls{l} \colon \gls{V} \to \mathcal{C} \subseteq \gls{R}$
   \ENSURE{} geordnete Nachbarschaftsmenge $\gls{Neighbor}_{\mathrm{out}}$ mit $\left|\gls{Neighbor}_{\mathrm{out}}\right| = K$
   \STATE{} berechne Ordnung $>_{\gls{v}}$, sodass $\gls{v}_i >_{\gls{v}} \gls{v}_j$ \gdw{} $\gls{s}\left(\gls{v}, \gls{v}_i\right) > \gls{s}\left(\gls{v}, \gls{v}_j\right)$ und $\gls{l}\left(\gls{v}_i\right) < \gls{l}\left(\gls{v}_j\right)$ falls $\gls{s}\left(\gls{v}, \gls{v}_i\right) = \gls{s}\left(\gls{v}, \gls{v}_j\right)$.
-  \STATE{} $\gls{Neighbor}_{\mathrm{sort}} \leftarrow$ Sortiere $\gls{Neighbor}$ aufsteigend \bzgl{} $>_{\gls{v}}$.
-  \IF{$\left|\gls{Neighbor}\right| > K$}
+  \STATE{} $\gls{Neighbor}_{\mathrm{sort}} \leftarrow$ Sortiere $\gls{Neighbor}_{\gls{v}}$ aufsteigend \bzgl{} $>_{\gls{v}}$.
+  \IF{$\left|\gls{Neighbor}_{\gls{v}}\right| > K$}
     \STATE{} $\gls{Neighbor}_{\mathrm{sort}} \leftarrow \gls{Neighbor}_{\mathrm{sort}}\left[0:K\right]$
   \ENDIF{}
   \STATE{} $\gls{G}^{\prime} = \left(\gls{V}^{\prime}, \gls{E}^{\prime}\right) \leftarrow$ Generiere Teilgraph aus \gls{G} mit Knotenmenge $\gls{V}^{\prime} \coloneqq \gls{Neighbor}_{\mathrm{sort}} \subseteq \gls{V}$.
   \STATE{} $\gls{Neighbor}_{\mathrm{out}} \leftarrow$ Kanonisiere $\gls{G}^{\prime}$ \bzgl{} $>_{\gls{v}}$ (hebt Gleichheiten in $>_{\gls{v}}$ auf).
-  \RETURN{$\gls{Neighbor}_{\mathrm{out}} \cup \left(K - \left|\gls{Neighbor}\right| \text{ Fakeknoten}\right)$}
+  \RETURN{$\gls{Neighbor}_{\mathrm{out}} \cup \left(K - \left|\gls{Neighbor}_{\mathrm{sort}}\right| \text{ Fakeknoten}\right)$}
 \end{algorithmic}
 \caption[Normalisierungsschritt der räumlichen Faltung]{}
 \label{alg:normalisierung}
 \end{algorithm}
 
-\todo{grap bild figure 3 nachmachen}
+\input{tikz/raeumliche_faltung}
 
 Nodes of any two graphs should have similar position in the
 adjacency matrices iff their structural roles are similar
