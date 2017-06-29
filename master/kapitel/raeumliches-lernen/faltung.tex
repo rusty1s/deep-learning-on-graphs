@@ -25,7 +25,7 @@ Im Folgenden werden die drei Schritte näher erläutert.
   \ENDWHILE{}
   \RETURN{$\gls{V}_{\mathrm{out}}$}
 \end{algorithmic}
-  \caption[Knotenauswahl]{Berechnung der Knotenauswahl $\gls{V}_{\mathrm{out}}$ anhand einer Knotenfärbung $\gls{l} \colon \gls{V} \to \mathcal{C} \subseteq \gls{R}$, einer maximalen Länge $L\in\gls{N}$ sowie einer Schrittweite $S \in \gls{N}$.}
+\caption[Knotenauswahl]{Berechnung der Knotenauswahl $\gls{V}_{\mathrm{out}}$ anhand einer Knotenfärbung $\gls{l} \colon \gls{V} \to \mathcal{C} \subseteq \gls{R}$, einer maximalen Länge $L\in\gls{N}$ sowie einer Schrittweite $S \in \gls{N}$.}
 \label{alg:knotenauswahl}
 \end{algorithm}
 
@@ -52,7 +52,7 @@ Demnach ist es möglich, dass $\gls{V}_{\mathrm{out}}$ weniger, aber niemals meh
   \ENDWHILE{}
   \RETURN{$\gls{Neighbor}_{\gls{v}}$}
 \end{algorithmic}
-  \caption[Nachbarschaftsgruppierung]{Berechnung einer Vorauswahl der maximal in dem Receptive-Field des Knotens $\gls{v} \in \gls{V}_{\mathrm{out}}$ mit Größe $K \in \gls{N}$ enthaltenden Knoten über eine von \gls{v} ausgehende Breitensuche.}
+\caption[Nachbarschaftsgruppierung]{Berechnung einer Vorauswahl der maximal in dem Receptive-Field des Knotens $\gls{v} \in \gls{V}_{\mathrm{out}}$ mit Größe $K \in \gls{N}$ enthaltenden Knoten über eine von \gls{v} ausgehende Breitensuche.}
 \label{alg:nachbarschaftsgruppierung}
 \end{algorithm}
 
@@ -67,7 +67,7 @@ $\gls{Neighbor}_{\mathrm{v}}$ erzeugt dabei in den allermeisten Fällen eine Men
 \paragraph{Normalisierung}
 \label{normalisierung}
 
-Die Nachbarschaftsgruppierung $\gls{Neighbor}_{\gls{v}}$ eines Knoten $\gls{v} \in \gls{V}_{\mathrm{out}}$ wird im Anschluss darauf \emph{normalisiert}, sodass diese die feste Größe $K$ besitzt sowie ihren Elementen eine totale Ordnung inne wohnt, sodass Knoten in zwei verschiedenen Graphen genau dann an eine ähnliche Position im Receptive-Field gelangen, wenn sich ihre strukturelle Rollen in den Graphen ähnelt~\cite{patchy}.
+Die Nachbarschaftsgruppierung $\gls{Neighbor}_{\gls{v}}$ eines Knoten $\gls{v} \in \gls{V}_{\mathrm{out}}$ wird im Anschluss darauf zu einem Receptive-Field $\gls{Neighbor}_{\mathrm{out}}$ mit einer festen Größe $\left|\gls{Neighbor}_{\mathrm{out}}\right| = K$ und einer totalen Ordnung auf dessen Elementen \emph{normalisiert}, sodass Knoten in zwei verschiedenen Graphen genau dann an eine ähnliche Position im Receptive-Field gelangen, wenn sich ihre strukturellen Rollen in den Graphen ähneln~\cite{patchy}.
 Die Normalisierung ist damit ein Prozess, der eine ungeordnete Knotenmenge in einen Vektorraum mit linearer Ordnung transformiert~\cite{patchy}.
 
 \begin{algorithm}[t]
@@ -82,14 +82,14 @@ Die Normalisierung ist damit ein Prozess, der eine ungeordnete Knotenmenge in ei
   \ENDIF{}
   \STATE{} $\gls{G}^{\prime} = \left(\gls{V}^{\prime}, \gls{E}^{\prime}\right) \leftarrow$ Generiere Teilgraph aus \gls{G} mit Knotenmenge $\gls{V}^{\prime} \coloneqq \gls{Neighbor}_{\mathrm{sort}} \subseteq \gls{V}$.
   \STATE{} $\gls{Neighbor}_{\mathrm{out}} \leftarrow$ Kanonisiere $\gls{G}^{\prime}$ \bzgl{} $>_{\gls{v}}$ (hebt Gleichheiten in $>_{\gls{v}}$ auf).
-  \RETURN{$\gls{Neighbor}_{\mathrm{out}} \cup \left(K - \left|\gls{Neighbor}_{\gls{v}}\right| \text{ Fakeknoten}\right)$}
+  \RETURN{$\gls{Neighbor}_{\mathrm{out}} \cup \left(\max \left(K - \left|\gls{Neighbor}_{\gls{v}}\right|, 0\right) \text{ Fakeknoten}\right)$}
 \end{algorithmic}
-\caption[Normalisierung]{}
+\caption[Normalisierung]{Berechnung der Vektorrepräsentation einer Nachbarschaftsmenge $\gls{Neighbor}_{\gls{v}}$ eines Knotens $\gls{v} \in \gls{V}_{\mathrm{out}}$ mittels einer vordefinierten Größe $K \in \gls{N}$, einer Färbung $\gls{l} \colon \gls{V} \to \mathcal{C} \subseteq \gls{R}$ sowie der Abstandsfunktion $\gls{s} \colon \gls{V} \times \gls{V} \to \gls{N}$ des Graphen \gls{G}.}
 \label{alg:normalisierung}
 \end{algorithm}
 
 Algorithmus~\ref{alg:normalisierung} veranschaulicht den von \citeauthor{patchy} entwickelten Normalisierungsprozess \bzgl{} eines Knotens $\gls{v} \in \gls{V}_{\mathrm{out}}$ basierend auf dessen zuvor ermittelter Nachbarschaftsmenge $\gls{Neighbor}_{\gls{v}}$.
-Dafür werden die Knoten der Nachbarschaftsmenge $\gls{v}_i \in \gls{Neighbor}_{\gls{v}}$ zuerst \bzgl{} ihrer Abstände $\gls{s}\left(\gls{v}, \gls{v}_i\right)$ zu \gls{v} aufsteigend und absteigend \bzgl{} ihrer jeweiligen Knotenfarbe bei gleichen Abständen sortiert.
+Dafür werden die Knoten der Nachbarschaftsmenge $\gls{v}_i \in \gls{Neighbor}_{\gls{v}}$ zuerst aufsteigend \bzgl{} ihrer Abstände $\gls{s}\left(\gls{v}, \gls{v}_i\right)$ zu \gls{v} und absteigend \bzgl{} ihrer jeweiligen Knotenfarbe bei gleichen Abständen sortiert.
 Falls $\gls{v}_i$ näher an \gls{v} als $\gls{v}_j$ liegt, \dhe{} $\gls{s}\left(\gls{v}, \gls{v}_i\right) < \gls{s}\left(\gls{v}, \gls{v}_j\right)$, befindet sich $\gls{v}_i$ immer vor $\gls{v}_j$ in der resultierenden normalisierten Nachbarschaftsmenge $\gls{Neighbor}_{\mathrm{out}}$.
 Damit befindet sich der Wurzelknoten \gls{v} stets an erster Position in $\gls{Neighbor}_{\mathrm{out}}$ und je weiter ein Knoten von \gls{v} entfernt liegt, umso höher ist sein Index in der Vektorrepräsentation.
 Anschließend kann die ermittelte Sortierung auf die Größe $K$ reduziert werden, indem die Elemente ab der Position $K+1$ verworfen werden.
@@ -97,12 +97,12 @@ Anschließend kann die ermittelte Sortierung auf die Größe $K$ reduziert werde
 Da die meisten Knotenfärbungsalgorithmen \gls{l} nicht injektiv sind und daher möglicherweise auf die gleiche Farbe innerhalb einer \enquote{Abstandsgruppe} abbilden, ist die generierte Sortierung $\gls{Neighbor}_{\mathrm{sort}}$ insbesondere nicht total.
 Es ist daher notwendig, die Äquivalenzen dieser Knotenfarbe aufzulösen.
 Für diesen Zweck wird ein Teilgraph $\gls{G}^{\prime} = \left(\gls{V}^{\prime}, \gls{E}^{\prime}\right)$ aus \gls{G} generiert, der \gls{G} auf die Nachbarschaftsmenge $\gls{V}^{\prime} \coloneqq \gls{Neighbor}_{\mathrm{sort}}$ beschränkt.
-Eine kanonische Ordnung auf diesem Graphen mit Berücksichtigung der Knotenfärbung \gls{l} liefert damit eine Ordnung der Knoten in $\gls{Neighbor}_{\mathrm{sort}}$, die für Knoten mit gleicher Knotenfarbe eine totale Ordnung bestimmt.
+Eine kanonische Ordnung auf diesem Graphen mit Berücksichtigung der Knotenfärbung \gls{l} liefert damit eine totale Ordnung der Knoten in $\gls{Neighbor}_{\mathrm{sort}}$ mit gleicher Knotenfarbe.
 Eine kanonische Ordnung auf Graphen mit fester Größe $K$ ist dabei in linearer Zeit möglich (\vgl{}~\cite{patchy}).
 Da die Kanonisierung des Graphen nur für Knoten mit gleicher Knotenfarbe angewendet werden muss, zeigt sich der zusätzliche Aufwand dieser Operation als zu vernachlässigen.
 
-Abschließend muss weiterhin der Fall betrachtet werden, dass $\left|\gls{Neighbor}_{\gls{v}}\right| < K$.
-Dafür werden $K - \left|\gls{Neighbor}_{\gls{v}}\right|$ \emph{Fakeknoten} an das Ende von $\gls{Neighbor}_{\mathrm{out}}$ gehängt, denen keine Bedeutung inne wohnt und später so belegt werden, dass diese keinen Einfluss auf das Resultat der Faltung nehmen.
+Abschließend muss weiterhin der Fall betrachtet werden, dass $\left|\gls{Neighbor}_{\gls{v}}\right| < K$ weniger als $K$ Knoten enthält.
+Dafür werden $\max\left(K - \left|\gls{Neighbor}_{\gls{v}}\right|, 0\right)$ \emph{Fakeknoten} an das Ende von $\gls{Neighbor}_{\mathrm{out}}$ gehängt, denen keine Bedeutung inne wohnt und später so belegt werden, dass diese keinen Einfluss auf das Resultat der Faltung nehmen.
 \input{tikz/raeumliche_faltung}
 Abbildung~\ref{fig:raeumliche_faltung} illustriert den Normalisierungsprozess an einem einfachen Beispiel.
 \\
