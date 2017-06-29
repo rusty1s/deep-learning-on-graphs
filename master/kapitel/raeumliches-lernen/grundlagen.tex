@@ -6,7 +6,7 @@ Die
 
 
 einer Abtastfolge \bzw{} einer Knotenauswahl sowie einer Nachbarschaftsgruppierung mit einer Ordnung
-todo{hier einleiten}
+\todo{hier einleiten}
 
 \paragraph{Färbung von Knoten}
 \label{faerbung_von_knoten}
@@ -42,6 +42,19 @@ Dann beschreibt der größte Eigenwert \gls{lambda} die Eigenvektorzentralität 
 \paragraph{Isomorphie und kanonische Ordnung}
 \label{isomorphie_und_kanonische_ordnung}
 
-\citeauthor{patchy} nutzen die Bibliothek Nauty, die zusätzlich eine Knotenfärbung respektiert~\cite{nauty}.
+Seien $\gls{G}_1 = \left(\gls{V}_1, \gls{E}_1\right)$ und $\gls{G}_2 = \left(\gls{V}_2, \gls{E}_2\right)$ zwei Graphen mit der gleichen Anzahl an Knoten, \dhe{} $\left|\gls{V}_1\right| = \left|\gls{V}_2\right|$.
+Dann heißt eine bijektive Abbildung $p \colon \gls{V}_1 \to \gls{V}_2$ \emph{Isomorphismus} zwichen $\gls{G}_1$ und $\gls{G}_2$, falls $\left(\gls{v}_i, \gls{v}_j\right) \in \gls{E}_1$ \gdw{} $\left(p\left(\gls{v}_i\right), p\left(\gls{v}_j\right)\right) \in \gls{E}_2$~\cite{nauty}.
+Zwei Graphen sind \emph{isomorph} zueinander, falls ein Isomorphismus zwischen ihnen existiert.
+Die Komplexität zur Bestimmung der Isomorphie zweier Graphen liegt in NP, wobei nicht bekannt ist, ob sie in P enthalten oder NP-vollständig ist~\cite{patchy}.
 
+Die Komposition mehrerer Isomorphismen ist ebenfalls ein Isomorphismus~\cite{nauty}.
+Die Menge aller Isomorphismen (zuzüglich der identischen Abbildung, die die Knoten auf sich selber abbildet) heißt die \emph{Isomorphismenklasse} des Graphen~\cite{nauty}.
+
+Eine \emph{kanonische Ordnung} eines Graphen $\gls{G} = \left(\gls{V}, \gls{E}\right)$ ist ein Graph $\gls{G}^{\prime} = \left(\gls{V}^{\prime}, \gls{E}^{\prime}\right)$ mit einer eindeutigen Ordnung seiner Knoten $\gls{V}^{\prime}$, der isomorph zu \gls{G} ist und seine gesamte Isomorphismenklasse repräsentiert~\cite{patchy}.
+Zwei Graphen sind insbesondere genau dann zueinander isomorph, wenn ihre kanonischen Ordnungen übereinstimmen~\cite{nauty}.
+Abbildung~\ref{fig:kanonische_ordnung} illustriert das Prinzip einer kanonischen Ordnung anhand zwei einfach gewählter isomorpher Graphen.
 \input{tikz/kanonische_ordnung}
+
+Ein Isomorphismus \bzw{} eine kanonische Ordnung kann ebenfalls eine Knotenfärbung berücksichtigen, indem Knoten durch einen Isomorphismus nur auf Knoten der gleichen Farbe abgebildet werden dürfen~\cite{nauty}.
+Das reduziert die Menge der verfügbaren Isomorphismenklassen und insbesondere die Komplexität ihrer Berechnung.
+Zur Berechnung der Isomorphismenklassen und der kanonischen Ordnung, auch unter Berücksichtigung einer Knotenfärbung, zeichnet sich das Programm \texttt{nauty} aufgrund dessen bemerkenswerter Berechnungslaufzeit aus (\vgl{}~\cite{nauty}).

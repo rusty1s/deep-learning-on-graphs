@@ -22,7 +22,7 @@
   }
 
   \draw[|-|] (-0.4, 0,    4)    -- node[left]  {$\left|\gls{V}_{\mathrm{out}}\right|$}        (-0.4, 3,    4);
-  \draw[|-|] (0,    3.55, 4.65) -- node[left]  {$M$ mit $\ma{F} \in \gls{R}^{N \times M}$}    (0,    3.55, 0.65);
+  \draw[|-|] (0,    3.55, 4.65) -- node[left]  {$M$}                                          (0,    3.55, 0.65);
   \draw[|-|] (0,    3.4,  0)    -- node[above] {$\left|\gls{Neighbor}_{\mathrm{out}}\right|$} (5,    3.4,  0);
 
   \node[node, noborder] (0) at (6.2,  2.3, 4) {};
@@ -37,8 +37,8 @@
 
 \end{tikzpicture}
 \caption[Räumliche Netzarchitektur auf Graphen]{Typische räumliche Netzarchitektur auf Graphen.
-Der \emph{Quader}, der durch die Anordnung der Knoten entsprechend ihrer Nachbarschaften entsteht, kann entlang der Nachbarschaften und ihrer Merkmale beliebig oft gefaltet und gepoolt werden.
-Eine Faltung entlang der Knotenauswahl besitzt allerdings keine Bedeutung und ist deshalb zu vermeiden.
+  Der \enquote{Quader}, der durch die Anordnung der Knotenauswahl $\gls{V}_{\mathrm{out}}$, ihrer Nachbarschaften $\gls{Neighbor}_{\mathrm{out}}$ und entsprechenden Merkmale in $\ma{F} \in \gls{R}^{N \times M}$ entsteht, kann entlang der jeweiligen Nachbarschaften \bzw{} ihrer Merkmale beliebig oft gefaltet und gepoolt werden.
+  Eine Faltung entlang der Knotenauswahl $\gls{V}_{\mathrm{out}}$ besitzt allerdings keine Bedeutung und ist deshalb zu vermeiden.
 Im Anschluss können vollverbundene Schichten hin zur Ausgabe an den abgeflachten Quader gestapelt werden.}
 \label{fig:netzarchitektur_raeumlich}
 \end{figure}
