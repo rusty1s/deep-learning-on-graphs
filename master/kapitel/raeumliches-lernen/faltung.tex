@@ -52,17 +52,14 @@
 \begin{algorithmic}
   \REQUIRE{} Graph \gls{G}, Knoten $\gls{v} \in \gls{V}$, Nachbarschaftsmenge $\gls{Neighbor} \subseteq \gls{V}$, Nachbarschaftsgröße $K \in \gls{N}$, Färbung $\gls{l} \colon \gls{V} \to \mathcal{C} \subseteq \gls{R}$
   \ENSURE{} geordnete Nachbarschaftsmenge $\gls{Neighbor}_{\mathrm{out}}$ mit $\left|\gls{Neighbor}_{\mathrm{out}}\right| = K$
-  \STATE{} Generiere Knotenfärbung $\gls{l}_{\gls{s}} \colon \gls{Neighbor} \to \gls{N}$ mit $\gls{l}\left(\gls{v}_i\right) = \gls{s}\left(\gls{v}, \gls{v}_i\right)$.
-  \STATE{} $\gls{Neighbor}_{\mathrm{out}} \leftarrow$ Sortiere $\gls{Neighbor}$ aufsteigend \bzgl{} $\gls{l}_{\gls{s}}$ und absteigend \bzgl{} \gls{l}, falls $\gls{l}_{\gls{s}}\left(\gls{v}_i\right) = \gls{l}_{\gls{s}}\left(\gls{v}_j\right)$.
+  \STATE{} berechne Ordnung $>_{\gls{v}}$, sodass $\gls{v}_i >_{\gls{v}} \gls{v}_j$ \gdw{} $\gls{s}\left(\gls{v}, \gls{v}_i\right) > \gls{s}\left(\gls{v}, \gls{v}_j\right)$ und $\gls{l}\left(\gls{v}_i\right) < \gls{l}\left(\gls{v}_j\right)$ falls $\gls{s}\left(\gls{v}, \gls{v}_i\right) = \gls{s}\left(\gls{v}, \gls{v}_j\right)$.
+  \STATE{} $\gls{Neighbor}_{\mathrm{sort}} \leftarrow$ Sortiere $\gls{Neighbor}$ aufsteigend \bzgl{} $>_{\gls{v}}$.
   \IF{$\left|\gls{Neighbor}\right| > K$}
-    \STATE{} $\gls{Neighbor}_{\mathrm{out}} \leftarrow \gls{Neighbor}_{\mathrm{out}}\left[0:K\right]$
+    \STATE{} $\gls{Neighbor}_{\mathrm{sort}} \leftarrow \gls{Neighbor}_{\mathrm{sort}}\left[0:K\right]$
   \ENDIF{}
-  \IF{$\left|\gls{Neighbor}\right| < K$}
-    \STATE{} $\gls{Neighbor}_{\mathrm{out}} \leftarrow \gls{Neighbor}_{\mathrm{out}}$ und zusätzlichen $K - \left|\gls{Neighbor}\right|$ Fakeknoten.
-  \ENDIF{}
-  \STATE{} $\gls{G}^{\prime} \leftarrow$ Generiere Teilgraph von \gls{G} aus den $K$ Knoten in $\gls{Neighbor}_{\mathrm{out}} \subseteq \gls{V}$.
-  \STATE{} $\gls{Neighbor}_{\mathrm{out}} \leftarrow$ Kanonisiere $\gls{G}^{\prime}$, wobei die Ordnung von $\gls{Neighbor}_{\mathrm{out}}$ erhalten bleibt.
-  \RETURN{$\gls{Neighbor}_{\mathrm{out}}$}
+  \STATE{} $\gls{G}^{\prime} = \left(\gls{V}^{\prime}, \gls{E}^{\prime}\right) \leftarrow$ Generiere Teilgraph aus \gls{G} mit Knotenmenge $\gls{V}^{\prime} \coloneqq \gls{Neighbor}_{\mathrm{sort}} \subseteq \gls{V}$.
+  \STATE{} $\gls{Neighbor}_{\mathrm{out}} \leftarrow$ Kanonisiere $\gls{G}^{\prime}$ \bzgl{} $>_{\gls{v}}$ (hebt Gleichheiten in $>_{\gls{v}}$ auf).
+  \RETURN{$\gls{Neighbor}_{\mathrm{out}} \cup \left(K - \left|\gls{Neighbor}\right| \text{ Fakeknoten}\right)$}
 \end{algorithmic}
 \caption[Normalisierungsschritt der räumlichen Faltung]{}
 \label{alg:normalisierung}
