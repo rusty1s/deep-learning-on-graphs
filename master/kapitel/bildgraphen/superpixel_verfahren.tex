@@ -81,7 +81,7 @@ Quickshift startet dabei mit der Berechnung der \emph{Parzen-Dichteschätzung} $
 mit der Standardabweichung $\gls{sigma} \in \gls{R}$ und der Gewichtung des Farbeinflusses über $\alpha \in \gls{R}$~\cite{quickshift}.
 Je größer \gls{sigma} gewählt wird, umso größer wird der Anteil weitentfernter Pixel zu der Dichte des jeweils betrachteten Pixels.
 In der Praxis kann, analog wie bei \gls{SLIC}, eine Fenstergröße $S \times S$ zur Einschränkung der Betrachtung der Pixel um einen Pixel definiert werden~\cite{super}.
-Obwohl Quickshift standardmäßig $S$ auf $\infty$ setzt, lohnt es sich aus Effizienzgründen eine Größe in Abhängigkeit zu \gls{sigma} zu wählen~\cite{quickshift}.
+Obwohl Quickshift standardmäßig $S$ auf $\infty$ setzt, lohnt es sich aus Effizienzgründen eine Größe in Abhängigkeit von \gls{sigma} zu wählen~\cite{quickshift}.
 
 Basierend auf den Dichten des Bildes generiert Quickshift einen Baum, der jedem Pixel $\gls{B}_{y_i x_i}$ einen Nachbarspixel $\gls{B}_{y_j x_j}$ zuordnet, welcher einen höheren Dichtewert besitzt, \dhe{}
 \begin{equation*}
