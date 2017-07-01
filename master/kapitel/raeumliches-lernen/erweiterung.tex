@@ -1,26 +1,40 @@
 \section{Erweiterung auf Graphen im zweidimensionalen Raum}
 \label{raeumliche_erweiterung}
 
-Wir wollen, dass benachbarte Knoten im Receptive-Field ebenfalls benachbart im Bild sind
+\citeauthor{patchy} haben einen Algorithmus zur Generierung von Receptive-Fields über den Nachbarschaften eines Graphen vorgestellt, der effizient implementiert werden kann und über einer Reihe von Testdatensätzen konkurrenzfähige Resultate im Vergleich zu Methoden mittels \emph{Graphkernen} liefert (\vgl{}~\cite{patchy}).
+Dabei hängt die Ordnung der Knotenauswahl und der Receptive-Fields stark von einer gewählten Zentralitätsmetrik ab, die auf einem allgemeinen Graphen $\gls{G} = \left(\gls{V}, \gls{E}\right)$ eine fehlende räumliche oder zeitliche Ordnung ersetzt.
+Im Kontext von Graphen im zweidimensionalen euklidischen Raum $\gls{G} = \left(\gls{V}, \gls{E}, \gls{p}\right)$, bei denen Knoten eindeutige Positionen in der Ebene zugeordnet werden können und deren Kanten eine Länge und Richtung über $\gls{Adist} \in {\left[0, 1\right]}^{N \times N}$ sowie $\gls{Arad} \in {\left[0, 2\pi\right]}^{N \times N}$ besitzen, kann die Auswahl der Knoten in $\gls{V}_{\mathrm{out}}$ sowie die Normalisierung der Nachbarschaftsmenge $\gls{N}_{\gls{v}}$ eines Knotens $\gls{v} \in \gls{V}_{\mathrm{out}}$ diese jedoch folglich berücksichtigen.
 
-beachtet keine Gewichte
-beatchtet keine Positionen
-im Kontext von Graphen im zweidimensionalen  euklidischen  Raum stehen uns diese aber zur Verfügung und sollten dementsprechen genutzt werden.
-Dafür wird das zuvor beschrieben Prinzip angepasst.
+Die Knotenauswahl kann folglich über die Anordnung der Knoten \bzgl{} ihrer \emph{Scanline} beschrieben werden, \dhe{} von oben nach unten und von links nach rechts.
+Formal lässt sich dafür die Knotenfärbung $\gls{l}_{\mathrm{scanline}} \colon \gls{V} \to \gls{R}$ über
+\begin{equation*}
+  \gls{l}_{\mathrm{scanline}}\left(\gls{v}\right) \coloneqq \frac{1}{wdad}
+\end{equation*}
+und $p_y \coloneqq \min \left({\gls{p}\left(\gls{v}_1\right)}_1, \ldots, {\gls{p}\left(\gls{v}_N\right)}_1\right)$ sowie $p_x \coloneqq \min \left({\gls{p}\left(\gls{v}_1\right)}_2, \ldots, {\gls{p}\left(\gls{v}_N\right)}_2\right)$ definieren, sodass Knoten einen höheren Farbwert erhalten, umso geringer ihre $y$-Koordinate ist und bei gleicher $y$-Koordinate ihre $x$-Koordinate die Farben weiter differenziert.
+Damit entspricht der Algorithmus~\ref{alg:knotenauswahl} mit der Knotenfärbung $\gls{l}_{\mathrm{scanline}}$ in etwa der Pixelauswahl einer klassischen Faltung auf regulären Gittern, mit dem Unterschied, dass die Knotenauswahl letztendlich eine eindimensionale geordnete Menge definiert.
+Das ist aufgrund der möglichen Irregularitäten in den jeweiligen Knotenpositionen allerdings nicht zu vermeiden.
 
-Als Knotenauswahl wählen wir Stackline-Order?
-Für die Nachbarschaftsauswahl kombinieren wir die Auswahl und dessen Normalisierung zu einem Schritt.
-Spriale
 
-Für die Neighborhood Assembly eines Knotens wurde ein spezieller Algorithmus implementiert, der die nächsten Knoten um den Rootknoten ähnlich wie bei einer Spirale einsammelt.
+% Wir wollen, dass benachbarte Knoten im Receptive-Field ebenfalls benachbart im Bild sind
 
-Dies wurde implementiert, da der eigentliche Gedanke, eine Convolution auf Basis des Grids, das SLIC erzeugt, nicht möglich ist. Es ist daher nicht möglich, da SLIC kein vollkommenes Grid erzeugt. Es werden teilweise Knoten hinzugefügt oder entfernt, wenn dies sinnvoll erscheint. Damit spuckt SLIC auch immer nur eine approximierte Anzahl an Segmenten aus, die gewünscht waren.
+% beachtet keine Gewichte
+% beatchtet keine Positionen
+% im Kontext von Graphen im zweidimensionalen  euklidischen  Raum stehen uns diese aber zur Verfügung und sollten dementsprechen genutzt werden.
+% Dafür wird das zuvor beschrieben Prinzip angepasst.
 
-Der Grid-Spiral-Algorithmus funktioniert wie folgt:
+% Als Knotenauswahl wählen wir Stackline-Order?
+% Für die Nachbarschaftsauswahl kombinieren wir die Auswahl und dessen Normalisierung zu einem Schritt.
+% Spriale
 
-Der Root Knoten ist immer an Index 0.
-Es wird der nächstgelegene Nachbar zum Rootknoten gesucht und der Neighborhood angehängt.
-Es wird wiederholt ein Nachbar y zum letzten hinzugefügten Knoten x gesucht, sodass $w(x, y)$ + $w(root, y)$ minimal.
+% Für die Neighborhood Assembly eines Knotens wurde ein spezieller Algorithmus implementiert, der die nächsten Knoten um den Rootknoten ähnlich wie bei einer Spirale einsammelt.
+
+% Dies wurde implementiert, da der eigentliche Gedanke, eine Convolution auf Basis des Grids, das SLIC erzeugt, nicht möglich ist. Es ist daher nicht möglich, da SLIC kein vollkommenes Grid erzeugt. Es werden teilweise Knoten hinzugefügt oder entfernt, wenn dies sinnvoll erscheint. Damit spuckt SLIC auch immer nur eine approximierte Anzahl an Segmenten aus, die gewünscht waren.
+
+% Der Grid-Spiral-Algorithmus funktioniert wie folgt:
+
+% Der Root Knoten ist immer an Index 0.
+% Es wird der nächstgelegene Nachbar zum Rootknoten gesucht und der Neighborhood angehängt.
+% Es wird wiederholt ein Nachbar y zum letzten hinzugefügten Knoten x gesucht, sodass $w(x, y)$ + $w(root, y)$ minimal.
 
 \begin{algorithm}[t]
 \centering
