@@ -1,11 +1,33 @@
 \section{Erweiterung auf Graphen im zweidimensionalen Raum}
 \label{raeumliche_erweiterung}
 
-% beachtet keine Gewichte
-% beatchtet keine Positionen
-% im Kontext von Graphen im zweidimensionalen  euklidischen  Raum stehen uns diese aber zur Verfügung und sollten dementsprechen genutzt werden.
-% Dafür wird das zuvor beschrieben Prinzip angepasst.
+Wir wollen, dass benachbarte Knoten im Receptive-Field ebenfalls benachbart im Bild sind
 
-% Als Knotenauswahl wählen wir Stackline-Order?
-% Für die Nachbarschaftsauswahl kombinieren wir die Auswahl und dessen Normalisierung zu einem Schritt.
-% Spriale
+beachtet keine Gewichte
+beatchtet keine Positionen
+im Kontext von Graphen im zweidimensionalen  euklidischen  Raum stehen uns diese aber zur Verfügung und sollten dementsprechen genutzt werden.
+Dafür wird das zuvor beschrieben Prinzip angepasst.
+
+Als Knotenauswahl wählen wir Stackline-Order?
+Für die Nachbarschaftsauswahl kombinieren wir die Auswahl und dessen Normalisierung zu einem Schritt.
+Spriale
+
+Für die Neighborhood Assembly eines Knotens wurde ein spezieller Algorithmus implementiert, der die nächsten Knoten um den Rootknoten ähnlich wie bei einer Spirale einsammelt.
+
+Dies wurde implementiert, da der eigentliche Gedanke, eine Convolution auf Basis des Grids, das SLIC erzeugt, nicht möglich ist. Es ist daher nicht möglich, da SLIC kein vollkommenes Grid erzeugt. Es werden teilweise Knoten hinzugefügt oder entfernt, wenn dies sinnvoll erscheint. Damit spuckt SLIC auch immer nur eine approximierte Anzahl an Segmenten aus, die gewünscht waren.
+
+Der Grid-Spiral-Algorithmus funktioniert wie folgt:
+
+Der Root Knoten ist immer an Index 0.
+Es wird der nächstgelegene Nachbar zum Rootknoten gesucht und der Neighborhood angehängt.
+Es wird wiederholt ein Nachbar y zum letzten hinzugefügten Knoten x gesucht, sodass $w(x, y)$ + $w(root, y)$ minimal.
+
+\begin{algorithm}[t]
+\centering
+\begin{algorithmic}
+  \REQUIRE{}
+  \ENSURE{}
+\end{algorithmic}
+\caption[]{}
+\label{alg:spirale}
+\end{algorithm}
