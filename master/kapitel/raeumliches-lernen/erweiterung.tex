@@ -8,11 +8,18 @@ Im Kontext von Graphen im zweidimensionalen euklidischen Raum $\gls{G} = \left(\
 Die Knotenauswahl kann folglich über die Anordnung der Knoten \bzgl{} ihrer \emph{Scanline} beschrieben werden, \dhe{} von oben nach unten und von links nach rechts.
 Formal lässt sich dafür die Knotenfärbung $\gls{l}_{\mathrm{scanline}} \colon \gls{V} \to \gls{R}$ über
 \begin{equation*}
-  \gls{l}_{\mathrm{scanline}}\left(\gls{v}\right) \coloneqq \frac{1}{wdad}
+  {\gls{l}_{\mathrm{scanline}}\left(\gls{v}\right)}^{-1} \coloneqq \frac{w_{\max}}{h_{\min}} {\hat p\left(\gls{v}\right)}_1 + {\hat p\left(\gls{v}\right)}_2
 \end{equation*}
-und $p_y \coloneqq \min \left({\gls{p}\left(\gls{v}_1\right)}_1, \ldots, {\gls{p}\left(\gls{v}_N\right)}_1\right)$ sowie $p_x \coloneqq \min \left({\gls{p}\left(\gls{v}_1\right)}_2, \ldots, {\gls{p}\left(\gls{v}_N\right)}_2\right)$ definieren, sodass Knoten einen höheren Farbwert erhalten, umso geringer ihre $y$-Koordinate ist und bei gleicher $y$-Koordinate ihre $x$-Koordinate die Farben weiter differenziert.
+mit dem maximalen Breitenabstand $w_{\max} \coloneqq \max_{\gls{v}_i, \gls{v}_j \in \gls{V}} \left({\gls{p}\left(\gls{v}_i\right)}_2 - {\gls{p}\left(\gls{v}_j\right)}_2 \right)$ sowie dem minimalen Höhenabstand $h_{\min} \coloneqq \min_{\gls{v}_i, \gls{v}_j \in \gls{V},\, {\gls{p}\left(\gls{v}_i\right)}_1 \neq {\gls{p}\left(\gls{v}_j\right)}_1} \left({\gls{p}\left(\gls{v}_i\right)}_1 - {\gls{p}\left(\gls{v}_j\right)}_1 \right)$ und
+\begin{equation*}
+  \hat p\left(\gls{v}\right) \coloneqq {\left[{\gls{p}\left(\gls{v}\right)}_1 - y_{\min}, {\gls{p}\left(\gls{v}\right)}_2 - x_{\min}\right]}^{\top}
+\end{equation*}
+mit $y_{\min} \coloneqq \min \left({\gls{p}\left(\gls{v}_1\right)}_1, \ldots, {\gls{p}\left(\gls{v}_N\right)}_1\right)$ \bzw{} $x_{\min} \coloneqq \min \left({\gls{p}\left(\gls{v}_1\right)}_2, \ldots, {\gls{p}\left(\gls{v}_N\right)}_2\right)$ definieren, sodass Knoten einen höheren Farbwert erhalten, umso geringer ihre $y$-Koordinate ist und bei gleicher $y$-Koordinate ihre $x$-Koordinate die Farben weiter differenziert.
+Dafür werden die Positionen $p$ mittels $\hat p$ in den positiven reellen transformiert und die $y$-Koordinate von $\hat p\left(\gls{v}\right)$ insofern gewichtet, dass für zwei unterschiedliche $y$-Koordinaten die Ordnung, die die Knotenfärbung generiert, nicht von der $x$-Koordinate abhängt.
 Damit entspricht der Algorithmus~\ref{alg:knotenauswahl} mit der Knotenfärbung $\gls{l}_{\mathrm{scanline}}$ in etwa der Pixelauswahl einer klassischen Faltung auf regulären Gittern, mit dem Unterschied, dass die Knotenauswahl letztendlich eine eindimensionale geordnete Menge definiert.
 Das ist aufgrund der möglichen Irregularitäten in den jeweiligen Knotenpositionen allerdings nicht zu vermeiden.
+Folglich sind benachbarte Knoten in $\gls{V}_{\mathrm{out}}$ nicht zwangsläufig auch in der Ebene benachbart.
+$\gls{l}_{\mathrm{scanline}}$ generiert jedoch eine Knotenfärbung, die für zwei strukturell gleiche Graphen eine ähnliche Ordnung generiert.
 
 
 % Wir wollen, dass benachbarte Knoten im Receptive-Field ebenfalls benachbart im Bild sind
