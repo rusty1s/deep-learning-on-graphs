@@ -2,7 +2,7 @@
 \centering
   \begin{tikzpicture}[scale=0.33]
   \draw[color=lightgray] (-0.1, -0.1) grid (38.9, 15.9);
-  \tikzstyle{color1}=[color=cyan]
+  \tikzstyle{color1}=[color=cyan, fill=cyan]
 
   \def\nocachevalues{{
      2.6410,
@@ -105,7 +105,11 @@
     \pgfmathtruncatemacro{\label}{2 * \x}
     \draw (2*\x, 0.3) -- (2*\x, -0.3) node[below] {\label};
 
-  \fill[white] (0, -3) rectangle (1, -2) node {};  % Abstand nach unten
+  \fill[white] (0, -4.5) rectangle (1, -2) node {};  % Abstand nach unten
+
+  \tikzstyle{node}=[rectangle,draw, minimum width=10pt, minimum height=10pt, inner sep=0pt]
+  \node[node, fill=black, label=right:ohne Caching] (1) at (11, -3.3) {};
+  \node[node, color1,     label=right:mit Caching]  (2) at (24, -3.3) {};
 
 \end{tikzpicture}
 % Erstelle Legende.
