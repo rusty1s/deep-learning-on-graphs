@@ -25,13 +25,13 @@ Im Folgenden werden die drei Schritte näher erläutert.
   \ENDWHILE{}
   \RETURN{$\gls{V}_{\mathrm{out}}$}
 \end{algorithmic}
-\caption[Knotenauswahl]{Berechnung der Knotenauswahl $\gls{V}_{\mathrm{out}}$ anhand einer Knotenfärbung $\gls{l} \colon \gls{V} \to \mathcal{C} \subseteq \gls{R}$, einer maximalen Länge $L\in\gls{N}$ sowie einer Schrittweite $S \in \gls{N}$.}
+\caption[Knotenauswahl]{Berechnung der Knotenauswahl $\gls{V}_{\mathrm{out}}$ anhand einer Knotenfärbung $\gls{l} \colon \gls{V} \to \gls{C} \subseteq \gls{R}$, einer maximalen Länge $L\in\gls{N}$ sowie einer Schrittweite $S \in \gls{N}$.}
 \label{alg:knotenauswahl}
 \end{algorithm}
 
 Die Knotenauswahl beschreibt den Prozess zur Auswahl einer geordneten Teilmenge $\gls{V}_{\mathrm{out}} \subseteq \gls{V}$ mit nicht mehr als $L \in \gls{N}$ vielen Knoten, für die im späteren Verlauf eine Nachbarschaft des Graphen \bzw{} ein Receptive-Field des Netzes erzeugt wird~\cite{patchy}.
 Algorithm~\ref{alg:knotenauswahl} veranschaulicht die grobe Vorgehensweise dieses Verfahrens.
-Dafür werden anhand einer gegebenen Knotenfärbung $\gls{l} \colon \gls{V} \to \mathcal{C} \subseteq \gls{R}$ die Knoten in \gls{V} absteigend sortiert, sodass Knoten, die aufgrund ihrer Zentralität als wichtiger gelten am Anfang der geordneten Knotenmenge $\gls{V}_{\mathrm{sort}}$ stehen.
+Dafür werden anhand einer gegebenen Knotenfärbung $\gls{l} \colon \gls{V} \to \gls{C} \subseteq \gls{R}$ die Knoten in \gls{V} absteigend sortiert, sodass Knoten, die aufgrund ihrer Zentralität als wichtiger gelten am Anfang der geordneten Knotenmenge $\gls{V}_{\mathrm{sort}}$ stehen.
 Foglich kann über die geordnete Knotenmenge $\gls{V}_{\mathrm{sort}}$ iteriert werden und in Abständen \bzw{} Schrittweiten $S \in \gls{N}$ solange Knoten aus $\gls{V}_{\mathrm{sort}}$ entnommen werden, bis $L$ viele gefunden wurden oder die Menge zu Ende iteriert wurde.
 $S$ gibt damit den Abstand zweier benachbarter Knoten in $\gls{V}_{\mathrm{out}}$ an, für die ein Receptive-Field generiert wird.
 Falls die Liste eine kleinere Anzahl an Knoten als $S\left( L -1 \right) + 1$ besitzt, dann besitzt $\gls{V}_{\mathrm{out}}$ folglich eine Kardinalität kleiner als $L$.
@@ -73,7 +73,7 @@ Die Normalisierung ist damit ein Prozess, der eine ungeordnete Knotenmenge in ei
 \begin{algorithm}[t]
 \centering
 \begin{algorithmic}
-  \REQUIRE{} Graph \gls{G}, Knoten $\gls{v} \in \gls{V}_{\mathrm{out}}$, Nachbarschaftsmenge $\gls{Neighbor}_{\gls{v}} \subseteq \gls{V}$, Receptive-Field-Größe $K \in \gls{N}$, Färbung $\gls{l} \colon \gls{V} \to \mathcal{C} \subseteq \gls{R}$
+  \REQUIRE{} Graph \gls{G}, Knoten $\gls{v} \in \gls{V}_{\mathrm{out}}$, Nachbarschaftsmenge $\gls{Neighbor}_{\gls{v}} \subseteq \gls{V}$, Receptive-Field-Größe $K \in \gls{N}$, Färbung $\gls{l} \colon \gls{V} \to \gls{C} \subseteq \gls{R}$
   \ENSURE{} geordnete Nachbarschaftsmenge $\gls{Neighbor}_{\mathrm{out}}$ mit $\left|\gls{Neighbor}_{\mathrm{out}}\right| = K$
   \STATE{} berechne Ordnung $>_{\gls{v}}$, sodass $\gls{v}_i >_{\gls{v}} \gls{v}_j$ \gdw{} $\gls{s}\left(\gls{v}, \gls{v}_i\right) > \gls{s}\left(\gls{v}, \gls{v}_j\right)$ und $\gls{l}\left(\gls{v}_i\right) < \gls{l}\left(\gls{v}_j\right)$ falls $\gls{s}\left(\gls{v}, \gls{v}_i\right) = \gls{s}\left(\gls{v}, \gls{v}_j\right)$.
   \STATE{} $\gls{Neighbor}_{\mathrm{sort}} \leftarrow$ Sortiere $\gls{Neighbor}_{\gls{v}}$ aufsteigend \bzgl{} $>_{\gls{v}}$.
@@ -84,7 +84,7 @@ Die Normalisierung ist damit ein Prozess, der eine ungeordnete Knotenmenge in ei
   \STATE{} $\gls{Neighbor}_{\mathrm{out}} \leftarrow$ Kanonisiere $\gls{G}^{\prime}$ \bzgl{} $>_{\gls{v}}$ (hebt Gleichheiten in $>_{\gls{v}}$ auf).
   \RETURN{$\gls{Neighbor}_{\mathrm{out}} \cup \left(\max \left(K - \left|\gls{Neighbor}_{\gls{v}}\right|, 0\right) \text{ Fakeknoten}\right)$}
 \end{algorithmic}
-\caption[Normalisierung]{Berechnung der Vektorrepräsentation einer Nachbarschaftsmenge $\gls{Neighbor}_{\gls{v}}$ eines Knotens $\gls{v} \in \gls{V}_{\mathrm{out}}$ mittels einer vordefinierten Größe $K \in \gls{N}$, einer Färbung $\gls{l} \colon \gls{V} \to \mathcal{C} \subseteq \gls{R}$ sowie der Abstandsfunktion $\gls{s} \colon \gls{V} \times \gls{V} \to \gls{N}$ des Graphen \gls{G}.}
+\caption[Normalisierung]{Berechnung der Vektorrepräsentation einer Nachbarschaftsmenge $\gls{Neighbor}_{\gls{v}}$ eines Knotens $\gls{v} \in \gls{V}_{\mathrm{out}}$ mittels einer vordefinierten Größe $K \in \gls{N}$, einer Färbung $\gls{l} \colon \gls{V} \to \gls{C} \subseteq \gls{R}$ sowie der Abstandsfunktion $\gls{s} \colon \gls{V} \times \gls{V} \to \gls{N}$ des Graphen \gls{G}.}
 \label{alg:normalisierung}
 \end{algorithm}
 
