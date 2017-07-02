@@ -4,11 +4,13 @@
 \citeauthor{patchy} haben einen Algorithmus zur Generierung von Receptive-Fields über den Nachbarschaften eines Graphen vorgestellt, der effizient implementiert werden kann und über einer Reihe von Testdatensätzen konkurrenzfähige Resultate im Vergleich zu Methoden, die auf \emph{Graphkernen} basieren, liefert (\vgl{}~\cite{patchy}).
 Dabei hängt die Ordnung der Knotenauswahl und der Receptive-Fields stark von einer gewählten Zentralitätsmetrik ab, die auf einem allgemeinen Graphen $\gls{G} = \left(\gls{V}, \gls{E}\right)$ eine fehlende räumliche oder zeitliche Ordnung ersetzt.
 Im Kontext von Graphen im zweidimensionalen euklidischen Raum $\gls{G} = \left(\gls{V}, \gls{E}, \gls{p}\right)$, bei denen Knoten eindeutige Positionen in der Ebene zugeordnet werden können und deren Kanten eine Länge und Richtung über $\gls{Adist} \in {\left[0, 1\right]}^{N \times N}$ sowie $\gls{Arad} \in {\left[0, 2\pi\right]}^{N \times N}$ besitzen, kann die Auswahl der Knoten in $\gls{V}_{\mathrm{out}}$ sowie die Normalisierung der Nachbarschaftsmenge $\gls{N}_{\gls{v}}$ eines Knotens $\gls{v} \in \gls{V}_{\mathrm{out}}$ diese jedoch folglich berücksichtigen.
+Weiterhin besitzt ein Graph in der Ebene möglicherweise keine ausgezeichneten \bzw{} wichtigen Knoten, sondern ist in etwa vergleichbar mit einem gekrümmten Gitter (\zB{} ein Graph, der durch eine \gls{SLIC}-Segmentierung generiert wurde).
+Die Verwendung einer Zentralitätsmetrik kann folglich keine zufriedenstellenden Resultate liefern.
 
-Die Knotenauswahl kann folglich über die Anordnung der Knoten \bzgl{} ihrer \emph{Scanline} beschrieben werden, \dhe{} von oben nach unten und von links nach rechts.
+Die Knotenauswahl wird folglich über die Anordnung der Knoten \bzgl{} ihrer \emph{Scanline}-Ordnung beschrieben, \dhe{} von oben nach unten und von links nach rechts.
 Formal lässt sich dafür die Knotenfärbung $\gls{l}_{\mathrm{scanline}} \colon \gls{V} \to \gls{R}$ über
 \begin{equation*}
-  {\gls{l}_{\mathrm{scanline}}\left(\gls{v}\right)}^{-1} \coloneqq w_{\max} {\hat p\left(\gls{v}\right)}_1 + {\hat p\left(\gls{v}\right)}_2
+  {\gls{l}_{\mathrm{scanline}}\left(\gls{v}\right)}^{-1} \coloneqq w_{\max} \, {\hat p\left(\gls{v}\right)}_1 + {\hat p\left(\gls{v}\right)}_2
 \end{equation*}
 mit dem maximalen Breitenabstand $w_{\max} \coloneqq \max_{\gls{v}_i, \gls{v}_j \in \gls{V}} \left({\gls{p}\left(\gls{v}_i\right)}_2 - {\gls{p}\left(\gls{v}_j\right)}_2 \right)$ und der normalisierten Position
 \begin{equation*}
