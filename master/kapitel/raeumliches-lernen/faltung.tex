@@ -111,4 +111,4 @@ Dafür werden $L$ Knoten des Graphen ausgewählt und für diese die entsprechend
 Jeder Eintrag in $\gls{Neighbor}_{\mathrm{out}}$ wird dann durch seine entsprechenden Merkmale aus \ma{F} ersetzt.
 Das erlaubt die Verwendung der klassischen \gls{conv2d}-Operation im Kontext von Graphen, die auf dreidimensionalen Tensoren operiert.
 Damit entspricht die Transformation eines Graphen in den Vektorraum und einer anschließenden Faltung auf dieser Repräsentation der ersten Faltungsschicht eines klassischen \glspl{CNN}.
-Für eine Knotenauswahl, die weniger als $L$ Knoten ermittelt, sowie für Receptive-Fields, die Fakeknoten enthalten, werden die entsprechenden Einträge in \ma{T} über den Wert Null repräsentiert, welcher somit keinen Einfluss auf die Faltung mittels \gls{conv2d} nimmt.
+Für eine Knotenauswahl, die weniger als $L$ Knoten ermittelt, sowie für Receptive-Fields, die Fakeknoten enthalten, werden die entsprechenden Einträge in \ma{T} über den Wert Null repräsentiert, welche somit keinen Einfluss auf die Faltung mittels \gls{conv2d} nehmen.
