@@ -8,7 +8,9 @@ Conv mit MaxPool gefolgt von AveragePool auf Fully Connect auf Softmax
 \label{datensaetze}
 
 \paragraph{MNIST}
-\label{MNIST}
+\label{mnist}
+
+\emph{\gls{MNIST}} Datensatz
 
 Bei den Datensätzen insbesondere auch die Superpixelalgorithmen erwähnen
 das heißt wie viele Superpixel
@@ -18,20 +20,30 @@ Wie viele Merkmale und welche?
 
 \cite{mnist}
 
-\paragraph{Cifar-10}
+\input{figures/mnist}
+
+\paragraph{CIFAR-10}
 \label{cifar_10}
 
 \cite{cifar_10}
+
+Der \emph{\gls{Cifar}} Datensatz
+Er liegt in zwei Versionen vor, \gls{Cifar}-10 und \gls{Cifar}-100, wobei sich diese Arbeit dem weitaus beliebteren Datensatz \gls{Cifar}-10 bedient.
+
+\input{figures/cifar_10}
 
 \paragraph{Tiny ImageNet}
 \label{tiny_image_net}
 
 \cite{imagenet}
 
-\paragraph{Pascal VOC}
+\paragraph{PASCAL VOC}
 \label{pascal_voc}
 
+\emph{\gls{Pascal}} Datensatz
 \cite{pascal_voc}
+
+\input{figures/pascal_voc}
 
 \subsection{Metriken}
 \label{metriken}
@@ -52,7 +64,7 @@ Es erscheint jedoch vorstellbar die Filtergröße bei größerer lokaler Kontrol
 \paragraph{Datenreduktion}
 \label{datenreduktion}
 
-\paragraph{Augmentierung von Graphen}
+\subsection{Augmentierung von Graphen}
 \label{augmentierung_von_graphen}
 
 hier auf die Formeln von TensorFlow referenzieren, d.h. TensorFlow Quelle angeben
@@ -65,5 +77,5 @@ Farbanpassungen
 nesser ist es, dass Bild vorher zu ändern, da sich dadurch die Superpixelrepräsentation ändert
 und folglich zu realisiterischer Augmentierung führt.
 
-\paragraph{Vorverarbeitung und Eingabe der Daten}
+\subsection{Vorverarbeitung und Eingabe der Daten}
 \label{vorverarbeitung}
