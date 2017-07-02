@@ -6,33 +6,33 @@
 \paragraph{Faltungsoperator}
 \label{gcn_faltungsoperator}
 
-Sei $\ve{f}_{\mathrm{in}} \star \ve{\hat g} \approx \sum_{k=0}^K c_k \gls{T}_k\left(\gls{Lbothtilde}\right) \ve{f}_{\mathrm{in}}$ der in~\eqref{eq:tschebyschow_faltung_L} definierte spektrale Faltungsoperator mit $K=1$.
-Dann ist $\ve{f}_{\mathrm{in}} \star \ve{\hat g}$ eine lineare Funktion \bzgl{} \gls{Lboth} und damit eine lineare Funktion auf dem Spektrum des Graphen~\cite{gcn}.
+Sei $\gls{f}_{\mathrm{in}} \star \ve{\hat g} \approx \sum_{k=0}^K c_k \gls{T}_k\left(\gls{Lbothtilde}\right) \gls{f}_{\mathrm{in}}$ der in~\eqref{eq:tschebyschow_faltung_L} definierte spektrale Faltungsoperator mit $K=1$.
+Dann ist $\gls{f}_{\mathrm{in}} \star \ve{\hat g}$ eine lineare Funktion \bzgl{} \gls{Lboth} und damit eine lineare Funktion auf dem Spektrum des Graphen~\cite{gcn}.
 Mit $K=1$ betrachtet der spektrale Faltungsoperator nur noch die lokale Nachbarschaft eines jeden Knotens (\vgl{}~\ref{polynomielle_approximation}).
 Es ist anzumerken, dass dies in der Regel keinen Nachteil darstellt.
 So hat es sich bei gegenwärtigen \enquote{State-of-the-Art}-\glspl{CNN} auf Bildern ebenfalls bewährt, nur noch über minimale $3\times3$ Filtergrößen zu falten und stattdessen Merkmale weit entfernterer Knoten über die mehrfache Aneinanderreihung der Faltungsschichten mittels tieferer Netze zu gewinnen~(\vgl{}~\cite{gcn, vgg, He}).
-Unter dieser Restriktion vereinfacht sich $\ve{f}_{\mathrm{in}} \star \ve{\hat g}$ zu
+Unter dieser Restriktion vereinfacht sich $\gls{f}_{\mathrm{in}} \star \ve{\hat g}$ zu
 \begin{equation}
-  \ve{f}_{\mathrm{in}} \star \ve{\hat g} \approx c_0\, \ve{f}_{\mathrm{in}} + c_1 \left(\frac{2}{\gls{lambdamax}}\gls{Lboth} - \gls{I}\right)\ve{f}_{\mathrm{in}}
+  \gls{f}_{\mathrm{in}} \star \ve{\hat g} \approx c_0\, \gls{f}_{\mathrm{in}} + c_1 \left(\frac{2}{\gls{lambdamax}}\gls{Lboth} - \gls{I}\right)\gls{f}_{\mathrm{in}}
   \label{eq:gcn_faltung_both}
 \end{equation}
 mit zwei freien Parametern $c_0$ und $c_1$~\cite{gcn}.
 Für $\gls{Lnorm}$ auf einem zusammenhängenden Graphen \gls{G} gilt dann nach~\eqref{eq:laplace_norm_connected} und~\eqref{eq:gcn_faltung_both} weiter
 \begin{equation}
-  \ve{f}_{\mathrm{in}} \star \ve{\hat g} \approx c_0 \, \ve{f}_{\mathrm{in}} + c_1 \left(\gls{Lnorm} - \gls{I}\right)\ve{f}_{\mathrm{in}} = c_0 \, \ve{f}_{\mathrm{in}} - c_1 \gls{D}^{-\frac{1}{2}} \gls{A} \gls{D}^{-\frac{1}{2}} \ve{f}_{\mathrm{in}},
+  \gls{f}_{\mathrm{in}} \star \ve{\hat g} \approx c_0 \, \gls{f}_{\mathrm{in}} + c_1 \left(\gls{Lnorm} - \gls{I}\right)\gls{f}_{\mathrm{in}} = c_0 \, \gls{f}_{\mathrm{in}} - c_1 \gls{D}^{-\frac{1}{2}} \gls{A} \gls{D}^{-\frac{1}{2}} \gls{f}_{\mathrm{in}},
   \label{eq:gcn_faltung_norm}
 \end{equation}
 wobei $\gls{lambdamax} \coloneqq 2$ auf dessen obere Schranke gesetzt wird~\cite{gcn}.
 Um die Gefahr des Overfittings und die Anzahl an Berechnungen pro Schicht weiter zu beschränken, reduziert sich~\eqref{eq:gcn_faltung_norm} mit einem einzigen Parameter $c \coloneqq c_0$ mit $c = -c_1$ zu~\cite{gcn}
 \begin{equation*}
-  \ve{f}_{\mathrm{in}} \star \ve{\hat g} \approx c \left(\gls{I} + \gls{D}^{-\frac{1}{2}} \gls{A} \gls{D}^{-\frac{1}{2}} \right) \ve{f}_{\mathrm{in}}.
+  \gls{f}_{\mathrm{in}} \star \ve{\hat g} \approx c \left(\gls{I} + \gls{D}^{-\frac{1}{2}} \gls{A} \gls{D}^{-\frac{1}{2}} \right) \gls{f}_{\mathrm{in}}.
 \end{equation*}
 Die skalierten Eigenwerte von \gls{Lambdatilde} liegen aufgrund der Addition mit \gls{I} nun im Intervall $\left[0, 2\right]$ (\vgl{}~\cite{gcn}).
 Demnach können wiederholte Anwendungen des Faltungsoperators zu \enquote{numerischen Instabilitäten und folglich zu explodierenden oder verschwindenen Gradienten} führen~\cite{gcn}.
 \citeauthor{gcn} führen zur Behebung dieses Problems die folgende Renormalisierung durch: $\gls{I} + \gls{D}^{-1/2} \gls{A} \gls{D}^{-1/2} \rightarrow \gls{Dtilde}^{-1/2} \gls{Atilde} \gls{Dtilde}^{-1/2}$ mit $\gls{Atilde} \coloneqq \gls{A} + \gls{I}$ und $\gls{Dtilde}_{ii} \coloneqq \sum_{j=1}^N \gls{Atilde}_{ij}$.
 Der entgültige Faltungsoperator des \glspl{GCN} ergibt sich dann als
 \begin{equation}
-  \ve{f}_{\mathrm{in}} \star \ve{\hat g} \approx c\, \gls{Dtilde}^{-\frac{1}{2}} \gls{Atilde} \gls{Dtilde}^{-\frac{1}{2}} \ve{f}_{\mathrm{in}}
+  \gls{f}_{\mathrm{in}} \star \ve{\hat g} \approx c\, \gls{Dtilde}^{-\frac{1}{2}} \gls{Atilde} \gls{Dtilde}^{-\frac{1}{2}} \gls{f}_{\mathrm{in}}
   \label{eq:gcn_renorm}
 \end{equation}
 auf einem einzigen freien Parameter $c \in \gls{R}$.
@@ -43,10 +43,10 @@ auf einem einzigen freien Parameter $c \in \gls{R}$.
 Die Faltung des \glspl{GCN} auf Merkmalsmatrizen lässt sich analog zur Tensorimplementierung des spektralen Faltungsoperators in Kapitel~\ref{polynomielle_approximation} beschreiben, mit dem Unterschied, dass wir aufgrund der Festlegung von $K=1$ keinen Filtertensor, sondern lediglich eine Filtermatrix $\gls{W} \in \gls{R}^{M_{\mathrm{in}} \times M_{\mathrm{out}}}$ nutzen.
 Die Faltung einer Eingabemerkmalsmatrix $\gls{F}_{\mathrm{in}} \in \gls{R}^{N \times M_{\mathrm{in}}}$ auf eine Ausgabemerkmalsmatrix $\gls{F}_{\mathrm{out}} \in \gls{R}^{N \times M_{\mathrm{out}}}$ ergibt sich dann als
 \begin{equation}
-  \ma{F}_{\mathrm{out}} \coloneqq \gls{Dtilde}^{-\frac{1}{2}} \gls{Atilde} \gls{Dtilde}^{-\frac{1}{2}}\, \ma{F}_{\mathrm{in}} \gls{W}
+  \gls{F}_{\mathrm{out}} \coloneqq \gls{Dtilde}^{-\frac{1}{2}} \gls{Atilde} \gls{Dtilde}^{-\frac{1}{2}}\, \gls{F}_{\mathrm{in}} \gls{W}
   \label{eq:gcn_tensor}
 \end{equation}
-mit Faltungsaufwand $\gls{O}\left(M_{\mathrm{in}}M_{\mathrm{out}}\left|\gls{E}\right|\right)$, weil $\gls{Atilde}\ma{F}_{\mathrm{in}}$ effizient mit der Multiplikation einer dünnbesetzten mit einer dichtbesetzten Matrix implementiert werden kann~\cite{gcn}.
+mit Faltungsaufwand $\gls{O}\left(M_{\mathrm{in}}M_{\mathrm{out}}\left|\gls{E}\right|\right)$, weil $\gls{Atilde}\gls{F}_{\mathrm{in}}$ effizient mit der Multiplikation einer dünnbesetzten mit einer dichtbesetzten Matrix implementiert werden kann~\cite{gcn}.
 
 \paragraph{Beziehung zum Weisfeiler-Lehman-Algorithmus}
 \label{weisfeiler_lehman_beziehung}
@@ -54,29 +54,29 @@ mit Faltungsaufwand $\gls{O}\left(M_{\mathrm{in}}M_{\mathrm{out}}\left|\gls{E}\r
 \begin{algorithm}[t]
 \centering
 \begin{algorithmic}
-  \REQUIRE{} Initiale Knotenfärbung $\ve{f}^{\left(0\right)} \in \gls{R}^N$
-  \ENSURE{} Finale Knotenfärbung $\ve{f}^{\left(T\right)} \in \gls{R}^N$ nach $T$ Durchläufen
+  \REQUIRE{} Initiale Knotenfärbung $\gls{f}^{\left(0\right)} \in \gls{R}^N$
+  \ENSURE{} Finale Knotenfärbung $\gls{f}^{\left(T\right)} \in \gls{R}^N$ nach $T$ Durchläufen
   \STATE{} $t \leftarrow 0$
   \REPEAT{}
     \FOR{$\gls{v}_i \in \gls{V}$}
-      \STATE{} $\ve{f}^{\left(t+1\right)}_i \leftarrow \mathrm{hash}\left(\sum_{\gls{v}_j \in \gls{Neighbor}\left(\gls{v}_i\right)} \ve{f}^{\left(t\right)}_j\right)$
+      \STATE{} $\gls{f}^{\left(t+1\right)}_i \leftarrow \mathrm{hash}\left(\sum_{\gls{v}_j \in \gls{Neighbor}\left(\gls{v}_i\right)} \gls{f}^{\left(t\right)}_j\right)$
     \ENDFOR{}
     \STATE{} $t \leftarrow t + 1$
   \UNTIL{Konvergenz}
-  \RETURN{$\ve{f}^{\left(T\right)}$}
+  \RETURN{$\gls{f}^{\left(T\right)}$}
 \end{algorithmic}
-  \caption[Weisfeiler-Lehman]{Eindimensionaler Weisfeiler-Lehman-Algorithmus auf einer initialen Knotenfärbung \bzw{} Merkmalsfunktion $\ve{f}^{\left(0\right)} \in \gls{R}^N$ eines Graphen \gls{G} mit $\gls{v}_i \in \gls{Neighbor}\left(\gls{v}_i\right)$~\cite{wl}. Der Prozess der Verfärbung eines jeden Knotens $\gls{v}_i$ auf Basis der Farben seiner lokalen Nachbarsknoten wird solange wiederholt, bis diese konvergieren.}
+  \caption[Weisfeiler-Lehman]{Eindimensionaler Weisfeiler-Lehman-Algorithmus auf einer initialen Knotenfärbung \bzw{} Merkmalsfunktion $\gls{f}^{\left(0\right)} \in \gls{R}^N$ eines Graphen \gls{G} mit $\gls{v}_i \in \gls{Neighbor}\left(\gls{v}_i\right)$~\cite{wl}. Der Prozess der Verfärbung eines jeden Knotens $\gls{v}_i$ auf Basis der Farben seiner lokalen Nachbarsknoten wird solange wiederholt, bis diese konvergieren.}
 \label{alg:wl}
 \end{algorithm}
 
 Der \emph{eindimensionale Weis\-fei\-ler-Lehman Algorithmus} beschreibt eine weit untersuchte Methode zur Knotenklassifizierung eines Graphen basierend auf einer initialen Färbung \bzw{} Merkmalsfunktion auf den Knoten eines Graphen \gls{G}, die unter anderem zur Bestimmung von Graphisomorphismen genutzt wird~\cite{douglas}.
-Basierend auf einer initialen kontinuierlichen Knotenfärbung $\ve{f}^{\left(0\right)} \in \gls{R}^N$ wird die Farbe eines jeden Knotens $\gls{v}_i \in \gls{V}$ sukzessive mit Hilfe einer Hashfunktion $\mathrm{hash}\left(\cdot\right)$ so angepasst, dass sie die vorangegangene Farbe des Knotens zusammen mit den Farben seiner lokalen Nachbarschaft repräsentiert.
+Basierend auf einer initialen kontinuierlichen Knotenfärbung $\gls{f}^{\left(0\right)} \in \gls{R}^N$ wird die Farbe eines jeden Knotens $\gls{v}_i \in \gls{V}$ sukzessive mit Hilfe einer Hashfunktion $\mathrm{hash}\left(\cdot\right)$ so angepasst, dass sie die vorangegangene Farbe des Knotens zusammen mit den Farben seiner lokalen Nachbarschaft repräsentiert.
 Dieser Prozess wiederholt sich solange, bis eine stabile Knotenfärbung gefunden wurde, \dhe{} die gefundene Färbung des Graphen konvergiert (\vgl{} Algorithmus~\ref{alg:wl}).
 
 Sei die Hashfunktion nun gegeben als eine differenzierbare, nicht-lineare Aktivierungsfunktion $\gls{act} \colon \gls{R} \to \gls{R}$, \bspw{} $\gls{relu}\left(\cdot\right) \coloneqq \max\left(\cdot, 0\right)$, eines neuronalen Netzes.
 Dann ergibt sich eine Faltungsschicht des \glspl{GCN} durch die Verkettung des Faltungsoperators mit anschließender Aktivierung als
 \begin{equation*}
-  \ve{f}^{\left(t+1\right)}_i = \gls{act}\left(\sum_{\gls{v}_j \in \gls{Neighbor}\left(\gls{v}_i\right)} \frac{\gls{w}\left(\gls{v}_i, \gls{v}_j\right)}{\sqrt{d_i d_j}} \ve{f}^{\left(t\right)}_j \gls{W}^{\left(t\right)} \right),
+  \gls{f}^{\left(t+1\right)}_i = \gls{act}\left(\sum_{\gls{v}_j \in \gls{Neighbor}\left(\gls{v}_i\right)} \frac{\gls{w}\left(\gls{v}_i, \gls{v}_j\right)}{\sqrt{d_i d_j}} \gls{f}^{\left(t\right)}_j \gls{W}^{\left(t\right)} \right),
 \end{equation*}
 wobei $\gls{w}\left(\gls{v}_i, \gls{v}_j\right)/\sqrt{d_i d_j} \in \gls{R}$ die Normalisierungskonstante für die Kante $\left(\gls{v}_i, \gls{v}_j\right) \in \gls{E}$ entsprechend der Normalisierung $\gls{Dtilde}^{-1/2}\gls{Atilde}\gls{Dtilde}^{-1/2}$ aus~\eqref{eq:gcn_renorm} und $\gls{W}^{\left(t\right)} \in \gls{R}^{N \times N}$ die Filtermatrix der $t$-en Faltungsschicht beschreibt~\cite{gcn}.
 Folglich kann die Faltung des \glspl{GCN} als \enquote{differenzierbare und parametrisierte Generalisierung des eindimensionalen Weisfeiler-Lehman-Algorithmus auf Graphen} verstanden werden~\cite{gcn}.

@@ -78,17 +78,17 @@ Wir schreiben \gls{Lboth} wenn die Wahl der Laplace-Matrix, ob \gls{L} oder \gls
 
 \input{tikz/five-point-stencil}
 
-Sei $f \colon \gls{V} \to \gls{R}$ \bzw{} $\ve{f} \in \gls{R}^N$ mit $f\left(\gls{v}_i\right) = \ve{f}_i$ eine Funktion \bzw{} ein Signal auf den Knoten eines Graphen \gls{G}.
+Sei $f \colon \gls{V} \to \gls{R}$ \bzw{} $\gls{f} \in \gls{R}^N$ mit $f\left(\gls{v}_i\right) = \gls{f}_i$ eine Funktion \bzw{} ein Signal auf den Knoten eines Graphen \gls{G}.
 Dann kann für die kombinatorische Laplace-Matrix \gls{L} verifiziert werden, dass sie die Gleichung
 \begin{equation*}
-  {\left(\gls{L}\ve{f}\right)}_i = \sum_{\gls{v}_j \in \gls{Neighbor}\left(\gls{v}_i\right)} \gls{w}\left(\gls{v}_i, \gls{v}_j\right) \left(\ve{f}_i - \ve{f}_j\right)
+  {\left(\gls{L}\gls{f}\right)}_i = \sum_{\gls{v}_j \in \gls{Neighbor}\left(\gls{v}_i\right)} \gls{w}\left(\gls{v}_i, \gls{v}_j\right) \left(\gls{f}_i - \gls{f}_j\right)
 \end{equation*}
 erfüllt~\cite{Hammond}.
 Sei $\gls{G}$ nun ein Graph, der aus einem (unendlichen) zweidimensionalen regulärem Gitter entstanden ist, \dhe{} jeder Knoten $\gls{v}_i$ besitzt genau vier achsenparallele rechtwinklige Nachbarn mit gleichen Kantengewichten $1/\delta^2$, wobei $\delta \in \gls{R}$ den Abstand der Knoten zueinander beschreibt.
-Zur einfacheren Veranschaulichung benutzen wir dabei für die Signalstärke $\ve{f}_i$ eines Knoten $v_i$ an Position $\left(x, y\right)$ die Indexnotation $\ve{f}_{x,y}$.
+Zur einfacheren Veranschaulichung benutzen wir dabei für die Signalstärke $\gls{f}_i$ eines Knoten $v_i$ an Position $\left(x, y\right)$ die Indexnotation $\gls{f}_{x,y}$.
 Dann beschreibt
 \begin{equation*}
-  {\left(\gls{L}\ve{f}\right)}_{x,y} = \frac{4\ve{f}_{x,y} - \ve{f}_{x+1,y} - \ve{f}_{x-1,y} - \ve{f}_{x,y+1} - \ve{f}_{x,y-1}}{h^2}
+  {\left(\gls{L}\gls{f}\right)}_{x,y} = \frac{4\gls{f}_{x,y} - \gls{f}_{x+1,y} - \gls{f}_{x-1,y} - \gls{f}_{x,y+1} - \gls{f}_{x,y-1}}{h^2}
 \end{equation*}
 die \emph{5-Punkte-Stern} Approximation $\nabla^2 f$ (bei umgekehrtem Vorzeichen) definiert auf den Punkten $\left\{\left(x,y\right), \left(x+\delta,y\right), \left(x-\delta,y\right), \left(x,y + \delta\right),\left(x,y-\delta\right)\right\}$~\cite{Hammond} (\vgl{} Abbildung~\ref{fig:5_punkte_stern}).
 Ähnlich zu einem regulären Gitter lässt sich ein Graph \gls{G} auch über beliebig viele Abtastpunkte einer differenzierbaren Mannigfaltigkeit konstruieren.
@@ -97,10 +97,10 @@ Damit kann $\gls{Lnorm}$ als die diskrete Analogie des $\nabla^2$ Operators auf 
 Der Laplace-Beltrami Operator $\nabla^2 f\left(p\right)$ misst dabei, in wie weit sich eine Funktion $f$ an einem Punkt $p$ von dem Durchschnitt aller Funktionspunkte um einen kleinen Bereich um $p$ unterscheidet.
 Die Laplace-Matrix operiert dabei völlig analog, in dem sie misst, wie sehr sich eine (diskrete) Funktion um einen Knoten im Vergleich zu seinen Nachbarknoten unterscheidet.
 
-Die Eigenwerte und Eigenvektoren von \gls{Lboth} helfen uns beim Verständnis der linearen Transformation einer Funktion \ve{f} (mehrfach) angewendet auf \gls{Lboth}.
-Wir können dafür \ve{f} als Linearkombination der Eigenbasis $\ve{f} = \sum_{n=1}^N a_n \gls{eiv}_n$, $a_n \in \gls{R}$ schreiben und erhalten
+Die Eigenwerte und Eigenvektoren von \gls{Lboth} helfen uns beim Verständnis der linearen Transformation einer Funktion \gls{f} (mehrfach) angewendet auf \gls{Lboth}.
+Wir können dafür \gls{f} als Linearkombination der Eigenbasis $\gls{f} = \sum_{n=1}^N a_n \gls{eiv}_n$, $a_n \in \gls{R}$ schreiben und erhalten
 \begin{equation*}
-  \gls{Lboth}^k \ve{f} = \sum_{n=1}^N a_n \gls{Lboth}^k \gls{eiv}_n = \sum_{n=1}^N a_n \gls{lambda}_n^k \gls{eiv}_n.
+  \gls{Lboth}^k \gls{f} = \sum_{n=1}^N a_n \gls{Lboth}^k \gls{eiv}_n = \sum_{n=1}^N a_n \gls{lambda}_n^k \gls{eiv}_n.
 \end{equation*}
 Somit können Eigenschaften von \gls{Lboth} und damit des Graphen selber durch dessen Eigenwerte und Eigenvektoren beschrieben werden.
 

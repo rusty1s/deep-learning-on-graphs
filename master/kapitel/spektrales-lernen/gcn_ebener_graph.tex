@@ -64,18 +64,18 @@ Analog zu~\eqref{eq:gcn_renorm} muss dafür zuerst die (Re-)normalisierung der F
 mit $\gls{Adisttilde} \coloneqq \gls{Adist} + \gls{I}$ und ${\left(\gls{Ddisttilde}\right)}_{ii} \coloneqq \sum_{j=1}^N {\left(\gls{Adisttilde}\right)}_{ij}$ durchgeführt werden.
 Dies lässt sich mit Hilfe von $\gls{Adist} = \sum_{p=0}^{P-1} \gls{A}_p$ und $\gls{Ddisttilde}^{-1/2}\gls{Ddisttilde}^{-1/2} = \gls{Ddisttilde}^{-1}$ verifizieren.
 Im Folgenden sei $\gls{Atilde}_p \coloneqq \gls{Ddisttilde}^{-1/2}\gls{A}_p\gls{Ddisttilde}^{-1/2}$ für $p \in \left\{0, \ldots, P-1 \right\}$ und $\gls{Atilde}_P \coloneqq \gls{Ddisttilde}^{-1}$.
-Dann folgt für den Faltungsoperatur $\ve{f}_{\mathrm{in}} \star \ve{\hat g}$ auf Graphen im zweidimensionalen euklidischen Raum, dass dieser über
+Dann folgt für den Faltungsoperatur $\gls{f}_{\mathrm{in}} \star \ve{\hat g}$ auf Graphen im zweidimensionalen euklidischen Raum, dass dieser über
 \begin{equation}
-  \ve{f}_{\mathrm{in}} \star \ve{\hat g} \approx \sum_{p=0}^P c_p \gls{Atilde}_p \ve{f}_{\mathrm{in}}
+  \gls{f}_{\mathrm{in}} \star \ve{\hat g} \approx \sum_{p=0}^P c_p \gls{Atilde}_p \gls{f}_{\mathrm{in}}
   \label{eq:partitionierung_faltung}
 \end{equation}
 mit den freien Parametern ${\left[c_0, \ldots, c_P\right]}^{\top} \in \gls{R}^{P+1}$ beschrieben werden kann.
 \\\\
 Es stellt sich heraus, dass die Faltung in~\eqref{eq:partitionierung_faltung} auf den Partitionen eines regulären Gittergraphen mit $P=8$ äquivalent zu der klassischen Faltung auf einem regulären Gitter mit Filtergröße $3 \times 3$ ist.
-Sei dafür \gls{G} ein (unendlicher) regulärer Gittergraph bei einer Konnektivität von $8$ und $\ve{f}_{\mathrm{in}}$ Merkmalsvektor auf dem Graphen mit Koordinatenindexnotation ${\left(\ve{f}_{\mathrm{in}}\right)}_{x,y}$.
+Sei dafür \gls{G} ein (unendlicher) regulärer Gittergraph bei einer Konnektivität von $8$ und $\gls{f}_{\mathrm{in}}$ Merkmalsvektor auf dem Graphen mit Koordinatenindexnotation ${\left(\gls{f}_{\mathrm{in}}\right)}_{x,y}$.
   Die klassische Faltung \gls{conv2d} an einem Gitterpunkt $\left(x, y\right)$ ist damit gegeben als
 \begin{equation*}
-  {\gls{conv2d}\left({\ve{f}_{\mathrm{in}}}\right)}_{x,y} = \sum_{i,j \in \left\{1, 2, 3\right\}} {\left(\ve{f}_{\mathrm{in}}\right)}_{x+i-2, y+j-2} \gls{W}_{i, j},
+  {\gls{conv2d}\left({\gls{f}_{\mathrm{in}}}\right)}_{x,y} = \sum_{i,j \in \left\{1, 2, 3\right\}} {\left(\gls{f}_{\mathrm{in}}\right)}_{x+i-2, y+j-2} \gls{W}_{i, j},
 \end{equation*}
 wobei $\gls{W} \in \gls{R}^{3 \times 3}$ eine Filtermatrix der Größe $3 \times 3$ ist.
 Da \gls{Adisttilde} ein reguläres Gitter beschreibt sind die Einträge ihrer Matrixreihen äquivalent unter unterschiedlicher Permutation und folglich sind die Einträge auf der Diagonalen von \gls{Ddisttilde} identisch (\oBdA{} entfällt hier die Randknotenbetrachtung).
@@ -91,15 +91,15 @@ Mit der Zuordnung
     c_4\theta_1 & c_3\theta_0 & c_2\theta_1
   \end{bmatrix}
 \end{equation*}
-  für den Faltungsoperator $\ve{f}_{\mathrm{in}} \star \ve{\hat g}$ aus~\eqref{eq:partitionierung_faltung} mit den Parametern ${\left[c_0, \ldots, c_8\right]}^{\top} \in \gls{R}^9$
-folgt damit sofort die Äquivalenz zu $\gls{conv2d}\left(\ve{f}_{\mathrm{in}}\right)$ auf regulären Gittern.
+  für den Faltungsoperator $\gls{f}_{\mathrm{in}} \star \ve{\hat g}$ aus~\eqref{eq:partitionierung_faltung} mit den Parametern ${\left[c_0, \ldots, c_8\right]}^{\top} \in \gls{R}^9$
+folgt damit sofort die Äquivalenz zu $\gls{conv2d}\left(\gls{f}_{\mathrm{in}}\right)$ auf regulären Gittern.
 
 \paragraph{Implementierung}
 \label{partitionierung_implementierung}
 
-Analog zu~\eqref{eq:gcn_tensor} lässt sich die Faltung für Merkmalsmatrizen $\ma{F}_{\mathrm{in}} \in \gls{R}^{N \times M_{\mathrm{in}}}$ und $\ma{F}_{\mathrm{out}} \in \gls{R}^{N \times M_{\mathrm{out}}}$ über einem Filtertensor $\gls{W} \in \gls{R}^{\left(P+1\right) \times M_{\mathrm{in}} \times M_{\mathrm{out}}}$ als
+Analog zu~\eqref{eq:gcn_tensor} lässt sich die Faltung für Merkmalsmatrizen $\gls{F}_{\mathrm{in}} \in \gls{R}^{N \times M_{\mathrm{in}}}$ und $\gls{F}_{\mathrm{out}} \in \gls{R}^{N \times M_{\mathrm{out}}}$ über einem Filtertensor $\gls{W} \in \gls{R}^{\left(P+1\right) \times M_{\mathrm{in}} \times M_{\mathrm{out}}}$ als
 \begin{equation*}
-  \ma{F}_{\mathrm{out}} \coloneqq \sum_{p=0}^P \gls{Atilde}_p\ma{F}_{\mathrm{in}}\gls{W}_{p+1}
+  \gls{F}_{\mathrm{out}} \coloneqq \sum_{p=0}^P \gls{Atilde}_p\gls{F}_{\mathrm{in}}\gls{W}_{p+1}
 \end{equation*}
 beschreiben.
 Es ist anzumerken, dass die Multiplikation mit den dünnbesetzten partitionierten Adjazenzmatrizen ${\left\{\gls{Atilde}_p\right\}}_{p=0}^P$ extrem effizient ist, da $\left|\gls{E}_p\right| \ll \left|\gls{E}\right|$ und insbesondere $\sum_{p=0}^P \left|\gls{E}_p\right| = \left|\gls{E}\right| + N$ gilt, wobei $\gls{E}_p \in \gls{V} \times \gls{V}$ die Kantenmenge der Adjazenzmatrix $\gls{Atilde}_p$ beschreibt.
@@ -156,21 +156,21 @@ Mit der expliziten Forderung gleichmäßig verteiler Knoten im Intervallbereich 
 \paragraph{Faltungsoperator}
 \label{bspline_faltungsoperator}
 
-Es kann folglich analog zu~\eqref{eq:partitionierung_faltung} der Faltungsoperator $\ve{f}_{\mathrm{in}} \star \ve{\hat g}$ auf Basis eines stückweisen polynomiellen Filters beschrieben werden.
-Mit $\gls{Adisttilde} \in \gls{R}^{N \times N}$ und $\gls{Ddisttilde} \in \gls{R}^{N \times N}$ ergibt sich $\ve{f}_{\mathrm{in}} \star \ve{\hat g}$ dann als
+Es kann folglich analog zu~\eqref{eq:partitionierung_faltung} der Faltungsoperator $\gls{f}_{\mathrm{in}} \star \ve{\hat g}$ auf Basis eines stückweisen polynomiellen Filters beschrieben werden.
+Mit $\gls{Adisttilde} \in \gls{R}^{N \times N}$ und $\gls{Ddisttilde} \in \gls{R}^{N \times N}$ ergibt sich $\gls{f}_{\mathrm{in}} \star \ve{\hat g}$ dann als
 \begin{equation*}
-  \ve{f}_{\mathrm{in}} \star \ve{\hat g} \approx c_P \gls{Ddisttilde}^{-1}\ve{f}_{\mathrm{in}} + \sum_{p=0}^{P-1} \left(\left(c_p \gls{basis}_p^K\left(\gls{Arad}\right)\right)\gls{hadamard}\left(\gls{Ddisttilde}^{-\frac{1}{2}}\gls{Adisttilde}\gls{Ddisttilde}^{-\frac{1}{2}}\right)\right)\ve{f}_{\mathrm{in}}
+  \gls{f}_{\mathrm{in}} \star \ve{\hat g} \approx c_P \gls{Ddisttilde}^{-1}\gls{f}_{\mathrm{in}} + \sum_{p=0}^{P-1} \left(\left(c_p \gls{basis}_p^K\left(\gls{Arad}\right)\right)\gls{hadamard}\left(\gls{Ddisttilde}^{-\frac{1}{2}}\gls{Adisttilde}\gls{Ddisttilde}^{-\frac{1}{2}}\right)\right)\gls{f}_{\mathrm{in}}
 \end{equation*}
 mit den freien Parametern ${\left[c_0, \ldots, c_P\right]}^{\top} \in \gls{R}^{P+1}$, wobei $\gls{basis}_p^K$ elementweise auf die Matrix \gls{Arad} angewendet wird.
-$\ve{f}_{\mathrm{in}} \star \ve{\hat g}$ sammelt dabei die aktuellen Merkmale an den einzelnen Knoten über $c_P \gls{Ddisttilde}^{-1}\ve{f}_{\mathrm{in}}$ und aggreriert diese mit den Merkmalen der lokalen Nachbarschaft über den polynomiellen Filter $\left(c_p\gls{basis}_p^K \left(\gls{Arad}\right)\right) \gls{hadamard} \left(\gls{Ddisttilde}^{-1/2}\gls{Adisttilde}\gls{Ddisttilde}^{-1/2}\right)$, der so die Länge und Richtungen der Kanten berücksichtigt.
+$\gls{f}_{\mathrm{in}} \star \ve{\hat g}$ sammelt dabei die aktuellen Merkmale an den einzelnen Knoten über $c_P \gls{Ddisttilde}^{-1}\gls{f}_{\mathrm{in}}$ und aggreriert diese mit den Merkmalen der lokalen Nachbarschaft über den polynomiellen Filter $\left(c_p\gls{basis}_p^K \left(\gls{Arad}\right)\right) \gls{hadamard} \left(\gls{Ddisttilde}^{-1/2}\gls{Adisttilde}\gls{Ddisttilde}^{-1/2}\right)$, der so die Länge und Richtungen der Kanten berücksichtigt.
 Für $K=0$ ist die Faltung über den B-Splines äquivalent zu der Faltung über den Partitionen des Graphen aus~\eqref{eq:partitionierung_faltung} aufgrund der Rechteckfunktionen ${\left\{\gls{basis}_p^0\right\}}_{p=0}^{P-1}$.
 
 \paragraph{Implementierung}
 \label{bspline_implementierung}
 
-Für Merkmalsmatrizen $\ma{F}_{\mathrm{in}} \in \gls{R}^{N \times M_{\mathrm{in}}}$ und $\ma{F}_{\mathrm{out}} \in \gls{R}^{N \times M_{\mathrm{out}}}$ kann die Faltung über einem Filtertensor $\gls{W} \in \gls{R}^{\left(P+1\right) \times M_{\mathrm{in}} \times M_{\mathrm{out}}}$ damit als
+Für Merkmalsmatrizen $\gls{F}_{\mathrm{in}} \in \gls{R}^{N \times M_{\mathrm{in}}}$ und $\gls{F}_{\mathrm{out}} \in \gls{R}^{N \times M_{\mathrm{out}}}$ kann die Faltung über einem Filtertensor $\gls{W} \in \gls{R}^{\left(P+1\right) \times M_{\mathrm{in}} \times M_{\mathrm{out}}}$ damit als
 \begin{equation*}
-  \ma{F}_{\mathrm{out}} \coloneqq \gls{Ddisttilde}^{-1}\ma{F}_{\mathrm{in}}\gls{W}_{P+1} + \sum_{p=0}^{P-1} \left(\gls{basis}_p^K\left(\gls{Arad}\right) \gls{hadamard}\left(\gls{Ddisttilde}^{-\frac{1}{2}}\gls{Adisttilde}\gls{Ddisttilde}^{-\frac{1}{2}}\right)\right)\ma{F}_{\mathrm{in}}\ma{W}_{p+1}
+  \gls{F}_{\mathrm{out}} \coloneqq \gls{Ddisttilde}^{-1}\gls{F}_{\mathrm{in}}\gls{W}_{P+1} + \sum_{p=0}^{P-1} \left(\gls{basis}_p^K\left(\gls{Arad}\right) \gls{hadamard}\left(\gls{Ddisttilde}^{-\frac{1}{2}}\gls{Adisttilde}\gls{Ddisttilde}^{-\frac{1}{2}}\right)\right)\gls{F}_{\mathrm{in}}\ma{W}_{p+1}
 \end{equation*}
 beschrieben werden.
 Im Vergleich zu Kapitel~\eqref{partitionierung_implementierung} erhöht sich der Aufwand der Faltung zu $\gls{O}\left(KPM_{\mathrm{in}}M_{\mathrm{out}}\right)$, da die Partitionen der Adjazenzmatrizen nicht mehr disjunkt, sondern $\left(K+1\right)$-mal betrachtet werden.

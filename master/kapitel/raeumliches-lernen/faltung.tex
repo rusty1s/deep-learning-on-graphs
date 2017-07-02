@@ -106,9 +106,9 @@ Dafür werden $\max\left(K - \left|\gls{Neighbor}_{\gls{v}}\right|, 0\right)$ \e
 \input{tikz/raeumliche_faltung}
 Abbildung~\ref{fig:raeumliche_faltung} illustriert den Normalisierungsprozess an einem einfachen Beispiel.
 \\\\
-Für jeden Graphen \gls{G} kann damit ein dreidimensionaler Tensor $\ma{T} \in \gls{R}^{L \times K \times M}$ über die drei beschriebenen Schritte mit Hilfe einer Merkmalsmatrix $\ma{F} \in \gls{R}^{N \times M}$ auf den Knoten des Graphen generiert werden.
+Für jeden Graphen \gls{G} kann damit ein dreidimensionaler Tensor $\ma{T} \in \gls{R}^{L \times K \times M}$ über die drei beschriebenen Schritte mit Hilfe einer Merkmalsmatrix $\gls{F} \in \gls{R}^{N \times M}$ auf den Knoten des Graphen generiert werden.
 Dafür werden $L$ Knoten des Graphen ausgewählt und für diese die entsprechenden $K$ großen Nachbarschaften \bzw{} Receptive-Fields ermittelt.
-Jeder Eintrag in $\gls{Neighbor}_{\mathrm{out}}$ wird dann durch seine entsprechenden Merkmale aus \ma{F} ersetzt.
+Jeder Eintrag in $\gls{Neighbor}_{\mathrm{out}}$ wird dann durch seine entsprechenden Merkmale aus \gls{F} ersetzt.
 Das erlaubt die Verwendung der klassischen \gls{conv2d}-Operation im Kontext von Graphen, die auf dreidimensionalen Tensoren operiert.
 Damit entspricht die Transformation eines Graphen in den Vektorraum und einer anschließenden Faltung auf dieser Repräsentation der ersten Faltungsschicht eines klassischen \glspl{CNN}.
 Für eine Knotenauswahl, die weniger als $L$ Knoten ermittelt, sowie für Receptive-Fields, die Fakeknoten enthalten, werden die entsprechenden Einträge in \ma{T} über den Wert Null repräsentiert, welche somit keinen Einfluss auf die Faltung mittels \gls{conv2d} nehmen.
