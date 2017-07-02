@@ -1,5 +1,6 @@
 #!/bin/sh
 
+pdflatex main.tex
 bibtex main
-makeglossaries main
+makeindex -s main.ist -o main.gls main.glo
 pdflatex main.tex

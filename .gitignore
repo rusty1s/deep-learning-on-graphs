@@ -16,6 +16,8 @@ log_graph
 *.ist
 *.bbl
 *.blg
+*.ilg
+*.ind
 *.bcf
 *.run.xml
 *.ckpt*
