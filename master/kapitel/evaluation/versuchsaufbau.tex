@@ -47,11 +47,21 @@ Bei \gls{SLIC} werden stattdessen auch die gleichfarbigen, schwarzen Flächen in
 Abbildung~\ref{fig:mnist} veranschaulicht die beiden Superpixel- \bzw{} Graphrepräsentationen anhand eines Bildes aus dem \gls{MNIST} Datensatz.
 \input{figures/mnist}
 
-
-Merkmalsselektion
-
-% Wie viele Merkmale und welche?
-
+Die in Kapitel~\ref{merkmalsselektion} beschriebene Merkmalsselektion reduziert für \gls{MNIST} die Menge an Formmerkmalen (\vgl{} Kapitel~\ref{merkmalsextraktion}) im ersten statistisch basierten Test auf $12$ Merkmale, welche im zweiten Schritt rekursiv auf $9$ Merkmale reduziert werden.
+Die ermittelten (unterschiedlichen) Formmerkmale für \gls{SLIC} und Quickshift \bzgl{} \gls{MNIST} sind in Tabelle~\ref{tab:mnist_merkmale} aufgezeigt.
+\begin{table}[t]
+\centering
+\begin{tabular}{lccccccccc}
+  \toprule
+  \textbf{\gls{SLIC}} & $\hat{x}$ & $\hat{y}$ & $\mathrm{ecc}$ & $\mathrm{dia}$ & $\mathrm{ext}$ & $\gls{mu}^{\prime}_{20}$ & $\gls{lambda}_2$ & $\mathrm{axis}_1$ & $\mathrm{axis}_2$\\
+  \textbf{Quickshift} & $\hat{x}$ & $\mathrm{ecc}$ & $\mathrm{dia}$ & $\mathrm{ext}$ & $\gls{mu}_{03}$ & $\gls{mu}_{21}$ & $\gls{mu}_{30}$ & $\gls{eta}_{03}$ & $\mathrm{ori}$\\
+  \bottomrule
+\end{tabular}
+\caption[]{}
+\label{tab:mnist_merkmale}
+\end{table}
+Wohingegen sich die Merkmalsselektion für \gls{SLIC} eher für Formmerkmale entscheidet, die aus den Momenten gewonnen werden können, so sind für Quickshift die reinen translationsinvarianten Momente \gls{mu} mehr von Interesse.
+Daraus ergeben sich $10$ Merkmale eines Knotens in \gls{MNIST} inklusive der Durchschnittsfarbe eines Superpixels.
 
 \paragraph{CIFAR-10}
 \label{cifar_10}
