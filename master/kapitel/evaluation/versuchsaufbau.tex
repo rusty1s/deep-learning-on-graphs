@@ -24,7 +24,6 @@ Die ermittelten Parameter \bzgl{} der beiden benutzten Superpixelalgorithmen sin
 Für \gls{SLIC} sind das die Parameter $K \in \gls{N}$, \dhe{} die Anzahl der gewünschten Segmente, sowie $F \in \gls{R}$ für die Gewichtung zwischen der Form und den Farbabgrenzungen der Superpixel.
 Für Quickshift ergeben sich dagegen drei wählbare Parameter — $\gls{sigma} \in \gls{R}$ für die Wahl der Standardabweichung der Gaußfunktion, $\alpha \in \gls{R}$ für die Gewichtung des Farbterms sowie $S \in \gls{N}$ zur Einschränkung der Berechnung über ein Fenster der Größe $S \times S$.
 Für eine detaillierte Beschreibung der Parameter sei auf Kapitel~\ref{superpixel_verfahren} verwiesen.
-
 \begin{table}[htpb]
 \centering
 \begin{tabular}{rlrlrlrlrlrl}
@@ -40,7 +39,6 @@ Für eine detaillierte Beschreibung der Parameter sei auf Kapitel~\ref{superpixe
 \caption[Parameterwahl des \gls{MNIST} Datensatzes]{Parameterwahl des \gls{MNIST} Datensatzes}
 \label{tab:mnist}
 \end{table}
-
 Aus der Wahl der Parameter ergeben sich die ebenfalls in der Tabelle datierten Werte der durchschnittlichen Anzahl an Knoten $\overline{N}$ und deren minimaler \bzw{} maximaler Anzahl $N_{\min}$ \bzw{} $N_{\max}$ sowie dem durchschnittlichen, minimalen und maximalen Knotengrad $\overline{\gls{degree}}$, $\gls{degree}_{\min}$, $\gls{degree}_{\max}$ über der Menge aller aus den Bildern generierten Graphen.
 \todo{noch ein satz hierzu}
 Abbildung~\ref{fig:mnist} veranschaulicht das Resultat der beiden Superpixel- \bzw{} Graphrepräsentationen eines Bildes aus dem \gls{MNIST} Datensatz.
