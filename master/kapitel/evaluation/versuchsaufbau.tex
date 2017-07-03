@@ -7,20 +7,60 @@ Conv mit MaxPool gefolgt von AveragePool auf Fully Connect auf Softmax
 \subsection{Datensätze}
 \label{datensaetze}
 
+Die vorgestellten Faltungsmethoden aus Kapitel~\ref{raeumliches_lernen} und~\ref{spektrales_lernen} \bzgl{} des Lernens auf zweidimensionalen euklidischen Graphen wurden über einer Reihe von Datensätzen verifiziert, die im Folgenden vorgestellt werden.
+Dafür wurden die Bildermengen in eine Superpixelrepräsentation (\gls{SLIC} und Quickshift) konvertiert und darauf basierend in eine Graphrepräsentation transformiert (\vgl{} Kapitel~\ref{graphrepraesentationen_von_bildern}).
+Zusätzlich zu der Präsentation der Datensätze enthält dieses Kapitel damit insbesondere die Parameterwahl der jeweiligen Superpixelalgorithmen, welche jeweils händisch über einer Untermenge der Bilder eines jeden Datensatzes ermittelt wurden, und weiterhin die entsprechenden Merkmalsselektionen, die nach dem beschriebenen Prinzip aus Kapitel~\ref{merkmalsselektion} errechnet wurden.
+
 \paragraph{MNIST}
 \label{mnist}
 
-\emph{\gls{MNIST}} Datensatz
+Der \emph{\gls{MNIST}} Datensatz enthält eine große Menge eindeutig klassifizierter handgeschriebener Zahlen von $0$ bis $9$, welcher daher zum Lernen einer Schrift- \bzw{} Zahlenerkennung genutzt werden kann~\cite{mnist}.
+Er besteht aus $55000$ Trainingsbildern, $5000$ Validierungsbildern sowie $10000$ Trainingsbildern.
+Die Bilder des Datensatzes sind einheitlich auf die Größe $28 \times 28$ skaliert und besitzen lediglich einen Farbkanal mit Grauwerten, welcher angibt, ob ein Pixel des Bildes zu einer Zahl (weiß), zu deren Rand oder zum Hintergrund (schwarz) gehört~\cite{mnist}.
+Aufgrund seiner kleinen Datengröße und leichten Handhabung gilt er als die ideale Einführung in Prinzipien des maschinellen Lernens und zeichnet sich damit als ideal für die Verifizierung eines neuen Ansatzes \bzgl{} neuronaler Netze aus.
+Insbesondere kann der Datensatz während des gesamten Trainings im Speicher gehalten werden, was den Aufwand \bzgl{} der Verarbeitung und Eingabe der Daten auf ein Minimum reduziert.
 
-Bei den Datensätzen insbesondere auch die Superpixelalgorithmen erwähnen
-das heißt wie viele Superpixel
-welche Parameter
-mean/max Knotengrad
-Wie viele Merkmale und welche?
+Die ermittelten Parameter \bzgl{} der beiden benutzten Superpixelalgorithmen sind in Tabelle~\ref{tab:mnist} gegeben.
+Für eine Beschreibung der Parameter sei auf Kapitel~\ref{superpixel_verfahren} verwiesen.
 
-\cite{mnist}
+\begin{table}[htpb]
+\centering
+\begin{tabular}{rlrlrlrlrlrl}
+  \toprule
+  \multicolumn{6}{c}{\gls{SLIC}} & \multicolumn{6}{c}{Quickshift}\\
+  \midrule
+  $K$: & $100$ & $F$: & $5$ & & & $\gls{sigma}$: & $2$ & $\alpha$: & $1$ & $S$: & $2$\\
+  \midrule
+  $\overline{N}$: & $10$ & $N_{\min}$: & $10$ & $N_{\max}$: & $10$ & $\overline{N}$: & $2$ & $N_{\min}$: & $1$ & $N_{\max}$: & $2$\\
+  $\overline{\gls{degree}}$: & $10$ & $\gls{degree}_{\min}$: & $10$ & $\gls{degree}_{\max}$: & $10$ & $\overline{\gls{degree}}$: & $2$ & $\gls{degree}_{\min}$: & $1$ & $\gls{degree}_{\max}$: & $2$\\
+  \bottomrule
+\end{tabular}
+\caption[Parameterwahl des \gls{MNIST} Datensatzes]{Parameterwahl des \gls{MNIST} Datensatzes}
+\label{tab:mnist}
+\end{table}
 
+Aus der benutzten Parameterwahl ergeben sich damit die Durchschnitts
+
+% Bei den Datensätzen insbesondere auch die Superpixelalgorithmen erwähnen
+% das heißt wie viele Superpixel
+% welche Parameter
+% mean/max Knotengrad
+
+Abbildung~\ref{fig:mnist} veranschaulicht das Resultat der beiden Superpixel- \bzw{} Graphrepräsentationen eines Bildes aus \gls{MNIST}.
 \input{figures/mnist}
+
+
+
+
+
+
+
+
+
+
+
+% Wie viele Merkmale und welche?
+
 
 \paragraph{CIFAR-10}
 \label{cifar_10}
