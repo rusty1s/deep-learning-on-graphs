@@ -15,10 +15,10 @@ Zusätzlich zu der Präsentation der Datensätze enthält dieses Kapitel damit i
 \label{mnist}
 
 Der \emph{\gls{MNIST}} Datensatz enthält eine große Menge eindeutig klassifizierter handgeschriebener Zahlen von $0$ bis $9$, welcher daher zum Lernen einer Schrift- \bzw{} Zahlenerkennung genutzt werden kann~\cite{mnist}.
-Er besteht aus $55000$ Trainingsbildern, $5000$ Validierungsbildern sowie $10000$ Trainingsbildern.
+Er besteht aus $55000$ Trainingsbildern, $5000$ Validierungsbildern sowie $10000$ Testbildern.
 Die Bilder des Datensatzes sind einheitlich auf die Größe $28 \times 28$ skaliert und besitzen lediglich einen Farbkanal mit Grauwerten, welcher angibt, ob ein Pixel des Bildes zu einer Zahl (weiß), zu deren Rand oder zum Hintergrund (schwarz) gehört~\cite{mnist}.
 Aufgrund seiner kleinen Datengröße und leichten Handhabung gilt er als die ideale Einführung in Prinzipien des maschinellen Lernens und zeichnet sich damit als ideal für die Verifizierung eines neuen Ansatzes \bzgl{} neuronaler Netze aus.
-Insbesondere kann der Datensatz während des gesamten Trainings im Speicher gehalten werden, was den Aufwand \bzgl{} der Verarbeitung und Eingabe der Daten auf ein Minimum reduziert.
+Insbesondere kann der Datensatz während des gesamten Trainings im Hauptspeicher gehalten werden, was den Aufwand \bzgl{} der Verarbeitung und Eingabe der Daten auf ein Minimum reduziert.
 
 Die ermittelten Parameter \bzgl{} der beiden benutzten Superpixelalgorithmen sind in Tabelle~\ref{tab:mnist} gegeben.
 Für \gls{SLIC} sind das die Parameter $K \in \gls{N}$, \dhe{} die Anzahl der gewünschten Segmente, sowie $F \in \gls{R}$ für die Gewichtung zwischen der Form und den Farbabgrenzungen der Superpixel.
@@ -60,16 +60,22 @@ Die ermittelten (unterschiedlichen) Formmerkmale für \gls{SLIC} und Quickshift 
   \caption[\gls{MNIST} Merkmalsselektion]{Merkmalsselektion des \gls{MNIST} Datensatzes auf $9$ Formmerkmale.}
 \label{tab:mnist_merkmale}
 \end{table}
-Wohingegen sich die Merkmalsselektion für \gls{SLIC} eher für Formmerkmale entscheidet, die aus den Momenten gewonnen werden können, so genießen für Quickshift die reinen translationsinvarianten Momente \gls{mu} größeres Interesse.
+Wohingegen sich die Merkmalsselektion bei \gls{SLIC} eher für Formmerkmale entscheidet, die aus den Momenten gewonnen werden können, so genießen bei Quickshift die reinen translationsinvarianten Momente \gls{mu} größeres Interesse.
 Daraus ergeben sich $10$ Merkmale eines Knotens in \gls{MNIST} inklusive der Durchschnittsfarbe eines Superpixels.
 
 \paragraph{CIFAR-10}
 \label{cifar_10}
 
-\cite{cifar_10}
-
-Der \emph{\gls{Cifar}} Datensatz
-Er liegt in zwei Versionen vor, \gls{Cifar}-10 und \gls{Cifar}-100, wobei sich diese Arbeit an dem weitaus beliebteren Datensatz \gls{Cifar}-10 bedient.
+Der \emph{\gls{Cifar}} Datensatz, auch \gls{Cifar}-10 genannt, besteht aus $60000$ farbigen Bildern, die jeweils genau einer von $10$ Klassen zugeordnet sind~\cite{cifar_10}.
+$45000$ Bilder werden dabei als Trainingsbilder, $5000$ als Validierungsbilder und $10000$ als Testbilder genutzt.
+Zu jeder Klasse existieren genau $6000$ Bilder, welche gleichmäßig auf die Bilduntermengen aufgeteilt sind.
+Die Klassen der Bilder sind im Folgenden: Flugzeug, Auto, Vogel, Katze, Reh, Hund, Frosch, Pferd, Schiff und Lastwagen.
+Die Bilder der Klassen sind dabei \emph{einander ausschließend}.
+So enthält die Klasse \enquote{Auto} nur kleinere Personenwagen, wohingegen die Klasse \enquote{Lastwagen} auch nur als solche zu klassifizierenden Fahrzeuge enthält~\cite{cifar_10}.
+Die Bilder haben eine einheitliche Größe von $32 \times 32$ Pixeln und besitzen drei Farbkanäle.
+Sie passen aufgrund ihrer Größe ähnlich zu \gls{MNIST} komplett in den Hauptspeicher.
+Aufgrund dessen ist er für eine Bildklassifizierung sehr beliebt, da er schnelle Trainingszeiten garantiert und dabei trotzdem alle Techniken des Deep Learnings ausgeschöpft werden müssen, um qualitativ hochwertige Resultate zu erzielen.
+Der \gls{Cifar} Datensatz liegt ebenfalls in einer zweiten Version vor, genannt \gls{Cifar}-100, der 60000 Bilder in 100 Klassen unterteilt, welcher aber in dieser Arbeit keine Verwendung findet~\cite{cifar_10}.
 
 \begin{table}[t]
 \centering
