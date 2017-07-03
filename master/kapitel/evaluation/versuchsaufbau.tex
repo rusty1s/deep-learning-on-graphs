@@ -24,44 +24,31 @@ Die ermittelten Parameter \bzgl{} der beiden benutzten Superpixelalgorithmen sin
 Für \gls{SLIC} sind das die Parameter $K \in \gls{N}$, \dhe{} die Anzahl der gewünschten Segmente, sowie $F \in \gls{R}$ für die Gewichtung zwischen der Form und den Farbabgrenzungen der Superpixel.
 Für Quickshift ergeben sich dagegen drei wählbare Parameter — $\gls{sigma} \in \gls{R}$ für die Wahl der Standardabweichung der Gaußfunktion, $\alpha \in \gls{R}$ für die Gewichtung des Farbterms sowie $S \in \gls{N}$ zur Einschränkung der Berechnung über ein Fenster der Größe $S \times S$.
 Für eine detaillierte Beschreibung der Parameter sei auf Kapitel~\ref{superpixel_verfahren} verwiesen.
-\begin{table}[htpb]
+\begin{table}[t]
 \centering
 \begin{tabular}{rlrlrlrlrlrl}
   \toprule
   \multicolumn{6}{c}{\gls{SLIC}} & \multicolumn{6}{c}{Quickshift}\\
   \midrule
-  $K$: & $100$ & $F$: & $5$ & & & $\gls{sigma}$: & $2$ & $\alpha$: & $1$ & $S$: & $2$\\
+  $K$ & $100$ & $F$ & $5$ & & & $\gls{sigma}$ & $2$ & $\alpha$ & $1$ & $S$ & $2$\\
   \midrule
-  $\overline{N}$: & $64.6$ & $N_{\min}$: & $50$ & $N_{\max}$: & $80$ & $\overline{N}$: & $2$ & $N_{\min}$: & $1$ & $N_{\max}$: & $2$\\
-  $\overline{\gls{degree}}$: & $4.2$ & $\gls{degree}_{\min}$: & $1$ & $\gls{degree}_{\max}$: & $16$ & $\overline{\gls{degree}}$: & $2$ & $\gls{degree}_{\min}$: & $1$ & $\gls{degree}_{\max}$: & $2$\\
+  $\overline{N}$ & $64.6$ & $N_{\min}$ & $50$ & $N_{\max}$ & $80$ & $\overline{N}$ & $82.1$ & $N_{\min}$ & $5$ & $N_{\max}$ & $154$\\
+  $\overline{\gls{degree}}$ & $5.7$ & $\gls{degree}_{\min}$ & $1$ & $\gls{degree}_{\max}$ & $19$ & $\overline{\gls{degree}}$ & $6.8$ & $\gls{degree}_{\min}$ & $1$ & $\gls{degree}_{\max}$ & $101$\\
   \bottomrule
 \end{tabular}
-\caption[Parameterwahl des \gls{MNIST} Datensatzes]{Parameterwahl des \gls{MNIST} Datensatzes}
+\caption[Superpixelparameter für den \gls{MNIST} Datensatz]{Wahl der Superpixelparameter für den \gls{MNIST} Datensatz}
 \label{tab:mnist}
 \end{table}
-Aus der Wahl der Parameter ergeben sich die ebenfalls in der Tabelle datierten Werte der durchschnittlichen Anzahl an Knoten $\overline{N}$ und deren minimaler \bzw{} maximaler Anzahl $N_{\min}$ \bzw{} $N_{\max}$ sowie dem durchschnittlichen, minimalen und maximalen Knotengrad $\overline{\gls{degree}}$, $\gls{degree}_{\min}$, $\gls{degree}_{\max}$ über der Menge aller aus den Bildern generierten Graphen bei einer Konnektivität von $8$.
-\todo{noch ein satz hierzu}
-Abbildung~\ref{fig:mnist} veranschaulicht das Resultat der beiden Superpixel- \bzw{} Graphrepräsentationen eines Bildes aus dem \gls{MNIST} Datensatz.
+
+Aus der Wahl der Superpixelparameter ergeben sich die ebenfalls in der Tabelle datierten Werte der durchschnittlichen, minimalen und maximalen Anzahl an Knoten $\overline{N}$, $N_{\min}$ \bzw{} $N_{\max}$ sowie dem durchschnittlichen, minimalen und maximalen Knotengrad $\overline{\gls{degree}}$, $\gls{degree}_{\min}$ \bzw{} $\gls{degree}_{\max}$ über der Menge aller aus den Bildern generierten Graphen bei einer Konnektivität von $8$.
+Wohingegen \gls{SLIC} über alle Bilder relativ gleich große Knotenmengen mit relativ gleichem Knotengrad erzeugt, kann dies bei Quickshift je nach Bild stark variieren.
+So erzeugt Quickshift in dem \gls{MNIST} Datensatz \bspw{} große schwarze Bereiche für den Hintergrund, die dementsprechend auch einen sehr hohen Knotengrad besitzen.
+Bei \gls{SLIC} werden stattdessen auch die gleichfarbigen, schwarzen Flächen in einheitliche Intervalle unterteilt.
+Abbildung~\ref{fig:mnist} veranschaulicht die beiden Superpixel- \bzw{} Graphrepräsentationen anhand eines Bildes aus dem \gls{MNIST} Datensatz.
 \input{figures/mnist}
 
 
-% Bei den Datensätzen insbesondere auch die Superpixelalgorithmen erwähnen
-% das heißt wie viele Superpixel
-% welche Parameter
-% mean/max Knotengrad
-
-
 Merkmalsselektion
-
-
-
-
-
-
-
-
-
-
 
 % Wie viele Merkmale und welche?
 
@@ -73,6 +60,22 @@ Merkmalsselektion
 
 Der \emph{\gls{Cifar}} Datensatz
 Er liegt in zwei Versionen vor, \gls{Cifar}-10 und \gls{Cifar}-100, wobei sich diese Arbeit an dem weitaus beliebteren Datensatz \gls{Cifar}-10 bedient.
+
+\begin{table}[t]
+\centering
+\begin{tabular}{rlrlrlrlrlrl}
+  \toprule
+  \multicolumn{6}{c}{\gls{SLIC}} & \multicolumn{6}{c}{Quickshift}\\
+  \midrule
+  $K$ & $200$ & $F$ & $5$ & & & $\gls{sigma}$ & $1$ & $\alpha$ & $1$ & $S$ & $5$\\
+  \midrule
+  $\overline{N}$ & $232.1$ & $N_{\min}$ & $186$ & $N_{\max}$ & $263$ & $\overline{N}$ & $182.0$ & $N_{\min}$ & $18$ & $N_{\max}$ & $624$\\
+  $\overline{\gls{degree}}$ & $6.3$ & $\gls{degree}_{\min}$ & $1$ & $\gls{degree}_{\max}$ & $21$ & $\overline{\gls{degree}}$ & $7.4$ & $\gls{degree}_{\min}$ & $1$ & $\gls{degree}_{\max}$ & $67$\\
+  \bottomrule
+\end{tabular}
+\caption[Superpixelparameter für den \gls{Cifar}-10 Datensatz]{Wahl der Superpixelparameter für den \gls{Cifar}-10 Datensatz}
+\label{tab:cifar_10}
+\end{table}
 
 \input{figures/cifar_10}
 
@@ -86,6 +89,22 @@ Er liegt in zwei Versionen vor, \gls{Cifar}-10 und \gls{Cifar}-100, wobei sich d
 
 \emph{\gls{Pascal}} Datensatz
 \cite{pascal_voc}
+
+\begin{table}[t]
+\centering
+\begin{tabular}{rlrlrlrlrlrl}
+  \toprule
+  \multicolumn{6}{c}{\gls{SLIC}} & \multicolumn{6}{c}{Quickshift}\\
+  \midrule
+  $K$ & $1600$ & $F$ & $30$ & & & $\gls{sigma}$ & $2$ & $\alpha$ & $0.75$ & $S$ & $8$\\
+  \midrule
+  $\overline{N}$ & $1540.9$ & $N_{\min}$ & $1082$ & $N_{\max}$ & $1839$ & $\overline{N}$ & $2131.6$ & $N_{\min}$ & $234$ & $N_{\max}$ & $29010$\\
+  $\overline{\gls{degree}}$ & $6.5$ & $\gls{degree}_{\min}$ & $1$ & $\gls{degree}_{\max}$ & $50$ & $\overline{\gls{degree}}$ & $7.7$ & $\gls{degree}_{\min}$ & $1$ & $\gls{degree}_{\max}$ & $256$\\
+  \bottomrule
+\end{tabular}
+\caption[Superpixelparameter für den \gls{Pascal} Datensatz]{Wahl der Superpixelparameter für den \gls{Pascal} Datensatz}
+\label{tab:pascal_voc}
+\end{table}
 
 \input{figures/pascal_voc}
 

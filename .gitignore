@@ -2,6 +2,7 @@
 log_graph
 *.acn
 *.out
+*.lot
 *.aux
 *.log
 *.loa
