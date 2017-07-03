@@ -10,7 +10,7 @@ Beide Verfahren werden im Folgenden näher vorgestellt.
 
 Der Superpixelalgorithmus \emph{\gls{SLIC}} ist ein recht einfach gehaltener lokaler \emph{$K$-Means}-Clustering-Ansatz, welcher sich dennoch durch seine Geschwindigkeit, seine Speichereffizienz und insbesondere durch seine erfolgreiche Segmentierung hinsichtlich der Farbabgrenzen seiner Superpixel im Vergleich zu anderen \enquote{State-of-the-Art}-Algorithmen auszeichnet~\cite{slic, Gadde}.
 
-Ein Bild $\gls{B} \in \gls{R}^{H \times C \times 3}$ im \emph{Lab-Farbraum} wird dazu initial in $K \in \gls{N}$ viele Clusterzentren $\ve{c}_k \coloneqq {\left[l_k, a_k, b_k, x_k, y_k\right]}^{\top}$  mit jeweils gleichmäßigem Abstand $S \coloneqq \sqrt{WH/K}$ zerlegt~\cite{slic}.
+Ein Bild $\gls{B} \in \gls{R}^{H \times C \times 3}$ im Lab-Farbraum wird dazu initial in $K \in \gls{N}$ viele Clusterzentren $\ve{c}_k \coloneqq {\left[l_k, a_k, b_k, x_k, y_k\right]}^{\top}$  mit jeweils gleichmäßigem Abstand $S \coloneqq \sqrt{WH/K}$ zerlegt~\cite{slic}.
 Daraufhin werden in einem iterativen Prozess die Zugehörigkeiten der Pixel zu ihren jeweiligen Clustern über eine Distanzmetrik $D$ bestimmt und die Clusterzentren entsprechend ihrer neuen Gruppierungen angepasst.
 Entgegen der konventionellen $k$-Means-Formulierung werden dabei aber nicht die Distanzen jedes Pixels zu jedem Clusterzentrum berechnet, sondern lediglich für die Pixel, die sich in der Region der Größe $2S \times 2S$ um $\ve{c}_k$ befinden~\cite{slic}.
 Dies führt folglich zu einer drastischen Reduzierung der Anzahl an Distanzberechnungen und zu einem effizienteren Algorithmus.
@@ -59,7 +59,7 @@ Die Normalisierungskonstante $F$ kann damit auch als Gewichtung zwischen der For
 Falls $F$ sehr klein gewählt wird, respektieren die Superpixel Farbabgrenzungen besser, aber besitzen im Allgemeinen auch eine eher unreguläre Form~\cite{slic}.
 
 Damit ist \gls{SLIC} ein $\gls{O}\left(WH\right)$ effizienter Algorithmus mit nur zwei frei wählbaren Parametern $K$ und $F$~\cite{slic}.
-Viele Anwendungen im Bereich der Bildverarbeitung machen sich daher \gls{SLIC} zu Nutze (\vgl{}~\cite{Gadde, supercnn, super}).
+Viele Anwendungen im Bereich der Bildverarbeitung machen sich daher \gls{SLIC} zunutze (\vgl{}~\cite{Gadde, supercnn, super}).
 Abbildung~\ref{fig:slic_quickshift} (a) zeigt ein Beispielresultat des \gls{SLIC}-Algorithmus bei unterschiedlich gewählten Anzahlen an Clusterzentren.
 
 \input{figures/superpixel}
@@ -69,9 +69,9 @@ Abbildung~\ref{fig:slic_quickshift} (a) zeigt ein Beispielresultat des \gls{SLIC
 
 Ein weiteres Verfahren zur Bildsegmentierung ist der gradientenbasierte Algorithmus \emph{Quickshift}, der unter anderem bereits zur Objektlokalisierung auf Basis von Superpixeln benutzt wurde~\cite{quickshift,Fulkerson}.
 
-Quickshift startet dabei mit der Berechnung der \emph{Parzen-Dichteschätzung} $p$ eines Bildes $\gls{B} \in \gls{R}^{H \times W \times 3}$ für jedes Pixel $\gls{B}_{yx} \in \gls{R}^3$ im fünfdimensionalen Raum über die Gaußfunktion, \dhe{}
+Quickshift startet dabei mit der Berechnung der \emph{Parzen-Dichteschätzung} $h$ eines Bildes $\gls{B} \in \gls{R}^{H \times W \times 3}$ für jedes Pixel $\gls{B}_{yx} \in \gls{R}^3$ im fünfdimensionalen Raum über die Gaußfunktion, \dhe{}
 \begin{equation*}
-  p\left(x,y, \gls{B}\right) = \sum_{\substack{1 \leq i \leq W\\1 \leq j \leq H}}
+  h\left(x,y, \gls{B}\right) = \sum_{\substack{1 \leq i \leq W\\1 \leq j \leq H}}
   \frac{1}{{\left(2\pi\gls{sigma}\right)}^5} \exp\left(-\frac{1}{2\gls{sigma}^2}{\left\|\begin{pmatrix}
     x - x_i\\
     y - y_i\\

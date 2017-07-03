@@ -26,6 +26,7 @@ Ein \emph{Pfad} ist ein Weg mit der Bedingung, dass $\gls{v}_{x\left(k\right)} \
 Im Kontext von schleifenlosen Graphen sind die Begriffe Weg und Pfad äquivalent.
 Wir schreiben $\gls{s}\left(\gls{v}_i, \gls{v}_j\right)$ mit Hilfe der \emph{Abstandsfunktion} $\gls{s} \colon \gls{V} \times \gls{V} \to \gls{N} \cup \left\{\infty\right\}$ für die Länge des kürzesten Pfades von $\gls{v}_i$ nach $\gls{v}_j$, \dhe{} die minimale Anzahl an Kanten, die zwischen $\gls{v}_i$ und $\gls{v}_j$ liegen~\cite{Hammond}.
 $\gls{v}_j$ ist von $\gls{v}_i$ aus \emph{erreichbar}, wenn $\gls{s}\left(\gls{v}_i, \gls{v}_j\right) \in \gls{N}$~\cite{Biggs}.
+Falls $\gls{v}_j$ nicht von $\gls{v}_i$ aus erreichbar ist, so gilt $gls{s}\left(\gls{v}_i, \gls{v}_j\right) = \infty$.
 Die Relation der Erreichbarkeit in der Knotenmenge \gls{V} eines Graphen ist eine Äquivalenzrelation.
 Die Äquivalenzklassen der Erreichbarkeitsrelation heißen die \emph{Zusammenhangskomponenten} des Graphen \gls{G}~\cite{Biggs}.
 Wir nennen \gls{G} \emph{zusammenhängend}, wenn \gls{G} genau eine Zusammenhangskomponente besitzt, \dhe{} zu jedem Knoten $\gls{v}_i$ existiert mindestens ein Weg zu jedem anderen Knoten $\gls{v}_j \in \gls{V}$~\cite{Hammond}.

@@ -17,12 +17,17 @@ Analog zu den Daten der Farbkanäle an den einzelnen Pixeln des Bildes hängt au
 \label{adjazenzbestimmung_gitter}
 
 Entgegen der Pixelanordnung in einem Bild ist die Anordnung der Knoten in einem Gittergraphen völlig irrelevant und kann willkürlich gewählt werden.
-Ein Aufbau der Kantenmenge \gls{E} \bzw{} der korrespondierenden, ungewichteten Adjazenzmatrix \gls{A} kann jedoch besonders effizient gestaltet werden, wenn die Knoten reihenweise entsprechend ihrer Bildkoordinate angeordnet werden.
-Dafür wird das Bild \gls{B} zunächst an dessen Rändern um eine zusätzliche Spalte \bzw{} Reihe erweitert, \dhe{} $\gls{B} \in {\left[0, 1\right]}^{\left(H + 2\right) \times \left(W + 2\right) \times C}$.
-Dann besitzt die ungewichtete Adjazenzmatrix $\gls{A} \in {\left\{0, 1\right\}}^{N \times N}$ mit $N \coloneqq \left(H+2\right)\left(W+2\right)$ in den Reihen $W+3 < i < N - W - 3$ an den Spaltenindizes $\left\{i-W-2, i-1, i+1, i+W+2\right\}$ \bzw{}
+Ein Aufbau der Kantenmenge \gls{E} \bzw{} der korrespondierenden, ungewichteten Adjazenzmatrix \gls{A} kann jedoch besonders effizient gestaltet werden, wenn die Knoten zeilenweise entsprechend ihrer Bildkoordinate angeordnet werden.
+Dafür wird das Bild \gls{B} zunächst an dessen Rändern um eine zusätzliche Spalte \bzw{} Zeile erweitert, \dhe{} $\gls{B} \in \gls{R}^{\left(H + 2\right) \times \left(W + 2\right) \times C}$.
+Daraus ergeben sich $N \coloneqq \left(H + 2\right)\left(W + 2\right)$ viele Knoten eines Graphen, die die jeweiligen Gitterpunkte repräsentieren.
+Ein Knoten $\gls{v}_i \in \gls{V}$, $W+3 < i < N - W - 3$, ist dann adjazent zu den Knoten $\gls{v}_j \in \gls{V}$ mit
 \begin{equation*}
-  \left\{i-W-3, i-W-2, i-W-1, i-1, i+1, i+W+1, i+W+2, i+W+3\right\}
+  j \in \left\{i-W-2, i-1, i+1, i+W+2\right\}
 \end{equation*}
-genau einen Eintrag gleich Eins (bei einer Konnektivität von $4$ \bzw{} $8$).
-Anschließend müssen die ungültigen Knoten aus \gls{A} reihen- und spaltenweise schrittweise über eine Länge von $W$ mit Schrittweite $W+2$ gefiltert werden.
-Dabei müssen natürlich zunächst die ersten und letzten $W + 3$ Knoten aus \gls{A} gelöscht werden.
+bei einer Konnektivität von $4$ \bzw{} mit
+\begin{equation*}
+  j \in \left\{i-W-3, i-W-2, i-W-1, i-1, i+1, i+W+1, i+W+2, i+W+3\right\}
+\end{equation*}
+bei einer Konnektivität von $8$.
+Anschließend müssen die ungültigen Knoten, \dhe{} die an den Rändern des Gitters hinzugefügten Knoten, aus \gls{V} gelöscht werden.
+Dazu zählen die ersten und letzten $W + 3$ Knoten aus \gls{V} sowie die vertikal am Rand des Gitters liegenden Knoten, die über eine Schrittweite von $W+2$ über der Knotenmenge eliminiert werden können.

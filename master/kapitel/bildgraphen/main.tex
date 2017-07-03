@@ -26,7 +26,7 @@ Insbesondere stimmt dies mit der Konvention überein, dass $\gls{w}\left(\gls{v}
 Damit lässt sich weiterhin die korrespondierende Adjazenzmatrix $\gls{Adist} \in \left[0, 1\right] \in \gls{R}^{N \times N}$ wie bekannt mit ${\left(\gls{Adist}\right)}_{ij} \coloneqq \gls{w}\left(\gls{v}_i, \gls{v}_j\right)$ definieren.
 
 Zusätzlich zu dem Abstand der Knoten \bzw{} der Länge der Kanten eines Graphen im zweidimensionalen euklidischen Raum $\gls{G} = \left(\gls{V}, \gls{E}, \gls{p}\right)$ lassen sich die Ausrichtungen der Kanten über die Positionen der Knoten von \gls{G} festhalten.
-Aus $p \colon \gls{V} \to \gls{R}$ wird folglich über
+Aus $\gls{p} \colon \gls{V} \to \gls{R}^2$ wird folglich über
 \begin{equation*}
   \gls{winkel}\left(\gls{v}_i, \gls{v}_j\right) \coloneqq \begin{cases}
     \mathrm{atan2}\left({\gls{p}\left(\gls{v}_j - \gls{v}_i\right)}_1, {\gls{p}\left(\gls{v}_j - \gls{v}_i\right)}_2\right) + \pi, & \text{wenn }\left(\gls{v}_i, \gls{v}_j\right) \in \gls{E},\\

@@ -4,7 +4,7 @@
 Superpixel erfreuen sich in allen Anwendungen der Bildverarbeitung, insbesondere als Vorverarbeitungsschritt, immer größerer Beliebtheit, da sie die Eingabegröße eines Problems mit oftmals zu vernachlässigem Fehler reduzieren~\cite{Gadde}.
 Superpixel fassen dabei ein Bild in logische, räumliche Gruppen anhand ausgewählter Metriken zusammen, sodass sich Pixel innerhalb einer Gruppe besonders ähnlich sind.
 
-Formal besteht eine \emph{Superpixelrepräsentation} eines Bildes $\gls{B} \in \gls{R}^{H \times W \times C}$ aus einer Menge von $N \in \gls{N}$ \emph{Superpixeln} \bzw{} \emph{Regionen} $\gls{Smenge} \coloneqq {\left\{\gls{Smenge}_n\right\}}_{n=1}^N$ mit $\gls{Smenge}_n \subseteq W \times H$, sodass $\gls{Smenge}_i \cap \gls{Smenge}_j = \emptyset$ und $\bigcup\limits_{\gls{Smenge}_n \in \gls{Smenge}} \gls{Smenge}_n = W \times H$~\cite{super}.
+Formal besteht eine \emph{Superpixelrepräsentation} eines Bildes $\gls{B} \in \gls{R}^{H \times W \times C}$ aus einer Menge von $N \in \gls{N}$ \emph{Superpixeln} \bzw{} \emph{Regionen} $\gls{Smenge} \coloneqq {\left\{\gls{Smenge}_n\right\}}_{n=1}^N$ mit $\gls{Smenge}_n \subseteq W \times H$, sodass $\gls{Smenge}_i \cap \gls{Smenge}_j = \emptyset$ und $\bigcup\limits_{n=1}^N \gls{Smenge}_n = W \times H$~\cite{super}.
 Für eine gültige Superpixelsegmentierung fordern wir desweiteren, dass $\gls{Smenge}_n$ zusammenhängend ist~\cite{super}.
 Aus der Menge an Superpixeln \gls{Smenge} lässt sich damit eine \emph{Segmentierungsmaske} $\gls{Smaske} \in {\left\{1, \ldots, N\right\}}^{H \times W}$ über
 \begin{equation*}
@@ -26,7 +26,7 @@ Formal lassen sich dabei erneut die zwei Konnektivitäten $4$ und $8$ unterschei
 \input{figures/superpixel_graph}
 Abbildung~\ref{fig:superpixel_graph} illustriert den beschriebenen Prozess der Graphgenerierung anhand einer Superpixelrepräsentation eines Bildes.
 
-Zusätzlich zu der Positionsfunktion $p$ auf den Superpixelknoten kann der Graph \gls{G} um eine \emph{Massefunktion} $\gls{m} \colon \gls{V} \to \gls{N}$ mit $\gls{m}\left(\gls{v}_n\right) \coloneqq \left|S_n\right|$ zu $\gls{G} = \left(\gls{V}, \gls{E}, \gls{p}, \gls{m}\right)$ erweitert werden, die die Masse \bzw{} den Flächeninhalt der einzelnen Superpixelregionen beschreibt.
+Zusätzlich zu der Positionsfunktion \gls{p} auf den Superpixelknoten kann der Graph \gls{G} um eine \emph{Massefunktion} $\gls{m} \colon \gls{V} \to \gls{N}$ mit $\gls{m}\left(\gls{v}_n\right) \coloneqq \left|S_n\right|$ zu $\gls{G} = \left(\gls{V}, \gls{E}, \gls{p}, \gls{m}\right)$ erweitert werden, die die Masse \bzw{} den Flächeninhalt der einzelnen Superpixelregionen beschreibt.
 
 \paragraph{Effiziente Adjazenzbestimmung}
 \label{adjazenzbestimmung_superpixel}
@@ -34,11 +34,11 @@ Zusätzlich zu der Positionsfunktion $p$ auf den Superpixelknoten kann der Graph
 Die Bestimmung einer Kantenrelation \gls{E} auf einer Superpixelrepräsentation kann aufgrund der pixelweisen Iteration auf der Segmentierungsmaske und dem sukzessiven Vergleich mit den jeweiligen Nachbarspixeln über ein $3 \times 3$ Fenster recht teuer werden.
 Eine effizientere und zugleich elegantere Bestimmung einer Kantenrelation als ungewichtete Adjazenzmatrix kann über eine versetzte Überlagerung der Segmentierungsmasken gewonnen werden.
 Sei dafür $\gls{Smaske} \in {\left\{1, \ldots N\right\}}^{H \times W}$ eine Segmentierungsmaske.
-Dann wird für die vertikale Adjazenzbestimmung die oberste und unterste Reihe aus \gls{Smaske} abgeschnitten und in $\gls{Smaske}_{\uparrow}, \gls{Smaske}_{\downarrow} \in {\left\{1, \ldots N\right\}}^{H-1 \times W}$ gespeichert.
+Dann wird für die vertikale Adjazenzbestimmung die oberste und unterste Zeile aus \gls{Smaske} abgeschnitten und in $\gls{Smaske}_{\uparrow}, \gls{Smaske}_{\downarrow} \in {\left\{1, \ldots N\right\}}^{H-1 \times W}$ gespeichert.
 $\gls{Smaske}_{\uparrow}$ und $\gls{Smaske}_{\downarrow}$ werden anschließend paarweise auf Ungleichheit getestet und dessen boolsches Ergebnis in einer Binärmaske $\left(\gls{Smaske}_{\uparrow} \neq \gls{Smaske}_{\downarrow}\right)$ gespeichert.
 Liegen dabei wahre, \dhe{} ungleiche Einträge vor, so ist eine vertikale Adjazenz zwischen zwei unterschiedlichen Regionen vorhanden.
 Die Einträge $i,j \in \left\{1, \ldots N \right\}$ in $\gls{Smaske}_{\uparrow}$ und $\gls{Smaske}_{\downarrow}$ an den Koordinaten der wahren Einträge in der Binärmaske bilden folglich die Knotenindizes einer Kante $\left(\gls{v}_i, \gls{v}_j\right) \in \gls{E}$ benachbarter Regionen und werden in eine Adjazenzmatrix mit $\gls{A}_{ij}=1$ übertragen.
-Analog wird für die horizontale Adjazenzbestimmung vorgegangen.
+Analog wird für die horizontale \bzw{} für die diagonalen Adjazenzen vorgegangen.
 \input{tikz/adjazenz}
 Die Veroderung $\gls{A} \vee \gls{A}^{\top}$ liefert dann die resultierende ungerichtete, ungewichtete Adjazenzmatrix mit einer Konnektivität von $4$ (\vgl{}~\cite{stackoverflow}).
 Abbildung~\ref{fig:adjazenz} illustriert das Verfahren anhand eines einfachen Beispiels.
