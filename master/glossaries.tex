@@ -4,8 +4,8 @@
 
 \newglossaryentry{I}{name=\ma{I}, description={Einheitsmatrix $\ma{I} \in \mathbb{R}^{N \times N}$ mit $\ma{I}_{ii} = 1$}}
 \newglossaryentry{W}{name=\ma{W}, description={Gewichtstensor}}
-\newglossaryentry{F}{name=\ma{F}, description={Merkmalsmatrix $\ma{F} \in \mathbb{R}^{N \times M}$}}
-\newglossaryentry{f}{name=\ve{f}, description={Merkmalsvektor $\ma{f} \in \mathbb{R}^N$}}
+\newglossaryentry{F}{name=\ma{F}, description={Merkmalsmatrix $\ma{F} \in \mathbb{R}^{N \times M}$ auf den Knoten eines Graphen $\mathcal{G}$}}
+\newglossaryentry{f}{name=\ve{f}, description={Merkmalsvektor $\ma{f} \in \mathbb{R}^N$ auf den Knoten eines Graphen $\mathcal{G}$}}
 \newglossaryentry{M}{name=\ma{M}, description={Nicht-zentrierte Momente}}
 \newglossaryentry{mu}{name=\ma{\mu}, description={Translationsinvariante Momente}}
 \newglossaryentry{eta}{name=\ma{\eta}, description={Skaleriungsinvariante Momente}}
@@ -17,47 +17,49 @@
 \newglossaryentry{O}{name=\ensuremath{\mathcal{O}}, description={O-Notation}}
 \newglossaryentry{T}{name=\ensuremath{T}, description={Tschebyschow-Polynom}}
 
-\newglossaryentry{G}{name=\ensuremath{\mathcal{G}}, description={Graph $\mathcal{G}\left(\mathcal{V}, \mathcal{E}\right)$ mit Knotenmenge $\mathcal{V}$ und Kantenmenge $\mathcal{E}$}}
+\newglossaryentry{G}{name=\ensuremath{\mathcal{G}}, description={Graph $\mathcal{G} = \left(\mathcal{V}, \mathcal{E}\right)$ mit Knotenmenge $\mathcal{V}$ und Kantenmenge $\mathcal{E}$}}
 \newglossaryentry{V}{name=\ensuremath{\mathcal{V}}, description={Knotenmenge $\mathcal{V} \coloneqq {\left\{v_n\right\}}^N_{n=1}$ eines Graphen $\mathcal{G}$}}
 \newglossaryentry{E}{name=\ensuremath{\mathcal{E}}, description={Kantenmenge $\mathcal{E} \subseteq \mathcal{V} \times \mathcal{V}$ eines Graphen $\mathcal{G}$}}
-\newglossaryentry{v}{name={\ensuremath{v}}, description={Knoten$v \in \mathcal{V}$ eines Graphen $\mathcal{G}$}}
+\newglossaryentry{v}{name={\ensuremath{v}}, description={Knoten $v \in \mathcal{V}$ eines Graphen $\mathcal{G}$}}
 
-\newglossaryentry{A}{name=\ma{A}, description={Adjazentmatrix eines Graphen \gls{G}}}
-\newglossaryentry{D}{name=\ma{D}, description={gewichtete Gradmatrix}}
-\newglossaryentry{L}{name=\ma{L}, description={Laplacian, unnormalisiert}}
-\newglossaryentry{Neighbor}{name=\ensuremath{\mathcal{N}}, description={Nachbarschaftsfunktion}}
-\newglossaryentry{Lnorm}{name=\ma{\tilde{L}}, description={Laplacian, normalisiert}}
-\newglossaryentry{Lboth}{name=\ma{\mathcal{L}}, description={Laplacian, normalisiert oder unnormalisiert}}
-\newglossaryentry{w}{name=\ensuremath{w}, description={Gewichtsfunktion der Kanten eines Graph \gls{G} mit $\gls{w} \colon \gls{V} \times \gls{V} \to \gls{R+}$}}
-\newglossaryentry{winkel}{name=\ensuremath{\varphi}, description={Winkelfunktion}}
-\newglossaryentry{degree}{name=\ensuremath{\mathrm{deg}}, description={Gradfunktion}}
-\newglossaryentry{d}{name=\ensuremath{d}, description={gewichtete Gradfunktion der Knoten eines Graphen \gls{G} mit $\gls{d} \colon \gls{V} \to \gls{R+}$}}
-\newglossaryentry{s}{name=\ensuremath{s}, description={kürzeste Pfaddistanz mit $s \colon \gls{V} \times \gls{V} \to \gls{N}$}}
+\newglossaryentry{A}{name=\ma{A}, description={Adjazenzmatrix $\ma{A} \in \mathbb{R}^{N \times N}$ eines Graphen $\mathcal{G}$}}
+\newglossaryentry{D}{name=\ma{D}, description={Gradmatrix $\ma{D} \in \mathbb{R}^{N \times N}$ eines Graphen $\mathcal{G}$ mit $\ma{D}_{ii} = d\left(v_i\right)$}}
+\newglossaryentry{L}{name=\ma{L}, description={kombinatorische Laplace-Matrix}}
+\newglossaryentry{Neighbor}{name=\ensuremath{\mathcal{N}}, description={Nachbarschaftsfunktion $\mathcal{N}_K\left(v_i\right) \coloneqq \left\{ v_j \mid s\left(v_i, v_j\right) \leq K \right\}$}}
+\newglossaryentry{Lnorm}{name=\ma{\tilde{L}}, description={normalisierte Laplace-Matrix $\ma{\tilde{L}} \coloneqq \ma{D}^{-1/2}\ma{L}\ma{D}^{-1/2}$}}
+\newglossaryentry{Lboth}{name=\ma{\mathcal{L}}, description={kombinatorische oder normalisierte Laplace-Matrix}}
+\newglossaryentry{w}{name=\ensuremath{w}, description={Gewichtsfunktion $w \colon \mathcal{V} \times \mathcal{V} \to \mathbb{R}_+$ \bzgl{} der Kanten eines Graphen $\mathcal{G}$}}
+\newglossaryentry{winkel}{name=\ensuremath{\varphi}, description={Winkelfunktion$ \varphi \colon \mathcal{V} \times \mathcal{V} \to \left[0, 2\pi\right]$ \bzgl{} der Kanten eines Graphen $\mathcal{G}$}}
+\newglossaryentry{degree}{name=\ensuremath{\mathrm{deg}}, description={Gradfunktion $\mathrm{\mathrm{deg}}\left(v\right) \coloneqq \left|\mathcal{N}\left(v\right)\right|$ auf den Knoten eines Graphen $\mathcal{G}$}}
+\newglossaryentry{d}{name=\ensuremath{d}, description={gewichtete Gradfunktion $d\left(v_i\right) \coloneqq \sum_{j=1}^N \ma{A}_{ij}$ auf den Knoten eines Graphen $\mathcal{G}$}}
+\newglossaryentry{s}{name=\ensuremath{s}, description={kürzeste Pfaddistanz $s \colon \mathcal{V} \times \mathcal{V} \to \mathbb{N} \cup \left\{\infty\right\}$ zweiter Knoten eines Graphen $\mathcal{G}$}}
 
 \newglossaryentry{lambda}{name=\ensuremath{\lambda}, description={Eigenwert eines Eigenwertproblems $\ma{M}\ve{u} = \lambda\ve{u}$}}
 \newglossaryentry{lambdamax}{name=\ensuremath{\lambda_{\max}}, description={Größter Eigenwert eines Eigenwertproblems $\ma{M}\ve{u} = \lambda\ve{u}$}}
-\newglossaryentry{Lambda}{name=\ma{\Lambda}, description={Diagonalmatrix der Eigenwerte einer Matrix \ma{M} mit $\mathrm{diag}$}}
-\newglossaryentry{eiv}{name=\ve{u}, description={normierter Eigenvektor zu einem Eigenwert mit $\left\|\gls{eiv}\right\|_2 = 1$}}
-\newglossaryentry{Eiv}{name=\ma{U}, description={Eigenvektormatrix $\left[\ve{u}_1, \ldots, \ve{u}_N \right] \in \mathbb{R}^{N \times N}$ von $N$ Eigenvektoren $\ve{u}_i$}}
-\newglossaryentry{Lambdatilde}{name=\ma{\tilde{\Lambda}}, description={reskalierte Diagonalmatrix der Eigenwerte des Laplacian}}
-\newglossaryentry{Lbothtilde}{name=\ma{\tilde{\mathcal{L}}}, description={Laplacian reskaliert}}
-\newglossaryentry{Atilde}{name=\ma{\tilde{A}}, description={reskalierte Diagonalmatrix der Eigenwerte des Laplacian}}
-\newglossaryentry{Dtilde}{name=\ma{\tilde{D}}, description={reskalierte Diagonalmatrix der Eigenwerte des Laplacian}}
-\newglossaryentry{sigma}{name=\ensuremath{\xi}, description={Standardabweichung}}
-\newglossaryentry{Adist}{name=\ensuremath{\ma{A}_{\mathrm{dist}}}, description={Adjazentmatrix eines Graphen \gls{G}}}
-\newglossaryentry{Arad}{name=\ensuremath{\ma{A}_{\mathrm{rad}}}, description={Adjazentmatrix eines Graphen \gls{G}}}
-\newglossaryentry{Adisttilde}{name=\ensuremath{\ma{\tilde{A}}_{\mathrm{dist}}}, description={Adjazentmatrix eines Graphen \gls{G}}}
-\newglossaryentry{Ddisttilde}{name=\ensuremath{\ma{\tilde{D}}_{\mathrm{dist}}}, description={Adjazentmatrix eines Graphen \gls{G}}}
-\newglossaryentry{conv2d}{name=\ensuremath{\mathrm{conv2d}}, description={Adjazentmatrix eines Graphen \gls{G}}}
+\newglossaryentry{Lambda}{name=\ma{\Lambda}, description={Diagonalmatrix der Eigenwerte ${\left\{\lambda_n\right\}}_{n=1}^N$ einer reell symmetrischen Matrix $\ma{M} \in \mathbb{R}^{N \times N}$}}
+\newglossaryentry{eiv}{name=\ve{u}, description={(normierter) Eigenvektor zu einem Eigenwert $\lambda$ eines Eigenwertproblems $\ma{M}\ve{u} = \lambda \ve{u}$}}
+\newglossaryentry{Eiv}{name=\ma{U}, description={Eigenvektormatrix $\ma{U} \coloneqq \left[\ve{u}_1, \ldots, \ve{u}_N \right] \in \mathbb{R}^{N \times N}$ zu einer reell symmetrischen Matrix $\ma{M} \in \mathbb{R}^{N \times N}$}}
+
+\newglossaryentry{Lambdatilde}{name=\ma{\tilde{\Lambda}}, description={skalierte und transformierte Diagonalmatrix der Eigenwerte $\ma{\tilde{\Lambda}} \coloneqq 2 \Lambda / \lambda_{\max} - \ma{I}$}}
+\newglossaryentry{Lbothtilde}{name=\ma{\tilde{\mathcal{L}}}, description={skalierte und transformierte Laplace-Matrix $\ma{\tilde{\mathcal{L}}} \coloneqq 2 \mathcal{L}/\lambda_{\max} - \ma{I}$}}
+\newglossaryentry{Atilde}{name=\ma{\tilde{A}}, description={transformierte Adjazenzmatrix $\ma{\tilde{A}} \coloneqq \ma{A} + \ma{I}$}}
+\newglossaryentry{Dtilde}{name=\ma{\tilde{D}}, description={transformierte Diagonalmatrix $\ma{\tilde{D}} \coloneqq \ma{D} + \ma{I}$}}
+\newglossaryentry{sigma}{name=\ensuremath{\xi}, description={Standardabweichung der Gaußfunktion}}
+\newglossaryentry{Adist}{name=\ensuremath{\ma{A}_{\mathrm{dist}}}, description={Distanzadjazenzmatrix $\ma{A}_{\mathrm{dist}} \in {\left[0, 1\right]}^{N \times N}$ eines Graphen $\mathcal{G}$ im zweidimensional euklidischen Raum}}
+\newglossaryentry{Arad}{name=\ensuremath{\ma{A}_{\mathrm{rad}}}, description={Winkeladjazenzmatrix $\ma{A}_{\mathrm{rad}} \in {\left[0, 2\pi\right]}^{N \times N}$ eines Graphen $\mathcal{G}$ im zweidimensional euklidischen Raum}}
+\newglossaryentry{Adisttilde}{name=\ensuremath{\ma{\tilde{A}}_{\mathrm{dist}}}, description={transformierte Distanzadjazenzmatrix $\ma{\tilde{A}}_{\mathrm{dist}} \coloneqq \ma{A}_{\mathrm{dist}} + \ma{I}$}}
+\newglossaryentry{Ddisttilde}{name=\ensuremath{\ma{\tilde{D}}_{\mathrm{dist}}}, description={transformierte Gradmatrix $\ma{\tilde{D}}_{\mathrm{dist}} \coloneqq \ma{\tilde{D}}_{\mathrm{dist}} + \ma{I}$ eines Graphen $\mathcal{G}$ im zweidimensionalen euklidischen Raum}}
+\newglossaryentry{conv2d}{name=\ensuremath{\mathrm{conv2d}}, description={klassische Faltungsoperation auf einem regulären Gitter}}
 \newglossaryentry{spline}{name=\ensuremath{b}, description={B-Spline-Kurve}}
-\newglossaryentry{basis}{name=\ensuremath{N}, description={Basisfunktionen einer B-Spline-Kurve}}
-\newglossaryentry{act}{name=\ensuremath{\sigma}, description={Aktivierungsfunktion}}
-\newglossaryentry{relu}{name=\ensuremath{\mathrm{ReLU}}, description={Aktivierungsfunktion}}
+\newglossaryentry{basis}{name=\ensuremath{\mathrm{N}}, description={Basisfunktionen einer B-Spline-Kurve}}
+\newglossaryentry{act}{name=\ensuremath{\sigma}, description={Aktivierungsfunktion eines neuronalen Netzes}}
+\newglossaryentry{relu}{name=\ensuremath{\mathrm{ReLU}}, description={Aktivierungsfunktion $\mathrm{ReLU}\left(\cdot\right) \coloneqq \max \left(\cdot, 0\right)$ eines neuronalen Netzes}}
 \newglossaryentry{ncut}{name=\ensuremath{\mathrm{NCut}}, description={Normalized-Cut}}
-\newglossaryentry{p}{name=\ensuremath{p}, description={Positionsfunktion auf den Knoten des Graphen}}
-\newglossaryentry{m}{name=\ensuremath{m}, description={Massefunktion auf den Knoten des Graphen}}
-\newglossaryentry{B}{name=\ma{B}, description={Bild}}
-\newglossaryentry{Smenge}{name=\ensuremath{\mathcal{S}}, description={Superpixelmenge}}
-\newglossaryentry{Smaske}{name=\ma{S}, description={Segmentierungsmaske}}
-\newglossaryentry{l}{name=\ensuremath{\ell}, description={Knotenfärbung}}
-\newglossaryentry{C}{name=\ensuremath{\mathcal{C}}, description={Menge der Farben einer Knotenfärbung}}
+\newglossaryentry{p}{name=\ensuremath{p}, description={Positionsfunktion $p \colon \mathcal{V} \to \mathbb{R}^2$ auf den Knoten des Graphen $\mathcal{G}$}}
+\newglossaryentry{m}{name=\ensuremath{m}, description={Massefunktion $m \colon \mathcal{V} \to \mathbb{R}$ auf den Knoten des Graphen $\mathcal{G}$}}
+\newglossaryentry{B}{name=\ma{B}, description={Bild $\ma{B} \in \mathbb{R}^{H \times W \times C}$}}
+
+\newglossaryentry{Smenge}{name=\ensuremath{\mathcal{S}}, description={Menge von Superpixeln $\mathcal{S} \coloneqq {\left\{ \mathcal{S}_n \right\}}_{n=1}^N$ mit $\mathcal{S}_n \subset W \times H$}}
+\newglossaryentry{Smaske}{name=\ma{S}, description={Segmentierungsmaske $\ma{S} \in {\left\{1, \ldots, N\right\}}^{H \times W}$ \bzgl{} einer Menge von Superpixeln}}
+\newglossaryentry{l}{name=\ensuremath{\ell}, description={Knotenfärbung $\ell \colon \gls{V} \to \mathcal{C} \subseteq \mathbb{R}$ eines Graphen $\mathcal{G}$}}
+\newglossaryentry{C}{name=\ensuremath{\mathcal{C}}, description={Menge der Farben $\mathcal{C} \subseteq \mathbb{R}$ einer Knotenfärbung $\ell$ eines Graphen $\mathcal{G}$}}

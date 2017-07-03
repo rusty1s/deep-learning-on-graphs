@@ -4,7 +4,7 @@
 Superpixel erfreuen sich in allen Anwendungen der Bildverarbeitung, insbesondere als Vorverarbeitungsschritt, immer größerer Beliebtheit, da sie die Eingabegröße eines Problems mit oftmals zu vernachlässigem Fehler reduzieren~\cite{Gadde}.
 Superpixel fassen dabei ein Bild in logische, räumliche Gruppen anhand ausgewählter Metriken zusammen, sodass sich Pixel innerhalb einer Gruppe besonders ähnlich sind.
 
-Formal besteht eine \emph{Superpixelrepräsentation} eines Bildes $\gls{B} \in \gls{R}^{H \times W \times C}$ aus einer Menge von $N \in \gls{N}$ \emph{Superpixeln} \bzw{} \emph{Regionen} $\gls{Smenge} \coloneqq {\left\{\gls{Smenge}_k\right\}}_{n=1}^N$ mit $\gls{Smenge}_n \subseteq W \times H$, sodass $\gls{Smenge}_i \cap \gls{Smenge}_j = \emptyset$ und $\bigcup\limits_{\gls{Smenge}_n \in \gls{Smenge}} \gls{Smenge}_n = W \times H$~\cite{super}.
+Formal besteht eine \emph{Superpixelrepräsentation} eines Bildes $\gls{B} \in \gls{R}^{H \times W \times C}$ aus einer Menge von $N \in \gls{N}$ \emph{Superpixeln} \bzw{} \emph{Regionen} $\gls{Smenge} \coloneqq {\left\{\gls{Smenge}_n\right\}}_{n=1}^N$ mit $\gls{Smenge}_n \subseteq W \times H$, sodass $\gls{Smenge}_i \cap \gls{Smenge}_j = \emptyset$ und $\bigcup\limits_{\gls{Smenge}_n \in \gls{Smenge}} \gls{Smenge}_n = W \times H$~\cite{super}.
 Für eine gültige Superpixelsegmentierung fordern wir desweiteren, dass $\gls{Smenge}_n$ zusammenhängend ist~\cite{super}.
 Aus der Menge an Superpixeln \gls{Smenge} lässt sich damit eine \emph{Segmentierungsmaske} $\gls{Smaske} \in {\left\{1, \ldots, N\right\}}^{H \times W}$ über
 \begin{equation*}

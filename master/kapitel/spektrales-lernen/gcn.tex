@@ -29,7 +29,7 @@ Um die Gefahr des Overfittings und die Anzahl an Berechnungen pro Schicht weiter
 \end{equation*}
 Die skalierten Eigenwerte von \gls{Lambdatilde} liegen aufgrund der Addition mit \gls{I} nun im Intervall $\left[0, 2\right]$ (\vgl{}~\cite{gcn}).
 Demnach können wiederholte Anwendungen des Faltungsoperators zu \enquote{numerischen Instabilitäten und folglich zu explodierenden oder verschwindenen Gradienten} führen~\cite{gcn}.
-\citeauthor{gcn} führen zur Behebung dieses Problems die folgende Renormalisierung durch: $\gls{I} + \gls{D}^{-1/2} \gls{A} \gls{D}^{-1/2} \rightarrow \gls{Dtilde}^{-1/2} \gls{Atilde} \gls{Dtilde}^{-1/2}$ mit $\gls{Atilde} \coloneqq \gls{A} + \gls{I}$ und $\gls{Dtilde}_{ii} \coloneqq \sum_{j=1}^N \gls{Atilde}_{ij}$.
+\citeauthor{gcn} führen zur Behebung dieses Problems die folgende Renormalisierung durch: $\gls{I} + \gls{D}^{-1/2} \gls{A} \gls{D}^{-1/2} \rightarrow \gls{Dtilde}^{-1/2} \gls{Atilde} \gls{Dtilde}^{-1/2}$ mit $\gls{Atilde} \coloneqq \gls{A} + \gls{I}$ und $\gls{Dtilde}_{ii} \coloneqq \sum_{j=1}^N \gls{Atilde}_{ij}$ \bzw{} $\gls{Dtilde}_{ii} = \gls{D} + \gls{I}$.
 Der entgültige Faltungsoperator des \glspl{GCN} ergibt sich dann als
 \begin{equation}
   \gls{f}_{\mathrm{in}} \star \ve{\hat g} \approx c\, \gls{Dtilde}^{-\frac{1}{2}} \gls{Atilde} \gls{Dtilde}^{-\frac{1}{2}} \gls{f}_{\mathrm{in}}
