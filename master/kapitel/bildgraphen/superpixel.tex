@@ -34,13 +34,14 @@ Zusätzlich zu der Positionsfunktion \gls{p} auf den Superpixelknoten kann der G
 Die Bestimmung einer Kantenrelation \gls{E} auf einer Superpixelrepräsentation kann aufgrund der pixelweisen Iteration auf der Segmentierungsmaske und dem sukzessiven Vergleich mit den jeweiligen Nachbarspixeln über ein $3 \times 3$ Fenster recht teuer werden.
 Eine effizientere und zugleich elegantere Bestimmung einer Kantenrelation als ungewichtete Adjazenzmatrix kann über eine versetzte Überlagerung der Segmentierungsmasken gewonnen werden.
 Sei dafür $\gls{Smaske} \in {\left\{1, \ldots N\right\}}^{H \times W}$ eine Segmentierungsmaske.
-Dann wird für die vertikale Adjazenzbestimmung die oberste und unterste Zeile aus \gls{Smaske} abgeschnitten und in $\gls{Smaske}_{\uparrow}, \gls{Smaske}_{\downarrow} \in {\left\{1, \ldots N\right\}}^{H-1 \times W}$ gespeichert.
-$\gls{Smaske}_{\uparrow}$ und $\gls{Smaske}_{\downarrow}$ werden anschließend paarweise auf Ungleichheit getestet und dessen boolsches Ergebnis in einer Binärmaske $\left(\gls{Smaske}_{\uparrow} \neq \gls{Smaske}_{\downarrow}\right)$ gespeichert.
+Dann wird für die vertikale Adjazenzbestimmung die oberste und unterste Zeile aus \gls{Smaske} abgeschnitten.
+Die so entstehenden Matrizen werden in $\gls{Smaske}_{\uparrow}$ \bzw{} $\gls{Smaske}_{\downarrow} \in {\left\{1, \ldots N\right\}}^{\left(H-1\right) \times W}$ gespeichert.
+$\gls{Smaske}_{\uparrow}$ und $\gls{Smaske}_{\downarrow}$ werden anschließend paarweise auf Ungleichheit getestet und dessen Ergebnis in der boolschen Matrix $\left(\gls{Smaske}_{\uparrow} \neq \gls{Smaske}_{\downarrow}\right) \in {\left\{0, 1\right\}}^{\left(H-1\right) \times W}$ gespeichert.
 Liegen dabei wahre, \dhe{} ungleiche Einträge vor, so ist eine vertikale Adjazenz zwischen zwei unterschiedlichen Regionen vorhanden.
 Die Einträge $i,j \in \left\{1, \ldots N \right\}$ in $\gls{Smaske}_{\uparrow}$ und $\gls{Smaske}_{\downarrow}$ an den Koordinaten der wahren Einträge in der Binärmaske bilden folglich die Knotenindizes einer Kante $\left(\gls{v}_i, \gls{v}_j\right) \in \gls{E}$ benachbarter Regionen und werden in eine Adjazenzmatrix mit $\gls{A}_{ij}=1$ übertragen.
-Analog wird für die horizontale \bzw{} für die diagonalen Adjazenzen vorgegangen.
+Analog wird für die horizontalen \bzw{} für die diagonalen Adjazenzen vorgegangen.
 \input{tikz/adjazenz}
-Die Veroderung $\gls{A} \vee \gls{A}^{\top}$ liefert dann die resultierende ungerichtete, ungewichtete Adjazenzmatrix mit einer Konnektivität von $4$ (\vgl{}~\cite{stackoverflow}).
+Die Veroderung $\gls{A} \vee \gls{A}^{\top}$ liefert dann die resultierende ungerichtete und ungewichtete Adjazenzmatrix (\vgl{}~\cite{stackoverflow}).
 Abbildung~\ref{fig:adjazenz} illustriert das Verfahren anhand eines einfachen Beispiels.
 
 \paragraph{Globale und lokale Normierung}
@@ -54,7 +55,7 @@ Eine Normierung der Kantenlängen erscheint daher für die Transformation nach \
 Eine \emph{Normierung} eines Graphen \gls{G} sieht dafür bei der Transformation nach \gls{Adist} eine Skalierung von ${\left\|\gls{p}\left(\gls{v}_i\right) - \gls{p}\left(\gls{v}_j\right)\right\|}_2^2 \in \gls{R}$ in das Intervall $\left[0, 1\right]$ vor.
 Eine \emph{globale Normierung} von \gls{G} skaliert dabei ${\left\|\gls{p}\left(\gls{v}_i\right) - \gls{p}\left(\gls{v}_j\right)\right\|}_2^2$ über die maximale Kantenlänge ${\left\|\cdot\right\|}_2^2$ aller Kanten des Graphen, wohingegen die \emph{lokale Normierung} lediglich eine Skalierung über die maximale Kantenlänge der ausgehenden Kanten von $\gls{v}_i \in \gls{V}$ vorsieht.
 Durch die lokale Normierung ist die Adjazenzmatrix \gls{Adist} insbesondere gerichtet.
-Ein üblicher Trick, um dem entgegenzuwirken, ist die Aufsummierung von \gls{Adist} mit ihrer transponierten Matrix $\gls{Adist}^{\top}$ und der anschließenden Halbierung ihrer Werte, \dhe{} $\frac{1}{2}\left(\gls{Adist} + \gls{Adist}^{\top}\right)$~\cite{Reuter}.
+Ein üblicher Trick für die Symmetrieerhaltung ist die anschließende Aufsummierung von \gls{Adist} mit ihrer transponierten Matrix $\gls{Adist}^{\top}$ und der Halbierung ihrer Werte, \dhe{} $\gls{Adist} \rightarrow \frac{1}{2}\left(\gls{Adist} + \gls{Adist}^{\top}\right)$~\cite{Reuter}.
 
-Es ist anzumerken, dass der normierte Graph, repräsentiert als \gls{Adist}, neben der bereits vorhandenen Translationsinvarianz insbesondere skalierungsinvariant ist.
+Es ist anzumerken, dass ein normierter Graph, repräsentiert als \gls{Adist}, neben der bereits vorhandenen Translationsinvarianz insbesondere skalierungsinvariant ist.
 Im weiteren Verlauf dieser Arbeit wird der Prozess der Normierung eines Graphen implizit angenommen.
