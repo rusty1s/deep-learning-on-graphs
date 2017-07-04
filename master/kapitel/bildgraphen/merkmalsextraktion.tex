@@ -73,8 +73,8 @@ Die beiden Eigenvektoren dieser Matrix
   \gls{lambda}_i = \frac{\gls{mu}^{\prime}_{20} + \gls{mu}^{\prime}_{02}}{2} \pm \frac{\sqrt{4\gls{mu}^{\prime}_{11} + {\left(\gls{mu}^{\prime}_{20} - \gls{mu}^{\prime}_{02}\right)}^2}}{2}
 \end{equation*}
 entsprechen über $\mathrm{axis}_i \coloneqq 4 \sqrt{\gls{lambda}_i}$ der Länge der großen \bzw{} kleinen Halbachse einer Ellipse, die die Region minimal umschließt~\cite{scikit, momente}.
-Damit kann die \emph{Ausrichtung} oder \emph{Orientierung} der Region aus dem Winkel des Eigenvektors des größten Eigenwerts mit Hilfe des Arkustangens über $\mathrm{ori} \coloneqq \mathrm{atan}\left(2\gls{mu}^{\prime}_{11}/\left(\gls{mu}^{\prime}_{20} - \gls{mu}^{\prime}_{02}\right)\right)/2$ berechnet werden~\cite{scikit}.
-Ähnlich dazu lässt sich die \emph{Exzentrizität} $\mathrm{ecc} \coloneqq \sqrt{1 - \gls{lambda}_1/\gls{lambda}_2}$ als das Verhältnis der beiden Hauptachen zueinander definieren~\cite{scikit, Siedhoff}.
+Damit kann die \emph{Orientierung} der Region aus dem Winkel des Eigenvektors des größten Eigenwerts mit Hilfe des Arkustangens über $\mathrm{ori} \coloneqq \mathrm{atan}\left(2\gls{mu}^{\prime}_{11}/\left(\gls{mu}^{\prime}_{20} - \gls{mu}^{\prime}_{02}\right)\right)/2$ berechnet werden~\cite{scikit}.
+Ähnlich dazu lässt sich die \emph{Exzentrizität} (\engl{} \emph{Eccentricity}) $\mathrm{ecc} \coloneqq \sqrt{1 - \gls{lambda}_1/\gls{lambda}_2}$ als das Verhältnis der beiden Hauptachen zueinander definieren~\cite{scikit, Siedhoff}.
 
 Neben den Merkmalen, die sich aus den Momenten ergeben, können noch zahlreiche weitere Merkmale aus den Formen einer Region gewonnen werden~(\vgl{}~\cite{Siedhoff}).
 Beispiele dafür sind unter anderem die Merkmale des \emph{minimalen Hüllkörpers} (\engl{} \emph{Bounding-Box}) einer Region, \dhe{} dem kleinsten waagerechten Rechteck, welches die Region umschließt.
