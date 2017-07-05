@@ -127,7 +127,26 @@ Das ist aufgrund der ursprünglichen Bildgrößen des \gls{Cifar}-10 Datensatzes
 \paragraph{PASCAL VOC}
 \label{pascal_voc}
 
-Der \emph{\gls{Pascal}} Datensatz~\cite{pascal_voc}.
+Der \emph{\gls{Pascal}} Datensatz besteht aus $17126$ farbigen Bildern beliebiger Größen, der aufgrund seiner ausführlichen Bildannotierungen nicht nur für eine Bildklassifizierung, sondern ebenfalls für Objektdetektionen oder eine Bildsegmentierung genutzt werden kann~\cite{pascal_voc}.
+Zu jedem Bild stehen insbesondere Informationen zu den enhaltenden Objekten und deren Hüllkörpern zur Verfügung~\cite{pascal_voc}.
+Ein Bild besitzt dabei minimal ein Objekt der $20$ annotierten Objektklassen.
+Gleiche oder unterschiedliche Objektklassen können mehrfach in einem Bild existieren.
+Die enthaltenden Objekte der Bilder sind im Einzelnen~\cite{pascal_voc}:
+\begin{itemize}
+  \item Person
+  \item Vogel, Katze, Kuh, Hund, Pferd, Schaf
+  \item Flugzeug, Fahrrad, Boot, Bus, Auto, Motorrad, Zug
+  \item Flasche, Stuhl, Esstisch, Topfblume, Sofa, Fernseher/Monitor
+\end{itemize}
+Die Höhen und Breiten der Bilder reichen von von $142$ bis $500$ Pixeln.
+Die durchschnittliche Bildgröße des Datensatzes beträgt $389 \times 467$ Pixel und ist damit um einiges größer als der zuvor betrachtete \gls{Cifar}-10 Datensatz.
+
+\gls{Pascal} besitzt keine eindeutige Zuordnung der Bilder in Trainings-, Validierungs und Testbildern.
+Es existiert zwar ein seperator Testdatensatz, jedoch stehen dessen Annotierungen nicht zur freien Verfügung.
+Folglich wird aus der Bildermenge zufällig eine Validierungs- \bzw{} Testmenge von $1500$ Bildern generiert.
+Damit stehen noch $15626$ Bilder für das Training eines neuronalen Netzes zur Verfügung.
+
+
 
 \begin{table}[t]
 \centering
