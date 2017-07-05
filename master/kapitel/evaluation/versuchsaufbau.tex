@@ -112,7 +112,7 @@ Tabelle~\ref{tab:cifar_10_merkmale} zeigt die berechnete Wahl der Merkmale der S
 \begin{tabular}{lccccccccc}
   \toprule
   \gls{SLIC} & $\gls{M}_{00}$ & $\mathrm{box}_y$ & $\hat x$ & $\mathrm{dia}$ & $\mathrm{ext}$ & $\gls{hu}_1$ & $\gls{lambda}_1$ & $\mathrm{axis}_1$ & $\mathrm{axis}_2$\\
-  Quickshift & $\mathrm{box}_y$ & $\mathrm{box}_x$ & $\hat x$ & $\hat y$ & $\mathrm{ecc}$ & $\mathrm{ext}$ & $\gls{lambda}_1$ & $\mathrm{axis}_1$ & $\mathrm{axis}_1$\\
+  Quickshift & $\mathrm{box}_y$ & $\mathrm{box}_x$ & $\hat x$ & $\hat y$ & $\mathrm{ecc}$ & $\mathrm{ext}$ & $\gls{lambda}_1$ & $\mathrm{axis}_1$ & $\mathrm{axis}_2$\\
   \bottomrule
 \end{tabular}
   \caption[\gls{Cifar}-10 Merkmalsselektion]{Merkmalsselektion des \gls{Cifar}-10 Datensatzes zu $9$ Formmerkmalen.}
@@ -121,7 +121,7 @@ Tabelle~\ref{tab:cifar_10_merkmale} zeigt die berechnete Wahl der Merkmale der S
 Es ist auffällig, dass sich für die beiden Superpixelrepräsentation dabei die Selektion der Merkmale bei nur drei von neun Merkmalen unterscheidet.
 Inklusive den Durchschnittsfarbwerten eines Superpixels über den drei Farbkanälen ergeben sich daraus jeweils $12$ Knotenmerkmale.
 Bei einer durchschnittlichen Anzahl an Knoten von $232.1$ bei \gls{SLIC} \bzw{} von $182.0$ bei Quickshift führt dies zu einer Berechnung von $2785$ \bzw{} $2184$ Merkmalen eines Graphen.
-Im Vergleich zu der Anzahl an Merkmalen des Originalbildes $\left(32 \times 32 \times 3 = 3072\right)$ ergibt sich folglich eine Datenreduktion von $9.34\%$ \bzw{} $28.91\%$.
+Im Vergleich zu der Anzahl an Merkmalen des Originalbildes $\left(32 \times 32 \times 3 = 3072\right)$ ergibt sich folglich eine Datenreduktion auf $90.66\%$ \bzw{} $71.09\%$ der Eingangsdaten.
 Das ist aufgrund der ursprünglichen Bildgrößen des \gls{Cifar}-10 Datensatzes eine nicht zu unterschätzende Datenreduktion, bei der kaum entscheidende Informationen des Bildes verloren gehen (\vgl{} Abbildung~\ref{fig:cifar_10}).
 
 \paragraph{PASCAL VOC}
@@ -138,16 +138,15 @@ Die enthaltenden Objekte der Bilder sind im Einzelnen~\cite{pascal_voc}:
   \item Flugzeug, Fahrrad, Boot, Bus, Auto, Motorrad, Zug
   \item Flasche, Stuhl, Esstisch, Topfblume, Sofa, Fernseher/Monitor
 \end{itemize}
-Die Höhen und Breiten der Bilder reichen von von $142$ bis $500$ Pixeln.
-Die durchschnittliche Bildgröße des Datensatzes beträgt $389 \times 467$ Pixel und ist damit um einiges größer als der zuvor betrachtete \gls{Cifar}-10 Datensatz.
-
-\gls{Pascal} besitzt keine eindeutige Zuordnung der Bilder in Trainings-, Validierungs und Testbildern.
-Es existiert zwar ein seperator Testdatensatz, jedoch stehen dessen Annotierungen nicht zur freien Verfügung.
-Folglich wird aus der Bildermenge zufällig eine Validierungs- \bzw{} Testmenge von $1500$ Bildern generiert.
+Für die eindeutige Zuweisung eines Bildes zu genau einer Klasse dient das Objekt mit dem größtem Hüllkörper.
+Die Höhen und Breiten der Bilder reichen von $142$ bis $500$ Pixeln.
+Die durchschnittliche Bildgröße des Datensatzes beträgt $389 \times 467$ Pixel und ist damit um einiges größer als der zuvor betrachtete \gls{Cifar}-10 Datensatz bei gleichzeitig weitaus weniger Beispielbildern.
+\gls{Pascal} besitzt weiterhin keine eindeutige Zuordnung der Bilder zu Trainings-, Validierungs und Testbildern.
+Es existiert zwar ein seperater Testdatensatz, jedoch stehen dessen Annotierungen nicht zur freien Verfügung.
+Folglich wird aus der Bildermenge eine zufällige Validierungs- \bzw{} Testmenge von $1500$ Bildern generiert.
 Damit stehen noch $15626$ Bilder für das Training eines neuronalen Netzes zur Verfügung.
 
-
-
+Die ermittelten Superpixelparameter finden sich in Tabelle~\ref{tab:pascal_voc}.
 \begin{table}[t]
 \centering
 \resizebox{\textwidth}{!}{%
@@ -164,10 +163,33 @@ Damit stehen noch $15626$ Bilder für das Training eines neuronalen Netzes zur V
 \caption[\gls{Pascal} Superpixelparameter]{Wahl der Superpixelparameter des \gls{Pascal} Datensatzes.}
 \label{tab:pascal_voc}
 \end{table}
-
+\gls{SLIC} generiert damit um die $K=1600$ Superpixel pro Bild.
+Im Vergleich zu der Wahl der Parameter für kleinere Bilder erhöht sich ebenfalls die Wahl der Normalisierungskonstante $F=30$ und gibt damit der Form der Superpixel in großen Bildern eine bessere Gewichtung.
+Für Quickshift wird auf ähnliche Weise die Gewichtung des Farbterms $\alpha = 0.75$ abgeschwächt, sodass Superpixel in ihrer möglichen Größe etwas beschränkter sind.
+Weiterhin vergrößert sich die Wahl der Größe des Fensters $S \times S$ auf $S = 8$.
+Die Wahl der gefundenen Parameter deckt sich damit größtenteils mit den üblichen Werten dieser in der Literatur~\cite{Fulkerson}.
+Abbildung~\ref{fig:pascal_voc} veranschaulicht die Wahl der Parameter der beiden Superpixelalgorithmen.
 \input{figures/pascal_voc}
 
-datenreduktion
+Auch für \gls{Pascal} bestimmt die Merkmalsselektion $9$ Merkmale aus den $38$ Formmerkmalen (\vgl{} Tabelle~\ref{tab:pascal_voc_merkmale}).
+\begin{table}[t]
+\centering
+\begin{tabular}{lccccccccc}
+  \toprule
+  \gls{SLIC} & $\mathrm{box}$ & $\mathrm{box}_y$ & $\mathrm{box}_x$ & $\hat x$ & $\hat y$ & $\mathrm{ecc}$ & $\mathrm{ext}$ & $\gls{hu}_1$ & $\mathrm{axis}_1$\\
+  Quickshift & $\gls{M}_{00}$ & $\mathrm{box}_y$ & $\mathrm{box}_x$ & $\hat x$ & $\mathrm{dia}$ & $\gls{lambda}_1$ & $\gls{lambda}_2$ & $\mathrm{axis}_1$ & $\mathrm{axis}_2$\\
+  \bottomrule
+\end{tabular}
+  \caption[\gls{Pascal} Merkmalsselektion]{Merkmalsselektion des \gls{Pascal} Datensatzes zu $9$ Formmerkmalen.}
+\label{tab:pascal_voc_merkmale}
+\end{table}
+Dabei wird sich erneut nicht für die eigentlichen Momente entschieden, sondern mehr für die Merkmale, die aus diesen gewonnen werden können.
+Auffällig ist für \gls{SLIC} die Wahl des Merkmals $\mathrm{box}$, da dieses bereits durch $\mathrm{box}_y$ und $\mathrm{box}_x$ implizit gegeben ist.
+Ein Knoten eines Graphen besitzt damit inklusive dessen Durchschnittsfarbe erneut $12$ Merkmale.
+
+Bei den (relativ) großen Bildern in \gls{Pascal} ergibt sich aufgrund der Vorsegmentierung des Bildes eine erhebliche Datenreduktion.
+Anstatt der durchschnittlichen Anzahl an Merkmalen des Originalbildes $\left(389 \times 467 \times 3 = 544989\right)$ erhalten wir im Durchschnitt bei der Verwendung von \gls{SLIC} $18491$ \bzw{} von Quickshift $25579$ Merkmale, was einer Datenreduktion auf lediglich $3.39\%$ \bzw{} $4.69\%$ der Eingangsdaten entspricht.
+Dabei werden insbesondere bei Quickshift auch kleine, auffällige Flächen des Bildes erhalten, sodass sich größtenteils nur eine Datenreduktion in Bereichen einstellt, die gleichfarbene, uninteressante Flächen des Bildes beschreiben.
 
 \paragraph{Weitere Datensätze}
 \label{weitere_datensaetze}
