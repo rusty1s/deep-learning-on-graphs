@@ -244,13 +244,14 @@ So kann \bspw{} die Helligkeits- und Kontrastanpassungen nur auf den Farbmerkmal
 Die vertikale Spiegelung des Graphen kann, falls diese im Graphkontext eine Bedeutung besitzt, analog zu $\textit{flip}$ auf Bildern über eine Anpassung der Winkel in $\gls{Arad} \in {\left[0, 2\pi\right]}^{N \times N}$ realisiert werden, \dhe{}
 \begin{equation*}
   {\textit{flip}\left(\gls{Arad}\right)}_{ij} \coloneqq \begin{cases}
-    1, & \text{wenn } {\left(\gls{Arad}\right)}_{ij} > 0\\
+    2\pi - {\left(\gls{Arad}\right)}_{ij}, & \text{wenn } {\left(\gls{Arad}\right)}_{ij} > 0,\\
     0, & \text{sonst.}
   \end{cases}
 \end{equation*}
 
-nesser ist es, dass Bild vorher zu ändern, da sich dadurch die Superpixelrepräsentation ändert
-und folglich zu realisiterischer Augmentierung führt.
+Es ist jedoch anzumerken, dass eine Justierung der Farbwerte auf den Knoten eines Graphen, der durch eine Superpixelrepräsentation gewonnen werden, nur bedingt sinnvoll ist, denn die Nachbarschaften des Graphen sowie dessen Formmerkmale bleiben bei dieser Art der Augmentierung unverändert.
+Eine Superpixelalgorithmus, welcher Superpixel größtenteils durch die Farbwerte eines Bildes generiert, bildet letztendlich bei einer Augmentierung der Farbwerte eines Bildes auf eine komplett andere Superpixelrepräsentation ab.
+Eine realistischere Augmentierung der Eingabedaten ist folglich nur dann gegeben, wenn die Superpixelrepräsentation \bzw{} dessen Graph erst nach der Augmentierung der Farben des Bildes generiert wird.
 
 \subsection{Implementierung}
 \label{implementierung}
