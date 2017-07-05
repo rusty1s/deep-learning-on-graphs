@@ -240,7 +240,6 @@ Alle Augmentierungsschritte werden für ein Eingabebild zufällig ausgeführt.
 Insbesondere erhält $\delta$ dabei einen zufälligen Wert aus einem vordefinierten Intervall $\delta \in \left[\delta_{\min}, \delta_{\max}\right]$.
 
 Die vorgestellten Augmentierungsschritte sind sowohl für Graphen im zweidimensionalen euklidischen Raum \bzw{} dessen Knotenmerkmale möglich.
-So kann \bspw{} die Helligkeits- und Kontrastanpassungen nur auf den Farbmerkmalen der Merkmalsmatrix $\gls{F} \in \gls{R}^{N \times M}$ angewendet werden.
 Die vertikale Spiegelung des Graphen kann, falls diese im Graphkontext eine Bedeutung besitzt, analog zu $\textit{flip}$ auf Bildern über eine Anpassung der Winkel in $\gls{Arad} \in {\left[0, 2\pi\right]}^{N \times N}$ realisiert werden, \dhe{}
 \begin{equation*}
   {\textit{flip}\left(\gls{Arad}\right)}_{ij} \coloneqq \begin{cases}
@@ -248,8 +247,8 @@ Die vertikale Spiegelung des Graphen kann, falls diese im Graphkontext eine Bede
     0, & \text{sonst.}
   \end{cases}
 \end{equation*}
-
-Es ist anzumerken, dass eine Justierung der Farbwerte auf den Knoten eines Graphen, der durch eine Superpixelrepräsentation gewonnen wurde, nur bedingt sinnvoll ist, denn die Nachbarschaften des Graphen sowie dessen Formmerkmale bleiben bei dieser Art der Augmentierung unverändert.
+Weiterhin können die Helligkeits- und Kontrastanpassungen der Farben lediglich auf den Farbmerkmalen der Merkmalsmatrix $\gls{F} \in \gls{R}^{N \times M}$ angewendet werden.
+Es ist jedoch anzumerken, dass eine Justierung der Farbwerte auf den Knoten eines Graphen, der durch eine Superpixelrepräsentation gewonnen wurde, nur bedingt sinnvoll ist, denn die Nachbarschaften des Graphen sowie dessen Formmerkmale bleiben bei dieser Art der Augmentierung unverändert.
 Ein Superpixelalgorithmus, welcher Superpixel größtenteils aufgrund der Farbwerte eines Bildes generiert, bildet letztendlich bei einer Augmentierung der Farbwerte eines Bildes auf eine komplett andere Superpixelrepräsentation ab.
 Eine realistischere Augmentierung der Eingabedaten ist folglich nur dann gegeben, wenn die Superpixelrepräsentation \bzw{} dessen Graph erst nach der Augmentierung der Farben des Bildes generiert wird.
 
