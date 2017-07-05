@@ -12,8 +12,8 @@ ander probleme sind aber denkbar (z.B. Segmentierung über Knotenklassifizierung
 
 Die vorgestellten Faltungsmethoden aus Kapitel~\ref{raeumliches_lernen} und~\ref{spektrales_lernen} \bzgl{} des Lernens auf Graphen im zweidimensionalen euklidischen Raum werden über einer Reihe von Datensätzen verifiziert, die im Folgenden vorgestellt werden.
 Dafür werden die Bildermengen in eine Superpixelrepräsentation (\gls{SLIC} und Quickshift) konvertiert und darauf basierend in eine Graphrepräsentation transformiert (\vgl{} Kapitel~\ref{graphrepraesentationen_von_bildern}).
-Zusätzlich zu der Präsentation der Datensätze enthält dieses Unterkapitel damit insbesondere die Parameterwahl der jeweiligen Superpixelalgorithmen, welche jeweils händisch über einer Untermenge der Bilder eines jeden Datensatzes ermittelt wurden.
-Weiterhin wird in diesem Unterkapitel abhängig von dem gewählten Datensatz und der Superpixelrepräsentation auf die entsprechenden Merkmalsselektionen der $38$ Formmerkmale eingegangen, die nach dem beschriebenen Prinzip aus Kapitel~\ref{merkmalsselektion} errechnet wurden.
+Zusätzlich zu der Präsentation der Datensätze enthält dieses Unterkapitel damit insbesondere die Parameterwahl der jeweiligen Superpixelalgorithmen, welche jeweils händisch über einer Untermenge der Bilder eines jeden Datensatzes ermittelt werden.
+Weiterhin wird in diesem Unterkapitel abhängig von dem gewählten Datensatz und der Superpixelrepräsentation auf die entsprechenden Merkmalsselektionen der $38$ Formmerkmale eingegangen, die nach dem beschriebenen Prinzip aus Kapitel~\ref{merkmalsselektion} errechnet werden.
 
 \paragraph{MNIST}
 \label{mnist}
@@ -61,11 +61,11 @@ Die ermittelten (unterschiedlichen) Formmerkmale für \gls{SLIC} und Quickshift 
   Quickshift & $\hat{x}$ & $\mathrm{ecc}$ & $\mathrm{dia}$ & $\mathrm{ext}$ & $\gls{mu}_{03}$ & $\gls{mu}_{21}$ & $\gls{mu}_{30}$ & $\gls{eta}_{03}$ & $\mathrm{ori}$\\
   \bottomrule
 \end{tabular}
-  \caption[\gls{MNIST} Merkmalsselektion]{Merkmalsselektion des \gls{MNIST} Datensatzes auf $9$ Formmerkmale.}
+  \caption[\gls{MNIST} Merkmalsselektion]{Merkmalsselektion des \gls{MNIST} Datensatzes zu $9$ Formmerkmalen.}
 \label{tab:mnist_merkmale}
 \end{table}
-Wohingegen sich die Merkmalsselektion bei \gls{SLIC} eher für Formmerkmale entscheidet, die aus den Momenten gewonnen werden können, so genießen bei Quickshift die reinen translationsinvarianten Momente \gls{mu} größeres Interesse.
-Daraus ergeben sich $10$ Merkmale eines Knotens in \gls{MNIST} inklusive der Durchschnittsfarbe eines Superpixels.
+Wohingegen sich die Merkmalsselektion bei \gls{SLIC} eher für Formmerkmale entscheidet, die aus den Momenten gewonnen werden können, genießen bei Quickshift die reinen translationsinvarianten Momente \gls{mu} ein größeres Interesse.
+Daraus ergeben sich $10$ Merkmale eines Knotens inklusive der Durchschnittsfarbe eines Superpixels.
 
 \paragraph{CIFAR-10}
 \label{cifar_10}
@@ -81,6 +81,7 @@ Sie passen aufgrund ihrer Größe ähnlich zu \gls{MNIST} komplett in den Haupts
 Aufgrund dessen ist er für eine Bildklassifizierung sehr beliebt, da er schnelle Trainingszeiten garantiert und dabei trotzdem alle Techniken des Deep Learnings ausgeschöpft werden müssen, um qualitativ hochwertige Resultate zu erzielen.
 Der \gls{Cifar} Datensatz liegt ebenfalls in einer zweiten Version vor, genannt \gls{Cifar}-100, der 60000 Bilder in 100 Klassen unterteilt, welcher aber in dieser Arbeit keine Verwendung findet~\cite{cifar_10}.
 
+Tabelle~\ref{tab:cifar_10} zeigt die Wahl der Parameter der beiden Superpixelalgorithmen.
 \begin{table}[t]
 \centering
 \resizebox{\textwidth}{!}{%
@@ -97,16 +98,36 @@ Der \gls{Cifar} Datensatz liegt ebenfalls in einer zweiten Version vor, genannt 
 \caption[\gls{Cifar}-10 Superpixelparameter]{Wahl der Superpixelparameter des \gls{Cifar}-10 Datensatzes.}
 \label{tab:cifar_10}
 \end{table}
-
+Im Vergleich zu dem \gls{MNIST} Datensatz würden dafür insbesondere für \gls{SLIC} die approximierte Anzahl an Superpixeln von 100 auf 200 und für Quickshift die Größe des Fensters $S$ von 2 auf 5 erhöht.
+Weiterhin zeigt die Tabelle erneut Informationen zu den generierten Graphen über die Anzahl der Knoten und ihrer Knotengraden.
+Hier lassen sich ebenfalls wieder die unterschiedlichen Vorgehensweisen der beiden Superpixelalgorithmen erkennen.
+Die maximale Anzahl an Knoten eines Graphen aus der Quickshift-Segmentierung liegt dabei mit $624$ Knoten sehr hoch, \dhe{} im Durchschnitt werden nur zwei Pixel einem Superpixel zugeordnet werden, und kann als extremer Ausreißer gewertet werden.
+Abbildung~\ref{fig:cifar_10} zeigt ein Bildes des \gls{Cifar}-10 Datensatzes mit dessen entsprechenden Superpixel- \bzw{} Graphrepräsentationen.
 \input{figures/cifar_10}
 
-\todo{datenreduktion}
+Analog zu \gls{MNIST} wurden für den \gls{Cifar}-10 Datensatz erneut $9$ Formmerkmale nach dem gleichen Prinzip ermittelt.
+Tabelle~\ref{tab:cifar_10_merkmale} zeigt die berechnete Wahl der Merkmale der Selektion.
+\begin{table}[t]
+\centering
+\begin{tabular}{lccccccccc}
+  \toprule
+  \gls{SLIC} & $\gls{M}_{00}$ & $\mathrm{box}_y$ & $\hat x$ & $\mathrm{dia}$ & $\mathrm{ext}$ & $\gls{hu}_1$ & $\gls{lambda}_1$ & $\mathrm{axis}_1$ & $\mathrm{axis}_2$\\
+  Quickshift & $\mathrm{box}_y$ & $\mathrm{box}_x$ & $\hat x$ & $\hat y$ & $\mathrm{ecc}$ & $\mathrm{ext}$ & $\gls{lambda}_1$ & $\mathrm{axis}_1$ & $\mathrm{axis}_1$\\
+  \bottomrule
+\end{tabular}
+  \caption[\gls{Cifar}-10 Merkmalsselektion]{Merkmalsselektion des \gls{Cifar}-10 Datensatzes zu $9$ Formmerkmalen.}
+\label{tab:cifar_10_merkmale}
+\end{table}
+Es ist auffällig, dass sich für die beiden Superpixelrepräsentation dabei die Selektion der Merkmale bei nur drei von neun Merkmalen unterscheidet.
+Inklusive den Durchschnittsfarbwerten eines Superpixels über den drei Farbkanälen ergeben sich daraus jeweils $12$ Knotenmerkmale.
+Bei einer durchschnittlichen Anzahl an Knoten von $232.1$ bei \gls{SLIC} \bzw{} von $182.0$ bei Quickshift führt dies zu einer Berechnung von $2785$ \bzw{} $2184$ Merkmalen eines Graphen.
+Im Vergleich zu der Anzahl an Merkmalen des Originalbildes $32 \times 32 \times 3 = 3072$ ergibt sich folglich eine Datenreduktion von $9.34\%$ \bzw{} $28.91\%$.
+Das ist aufgrund der ursprünglichen Bildgrößen des \gls{Cifar}-10 Datensatzes eine nicht zu unterschätzende Datenreduktion, bei der kaum entscheidende Informationen des Bildes verloren gehen (\vgl{} Abbildung~\ref{fig:cifar_10}).
 
 \paragraph{PASCAL VOC}
 \label{pascal_voc}
 
-\emph{\gls{Pascal}} Datensatz
-\cite{pascal_voc}
+Der \emph{\gls{Pascal}} Datensatz~\cite{pascal_voc}.
 
 \begin{table}[t]
 \centering
@@ -128,6 +149,9 @@ Der \gls{Cifar} Datensatz liegt ebenfalls in einer zweiten Version vor, genannt 
 \input{figures/pascal_voc}
 
 datenreduktion
+
+\paragraph{Weitere Datensätze}
+\label{weitere_datensaetze}
 
 \subsection{Metriken}
 \label{metriken}
