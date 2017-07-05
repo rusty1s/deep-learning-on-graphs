@@ -2,9 +2,19 @@
 \label{evaluation}
 
 \input{kapitel/evaluation/merkmalsselektion}
+
+pca nicht möglich, weil zu teuer (alle Form Features zu berechnen ist utopisch und widerspricht der Grundidee)
+
 \input{kapitel/evaluation/versuchsaufbau}
+
+Sparse-Tensoren
+Preprocessing vs Postprocessing
+
 \input{kapitel/evaluation/ergebnisse}
 \input{kapitel/evaluation/laufzeitanalyse}
+
+langsamer als ausgereifte Bildimplementierungen
+
 \input{kapitel/evaluation/diskussion}
 
 Es ist teilweise schwer, Formfeatures fuer Polygone zu extrahieren, die ueber das Polygon viel aussagen. Deswegen ist es umso besser, wenn Superpixelalgorithmen nicht zu grosse Superpixel berechnen und diese, wenn sie nichts interessantes enthalten, moeglichst quadratisch sind. Dann kann ueber die Form auf die Wichtigkeit dieses Superpixels geschlossen werden.

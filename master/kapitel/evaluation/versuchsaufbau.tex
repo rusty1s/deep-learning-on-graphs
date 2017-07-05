@@ -4,12 +4,16 @@
 Generelle Netzstruktur, softmax auf Klassen abgebildet
 Conv mit MaxPool gefolgt von AveragePool auf Fully Connect auf Softmax
 
+wir machen hier nur klassifikation
+ander probleme sind aber denkbar (z.B. Segmentierung über Knotenklassifizierung)
+
 \subsection{Datensätze}
 \label{datensaetze}
 
-Die vorgestellten Faltungsmethoden aus Kapitel~\ref{raeumliches_lernen} und~\ref{spektrales_lernen} \bzgl{} des Lernens auf zweidimensionalen euklidischen Graphen wurden über einer Reihe von Datensätzen verifiziert, die im Folgenden vorgestellt werden.
-Dafür wurden die Bildermengen in eine Superpixelrepräsentation (\gls{SLIC} und Quickshift) konvertiert und darauf basierend in eine Graphrepräsentation transformiert (\vgl{} Kapitel~\ref{graphrepraesentationen_von_bildern}).
-Zusätzlich zu der Präsentation der Datensätze enthält dieses Kapitel damit insbesondere die Parameterwahl der jeweiligen Superpixelalgorithmen, welche jeweils händisch über einer Untermenge der Bilder eines jeden Datensatzes ermittelt wurden, und weiterhin die entsprechenden Merkmalsselektionen, die nach dem beschriebenen Prinzip aus Kapitel~\ref{merkmalsselektion} errechnet wurden.
+Die vorgestellten Faltungsmethoden aus Kapitel~\ref{raeumliches_lernen} und~\ref{spektrales_lernen} \bzgl{} des Lernens auf Graphen im zweidimensionalen euklidischen Raum werden über einer Reihe von Datensätzen verifiziert, die im Folgenden vorgestellt werden.
+Dafür werden die Bildermengen in eine Superpixelrepräsentation (\gls{SLIC} und Quickshift) konvertiert und darauf basierend in eine Graphrepräsentation transformiert (\vgl{} Kapitel~\ref{graphrepraesentationen_von_bildern}).
+Zusätzlich zu der Präsentation der Datensätze enthält dieses Unterkapitel damit insbesondere die Parameterwahl der jeweiligen Superpixelalgorithmen, welche jeweils händisch über einer Untermenge der Bilder eines jeden Datensatzes ermittelt wurden.
+Weiterhin wird in diesem Unterkapitel abhängig von dem gewählten Datensatz und der Superpixelrepräsentation auf die entsprechenden Merkmalsselektionen der $38$ Formmerkmale eingegangen, die nach dem beschriebenen Prinzip aus Kapitel~\ref{merkmalsselektion} errechnet wurden.
 
 \paragraph{MNIST}
 \label{mnist}
