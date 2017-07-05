@@ -79,7 +79,7 @@ So enthält die Klasse \enquote{Auto} nur kleinere Personenwagen, wohingegen die
 Die Bilder haben eine einheitliche Größe von $32 \times 32$ Pixeln und besitzen drei Farbkanäle.
 Sie passen aufgrund ihrer Größe ähnlich zu \gls{MNIST} komplett in den Hauptspeicher.
 Aufgrund dessen ist er für eine Bildklassifizierung sehr beliebt, da er schnelle Trainingszeiten garantiert und dabei trotzdem alle Techniken des Deep Learnings ausgeschöpft werden müssen, um qualitativ hochwertige Resultate zu erzielen.
-Der \gls{Cifar} Datensatz liegt ebenfalls in einer zweiten Version vor, genannt \gls{Cifar}-100, der 60000 Bilder in 100 Klassen unterteilt, welcher aber in dieser Arbeit keine Verwendung findet~\cite{cifar_10}.
+Der \gls{Cifar} Datensatz liegt ebenfalls in einer zweiten Version vor, genannt \emph{\gls{Cifar}-100}, der 60000 Bilder in 100 Klassen unterteilt, welcher aber in dieser Arbeit keine Verwendung findet~\cite{cifar_10}.
 
 Tabelle~\ref{tab:cifar_10} zeigt die Wahl der Parameter der beiden Superpixelalgorithmen.
 \begin{table}[t]
@@ -105,7 +105,7 @@ Die maximale Anzahl an Knoten eines Graphen aus der Quickshift-Segmentierung lie
 Abbildung~\ref{fig:cifar_10} zeigt ein Bildes des \gls{Cifar}-10 Datensatzes mit dessen entsprechenden Superpixel- \bzw{} Graphrepräsentationen.
 \input{figures/cifar_10}
 
-Analog zu \gls{MNIST} wurden für den \gls{Cifar}-10 Datensatz erneut $9$ Formmerkmale nach dem gleichen Prinzip ermittelt.
+Analog zu \gls{MNIST} wurden für den \emph{\gls{Cifar}-10} Datensatz erneut $9$ Formmerkmale nach dem gleichen Prinzip ermittelt.
 Tabelle~\ref{tab:cifar_10_merkmale} zeigt die berechnete Wahl der Merkmale der Selektion.
 \begin{table}[t]
 \centering
@@ -194,7 +194,17 @@ Dabei werden insbesondere bei Quickshift auch kleine, auffällige Flächen des B
 \paragraph{Weitere Datensätze}
 \label{weitere_datensaetze}
 
-\todo{wadwd}
+Es existieren eine Reihe weitere Bilddatensätze, die zwar in dieser Arbeit nicht benutzt werden, aber dennoch hier eine kurze Erwähnung finden sollen.
+Der weitaus größte und beliebteste Datensatz zur Bildklassifizierung ist der \emph{ImageNet} Datensatz, der aus mehr als 1.2 Millionen Bildern besteht, denen jeweils eine von $1000$ Klassen zugeordnet ist~\cite{imagenet}.
+Er wird aufgrund seiner Größe und seiner Komplexität für die reine Verifizierung der Faltungsansätze auf Graphrepräsentationen von Bildern in dieser Arbeit nicht verwendet.
+Er bildet jedoch insbesondere die Basis weiterer Datensätze.
+So beinhaltet \bspw{} der \emph{Tiny ImageNet} Datensatz eine Untermenge der Bilder von ImageNet (200 Klassen mit jeweils 600 Bildern), bei denen die Bilder auf eine einheitliche Größe von $64 \times 64$ Pixeln skaliert wurden~\cite{imagenet}.
+\gls{Pascal} bedient sich ebenso einer Untermenge der Bilder des ImageNet Datensatzes, die um entsprechende Annotationen wie \zB{} den Hüllkörpern der Objekte erweitert wurden~\cite{pascal_voc}.
+Namenhaft zu erwähnen sei weiterhin der von \gls{Cifar}-10 inspirierte \emph{STL-10} Datensatz von Stanford mit einer einheitlichen Bildergröße von $96 \times 96$ Pixeln~\cite{stl}.
+Er enthält aber nur sehr wenige annotierte Bilder und findet seine Anwendung daher vorallem im unüberwachten Lernen — ein Ansatz, der in dieser Arbeit nicht verfolgt wird.
+Der \emph{\gls{SVHN}} Datensatz beinhaltet 600000 annotierte Bilder $\left(32 \times 32\right)$ von Hausnummern, die aus \emph{Google Street View} extrahiert wurden~\cite{svhn}.
+Er enthält damit weitaus mehr Bilder als der zu ihm ähnliche \gls{MNIST} Datensatz und versucht dabei ein weitaus schwereres Problem zu lösen — der Objekterkennung von Zahlen in natürlichen Szenen.
+Er kann jedoch insbesondere aufgrund der beliebigen Anzahl an Ziffern im Bild nicht für eine Bildklassifizierung genutzt werden.
 
 \subsection{Metriken}
 \label{metriken}
@@ -256,8 +266,22 @@ Eine realistischere Augmentierung der Eingabedaten ist folglich nur dann gegeben
 \label{implementierung}
 
 Python
-Tensorflow, Numpy, Skimage,
-Sparse Tensoren
+Code vorstellen, frei zur Verfügung, Code Cov erwähnen
 Code in Footnote
+Homepage\footnote{\url{https://github.com/rusty1s/embedded\_gcnn}}
+
+
+\paragraph{Benutzte Bibliotheken}
+Bibliotheken vorstellen
+skimage, scikit-learn
+preprocessing mit numpy and scipy and numpy-groupies
+tensorflow zum lernen
+Sparse Tensoren
+
+Zur Umsetzung der neuronalen Netze wurde die TensorFlow-Bibliothek verwendet, die die Modellierung und den Betrieb neuronaler Netze in Python ermöglicht
+
+\paragraph{Eingabe und Verarbeitung der Daten}
+
+Warteschlangen
 Alle Bilder isn in [0,1]
 Stddev FormFeatures (Formel)
