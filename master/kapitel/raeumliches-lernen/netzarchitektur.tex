@@ -1,14 +1,19 @@
 \section{Netzarchitektur}
 \label{raeumliche_netzarchitektur}
 
-% Hier den Cube vorstellen
-% 1D Convolutions etc
-
+Der räumliche Faltungsoperator bildet die erste Faltungsschicht eines neuronalen Netzes auf Graphen~\cite{patchy}.
+Dabei kann auf dem berechneten dreidimensionale Tensor der Größe $\left|\gls{V}_{\mathrm{out}}\right| \times \left|\gls{Neighbor}_{\mathrm{out}}\right| \times M$ des Graphen, der zu jeder Knotenauswahl dessen Nachbarschaftsmenge auf dessen $M$ Mermale der Merkmalsmatrix $\gls{F} \in \gls{R}^{N \times M}$ abbildet, mit Hilfe der klassischen Faltungsoperation \gls{conv2d} gefaltet werden (\vgl{}~Abbildung~\ref{fig:netzarchitektur_raeumlich}).
+Es ist jedoch insbesondere darauf zu achten, nicht über den Grenzen des Receptive-Fields hinaus zu falten.
+Insbesondere sollte eine Faltung entlang der Knotenauswahl $\gls{V}_{\mathrm{out}}$ vermieden werden, da dessen Knotenanordnung im Kontext einer Faltung keine Bedeutung besitzt, denn zwei \enquote{übereinanderliegende} Receptive-Fields müssen nicht zwangsläufig im Graphen benachbart sein.
+Die \gls{conv2d}-Operation operiert daher mit der Filtergröße und Schrittweite $1 \times \left|\gls{Neighbor}_{\mathrm{out}}\right|$~\cite{patchy}.
+Die restliche Struktur des Netzes kann nach Belieben gewählt werden~\cite{patchy}.
+Üblicherweise wird der Ausgabetensor der Faltungsschicht dafür zu einem Vektor \enquote{abgeflacht}, sodass vollverbundenen Schichten hinzu zur Ausgabe an das Ergebnis der Faltungsschicht gestapelt werden können.
+Abbildung~\ref{fig:netzarchitektur_raeumlich} veranschaulicht die typische räumliche Netzarchitektur auf Graphen.
 \input{tikz/netzarchitektur_raeumlich}
 
-Eigentliche Graphstruktur geht verloren (\zB{} Distanzen der Knoten zueinander) (in gewisser weise stecken diese aber in den Formfeatures).
+Es ist weiterhin vorstellbar, auch mehrmals in einem Receptive-Field auf analoge Weise zu dem \emph{Fire Module} des \emph{SqueezeNet} zu falten~\cite{squeeze}.
+So können \zB{} über eine Faltung mit Filtergröße und Schrittweite $1 \times 1$ zuvor neue Merkmale aus den Eingabedaten generiert werden und im Anschluss die beschriebene Faltung über das gesamte Receptive-Field vollzogen werden.
 
-Die Anordnung der Knoten zu einem Quaderform besitzt damit die Einschränkung, dass das Netz lediglich eine Faltungsschicht enthalten kann.
-Die Methode der spektralen Faltung auf Graphen umgeht diese Einschränkung.
-
-Würfel ist speicherineffizient
+Die räumliche Netzarchitektur erlaubt aufgrund ihrer Architektur nur eine Faltungsschicht in einem neuronalen Netz.
+Damit sind insbesondere die für das Deep Learning typischen gestapelten Faltungen mit Poolingoperationen nicht möglich.
+Der Ansatz des spektralen Lernens auf Graphen, welcher in Kapitel~\ref{spektrales_lernen} vorgestellt wird, überwindet dieses Problem.
