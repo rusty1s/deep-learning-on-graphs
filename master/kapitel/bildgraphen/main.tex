@@ -27,12 +27,13 @@ Damit lässt sich weiterhin die korrespondierende Adjazenzmatrix $\gls{Adist} \i
 
 Zusätzlich zu dem Abstand der Knoten \bzw{} der Länge der Kanten eines Graphen im zweidimensionalen euklidischen Raum $\gls{G} = \left(\gls{V}, \gls{E}, \gls{p}\right)$ lassen sich die Ausrichtungen der Kanten über die Positionen der Knoten von \gls{G} festhalten.
 Aus $\gls{p} \colon \gls{V} \to \gls{R}^2$ wird folglich über
-\begin{equation*}
+\begin{equation}
   \gls{winkel}\left(\gls{v}_i, \gls{v}_j\right) \coloneqq \begin{cases}
-    \mathrm{atan2}\left({\gls{p}\left(\gls{v}_j - \gls{v}_i\right)}_1, {\gls{p}\left(\gls{v}_j - \gls{v}_i\right)}_2\right) + \pi, & \text{wenn }\left(\gls{v}_i, \gls{v}_j\right) \in \gls{E},\\
+    \mathrm{atan2}\left({\gls{p}\left(\gls{v}_j\right)}_1 - {\gls{p}\left(\gls{v}_i\right)}_1, {\gls{p}\left(\gls{v}_j\right)}_2 - {\gls{p}\left(\gls{v}_i\right)}_2\right) + \pi, & \text{wenn }\left(\gls{v}_i, \gls{v}_j\right) \in \gls{E},\\
     0, & \text{sonst}
   \end{cases}
-\end{equation*}
+  \label{eq:winkelfunktion}
+\end{equation}
 eine \emph{Winkelfunktion} $\gls{winkel} \colon \gls{V} \times \gls{V} \to \left[0, 2\pi\right]$ auf den Kanten von \gls{G} im Uhrzeigersinn definiert, wobei $\mathrm{atan2}\left(x, y\right) \in \left[-\pi, \pi\right]$ den Arkustangens von $x/y$ berechnet, aber im Gegensatz zu $\mathrm{atan}\left(\cdot\right)$ die Vorzeichen beider Parameter beachtet und so den Quadranten des Ergebnisses bestimmen kann (\vgl{}~\cite{atan2}).
 Der Winkel Null wird dabei explizit als $2\pi$ definiert, sodass weiterhin $\gls{winkel}\left(\gls{v}_i, \gls{v}_j\right) = 0$ gilt, falls $\left(\gls{v}_i, \gls{v}_j\right) \notin \gls{E}$.
 Analog zu \gls{Adist} lässt sich damit die Adjazenzmatrix $\gls{Arad} \in {\left[0, 2\pi\right]}^{N \times N}$ mit ${\left(\gls{Arad}\right)}_{ij} \coloneqq \gls{winkel}\left(\gls{v}_i, \gls{v}_j\right)$ definieren.
