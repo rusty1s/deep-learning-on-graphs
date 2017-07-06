@@ -232,17 +232,17 @@ Es erscheint jedoch vorstellbar die Filtergröße bei größerer lokaler Kontrol
 Üblicherweise findet während des Trainings eines neuronalen Netzes eine \emph{Augmentierung} der Eingabedaten statt, die es ermöglicht, die Anzahl der Trainingsbilder virtuell zu erhöhen und die Gefahr des Overfittings zu reduzieren~\cite{tensorflow}.
 So kann \zB{} ein Bild $\gls{B} \in \gls{R}^{H \times W \times C}$ vertikal an dessen Bildmitte gespiegelt werden, \dhe{}
 \begin{equation*}
-  {\textit{flip}\left(\gls{B}\right)}_{yx} \coloneqq \gls{B}_{y,W-x},
+  {\mathrm{flip}\left(\gls{B}\right)}_{yx} \coloneqq \gls{B}_{y,W-x},
 \end{equation*}
 sodass ein Bild erzeugt wird, welches das Ursprungsbild \enquote{von der anderen Seite} zeigt~\cite{tensorflow}.
 Ebenso kann die Helligkeit eines Bildes, welches im RGB-Farbmodell in Gleitkommarepräsentation als $\gls{B} \in {\left[0, 1\right]}^{H \times W \times C}$ vorliegt, über
 \begin{equation*}
-  {\textit{brightness}\left(\gls{B}, \delta \right)}_{yxc} \coloneqq \min \left( \max \left(\gls{B}_{yxc} + \delta, 0\right), 1\right)
+  {\mathrm{brightness}\left(\gls{B}, \delta \right)}_{yxc} \coloneqq \min \left( \max \left(\gls{B}_{yxc} + \delta, 0\right), 1\right)
 \end{equation*}
 um den Faktor $\delta \in \left[-1, 1\right]$ justiert werden~\cite{tensorflow}.
 Weiterhin ist die Kontrastanpassung eines RGB-Bildes $\gls{B} \in {\left[0, 1\right]}^{H \times W \times C}$ um den Faktor $\delta \in \left[-1, 1\right]$ definiert als
 \begin{equation*}
-  {\textit{contrast}\left(\gls{B}, \delta\right)}_{yxc} \coloneqq \min \left( \max \left(\delta \left(\gls{B}_{yxc} - \overline{\gls{B}}_c\right) + \overline{\gls{B}}_c, 0\right), 1 \right)
+  {\mathrm{contrast}\left(\gls{B}, \delta\right)}_{yxc} \coloneqq \min \left( \max \left(\delta \left(\gls{B}_{yxc} - \overline{\gls{B}}_c\right) + \overline{\gls{B}}_c, 0\right), 1 \right)
 \end{equation*}
 wobei $\overline{\gls{B}}_c \coloneqq 1/\left(WH\right) \sum_{x = 1}^W \sum_{y = 1}^H \gls{B}_{yxc}$ die Durchschnittsfarbe des Bildes \bzgl{} des Farbkanals $c \in \left\{1, \ldots, C\right\}$ beschreibt~\cite{tensorflow}.
 Es sind eine ganze Reihe weiterer Augmentierungsschritte denkbar~\cite{tensorflow}.
@@ -250,9 +250,9 @@ Alle Augmentierungsschritte werden für ein Eingabebild zufällig ausgeführt.
 Insbesondere erhält $\delta$ dabei einen zufälligen Wert aus einem vordefinierten Intervall $\delta \in \left[-\delta_{\max}, \delta_{\max}\right]$.
 
 Die vorgestellten Augmentierungsschritte sind sowohl für Graphen im zweidimensionalen euklidischen Raum \bzw{} dessen Knotenmerkmale möglich.
-Die vertikale Spiegelung des Graphen kann, falls diese im Graphkontext eine Bedeutung besitzt, analog zu $\textit{flip}$ auf Bildern über eine Anpassung der Winkel in $\gls{Arad} \in {\left[0, 2\pi\right]}^{N \times N}$ realisiert werden, \dhe{}
+Die vertikale Spiegelung des Graphen kann, falls diese im Graphkontext eine Bedeutung besitzt, analog zu der Operation auf Bildern über eine Anpassung der Winkel in $\gls{Arad} \in {\left[0, 2\pi\right]}^{N \times N}$ realisiert werden, \dhe{}
 \begin{equation*}
-  {\textit{flip}\left(\gls{Arad}\right)}_{ij} \coloneqq \begin{cases}
+  {\mathrm{flip}\left(\gls{Arad}\right)}_{ij} \coloneqq \begin{cases}
     2\pi - {\left(\gls{Arad}\right)}_{ij}, & \text{wenn } {\left(\gls{Arad}\right)}_{ij} > 0,\\
     0, & \text{sonst.}
   \end{cases}

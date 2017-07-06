@@ -3,9 +3,11 @@
 
 \citeauthor{patchy} haben einen Algorithmus zur Generierung von Receptive-Fields über den Nachbarschaften eines Graphen vorgestellt, der effizient implementiert werden kann und über einer Reihe von Testdatensätzen konkurrenzfähige Resultate im Vergleich zu Methoden, die auf \emph{Graphkernen} basieren, liefert (\vgl{}~\cite{patchy}).
 Dabei hängt die Ordnung der Knotenauswahl und der Receptive-Fields stark von einer gewählten Zentralitätsmetrik ab, die auf einem allgemeinen Graphen $\gls{G} = \left(\gls{V}, \gls{E}\right)$ eine fehlende räumliche oder zeitliche Ordnung ersetzt.
-Im Kontext von Graphen im zweidimensionalen euklidischen Raum $\gls{G} = \left(\gls{V}, \gls{E}, \gls{p}\right)$, bei denen Knoten eindeutige Positionen in der Ebene zugeordnet werden können und deren Kanten eine Länge und Richtung über $\gls{Adist} \in {\left[0, 1\right]}^{N \times N}$ sowie $\gls{Arad} \in {\left[0, 2\pi\right]}^{N \times N}$ besitzen, kann die Auswahl der Knoten in $\gls{V}_{\mathrm{out}}$ sowie die Normalisierung der Nachbarschaftsmenge $\gls{N}_{\gls{v}}$ eines Knotens $\gls{v} \in \gls{V}_{\mathrm{out}}$ diese jedoch folglich berücksichtigen.
-Weiterhin besitzt ein Graph in der Ebene möglicherweise keine ausgezeichneten \bzw{} wichtigen Knoten, sondern ist in etwa vergleichbar mit einem gekrümmten Gitter (\zB{} ein Graph, der durch eine \gls{SLIC}-Segmentierung generiert wurde).
-Die Verwendung einer Zentralitätsmetrik kann folglich keine zufriedenstellenden Resultate liefern.
+Im Kontext von Graphen im zweidimensionalen euklidischen Raum $\gls{G} = \left(\gls{V}, \gls{E}, \gls{p}\right)$, bei denen den Knoten jeweils eine eindeutige Position in der Ebene zugeordnet werden kann, kann die Knotenauswahl $\gls{V}_{\mathrm{out}}$ (Algorithmus~\ref{alg:knotenauswahl}) sowie die Normalisierung der Nachbarschaftsmenge $\gls{N}_{\gls{v}}$ eines Knotens $\gls{v} \in \gls{V}_{\mathrm{out}}$ diese folglich berücksichtigen.
+Dies erscheint insbesondere dann sinnvoll, wenn sich ein Graph durch viele gleichwertig zentrale Knoten auszeichnet.
+So bildet ein Graph, der durch eine \gls{SLIC}-Segmentierung generiert wurde, (in etwa) auf ein unstrukturiertes Gitter ab.
+Eine Zentralitätsmetrik auf diesem Graphen besitzt so gut wie keine Aussagekraft.
+Der Graph zeichnet sich dabei eher durch seine Positionen der Knoten in der Ebene aus.
 
 Die Knotenauswahl wird folglich über die Anordnung der Knoten \bzgl{} ihrer \emph{Scanline}-Ordnung beschrieben, \dhe{} von oben nach unten und von links nach rechts.
 Formal lässt sich dafür die Knotenfärbung $\gls{l}_{\mathrm{scanline}} \colon \gls{V} \to \gls{R}$ über
