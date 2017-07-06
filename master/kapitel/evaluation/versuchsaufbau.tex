@@ -105,7 +105,7 @@ Die maximale Anzahl an Knoten eines Graphen aus der Quickshift-Segmentierung lie
 Abbildung~\ref{fig:cifar_10} zeigt ein Bildes des \gls{Cifar}-10 Datensatzes mit dessen entsprechenden Superpixel- \bzw{} Graphrepräsentationen.
 \input{figures/cifar_10}
 
-Analog zu \gls{MNIST} wurden für den \emph{\gls{Cifar}-10} Datensatz erneut $9$ Formmerkmale nach dem gleichen Prinzip ermittelt.
+Analog zu \gls{MNIST} wurden für den \gls{Cifar}-10 Datensatz erneut $9$ Formmerkmale nach dem gleichen Prinzip ermittelt.
 Tabelle~\ref{tab:cifar_10_merkmale} zeigt die berechnete Wahl der Merkmale der Selektion.
 \begin{table}[t]
 \centering
@@ -225,6 +225,7 @@ BatchSize?
 Globale/normale Lokalisierung
 Standardabweichung für Gauß
 LEARNING RATE, LEARNING RATE DECAY
+weight bias initialisierung
 
 Alle Faltungen wurden dabei mit einer Partitionsgröße von $8$ bei $K=0$ und $K=1$ implementiert, um ein \gls{CNN} mit einem $3 \times 3$ Filter zu simulieren.
 Es erscheint jedoch vorstellbar die Filtergröße bei größerer lokaler Kontrollierbarkeit, \dhe{} $K > 1$, weiter zu reduzieren und die Gefahr des Overfittings damit aufgrund der kleineren Anzahl an Trainingsparametern einzuschränken.
@@ -274,16 +275,36 @@ Die Implementation erreicht dabei eine \emph{Testabdeckung}, \dhe{} Anteil getes
 Es liegen zusätzliche Installationsanweisungen bei und der Quelltext ist so dokumentiert, dass er mit Hilfe dieser Arbeit verstanden werden kann.
 
 \paragraph{Benutzte Bibliotheken}
-Bibliotheken vorstellen
-skimage, scikit-learn
-preprocessing mit numpy and scipy and numpy-groupies
-tensorflow zum lernen
-Sparse Tensoren
+\label{benutzte_bibliotheken}
 
-Zur Umsetzung der neuronalen Netze wurde die TensorFlow-Bibliothek verwendet, die die Modellierung und den Betrieb neuronaler Netze in Python ermöglicht
+Für die Modellierung und den Betrieb neuronaler Netze in Python wurde die \texttt{tensorflow}-Bibliothek von Google verwendet~\cite{tensorflow}.
+Sie erlaubt die Modellierung eines Berechnungsgraphen, bei dem Knoten mathematische Operationen repräsentieren und die Kanten zwischen ihnen den Datenfluss multidimensionaler Tensoren steuern.
+So gut wie alle implementierten mathematischen Operationen in \texttt{tensorflow} besitzen eine Gradientenimplementierung, sodass die Kosten der Ausgabe eines Berechnungsgraph über das Backpropagationverfahren minimiert werden können.
+Dies erlaubt insbesondere den Bau der implementierten Faltungsoperatoren auf Graphen mit den reinen Operationen, die \texttt{tensorflow} bereitstellt.
 
-\paragraph{Eingabe und Verarbeitung der Daten}
+Zur Generierung der Superpixelrepräsentationen der Bildermengen wurde die Bibliothek \texttt{scikit-image} (\texttt{skimage}) benutzt~\cite{scikit}.
+Sie enthält die Implementierungen zu den \gls{SLIC} und Quickshift Algorithmen.
+Sie enthält ebenso eine Implementierung der Graphgenerierung aus einer Superpixelrepräsentation, die sich aber in Tests als ineffizient herausstellte und daher in dieser Arbeit nicht verwendet wird (\vgl{} Kapitel~\ref{laufzeitanalyse}).
 
-Warteschlangen
-Alle Bilder isn in [0,1]
-Stddev FormFeatures (Formel)
+Für die Merkmalsextraktion, die Graphgenerierung sowie die Implementierung der Graphvergröberungen für die Poolingoperationen wurden die Bibliotheken \texttt{numpy} und \texttt{scipy} verwendet~\cite{numpy, scipy}.
+Beide Bibliotheken gehören aufgrund ihrer effizienten Implementierung in C zu der Standardwahl \bzgl{} wissenschaflicher Berechnungen in Python.
+Alle dünnbesetzten Matrizen, \dhe{} Adjazenzmatrizen sowie Diagonalmatrizen, sind insbesondere auch als solche implementiert.
+
+\paragraph{Eingabe und Vorverarbeitung der Daten}
+
+Für die Eingabe der Knotenmerkmale in ein neuronales Netz werden diese pro Graph in dessen \emph{Standardnormalverteilung} überführt, \dhe{}~\cite{tensorflow}
+\begin{equation*}
+  \hat{\gls{f}}_i \coloneqq \frac{\gls{f}_i - \overline{\gls{f}}}{\gls{sigma}},
+\end{equation*}
+wobei $\overline{\gls{f}} \coloneqq 1/N \sum_{n=1}^N \gls{f}_n$ den Durchschitt der Merkmale und $\gls{sigma}$ die Standardabweichung von $\gls{f} \in \gls{R}^N$ beschreibt.
+Die Verteilung eines Merkmals eines Graphen liegt damit durchschnittlich bei Null und besitzt eine Standardabweichung von Eins.
+Die Überführung der Eingabedaten in die Standardnormalverteilung ist ein übliches Verfahren im Kontext von neuronalen Netzen.
+
+Für die Vorverarbeitung der Daten wurden zwei unterschiedliche Ansätze verfolgt, die sowohl Vor- wie auch Nachteile aufweisen und daher je nach Datensatz Verwendung finden.
+Dem Benutzer steht es dabei frei, die vorverarbeiten Daten in einem eigenen Datensatz vor Trainingsbeginn zu speichern oder alle notwendigen Vorverarbeitungsschritte der Bilder zur Laufzeit während des Trainings für das aktuell zu lernende Bild zu vollziehen.
+Die Vorverarbeitung während des Trainings wurde dabei mit Hilfe mehrerer Threads implementiert, sodass die Geschwindigkeit der Lernprozedur möglichst nicht gestört wird.
+Es zeigt sich, dass für kleine Datensätze wie \gls{MNIST} oder \gls{Cifar}-10 die Vorverarbeitung der Daten während des Trainings so gut wie keinen Einfluss auf die Lerngeschwindigkeit mit sich zieht.
+Für größere Datensätze wie \gls{Pascal} ist dies aber nicht zu empfehlen, da der Aufwand der Vorverarbeitung durch die größeren Bilder, gerade aufgrund der Laufzeiten der Superpixelalgorithmen, zu einer erhöhten Lerndauer führt.
+Eine gezielte Laufzeitanalyse der beiden Vorverarbeitungsmethoden finden sich für die einzelnen Datensätze in Kapitel~\ref{laufzeitanalyse}.
+Ein entscheidener Vorteil der Vorverarbeitung zur Laufzeit ist jedoch die in Kapitel~\ref{augmentierung} angesprochene Augmentierung der Eingabedaten.
+Wohingegen für vorverarbeitete Daten nur eine Augmentierung auf Graphen möglich ist, kann das volle Ausmaß einer Augmentierung erst über die Vorverarbeitung zur Laufzeit gewonnen werden.
