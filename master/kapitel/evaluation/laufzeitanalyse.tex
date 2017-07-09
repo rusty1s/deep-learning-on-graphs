@@ -19,3 +19,23 @@ mit: 0.29s (Batch-Size 64)
 \label{vergleich_laufzeit}
 
 \input{tikz/laufzeit_vergleich}
+
+Tabelle~\ref{tab:laufzeit_raeumlich_spektral} zeigt
+\begin{table}[t]
+\centering
+\begin{tabular}{lrrrr}
+  \toprule
+  & \multicolumn{2}{c}{Räumlich} & \multicolumn{2}{c}{Spektral}\\
+  \cmidrule{2-5}
+  & \gls{SLIC} & Quickshift & \gls{SLIC} & Quickshift\\
+  \midrule
+  \gls{MNIST} & 1 & 1 & 1 & 1\\
+  \gls{Cifar}-10 & 1 & 1 & 1 & 1\\
+  \gls{Pascal} & 1 & 1 & 1 & 1\\
+  \bottomrule
+\end{tabular}
+\caption[Laufzeiten der räumlichen und spektralen Vorverarbeitungsschritte]{}
+\label{tab:laufzeit_raeumlich_spektral}
+\end{table}
+
+\todo{laufzeitentabelle Lernen pro Batch}
