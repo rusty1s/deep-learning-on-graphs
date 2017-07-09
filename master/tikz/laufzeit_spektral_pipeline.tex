@@ -80,11 +80,11 @@
 \begin{tabular}{ll}
   \toprule
   1. Segmentierung & 2. Adjazenzbestimmung\\
-  3. Graphvergröberung & 4. Merkmalsextraktion\\
+  3. Graphvergröberung (vier Ebenen) & 4. Merkmalsextraktion\\
   \bottomrule
 \end{tabular}
 
-\caption[Laufzeitverteilung der Vorverarbeitungsschritte]{Laufzeitverteilung der einzelnen Vorverarbeitungsschritte für das Lernen auf Graphen, unterteilt \bzgl{} unterschiedlichen Datensätze \gls{MNIST}, \gls{Cifar}-10 und \gls{Pascal} und den verwendeteten Superpixelalgorithmen \gls{SLIC} (blau) und Quickshift (orange).
+\caption[Laufzeitverteilung der spektralen Vorverarbeitungsschritte]{Laufzeitverteilung der einzelnen Vorverarbeitungsschritte für das spektrale Lernen auf Graphen, unterteilt \bzgl{} unterschiedlichen Datensätze \gls{MNIST}, \gls{Cifar}-10 und \gls{Pascal} und den verwendeteten Superpixelalgorithmen \gls{SLIC} (blau) und Quickshift (orange).
 Wohingegen für \gls{MNIST} und \gls{Cifar}-10 die Graphvergröberung die längste Berechnungsdauer in Anspruch nimmt, zeigt sich dagegegen für größere Datensätze (\gls{Pascal}) die Segmentierung als Flaschenhals der Vorverarbeitung.}
-\label{fig:laufzeit_pipeline}
+\label{fig:laufzeit_spektral_pipeline}
 \end{figure}
