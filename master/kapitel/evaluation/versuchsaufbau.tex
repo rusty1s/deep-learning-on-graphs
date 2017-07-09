@@ -209,8 +209,32 @@ Er kann jedoch insbesondere aufgrund der beliebigen Anzahl an Ziffern im Bild ni
 \subsection{Metriken}
 \label{metriken}
 
+Shaping the output of our linear function into the form we want - in this case, a probability distribution over the classes.
+\emph{Softmax}~\cite{tensorflow}
+\begin{equation*}
+  \mathrm{softmax}\left(\ve{x}\right) = \frac{\exp\left(\ve{x}\right)}{\sum_{n=1}^N \exp\left(\ve{x}_n\right)}
+\end{equation*}
+Exponentierten der Inputs und dann normalisieren
+output ist immer größer 0
+Normalisieren, so dass sie sich zu 1 aufaddieren (was einer Wahrscheinlichkeitsverteilung entspricht)
+
+\emph{Cross-Entropie}~\cite{tensorflow}
+\begin{equation*}
+  H_{\ve{y}^{\prime}}\left(\ve{y}\right) \coloneqq - \sum_{n=1}^N \ve{y}_n^{\prime} \log \left(\ve{y}_n\right)
+\end{equation*}
+Kostenfunktion ist immer positiv
+Je näher es am resultat ist, umso kleiner werden die Kosten
+
+
+Warum ist das besser als Quadratic Cost
+
 Loss Function
 Accuracy
+
+\emph{Genauigkeit} (\engl{} \emph{Accuracy})
+\begin{equation*}
+  \mathrm{accuracy}\left(\right)
+\end{equation*}
 
 \subsection{Parameterwahl}
 \label{parameterwahl}
