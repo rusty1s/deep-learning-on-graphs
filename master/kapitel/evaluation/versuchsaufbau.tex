@@ -302,7 +302,7 @@ Die Überführung der Eingabedaten in die Standardnormalverteilung ist ein übli
 
 Für die Vorverarbeitung der Daten wurden zwei unterschiedliche Ansätze verfolgt, die sowohl Vor- wie auch Nachteile aufweisen und daher je nach Datensatz Verwendung finden.
 Dem Benutzer steht es dabei frei, die vorverarbeiten Daten in einem eigenen Datensatz vor Trainingsbeginn zu speichern oder alle notwendigen Vorverarbeitungsschritte der Bilder zur Laufzeit während des Trainings für das aktuell zu lernende Bild zu vollziehen.
-Die Vorverarbeitung während des Trainings wurde dabei mit Hilfe mehrerer Threads implementiert, sodass die Geschwindigkeit der Lernprozedur möglichst nicht gestört wird.
+Die Vorverarbeitung während des Trainings wurde dabei mit Hilfe mehrerer Threads implementiert, sodass die Laufzeit der Lernprozedur möglichst nicht gestört wird.
 Es zeigt sich, dass die Vorverarbeitung der Daten während des Trainings für kleine Datensätze wie \gls{MNIST} oder \gls{Cifar}-10 so gut wie keinen Einfluss auf die Lerngeschwindigkeit mit sich zieht.
 Für größere Datensätze wie \gls{Pascal} ist dies aber nicht zu empfehlen, da der Aufwand der Vorverarbeitung durch die größeren Bilder, gerade aufgrund der steigenden Laufzeiten der Superpixelalgorithmen, zu einer erhöhten Lerndauer führt.
 Eine gezielte Laufzeitanalyse der beiden Vorverarbeitungsmethoden findet sich für die einzelnen Datensätze in Kapitel~\ref{laufzeitanalyse}.
