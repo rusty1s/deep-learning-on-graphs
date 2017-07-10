@@ -1,19 +1,22 @@
 \section{Versuchsaufbau}
 \label{versuchsaufbau}
 
-Generelle Netzstruktur, softmax auf Klassen abgebildet
-Conv mit MaxPool gefolgt von AveragePool auf Fully Connect auf Softmax
+Die Aufgabe einer \emph{Klassifizerung} ist die Zuordnung einer Eingabe $\ve{x}$ zu genau einem Element einer endlichen Menge fest definierter Klassen $\mathcal{Y} = {\left\{y_i\right\}}_{i=1}^Y$ mit $\left|\mathcal{Y}\right| = Y$.
+Das neuronale Netz approximiert \bzw{} lernt dabei eine Funktion, die eine beliebige Eingabe, \dhe{} ein Bild (oder in diesem Fall ein Graph), auf eine $Y$-dimensionale Ausgabe $\ve{y} \in \gls{R}^Y$ überführt, wobei $\ve{y}_i$ die Evidenz des Auftretens der Klasse $y_i$ in der Eingabe beschreibt.
+Der Index des höchsten Werts des Ausgabevektors $\ve{y}$ gilt damit folglich als die Klasse der Eingabe $\ve{x}$, die diese am ehesten beschreibt.
 
-wir machen hier nur klassifikation
-ander probleme sind aber denkbar (z.B. Segmentierung über Knotenklassifizierung)
+Die Bildklassifizerung ist, gerade im Kontext neuronaler Netze \bzw{} \glspl{CNN}, ein bereits weiterforschtes Gebiet.
+Es gibt eine Vielzahl an Datensätzen und Methodiken, die sich ausschließlich diesem Problem widmen.
+Gerade auch aufgrund ihrer vielen Vergleichsresultate zeichnet sie sich damit ideal für die Verifizierung der vorgestellten Faltungsoperatoren aus.
+Andere Probleme, wie etwa die Objekterkennung oder eine Segmentierung über eine Knotenklassifizierung, sind vorstellbar, wurden aber im Rahmen dieser Arbeit nicht verfolgt.
 
 \subsection{Datensätze}
 \label{datensaetze}
 
 Die vorgestellten Faltungsmethoden aus Kapitel~\ref{raeumliches_lernen} und~\ref{spektrales_lernen} \bzgl{} des Lernens auf Graphen im zweidimensionalen euklidischen Raum werden über einer Reihe von Datensätzen verifiziert, die im Folgenden vorgestellt werden.
 Dafür werden die Bildermengen in eine Superpixelrepräsentation (\gls{SLIC} und Quickshift) konvertiert und darauf basierend in eine Graphrepräsentation transformiert (\vgl{} Kapitel~\ref{graphrepraesentationen_von_bildern}).
-Zusätzlich zu der Präsentation der Datensätze enthält dieses Unterkapitel damit insbesondere die Parameterwahl der jeweiligen Superpixelalgorithmen, welche jeweils händisch über einer Untermenge der Bilder eines jeden Datensatzes ermittelt werden.
-Weiterhin wird in diesem Unterkapitel abhängig von dem gewählten Datensatz und der Superpixelrepräsentation auf die entsprechenden Merkmalsselektionen der $38$ Formmerkmale eingegangen, die nach dem beschriebenen Prinzip aus Kapitel~\ref{merkmalsselektion} errechnet werden.
+Zusätzlich zu der Präsentation der Datensätze enthält dieses Unterkapitel damit insbesondere die Parameterwahl der jeweiligen Superpixelalgorithmen, welche jeweils händisch über einer Untermenge der Bilder eines jeden Datensatzes ermittelt wurden.
+Weiterhin wird in diesem Unterkapitel abhängig von dem gewählten Datensatz und der Superpixelrepräsentation auf die entsprechenden Merkmalsselektionen der $38$ Formmerkmale eingegangen, die nach dem beschriebenen Prinzip aus Kapitel~\ref{merkmalsselektion} errechnet wurden.
 
 \paragraph{MNIST}
 \label{mnist}
@@ -209,32 +212,28 @@ Er kann jedoch insbesondere aufgrund der beliebigen Anzahl an Ziffern im Bild ni
 \subsection{Metriken}
 \label{metriken}
 
-Shaping the output of our linear function into the form we want - in this case, a probability distribution over the classes.
-\emph{Softmax}~\cite{tensorflow}
+Eine typische Normierung der Ausgabe $\ve{y} \in \gls{R}^Y$ eines neuronalen Netzes für ein multidimensionales Klassifizierungsproblem ist die \emph{Softmax Regression}
 \begin{equation*}
-  \mathrm{softmax}\left(\ve{x}\right) = \frac{\exp\left(\ve{x}\right)}{\sum_{n=1}^N \exp\left(\ve{x}_n\right)}
+  \mathrm{softmax}\left(\ve{y}\right) \coloneqq \frac{\exp\left(\ve{y}\right)}{\sum_{i=1}^Y \exp\left(\ve{y}_i\right)},
 \end{equation*}
-Exponentierten der Inputs und dann normalisieren
-output ist immer größer 0
-Normalisieren, so dass sie sich zu 1 aufaddieren (was einer Wahrscheinlichkeitsverteilung entspricht)
+die einer Wahrscheinlichkeitsverteilung der Klassen $\mathcal{Y}$ für das Auftreten dieser in der Eingabe $\ve{x}$ entspricht~\cite{Nielsen, tensorflow}.
+Damit gilt insbesondere $\mathrm{softmax}\left(\ve{y}\right) \in {\left[0, 1\right]}^Y$ sowie $\sum_{i=1}^Y = {\mathrm{softmax}\left(\ve{y}\right)}_i = 1$~\cite{Nielsen}.
+Aufgrund der Verwendung der Exponentialfunktion werden dabei die höchsten Werte in $\ve{y}$ hervorgehoben, wohingegen Werte, die signifikant unter dem Maximum liegen, abgeschwächt werden.
 
-\emph{Cross-Entropie}~\cite{tensorflow}
+Neben der in Kapitel~\ref{convolutional_neural_networks} vorgestellten quadratischen Kostenfunktion findet sich in neuronalen Netzen häufiger die Verwendung der Kreuzentropie als Kostenfunktion, welche dem Netz ermöglicht, schneller bessere Entscheidungen zu fällen (\vgl{}~\cite{Nielsen}).
+Die \emph{Kreuzentropie} ist dabei definiert als
 \begin{equation*}
-  H_{\ve{y}^{\prime}}\left(\ve{y}\right) \coloneqq - \sum_{n=1}^N \ve{y}_n^{\prime} \log \left(\ve{y}_n\right)
+  H_{\ve{y}^{\prime}}\left(\ve{y}\right) \coloneqq - \left\langle \ve{y}^{\prime}, \log\left(\mathrm{softmax}\left(\ve{y}\right)\right)\right\rangle
 \end{equation*}
-Kostenfunktion ist immer positiv
-Je näher es am resultat ist, umso kleiner werden die Kosten
+wobei $\ve{y}^{\prime} \in {\left\{ 0, 1 \right\}}^Y$ die \emph{Ground-Truth} der Eingabe $\ve{x}$ als \emph{One-Hot}-Kodierung beschreibt~\cite{tensorflow, Nielsen}.
+$H_{\ve{y}^{\prime}}\left(\ve{y}\right)$ ist aufgrund der Intervalleinschränkung von \ve{y} mit Hilfe der Softmax Regression stets positiv und wird umso kleiner, je ähnlicher sich $\ve{y}^{\prime}$ und $\ve{y}$ werden~\cite{Nielsen}.
 
-
-Warum ist das besser als Quadratic Cost
-
-Loss Function
-Accuracy
-
-\emph{Genauigkeit} (\engl{} \emph{Accuracy})
+Zur Evaluation der Ergebnisse einer Klassifizierung wird neben der Kostenfunktion die \emph{Genauigkeit} (\engl{} \emph{Accuracy}) über einer Eingabemenge $\mathcal{X} = \left\{\ve{x}_1, \ldots \right\}$ als
 \begin{equation*}
-  \mathrm{accuracy}\left(\right)
+  \mathrm{accuracy}\left(\mathcal{X}\right) \coloneqq \frac{1}{\left|\mathcal{X}\right|}\sum_{i = 1}^{\left|\mathcal{X}\right|}  \max \left( - \left| \mathrm{argmax}\left(\ve{y}_i\right) - \mathrm{argmax}\left(\ve{y}^{\prime}_i\right) \right| + 1, 0 \right)
 \end{equation*}
+definiert, wobei $\mathrm{argmax}\left(\ve{y}\right) = i$ genau dann, wenn $\ve{y}_i \geq \ve{y}_j$ für alle $1 \leq j \leq Y$.
+Sie beschreibt den Anteil korrekt klassifizierter Eingabedaten aus der jeweiligen Gesamtmenge der Trainings-, Validierungs- und Testdaten $\mathcal{X}$ und ist daher ein geeignetes Mittel, die Qualität eines neuronalen Klassifizierungsnetzes zu bestimmen.
 
 \subsection{Parameterwahl}
 \label{parameterwahl}
@@ -325,10 +324,10 @@ Die Verteilung eines Merkmals eines Graphen liegt damit durchschnittlich bei Nul
 Die Überführung der Eingabedaten in die Standardnormalverteilung ist ein übliches Verfahren im Kontext von neuronalen Netzen.
 
 Für die Vorverarbeitung der Daten wurden zwei unterschiedliche Ansätze verfolgt, die sowohl Vor- wie auch Nachteile aufweisen und daher je nach Datensatz Verwendung finden.
-Dem Benutzer steht es dabei frei, die vorverarbeiten Daten in einem eigenen Datensatz vor Trainingsbeginn zu speichern oder alle notwendigen Vorverarbeitungsschritte der Bilder zur Laufzeit während des Trainings für das aktuell zu lernende Bild zu vollziehen.
+Dem Benutzer steht es dabei frei, die vorverarbeiteten Daten in einem eigenen Datensatz vor Trainingsbeginn zu speichern oder alle notwendigen Vorverarbeitungsschritte der Bilder zur Laufzeit während des Trainings für das aktuell zu lernende Bild zu vollziehen.
 Die Vorverarbeitung während des Trainings wurde dabei mit Hilfe mehrerer Threads implementiert, sodass die Laufzeit der Lernprozedur möglichst nicht gestört wird.
 Es zeigt sich, dass die Vorverarbeitung der Daten während des Trainings für kleine Datensätze wie \gls{MNIST} oder \gls{Cifar}-10 so gut wie keinen Einfluss auf die Lerngeschwindigkeit mit sich zieht.
-Für größere Datensätze wie \gls{Pascal} ist dies aber nicht zu empfehlen, da der Aufwand der Vorverarbeitung durch die größeren Bilder, gerade aufgrund der steigenden Laufzeiten der Superpixelalgorithmen, zu einer erhöhten Lerndauer führt.
+Für größere Datensätze wie \gls{Pascal} ist dies aber nicht zu empfehlen, da der Aufwand der Vorverarbeitung durch die größeren Bilder, gerade aufgrund der steigenden Laufzeiten der Superpixelalgorithmen, die Lerndauer teilweise extrem beeinflussen kann.
 Eine gezielte Laufzeitanalyse der beiden Vorverarbeitungsmethoden findet sich für die einzelnen Datensätze in Kapitel~\ref{laufzeitanalyse}.
 Ein entscheidener Vorteil der Vorverarbeitung zur Laufzeit ist jedoch die in Kapitel~\ref{augmentierung} angesprochene Augmentierung der Eingabedaten.
 Wohingegen für vorverarbeitete Daten nur eine Augmentierung auf Graphen möglich ist, kann das volle Ausmaß einer Augmentierung erst über die Vorverarbeitung zur Laufzeit gewonnen werden.
