@@ -303,15 +303,15 @@ Es liegen zusätzliche Installationsanweisungen bei und der Quelltext ist so dok
 
 Für die Modellierung und den Betrieb neuronaler Netze in Python wurde die \texttt{tensorflow}-Bibliothek von Google verwendet~\cite{tensorflow}.
 Sie erlaubt die Modellierung eines Berechnungsgraphen, bei dem Knoten mathematische Operationen repräsentieren und die Kanten zwischen ihnen den Datenfluss multidimensionaler Tensoren steuern.
-So gut wie alle implementierten mathematischen Operationen in \texttt{tensorflow} besitzen eine Gradientenimplementierung, sodass die Kosten der Ausgabe eines Berechnungsgraph über das Backpropagationverfahren minimiert werden können.
-Dies erlaubt insbesondere den Bau der implementierten Faltungsoperatoren auf Graphen mit den reinen Operationen, die \texttt{tensorflow} bereitstellt.
+So gut wie alle implementierten mathematischen Operationen in \texttt{tensorflow} besitzen eine Gradientenimplementierung, sodass die Kosten der Ausgabe eines Berechnungsgraphen über das Backpropagationverfahren minimiert werden können.
+Dies erlaubt insbesondere den Bau der implementierten Faltungsoperatoren mit den in \texttt{tensorflow} zur Verfügung stehenden Operationen.
 
 Zur Generierung der Superpixelrepräsentationen der Bildermengen wurde die Bibliothek \texttt{scikit-image} (\texttt{skimage}) benutzt~\cite{scikit}.
-Sie enthält die Implementierungen zu den \gls{SLIC} und Quickshift Algorithmen.
-Sie enthält ebenso eine Implementierung der Graphgenerierung aus einer Superpixelrepräsentation, die sich aber in Tests als ineffizient herausstellte und daher in dieser Arbeit nicht verwendet wird (\vgl{} Kapitel~\ref{laufzeitanalyse}).
+Sie enthält die Implementierungen zu den Superpixelalgorithmen \gls{SLIC} und Quickshift, die in dieser Arbeit benutzt werden.
+Sie enthält ebenso eine Implementierung zur Graphgenerierung einer Superpixelrepräsentation, die sich aber in Tests als ineffizient herausstellte und daher in dieser Arbeit nicht verwendet wird (\vgl{} Kapitel~\ref{laufzeitanalyse}).
 
-Für die Merkmalsextraktion, die Graphgenerierung sowie die Implementierung der Graphvergröberungen für die Poolingoperationen wurden die Bibliotheken \texttt{numpy} und \texttt{scipy} verwendet~\cite{numpy, scipy}.
-Beide Bibliotheken gehören aufgrund ihrer effizienten Implementierung in C zu der Standardwahl \bzgl{} wissenschaflicher Berechnungen in Python.
+Für die Merkmalsextraktion, die Graphgenerierung, die Implementierung der Graphvergröberungen für das spektrale Lernen sowie die Generierung der Receptive-Fields für das räumliche Lernen wurden die Bibliotheken \texttt{numpy} und \texttt{scipy} verwendet~\cite{numpy, scipy}.
+Beide Bibliotheken gehören aufgrund ihrer effizienten Implementierung in C zu der Standardwahl wissenschaflicher Berechnungen in Python.
 Alle dünnbesetzten Matrizen, \dhe{} Adjazenzmatrizen sowie Diagonalmatrizen, sind insbesondere auch als solche implementiert.
 
 \paragraph{Eingabe und Vorverarbeitung der Daten}
