@@ -1,8 +1,12 @@
 \section{Merkmalsselektion}
 \label{merkmalsselektion}
 
-erwähnen das Features auf Mean 0 und Stddev 1 skaliert sind
-
-Alle
-
-pca nicht möglich, weil zu teuer (alle Form Features zu berechnen ist utopisch und widerspricht der Grundidee)
+Die in Kapitel~\ref{merkmalsextraktion} ermittelten Formmerkmale auf den Knoten eines Graphen, der aus einer Superpixelrepräsentation generiert wurde, besitzen mit $38$ Dimensionen eine hohe Dimensionalität.
+Viele der Formmerkmale bauen dabei aufeinander auf und es ist daher fraglich, inwieweit die gesamte Menge der Merkmale gebraucht werden oder ob eine Untermenge dieser ausreicht.
+Eine \emph{\gls{PCA}} auf den Merkmalen kann uns helfen, die reale Dimensionalität der Daten abzuschätzen.
+Dafür werden die Merkmale durch eine Linearkombination ihrer Hauptkomponenten beschrieben und können so durch weitaus weniger Dimensionen beschrieben werden.
+Abbildung~\ref{fig:pca} zeigt dabei die kumulative Varianz des Merkmalraums, \dhe{} die Abdeckung des Raums, in Abhängigkeit zu der Anzahl an Hauptkomponenten der \gls{PCA}.
+\input{tikz/pca}
+Es zeigt sich, dass nach bereits recht wenigen Komponenten $\left(\approx 9\right)$ der Großteil des Merkmalraums abgedeckt werden kann.
+Im Kontext von neuronalen Netzen ist die Verwendung einer \gls{PCA} aber eher untypisch, denn schließlich müssen dafür weiterhin alle $38$ Formmerkmale berechnet werden und daraus schließlich die neuen Merkmale anhand der Hauptkomponenten ermittel werden.
+Ein einfacheres Verfahren ist dagegen eine Auswahl an Merkmalen, genannt \emph{Merkmalsselektion}, die die Merkmalsmenge möglichst gut beschreibt.
