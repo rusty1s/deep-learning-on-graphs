@@ -13,13 +13,8 @@
 % Cifar-10 Quickshift: Ohne Preprocessing: 0.03s
 % mit: 0.29s (Batch-Size 64)
 
-\input{tikz/laufzeit_spektral_pipeline}
 \input{tikz/laufzeit_raeumlich_pipeline}
-
-\paragraph{Vergleich \bzgl{} vorhandener Implementierungen}
-\label{vergleich_laufzeit}
-
-\input{tikz/laufzeit_vergleich}
+\input{tikz/laufzeit_spektral_pipeline}
 
 % Tabelle~\ref{tab:laufzeit_raeumlich_spektral} zeigt
 \begin{table}[t]
@@ -30,15 +25,21 @@
   \cmidrule{2-5}
   & \gls{SLIC} & Quickshift & \gls{SLIC} & Quickshift\\
   \midrule
-  \gls{MNIST} & 1 & 1 & 1 & 1\\
-  \gls{Cifar}-10 & 1 & 1 & 1 & 1\\
-  \gls{Pascal} & 1 & 1 & 1 & 1\\
+  \gls{MNIST} & 30.59 & 24.00 & 20.32 & 19.40\\
+  \gls{Cifar}-10 & 72.74 & 43.85 & 25.34 & 23.18\\
+  \gls{Pascal} & 713.40 & 1080.78 & 372.79 & 782.56\\
   \bottomrule
 \end{tabular}
-\caption[Laufzeiten der räumlichen und spektralen Vorverarbeitungsschritte]{}
+\caption[Laufzeiten der räumlichen und spektralen Vorverarbeitung]{Laufzeiten der räumlichen sowie spektralen Vorverarbeitung für alle Datensätze und Superpixelalgorithmen basierend auf den Laufzeiten aus Abbildung~\ref{fig:laufzeit_raeumlich_pipeline} und~\ref{fig:laufzeit_spektral_pipeline}.
+Die räumliche Vorverarbeitung ist aufgrund der einzelnen Receptive-Field-Berechnungen deutlich ineffizienter.}
 \label{tab:laufzeit_raeumlich_spektral}
 \end{table}
 
 % \todo{laufzeitentabelle Lernen pro Batch}
 
 % langsamer als ausgereifte Bildimplementierungen
+
+\paragraph{Vergleich \bzgl{} vorhandener Implementierungen}
+\label{vergleich_laufzeit}
+
+\input{tikz/laufzeit_vergleich}
