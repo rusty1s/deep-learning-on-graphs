@@ -5,7 +5,7 @@ Die in Kapitel~\ref{merkmalsextraktion} ermittelten Formmerkmale auf den Knoten 
 Viele der Formmerkmale bauen dabei aufeinander auf und es ist daher fraglich, inwieweit die gesamte Menge an Merkmalen gebraucht wird oder ob eine Untermenge dieser als ausreichend gilt.
 Eine \emph{\gls{PCA}} auf den Knotenmerkmalen kann uns dabei helfen, die reale Dimensionalität der Daten abzuschätzen.
 Dafür werden die Merkmale durch eine Linearkombination ihrer Hauptkomponenten beschrieben und können so durch weitaus weniger Dimensionen beschrieben werden.
-Abbildung~\ref{fig:pca} zeigt dabei die \emph{kumulative Varianz} des Merkmalraums, \dhe{} die Abdeckung des Raums, in Abhängigkeit zu der Anzahl an Hauptkomponenten der \gls{PCA}.
+Abbildung~\ref{fig:pca} zeigt dabei die \emph{kumulative Varianzaufklärung} des Merkmalraums, \dhe{} die Varianzabdeckung der Merkmale durch die Hauptkomponenten, in Abhängigkeit zu der Anzahl an Hauptkomponenten der \gls{PCA}~\cite{scikitlearn}.
 \input{tikz/pca}
 Dabei zeigt sich, dass nach bereits recht wenigen Komponenten $\left(\approx 9\right)$ der Großteil des Merkmalraums abgedeckt werden kann.
 
