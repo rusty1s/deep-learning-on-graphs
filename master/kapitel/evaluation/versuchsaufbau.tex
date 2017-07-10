@@ -235,23 +235,23 @@ Zur Evaluation der Ergebnisse einer Klassifizierung wird neben der Kostenfunktio
 definiert, wobei $\mathrm{argmax}\left(\ve{y}\right) = i$ genau dann, wenn $\ve{y}_i \geq \ve{y}_j$ für alle $1 \leq j \leq Y$.
 Sie beschreibt den Anteil korrekt klassifizierter Eingabedaten aus der jeweiligen Gesamtmenge der Trainings-, Validierungs- und Testdaten $\mathcal{X}$ und ist daher ein geeignetes Mittel, die Qualität eines neuronalen Klassifizierungsnetzes zu bestimmen~\cite{Nielsen}.
 
-\subsection{Parameterwahl}
-\label{parameterwahl}
+\subsection{Parameter}
+\label{parameter}
 
-Diese beeinflussen zum einen die Ergebnisse der neuronalen Netze und bestehen für diese aus Lernrate, Anzahl und Filtergrößen je Faltungsschicht und der Zahl der Neuronen in der verbundenen Ebene.
-Anzahl der Ebenen
+Neben den Superpixelparametern und der Anzahl \bzw{} Auswahl der zur Verfügung stehenden Formmerkmale besitzt die Vorverarbeitung der Daten sowie das neuronale Netz an sich zahlreiche weitere optimierbare Parameter.
 
-Vorstellung aller Parameter
-Was gibt es denn hier überhaupt?
-Dropout, L2 Regularisierung?
-BatchSize?
-Globale/normale Lokalisierung
-Standardabweichung für Gauß
-LEARNING RATE, LEARNING RATE DECAY
-weight bias initialisierung
+So kann sich \zB{} bei der Graphgenerierung zusätzlich zwischen einer Konnektiviät von $4$ \bzw{} $8$, einer globalen oder lokalen Normierung sowie einer frei wählbaren Standardabweichung \gls{sigma} für die Gewichtsbestimmung der Kanten nach~\eqref{eq:gauss} entschieden werden.
+Aufgrund der unmöglichen Abdeckung aller möglichen Parameterkombinationen wurden speziell diese für die Evaluation festgehalten.
+Alle generierten Graphen wurden folglich über einer Konnektivität von $8$, einer globalen Normierung sowie einer Standardabweichung \gls{sigma} von Eins generiert.
 
-Alle Faltungen wurden dabei mit einer Partitionsgröße von $8$ bei $K=0$ und $K=1$ implementiert, um ein \gls{CNN} mit einem $3 \times 3$ Filter zu simulieren.
-Es erscheint jedoch vorstellbar die Filtergröße bei größerer lokaler Kontrollierbarkeit, \dhe{} $K > 1$, weiter zu reduzieren und die Gefahr des Overfittings damit aufgrund der kleineren Anzahl an Trainingsparametern einzuschränken.
+Für das neuronale Netz ergeben sich neben der Anzahl an Faltungs-, Pooling- und vollverbundenen Schichten sowie deren Größen und Anordnungen, die in den Ergebnissen in Kapitel~\ref{ergebnisse} manuell aufgelistet sind, weitere einstellbare Größen.
+Alle Netze wurden mit einer \emph{Batch Size} von $64$ trainiert.
+Die Gewichte des Netzes wurden normal verteilt mit einer Standardabweichung von $0.1$ initialisiert, wohingegen alle Biaswerte zu Beginn des Trainings einen konstanten Wert von  $0.1$ besitzen.
+Die gewählte Lernrate \gls{learning} des Netzes unterscheidet sich je nach getestetem Modell zwischen $0.01$ und $0.001$.
+Sie wird dabei zusätzlich stufenweise exponentiell nach einer definierten Anzahl an Epochen reduziert.
+
+Es wurden ebenso Methodiken angewendet, die das Overfitting eines Netzes reduzieren.
+So finden sich speziell in den vollverbundenen Schichten Anwendungen der \emph{Dropout}-Technik sowie der \emph{L2-Regularisierung} (\vgl{}~\cite{dropout, weight_decay}).
 
 \subsection{Augmentierung}
 \label{augmentierung}
