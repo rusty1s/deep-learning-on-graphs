@@ -1,47 +1,47 @@
 \section{Ergebnisse}
 \label{ergebnisse}
 
-10.000 Steps mit Batch Size 64\\
-Learning-Rate: 0.001\\
-Dropout: 0.5\\
+% 10.000 Steps mit Batch Size 64\\
+% Learning-Rate: 0.001\\
+% Dropout: 0.5\\
 
-\begin{tabular}{cccc}
-  \toprule
-  Verfahren & Netzarchitektur & Dauer & Genauigkeit\\
-  \midrule
-  klassisch & C5-32-P4-C5-64-P4-FC1024 & 0.18s & 99.189\\
-  klassisch & C32-C32-P4-C64-C64-P4-FC1024 & 0.25s & 99.139\\
-  Chebyshev & C25-32-P4-C25-64-P4-FC1024 & 0.91s & 98.888\\
-  GCN & C32-C32-P4-C64-C64-P4-FC1024 & 0.22s & 96.675\\
-  E-GCN & C32-C32-P4-C64-C64-P4-FC1024 & 0.77s & 99.145\\
-  \bottomrule
-\end{tabular}
-\todo{fuckin patchy}
+% \begin{tabular}{cccc}
+%   \toprule
+%   Verfahren & Netzarchitektur & Dauer & Genauigkeit\\
+%   \midrule
+%   klassisch & C5-32-P4-C5-64-P4-FC1024 & 0.18s & 99.189\\
+%   klassisch & C32-C32-P4-C64-C64-P4-FC1024 & 0.25s & 99.139\\
+%   Chebyshev & C25-32-P4-C25-64-P4-FC1024 & 0.91s & 98.888\\
+%   GCN & C32-C32-P4-C64-C64-P4-FC1024 & 0.22s & 96.675\\
+%   E-GCN & C32-C32-P4-C64-C64-P4-FC1024 & 0.77s & 99.145\\
+%   \bottomrule
+% \end{tabular}
+% \todo{fuckin patchy}
 
 % \paragraph{Vergleich \bzgl{} vorhandener Implementierungen}
 % \label{vergleich_ergebnisse}
 
-PascalVOC Squeeze einheitliche Größe von $224 \times 224$.
+% PascalVOC Squeeze einheitliche Größe von $224 \times 224$.
 
-\paragraph{\gls{Cifar}-10}
+% \paragraph{\gls{Cifar}-10}
 
-Abbildung~\ref{fig:cifar_10_train} zeigt
+% Abbildung~\ref{fig:cifar_10_train} zeigt
 \input{tikz/cifar_10_train}
 
-Postprocessing weitaus besser als preprocessing!
+% Postprocessing weitaus besser als preprocessing!
 
-Mit drei mal Dropout kein Overfitting, trainiert allerdings langsam
-Learning Rate Decay darf nicht zu krass sein
+% Mit drei mal Dropout kein Overfitting, trainiert allerdings langsam
+% Learning Rate Decay darf nicht zu krass sein
 
-Durchschnittliche Faltungsdauer: 2.05s, Preprocessingdauer: 0.35s
-Bei Batch-Size 64
-Erstes Resultat mit Postprocessing:
-Loss: 1.05440, acc: 0.63411
+% Durchschnittliche Faltungsdauer: 2.05s, Preprocessingdauer: 0.35s
+% Bei Batch-Size 64
+% Erstes Resultat mit Postprocessing:
+% Loss: 1.05440, acc: 0.63411
 
-Zweiter Test:
-Dropout nur noch 2 mal, nicht so starkes Learning Rate Decay
-ist nun bei 70 \% nach 50k Steps
-Dropout ist immer noch zu hart
+% Zweiter Test:
+% Dropout nur noch 2 mal, nicht so starkes Learning Rate Decay
+% ist nun bei 70 \% nach 50k Steps
+% Dropout ist immer noch zu hart
 
-Alle Faltungen wurden dabei mit einer Partitionsgröße von $8$ bei $K=0$ und $K=1$ implementiert, um ein \gls{CNN} mit einem $3 \times 3$ Filter zu simulieren.
-Es erscheint jedoch vorstellbar die Filtergröße bei größerer lokaler Kontrollierbarkeit, \dhe{} $K > 1$, weiter zu reduzieren und die Gefahr des Overfittings damit aufgrund der kleineren Anzahl an Trainingsparametern einzuschränken.
+% Alle Faltungen wurden dabei mit einer Partitionsgröße von $8$ bei $K=0$ und $K=1$ implementiert, um ein \gls{CNN} mit einem $3 \times 3$ Filter zu simulieren.
+% Es erscheint jedoch vorstellbar die Filtergröße bei größerer lokaler Kontrollierbarkeit, \dhe{} $K > 1$, weiter zu reduzieren und die Gefahr des Overfittings damit aufgrund der kleineren Anzahl an Trainingsparametern einzuschränken.
