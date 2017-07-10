@@ -9,4 +9,5 @@ Abbildung~\ref{fig:pca} zeigt dabei die kumulative Varianz des Merkmalraums, \dh
 \input{tikz/pca}
 Es zeigt sich, dass nach bereits recht wenigen Komponenten $\left(\approx 9\right)$ der Großteil des Merkmalraums abgedeckt werden kann.
 Im Kontext von neuronalen Netzen ist die Verwendung einer \gls{PCA} aber eher untypisch, denn schließlich müssen dafür weiterhin alle $38$ Formmerkmale berechnet werden und daraus schließlich die neuen Merkmale anhand der Hauptkomponenten ermittel werden.
-Ein einfacheres Verfahren ist dagegen eine Auswahl an Merkmalen, genannt \emph{Merkmalsselektion}, die die Merkmalsmenge möglichst gut beschreibt.
+Ein einfacheres Verfahren ist dagegen die Bestimmung einer Auswahl an Merkmalen, genannt \emph{Merkmalsselektion}, die die Merkmalsmenge möglichst gut beschreibt.
+In dieser Arbeit kommen zwei Merkmalsselektionsalgorithmen zum Einsatz, die jeweils sequentiell ausgeführt werden — die univariate Merkmalsselektion sowie die rekursive Merkmalseliminierung
