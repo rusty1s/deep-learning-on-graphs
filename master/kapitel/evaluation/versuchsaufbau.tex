@@ -48,7 +48,7 @@ Für eine detaillierte Beschreibung der Parameter sei auf Kapitel~\ref{superpixe
 \end{table}
 
 Aus der Wahl der Superpixelparameter ergeben sich die ebenfalls in der Tabelle datierten Werte der durchschnittlichen, minimalen und maximalen Anzahl an Knoten $\overline{N}$, $N_{\min}$ \bzw{} $N_{\max}$ sowie dem durchschnittlichen, minimalen und maximalen Knotengrad $\overline{\gls{degree}}$, $\gls{degree}_{\min}$ \bzw{} $\gls{degree}_{\max}$ über der Menge aller aus den Bildern generierten Graphen bei einer Konnektivität von $8$.
-Wohingegen \gls{SLIC} über alle Bilder relativ gleich große Knotenmengen mit relativ gleichem Knotengrad erzeugt, kann dies bei Quickshift je nach Bild stark variieren.
+Wohingegen \gls{SLIC} über alle Bilder relativ gleich große Knotenmengen mit ähnlichem Knotengrad erzeugt, kann dies bei Quickshift je nach Bild stark variieren.
 So erzeugt Quickshift in dem \gls{MNIST} Datensatz \bspw{} große schwarze Bereiche für den Hintergrund, die dementsprechend auch einen sehr hohen Knotengrad besitzen.
 Bei \gls{SLIC} werden stattdessen auch die gleichfarbigen, schwarzen Flächen in einheitliche Intervalle unterteilt.
 Abbildung~\ref{fig:mnist} veranschaulicht die beiden Superpixel- \bzw{} Graphrepräsentationen anhand eines Bildes aus dem \gls{MNIST} Datensatz.
@@ -81,7 +81,7 @@ Die Bilder der Klassen sind dabei \emph{einander ausschließend}.
 So enthält die Klasse \enquote{Auto} nur kleinere Personenwagen, wohingegen die Klasse \enquote{Lastwagen} auch nur als solche zu klassifizierenden Fahrzeuge enthält~\cite{cifar_10}.
 Die Bilder haben eine einheitliche Größe von $32 \times 32$ Pixeln und besitzen drei Farbkanäle.
 Sie passen aufgrund ihrer Größe ähnlich zu \gls{MNIST} komplett in den Hauptspeicher.
-Aufgrund dessen ist er für eine Bildklassifizierung sehr beliebt, da er schnelle Trainingszeiten garantiert und dabei trotzdem alle Techniken des Deep Learnings ausgeschöpft werden müssen, um qualitativ hochwertige Resultate zu erzielen.
+Aufgrund dessen ist \gls{Cifar}-10 für eine Bildklassifizierung sehr beliebt, da so schnelle Trainingszeiten garantiert sind und dabei trotzdem alle Techniken des Deep Learnings ausgeschöpft werden müssen, um qualitativ hochwertige Resultate zu erzielen.
 Der \gls{Cifar} Datensatz liegt ebenfalls in einer zweiten Version vor, genannt \emph{\gls{Cifar}-100}, der 60000 Bilder in 100 Klassen unterteilt, welcher aber in dieser Arbeit keine Verwendung findet~\cite{cifar_10}.
 
 Tabelle~\ref{tab:cifar_10} zeigt die Wahl der Parameter der beiden Superpixelalgorithmen.
@@ -105,7 +105,7 @@ Im Vergleich zu dem \gls{MNIST} Datensatz würden dafür insbesondere für \gls{
 Weiterhin zeigt die Tabelle erneut Informationen zu den generierten Graphen über die Anzahl der Knoten und ihrer Knotengraden.
 Hier lassen sich ebenfalls wieder die unterschiedlichen Vorgehensweisen der beiden Superpixelalgorithmen erkennen.
 Die maximale Anzahl an Knoten eines Graphen aus der Quickshift-Segmentierung liegt dabei mit $624$ Knoten sehr hoch, \dhe{} im Durchschnitt werden nur zwei Pixel einem Superpixel zugeordnet werden, und kann als extremer Ausreißer gewertet werden.
-Abbildung~\ref{fig:cifar_10} zeigt ein Bildes des \gls{Cifar}-10 Datensatzes mit dessen entsprechenden Superpixel- \bzw{} Graphrepräsentationen.
+Abbildung~\ref{fig:cifar_10} zeigt ein Bild aus dem \gls{Cifar}-10 Datensatz mit dessen entsprechenden Superpixel- \bzw{} Graphrepräsentationen.
 \input{figures/cifar_10}
 
 Analog zu \gls{MNIST} wurden für den \gls{Cifar}-10 Datensatz erneut $9$ Formmerkmale nach dem gleichen Prinzip ermittelt.
@@ -139,7 +139,7 @@ Die enthaltenden Objekte der Bilder sind im Einzelnen~\cite{pascal_voc}:
   \item Person
   \item Vogel, Katze, Kuh, Hund, Pferd, Schaf
   \item Flugzeug, Fahrrad, Boot, Bus, Auto, Motorrad, Zug
-  \item Flasche, Stuhl, Esstisch, Topfblume, Sofa, Fernseher/Monitor
+  \item Flasche, Stuhl, Esstisch, Topfblume, Sofa, Bildschirm
 \end{itemize}
 Für die eindeutige Zuweisung eines Bildes zu genau einer Klasse dient das Objekt mit dem größtem Hüllkörper.
 Die Höhen und Breiten der Bilder reichen von $142$ bis $500$ Pixeln.
@@ -220,10 +220,10 @@ die einer Wahrscheinlichkeitsverteilung der Klassen $\mathcal{Y}$ für das Auftr
 Damit gilt insbesondere $\mathrm{softmax}\left(\ve{y}\right) \in {\left[0, 1\right]}^Y$ sowie $\sum_{i=1}^Y = {\mathrm{softmax}\left(\ve{y}\right)}_i = 1$~\cite{Nielsen}.
 Aufgrund der Verwendung der Exponentialfunktion werden dabei die höchsten Werte in $\ve{y}$ hervorgehoben, wohingegen Werte, die signifikant unter dem Maximum liegen, abgeschwächt werden.
 
-Neben der in Kapitel~\ref{convolutional_neural_networks} vorgestellten quadratischen Kostenfunktion findet sich in neuronalen Netzen häufiger die Verwendung der Kreuzentropie als Kostenfunktion, welche dem Netz ermöglicht, schneller bessere Entscheidungen zu fällen (\vgl{}~\cite{Nielsen}).
+Neben der in Kapitel~\ref{convolutional_neural_networks} vorgestellten quadratischen Kostenfunktion~\eqref{eq:quadratische_kostenfunktion} findet sich in neuronalen Netzen häufiger die Verwendung der Kreuzentropie als Kostenfunktion, welche dem Netz ermöglicht, schneller bessere Entscheidungen zu fällen (\vgl{}~\cite{Nielsen}).
 Die \emph{Kreuzentropie} ist dabei definiert als
 \begin{equation*}
-  H_{\ve{y}^{\prime}}\left(\ve{y}\right) \coloneqq - \left\langle \ve{y}^{\prime}, \log\left(\mathrm{softmax}\left(\ve{y}\right)\right)\right\rangle
+  H_{\ve{y}^{\prime}}\left(\ve{y}\right) \coloneqq - \left\langle \ve{y}^{\prime}, \log\left(\mathrm{softmax}\left(\ve{y}\right)\right)\right\rangle,
 \end{equation*}
 wobei $\ve{y}^{\prime} \in {\left\{ 0, 1 \right\}}^Y$ die \emph{Ground-Truth} der Eingabe $\ve{x}$ als \emph{One-Hot}-Kodierung beschreibt~\cite{tensorflow, Nielsen}.
 $H_{\ve{y}^{\prime}}\left(\ve{y}\right)$ ist aufgrund der Intervalleinschränkung von \ve{y} mit Hilfe der Softmax Regression stets positiv und wird umso kleiner, je ähnlicher sich $\ve{y}^{\prime}$ und $\ve{y}$ werden~\cite{Nielsen}.
@@ -247,6 +247,7 @@ Alle generierten Graphen wurden folglich über einer Konnektivität von $8$, ein
 Für das neuronale Netz ergeben sich neben der Anzahl an Faltungs-, Pooling- und vollverbundenen Schichten sowie deren Größen und Anordnungen, die in den Ergebnissen in Kapitel~\ref{ergebnisse} manuell aufgelistet sind, weitere einstellbare Größen.
 Alle Netze wurden mit einer \emph{Batch-Size} von $64$ trainiert.
 Die Gewichte des Netzes wurden normal verteilt mit einer Standardabweichung von $0.1$ initialisiert, wohingegen alle Biaswerte zu Beginn des Trainings einen konstanten Wert von  $0.1$ besitzen.
+\gls{relu} wird als Aktivierungsfunktion für alle Faltungs- und vollverbundenen Schichten verwendet.
 Die gewählte Lernrate \gls{learning} des Netzes unterscheidet sich je nach getestetem Modell zwischen $0.001$ und $0.0001$.
 Sie wird dabei zusätzlich stufenweise exponentiell nach einer definierten Anzahl an Epochen reduziert.
 
@@ -284,7 +285,7 @@ Die vertikale Spiegelung des Graphen kann, falls diese im Graphkontext eine Bede
     0, & \text{sonst.}
   \end{cases}
 \end{equation*}
-Weiterhin können die Helligkeits- und Kontrastanpassungen der Farben lediglich auf den Farbmerkmalen der Merkmalsmatrix $\gls{F} \in \gls{R}^{N \times M}$ angewendet werden.
+Weiterhin können die Helligkeits- und Kontrastanpassungen der Farben auf den Farbmerkmalen der Merkmalsmatrix $\gls{F} \in \gls{R}^{N \times M}$ angewendet werden.
 Es ist jedoch anzumerken, dass eine Justierung der Farbwerte auf den Knoten eines Graphen, der durch eine Superpixelrepräsentation gewonnen wurde, nur bedingt sinnvoll ist, denn die Nachbarschaften des Graphen sowie dessen Formmerkmale bleiben bei dieser Art der Augmentierung unverändert.
 Ein Superpixelalgorithmus, welcher Superpixel größtenteils aufgrund der Farbwerte eines Bildes generiert, bildet letztendlich bei einer Augmentierung der Farbwerte eines Bildes auf eine komplett andere Superpixelrepräsentation ab.
 Eine realistischere Augmentierung der Eingabedaten ist folglich nur dann gegeben, wenn die Superpixelrepräsentation \bzw{} dessen Graph erst nach der Augmentierung der Farben des Bildes generiert wird.
@@ -300,7 +301,7 @@ Es liegen zusätzliche Installationsanweisungen bei und der Quelltext ist so dok
 \paragraph{Benutzte Bibliotheken}
 \label{benutzte_bibliotheken}
 
-Für die Modellierung und den Betrieb neuronaler Netze in Python wurde die \texttt{tensorflow}-Bibliothek von Google verwendet~\cite{tensorflow}.
+Für die Modellierung und den Betrieb neuronaler Netze in Python wurde die Bibliothek \texttt{tensorflow} von Google verwendet~\cite{tensorflow}.
 Sie erlaubt die Modellierung eines Berechnungsgraphen, bei dem Knoten mathematische Operationen repräsentieren und die Kanten zwischen ihnen den Datenfluss multidimensionaler Tensoren steuern.
 So gut wie alle implementierten mathematischen Operationen in \texttt{tensorflow} besitzen eine Gradientenimplementierung, sodass die Kosten der Ausgabe eines Berechnungsgraphen über das Backpropagationverfahren minimiert werden können.
 Dies erlaubt insbesondere den Bau der implementierten Faltungsoperatoren mit den in \texttt{tensorflow} zur Verfügung stehenden Operationen.
@@ -328,7 +329,7 @@ Für die Vorverarbeitung der Daten wurden zwei unterschiedliche Ansätze verfolg
 Dem Benutzer steht es dabei frei, die vorverarbeiteten Daten in einem eigenen Datensatz vor Trainingsbeginn zu speichern oder alle notwendigen Vorverarbeitungsschritte der Bilder zur Laufzeit während des Trainings für das aktuell zu lernende Bild zu vollziehen.
 Die Vorverarbeitung während des Trainings wurde dabei mit Hilfe mehrerer Threads implementiert, sodass die Laufzeit der Lernprozedur möglichst nicht gestört wird.
 Es zeigt sich, dass die Vorverarbeitung der Daten während des Trainings für kleine Datensätze wie \gls{MNIST} oder \gls{Cifar}-10 so gut wie keinen Einfluss auf die Lerngeschwindigkeit mit sich zieht.
-Für größere Datensätze wie \gls{Pascal} ist dies aber nicht zu empfehlen, da der Aufwand der Vorverarbeitung durch die größeren Bilder, gerade aufgrund der steigenden Laufzeiten der Superpixelalgorithmen, die Lerndauer teilweise extrem beeinflussen kann.
+Für größere Datensätze wie \gls{Pascal} ist dies aber nicht zu empfehlen, da der Aufwand der Vorverarbeitung die Lerndauer durch die größeren Bilder, gerade aufgrund der steigenden Laufzeiten der Superpixelalgorithmen, teilweise extrem beeinflussen kann.
 Eine gezielte Laufzeitanalyse der beiden Vorverarbeitungsmethoden findet sich für die einzelnen Datensätze in Kapitel~\ref{laufzeitanalyse}.
 Ein entscheidener Vorteil der Vorverarbeitung zur Laufzeit ist jedoch die in Kapitel~\ref{augmentierung} angesprochene Augmentierung der Eingabedaten.
 Wohingegen für vorverarbeitete Daten nur eine Augmentierung auf Graphen möglich ist, kann das volle Ausmaß einer Augmentierung erst über die Vorverarbeitung zur Laufzeit gewonnen werden.
