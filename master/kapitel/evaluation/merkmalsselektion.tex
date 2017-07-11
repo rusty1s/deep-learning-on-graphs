@@ -5,17 +5,21 @@ Die in Kapitel~\ref{merkmalsextraktion} ermittelten Formmerkmale auf den Knoten 
 Viele der Formmerkmale bauen dabei aufeinander auf und es ist daher fraglich, inwieweit die gesamte Menge an Merkmalen gebraucht wird oder ob eine Untermenge dieser als ausreichend gilt.
 Eine \emph{\gls{PCA}} auf den Knotenmerkmalen kann uns dabei helfen, die reale Dimensionalität der Daten abzuschätzen.
 Dafür werden die Merkmale durch eine Linearkombination ihrer Hauptkomponenten beschrieben und können so durch weitaus weniger Dimensionen beschrieben werden.
-Abbildung~\ref{fig:pca} zeigt dabei die \emph{kumulative Varianzaufklärung} des Merkmalraums, \dhe{} die Varianzabdeckung der Merkmale durch die Hauptkomponenten, in Abhängigkeit zu der Anzahl an Hauptkomponenten der \gls{PCA}~\cite{scikitlearn}.
+Abbildung~\ref{fig:pca} zeigt dabei die \emph{kumulative Varianzaufklärung} der Hauptkomponenten einer \gls{PCA}, \dhe{} die Varianzabdeckung der Merkmale durch die Hauptkomponenten, in Abhängigkeit zu der Anzahl an Hauptkomponenten.
 \input{tikz/pca}
-Dabei zeigt sich, dass nach bereits recht wenigen Komponenten $\left(\approx 9\right)$ der Großteil des Merkmalraums abgedeckt werden kann.
+Dabei zeigt sich, dass nach bereits recht wenigen Komponenten $\left(\approx 9\right)$ der Großteil des Merkmalsraums abgedeckt werden kann.
 
 Im Kontext von neuronalen Netzen ist die Verwendung einer \gls{PCA} untypisch, denn schließlich müssen dafür weiterhin alle $38$ Formmerkmale berechnet werden, um daraus die neuen Merkmale anhand der Hauptkomponenten zu ermitteln.
 Ein effizienteres Verfahren ist dagegen die Bestimmung einer Auswahl an Merkmalen, genannt \emph{Merkmalsselektion}, die die Merkmalsmenge möglichst gut beschreibt.
 In dieser Arbeit kommen daher zwei Merkmalsselektionsalgorithmen zum Einsatz, die jeweils sequentiell auf der Menge der Merkmale dessen bedeutenste auswählen — die univariate Merkmalsselektion sowie die rekursive Merkmalseliminierung~\cite{scikitlearn}.
 
 Die \emph{univariate Merkmalsselektion} untersucht jedes Merkmal individuell auf Basis statistischer Tests und ermittelt daraus eine Bewertung der Wichtigkeit dieses Merkmals.
-Als statistischen Test kommt dafür die \emph{Varianzanalyse} durch einen \emph{F-Test} zum Einsatz (\vgl{}~\cite{scikitlearn}).
+Als statistischer Test kommt dafür die \emph{Varianzanalyse} durch einen \emph{F-Test} zum Einsatz (\vgl{}~\cite{scikitlearn}).
 Dafür werden die Merkmale des Bildes je nach ihrer zugeordneten Klassifizierung in Gruppen eingeteilt.
-Die Varianzanalyse überprüft daraufhin, ob die Varianz zwischen den Gruppen größer ist als die Varianz innerhalb der Gruppen und kann folglich Schlussfolgerungen darüber ziehen, ob das Merkmal die Gruppe signifikant repräsentiert.
+Die Varianzanalyse überprüft daraufhin, ob die Varianz zwischen den Gruppen größer als die Varianz innerhalb der Gruppen ist und kann folglich Schlussfolgerungen darüber ziehen, ob das Merkmal die Gruppe signifikant repräsentiert.
 
-Die \emph{rekursive Merkmalseliminierung}
+Die \emph{rekursive Merkmalseliminierung} wählt Merkmale basierend ihrer Gewichte aus, in dem rekursiv eine immer kleinere Menge an Merkmalen betrachtet wird~\cite{scikitlearn}.
+Sei dafür eine \emph{Schätzmethode} gegeben, die den Merkmalen jeweils ein Gewicht zuordnet.
+Zu Beginn errechnet die Schätzmethode die Gewichte aller Merkmale und die Merkmale mit den geringsten Gewichten werden aus der Merkmalsmenge eliminiert.
+Diese Prozedur wiederholt sich solange, bis die gewünschte Anzahl an Merkmalen erreicht wurde.
+Als Schätzer kommt dabei ein \emph{\gls{SVM}}-Klassifizierer mit der euklidischen Norm zum Einsatz~\cite{scikitlearn}.
