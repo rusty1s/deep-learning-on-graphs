@@ -39,10 +39,10 @@ Dann kann $\gls{l}_{\gls{v}}$ \bzgl{} eines Wurzelknotens $\gls{v} \in \gls{V}$ 
 \begin{equation*}
   {\gls{l}_{\gls{v}}\left(\gls{v}_i\right)}^{-1} \coloneqq \frac{d_{\max}}{\gls{winkel}_{\min}} \gls{winkel}_{\gls{v}}\left(\gls{v}_i\right) + {\left\|\gls{p}\left(\gls{v}_i\right) - \gls{p}\left(\gls{v}\right)\right\|}_2
 \end{equation*}
-definiert werden, wobei $d_{\max} \coloneqq \max_{\gls{v}_i \in \gls{V}} {\left\| \gls{p}\left(\gls{v}_i\right) - \gls{p}\left(\gls{v}\right) \right\|}_2$ den maximalen Abstand und $\gls{winkel}_{\min} \coloneqq \min_{\gls{v}_i, \gls{v}_j \in \gls{V},\, \gls{winkel}_{\gls{v}}\left(\gls{v}_i\right) \neq \gls{winkel}_{\gls{v}}\left(\gls{v}_j \right)} \left|\gls{winkel}_{\gls{v}}\left(\gls{v}_i\right) - \gls{winkel}_{\gls{v}}\left(\gls{v}_j\right)\right|$ den minimalen, echt positiven Winkelabstand zweier Knoten beschreibt.
+definiert werden, wobei $d_{\max} \coloneqq \max_{\gls{v}_i \in \gls{V}} {\left\| \gls{p}\left(\gls{v}_i\right) - \gls{p}\left(\gls{v}\right) \right\|}_2$ den maximalen Abstand eines Knotens zum Wurzelknoten und $\gls{winkel}_{\min} \coloneqq \min_{\gls{v}_i, \gls{v}_j \in \gls{V},\, \gls{winkel}_{\gls{v}}\left(\gls{v}_i\right) \neq \gls{winkel}_{\gls{v}}\left(\gls{v}_j \right)} \left|\gls{winkel}_{\gls{v}}\left(\gls{v}_i\right) - \gls{winkel}_{\gls{v}}\left(\gls{v}_j\right)\right|$ den minimalen, echt positiven Winkelabstand zweier Knoten beschreibt.
 Damit werden Knoten entsprechend ihrer Winkel zum Wurzelknoten \gls{v} sortiert.
 Besitzen zwei Knoten den exakt gleichen Winkel, wird über den Abstand ihrer Positionen zum Wurzelknoten der Farbwert weiter differenziert.
-Die Gewichtung des Winkels über $d_{\max}/\gls{winkel}_{\min}$ sorgt dafür, dass für zwei unterschiedliche Winkel $\gls{winkel}_{\gls{v}}\left(\gls{v}_i\right) \neq \gls{winkel}_{\gls{v}}\left(\gls{v}_j\right)$ die Distanzen der Knoten zum Wurzelknoten keinen Einfluss nimmt.
+Die Gewichtung des Winkels über $d_{\max}/\gls{winkel}_{\min}$ sorgt dafür, dass für zwei unterschiedliche Winkel $\gls{winkel}_{\gls{v}}\left(\gls{v}_i\right) \neq \gls{winkel}_{\gls{v}}\left(\gls{v}_j\right)$ die Distanzen der Knoten zum Wurzelknoten keinen Einfluss nehmen.
 
 Damit ist $\gls{l}_{\gls{v}}$ für alle Graphen injektiv, für die die Positionsfunktion \gls{p} injektiv ist.
 Folglich verfällt bei einer injektiven Positionsabbildung insbesondere die Notwendigkeit der Berechnung einer kanonischen Ordnung des Teilgraphs (\vgl{} Algorithmus~\ref{alg:normalisierung}).
