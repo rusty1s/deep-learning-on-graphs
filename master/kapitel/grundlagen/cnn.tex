@@ -16,7 +16,7 @@ Abbildung~\ref{fig:feedforward} zeigt ein Beispiel eines solchen Netzes mit drei
 \input{tikz/feedforward}
 Andere Netzvarianten erlauben \zB{} Schleifen, Rückwärtskanten oder das Überspringen einer Schicht~\cite{Nielsen}.
 
-Ein Neuron besitzt einen reellen Wert, der sich aus den Neuronen der vorherigen Schicht erschließt.
+Ein Neuron besitzt genau einen reellen Wert, der sich aus den Neuronen der vorherigen Schicht erschließt.
 Die $t$-te Neuronenschicht lässt sich folglich als ein Vektor $\ve{x}^{\left(t\right)} \in \gls{R}^{N^{\left(t\right)}}$ auffassen, wobei $N^{\left(t\right)} \in \gls{N}$ die Anzahl der Neuronen in der $t$-ten Schicht beschreibt.
 Zu jeder Kante existiert zusätzlich ein Gewicht, welches den Anteil des Neurons zu dessen verbundenen Neuron angibt.
 Damit lassen sich die Neuronenwerte der $\left(t+1\right)$-ten Schicht über
@@ -42,14 +42,10 @@ Als Aktivierungsfunktion kommt dabei \bspw{} die nicht-lineare \emph{Sigmoidfunk
 % Receptive-Field
 % Learning-Rate
 % Loss-Function
-% Overfitting
 % Merkmalskarten oder Featuremap
 % Backpropagation quelle
-% Feedvorward Netz
 % Epoche
-% Gewichte/Bias
 % Stride, Filtergröße
-
 % Stride Slice Pooling
 
 % What we'd like is an algorithm which lets us find weights and biases so that the output from the network approximates y(x)y(x) for all training inputs xx. To quantify how well we're achieving this goal we define a cost function*
