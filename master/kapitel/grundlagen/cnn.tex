@@ -13,6 +13,25 @@ Schichten zwischen Ein- und Ausgabe heißen \emph{versteckt} (\engl{} \emph{hidd
 Die einfachste Form eines neuronalen Netzes ist das \emph{Feedforward}-Netz, bei der jedes Neuron einer Schicht mit allen Neuronen der darauffolgenden Schicht verbunden ist.
 Die Schichten eines Feedforward-Netzes werden deshalb auch als \emph{vollverbunden} (\engl{} \emph{fully-connected}) betitelt.
 Abbildung~\ref{fig:feedforward} zeigt ein Beispiel eines solchen Netzes mit drei Schichten.
+\input{tikz/feedforward}
+Andere Netzvarianten erlauben \zB{} Schleifen, Rückwärtskanten oder das Überspringen einer Schicht~\cite{Nielsen}.
+
+Ein Neuron besitzt einen reellen Wert, der sich aus den Neuronen der vorherigen Schicht erschließt.
+Die $t$-te Neuronenschicht lässt sich folglich als ein Vektor $\ve{x}^{\left(t\right)} \in \gls{R}^{N^{\left(t\right)}}$ auffassen, wobei $N^{\left(t\right)} \in \gls{N}$ die Anzahl der Neuronen in der $t$-ten Schicht beschreibt.
+Zu jeder Kante existiert zusätzlich ein Gewicht, welches den Anteil des Neurons zu dessen verbundenen Neuron angibt.
+Damit lassen sich die Neuronenwerte der $\left(t+1\right)$-ten Schicht über
+\begin{equation*}
+  \ve{x}^{\left(t+1\right)} \coloneqq \gls{W}^{\left(t+1\right)}\ve{x}^{\left(t\right)}
+\end{equation*}
+definieren, wobei $\gls{W}^{\left(t+1\right)} \in \gls{R}^{N^{\left(t+1\right)} \times N^{\left(t\right)}}$ eine \emph{Gewichtsmatrix} der Kanten beschreibt, sodass $\gls{W}^{\left(t+1\right)}_{ji} \in \gls{R}$ das Gewicht der Kante des $i$-ten Neurons in der $t$-ten Schicht zu dem $j$-ten Neuron der $\left(t+1\right)$-ten Schicht angibt.
+Zusätzlich zu den Gewichten existert zu jedem Neuron in der $t$-ten Schicht außer der Eingabeschicht ein \emph{Bias} $\gls{b}^{\left(t\right)} \in \gls{R}^{N^{\left(t\right)}}$.
+Mit einer elementweisen Anwendung einer nicht-linearen \emph{Aktivierungsfunktion} $\gls{act} \colon \gls{R} \to \gls{R}$ ergibt sich damit die finale Version der Neuronenwerte der $\left(t+1\right)$-ten Schicht als
+\begin{equation*}
+  \ve{x}^{\left(t+1\right)} \coloneqq \gls{act} \left(\gls{W}^{\left(t+1\right)}\ve{x}^{\left(t\right)} + \gls{b}^{\left(t+1\right)} \right).
+\end{equation*}
+Als Aktivierungsfunktion kommt dabei \bspw{} die nicht-lineare \emph{Sigmoidfunktion} $\mathrm{sig}\left(z\right) \coloneqq 1 / \left(1 + \exp\left(-z\right)\right)$ oder die \emph{Rectified Linear Unit (ReLU)}-Funktion $\gls{relu}\left(z\right) \coloneqq \max \left(z, 0\right)$ zum Einsatz.
+
+
 
 
 \gls{conv2d}
