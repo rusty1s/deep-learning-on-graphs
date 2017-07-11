@@ -10,6 +10,7 @@ Ein \emph{neuronales Netz} besteht aus einer beliebigen Anzahl miteinander verbu
 Neuronen sind üblicherweise mit anderen Neuronen in sequentiellen \emph{Schichten} \bzw{} \emph{Ebenen} angeordnet.
 Die erste Schicht eines neuronalen Netzes wird als \emph{Eingabe}- und die letzte Schicht als  \emph{Ausgabeschicht} bezeichnet.
 Schichten zwischen Ein- und Ausgabe heißen \emph{versteckt} (\engl{} \emph{hidden}).
+Als \emph{Deep-Learning} wird ein Netz mit mindestens zwei versteckten Schichten verstanden.
 Die einfachste Form eines neuronalen Netzes ist das \emph{Feedforward}-Netz, bei der jedes Neuron einer Schicht mit allen Neuronen der darauffolgenden Schicht verbunden ist.
 Die Schichten eines Feedforward-Netzes werden deshalb auch als \emph{vollverbunden} (\engl{} \emph{fully-connected}) betitelt.
 Abbildung~\ref{fig:feedforward} zeigt ein Beispiel eines solchen Netzes mit drei Schichten.
@@ -29,28 +30,30 @@ Mit einer elementweisen Anwendung einer nicht-linearen \emph{Aktivierungsfunktio
 \begin{equation*}
   \ve{x}^{\left(t+1\right)} \coloneqq \gls{act} \left(\gls{W}^{\left(t+1\right)}\ve{x}^{\left(t\right)} + \gls{b}^{\left(t+1\right)} \right).
 \end{equation*}
-Als Aktivierungsfunktion kommt dabei \bspw{} die nicht-lineare \emph{Sigmoidfunktion} $\mathrm{sig}\left(z\right) \coloneqq 1 / \left(1 + \exp\left(-z\right)\right)$ oder die \emph{Rectified Linear Unit (ReLU)}-Funktion $\gls{relu}\left(z\right) \coloneqq \max \left(z, 0\right)$ zum Einsatz.
-
-
-
-
-\gls{conv2d}
-\gls{CNN}
-
-% genereller Faltungsoperator?
-
-% Receptive-Field
-% Learning-Rate
-% Loss-Function
-% Merkmalskarten oder Featuremap
-% Backpropagation quelle
-% Epoche
-% Stride, Filtergröße
-% Stride Slice Pooling
-
-% What we'd like is an algorithm which lets us find weights and biases so that the output from the network approximates y(x)y(x) for all training inputs xx. To quantify how well we're achieving this goal we define a cost function*
+Als Aktivierungsfunktion kommt dabei \bspw{} die nicht-lineare \emph{Sigmoidfunktion} $\mathrm{sig}\left(z\right) \coloneqq 1 / \left(1 + \exp\left(-z\right)\right)$ oder die \emph{Rectified Linear Unit (ReLU)}-Funktion $\gls{relu}\left(z\right) \coloneqq \max \left(z, 0\right)$ zum Einsatz~\cite{Nielsen}.
 
 \begin{equation*}
   \mathrm{quadratische kostenfunktion}
   \label{eq:quadratische_kostenfunktion}
 \end{equation*}
+
+
+
+
+
+% Epoche
+% Learning-Rate
+% Loss-Function
+
+% Receptive-Field
+% Merkmalskarten oder Featuremap
+% Backpropagation quelle
+% Stride, Filtergröße
+% Stride Slice Pooling
+% genereller Faltungsoperator?
+\gls{conv2d}
+\gls{CNN}
+
+% What we'd like is an algorithm which lets us find weights and biases so that the output from the network approximates y(x)y(x) for all training inputs xx. To quantify how well we're achieving this goal we define a cost function*
+
+% Üblicherweise wird \gls{learning} so gewählt, dass nicht zu langsam gelernt wird, aber dennoch eine gute Approximation erreicht wird.
