@@ -212,7 +212,7 @@ Er kann jedoch insbesondere aufgrund der beliebigen Anzahl an Ziffern im Bild ni
 \subsection{Metriken}
 \label{metriken}
 
-Eine typische Normierung der Ausgabe $\ve{y} \in \gls{R}^Y$ eines neuronalen Netzes für ein multidimensionales Klassifizierungsproblem ist die \emph{Softmax Regression}
+Eine typische Aktivierungsfunktion für die Ausgabe $\ve{y} \in \gls{R}^Y$ eines neuronalen Netzes für ein multidimensionales Klassifizierungsproblem ist die \emph{Softmax Regression}
 \begin{equation*}
   \mathrm{softmax}\left(\ve{y}\right) \coloneqq \frac{\exp\left(\ve{y}\right)}{\sum_{i=1}^Y \exp\left(\ve{y}_i\right)},
 \end{equation*}
@@ -221,19 +221,19 @@ Damit gilt insbesondere $\mathrm{softmax}\left(\ve{y}\right) \in {\left[0, 1\rig
 Aufgrund der Verwendung der Exponentialfunktion werden dabei die höchsten Werte in $\ve{y}$ hervorgehoben, wohingegen Werte, die signifikant unter dem Maximum liegen, abgeschwächt werden.
 
 Neben der in Kapitel~\ref{convolutional_neural_networks} vorgestellten quadratischen Kostenfunktion aus~\eqref{eq:quadratische_kostenfunktion} findet sich in neuronalen Netzen häufiger die Verwendung der Kreuzentropie als Kostenfunktion, welche dem Netz ermöglicht, schneller bessere Entscheidungen zu fällen (\vgl{}~\cite{Nielsen}).
-Die \emph{Kreuzentropie} ist dabei definiert als
+Die \emph{Kreuzentropie} ist dabei über einer Eingabemenge $\mathcal{X}$ definiert als
 \begin{equation*}
-  H_{\ve{y}^{\prime}}\left(\ve{y}\right) \coloneqq - \left\langle \ve{y}^{\prime}, \log\left(\mathrm{softmax}\left(\ve{y}\right)\right)\right\rangle,
+  H\left(\mathcal{X}\right) \coloneqq - \frac{1}{\left|\mathcal{X}\right|} \sum_{\ve{x} \in \mathcal{X}} \left\langle \ve{y}^{\prime}, \log\left(\ve{y}\right)\right\rangle,
 \end{equation*}
-wobei $\ve{y}^{\prime} \in {\left\{ 0, 1 \right\}}^Y$ die \emph{Ground-Truth} der Eingabe $\ve{x}$ als \emph{One-Hot}-Kodierung beschreibt~\cite{tensorflow, Nielsen}.
-$H_{\ve{y}^{\prime}}\left(\ve{y}\right)$ ist aufgrund der Intervalleinschränkung von \ve{y} mit Hilfe der Softmax Regression stets positiv und wird umso kleiner, je ähnlicher sich $\ve{y}^{\prime}$ und $\ve{y}$ werden~\cite{Nielsen}.
+wobei $\ve{y}^{\prime} \in {\left\{ 0, 1 \right\}}^Y$ die \emph{Ground-Truth} der Eingabe $\ve{x} \in \mathcal{X}$ als \emph{One-Hot}-Kodierung beschreibt~\cite{tensorflow, Nielsen}.
+$H\left(\mathcal{X}\right)$ ist aufgrund der Intervalleinschränkung der jeweiligen Ausgaben \ve{y} von $\ve{x} \in \mathcal{X}$ mit Hilfe der Softmax Regression stets positiv und wird umso kleiner, je ähnlicher sich $\ve{y}^{\prime}$ und dessen Ground-Truth $\ve{y}$ werden~\cite{Nielsen}.
 
-Zur Evaluation der Ergebnisse einer Klassifizierung wird neben der Kostenfunktion die \emph{Genauigkeit} (\engl{} \emph{Accuracy}) über einer Eingabemenge $\mathcal{X} = \left\{\ve{x}_1, \ldots \right\}$ als
+Zur Evaluation der Ergebnisse einer Klassifizierung wird neben der Kostenfunktion die \emph{Genauigkeit} (\engl{} \emph{Accuracy}) über einer Eingabemenge $\mathcal{X}$ als
 \begin{equation*}
-  \mathrm{accuracy}\left(\mathcal{X}\right) \coloneqq \frac{1}{\left|\mathcal{X}\right|}\sum_{i = 1}^{\left|\mathcal{X}\right|}  \max \left( - \left| \mathrm{argmax}\left(\ve{y}_i\right) - \mathrm{argmax}\left(\ve{y}^{\prime}_i\right) \right| + 1, 0 \right)
+  \mathrm{accuracy}\left(\mathcal{X}\right) \coloneqq \frac{1}{\left|\mathcal{X}\right|}\sum_{\ve{x} \in \mathcal{X}} \max \left( - \left| \mathrm{argmax}\left(\ve{y}\right) - \mathrm{argmax}\left(\ve{y}^{\prime}\right) \right| + 1, 0 \right)
 \end{equation*}
 definiert, wobei $\mathrm{argmax}\left(\ve{y}\right) = i$ genau dann, wenn $\ve{y}_i \geq \ve{y}_j$ für alle $1 \leq j \leq Y$.
-Sie beschreibt den Anteil korrekt klassifizierter Eingabedaten aus der jeweiligen Gesamtmenge der Trainings-, Validierungs- und Testdaten $\mathcal{X}$ und ist daher ein geeignetes Mittel, die Qualität eines neuronalen Klassifizierungsnetzes zu bestimmen~\cite{Nielsen}.
+Sie beschreibt den Anteil korrekt klassifizierter Eingabedaten aus der jeweiligen Gesamtmenge der Trainings-, Validierungs- oder Testdaten $\mathcal{X}$ und ist daher ein geeignetes Mittel, die Qualität eines neuronalen Klassifizierungsnetzes zu bestimmen~\cite{Nielsen}.
 
 \subsection{Parameter}
 \label{parameter}
@@ -247,7 +247,7 @@ Alle generierten Graphen wurden folglich über einer Konnektivität von $8$, ein
 Für das neuronale Netz ergeben sich neben der Anzahl an Faltungs-, Pooling- und vollverbundenen Schichten sowie deren Größen und Anordnungen, die in den Ergebnissen in Kapitel~\ref{ergebnisse} manuell aufgelistet sind, weitere einstellbare Größen.
 Alle Netze wurden mit einer \emph{Batch-Size} von $64$ trainiert.
 Die Gewichte des Netzes wurden normal verteilt mit einer Standardabweichung von $0.1$ initialisiert, wohingegen alle Biaswerte zu Beginn des Trainings einen konstanten Wert von  $0.1$ besitzen.
-\gls{relu} wird als Aktivierungsfunktion für alle Faltungs- und vollverbundenen Schichten verwendet.
+\gls{relu} wird als Aktivierungsfunktion für alle bis auf die letzte neuronale Schicht verwendet.
 Die gewählte Lernrate \gls{learning} des Netzes unterscheidet sich je nach getestetem Modell zwischen $0.001$ und $0.0001$.
 Sie wird dabei zusätzlich stufenweise exponentiell nach einer definierten Anzahl an Epochen reduziert.
 

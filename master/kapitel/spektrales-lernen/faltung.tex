@@ -99,7 +99,7 @@ Um die oben genannten Schwächen zu umgehen kann $\hat g\left(\gls{lambda}_i\rig
   \hat g\left(\gls{lambda}_i\right) \approx \sum_{k=0}^K c_k\gls{lambda}_i^k
   \label{eq:spektraler_filter_approximation}
 \end{equation}
-vom Grad $K$ mit Koeffizienten ${\left[c_0, \ldots, c_K\right]}^{\top} \in \gls{R}^{K+1}$ approximiert werden~\cite{Hammond, Defferrard}.
+vom Grad $K$ mit Koeffizienten $\ve{c} \coloneqq {\left[c_0, \ldots, c_K\right]}^{\top} \in \gls{R}^{K+1}$ approximiert werden~\cite{Hammond, Defferrard}.
 Die Filtergröße sinkt somit auf einen konstanten Faktor $K$ mit Lernaufwand $\gls{O}\left(K\right)$, dem gleichen Aufwand klassischer zweidimensionaler \glspl{CNN}~\cite{Defferrard}.
 $\gls{f}_{\mathrm{in}} \star \ve{\hat g}$ ergibt dann nach~\eqref{eq:matrix_potenz},~\eqref{eq:spektraler_faltungsoperator} und~\eqref{eq:spektraler_filter_approximation} approximiert durch~\cite{Defferrard}
 \begin{equation}
@@ -134,7 +134,7 @@ Die spektrale Faltung mittels Tschebyschow-Polynomen ergibt sich dann nach~\eqre
   \gls{f}_{\mathrm{in}} \star \ve{\hat g} \approx \sum_{k=0}^K c_k\gls{Eiv}\gls{T}_k\left(\gls{Lambdatilde}\right)\gls{Eiv}^{\top}\gls{f}_{\mathrm{in}},
   \label{eq:tschebyschow_faltung}
 \end{equation}
-wobei die Werte ${\left[c_0, \ldots, c_K\right]}^{\top} \in \gls{R}^{K+1}$ nun die Koeffizienten der Tschebyschow-Po\-ly\-no\-me $\gls{T}_k\left(\gls{Lambdatilde}\right) \in \gls{R}^{N \times N}$ bilden~\cite{Defferrard}.
+wobei die Werte $\ve{c} \coloneqq {\left[c_0, \ldots, c_K\right]}^{\top} \in \gls{R}^{K+1}$ nun die Koeffizienten der Tschebyschow-Po\-ly\-no\-me $\gls{T}_k\left(\gls{Lambdatilde}\right) \in \gls{R}^{N \times N}$ bilden~\cite{Defferrard}.
 $\gls{Eiv}\gls{T}_k\left(\gls{Lambdatilde}\right)\gls{Eiv}^{\top}$ kann aufgrund der polynomiellen Form von $\gls{T}_k$ und~\eqref{eq:matrix_potenz} ebenso auf $\gls{T}_k\left(\gls{Lbothtilde}\right)$ mit $\gls{Lbothtilde} \coloneqq \gls{Eiv}\gls{Lambdatilde}\gls{Eiv}^{\top} = \frac{2}{\gls{lambdamax}}\gls{Lboth} - \gls{I}$ angewendet werden~\cite{Defferrard}.
 Damit kann~\eqref{eq:tschebyschow_faltung} weiter vereinfacht werden zu
 \begin{equation}
@@ -145,8 +145,16 @@ und ist nun ein rekursiv formulierter Faltungsoperator, der weiterhin ohne die e
 Für \gls{Lboth} kann $\gls{lambdamax} \leq 2$ auf dessen obere Schranke, \dhe{} $\gls{lambdamax} \coloneqq 2$, gesetzt werden sodass die Berechnung von \gls{lambdamax} vermieden werden kann ohne die Schranken von $\gls{Lambdatilde} \in {\left[-1, 1\right]}^{N \times N}$ zu verletzen.
 
 Der rekursive Zusammenhang von $\gls{T}_k$ hilft uns dabei, $\gls{f}_{\mathrm{in}} \star \ve{\hat g}$ effizient zu bestimmen.
-Berechne dafür $\ve{\bar f}_k \coloneqq \gls{T}_k\left(\gls{Lbothtilde}\right)\gls{f}_{\mathrm{in}} \in \gls{R}^N$ für alle $k \in \left\{0, \ldots, K\right\}$ rekursiv mit $\ve{\bar f}_0 = \gls{f}_{\mathrm{in}}$, $\ve{\bar f}_1 = \gls{Lbothtilde}\,\gls{f}_{\mathrm{in}}$ und $\ve{\bar f}_k = 2 \gls{Lbothtilde}\,\ve{\bar f}_{k-1} - \ve{\bar f}_{k - 2}$.
-Dann ergibt sich $\gls{f}_{\mathrm{out}} = \left[\ve{\bar f}_0, \ve{\bar f}_1, \ldots, \ve{\bar f}_K\right]\ve{c} \in \gls{R}^N$ mit $\ve{c} \coloneqq {\left[c_0, c_1, \ldots, c_K\right]}^{\top} \in \gls{R}^{K+1}$ (\vgl{}~\cite{Hammond}).
+Dafür muss $\bar f\left(k\right) \coloneqq \gls{T}_k\left(\gls{Lbothtilde}\right)\gls{f}_{\mathrm{in}} \in \gls{R}^N$ für alle $k \in \left\{0, \ldots, K\right\}$ rekursiv mit
+\begin{equation*}
+\bar f\left(0\right) = \gls{f}_{\mathrm{in}}
+\qquad
+\bar f\left(1\right) = \gls{Lbothtilde}\,\gls{f}_{\mathrm{in}}
+\qquad
+\bar f\left(k\right) = 2 \gls{Lbothtilde}\,\bar f\left(k-1\right) - \bar f\left(k - 2\right)
+\end{equation*}
+berechnet werden.
+Dann ergibt sich $\gls{f}_{\mathrm{out}} = \left[\bar f\left(0\right), \bar f\left(1\right), \ldots, \bar f\left(K\right)\right]\ve{c} \in \gls{R}^N$ (\vgl{}~\cite{Hammond}).
 $\gls{f}_{\mathrm{out}}$ lässt sich damit über $K + 1$ Multiplikationen einer dünnbesetzen Matrix mit einem Vektor und einer abschließenden Vektormultplikation beschreiben.
 Mit $N \leq \left|\gls{E}\right|$ ergibt dies eine finale Laufzeit der spektralen Faltung von $\gls{O}\left(K\left|\gls{E}\right|\right)$~\cite{Defferrard}.
 
