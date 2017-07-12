@@ -1,22 +1,32 @@
 \section{Ergebnisse}
 \label{ergebnisse}
 
-% 10.000 Steps mit Batch Size 64\\
-% Learning-Rate: 0.001\\
-% Dropout: 0.5\\
+10.000 Steps mit Batch Size 64\\
+Learning-Rate: 0.001\\
+Dropout: 0.5\\
 
-% \begin{tabular}{cccc}
-%   \toprule
-%   Verfahren & Netzarchitektur & Dauer & Genauigkeit\\
-%   \midrule
-%   klassisch & C5-32-P4-C5-64-P4-FC1024 & 0.18s & 99.189\\
-%   klassisch & C32-C32-P4-C64-C64-P4-FC1024 & 0.25s & 99.139\\
-%   Chebyshev & C25-32-P4-C25-64-P4-FC1024 & 0.91s & 98.888\\
-%   GCN & C32-C32-P4-C64-C64-P4-FC1024 & 0.22s & 96.675\\
-%   E-GCN & C32-C32-P4-C64-C64-P4-FC1024 & 0.77s & 99.145\\
-%   \bottomrule
-% \end{tabular}
-% \todo{fuckin patchy}
+\gls{GCN}
+
+\begin{table}[t]
+\centering
+\begin{tabular}{lclrr}
+  \toprule
+  Ansatz & \ma{W} & Architektur & Genauigkeit [\%]\\
+  \midrule
+  SGCNN & 25 & C32-P4-C64-P4-FC1024 & 98.888\\
+  GCN & 1 & C32-C32-P4-C64-C64-P4-FC1024 & 96.675\\
+  EGCNN & 9 & C32-C32-P4-C64-C64-P4-FC1024 & 99.145\\
+  \midrule
+  klassisch & $5 \times 5$ & C32-P4-C64-P4-FC1024 & 99.189\\
+  klassisch & $3 \times 3$ & C32-C32-P4-C64-C64-P4-FC1024 & 99.139\\
+  \bottomrule
+\end{tabular}
+  \caption[Testgenauigkeiten der \gls{MNIST}-Gitterrepräsentation]{Testgenauigkeiten eines Trainings auf einer \gls{MNIST}-Gitterrepräsentation nach 10000 Durchläufen ($\approx 11$ Epochen) für die vorgestellten Ansätze inklusive ähnlicher Netzarchitekturen bei Benutzung der klassischen Faltungsoperation.}
+\end{table}
+kein preprocessing nötig, es wird immer die gleiche Adjazenzmatrix benutzt.
+nur zum Validieren
+Es zeigt sich dass EGCN wirklich äquivalent zu der Faltung auf $3 \times 3$ ist.
+\todo{fuckin patchy}
 
 % \paragraph{Vergleich \bzgl{} vorhandener Implementierungen}
 % \label{vergleich_ergebnisse}
@@ -55,8 +65,8 @@ BatchSize: 64
 Parameteranzahl: 8
 Aufbau: CNN64 CNN64 MaxPool2 CNN128 MaxPool2 CNN256 MaxPool3 CNN512 AveragePool FC256 FC128 FC10
 WeightDecay in FC256 und FC128: 0.004
-Dropout vor letztem: 0.5
-65k steps trainiert:
+Dropout vor letztem: 0.5 (entspricht ungefähr 75 Epochen)
+65k steps trainiert: vereinheitlichen wir zu 60k
 Laufzeit: 0.43s + 1.95s
 Loss: 1.01912, acc: 0.67748
 Es werden pro Faltung eine 8fache Nachbarschaft betrachtet.
@@ -66,3 +76,7 @@ Das ist riesig!
 Alles gleich bis auf Aufbau:
 Aufbau: CNN64 CNN64 MaxPool2 CNN128 CNN128 MaxPool2 CNN256 CNN256 MaxPool3 CNN512 AveragePool FC256 FC128 FC10
 Im Gegensatz zu Tschebyschov zwei mal mehr falten, da immer nur minimale Nachbarschaften betrachtet werden.
+Laufzeit: 0.08s + 2.64s
+Loss:, acc:
+
+Je höher die Laufzeit des Lernens wird, umso geringer wird die Dauer der Vorverarbeitung.
