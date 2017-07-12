@@ -40,15 +40,32 @@ Ein Beispiel einer Kostenfunktion ist die \emph{quadratische Kostenfunktion}, di
   \label{eq:quadratische_kostenfunktion}
 \end{equation}
 definiert ist, wobei \ve{y} die Ausgabe des Netzes und $\ve{y}^{\prime}$ die erwartete Ausgabe \bzgl{} \ve{x} beschreibt~\cite{Nielsen}.
-Die implizit durch das Netz gegeben Werte $\mathcal{W}$ und $\mathcal{B}$ werden dabei oft weggelassen, sodass wir lediglich $C\left(\mathcal{X}\right)$ schreiben.
+Die implizit durch das Netz gegebenen Werte $\mathcal{W}$ und $\mathcal{B}$ werden dabei oft weggelassen, sodass wir lediglich $C\left(\mathcal{X}\right)$ schreiben.
+$C$ zeichnet sich dabei als Kostenfunktion aus, denn sie ist für alle Eingaben stets positiv und wird umso kleiner, je ähnlicher \ve{y} und $\ve{y}^{\prime}$ werden.
+Die Anpassung der Parameter des Netzes erfolgt über die sukzessive Eingabe einer Menge $\mathcal{X}$ in das Netz und der Berechnung eines negativen Gradienten in Richtung des steilsten Abstieges von $C$.
+Formal betrachtet entspricht der Gradient der Kostenfunktion $C$ dem Vektor der partiellen Ableitungen
+\begin{equation*}
+  \nabla C \coloneqq {\left[\frac{\partial C}{\partial w_i}, \ldots, \frac{\partial C}{\partial b_j}, \ldots \right]}^{\top}
+\end{equation*}
+aller Gewichte $w_i$ und aller Biaswerte $b_j$ des Netzes~\cite{Nielsen}.
+Durch die Anpassung der Gewichte und Biaswerte des Netzes über
+\begin{equation*}
+  w_i \rightarrow w^{\prime}_i = w_i - \gls{learning}\frac{\partial C}{\partial w_i}
+  \qquad
+  \text{und}
+  \qquad
+  b_j \rightarrow b^{\prime}_j = b_j - \gls{learning}\frac{\partial C}{\partial b_j}
+\end{equation*}
+wird die Kostenfunktion $C$ minimiert, wobei $\gls{learning} \in \gls{R+}$ der \emph{Lernrate}, \dhe{} der gewählten Schrittweite, entlang des negativen Gradienten entspricht~\cite{Nielsen}.
+Üblicherweise wird dabei \gls{learning} so gewählt, dass das Netz nicht zu langsam trainiert, aber dennoch eine gute Approximation erreicht wird und erfordert in der Regel eine manuelle Anpassung.
+Die Berechnung des Gradienten $\nabla C$ wird dabei aus Berechnungsgründen nicht für alle, sondern lediglich für Eingaben einer zufällig ausgewählten Untermenge von $\mathcal{X}$ durchgeführt und daraus dessen Durchschnitt gebildet, welcher stochastisch gesehen in etwa dem realen Gradienten über allen Eingaben entspricht (\emph{stochastischer Gradientenabstieg})~\cite{Nielsen}.
+Zur Berechnung des Gradienten der Kostenfunktion $C$ kommt dabei der effiziente \emph{Backpropagation}-Algorithmus zum Einsatz, der es ermöglicht die optimierten Werte der Parameter nach einem Trainingsschritt zu ermitteln, in dem der Fehler zwischen der Ausgabe des Netzes und der erwarteten Ausgabe über die Ausgabe- zur Eingabeschicht zurück propagiert wird~\cite{backpropagation}.
+Aus den Fehlern der einzelnen Neuronen kann damit schließlich der Gradient $\nabla C$ berechnet werden (\vgl{}~\cite{Nielsen}).
 
-
-
-
-
-% Epoche
-% Learning-Rate
-% Loss-Function
+Der Prozess des Trainings eines neuronalen Netzes, \dhe{} die Anpassung seiner Parameter zur Minimierung der Kostenfunktion, wird dabei solange wiederholt, bis $\nabla C$ ein lokales Minimum erreicht.
+Ein einmaliges Durchlaufen aller Eingaben der Eingabemenge wird dabei als \emph{Epoche} bezeichnet~\cite{Nielsen}.
+\\\\
+Eine Spezialform eines neuronalen Netz ist das \emph{\gls{CNN}}
 
 % Receptive-Field
 % Merkmalskarten oder Featuremap
@@ -57,8 +74,3 @@ Die implizit durch das Netz gegeben Werte $\mathcal{W}$ und $\mathcal{B}$ werden
 % Stride Slice Pooling
 % genereller Faltungsoperator?
 \gls{conv2d}
-\gls{CNN}
-
-% What we'd like is an algorithm which lets us find weights and biases so that the output from the network approximates y(x)y(x) for all training inputs xx. To quantify how well we're achieving this goal we define a cost function*
-
-% Üblicherweise wird \gls{learning} so gewählt, dass nicht zu langsam gelernt wird, aber dennoch eine gute Approximation erreicht wird.
