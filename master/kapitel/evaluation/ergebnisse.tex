@@ -47,3 +47,22 @@
 
 % Alle Faltungen wurden dabei mit einer Partitionsgröße von $8$ bei $K=0$ und $K=1$ implementiert, um ein \gls{CNN} mit einem $3 \times 3$ Filter zu simulieren.
 % Es erscheint jedoch vorstellbar die Filtergröße bei größerer lokaler Kontrollierbarkeit, \dhe{} $K > 1$, weiter zu reduzieren und die Gefahr des Overfittings damit aufgrund der kleineren Anzahl an Trainingsparametern einzuschränken.
+
+\textbf{Tschebyshov Quickshift:}
+LearningRate: 0.001
+LearningRateDecay: Alle 5000 Steps um 0.96
+BatchSize: 64
+Parameteranzahl: 8
+Aufbau: CNN64 CNN64 MaxPool2 CNN128 MaxPool2 CNN256 MaxPool3 CNN512 AveragePool FC256 FC128 FC10
+WeightDecay in FC256 und FC128: 0.004
+Dropout vor letztem: 0.5
+65k steps trainiert:
+Laufzeit: 0.43s + 1.95s
+Loss: 1.01912, acc: 0.67748
+Es werden pro Faltung eine 8fache Nachbarschaft betrachtet.
+Das ist riesig!
+
+\textbf{EGCNN Quickshift}
+Alles gleich bis auf Aufbau:
+Aufbau: CNN64 CNN64 MaxPool2 CNN128 CNN128 MaxPool2 CNN256 CNN256 MaxPool3 CNN512 AveragePool FC256 FC128 FC10
+Im Gegensatz zu Tschebyschov zwei mal mehr falten, da immer nur minimale Nachbarschaften betrachtet werden.
