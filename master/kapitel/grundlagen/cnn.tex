@@ -32,16 +32,15 @@ Mit einer elementweisen Anwendung einer nicht-linearen \emph{Aktivierungsfunktio
 \end{equation*}
 Als Aktivierungsfunktion kommt dabei \bspw{} die nicht-lineare \emph{Sigmoidfunktion} $\mathrm{sig}\left(z\right) \coloneqq 1 / \left(1 + \exp\left(-z\right)\right)$ oder die \emph{Rectified Linear Unit (ReLU)}-Funktion $\gls{relu}\left(z\right) \coloneqq \max \left(z, 0\right)$ zum Einsatz~\cite{Nielsen}.
 Die Menge der Gewichte $\mathcal{W} \coloneqq {\left\{\gls{W}^{\left(t\right)}\right\}}_{t=2}^T$ sowie die Menge der Biaswerte $\mathcal{B} \coloneqq {\left\{\gls{b}^{\left(t\right)}\right\}}_{t=2}^T$ für $T \in \gls{N}$ viele Schichten werden die \emph{Parameter} des Netzes genannt, über dessen Anpassung das Netz trainiert wird.
-Diese Werte werden dabei sequentiell über eine kleine Eingabemenge $\mathcal{X} \coloneqq {\left\{\ve{x}_n \right\}}_{n=1}^N$ so angepasst, dass eine \emph{Kostenfunktion} minimiert wird.
-Die \emph{quadratische Kostenfunktion}
-
-
-
-
-\begin{equation*}
-  \mathrm{quadratische kostenfunktion}
+Diese Werte werden dabei sequentiell über einer kleinen Eingabemenge $\mathcal{X}$ mit den Eingaben $\ve{x} \in \mathcal{X}$ so angepasst, dass eine stetige \emph{Kostenfunktion} minimiert wird.
+Die Größe der Menge $\mathcal{X}$ wird dabei als \emph{Batch-Size} betitelt~\cite{Nielsen}.
+Ein Beispiel einer Kostenfunktion ist die \emph{quadratische Kostenfunktion}, die über
+\begin{equation}
+  C\left(\mathcal{X}, \mathcal{W}, \mathcal{B}\right) \coloneqq \frac{1}{2\left|\mathcal{X}\right|} \sum_{\ve{x} \in \mathcal{X}} {\left\| \ve{y} - \ve{y}^{\prime} \right\|}_2^2
   \label{eq:quadratische_kostenfunktion}
-\end{equation*}
+\end{equation}
+definiert ist, wobei \ve{y} die Ausgabe des Netzes und $\ve{y}^{\prime}$ die erwartete Ausgabe \bzgl{} \ve{x} beschreibt~\cite{Nielsen}.
+Die implizit durch das Netz gegeben Werte $\mathcal{W}$ und $\mathcal{B}$ werden dabei oft weggelassen, sodass wir lediglich $C\left(\mathcal{X}\right)$ schreiben.
 
 
 
