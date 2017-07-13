@@ -74,7 +74,7 @@ Abbildung~\ref{fig:cnn} veranschaulicht die Vernetzung der Neuronen durch ein Re
 \input{tikz/cnn}
 Eine Besonderheit des \glspl{CNN} ist weiterhin, dass sich die Receptive-Fields ihre Gewichte und Biaswerte teilen.
 Damit erlernt ein Receptive-Field ein Merkmal, \zB{} eine Kante oder eine Textur, und findet dieses Merkmal auch in anderen Receptive-Fields, nur an unterschiedlichen Positionen~\cite{Nielsen}.
-Das ermöglicht insbesondere das Erlernen translationsinvarianter Merkmale, die für eine Bilderkennung fundumental sind.
+Das ermöglicht insbesondere das Erlernen translationsinvarianter Merkmale, die für eine Bilderkennung fundamental sind.
 Aus diesem Grund spricht man auch häufig von einer \emph{Merkmalskarte} (\engl{} \emph{Feature-Map}), die durch eine Faltung über den Receptive-Fields entsteht.
 Um mehrere Merkmale eines Receptive-Fields zu generieren, werden dabei üblicherweise eine Reihe von zusammengehörigen \emph{Eingabekarten} auf eine neue Menge von \emph{Ausgabekarten} projiziert.
 Ein Bild $\gls{B} \in \gls{R}^{H \times W \times 3}$ mit drei Farbkanälen beschreibt \zB{} drei Merkmalskarten, die als Eingabe in das \gls{CNN} dienen.
@@ -93,7 +93,7 @@ Der Wert eines Indexzugriffs auf die Eingabekarte \gls{B}, der über die Grenzen
 Eine Reduktion der Auflösung innerhalb der Faltungsschicht kann erreicht werden, in dem nicht über jedes Neuron, sondern nur über eine Untermenge dieser in fester Schrittweite $s_y \times s_x$ zueinander gefaltet wird.
 Eine Alternative dazu ist die Verwendung einer \emph{Poo\-ling\-sch\-icht}, die üblicherweise direkt nach einer Faltungsschicht zum Einsatz kommt und versucht, die Ausgabe der Faltungsschicht zu reduzieren \bzw{} auf das Wesentliche zu vereinfachen.
 Eine Poolingoperation besitzt analog zu \gls{conv2d} eine Fenstergröße sowie eine Schrittweite.
-Die beliebteste Poolingoperation ist das \emph{MaxPooling}, die sich jeweils für das Maximum der Aktivierungen innerhalb jedes Fensters entscheidet~\cite{Nielsen}.
+Die beliebteste Poolingoperation ist das \emph{Max-Pooling}, welche sich jeweils für das Maximum der Aktivierungen innerhalb jedes Fensters entscheidet~\cite{Nielsen}.
 Eine Poolingoperation mit Fenstergröße $2 \times 2$ sowie Schrittweite $2 \times 2$ reduziert damit die Daten der Merkmalskarte um genau die Hälfte.
 
 Ein \gls{CNN} besteht typischerweise aus mehreren Faltungs- und Poolingschichten, sodass die Menge der Merkmalskarten dabei stetig erhöht und die Auflösung stetig verringert wird~\cite{Nielsen}.
