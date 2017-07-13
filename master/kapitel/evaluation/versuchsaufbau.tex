@@ -248,6 +248,7 @@ Für das neuronale Netz ergeben sich neben der Anzahl an Faltungs-, Pooling- und
 Alle Netze wurden mit einer Batch-Size von $64$ trainiert.
 Die Gewichte des Netzes wurden normal verteilt mit einer Standardabweichung von $0.1$ initialisiert, wohingegen alle Biaswerte zu Beginn des Trainings einen konstanten Wert von  $0.1$ besitzen.
 \gls{relu} wird als Aktivierungsfunktion für alle bis auf die letzte neuronale Schicht verwendet.
+Für jede Poolingschicht kommt das Max-Pooling zum Einsatz.
 Die gewählte Lernrate \gls{learning} des Netzes unterscheidet sich je nach getestetem Modell zwischen $0.001$ und $0.0001$.
 Sie wird dabei zusätzlich stufenweise exponentiell nach einer definierten Anzahl an Epochen reduziert.
 

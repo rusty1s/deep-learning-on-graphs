@@ -31,6 +31,7 @@ Dropout: 0.5\\
 kein preprocessing nötig, es wird immer die gleiche Adjazenzmatrix benutzt.
 nur zum Validieren
 Es zeigt sich dass EGCN wirklich äquivalent zu der Faltung auf $3 \times 3$ ist.
+insbesondere kein average pool notwendig, da graphen alle gleich groß
 \todo{fuckin patchy}
 
 % \paragraph{Vergleich \bzgl{} vorhandener Implementierungen}
@@ -85,3 +86,6 @@ Laufzeit: 0.08s + 2.64s
 Loss:, acc:
 
 Je höher die Laufzeit des Lernens wird, umso geringer wird die Dauer der Vorverarbeitung.
+
+Grafik für Acuuracy und Loss getrennt!
+Dafür alle Ansätze in einer Grafik (Training immer gestrichelt)
