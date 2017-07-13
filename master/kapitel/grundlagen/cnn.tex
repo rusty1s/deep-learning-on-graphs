@@ -65,15 +65,19 @@ Aus den Fehlern der einzelnen Neuronen kann damit schließlich der Gradient $\na
 Der Prozess des Trainings eines neuronalen Netzes, \dhe{} die Anpassung seiner Parameter zur Minimierung der Kostenfunktion, wird dabei solange wiederholt, bis $\nabla C$ ein lokales Minimum erreicht.
 Ein einmaliges Durchlaufen aller Eingaben der Eingabemenge wird dabei als \emph{Epoche} bezeichnet~\cite{Nielsen}.
 \\\\
-Eine Spezialform eines neuronalen Netz ist das \emph{\gls{CNN}}, welches hauptsächlich in der Bild- und Spracherkennung zum Einsatz kommt und seinen Namen aufgrund der Faltung seiner Eingabe mit einem Filter erhält.~\cite{cnn}.
+Eine Spezialform eines neuronalen Netz ist das \emph{\gls{CNN}}, welches hauptsächlich in der Bild- und Spracherkennung zum Einsatz kommt und seinen Namen aufgrund der \emph{Faltung} seiner Eingabe mit einem \emph{Filter} erhält.~\cite{cnn}.
 Entgegen eines Feedforward-Netzes, welches stets einen Vektor als Eingabe erwartet, arbeitet ein \gls{CNN} auf den originalen Bilddaten, \dhe{} einer Menge zweidimensionaler Matrizen, und ermöglicht so, dass dessen räumliche Struktur beim Lernen berücksichtigt wird~\cite{Nielsen}.
 Dabei wird ein Neuron nicht mehr mit allen Neuronen der vorherigen Schicht, sondern nur noch mit einer Teilmenge dieser innerhalb eines Fensters um das Neuron verbunden.
 Dieses Fenster wird auch oft, angelehnt an die Rezeptoren eines Auges, \emph{rezeptives Feld} (\engl{} \emph{Receptive-Field}) genannt~\cite{cnn}.
 Die Größe des Receptive-Fields, \zB{} $5 \times 5$, wird dabei als \emph{Filtergröße} bezeichnet.
 Abbildung~\ref{fig:cnn} veranschaulicht die Vernetzung der Neuronen durch ein Receptive-Field.
 \input{tikz/cnn}
-% Merkmalskarten (Ein-Ausgabe)
-% shared bias weight
+Eine Besonderheit des \glspl{CNN} ist weiterhin, dass sich die Receptive-Fields ihre Gewichte und Biaswerte teilen.
+Damit erlernt ein Receptive-Field ein Merkmal, \zB{} eine Kante oder eine Textur, und findet dieses Merkmal auch in anderen Receptive-Fields, nur an unterschiedlichen Positionen~\cite{Nielsen}.
+Das ermöglicht insbesondere das Erlernen translationsinvarianter Merkmale, die für eine Bilderkennung fundumental sind.
+Aus diesem Grund spricht man auch häufig von einer \emph{Merkmalskarte} (\engl{} \emph{Feature-Map}), die durch eine Faltung über den Receptive-Fields entsteht.
+Um mehrere Merkmale eines Receptive-Fields zu generieren, werden dabei üblicherweise eine Reihe von zusammengehörigen \emph{Eingabekarten} auf eine neue Menge von \emph{Ausgabekarten} projiziert.
+Ein Bild $\gls{B} \in \gls{R}^{H \times W \times 3}$ mit drei Farbkanälen beschreibt \zB{} drei Merkmalskarten, die als Eingabe in das \gls{CNN} dienen.
 
 Formal lässt sich damit die \emph{zweidimensionale Faltungsoperation}
 \begin{equation*}
@@ -85,9 +89,15 @@ im Folgenden auch oft als \emph{klassische Faltungsoperation} betitelt, als
 \end{equation*}
 mit $1 \leq y \leq H$, $1 \leq x \leq W$ und $1 \leq m \leq M_{\mathrm{out}}$ definieren, wobei $\gls{B} \in \gls{R}^{H \times W \times M_{\mathrm{in}}}$ die Eingabe und $\gls{W} \in \gls{R}^{F_y \times F_x \times M_{\mathrm{in}} \times M_{\mathrm{out}}}$ den Filter \bzw{} Gewichtstensor der Faltungsoperation mit Filtergröße $F_y \times F_x$ von $M_{\mathrm{in}} \in \gls{N}$ Eingabekarten auf $M_{\mathrm{out}} \in \gls{N}$ Ausgabekarten beschreibt~\cite{tensorflow}.
 Auf die Aufsummierung eines Bias $\gls{b} \in \gls{R}^{M_{\mathrm{out}}}$ sowie die Anwendung der Aktivierungsfunktion \gls{act} auf \gls{conv2d} wurde hier zur Vereinfachung verzichtet.
-Der Wert eines Indexzugriffs auf die Eingabekarte \gls{B}, der über die Grenzen von \gls{B} hinausgeht, wird üblicherweise auf Null gesetzt (\emph{\enquote{SAME}-Padding}), sodass diese keinen Einfluss auf die Faltung nehmen und die Ausgabekarte damit die gleiche Höhe und Breite wie die Eingabekarte besitzt~\cite{tensorflow}.
-Eine Reduktion der Dimensionen innerhalb der Faltungsschicht kann erreicht werden, in dem nicht über jedes Neuron, sondern nur über eine Untermenge dieser in fester Schrittweite $s_y \times s_x$ zueinander gefaltet wird.
-Eine Alternative dazu ist die Verwendung einer \emph{Poo\-ling\-sch\-icht}.
+Der Wert eines Indexzugriffs auf die Eingabekarte \gls{B}, der über die Grenzen von \gls{B} hinausgeht, wird üblicherweise auf Null gesetzt (\emph{\enquote{SAME}-Padding}), sodass dieser keinen Einfluss auf die Faltung nimmt und die Ausgabekarte damit die gleiche Höhe und Breite wie die Eingabekarte besitzt~\cite{tensorflow}.
+Eine Reduktion der Auflösung innerhalb der Faltungsschicht kann erreicht werden, in dem nicht über jedes Neuron, sondern nur über eine Untermenge dieser in fester Schrittweite $s_y \times s_x$ zueinander gefaltet wird.
+Eine Alternative dazu ist die Verwendung einer \emph{Poo\-ling\-sch\-icht}, die üblicherweise direkt nach einer Faltungsschicht zum Einsatz kommt und versucht, die Ausgabe der Faltungsschicht zu reduzieren \bzw{} auf das Wesentliche zu vereinfachen.
+Eine Poolingoperation besitzt analog zu \gls{conv2d} eine Fenstergröße sowie eine Schrittweite.
+Die beliebteste Poolingoperation ist das \emph{MaxPooling}, die sich jeweils für das Maximum der Aktivierungen innerhalb jedes Fensters entscheidet~\cite{Nielsen}.
+Eine Poolingoperation mit Fenstergröße $2 \times 2$ sowie Schrittweite $2 \times 2$ reduziert damit die Daten der Merkmalskarte um genau die Hälfte.
 
-% Hier Schrittweite vorstellen
-% Pooling
+Ein \gls{CNN} besteht typischerweise aus mehreren Faltungs- und Poolingschichten, sodass die Menge der Merkmalskarten dabei stetig erhöht und die Auflösung stetig verringert wird.
+Damit entstehen im späteren Verlauf des Netzes Merkmalskarten, die immer größere Receptive-Fields des Eingabebildes basierend auf den ermittelten Merkmalen vorangegangener Schichten beschreiben.
+Nach einer gewissen Anzahl an Faltungen werden die Merkmalskarten zu einem Vektor \emph{abgeflacht}, sodass vollverbundene Schichten hin zur Ausgabe genutzt werden können.
+Abbildung~\ref{fig:cnn_aufbau} illustriert den üblichen Aufbau eines \glspl{CNN}.
+\input{tikz/cnn_aufbau}
