@@ -66,22 +66,28 @@ Der Prozess des Trainings eines neuronalen Netzes, \dhe{} die Anpassung seiner P
 Ein einmaliges Durchlaufen aller Eingaben der Eingabemenge wird dabei als \emph{Epoche} bezeichnet~\cite{Nielsen}.
 \\\\
 Eine Spezialform eines neuronalen Netz ist das \emph{\gls{CNN}}, welches hauptsächlich in der Bild- und Spracherkennung zum Einsatz kommt und seinen Namen aufgrund der Faltung seiner Eingabe mit einem Filter erhält.~\cite{cnn}.
-Entgegen eines Feedforward-Netzes, welches stets einen Vektor als Eingabe erwartet, arbeitet ein \gls{CNN} auf den originalen Bilddaten, \dhe{} einer Menge zweidimensionaler Matrizen, und ermöglicht so, dass dessen räumliche Struktur beim Lernen berücksichtigt wird.
+Entgegen eines Feedforward-Netzes, welches stets einen Vektor als Eingabe erwartet, arbeitet ein \gls{CNN} auf den originalen Bilddaten, \dhe{} einer Menge zweidimensionaler Matrizen, und ermöglicht so, dass dessen räumliche Struktur beim Lernen berücksichtigt wird~\cite{Nielsen}.
 Dabei wird ein Neuron nicht mehr mit allen Neuronen der vorherigen Schicht, sondern nur noch mit einer Teilmenge dieser innerhalb eines Fensters um das Neuron verbunden.
 Dieses Fenster wird auch oft, angelehnt an die Rezeptoren eines Auges, \emph{rezeptives Feld} (\engl{} \emph{Receptive-Field}) genannt~\cite{cnn}.
 Die Größe des Receptive-Fields, \zB{} $5 \times 5$, wird dabei als \emph{Filtergröße} bezeichnet.
-Abbildung~\ref{fig:cnn} veranschaulicht das Prinzip der Faltung
+Abbildung~\ref{fig:cnn} veranschaulicht die Vernetzung der Neuronen durch ein Receptive-Field.
 \input{tikz/cnn}
 % Merkmalskarten (Ein-Ausgabe)
 % shared bias weight
 
-Formal lässt sich damit die \emph{zweidimensionale Faltungsoperation} \gls{conv2d}, im Folgenden auch oft als \emph{klassische Faltungsoperation} betitelt, als
+Formal lässt sich damit die \emph{zweidimensionale Faltungsoperation}
+\begin{equation*}
+  \gls{conv2d} \colon H \times W \times M_{\mathrm{in}} \to H \times W \times M_{\mathrm{out}},
+\end{equation*}
+im Folgenden auch oft als \emph{klassische Faltungsoperation} betitelt, als
 \begin{equation*}
   {\gls{conv2d}\left(\gls{B}\right)}_{yxm} \coloneqq \sum_{\Delta y = 1}^{F_y} \sum_{\Delta x = 1}^{F_x} \sum_{m_{\mathrm{in}} = 1}^{M_\mathrm{in}} \gls{B}_{y + \left\lceil F_y \right\rceil - \Delta y, x + \left\lceil F_x \right\rceil - \Delta x, m_{\mathrm{in}}} \gls{W}_{\Delta y, \Delta x, m_{\mathrm{in}}, m}
 \end{equation*}
 mit $1 \leq y \leq H$, $1 \leq x \leq W$ und $1 \leq m \leq M_{\mathrm{out}}$ definieren, wobei $\gls{B} \in \gls{R}^{H \times W \times M_{\mathrm{in}}}$ die Eingabe und $\gls{W} \in \gls{R}^{F_y \times F_x \times M_{\mathrm{in}} \times M_{\mathrm{out}}}$ den Filter \bzw{} Gewichtstensor der Faltungsoperation mit Filtergröße $F_y \times F_x$ von $M_{\mathrm{in}} \in \gls{N}$ Eingabekarten auf $M_{\mathrm{out}} \in \gls{N}$ Ausgabekarten beschreibt~\cite{tensorflow}.
-Die Aufsummierung eines Bias $\gls{b} \in \gls{R}^{M_{\mathrm{out}}}$ sowie die Anwendung der Aktivierungsfunktion \gls{act} auf \gls{conv2d} wurde hier zur Vereinfachung vernachlässigt.
+Auf die Aufsummierung eines Bias $\gls{b} \in \gls{R}^{M_{\mathrm{out}}}$ sowie die Anwendung der Aktivierungsfunktion \gls{act} auf \gls{conv2d} wurde hier zur Vereinfachung verzichtet.
 Der Wert eines Indexzugriffs auf die Eingabekarte \gls{B}, der über die Grenzen von \gls{B} hinausgeht, wird üblicherweise auf Null gesetzt (\emph{\enquote{SAME}-Padding}), sodass diese keinen Einfluss auf die Faltung nehmen und die Ausgabekarte damit die gleiche Höhe und Breite wie die Eingabekarte besitzt~\cite{tensorflow}.
+Eine Reduktion der Dimensionen innerhalb der Faltungsschicht kann erreicht werden, in dem nicht über jedes Neuron, sondern nur über eine Untermenge dieser in fester Schrittweite $s_y \times s_x$ zueinander gefaltet wird.
+Eine Alternative dazu ist die Verwendung einer \emph{Poo\-ling\-sch\-icht}.
 
 % Hier Schrittweite vorstellen
 % Pooling
