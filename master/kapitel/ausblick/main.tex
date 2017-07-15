@@ -1,8 +1,22 @@
 \chapter{Ausblick}
 \label{ausblick}
 
-\paragraph{Weitere Anwendungsgebiete}
-\label{weitere_anwendungsgebiete}
+Die vorgestellten und entwickelten Ansätze zum Lernen auf Graphen im zweidimensional euklidischen Raum wurden in dieser Arbeit über einer Klassizierung auf Graphrepräsentationen von Bildern evaluiert.
+Sie lassen sich jedoch auch mühelos auf andere Probleme wie \zB{} der Objekterkennung oder der Segmentierung anwenden.
+Dabei sind ebenso völlig andere als in dieser Arbeit präsentierten Anwendungsgebiete denkbar, denn die einzige Einschränkung der Graphen für die Benutzung der entwickelten Faltungsoperatoren ist die eindeutige oder zumindest relative Positionierung seiner Knoten zueinander im Raum.
+So lassen sich solche Graphen \bspw{} über Karten oder Straßennetze gewinnen, deren Eingabe in die vorgestellten Netzarchitekturen vielversprechende Möglichkeiten offenbaren.
+
+Zum Abschluss dieser Arbeit wird ein Ausblick zu denkbaren Erweiterungen vorgestellt, für dessen Erforschung an dieser Stelle der Platz fehlt.
+
+\paragraph{Erweiterung auf den dreidimensionalen Raum}
+\label{dredimensionale_erweiterung}
+
+Alle Faltungsansätze in dieser Arbeit wurden lediglich auf Graphen im zweidimensionalen Raum betrachtet.
+Dabei ist es aber ebenso vorstellbar, diese Ansätze auf den dreidimensionalen Raum auszuweiten.
+In diesem Fall besitzt ein Graph $\gls{G} = \left(\gls{V}, \gls{E}, \gls{p}\right)$ eine Positionsfunktion $\gls{p} \colon \gls{V} \to \gls{R}^3$, die den Knoten jeweils drei Koordinaten zuordnet.
+Die implizit gegebene Winkelfunktion seiner Kanten $\gls{winkel} \colon \gls{V} \times \gls{V} \to {\left[0, 2\pi\right]}^2$ bildet damit folglich auf zwei Winkel ab.
+Insbesondere der spektrale Faltungsoperator, der in Kapitel~\ref{bspline} mit Hilfe einer polynomiellen Approximation über B-Spline-Kurven erweitert wurde, erlernt nun eine Repräsentation einer geschlossenen Fläche anstatt einer Kurve, die mittels der \emph{Tensorproduktkonstruktion} über zwei Basisfunktionen konstruiert werden kann~\cite{gm}.
+Eine Implementierung \bzw{} Erweiterung dieser Ansätze auf den dreidimensionalen Raum erlaubt damit insbesondere das Lernen auf Polygonnetzen und folglich auch auf dreidimensionalen Objekten.
 
 \paragraph{Entfernung irrelevanter Knoten}
 \label{entfernung_irrelevanter_knoten}
@@ -26,6 +40,23 @@ Wenn nicht, dann Knoten mit nächsten verbinden.
 
 \paragraph{Spatial-Pyramid-Pooling}
 \label{spatial_pyramid_pooling}
+
+Erweiterung auf den dreidimensionalen Raum
+
+Entfernung irrelevanter Kanten
+
+Spatial Pyramid Pooling als Alternative zur durchschnittsbildung
+
+
+spannende mäglichkeit verspricht
+
+Im folgenden
+
+Meshes 3d
+
+
+
+
 
 \paragraph{Attention-Algorithmus}
 \label{attention_algorithmus}
