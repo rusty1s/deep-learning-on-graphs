@@ -27,7 +27,7 @@ Eine Faltung auf diesen Knoten besitzt so gut wie keine lokale Aussage, sodass d
 Es erscheint sinnvoll, diese Knoten in einem weiteren Vorverarbeitungsschritt über einer zuvor definierten Strategie zu entfernen.
 Abbildung~\ref{fig:knotenentfernung} illustriert eine mögliche irrelevante Knotenentfernung anhand eines Bildes aus dem \gls{MNIST}-Datensatz.
 \input{figures/knotenentfernung}
-Es lassen sich folglich zwischen datensatzspezifischen und -unspezifischen Strategien unterscheiden.
+Dabei lassen sich zwischen datensatzspezifischen und -unspezifischen Strategien unterscheiden.
 Auf dem \gls{MNIST} Datensatz können \zB{} alle Knoten entfernt werden, die einen schwarzen Farbwert oder eine (relativ) große Fläche aufweisen.
 Eine allgemeinere Vorgehensweise ist die Knotenentfernung basierend auf einem (relativen) Grenzwert seiner Knotengrade.
 Bei der bloßen Entfernung von Knoten aus einem Graphen laufen wir aber Gefahr, dass dieser nun möglicherweise isolierte Knoten \bzw{} mehrere Zusammenhangskomponenten besitzt.
@@ -44,3 +44,17 @@ Eine weitere Alternative ist die Verwendung eines \emph{Attentation}-Mechanismus
 
 \paragraph{Effiziente GPU-Implementierung}
 \label{gpu_implementierung}
+
+Die Laufzeiten der vorgestellten Faltungsoperatoren können derzeit, obgleich einer kleineren Eingabegröße, nicht mit den Laufzeiten der klassichen Faltung auf Bildern konkurrieren.
+Der klassische Faltungsoperator besitzt eine für die GPU höchst optimierte batchweise Implementierung, wohingegen die Graphimplementierung aufgrund der Limitierung dünnbesetzter Tensoren auf genau zwei Dimensionen dies nicht leisten kann.
+Für die Verarveitung eines Batches muss folglich über jeden Graphen einzeln iteriert werden, sodass die Vorteile der Nutzung einer GPU \bzgl{} ihrer Parallisierungsmechanismen verloren gehen.
+Eine Möglichkeit, diese Schwäche zu umgehen, ist die batchweise Darstellung der Adjazenzmatrizen $\mathcal{A} \coloneqq {\left\{\gls{A}_m\right\}}_{m=1}^M$ über genau eine dünnbesetzte Matrix, sodass die Adjazenzmatrizen diagonalbasiert angeordnet sind, \dhe{}
+\begin{equation*}
+  \mathcal{A} \coloneqq \begin{bmatrix}
+  \gls{A}_1 & & \ma{0}\\
+  & \ddots & \\
+  \ma{0} & & \gls{A}_M
+  \end{bmatrix},
+\end{equation*}
+und folglich einheitlich verarbeitet werden können.
+Die Optimierung dieses Ansatzes bleibt ein interessantes Forschungsgebiet für weiterführende Arbeiten.
