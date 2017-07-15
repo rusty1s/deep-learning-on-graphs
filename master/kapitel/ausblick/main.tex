@@ -32,7 +32,7 @@ Auf dem \gls{MNIST} Datensatz können \zB{} alle Knoten entfernt werden, die ein
 Eine allgemeinere Vorgehensweise ist die Knotenentfernung basierend auf einem (relativen) Grenzwert seiner Knotengrade.
 Bei der bloßen Entfernung von Knoten aus einem Graphen laufen wir aber Gefahr, dass dieser nun möglicherweise isolierte Knoten \bzw{} mehrere Zusammenhangskomponenten besitzt.
 Insbesondere die Poolingoperation sowie die Faltung basierend auf den \glspl{GCN} erfordern jedoch zusammenhängende Graphen.
-Ein Test mit Hilfe des zweiten Eigenwerts der Laplace-Matrix zeigt, dass die Knotenentfernung basierend auf ihren Farbwerten für Graphen, die über Quickshift aus dem \gls{MNIST}-Datensatz generiert wurden, zu $99.9\%$ einen zusammenhängenden Graphen erhält, wohingegen für eine Knotenentfernung auf Basis ihrer Knotengrade dies nur noch für $45.4\%$ der Graphen der Fall ist.
+Ein Test mit Hilfe des zweiten Eigenwerts der Laplace-Matrix zeigt, dass die Knotenentfernung basierend auf ihren Farbwerten für Graphen, die über Quickshift aus dem \gls{MNIST}-Datensatz generiert wurden, in $99.9\%$ der Fällen einen zusammenhängenden Graphen erhält, wohingegen für eine Knotenentfernung auf Basis ihrer Knotengrade dies nur noch für $45.4\%$ der Graphen der Fall ist.
 Es lassen sich jedoch die beiden nächsten zueinander liegenden Knoten unterschiedlicher Zusammenhangskomponenten über eine Kante verbinden, bis der Graph wieder zusammenhängend ist.
 
 \paragraph{Spatial Pyramid Pooling}
