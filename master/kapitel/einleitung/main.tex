@@ -1,21 +1,20 @@
 \chapter{Einleitung}
 \label{einleitung}
 
-Wir zeigen, dass wir bisherige Faltungsoperatoren auf Graphen drastisch verbessern können, wenn den Graphenkanten eine Orientierung zu Grunde liegt und wir diese berücksichtigen.
-
-Wir zeigen, dass die Vorgestellten Faltungsoperatoren in dieser Arbeit äquivalent zu der Köassischen Faltung auf rwgulären Gittern aind und
-Obwohl diese nicht ganz mit den klassischen Faltungsoperatoren auf Bildern für irreguläre Graphen mithalten könn n, so zeigen sie sich dennoch als lohnenswert auf Grundlage ihrer Datenreduktion für zukünftige Arbeiten.
-gerade in Hinsicht für eine effiziente GPU Implementierung.
-
-CNNs falten selbst die unnötigsten Stellen eines Bildes, wohingegen der Graphansatz durch eine Vorverarbeitung diesw zu einem Knoten zusammenfügt.
-
-Insbesondere hier schon auf räumlich und spektral eingehen, da es woanders keinen sinn macht
-
-In the context of the generalization of Convolutional Neural Networks (CNNs) to irregular domains modelled by graphs, the problem is the classification or regression of graph signals, i.e.\ signals who take a value at each vertex of a weighted graph. There is two approaches to convolve a graph signal with a (learned) filter:
-Spatially sliding a filter on the vertices, as you would slide a filter on a 2D image or a 1D audio signal (the pixels form a grid graph, the time forms a line graph), i.e.\ the straightforward application of the definition of a convolution. This approach however presents two challenges: (1) the definition of a receptive field / neighbourhood, because sampling on arbitrary graphs is not necessarily uniform and (2), the ordering of nodes, because problem-specific ordering, e.g.\ spatially ordered pixels or time ordered samples, is missing. These recent works, who present the same ideas differently, spatially define the convolution operator on graphs:
-The spectral formulation builds on Spectral Graph Theory and Computational Harmonic Analysis. It decomposes the graph Laplacian (via an eigendecomposition) to form a Fourier basis, which properties are analog to the classical Fourier basis on n-dimensional Euclidean spaces. A convolution in the graph domain is then equivalent to a multiplication in the spectral domain. See [1211.0053] for an overview of the Graph Signal Processing field. Note that the spectral approach was also proposed in [1312.5851] (using FFTs) to speed up CNNs on regular 2D Euclidean spaces (i.e.\ for images). The limitations of this approach is (for now, we have plans to address those): (1) filters are rotation invariant, and (2) filters are not directly transferrable to a different graph. These recent works, who build on one another, spectrally define the convolution operator on graphs:
-
-Generell Lernen auf Graphen, die in der Ebene oder im Raum eingebettet sind, z.B. Straßennetze, Karten.
+Convolutional Neural Networks, eine Spezialform der neuronalen Netze, gelten dank ihrer effizienten Architektur und ihrer Fähigkeit, lokal stationäre Strukturen auf multiskalare, hierarchische Merkmale zu übertragen, als Allzweckmittel zu Problemen in Bereichen der Bild-, Video- und Spracherkennung~\cite{Defferrard}.
+Sie sind jedoch nur im Kontext regulärer Datendomänen wohldefiniert.
+So lassen sich aber insbesondere zahlreiche Probleme als maschinelles Lernen auf irregulär strukturierten Daten verstehen.
+Dabei liefern Graphen eine geeignete generische Datenstruktur, die es ermöglicht, eine Vielzahl dieser Probleme wie etwa in Bereichen der sozialen Netzwerke, der Biologie, Chemie oder Telekommunikation zu modellieren~\cite{Shuman}.
+Es ist daher nicht verwunderlich, dass in der Vergangenheit zahlreiche Anstrengungen unternommen wurden, den Faltungsoperator der Convolutional Neural Networks für die Anwendung auf irregulären Graphstrukturen zu generalisieren~\cite{patchy, Defferrard, gcn}.
+Diese Verfahren lassen sich dabei grob über zwei unterschiedliche Herangehensweisen gliedern:
+\begin{enumerate}
+  \item Das \textbf{räumliche Lernen auf Graphen} widmet sich der räumlichen Verschiebung eines Filters auf den Knoten eines Graphen ähnlich zu der Verschiebung eines Filters auf einem zweidimensionalen Bild oder einem eindimensionalen Audiosignal~\cite{patchy}.
+  Dafür wird zu einem Knoten eine feste sowie eindeutige Nachbarschaft definiert und ein gemeinsamer Filter auf allen Nachbarschaften einer Knotenauswahl angewendet.
+  \item Das \textbf{spektrale Lernen auf Graphen} basiert auf der spektralen Graphentheorie und formuliert einen Faltungsoperator auf Graphen über die Zerlegung seiner Knotenmerkmale in das Spektrum des Graphen ähnlich zu der Transformation eines Signals in dessen Frequenzraum mittels der klassischen Fourier-Transformation.
+  Eine Multiplikation der Knotenmerkmale in der spektralen Domäne entspricht damit einer Faltung in der Domäne des Graphen.
+\end{enumerate}
+Beide Herangehensweisen zeichnen sich dabei im Gegensatz zur klassischen Faltung der Convolutional Neural Networks auf regulären Strukturen durch ihre (notwendigerweise) rotationsinvariante Faltung aus.
+In dieser Arbeit motivieren wir daher zwei Ansätze \bzgl{} einer rotationsvarianten Faltung auf Graphen, deren Knoten eine eindeutige Position im zweidimensionalen euklidischen Raum inne wohnt.
 
 \input{kapitel/einleitung/problemstellung}
 \input{kapitel/einleitung/aufbau}
