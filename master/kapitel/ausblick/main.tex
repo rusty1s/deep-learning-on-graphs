@@ -21,25 +21,24 @@ Eine Implementierung \bzw{} Erweiterung dieser Ansätze auf den dreidimensionale
 \paragraph{Entfernung irrelevanter Knoten}
 \label{entfernung_irrelevanter_knoten}
 
-nicht nur bei \gls{MNIST}
-auch bei \gls{Pascal} slic? (\zB{} Regelmäßigkeiten erkennen)
-
-Problem kanten bzw knoten mit sehr vielen kanten enthalten wenig information und sind meist hintergrundsknoten, die eine grosse gleichfarvige fläche bilden (das ist natürlich nicht immer der fall)
-Wir können diese knoten über einen treshhold entfernen (zb 20)
-Laufen jedoch gefahr isolierte knoten zu schaffen bzw einen nicht verbundenen graphen (zeige beispiel)
- Eine weitere idee ist für jeden knoten einen threshold an anzahl an kanten zusetzen und die längsten kanten zu entfernen. Dann bleibt aber der unnütze hintergrundknoten erhalten.
-
-Im falle von mnist kann mn hintergrundsknoten leicht über farbe ermitteln.
-In anderen interessanteren datensätzen ist dies nicht so einfach.
-
-Gibt es weitere ideen?
-Kann man isolierte graphen leicht ermitteln? Was tun in so einem fall?
-
-Testen über Eigenvektoren ob Graph zusammenhängend ist
-Wenn nicht, dann Knoten mit nächsten verbinden.
+In den Graphrepräsentationen von Bildern können bei der Benutzung der Quickshift-Segmentierung Knoten vereinzelnd einen extrem hohen Knotengrade aufweisen (\vgl{} \zB{} Tabelle~\ref{tab:mnist}).
+Das ist insbesondere dann der Fall, wenn Knoten eine große einheitliche Fläche des Bildes abdecken (\zB{} einen einfarbigen Hintergrund) und folglich an dessen Segmenträndern viele benachbarte Pixel anliegen.
+Eine Faltung auf diesen Knoten besitzt so gut wie keine lokale Aussage, sodass dessen Nutzen für ein neuronales Netzes fraglich oder gar hinderlich ist.
+Es erscheint sinnvoll, diese Knoten in einem weiteren Vorverarbeitungsschritt über einer zuvor definierten Strategie zu entfernen.
+Abbildung~\ref{fig:knotenentfernung} illustriert eine mögliche irrelevante Knotenentfernung anhand eines Bildes aus dem \gls{MNIST}-Datensatz.
+Es lassen sich folglich zwischen datensatzspezifischen und -unspezifischen Strategien unterscheiden.
+Auf dem \gls{MNIST} Datensatz können \zB{} alle Knoten entfernt werden, die einen schwarzen Farbwert oder eine (relativ) große Fläche aufweisen.
+Eine allgemeinere Vorgehensweise ist die Knotenentfernung basierend auf einem (relativen) Grenzwert seiner Knotengrade.
+Bei der bloßen Entfernung von Knoten aus einem Graphen laufen wir aber Gefahr, dass dieser nun möglicherweise isolierte Knoten \bzw{} mehrere Zusammenhangskomponenten besitzt.
+Insbesondere die Poolingoperation sowie die Faltung basierend auf den \glspl{GCN} erfordern jedoch zusammenhängende Graphen.
+Ein Test mit Hilfe des zweiten Eigenwerts der Laplace-Matrix zeigt, dass die Knotenentfernung basierend auf ihren Farbwerten für Graphen, die über Quickshift aus dem \gls{MNIST}-Datensatz generiert wurden, zu $99.9\%$ einen zusammenhängenden Graphen erhält, wohingegen für eine Knotenentfernung auf Basis ihrer Knotengrade dies nur noch für $45.4\%$ der Graphen der Fall ist.
+Es lassen sich jedoch die beiden nächsten zueinander liegenden Knoten unterschiedlicher Zusammenhangskomponenten über eine Kante verbinden, bis der Graph wieder zusammenhängend ist.
 
 \paragraph{Spatial-Pyramid-Pooling}
 \label{spatial_pyramid_pooling}
+
+\paragraph{Effiziente GPU-Implementierung}
+\label{gpu_implementierung}
 
 Erweiterung auf den dreidimensionalen Raum
 
