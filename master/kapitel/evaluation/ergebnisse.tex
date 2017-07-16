@@ -37,7 +37,8 @@ Dropout: 0.5\\
 \label{tab:train_mnist_gitter}
 \end{table}
 
-kein preprocessing nötig, es wird immer die gleiche Adjazenzmatrix benutzt.
+kein preprocessing nötig.
+es wird immer die gleiche Adjazenzmatrix benutzt.
 nur zum Validieren
 Es zeigt sich dass \gls{EGCNN} wirklich äquivalent zu der Faltung auf $3 \times 3$ ist.
 insbesondere kein average pool notwendig, da graphen alle gleich groß
@@ -111,9 +112,9 @@ Das ist riesig!
   \cmidrule{4-5}
    & & & \gls{SLIC} & \gls{QS}\\
   \midrule
-  \gls{EGCNN} & 9 & \\
+  \gls{EGCNN} & 9 & &\\
   \midrule
-  klassisch & $3 \times 3$ & \multicolumn{2}{c}{ad} \\
+  klassisch & — & SqueezeNet 1.1 & \multicolumn{2}{c}{ad} \\
   \bottomrule
 \end{tabular}}
 \caption[Testgenauigkeiten der \gls{Pascal} Superpixelrepräsentationen]{}
