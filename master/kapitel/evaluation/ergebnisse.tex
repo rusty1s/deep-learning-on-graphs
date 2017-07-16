@@ -1,16 +1,21 @@
 \section{Ergebnisse}
 \label{ergebnisse}
 
+als \gls{QS} wird dingens abgekürzt
+\gls{GCN}
+
+% Alle Faltungen wurden dabei mit einer Partitionsgröße von $8$ bei $K=0$ und $K=1$ implementiert, um ein \gls{CNN} mit einem $3 \times 3$ Filter zu simulieren.
+% Es erscheint jedoch vorstellbar die Filtergröße bei größerer lokaler Kontrollierbarkeit, \dhe{} $K > 1$, weiter zu reduzieren und die Gefahr des Overfittings damit aufgrund der kleineren Anzahl an Trainingsparametern einzuschränken.
+
 \paragraph{\gls{MNIST}}
 
 keine Augmentierung
 keine L2-Regularisierung
+kein Learning Rate Decay
 
 10.000 Steps mit Batch Size 64\\
 Learning-Rate: 0.001\\
 Dropout: 0.5\\
-
-\gls{GCN}
 
 \begin{table}[t]
 \centering
@@ -18,6 +23,7 @@ Dropout: 0.5\\
   \toprule
   Ansatz & \ma{W} & Architektur & Genauigkeit [\%]\\
   \midrule
+  Cube & 25 & C64-F2048-FC1024 & \\
   SGCNN & 25 & C32-P4-C64-P4-FC1024 & 98.888\\
   GCN & 1 & C32-C32-P4-C64-C64-P4-FC1024 & 96.675\\
   EGCNN & 9 & C32-C32-P4-C64-C64-P4-FC1024 & 99.145\\
@@ -26,66 +32,93 @@ Dropout: 0.5\\
   klassisch & $3 \times 3$ & C32-C32-P4-C64-C64-P4-FC1024 & 99.139\\
   \bottomrule
 \end{tabular}
-  \caption[Testgenauigkeiten der \gls{MNIST}-Gitterrepräsentation]{Testgenauigkeiten eines Trainings auf einer \gls{MNIST}-Gitterrepräsentation nach 10000 Durchläufen ($\approx 11$ Epochen) für die vorgestellten Ansätze inklusive äquivalenter Netzarchitekturen bei Benutzung der klassischen Faltungsoperation.}
+\caption[Testgenauigkeiten der \gls{MNIST}-Gitterrepräsentation]{Testgenauigkeiten eines Trainings auf einer \gls{MNIST}-Gitterrepräsentation nach 10000 Durchläufen ($\approx 11$ Epochen) für die vorgestellten Ansätze inklusive äquivalenter Netzarchitekturen bei Benutzung der klassischen Faltungsoperation.}
+\label{tab:train_mnist_gitter}
 \end{table}
+
 kein preprocessing nötig, es wird immer die gleiche Adjazenzmatrix benutzt.
 nur zum Validieren
 Es zeigt sich dass EGCN wirklich äquivalent zu der Faltung auf $3 \times 3$ ist.
 insbesondere kein average pool notwendig, da graphen alle gleich groß
-\todo{fuckin patchy}
 
-% \paragraph{Vergleich \bzgl{} vorhandener Implementierungen}
-% \label{vergleich_ergebnisse}
+\begin{table}[t]
+\centering
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lclrrr}
+  \toprule
+  Ansatz & \ma{W} & Architektur & \multicolumn{2}{c}{Genauigkeit [\%]}\\
+  \cmidrule{4-5}
+   & & & \gls{SLIC} & \gls{QS}\\
+  \midrule
+  Cube & 25 & & & \\
+  SGCNN & 9 & & & \\
+  GCN & 1 & & & \\
+  EGCNN & 9 & & & \\
+  \bottomrule
+\end{tabular}}
+\caption[Testgenauigkeiten der \gls{MNIST} Superpixelrepräsentationen]{10k steps}
+\label{tab:train_mnist}
+\end{table}
 
-% PascalVOC Squeeze einheitliche Größe von $224 \times 224$.
-
-% \paragraph{\gls{Cifar}-10}
+\paragraph{\gls{Cifar}-10}
 
 % Abbildung~\ref{fig:cifar_10_train} zeigt
 \input{tikz/cifar_10_train}
 
 % Postprocessing weitaus besser als preprocessing!
 
-% Mit drei mal Dropout kein Overfitting, trainiert allerdings langsam
-% Learning Rate Decay darf nicht zu krass sein
-
-% Durchschnittliche Faltungsdauer: 2.05s, Preprocessingdauer: 0.35s
-% Bei Batch-Size 64
-% Erstes Resultat mit Postprocessing:
-% Loss: 1.05440, acc: 0.63411
-
-% Zweiter Test:
-% Dropout nur noch 2 mal, nicht so starkes Learning Rate Decay
-% ist nun bei 70 \% nach 50k Steps
-% Dropout ist immer noch zu hart
-
-% 0.82699 loss, acc: .72917
-
-% Alle Faltungen wurden dabei mit einer Partitionsgröße von $8$ bei $K=0$ und $K=1$ implementiert, um ein \gls{CNN} mit einem $3 \times 3$ Filter zu simulieren.
-% Es erscheint jedoch vorstellbar die Filtergröße bei größerer lokaler Kontrollierbarkeit, \dhe{} $K > 1$, weiter zu reduzieren und die Gefahr des Overfittings damit aufgrund der kleineren Anzahl an Trainingsparametern einzuschränken.
-
-\textbf{Tschebyshov Quickshift:}
 LearningRate: 0.001
 LearningRateDecay: Alle 5000 Steps um 0.96
 BatchSize: 64
-Parameteranzahl: 8
-Aufbau: CNN64 CNN64 MaxPool2 CNN128 MaxPool2 CNN256 MaxPool3 CNN512 AveragePool FC256 FC128 FC10
 WeightDecay in FC256 und FC128: 0.004
-Dropout vor letztem: 0.5 (entspricht ungefähr 75 Epochen)
+Dropout vor letztem: 0.5
+jeweils 65k Steps (entspricht ungefähr 75 Epochen)
 65k steps trainiert: vereinheitlichen wir zu 60k
-Laufzeit: 0.43s + 1.95s
-Loss: 1.01912, acc: 0.67748
-Es werden pro Faltung eine 8fache Nachbarschaft betrachtet.
+
+Chebyshev: Es werden pro Faltung eine 8fache Nachbarschaft betrachtet.
 Das ist riesig!
 
-\textbf{EGCNN Quickshift}
-Alles gleich bis auf Aufbau:
-Aufbau: CNN64 CNN64 MaxPool2 CNN128 CNN128 MaxPool2 CNN256 CNN256 MaxPool3 CNN512 AveragePool FC256 FC128 FC10
-Im Gegensatz zu Tschebyschov zwei mal mehr falten, da immer nur minimale Nachbarschaften betrachtet werden.
-Laufzeit: 0.08s + 2.64s
-Loss:, acc:
+\begin{table}[t]
+\centering
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lclrrr}
+  \toprule
+  Ansatz & \ma{W} & Architektur & \multicolumn{2}{c}{Genauigkeit [\%]}\\
+  \cmidrule{4-5}
+   & & & \gls{SLIC} & \gls{QS}\\
+  \midrule
+  Cube & 25 & C64-FC1024-FC512-FC128 & & \\
+  SGCNN & 9 & C64-C64-P2-C128-P2-C256-P2-C512-Avg-FC256-FC128 & & 67.748\\
+  GCN & 1 & C64-C64-P2-C128-P2-C256-P2-C512-Avg-FC256-FC128 & & \\
+  EGCNN & 9 & C64-C64-P2-C128-P2-C256-P2-C512-Avg-FC256-FC128 & & 75.230\\
+  \midrule
+  klassisch & $3 \times 3$ & C64-C64-P4-C128-P4-C256-P4-FC256-FC128 & \multicolumn{2}{c}{ad} \\
+  \bottomrule
+\end{tabular}}
+\caption[Testgenauigkeiten der \gls{Cifar}-10 Superpixelrepräsentationen]{65k steps}
+\label{tab:train_cifar_10}
+\end{table}
 
-Je höher die Laufzeit des Lernens wird, umso geringer wird die Dauer der Vorverarbeitung.
+\paragraph{\gls{Pascal}}
 
-Grafik für Acuuracy und Loss getrennt!
-Dafür alle Ansätze in einer Grafik (Training immer gestrichelt)
+\begin{table}[t]
+\centering
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lclrrr}
+  \toprule
+  Ansatz & \ma{W} & Architektur & \multicolumn{2}{c}{Genauigkeit [\%]}\\
+  \cmidrule{4-5}
+   & & & \gls{SLIC} & \gls{QS}\\
+  \midrule
+  EGCNN & 9 & \\
+  \midrule
+  klassisch & $3 \times 3$ & \multicolumn{2}{c}{ad} \\
+  \bottomrule
+\end{tabular}}
+\caption[Testgenauigkeiten der \gls{Pascal} Superpixelrepräsentationen]{}
+\label{tab:train_pascal}
+\end{table}
+
+PascalVOC Squeeze einheitliche Größe von $224 \times 224$.
+Squeeze vorstellen
+insbesondere nur Vorverarbeitung vorm Training (aufgrund Laufzeiten)

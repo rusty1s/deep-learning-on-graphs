@@ -4,15 +4,6 @@
 % Das Training des neuronalen Netzes und der Betrieb des in Kapitel 3.4 vorgestell- ten Systems erfolgte auf einem Intel R CoreTM i5 Prozessor mit 3,2 Ghz, 16GB Ar- beitsspeicher und einer Nvidia R GeForceTM 980GTX Grafikkarte.
 % Rechnerhardware vorstellen
 
-% Laufzeitvergleich Slic Quickshift
-% Laufzeitvergleich Normales CNN und die entsprechenden Graphimplementierungen
-% Laufzeitvergleich CPU GPU
-
-% Laufzeitvergleich Preprocessing / ohne (+ Verhältnis Faltung / Preprocessing)
-
-% Cifar-10 Quickshift: Ohne Preprocessing: 0.03s
-% mit: 0.29s (Batch-Size 64)
-
 \input{tikz/laufzeit_raeumlich_pipeline}
 \input{tikz/laufzeit_spektral_pipeline}
 
@@ -34,6 +25,56 @@
 Die räumliche Vorverarbeitung ist aufgrund der einzelnen Receptive-Field-Berechnungen deutlich ineffizienter.}
 \label{tab:laufzeit_raeumlich_spektral}
 \end{table}
+
+\begin{table}[t]
+\centering
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lllrrrr}
+  \toprule
+  Datensatz & Superpixel & Verfahren & \multicolumn{4}{c}{Laufzeit [s]}\\
+  \cmidrule{4-7}
+   & & & vor Beginn & \multicolumn{3}{c}{zur Laufzeit}\\
+  \cmidrule{5-7}
+   & & & & Vorverarbeitung & Training & $\sum$\\
+  \midrule
+  \gls{MNIST} & \gls{SLIC} & Cube & & & &\\
+  \gls{MNIST} & \gls{SLIC} & SGCNN & & & &\\
+  \gls{MNIST} & \gls{SLIC} & GCN & & & &\\
+  \gls{MNIST} & \gls{SLIC} & EGCNN & & & &\\
+  \gls{MNIST} & \gls{QS} & Cube & & & &\\
+  \gls{MNIST} & \gls{QS} & SGCNN & & & &\\
+  \gls{MNIST} & \gls{QS} & GCN & & & &\\
+  \gls{MNIST} & \gls{QS} & EGCNN & & & &\\
+  \midrule
+  \gls{Cifar}-10 & \gls{SLIC} & Cube & & & & \\
+  \gls{Cifar}-10 & \gls{SLIC} & SGCNN & & & & \\
+  \gls{Cifar}-10 & \gls{SLIC} & GCN & & & & \\
+  \gls{Cifar}-10 & \gls{SLIC} & EGCNN & & & & \\
+  \gls{Cifar}-10 & \gls{QS} & Cube & & & & \\
+  \gls{Cifar}-10 & \gls{QS} & SGCNN & & 0.43 & 1.95 & 2.38\\
+  \gls{Cifar}-10 & \gls{QS} & GCN & & 1.09 & 0.36 & 1.45\\
+  \gls{Cifar}-10 & \gls{QS} & EGCNN & & & & \\
+  \midrule
+  \gls{Pascal} & \gls{SLIC} & EGCNN & & \multicolumn{3}{c}{—}\\
+  \gls{Pascal} & \gls{QS} & EGCNN & & \multicolumn{3}{c}{—}\\
+  \midrule
+  \gls{MNIST} & — & klassisch & & \multicolumn{3}{c}{—}\\
+  \gls{Cifar}-10 & — & klassisch & & \multicolumn{3}{c}{—}\\
+  \gls{Pascal} & — & klassisch & & \multicolumn{3}{c}{—}\\
+  \bottomrule
+\end{tabular}}
+\caption[]{}
+\label{tab:train_laufzeit}
+\end{table}
+
+Laufzeit: 0.43s + 1.95s
+% Je höher die Laufzeit des Lernens wird, umso geringer wird die Dauer der Vorverarbeitung.
+
+% Laufzeitvergleich Slic Quickshift
+% Laufzeitvergleich Normales CNN und die entsprechenden Graphimplementierungen
+% Laufzeitvergleich CPU GPU
+
+% Laufzeitvergleich Preprocessing / ohne (+ Verhältnis Faltung / Preprocessing)
 
 % \todo{laufzeitentabelle Lernen pro Batch}
 
