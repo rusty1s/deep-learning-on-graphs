@@ -37,26 +37,26 @@ Die räumliche Vorverarbeitung ist aufgrund der einzelnen Receptive-Field-Berech
   \cmidrule{5-7}
    & & & & Vorverarbeitung & Training & $\sum$\\
   \midrule
-  \gls{MNIST} & \gls{SLIC} & Cube & & & &\\
-  \gls{MNIST} & \gls{SLIC} & SGCNN & & & &\\
-  \gls{MNIST} & \gls{SLIC} & GCN & & & &\\
-  \gls{MNIST} & \gls{SLIC} & EGCNN & & & &\\
-  \gls{MNIST} & \gls{QS} & Cube & & & &\\
-  \gls{MNIST} & \gls{QS} & SGCNN & & & &\\
-  \gls{MNIST} & \gls{QS} & GCN & & & &\\
-  \gls{MNIST} & \gls{QS} & EGCNN & & & &\\
+  \gls{MNIST} & \gls{SLIC} & \gls{RL} & & & &\\
+  \gls{MNIST} & \gls{SLIC} & \gls{SGCNN} & & & &\\
+  \gls{MNIST} & \gls{SLIC} & \gls{GCN} & & & &\\
+  \gls{MNIST} & \gls{SLIC} & \gls{EGCNN} & & & &\\
+  \gls{MNIST} & \gls{QS}   & \gls{RL} & & & &\\
+  \gls{MNIST} & \gls{QS}   & \gls{SGCNN} & & & &\\
+  \gls{MNIST} & \gls{QS}   & \gls{GCN} & & & &\\
+  \gls{MNIST} & \gls{QS}   & \gls{EGCNN} & & & &\\
   \midrule
-  \gls{Cifar}-10 & \gls{SLIC} & Cube & & & & \\
-  \gls{Cifar}-10 & \gls{SLIC} & SGCNN & & & & \\
-  \gls{Cifar}-10 & \gls{SLIC} & GCN & & & & \\
-  \gls{Cifar}-10 & \gls{SLIC} & EGCNN & & & & \\
-  \gls{Cifar}-10 & \gls{QS} & Cube & & & & \\
-  \gls{Cifar}-10 & \gls{QS} & SGCNN & & 0.43 & 1.95 & 2.38\\
-  \gls{Cifar}-10 & \gls{QS} & GCN & & 1.09 & 0.36 & 1.45\\
-  \gls{Cifar}-10 & \gls{QS} & EGCNN & & & & \\
+  \gls{Cifar}-10 & \gls{SLIC} & \gls{RL} & & & & \\
+  \gls{Cifar}-10 & \gls{SLIC} & \gls{SGCNN} & & & & \\
+  \gls{Cifar}-10 & \gls{SLIC} & \gls{RL} & & & & \\
+  \gls{Cifar}-10 & \gls{SLIC} & \gls{EGCNN} & & & & \\
+  \gls{Cifar}-10 & \gls{QS}   & \gls{RL} & & & & \\
+  \gls{Cifar}-10 & \gls{QS}   & \gls{SGCNN} & & 0.43 & 1.95 & 2.38\\
+  \gls{Cifar}-10 & \gls{QS}   & \gls{GCN} & & 1.09 & 0.36 & 1.45\\
+  \gls{Cifar}-10 & \gls{QS}   & \gls{EGCNN} & & & & \\
   \midrule
-  \gls{Pascal} & \gls{SLIC} & EGCNN & & \multicolumn{3}{c}{—}\\
-  \gls{Pascal} & \gls{QS} & EGCNN & & \multicolumn{3}{c}{—}\\
+  \gls{Pascal} & \gls{SLIC} & \gls{EGCNN} & & \multicolumn{3}{c}{—}\\
+  \gls{Pascal} & \gls{QS}   & \gls{EGCNN} & & \multicolumn{3}{c}{—}\\
   \midrule
   \gls{MNIST} & — & klassisch & & \multicolumn{3}{c}{—}\\
   \gls{Cifar}-10 & — & klassisch & & \multicolumn{3}{c}{—}\\

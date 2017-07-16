@@ -1,8 +1,9 @@
 \section{Ergebnisse}
 \label{ergebnisse}
 
-als \gls{QS} wird dingens abgekürzt
-\gls{GCN}
+Dieses Kapitel stellt die Ergebnisse aller Datensätze über allen Verfahren, \dhe{} dem \gls{RL}, dem \gls{SGCNN} über den Tschebyschow-Polynomen, den Graph Convoluional Networks (GCN) und dem angepassten Ansatz \gls{EGCNN}
+
+über den Superpixelalgorithmen SLIC und \gls{QS}.
 
 % Alle Faltungen wurden dabei mit einer Partitionsgröße von $8$ bei $K=0$ und $K=1$ implementiert, um ein \gls{CNN} mit einem $3 \times 3$ Filter zu simulieren.
 % Es erscheint jedoch vorstellbar die Filtergröße bei größerer lokaler Kontrollierbarkeit, \dhe{} $K > 1$, weiter zu reduzieren und die Gefahr des Overfittings damit aufgrund der kleineren Anzahl an Trainingsparametern einzuschränken.
@@ -23,10 +24,10 @@ Dropout: 0.5\\
   \toprule
   Ansatz & \ma{W} & Architektur & Genauigkeit [\%]\\
   \midrule
-  Cube & 25 & C64-F2048-FC1024 & \\
-  SGCNN & 25 & C32-P4-C64-P4-FC1024 & 98.888\\
-  GCN & 1 & C32-C32-P4-C64-C64-P4-FC1024 & 96.675\\
-  EGCNN & 9 & C32-C32-P4-C64-C64-P4-FC1024 & 99.145\\
+  \gls{RL} & 25 & C64-F2048-FC1024 & \\
+  \gls{SGCNN} & 25 & C32-P4-C64-P4-FC1024 & 98.888\\
+  \gls{GCN} & 1 & C32-C32-P4-C64-C64-P4-FC1024 & 96.675\\
+  \gls{EGCNN} & 9 & C32-C32-P4-C64-C64-P4-FC1024 & 99.145\\
   \midrule
   klassisch & $5 \times 5$ & C32-P4-C64-P4-FC1024 & 99.189\\
   klassisch & $3 \times 3$ & C32-C32-P4-C64-C64-P4-FC1024 & 99.139\\
@@ -38,7 +39,7 @@ Dropout: 0.5\\
 
 kein preprocessing nötig, es wird immer die gleiche Adjazenzmatrix benutzt.
 nur zum Validieren
-Es zeigt sich dass EGCN wirklich äquivalent zu der Faltung auf $3 \times 3$ ist.
+Es zeigt sich dass \gls{EGCNN} wirklich äquivalent zu der Faltung auf $3 \times 3$ ist.
 insbesondere kein average pool notwendig, da graphen alle gleich groß
 
 \begin{table}[t]
@@ -50,10 +51,10 @@ insbesondere kein average pool notwendig, da graphen alle gleich groß
   \cmidrule{4-5}
    & & & \gls{SLIC} & \gls{QS}\\
   \midrule
-  Cube & 25 & & & \\
-  SGCNN & 9 & & & \\
-  GCN & 1 & & & \\
-  EGCNN & 9 & & & \\
+  \gls{RL} & 25 & & & \\
+  \gls{SGCNN} & 9 & & & \\
+  \gls{GCN} & 1 & & & \\
+  \gls{EGCNN} & 9 & & & \\
   \bottomrule
 \end{tabular}}
 \caption[Testgenauigkeiten der \gls{MNIST} Superpixelrepräsentationen]{10k steps}
@@ -87,10 +88,10 @@ Das ist riesig!
   \cmidrule{4-5}
    & & & \gls{SLIC} & \gls{QS}\\
   \midrule
-  Cube & 25 & C64-FC1024-FC512-FC128 & & \\
-  SGCNN & 9 & C64-C64-P2-C128-P2-C256-P2-C512-Avg-FC256-FC128 & & 67.748\\
-  GCN & 1 & C64-C64-P2-C128-P2-C256-P2-C512-Avg-FC256-FC128 & & \\
-  EGCNN & 9 & C64-C64-P2-C128-P2-C256-P2-C512-Avg-FC256-FC128 & & 75.230\\
+  \gls{RL} & 25 & C64-FC1024-FC512-FC128 & & \\
+  \gls{SGCNN} & 9 & C64-C64-P2-C128-P2-C256-P2-C512-Avg-FC256-FC128 & & 67.748\\
+  \gls{GCN} & 1 & C64-C64-P2-C128-P2-C256-P2-C512-Avg-FC256-FC128 & & \\
+  \gls{EGCNN} & 9 & C64-C64-P2-C128-P2-C256-P2-C512-Avg-FC256-FC128 & & 75.230\\
   \midrule
   klassisch & $3 \times 3$ & C64-C64-P4-C128-P4-C256-P4-FC256-FC128 & \multicolumn{2}{c}{ad} \\
   \bottomrule
@@ -110,7 +111,7 @@ Das ist riesig!
   \cmidrule{4-5}
    & & & \gls{SLIC} & \gls{QS}\\
   \midrule
-  EGCNN & 9 & \\
+  \gls{EGCNN} & 9 & \\
   \midrule
   klassisch & $3 \times 3$ & \multicolumn{2}{c}{ad} \\
   \bottomrule
