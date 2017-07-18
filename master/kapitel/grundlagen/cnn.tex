@@ -2,9 +2,9 @@
 \label{convolutional_neural_networks}
 
 Neuronale Netze \bzw{} Deep-Learning gehören zu den derzeit besten und beliebtesten Lösungen zu Problemen der Bild- oder Spracherkennung~\cite{Nielsen}.
-Dabei lernt \bzw{} approximiert das Netz durch eine Anpassung ihrer Parameter über einer Menge an Trainingsbeispielen eine stetige Funktion, sodass die Trainingsbeispiele auf ihre gewünschte Ausgabe abbilden und auch für unbekannte Eingaben zuverlässige Vorhersagen getroffen werden können.
+Dabei lernt \bzw{} approximiert das Netz durch eine Anpassung ihrer Parameter über einer Menge an Trainingsbeispielen eine Funktion, sodass die Trainingsbeispiele auf ihre gewünschte Ausgabe abbilden und auch für unbekannte Eingaben zuverlässige Vorhersagen getroffen werden können.
 Neuronale Netze sind daher größtenteils in dem Bereich des \emph{überwachten maschinellen Lernens} anzuordnen.
-Ein Netz, welches lediglich die Trainingsmenge lernt und dessen Parameter unbekannte Eingaben nicht generalisieren können, wird als ein \emph{überangepasstes} (\engl{} \emph{overfitted}) Netz bezeichnet~\cite{Nielsen}.
+Ein Netz, welches lediglich die Trainingsmenge lernt, aber über der Trainingsmenge hinausgehende Daten nicht beschreiben kann, wird als ein \emph{überangepasstes} (\engl{} \emph{overfitted}) Netz bezeichnet~\cite{Nielsen}.
 
 Ein \emph{neuronales Netz} besteht aus einer beliebigen Anzahl miteinander verbundener \emph{Neuronen}.
 Neuronen sind üblicherweise mit anderen Neuronen in sequentiellen \emph{Schichten} \bzw{} \emph{Ebenen} angeordnet.
@@ -32,7 +32,7 @@ Mit einer elementweisen Anwendung einer nicht-linearen \emph{Aktivierungsfunktio
 \end{equation*}
 Als Aktivierungsfunktion kommt dabei \bspw{} die nicht-lineare \emph{Sigmoidfunktion} $\mathrm{sig}\left(z\right) \coloneqq 1 / \left(1 + \exp\left(-z\right)\right)$ oder die \emph{Rectified Linear Unit (ReLU)}-Funktion $\gls{relu}\left(z\right) \coloneqq \max \left(z, 0\right)$ zum Einsatz~\cite{Nielsen}.
 Die Menge der Gewichte $\mathcal{W} \coloneqq {\left\{\gls{W}^{\left(t\right)}\right\}}_{t=2}^T$ sowie die Menge der Biaswerte $\mathcal{B} \coloneqq {\left\{\gls{b}^{\left(t\right)}\right\}}_{t=2}^T$ für $T \in \gls{N}$ viele Schichten werden die \emph{Parameter} des Netzes genannt, über dessen Anpassung das Netz trainiert wird.
-Diese Werte werden dabei sequentiell über einer kleinen Eingabemenge $\mathcal{X}$ mit den Eingaben $\ve{x} \in \mathcal{X}$ so angepasst, dass eine stetige \emph{Kostenfunktion} minimiert wird.
+Diese Werte werden dabei sequentiell über einer kleinen Eingabemenge $\mathcal{X}$ mit den Eingaben $\ve{x} \in \mathcal{X}$ so angepasst, dass eine \emph{Kostenfunktion} minimiert wird.
 Die Größe der Menge $\mathcal{X}$ wird dabei als \emph{Batch-Size} betitelt~\cite{Nielsen}.
 Ein Beispiel einer Kostenfunktion ist die \emph{quadratische Kostenfunktion}, die über
 \begin{equation}
@@ -85,11 +85,11 @@ Formal lässt sich damit die \emph{zweidimensionale Faltungsoperation}
 \end{equation*}
 im Folgenden auch oft als \emph{klassische Faltungsoperation} betitelt, als
 \begin{equation*}
-  {\gls{conv2d}\left(\gls{B}\right)}_{yxm} \coloneqq \sum_{\Delta y = 1}^{F_y} \sum_{\Delta x = 1}^{F_x} \sum_{m_{\mathrm{in}} = 1}^{M_\mathrm{in}} \gls{B}_{y + \left\lceil F_y \right\rceil - \Delta y, x + \left\lceil F_x \right\rceil - \Delta x, m_{\mathrm{in}}} \gls{W}_{\Delta y, \Delta x, m_{\mathrm{in}}, m}
+  {\gls{conv2d}\left(\gls{B}\right)}_{yxm} \coloneqq \sum_{\Delta y = 1}^{F_y} \sum_{\Delta x = 1}^{F_x} \sum_{m_{\mathrm{in}} = 1}^{M_\mathrm{in}} \gls{B}_{y + \left\lceil F_y/2 \right\rceil - \Delta y, x + \left\lceil F_x/2 \right\rceil - \Delta x, m_{\mathrm{in}}} \gls{W}_{\Delta y, \Delta x, m_{\mathrm{in}}, m}
 \end{equation*}
 mit $1 \leq y \leq H$, $1 \leq x \leq W$ und $1 \leq m \leq M_{\mathrm{out}}$ definieren, wobei $\gls{B} \in \gls{R}^{H \times W \times M_{\mathrm{in}}}$ die Eingabe und $\gls{W} \in \gls{R}^{F_y \times F_x \times M_{\mathrm{in}} \times M_{\mathrm{out}}}$ den Filter \bzw{} Gewichtstensor der Faltungsoperation mit Filtergröße $F_y \times F_x$ von $M_{\mathrm{in}} \in \gls{N}$ Eingabekarten auf $M_{\mathrm{out}} \in \gls{N}$ Ausgabekarten beschreibt~\cite{tensorflow}.
 Auf die Aufsummierung eines Bias $\gls{b} \in \gls{R}^{M_{\mathrm{out}}}$ sowie die Anwendung der Aktivierungsfunktion \gls{act} auf \gls{conv2d} wurde hier zur Vereinfachung verzichtet.
-Der Wert eines Indexzugriffs auf die Eingabekarte \gls{B}, der über die Grenzen von \gls{B} hinausgeht, wird üblicherweise auf Null gesetzt (\emph{\enquote{SAME}-Padding}), sodass dieser keinen Einfluss auf die Faltung nimmt und die Ausgabekarte damit die gleiche Höhe und Breite der Eingabekarte besitzt~\cite{tensorflow}.
+Der Wert eines Indexzugriffs auf die Eingabekarte \gls{B}, der über die Grenzen von \gls{B} hinausgeht, wird üblicherweise auf Null gesetzt (\emph{Zero-Padding}), sodass dieser keinen Einfluss auf die Faltung nimmt und die Ausgabekarte damit die gleiche Höhe und Breite der Eingabekarte besitzt~\cite{tensorflow}.
 Eine Reduktion der Auflösung innerhalb der Faltungsschicht kann erreicht werden, in dem nicht über jedes Neuron, sondern nur über eine Untermenge dieser in fester Schrittweite $s_y \times s_x$ zueinander gefaltet wird.
 Eine Alternative dazu ist die Verwendung einer \emph{Poo\-ling\-sch\-icht}, die üblicherweise direkt nach einer Faltungsschicht zum Einsatz kommt und versucht, die Ausgabe der Faltungsschicht zu reduzieren \bzw{} auf das Wesentliche zu vereinfachen.
 Eine Poolingoperation besitzt analog zu \gls{conv2d} eine Fenstergröße sowie eine Schrittweite.
@@ -98,6 +98,6 @@ Eine Poolingoperation mit Fenstergröße $2 \times 2$ sowie Schrittweite $2 \tim
 
 Ein \gls{CNN} besteht typischerweise aus mehreren Faltungs- und Poolingschichten, sodass die Menge der Merkmalskarten dabei stetig erhöht und die Auflösung stetig verringert wird~\cite{Nielsen}.
 Damit entstehen im späteren Verlauf des Netzes Merkmalskarten, die immer größere Receptive-Fields des Eingabebildes basierend auf den ermittelten Merkmalen vorangegangener Schichten beschreiben.
-Nach einer gewissen Anzahl an Faltungen werden die Merkmalskarten zu einem Vektor \emph{abgeflacht}, sodass vollverbundene Schichten hin zur Ausgabe genutzt werden können~\cite{Nielsen}.
+Nach einer gewissen Anzahl an Faltungen werden die Merkmalskarten zu einem Vektor umsortiert, sodass vollverbundene Schichten hin zur Ausgabe genutzt werden können~\cite{Nielsen}.
 Abbildung~\ref{fig:cnn_aufbau} illustriert den üblichen Aufbau eines \glspl{CNN}.
 \input{tikz/cnn_aufbau}
