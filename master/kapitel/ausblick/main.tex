@@ -50,7 +50,7 @@ Eine weitere Alternative ist die Verwendung eines \emph{Attentation}-Mechanismus
 
 Die Laufzeiten der vorgestellten Faltungsoperatoren können derzeit, obgleich einer kleineren Eingabegröße, nicht mit den Laufzeiten der klassichen Faltung auf Bildern konkurrieren.
 Der klassische Faltungsoperator besitzt eine für die GPU höchst optimierte batchweise Implementierung, wohingegen die Graphimplementierung aufgrund der Limitierung dünnbesetzter Tensoren auf genau zwei Dimensionen dies nicht leisten kann.
-Für die Verarveitung eines Batches muss folglich über jeden Graphen einzeln iteriert werden, sodass die Vorteile der Nutzung einer GPU \bzgl{} ihrer Parallelisierungsmechanismen verloren gehen.
+Für die Verarbeitung eines Batches muss folglich über jeden Graphen einzeln iteriert werden, sodass die Vorteile der Nutzung einer GPU \bzgl{} ihrer Parallelisierungsmechanismen verloren gehen.
 Eine Möglichkeit, diese Schwäche zu umgehen, ist die batchweise Darstellung der Adjazenzmatrizen $\mathcal{A} \coloneqq {\left\{\gls{A}_m\right\}}_{m=1}^M$ über genau eine dünnbesetzte Matrix, sodass die Adjazenzmatrizen diagonalbasiert angeordnet sind, \dhe{}
 \begin{equation*}
   \mathcal{A} \coloneqq \begin{bmatrix}
