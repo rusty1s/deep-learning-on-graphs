@@ -5,7 +5,7 @@ Die vorliegende Arbeit beschäftigt sich mit dem maschinellen Lernen mittels neu
 Als eine \emph{Graphrepräsentation eines Bildes} verstehen wir dabei die Abbildung eines Bildes in einen Graphen, welcher das korrespondierende Bild mittels einer Menge von Knoten und Verbindungen von Knotenpaaren beschreibt, sodass signifikante Merkmale des Bildes erhalten bleiben.
 Knoten des Graphen müssen dabei nicht für alle Pixel eines Bildes existieren, sondern können auch ganze Bildbereiche abdecken.
 Das bietet sich insbesondere dann an, wenn das vorliegende Bild zu großen Teilen aus Hintergrundbereichen besteht, welche für das Training eines neuronalen Netzes lediglich mehr Aufwand, aber keinen Mehrwert bedeuten.
-Damit kann sich folglich für Bilder eine nicht unerhebliche Datenreduktion ergeben, die unteranderem das Potential besitzt, schnellere Trainingszeiten eines neuronalen Netzes zu garantieren.
+Damit kann sich folglich für Bilder eine nicht unerhebliche Datenreduktion ergeben, die unter anderem das Potential besitzt, schnellere Ausführungszeiten eines neuronalen Netzes zu garantieren.
 Dabei wird das Bild folglich von einer regulären Gitterstruktur in eine irreguläre Graphstruktur übertragen (\vgl{} Abbildung~\ref{fig:problemstellung}).
 \input{figures/problemstellung}
 Das Lernen auf solch einer Graphstruktur ist eine sowohl theoretisch als auch implementierungtechnisch herausfordernde Aufgabe, denn schließlich kann der lediglich auf regulären Strukturen definierte klassische Faltungsoperator der Convolutional Neural Networks nicht genutzt werden.

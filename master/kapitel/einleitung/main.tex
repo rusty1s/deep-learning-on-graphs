@@ -1,12 +1,12 @@
 \chapter{Einleitung}
 \label{einleitung}
 
-Convolutional Neural Networks, eine Spezialform der neuronalen Netze, gelten dank ihrer effizienten Architektur und ihrer Fähigkeit, lokal stationäre Strukturen auf multiskalare, hierarchische Merkmale zu übertragen, als Allzweckmittel zu Problemen in Bereichen der Bild-, Video- und Spracherkennung~\cite{Defferrard}.
+Convolutional Neural Networks, eine Spezialform der neuronalen Netze, gelten dank ihrer effizienten Architektur und ihrer Fähigkeit, lokal stationäre Strukturen auf multiskalare, hierarchische Merkmale zu übertragen, als Allzweckmittel zu Lösungen von Problemen in Bereichen der Bild-, Video- und Spracherkennung~\cite{Defferrard}.
 Sie sind jedoch nur im Kontext regulärer Datendomänen wohldefiniert.
 So lassen sich aber insbesondere zahlreiche Probleme als maschinelles Lernen auf irregulär strukturierten Daten verstehen.
 Dabei liefern Graphen eine geeignete generische Datenstruktur, die es ermöglicht, eine Vielzahl dieser Probleme wie etwa in Bereichen der sozialen Netzwerke, der Biologie, Chemie oder Telekommunikation zu modellieren~\cite{Shuman}.
 Es ist daher nicht verwunderlich, dass in der Vergangenheit zahlreiche Anstrengungen unternommen wurden, den Faltungsoperator der Convolutional Neural Networks für die Anwendung auf irregulären Graphstrukturen zu generalisieren~\cite{patchy, Defferrard, gcn}.
-Diese Verfahren lassen sich dabei grob in zwei unterschiedliche Herangehensweisen gliedern:
+Diese Verfahren lassen sich dabei in zwei unterschiedliche Herangehensweisen gliedern:
 \begin{enumerate}
   \item Das \emph{räumliche Lernen auf Graphen} widmet sich der räumlichen Verschiebung eines Filters auf den Knoten eines Graphen ähnlich zu der Verschiebung eines Filters auf einem zweidimensionalen Bild oder einem eindimensionalen Audiosignal~\cite{patchy}.
   Dafür wird zu einem Knoten eine feste sowie eindeutige Nachbarschaft definiert und ein gemeinsamer Filter auf allen Nachbarschaften einer Knotenauswahl angewendet.
