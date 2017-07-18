@@ -3,7 +3,7 @@
 
 Die in Kapitel~\ref{merkmalsextraktion} ermittelten Formmerkmale auf den Knoten eines Graphen, der aus einer Superpixelrepräsentation generiert wurde, besitzen mit $38$ Dimensionen eine hohe Dimensionalität.
 Viele der Formmerkmale bauen dabei aufeinander auf und es ist daher fraglich, inwieweit die gesamte Menge an Merkmalen gebraucht wird oder ob eine Untermenge dieser als ausreichend gilt.
-Eine \emph{\gls{PCA}} auf den Knotenmerkmalen kann uns dabei helfen, die reale Dimensionalität der Daten abzuschätzen.
+Eine \emph{\gls{PCA}} auf den Knotenmerkmalen kann dabei helfen, die reale Dimensionalität der Daten abzuschätzen.
 Dafür werden die Merkmale durch eine Linearkombination ihrer Hauptkomponenten beschrieben und können so durch weitaus weniger Dimensionen dargestellt werden.
 Abbildung~\ref{fig:pca} zeigt dabei die \emph{kumulative Varianzaufklärung} der Hauptkomponenten einer \gls{PCA}, \dhe{} die Varianzabdeckung der Merkmale durch die Hauptkomponenten, in Abhängigkeit ihrer Anzahl.
 \input{tikz/pca}

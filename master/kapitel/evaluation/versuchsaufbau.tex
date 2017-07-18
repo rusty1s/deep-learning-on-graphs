@@ -2,7 +2,7 @@
 \label{versuchsaufbau}
 
 Die Aufgabe einer \emph{Klassifizerung} ist die Zuordnung einer Eingabe $\ve{x}$ zu genau einem Element einer endlichen Menge fest definierter Klassen $\mathcal{Y} = {\left\{y_i\right\}}_{i=1}^Y$ mit $\left|\mathcal{Y}\right| = Y$.
-Das neuronale Netz approximiert \bzw{} lernt dabei eine Funktion, die eine beliebige Eingabe, \dhe{} ein Bild (oder in diesem Fall ein Graph), auf eine $Y$-dimensionale Ausgabe $\ve{y} \in \gls{R}^Y$ überführt, wobei $\ve{y}_i$ die Evidenz des Auftretens der Klasse $y_i$ in der Eingabe beschreibt.
+Das neuronale Netz approximiert \bzw{} lernt dabei eine Funktion, die eine beliebige Eingabe, \dhe{} ein Bild (oder in diesem Fall ein Graph), auf eine $Y$-dimensionale Ausgabe $\ve{y} \in \gls{R}^Y$ überführt, wobei $\ve{y}_i$ die Konfidenz des Auftretens der Klasse $y_i$ in der Eingabe beschreibt.
 Der Index des höchsten Werts des Ausgabevektors $\ve{y}$ gilt damit folglich als die Klasse der Eingabe $\ve{x}$, die diese am ehesten beschreibt.
 
 Die Bildklassifizerung ist, gerade im Kontext neuronaler Netze \bzw{} \glspl{CNN}, ein bereits weiterforschtes Gebiet.
@@ -29,7 +29,7 @@ Insbesondere kann der Datensatz während des gesamten Trainings im Hauptspeicher
 
 Die ermittelten Parameter \bzgl{} der beiden benutzten Superpixelalgorithmen sind in Tabelle~\ref{tab:mnist} gegeben.
 Für \gls{SLIC} sind das die Parameter $K \in \gls{N}$, \dhe{} die Anzahl der gewünschten Segmente, sowie $F \in \gls{R}$ für die Gewichtung zwischen der Form und den Farbabgrenzungen der Superpixel.
-Für Quickshift ergeben sich dagegen drei wählbare Parameter — $\gls{sigma} \in \gls{R}$ für die Wahl der Standardabweichung der Gaußfunktion, $\alpha \in \gls{R}$ für die Gewichtung des Farbterms sowie $S \in \gls{N}$ zur Einschränkung der Berechnung über ein Fenster der Größe $S \times S$.
+Für Quickshift ergeben sich dagegen drei wählbare Parameter: $\gls{sigma} \in \gls{R}$ für die Wahl der Standardabweichung der Gaußfunktion, $\alpha \in \gls{R}$ für die Gewichtung des Farbterms sowie $S \in \gls{N}$ zur Einschränkung der Berechnung über ein Fenster der Größe $S \times S$.
 Für eine detaillierte Beschreibung der Parameter sei auf Kapitel~\ref{superpixel_verfahren} verwiesen.
 \begin{table}[t]
 \centering
@@ -55,7 +55,7 @@ Abbildung~\ref{fig:mnist} veranschaulicht die beiden Superpixel- \bzw{} Graphrep
 \input{figures/mnist}
 
 Die in Kapitel~\ref{merkmalsselektion} beschriebene Merkmalsselektion reduziert für \gls{MNIST} die Menge an Formmerkmalen (\vgl{} Kapitel~\ref{merkmalsextraktion}) im ersten statistisch basierten Test auf $12$ Merkmale, welche im zweiten Schritt rekursiv auf $9$ Merkmale weiter beschränkt wird.
-Die ermittelten (unterschiedlichen) Formmerkmale für \gls{SLIC} und Quickshift \bzgl{} \gls{MNIST} sind in Tabelle~\ref{tab:mnist_merkmale} aufgezeigt.
+Die ermittelten (unterschiedlichen) Formmerkmale aus Kapitel~\ref{merkmalsextraktion} für \gls{SLIC} und Quickshift \bzgl{} \gls{MNIST} sind in Tabelle~\ref{tab:mnist_merkmale} aufgezeigt.
 \begin{table}[t]
 \centering
 \begin{tabular}{lccccccccc}
@@ -322,7 +322,7 @@ Für die Eingabe der Knotenmerkmale in ein neuronales Netz werden diese pro Grap
 \begin{equation*}
   \hat{\gls{f}}_i \coloneqq \frac{\gls{f}_i - \overline{\gls{f}}}{\gls{sigma}},
 \end{equation*}
-wobei $\overline{\gls{f}} \coloneqq 1/N \sum_{n=1}^N \gls{f}_n$ den Durchschitt der Merkmale und $\gls{sigma}$ die Standardabweichung von $\gls{f} \in \gls{R}^N$ beschreibt.
+wobei $\overline{\gls{f}} \coloneqq \left(1/N\right) \sum_{n=1}^N \gls{f}_n$ den Durchschitt der Merkmale und $\gls{sigma}$ die Standardabweichung von $\gls{f} \in \gls{R}^N$ beschreibt.
 Die Verteilung eines Merkmals eines Graphen liegt damit durchschnittlich bei Null und besitzt eine Standardabweichung von Eins.
 Die Überführung der Eingabedaten in die Standardnormalverteilung ist ein übliches Verfahren im Kontext von neuronalen Netzen.
 
