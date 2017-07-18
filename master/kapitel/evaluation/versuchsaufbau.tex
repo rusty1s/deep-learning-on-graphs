@@ -232,7 +232,7 @@ Zur Evaluation der Ergebnisse einer Klassifizierung wird neben der Kostenfunktio
 \begin{equation*}
   \mathrm{accuracy}\left(\mathcal{X}\right) \coloneqq \frac{1}{\left|\mathcal{X}\right|}\sum_{\ve{x} \in \mathcal{X}} \max \left( - \left| \mathrm{argmax}\left(\ve{y}\right) - \mathrm{argmax}\left(\ve{y}^{\prime}\right) \right| + 1, 0 \right)
 \end{equation*}
-definiert, wobei $\mathrm{argmax}\left(\ve{y}\right) = i$ genau dann, wenn $\ve{y}_i \geq \ve{y}_j$ für alle $1 \leq j \leq Y$.
+definiert, wobei $\mathrm{argmax}\left(\ve{y}\right) = n$ genau dann, wenn $\ve{y}_n \geq \ve{y}_m$ für alle $1 \leq m \leq Y$.
 Sie beschreibt den Anteil korrekt klassifizierter Eingabedaten aus der jeweiligen Gesamtmenge der Trainings-, Validierungs- oder Testdaten $\mathcal{X}$ und ist daher ein geeignetes Mittel, die Qualität eines neuronalen Klassifizierungsnetzes zu bestimmen~\cite{Nielsen}.
 
 \subsection{Parameter}
@@ -246,7 +246,7 @@ Alle generierten Graphen wurden folglich über einer Konnektivität von $8$, ein
 
 Für das neuronale Netz ergeben sich neben der Anzahl an Faltungs-, Pooling- und vollverbundenen Schichten sowie deren Größen und Anordnungen, die in den Ergebnissen in Kapitel~\ref{ergebnisse} manuell aufgelistet sind, weitere einstellbare Größen.
 Alle Netze wurden mit einer Batch-Size von $64$ trainiert.
-Die Gewichte des Netzes wurden normal verteilt mit einer Standardabweichung von $0.1$ initialisiert, wohingegen alle Biaswerte zu Beginn des Trainings einen konstanten Wert von  $0.1$ besitzen.
+Die Gewichte des Netzes wurden zusammen verteilt mit einem Durchschnitt von Null und einer Standardabweichung von $0.1$ initialisiert, wohingegen alle Biaswerte zu Beginn des Trainings einen konstanten Wert von  $0.1$ besitzen.
 \gls{relu} wird als Aktivierungsfunktion für alle bis auf die letzte neuronale Schicht verwendet.
 Für jede Poolingschicht kommt das Max-Pooling zum Einsatz.
 Die gewählte Lernrate \gls{learning} des Netzes unterscheidet sich je nach getestetem Modell zwischen $0.001$ und $0.0001$.
@@ -259,11 +259,11 @@ So finden sich speziell in den vollverbundenen Schichten Anwendungen der \emph{D
 \label{augmentierung}
 
 Üblicherweise findet während des Trainings eines neuronalen Netzes eine \emph{Augmentierung} der Eingabedaten statt, die es ermöglicht, die Anzahl der Trainingsbilder virtuell zu erhöhen und die Gefahr des Overfittings zu reduzieren~\cite{tensorflow}.
-So kann \zB{} ein Bild $\gls{B} \in \gls{R}^{H \times W \times C}$ vertikal an dessen Bildmitte gespiegelt werden, \dhe{}
+So kann \zB{} ein Bild $\gls{B} \in \gls{R}^{H \times W \times C}$ vertikal an dessen Bildmitte über
 \begin{equation*}
-  {\mathrm{flip}\left(\gls{B}\right)}_{yx} \coloneqq \gls{B}_{y,W-x},
+  {\mathrm{flip}\left(\gls{B}\right)}_{yx} \coloneqq \gls{B}_{y,W-x}
 \end{equation*}
-sodass ein Bild erzeugt wird, welches das Ursprungsbild \enquote{von der anderen Seite} zeigt~\cite{tensorflow}.
+gespiegelt werden~\cite{tensorflow}.
 Ebenso kann die Helligkeit eines Bildes, welches im RGB-Farbmodell in Gleitkommarepräsentation als $\gls{B} \in {\left[0, 1\right]}^{H \times W \times C}$ vorliegt, über
 \begin{equation*}
   {\mathrm{brightness}\left(\gls{B}, \delta \right)}_{yxc} \coloneqq \min \left( \max \left(\gls{B}_{yxc} + \delta, 0\right), 1\right)
@@ -296,7 +296,7 @@ Eine realistischere Augmentierung der Eingabedaten ist folglich nur dann gegeben
 
 Alle vorgestellten Methodiken wurden in der Programmiersprache \emph{Python} implementiert und stehen unter der \emph{MIT-Lizenz} zur freien Verfügung\footnote{\url{https://github.com/rusty1s/embedded\_gcnn}}.
 Es liegen ausführbare Dateien zum Trainieren der neuronalen Netze auf allen erwähnten Datensätzen bereit, die sich bei Ausführung automatisch herunterladen.
-Die Implementation erreicht dabei eine \emph{Testabdeckung}, \dhe{} Anteil getesteter Quelltextzeilen, von \codecov{}\% und wurde auf allen bedeutenden Pythonversionen (2.7 und > 3.5) getestet.
+Die Implementation erreicht dabei eine \emph{Testabdeckung}, \dhe{} Anteil getesteter Quelltextzeilen, von \codecov{}\% und wurde auf den Pythonversionen 2.7 und > 3.4 getestet.
 Es liegen zusätzliche Installationsanweisungen bei und der Quelltext ist so dokumentiert, dass er mit Hilfe dieser Arbeit verstanden werden kann.
 
 \paragraph{Benutzte Bibliotheken}
