@@ -7,6 +7,10 @@
   \tikzstyle{egcnn}=[color=magenta]
   \tikzstyle{sgcnn}=[color=orange]
   \tikzstyle{gcn}=[color=olive]
+  \tikzstyle{fillklassisch}=[fill=cyan]
+  \tikzstyle{fillegcnn}=[fill=magenta]
+  \tikzstyle{fillsgcnn}=[fill=orange]
+  \tikzstyle{fillgcn}=[fill=olive]
 
   \draw[klassisch, dashed] (0, 0.1) -- (0.1, 1.7312) -- (0.2, 2.4792) -- (0.3, 2.933) -- (0.4, 3.0682) -- (0.5, 3.2344) -- (0.6, 3.2938) -- (0.7, 3.3125) -- (0.8, 3.3477) -- (0.9, 3.4792) -- (1.0, 3.6111) -- (1.1, 3.5759) -- (1.2, 3.4554) -- (1.3, 3.6066) -- (1.4, 3.5491) -- (1.5, 3.6364) -- (1.6, 3.5417) -- (1.7, 3.6771) -- (1.8, 3.7045) -- (1.9, 3.733) -- (2.0, 3.7404) -- (2.1, 3.7578) -- (2.2, 3.7831) -- (2.3, 3.75) -- (2.4, 3.8365) -- (2.5, 3.8269) -- (2.6, 3.7708) -- (2.7, 3.8) -- (2.8, 3.8382) -- (2.9, 3.825) -- (3.0, 3.875) -- (3.1, 3.8438) -- (3.2, 3.8462) -- (3.3, 3.8516) -- (3.4, 3.8705) -- (3.5, 3.8984) -- (3.6, 3.8958) -- (3.7, 3.8708) -- (3.8, 3.892) -- (3.9, 3.8787) -- (4.0, 3.8611) -- (4.1, 3.9152) -- (4.2, 3.9115) -- (4.3, 3.9241) -- (4.4, 3.9148) -- (4.5, 3.9141) -- (4.6, 3.8409) -- (4.7, 3.9375) -- (4.8, 3.9318) -- (4.9, 3.9087) -- (5.0, 3.9125) -- (5.1, 3.9261) -- (5.2, 3.9292) -- (5.3, 3.9286) -- (5.4, 3.9062) -- (5.5, 3.9148) -- (5.6, 3.9423) -- (5.7, 3.9241) -- (5.8, 3.925) -- (5.9, 3.9375) -- (6.0, 3.9375) -- (6.1, 3.9615) -- (6.2, 3.9605) -- (6.3, 3.9653) -- (6.4, 3.9531) -- (6.5, 3.9625) -- (6.6, 3.9688) -- (6.7, 3.9625) -- (6.8, 3.9583) -- (6.9, 3.9635) -- (7.0, 3.9423) -- (7.1, 3.9464) -- (7.2, 3.9766) -- (7.3, 3.9479) -- (7.4, 3.9562) -- (7.5, 3.933) -- (7.6, 3.9648) -- (7.7, 3.9688) -- (7.8, 3.9542) -- (7.9, 3.9554) -- (8.0, 3.9625);
 
@@ -47,10 +51,11 @@
   \draw[->] (0,    -0.2) -- (0,   4.4) node[above] {Genauigkeit [\%]};
   \draw[->] (8,    -0.2) -- (8,   4.4);
 
-  % \draw[color2, thick, dashed] (0, -1.3) -- (0.4, -1.3) node[right] {Trainingskosten};
-  % \draw[color2, thick]         (0, -1.9) -- (0.4, -1.9) node[right] {Validierungskosten};
-  % \draw[color1, thick, dashed] (5, -1.3) -- (5.4, -1.3) node[right] {Trainingsgenauigkeit};
-  % \draw[color1, thick]         (5, -1.9) -- (5.4, -1.9) node[right] {Validierungsgenauigkeit};
+  \tikzstyle{node}=[rectangle, minimum width=10pt, minimum height=10pt, inner sep=0pt]
+  \node[node, fillsgcnn,     label=right:\gls{SGCNN}] (1) at (0.4, -1) {};
+  \node[node, fillgcn,       label=right:\gls{GCN}]   (2) at (2.4, -1) {};
+  \node[node, fillegcnn,     label=right:\gls{EGCNN}] (3) at (4.4, -1) {};
+  \node[node, fillklassisch, label=right:klassisch]   (4) at (6.4, -1) {};
 
 \end{tikzpicture}
 \caption[\gls{Cifar}-10 Genauigkeitsverlauf über Quickshift]{Genauigkeitsverlauf eines Trainings auf dem \gls{Cifar}-10 Datensatz der spektralen Ansätze auf Graphen im zweidimensionalen euklidischen Raum, welche über Quickshift generiert wurden, sowie dem klassischen Ansatz auf Bildern.
