@@ -45,7 +45,6 @@ insbesondere kein average pool notwendig, da graphen alle gleich groß
 
 \begin{table}[t]
 \centering
-\resizebox{\textwidth}{!}{%
 \begin{tabular}{lclrrr}
   \toprule
   Ansatz & \ma{W} & Architektur & \multicolumn{2}{c}{Genauigkeit [\%]}\\
@@ -53,11 +52,11 @@ insbesondere kein average pool notwendig, da graphen alle gleich groß
    & & & \gls{SLIC} & \gls{QS}\\
   \midrule
   \gls{RL} & 25 & C64-F1600-F256 & & \\
-  \gls{SGCNN} & 9 & & & \\
-  \gls{GCN} & 1 & & & \\
-  \gls{EGCNN} & 9 & & & \\
+  \gls{SGCNN} & 9 & C64-P4-C128-P4-Avg-F128 & & \\
+  \gls{GCN} & 1 & C64-C64-P4-C128-C128-P4-Avg-F128 & & \\
+  \gls{EGCNN} & 9 & C64-C64-P4-C128-C128-P4-Avg-F128 & & \\
   \bottomrule
-\end{tabular}}
+\end{tabular}
 \caption[Testgenauigkeiten der \gls{MNIST} Superpixelrepräsentationen]{10k steps}
 \label{tab:train_mnist}
 \end{table}
