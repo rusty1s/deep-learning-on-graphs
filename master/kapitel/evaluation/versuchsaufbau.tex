@@ -33,14 +33,12 @@ Für Quickshift ergeben sich dagegen drei wählbare Parameter: $\gls{sigma} \in 
 Für eine detaillierte Beschreibung der Parameter sei auf Kapitel~\ref{superpixel_verfahren} verwiesen.
 \begin{table}[t]
 \centering
-\begin{tabular}{rlrlrlrlrlrl}
+\begin{tabular}{llrrrrrr}
   \toprule
-  \multicolumn{6}{c}{\gls{SLIC}} & \multicolumn{6}{c}{Quickshift}\\
+  & Parameter & $\overline{N}$ & $N_{\min}$ & $N_{\max}$ & $\overline{\gls{degree}}$ & $\gls{degree}_{\min}$ & $\gls{degree}_{\max}$\\
   \midrule
-  $K$ & $100$ & $F$ & $5$ & & & $\gls{sigma}$ & $2$ & $\alpha$ & $1$ & $S$ & $2$\\
-  \midrule
-  $\overline{N}$ & $64.6$ & $N_{\min}$ & $50$ & $N_{\max}$ & $80$ & $\overline{N}$ & $82.1$ & $N_{\min}$ & $5$ & $N_{\max}$ & $154$\\
-  $\overline{\gls{degree}}$ & $5.7$ & $\gls{degree}_{\min}$ & $1$ & $\gls{degree}_{\max}$ & $19$ & $\overline{\gls{degree}}$ & $6.8$ & $\gls{degree}_{\min}$ & $1$ & $\gls{degree}_{\max}$ & $101$\\
+  \gls{SLIC} & ($K=100, F=5$) & 64.6 & 50 & 80 & 5.7 & 1 & 19\\
+  Quickshift & ($\gls{sigma}=2, \alpha=1, S=2$) & 82.1 & 5 & 154 & 6.8 & 1 & 101\\
   \bottomrule
 \end{tabular}
 \caption[\gls{MNIST} Superpixelparameter]{Wahl der Superpixelparameter des \gls{MNIST} Datensatzes.}
@@ -61,6 +59,7 @@ Die ermittelten (unterschiedlichen) Formmerkmale aus Kapitel~\ref{merkmalsextrak
 \begin{tabular}{lccccccccc}
   \toprule
   \gls{SLIC} & $\hat{x}$ & $\hat{y}$ & $\mathrm{ecc}$ & $\mathrm{dia}$ & $\mathrm{ext}$ & $\gls{mu}^{\prime}_{20}$ & $\gls{lambda}_2$ & $\mathrm{axis}_1$ & $\mathrm{axis}_2$\\
+  \midrule
   Quickshift & $\hat{x}$ & $\mathrm{ecc}$ & $\mathrm{dia}$ & $\mathrm{ext}$ & $\gls{mu}_{03}$ & $\gls{mu}_{21}$ & $\gls{mu}_{30}$ & $\gls{eta}_{03}$ & $\mathrm{ori}$\\
   \bottomrule
 \end{tabular}
@@ -87,17 +86,14 @@ Der \gls{Cifar} Datensatz liegt ebenfalls in einer zweiten Version vor, genannt 
 Tabelle~\ref{tab:cifar_10} zeigt die Wahl der Parameter der beiden Superpixelalgorithmen.
 \begin{table}[t]
 \centering
-\resizebox{\textwidth}{!}{%
-\begin{tabular}{rlrlrlrlrlrl}
+\begin{tabular}{llrrrrrr}
   \toprule
-  \multicolumn{6}{c}{\gls{SLIC}} & \multicolumn{6}{c}{Quickshift}\\
+  & Parameter & $\overline{N}$ & $N_{\min}$ & $N_{\max}$ & $\overline{\gls{degree}}$ & $\gls{degree}_{\min}$ & $\gls{degree}_{\max}$\\
   \midrule
-  $K$ & $200$ & $F$ & $5$ & & & $\gls{sigma}$ & $1$ & $\alpha$ & $1$ & $S$ & $5$\\
-  \midrule
-  $\overline{N}$ & $232.1$ & $N_{\min}$ & $186$ & $N_{\max}$ & $263$ & $\overline{N}$ & $182.0$ & $N_{\min}$ & $18$ & $N_{\max}$ & $624$\\
-  $\overline{\gls{degree}}$ & $6.3$ & $\gls{degree}_{\min}$ & $1$ & $\gls{degree}_{\max}$ & $21$ & $\overline{\gls{degree}}$ & $7.4$ & $\gls{degree}_{\min}$ & $1$ & $\gls{degree}_{\max}$ & $67$\\
+  \gls{SLIC} & ($K=200, F=5$) & 232.1 & 186 & 263 & 6.3 & 1 & 21\\
+  Quickshift & ($\gls{sigma}=1, \alpha=1, S=5$) & 182.0 & 18 & 624 & 7.4 & 1 & 67\\
   \bottomrule
-\end{tabular}}
+\end{tabular}
 \caption[\gls{Cifar}-10 Superpixelparameter]{Wahl der Superpixelparameter des \gls{Cifar}-10 Datensatzes.}
 \label{tab:cifar_10}
 \end{table}
@@ -115,6 +111,7 @@ Tabelle~\ref{tab:cifar_10_merkmale} zeigt die berechnete Wahl der Merkmale der S
 \begin{tabular}{lccccccccc}
   \toprule
   \gls{SLIC} & $\gls{M}_{00}$ & $\mathrm{box}_y$ & $\hat x$ & $\mathrm{dia}$ & $\mathrm{ext}$ & $\gls{hu}_1$ & $\gls{lambda}_1$ & $\mathrm{axis}_1$ & $\mathrm{axis}_2$\\
+  \midrule{}
   Quickshift & $\mathrm{box}_y$ & $\mathrm{box}_x$ & $\hat x$ & $\hat y$ & $\mathrm{ecc}$ & $\mathrm{ext}$ & $\gls{lambda}_1$ & $\mathrm{axis}_1$ & $\mathrm{axis}_2$\\
   \bottomrule
 \end{tabular}
@@ -153,14 +150,12 @@ Die ermittelten Superpixelparameter finden sich in Tabelle~\ref{tab:pascal_voc}.
 \begin{table}[t]
 \centering
 \resizebox{\textwidth}{!}{%
-\begin{tabular}{rlrlrlrlrlrl}
+\begin{tabular}{llrrrrrr}
   \toprule
-  \multicolumn{6}{c}{\gls{SLIC}} & \multicolumn{6}{c}{Quickshift}\\
+  & Parameter & $\overline{N}$ & $N_{\min}$ & $N_{\max}$ & $\overline{\gls{degree}}$ & $\gls{degree}_{\min}$ & $\gls{degree}_{\max}$\\
   \midrule
-  $K$ & $1600$ & $F$ & $30$ & & & $\gls{sigma}$ & $2$ & $\alpha$ & $0.75$ & $S$ & $8$\\
-  \midrule
-  $\overline{N}$ & $1540.9$ & $N_{\min}$ & $1082$ & $N_{\max}$ & $1839$ & $\overline{N}$ & $2131.6$ & $N_{\min}$ & $234$ & $N_{\max}$ & $29010$\\
-  $\overline{\gls{degree}}$ & $6.5$ & $\gls{degree}_{\min}$ & $1$ & $\gls{degree}_{\max}$ & $50$ & $\overline{\gls{degree}}$ & $7.7$ & $\gls{degree}_{\min}$ & $1$ & $\gls{degree}_{\max}$ & $256$\\
+  \gls{SLIC} & ($K=1600, F=30$) & 1540.9 & 1082 & 1839 & 6.5 & 1 & 50\\
+  Quickshift & ($\gls{sigma}=2, \alpha=0.75, S=8$) & 2131.6 & 234 & 29010 & 7.7 & 1 & 256\\
   \bottomrule
 \end{tabular}}
 \caption[\gls{Pascal} Superpixelparameter]{Wahl der Superpixelparameter des \gls{Pascal} Datensatzes.}
@@ -180,6 +175,7 @@ Auch für \gls{Pascal} bestimmt die Merkmalsselektion $9$ Merkmale aus den $38$ 
 \begin{tabular}{lccccccccc}
   \toprule
   \gls{SLIC} & $\mathrm{box}$ & $\mathrm{box}_y$ & $\mathrm{box}_x$ & $\hat x$ & $\hat y$ & $\mathrm{ecc}$ & $\mathrm{ext}$ & $\gls{hu}_1$ & $\mathrm{axis}_1$\\
+  \midrule{}
   Quickshift & $\gls{M}_{00}$ & $\mathrm{box}_y$ & $\mathrm{box}_x$ & $\hat x$ & $\mathrm{dia}$ & $\gls{lambda}_1$ & $\gls{lambda}_2$ & $\mathrm{axis}_1$ & $\mathrm{axis}_2$\\
   \bottomrule
 \end{tabular}
