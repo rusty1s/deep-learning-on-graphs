@@ -37,17 +37,17 @@ Die räumliche Vorverarbeitung ist aufgrund der einzelnen Receptive-Field-Berech
   \cmidrule{5-7}
    & & & & Vorverarbeitung & Training & $\sum$\\
   \midrule
-  \gls{MNIST} & \gls{SLIC} & \gls{RL} & & & &\\
-  \gls{MNIST} & \gls{SLIC} & \gls{SGCNN} & & & &\\
-  \gls{MNIST} & \gls{SLIC} & \gls{GCN} & & & &\\
-  \gls{MNIST} & \gls{SLIC} & \gls{EGCNN} & & & &\\
-  \gls{MNIST} & \gls{QS}   & \gls{RL} & & & &\\
-  \gls{MNIST} & \gls{QS}   & \gls{SGCNN} & & & &\\
-  \gls{MNIST} & \gls{QS}   & \gls{GCN} & & & &\\
-  \gls{MNIST} & \gls{QS}   & \gls{EGCNN} & & & &\\
+  \gls{MNIST} & \gls{SLIC} & \gls{RL} & & \multicolumn{3}{c}{—}\\
+  \gls{MNIST} & \gls{SLIC} & \gls{SGCNN} & & \multicolumn{3}{c}{—}\\
+  \gls{MNIST} & \gls{SLIC} & \gls{GCN} & & \multicolumn{3}{c}{—}\\
+  \gls{MNIST} & \gls{SLIC} & \gls{EGCNN} & & \multicolumn{3}{c}{—}\\
+  \gls{MNIST} & \gls{QS}   & \gls{RL} & & \multicolumn{3}{c}{—}\\
+  \gls{MNIST} & \gls{QS}   & \gls{SGCNN} & & \multicolumn{3}{c}{—}\\
+  \gls{MNIST} & \gls{QS}   & \gls{GCN} & & \multicolumn{3}{c}{—}\\
+  \gls{MNIST} & \gls{QS}   & \gls{EGCNN} & 0.63 & \multicolumn{3}{c}{—}\\
   \midrule
   \gls{Cifar}-10 & \gls{SLIC} & \gls{SGCNN} & & & & \\
-  \gls{Cifar}-10 & \gls{SLIC} & \gls{RL} & & & & \\
+  \gls{Cifar}-10 & \gls{SLIC} & \gls{GCN} & & & & \\
   \gls{Cifar}-10 & \gls{SLIC} & \gls{EGCNN} & & & & \\
   \gls{Cifar}-10 & \gls{QS}   & \gls{SGCNN} & & 0.43 & 1.95 & 2.38\\
   \gls{Cifar}-10 & \gls{QS}   & \gls{GCN} & & 1.09 & 0.36 & 1.45\\
@@ -56,12 +56,12 @@ Die räumliche Vorverarbeitung ist aufgrund der einzelnen Receptive-Field-Berech
   \gls{Pascal} & \gls{SLIC} & \gls{EGCNN} & & \multicolumn{3}{c}{—}\\
   \gls{Pascal} & \gls{QS}   & \gls{EGCNN} & & \multicolumn{3}{c}{—}\\
   \midrule
-  \gls{MNIST} & — & klassisch & & \multicolumn{3}{c}{—}\\
+  \gls{MNIST} & — & klassisch & 0.31 & \multicolumn{3}{c}{—}\\
   \gls{Cifar}-10 & — & klassisch & 0.49 & \multicolumn{3}{c}{—}\\
   \gls{Pascal} & — & klassisch & & \multicolumn{3}{c}{—}\\
   \bottomrule
 \end{tabular}}
-\caption[]{}
+\caption[bla]{bla}
 \label{tab:train_laufzeit}
 \end{table}
 
