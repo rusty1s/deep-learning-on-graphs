@@ -270,8 +270,8 @@ Weiterhin ist die Kontrastanpassung eines RGB-Bildes $\gls{B} \in {\left[0, 1\ri
   {\mathrm{contrast}\left(\gls{B}, \delta\right)}_{yxc} \coloneqq \min \left( \max \left(\delta \left(\gls{B}_{yxc} - \overline{\gls{B}}_c\right) + \overline{\gls{B}}_c, 0\right), 1 \right)
 \end{equation*}
 wobei $\overline{\gls{B}}_c \coloneqq 1/\left(WH\right) \sum_{x = 1}^W \sum_{y = 1}^H \gls{B}_{yxc}$ die Durchschnittsfarbe des Bildes \bzgl{} des Farbkanals $c \in \left\{1, \ldots, C\right\}$ beschreibt~\cite{tensorflow}.
-Es sind eine ganze Reihe weiterer Augmentierungsschritte denkbar~\cite{tensorflow}.
-Alle Augmentierungsschritte werden für ein Eingabebild zufällig ausgeführt.
+Es sind eine ganze Reihe weiterer Augmentierungsschritte denkbar, wie \zB{} das Zuschneiden des Bildes an dessen Rändern auf eine kleinere Auflösung (\engl{} \emph{Cropping})~\cite{tensorflow}.
+Alle Augmentierungsschritte werden dabei für ein Eingabebild zufällig ausgeführt.
 Insbesondere erhält $\delta$ dabei einen zufälligen Wert aus einem vordefinierten Intervall $\delta \in \left[-\delta_{\max}, \delta_{\max}\right]$.
 
 Die vorgestellten Augmentierungsschritte sind sowohl für Graphen im zweidimensionalen euklidischen Raum \bzw{} dessen Knotenmerkmale möglich.
@@ -282,6 +282,7 @@ Die vertikale Spiegelung des Graphen kann, falls diese im Graphkontext eine Bede
     0, & \text{sonst.}
   \end{cases}
 \end{equation*}
+Für das Zuschneiden eines Graphen können analog zu einem Bild diejenigen Knoten eliminiert werden, dessen Positionen sich nicht in der resultierenden Auflösung befinden.
 Weiterhin können die Helligkeits- und Kontrastanpassungen der Farben auf den Farbmerkmalen der Merkmalsmatrix $\gls{F} \in \gls{R}^{N \times M}$ angewendet werden.
 Es ist jedoch anzumerken, dass eine Justierung der Farbwerte auf den Knoten eines Graphen, der durch eine Superpixelrepräsentation gewonnen wurde, nur bedingt sinnvoll ist, denn die Nachbarschaften des Graphen sowie dessen Formmerkmale bleiben bei dieser Art der Augmentierung unverändert.
 Ein Superpixelalgorithmus, welcher Superpixel größtenteils aufgrund der Farbwerte eines Bildes generiert, bildet letztendlich bei einer Augmentierung der Farbwerte eines Bildes auf eine komplett andere Superpixelrepräsentation ab.
