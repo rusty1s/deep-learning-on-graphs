@@ -58,7 +58,7 @@ Die in Tabelle~\ref{tab:train_mnist} vorgestellten Netzarchitekturen zeigen die 
   \cmidrule{4-5}
    & & & \acs{SLIC} & \acs{QS}\\
   \midrule
-  \acs{RL} & 25 & C64-F1600-F256 & 82.873 & 85.226 \\
+  \acs{RL} & 25 & C64-FC1024 & 82.873 & 85.226 \\
   \acs{SGCNN} & 9 & C64-P4-C128-P4-Avg & 91.884 & 92.718 \\
   \acs{GCN} & 1 & C64-C64-P4-C128-C128-P4-Avg & 78.155 & 86.358 \\
   \acs{EGCNN} & 9 & C64-C64-P4-C128-C128-P4-Avg & 97.405 & 98.025 \\
@@ -75,21 +75,14 @@ Insbesondere erreicht der entwickelte spektrale Faltungsoperator über B-Spline-
 
 \paragraph{\gls{Cifar}-10}
 
-Die Klassifikation auf dem \gls{Cifar}-10 Datensatz ist im Verlgeich zu \gls{MNIST} eine schwierigere Angelegenheit, die eine weitaus längere Trainingsdauer in Anspruch nimmt.
-
-% Abbildung~\ref{fig:cifar_10_train} zeigt
-\input{tikz/cifar_10_train}
-
-% Postprocessing weitaus besser als preprocessing!
-
-LearningRate: 0.001
-LearningRateDecay: Alle 5000 Steps um 0.96
-BatchSize: 64
-WeightDecay in FC256 und FC128: 0.004
-Dropout vor letztem: 0.5
-jeweils 65k Steps (entspricht ungefähr 75 Epochen)
-65k steps trainiert: vereinheitlichen wir zu 60k
-
+Die Klassifikation auf dem \gls{Cifar}-10 Datensatz ist im Vergleich zu \gls{MNIST} eine anspruchsvollere Aufgabe, die insbesondere eine längere Trainingsdauer über weitaus mehr Epochen in Anspruch nimmt.
+Wichtige Maßnahmen für qualitativ hochwertige Ergebnisse sind dabei insbesondere die in Kapitel~\ref{augmentierung} vorgestellten Augmentierungschritte der Eingabedaten~\cite{tensorflow}.
+Es hat sich auch in der Evaluierung bewahrheitet, dass eine Augmentierung auf den Graphen schwächere Resultate als eine Augmentierung auf den Rohdaten des Bildes liefert und ein Genauigkeitsverlust von bis zu 5\% nach sich zieht.
+Für alle Lernansätze wurden deshalb die Eingaben des \gls{Cifar}-10 Datensatz zur Laufzeit augmentiert und erst anschließend in eine Graphrepräsentation transformiert.
+Die Lernrate wurde dabei mit $0.001$ initialisiert und alle 6 Epochen exponentiell um $0.96$ verringert.
+In den vollverbundenen Schichten außer der Ausgabeschicht besitzen die Gewichte \bzgl{} der L2-Regularisierung eine Dämpfungskonstante von $0.004$.
+Vor der Ausgabeschicht sorgt die zusätzliche Anwendung eines Dropouts von $0.5$ ein Overfitting der Netze weiter zu vermeiden.
+Tabelle~\ref{tab:train_cifar_10} fasst die Netzarchitekturen der einzelnen Ansätze und ihre erreichten Genauigkeiten nach rund 80 Epochen zusammen.
 \begin{table}[t]
 \centering
 \resizebox{\textwidth}{!}{%
@@ -97,18 +90,26 @@ jeweils 65k Steps (entspricht ungefähr 75 Epochen)
   \toprule
   Ansatz & \ma{W} & Architektur & \multicolumn{2}{c}{Genauigkeit [\%]}\\
   \cmidrule{4-5}
-   & & & \gls{SLIC} & \acs{QS}\\
+   & & & \acs{SLIC} & \acs{QS}\\
   \midrule
-  \acs{SGCNN} & 9 & C64-P2-C128-P2-C256-P2-C512-Avg-FC256-FC128 & & 67.748\\
+  \acs{SGCNN} & 9 & C64-P2-C128-P2-C256-P2-C512-Avg-FC256-FC128 & 66.814 & 67.748\\
   \acs{GCN} & 1 & C64-C64-P2-C128-P2-C256-P2-C512-Avg-FC256-FC128 & 54.497 & 53.606\\
   \acs{EGCNN} & 9 & C64-C64-P2-C128-P2-C256-P2-C512-Avg-FC256-FC128 & 74.218 & 75.230\\
   \midrule
   klassisch & $3 \times 3$ & C64-C64-P4-C128-P4-C256-P4-FC256-FC128 & \multicolumn{2}{c}{82.061} \\
   \bottomrule
 \end{tabular}}
-\caption[Testgenauigkeiten der \gls{Cifar}-10 Superpixelrepräsentationen]{65k steps}
+\caption[Testgenauigkeiten der \gls{Cifar}-10 Superpixelrepräsentationen]{Testgenauigkeiten eines Trainings auf den durch \gls{SLIC} und Quickshift generierten Graphrepräsentationen des \gls{Cifar}-10 Datensatz nach 80 Epochen im Vergleich zu einer ähnlichen klassischen Netzarchitektur auf den Bildrohdaten.}
 \label{tab:train_cifar_10}
 \end{table}
+Alle spektralen Graphansätze auf den aus \gls{SLIC} und Quickshift generierten Graphrepräsentationen können nicht mit einer ähnlichen klassischen Netzarchitektur auf den Bildrohdaten konkurrieren.
+Wohingegen jedoch die vorhandenen Ansätze \acs{SGCNN} und \acs{GCN} eine maximale Genauigkeit von rund 67\% erreichen, zeigt sich auch hier eine signfikante Verbesserung durch den neu entwickelten spektralen Faltungsoperator \acs{EGCNN}.
+Er erreicht mit $75\%$ mittels der Quickshift-Segmentierung das eindeutig beste Resultat.
+Hochoptimierte Ansätze, bei denen noch weitaus mehr Augmentierungsschritte zum Einsatz kommen, erreichen auf \gls{Cifar}-10 jedoch bereits mehr als $90\%$ und so ist nicht auszuschließen, dass auch für \acs{EGCNN} Potential nach oben besteht~\cite{fracmaxpool}.
+
+Abbildung~\ref{fig:cifar_10_train} illustriert den Genauigkeitsverlauf des \gls{Cifar}-10 Trainings- und Validierungsdatensatzes während des Trainings in Abhängigkeit der vergangenen Epochen.
+\input{tikz/cifar_10_train}
+Wohingegen der klassische Ansatz recht schnell nach ungefähr 14 Epochen seine Maximalgenauigkeit erreicht und den Rest des Trainings damit verbringt, seine Trainingsdaten \enquote{überanzupassen}, lernen die Graphansätze weitaus langsamer und kontinuierlicher.
 
 \paragraph{\gls{Pascal}}
 
@@ -119,7 +120,7 @@ jeweils 65k Steps (entspricht ungefähr 75 Epochen)
   \toprule
   Ansatz & \ma{W} & Architektur & \multicolumn{2}{c}{Genauigkeit [\%]}\\
   \cmidrule{4-5}
-   & & & \gls{SLIC} & \acs{QS}\\
+   & & & \acs{SLIC} & \acs{QS}\\
   \midrule
   \acs{EGCNN} & 9 & &\\
   \midrule
