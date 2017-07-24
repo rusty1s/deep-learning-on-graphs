@@ -30,9 +30,9 @@ Im Folgenden werden die drei Schritte näher erläutert.
 \end{algorithm}
 
 Die Knotenauswahl beschreibt den Prozess zur Auswahl einer geordneten Teilmenge $\gls{V}_{\mathrm{out}} \subseteq \gls{V}$ mit nicht mehr als $L \in \gls{N}$ vielen Knoten, für die im späteren Verlauf eine Nachbarschaft des Graphen \bzw{} ein Receptive-Field des Netzes erzeugt wird~\cite{patchy}.
-Algorithm~\ref{alg:knotenauswahl} veranschaulicht die grobe Vorgehensweise dieses Verfahrens.
+Algorithmus~\ref{alg:knotenauswahl} veranschaulicht die grobe Vorgehensweise dieses Verfahrens.
 Dafür werden anhand einer gegebenen Knotenfärbung $\gls{l} \colon \gls{V} \to \gls{C} \subseteq \gls{R}$ die Knoten in \gls{V} absteigend sortiert, sodass Knoten, die aufgrund ihrer Zentralität als wichtiger gelten, am Anfang der geordneten Knotenmenge $\gls{V}_{\mathrm{sort}}$ stehen.
-Foglich kann über die geordnete Knotenmenge $\gls{V}_{\mathrm{sort}}$ iteriert werden und in Abständen \bzw{} Schrittweiten $S \in \gls{N}$ solange Knoten aus $\gls{V}_{\mathrm{sort}}$ entnommen werden, bis $L$ viele gefunden wurden oder die Menge zu Ende iteriert wurde.
+Folglich kann über die geordnete Knotenmenge $\gls{V}_{\mathrm{sort}}$ iteriert werden und in Abständen \bzw{} Schrittweiten $S \in \gls{N}$ solange Knoten aus $\gls{V}_{\mathrm{sort}}$ entnommen werden, bis $L$ viele gefunden wurden oder die Menge zu Ende iteriert wurde.
 $S$ gibt damit den Abstand zweier benachbarter Knoten in $\gls{V}_{\mathrm{out}}$ an, für die ein Receptive-Field generiert wird.
 Falls die Liste eine kleinere Anzahl an Knoten als $S\left( L -1 \right) + 1$ besitzt, dann besitzt $\gls{V}_{\mathrm{out}}$ folglich eine Kardinalität kleiner als $L$.
 Demnach ist es möglich, dass $\gls{V}_{\mathrm{out}}$ weniger, aber niemals mehr Knoten als $L$ enthält (\vgl{}~\cite{patchy}).

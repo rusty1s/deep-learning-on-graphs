@@ -4,7 +4,7 @@
 Die Darstellung eines Bildes über einen Graphen \gls{G}, der aus einer Superpixelrepräsentation \gls{Smenge} gewonnen wurde, besitzt in der Regel weitaus weniger Knoten im Gegensatz zu der reinen Darstellung des Bildes über eine Gitterrepräsentation.
 Die Superpixel \bzw{} die Regionen der Segmentierungsmaske können dabei jedoch die willkürlichsten Formen annehmen und besitzen lediglich die Einschränkung, dass diese stets zusammenhängend sind.
 Die Form eines Superpixels muss demnach bestmöglichst eingefangen \bzw{} beschrieben werden können — ein Prozess, der in der Bildverarbeitung als \emph{Merkmalsextraktion} bekannt ist~\cite{momente}.
-Ein geeigntes Mittel zur Beschreibung einzelner Objekte in einem segmentierten Bild sind die \emph{Momente}, welche in nicht-zentrierte, translationsinvariante, skalierungsinvariante und rotationsinvariante Momente unterschieden werden~\cite{momente}.
+Ein geeignetes Mittel zur Beschreibung einzelner Objekte in einem segmentierten Bild sind die \emph{Momente}, welche in nicht-zentrierte, translationsinvariante, skalierungsinvariante und rotationsinvariante Momente unterschieden werden~\cite{momente}.
 
 \paragraph{Nicht-zentrierte Momente}
 \label{nicht_zentrierte_momente}
@@ -22,7 +22,7 @@ Bildeigenschaften, die durch nicht-zentrierte Momente beschrieben werden können
 Nicht-zentrierte Momente sind aufgrund ihrer Berücksichtigung der Position einer Region im Bild meist unerwünscht, sie helfen aber für die weitere Definition von translationsinvarianten Momenten.
 Mit Hilfe der absoluten Schwerpunktskoordinaten $\left\{ \bar{x}, \bar{y} \right\}$ können die \emph{translationsinvarianten Momente} über
 \begin{equation*}
-  \gls{mu}_{ij} \coloneqq \sum_x^W \sum_y^H {\left(x - \bar{x}\right)}^i {\left(y - \bar{y}\right)}^j \gls{Smaske}_{yx}.
+  \gls{mu}_{ij} \coloneqq \sum_x^W \sum_y^H {\left(x - \bar{x}\right)}^i {\left(y - \bar{y}\right)}^j \gls{Smaske}_{yx}
 \end{equation*}
 definiert werden~\cite{momente}.
 Sie lassen sich weiterhin direkt aus $\gls{M}_{ij}$ ermitteln.
@@ -41,7 +41,7 @@ Dafür wird das entsprechende translationsinvariante Moment $\gls{mu}_{ij}$ durc
 \label{rotationsinvariante_momente}
 
 \citeauthor{Hu} verwendet eine nichtlineare Kombination der skalierungsinvarianten Momente bis zum Grad $3$, um aus ihnen zusätzlich eine Rotationsinvarianz zu gewinnen~\cite{Hu, momente}.
-Daraus ergeben sich die sieben \emph{rotationsinvariante Momente} \bzw{} die \emph{Hu-Momente}~\cite{momente}:
+Daraus ergeben sich die sieben \emph{rotationsinvarianten Momente} \bzw{} die \emph{Hu-Momente}~\cite{momente}:
 \begin{equation*}
 \begin{split}
   \gls{hu}_1 & = \gls{eta}_{20} + \gls{eta}_{02}\\
@@ -73,7 +73,7 @@ Die beiden Eigenvektoren dieser Matrix
   \gls{lambda}_i = \frac{\gls{mu}^{\prime}_{20} + \gls{mu}^{\prime}_{02}}{2} \pm \frac{\sqrt{4\gls{mu}^{\prime}_{11} + {\left(\gls{mu}^{\prime}_{20} - \gls{mu}^{\prime}_{02}\right)}^2}}{2}
 \end{equation*}
 entsprechen über $\mathrm{axis}_i \coloneqq 4 \sqrt{\gls{lambda}_i}$ der Länge der großen \bzw{} kleinen Halbachse einer Ellipse, die die Region minimal umschließt~\cite{scikit, momente}.
-Damit kann die \emph{Orientierung} der Region aus dem Winkel des Eigenvektors des größten Eigenwerts mit Hilfe des Arkustangens über $\mathrm{ori} \coloneqq \mathrm{atan}\left(2\gls{mu}^{\prime}_{11}/\left(\gls{mu}^{\prime}_{20} - \gls{mu}^{\prime}_{02}\right)\right)/2$ berechnet werden~\cite{scikit}.
+Damit kann die \emph{Orientierung} der Region aus dem Winkel des Eigenvektors des größten Eigenwerts mit Hilfe des Ar\-kus\-tan\-gens über $\mathrm{ori} \coloneqq \mathrm{atan}\left(2\gls{mu}^{\prime}_{11}/\left(\gls{mu}^{\prime}_{20} - \gls{mu}^{\prime}_{02}\right)\right)/2$ berechnet werden~\cite{scikit}.
 Ähnlich dazu lässt sich die \emph{Exzentrizität} (\engl{} \emph{Eccentricity}) $\mathrm{ecc} \coloneqq \sqrt{1 - \gls{lambda}_1/\gls{lambda}_2}$ als das Verhältnis der beiden Hauptachen zueinander definieren~\cite{scikit, Siedhoff}.
 
 Neben den Merkmalen, die sich aus den Momenten ergeben, können noch zahlreiche weitere Merkmale aus den Formen einer Region gewonnen werden~(\vgl{}~\cite{Siedhoff}).
@@ -89,7 +89,7 @@ Die Breite, Höhe und Fläche dieses Hüllkörpers können aus einer binären Se
 gewonnen werden.
 Das \emph{Ausmaß} einer Region (\engl{} \emph{Extent}) ist weiterhin definiert als $\mathrm{ext} \coloneqq \gls{M}_{00}/\mathrm{box}$~\cite{scikit}.
 Der \emph{gleichwertige Durchmesser} (engl. \emph{Equivalent-Di\-a\-me\-ter}) zu der Fläche einer Region lässt sich über $\mathrm{dia} \coloneqq \sqrt{4 \gls{M}_{00}/\pi}$ beschreiben~\cite{scikit, Siedhoff}.
-Abschließend lassen sich die absoluten Schwerpunktskoordianten $\left\{\bar{x}, \bar{y}\right\}$ in relative, \dhe{} translationsinvariante, Schwerpunktskoordinaten $\left\{\hat{x}, \hat{y}\right\}$ mittels
+Abschließend lassen sich die absoluten Schwerpunktskoordianten $\left\{\bar{x}, \bar{y}\right\}$ in relative \bzw{} translationsinvariante Schwerpunktskoordinaten $\left\{\hat{x}, \hat{y}\right\}$ mittels
 \begin{equation*}
   \hat{x} \coloneqq \bar{x} - \min\left(\left\{x \mid \gls{Smaske}_{yx} = 1\right\}\right)
   \qquad
@@ -106,7 +106,7 @@ Zusätzlich zu diesen beschreiben drei weitere Merkmale die Durchschnittsfarbe d
 
 Viele der $38$ ermittelten Merkmale werden über bereits definierte Merkmale beschrieben.
 So bauen insbesondere die Momente sukzessive über die zusätzlichen Stufen der Invarianz aufeinander auf.
-Weiterhin erfordern Merkmale wie die Orientierung oder die Exzentrizität gleichermaßen die Berechnung der translationsinvarianten Momente sowie dessen Kovarianzmatrix.
+Weiterhin erfordern Merkmale wie die Orientierung oder die Exzentrizität gleichermaßen die Berechnung der translationsinvarianten Momente sowie deren Kovarianzmatrix.
 Auch bei Merkmalen, die nicht über die Momente beschrieben sind, wie \zB{} die Berechnung des minimalen Hüllkörpers und der relativen Schwerpunktskoordinaten, lassen sich Gemeinsamkeiten in der Berechnung wiederfinden, \zB{} über die Eckpunktkoordinaten des Hüllkörpers.
 Obwohl eine Berechnung aller Merkmale aufgrund der stetigen Wiederverwertung der Daten redundant erscheint und die Menge der zu benutzenden Merkmale für ein spezifisches Problem auf eine Untermenge reduziert werden sollte (\vgl{} Kapitel~\ref{merkmalsselektion}), zeigt es sich dennoch als lohnenswert, alle bereits errechneten Daten für die weiteren Berechnungen zu cachen.
 Abbildung~\ref{fig:merkmals_caching} illustriert dabei den enormen Laufzeitgewinn gegenüber einer Berechnung ohne Verwendung eines Caches.

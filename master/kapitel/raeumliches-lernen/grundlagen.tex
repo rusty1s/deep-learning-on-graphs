@@ -20,7 +20,7 @@ Die \emph{Nähe} (\engl{} \emph{Closeness})
 \end{equation*}
 ist ein Maß für die durchschnittliche Länge zwischen einem Knoten und allen weiteren Knoten in \gls{V}~\cite{centrality}.
 Je \emph{näher} ein Knoten sich an der Knotenmenge befindet, als desto zentraler gilt er.
-Die \emph{Betweeness-Zentralität} eines Knotens $\gls{v} \in \gls{V}$ ist über
+Die \emph{Betweenness-Zentralität} eines Knotens $\gls{v} \in \gls{V}$ ist über
 \begin{equation*}
   c\left(\gls{v}\right) \coloneqq \sum_{\gls{v}_i \neq \gls{v} \neq \gls{v}_j} \frac{\kappa_{ij}\left(\gls{v}\right)}{\kappa_{ij}}
 \end{equation*}
@@ -39,7 +39,7 @@ Dann beschreibt der größte Eigenwert \gls{lambda} die Eigenvektorzentralität 
 
 Seien $\gls{G}_1 = \left(\gls{V}_1, \gls{E}_1\right)$ und $\gls{G}_2 = \left(\gls{V}_2, \gls{E}_2\right)$ zwei Graphen mit der gleichen Anzahl an Knoten, \dhe{} $\left|\gls{V}_1\right| = \left|\gls{V}_2\right|$.
 Dann heißt eine bijektive Abbildung $p \colon \gls{V}_1 \to \gls{V}_2$ \emph{Isomorphismus} zwichen $\gls{G}_1$ und $\gls{G}_2$, falls $\left(\gls{v}_i, \gls{v}_j\right) \in \gls{E}_1$ \gdw{} $\left(p\left(\gls{v}_i\right), p\left(\gls{v}_j\right)\right) \in \gls{E}_2$~\cite{nauty}.
-Zwei Graphen sind \emph{isomorph} zueinander, falls ein Isomorphismus zwischen ihnen existiert.
+Zwei Graphen sind genau dann \emph{isomorph} zueinander, wenn ein Isomorphismus zwischen ihnen existiert.
 Die Komplexität zur Bestimmung der Isomorphie zweier Graphen liegt in NP, wobei nicht bekannt ist, ob sie in P enthalten oder NP-vollständig ist~\cite{patchy}.
 
 Die Komposition mehrerer Isomorphismen ist ebenfalls ein Isomorphismus~\cite{nauty}.

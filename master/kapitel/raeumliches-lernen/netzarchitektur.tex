@@ -7,7 +7,7 @@ Es ist jedoch insbesondere darauf zu achten, nicht über den Grenzen des Recepti
 Insbesondere sollte eine Faltung entlang der Knotenauswahl $\gls{V}_{\mathrm{out}}$ vermieden werden, da dessen Knotenanordnung im Kontext einer Faltung keine Bedeutung besitzt, denn zwei \enquote{übereinanderliegende} Receptive-Fields müssen nicht zwangsläufig im Graphen benachbart sein.
 Die \gls{conv2d}-Operation operiert daher mit der Filtergröße und Schrittweite $1 \times \left|\gls{Neighbor}_{\mathrm{out}}\right|$~\cite{patchy}.
 Die restliche Struktur des Netzes kann nach Belieben gewählt werden~\cite{patchy}.
-Üblicherweise wird der Ausgabetensor der Faltungsschicht dafür zu einem Vektor umsortiert, sodass vollverbundenen Schichten hinzu zur Ausgabe an das Ergebnis der Faltungsschicht gestapelt werden können.
+Üblicherweise wird der Ausgabetensor der Faltungsschicht dafür zu einem Vektor umsortiert, sodass vollverbundenen Schichten hin zur Ausgabe an das Ergebnis der Faltungsschicht gestapelt werden können.
 Abbildung~\ref{fig:netzarchitektur_raeumlich} veranschaulicht die typische räumliche Netzarchitektur auf Graphen.
 \input{tikz/netzarchitektur_raeumlich}
 
