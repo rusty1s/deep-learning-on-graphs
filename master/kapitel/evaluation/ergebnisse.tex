@@ -66,11 +66,11 @@ Die in Tabelle~\ref{tab:train_mnist} vorgestellten Netzarchitekturen zeigen die 
 \caption[Testgenauigkeiten der \gls{MNIST} Superpixelrepräsentationen]{Testgenauigkeiten eines Trainings auf dem \gls{MNIST} Datensatz nach 17 Epochen, dessen Bilder zuvor durch einen Superpixelalgorithmus in irreguläre Graphrepräsentationen gebracht werden.}
 \label{tab:train_mnist}
 \end{table}
-Für \acs{SGCNN} wurde dabei aufgrund der kleineren Eingabemenge die Filtergröße im Vergleich zum Vortest gedrosselt.
+Für \acs{SGCNN} wurde dabei aufgrund der kleineren Eingabemenge die Filtergröße im Vergleich zum Vortest gedrosselt und besitzt im Vergleich zu den \acs{GCN} und \acs{EGCNN}-Netzen nicht mehrere, aufeinanderfolgende Faltungsschichten.
 Es zeigt sich, dass alle Netzansätze auf irregulären Daten nicht an die Ergebnisse auf regulären Gittereingaben heranreichen.
 Insbesondere offenbart der räumliche Faltungsansatz hier seine Schwächen, denn obwohl die Trainingsmenge erfolgreich gelernt wird, so lassen sich unbekannte Eingaben aufgrund der Anordnung zu eindimensionalen Knoten- sowie Nachbarschaftsmengen für irreguläre Graphen nur schwer bis garnicht generalisieren.
 Für alle Netze zeigt sich desweiteren die Quickshift-Segmentierung aufgrund ihrer überlegenden Segmentierung auf den Bildern des \gls{MNIST} Datensatz als die bessere Wahl (\vgl{} Abbildung~\ref{mnist}).
-Insbesondere erreicht der entwickelte spektrale Faltungsansatz über B-Spline-Kurven (\acs{EGCNN}) auch hier die eindeutig besten Ergebnisse.
+Insbesondere erreicht der entwickelte spektrale Faltungsoperator über B-Spline-Kurven (\acs{EGCNN}) auch hier die eindeutig besten Ergebnisse.
 
 \paragraph{\gls{Cifar}-10}
 
