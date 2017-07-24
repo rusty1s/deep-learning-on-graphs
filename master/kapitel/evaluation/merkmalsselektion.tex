@@ -1,7 +1,7 @@
 \section{Merkmalsselektion}
 \label{merkmalsselektion}
 
-Die in Kapitel~\ref{merkmalsextraktion} ermittelten Formmerkmale auf den Knoten eines Graphen, der aus einer Superpixelrepräsentation generiert wurde, besitzen mit $38$ Dimensionen eine hohe Dimensionalität.
+Die in Kapitel~\ref{merkmalsextraktion} ermittelten $38$ Formmerkmale auf den Knoten eines Graphen, der aus einer Superpixelrepräsentation generiert wurde, besitzen eine hohe Dimensionalität.
 Viele der Formmerkmale bauen dabei aufeinander auf und es ist daher fraglich, inwieweit die gesamte Menge an Merkmalen gebraucht wird oder ob eine Untermenge dieser als ausreichend gilt.
 Eine \emph{\gls{PCA}} auf den Knotenmerkmalen kann dabei helfen, die reale Dimensionalität der Daten abzuschätzen.
 Dafür werden die Merkmale durch eine Linearkombination ihrer Hauptkomponenten beschrieben und können so durch weitaus weniger Dimensionen dargestellt werden.
@@ -11,7 +11,7 @@ Dabei zeigt sich, dass nach bereits recht wenigen Komponenten $\left(\geq 9\righ
 
 Im Kontext von neuronalen Netzen ist die Verwendung einer \gls{PCA} untypisch, denn schließlich müssen dafür weiterhin alle $38$ Formmerkmale berechnet werden, um daraus die neuen Merkmale anhand der Hauptkomponenten zu ermitteln.
 Ein effizienteres Verfahren ist dagegen die Bestimmung einer Auswahl an Merkmalen, genannt \emph{Merkmalsselektion}, die die Merkmalsmenge möglichst gut beschreibt.
-In dieser Arbeit kommen daher zwei Merkmalsselektionsalgorithmen zum Einsatz, die jeweils sequentiell auf der Menge der Merkmale dessen bedeutenste auswählen — die univariate Merkmalsselektion sowie die rekursive Merkmalseliminierung~\cite{scikitlearn}.
+In dieser Arbeit kommen daher zwei Merkmalsselektionsalgorithmen zum Einsatz, die jeweils sequentiell auf der Menge der Merkmale dessen bedeutenste auswählen: die univariate Merkmalsselektion sowie die rekursive Merkmalseliminierung~\cite{scikitlearn}.
 
 Die \emph{univariate Merkmalsselektion} untersucht jedes Merkmal individuell auf Basis statistischer Tests und ermittelt daraus eine Bewertung der Wichtigkeit dieses Merkmals.
 Als statistischer Test kommt dafür die \emph{Varianzanalyse} durch einen \emph{F-Test} zum Einsatz (\vgl{}~\cite{scikitlearn}).
