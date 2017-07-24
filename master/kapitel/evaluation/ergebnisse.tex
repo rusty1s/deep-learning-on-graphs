@@ -1,14 +1,18 @@
 \section{Ergebnisse}
 \label{ergebnisse}
 
-Dieses Kapitel stellt die Ergebnisse aller Datensätze über allen Verfahren, \dhe{} dem \gls{RL}, dem \gls{SGCNN} über den Tschebyschow-Polynomen, den Graph Convoluional Networks (GCN) und dem angepassten Ansatz \gls{EGCNN}
+Dieses Kapitel stellt die Ergebnisse einer ausgewählten Untermenge der in dieser Arbeit vorgestellten Graphrepräsentationen von Bildern, den Ansätzen zum Lernen auf diesen sowie den beschriebenen Datensätzen und Superpixelalgorithmen vor.
+Zur Kenntlichmachung der einzelnen Ansätze erhält das räumliche Lernen auf Graphen dabei die Abkürzung \enquote{\acs{RL}} und das spektrale Lernen auf Graphen über den Tschebyschow-Polynomen \bzw{} dessen Einschränkung auf eine Filtergröße von Eins die Abkürzungen \enquote{\acs{SGCNN}} \bzw{} \enquote{\acs{GCN}}.
+Der erweiterte Ansatz zum spektralen Lernen ist über \enquote{\acs{EGCNN}} gekennzeichnet.
+Der Quickshift-Algorithmus wird ebenfalls über \enquote{\acs{QS}} abgekürzt.
 
-über den Superpixelalgorithmen SLIC und \gls{QS}.
-
-% Alle Faltungen wurden dabei mit einer Partitionsgröße von $8$ bei $K=0$ und $K=1$ implementiert, um ein \gls{CNN} mit einem $3 \times 3$ Filter zu simulieren.
-% Es erscheint jedoch vorstellbar die Filtergröße bei größerer lokaler Kontrollierbarkeit, \dhe{} $K > 1$, weiter zu reduzieren und die Gefahr des Overfittings damit aufgrund der kleineren Anzahl an Trainingsparametern einzuschränken.
+Netzarchitekturen werden im Folgenden über ein Muster der Form \enquote{C32-P2-FC128} beschrieben und signalisieren eine Faltungsschicht, die auf 32 Merkmalskarten abbildet, gefolgt von einer Poolingschicht, die zwei Knoten vereint, hin zu einer vollverbundenen Schicht mit 128 Neuronen.
+Die für das spektrale Lernen bei dynamischen Eingabegrößen notwendige Durchschnittsbildung zwischen Faltungs- und vollverbundener Schicht wird als \enquote{Avg} gekennzeichnet (\vgl{} Kapitel~\ref{spektrale_netzarchitektur}).
+Auf die explizite Erwähnung der Eingabe- und Ausgabeschichten der Netze wird übersichtshalber verzichtet.
 
 \paragraph{\gls{MNIST}}
+
+Für die Validierung der Faltungsansätze starten wir mit dem \gls{MNIST}-Datensatz und der in Kapitel~\ref{gitter} beschriebenen Graphrepräsentationen der Bilder als reguläres Gitter.
 
 Spatial: 25/25 mit Stride 4, Delta = 3
 
@@ -26,16 +30,17 @@ Dropout: 0.5\\
   \toprule
   Ansatz & \ma{W} & Architektur & Genauigkeit [\%]\\
   \midrule
-  \gls{RL} & 25 & C64-F2048-FC1024 & \\
-  \gls{SGCNN} & 25 & C32-P4-C64-P4-FC1024 & 98.888\\
-  \gls{GCN} & 1 & C32-C32-P4-C64-C64-P4-FC1024 & 96.675\\
-  \gls{EGCNN} & 9 & C32-C32-P4-C64-C64-P4-FC1024 & 99.145\\
+  \acs{RL} & 25 & C64-F2048-FC1024 & \\
+  \acs{SGCNN} & 25 & C32-P4-C64-P4-FC1024 & 98.888\\
+  \acs{GCN} & 1 & C32-C32-P4-C64-C64-P4-FC1024 & 96.675\\
+  \acs{EGCNN} & 9 & C32-C32-P4-C64-C64-P4-FC1024 & 99.145\\
   \midrule
   klassisch & $5 \times 5$ & C32-P4-C64-P4-FC1024 & 99.189\\
   klassisch & $3 \times 3$ & C32-C32-P4-C64-C64-P4-FC1024 & 99.139\\
   \bottomrule
 \end{tabular}
-\caption[Testgenauigkeiten der \gls{MNIST}-Gitterrepräsentation]{Testgenauigkeiten eines Trainings auf einer \gls{MNIST}-Gitterrepräsentation nach 10000 Durchläufen ($\approx 11$ Epochen) für die vorgestellten Ansätze inklusive äquivalenter Netzarchitekturen bei Benutzung der klassischen Faltungsoperation.}
+\caption[Testgenauigkeiten der \gls{MNIST}-Gitterrepräsentation]{Testgenauigkeiten eines Trainings auf einer \gls{MNIST}-Gitterrepräsentation nach 10 Epochen für die vorgestellten Ansätze inklusive äquivalenter Netzarchitekturen bei Benutzung der klassischen Faltungsoperation.
+Die Spalte \ma{W} kennzeichnet die benutzten Filtergrößen der einzelnen Faltungsschichten.}
 \label{tab:train_mnist_gitter}
 \end{table}
 
@@ -51,12 +56,12 @@ insbesondere kein average pool notwendig, da graphen alle gleich groß
   \toprule
   Ansatz & \ma{W} & Architektur & \multicolumn{2}{c}{Genauigkeit [\%]}\\
   \cmidrule{4-5}
-   & & & \gls{SLIC} & \gls{QS}\\
+   & & & \gls{SLIC} & \acs{QS}\\
   \midrule
-  \gls{RL} & 25 & C64-F1600-F256 & 82.873 & 85.226 \\
-  \gls{SGCNN} & 9 & C64-P4-C128-P4-Avg-F128 & & 92.718 \\
-  \gls{GCN} & 1 & C64-C64-P4-C128-C128-P4-Avg-F128 & 78.155 & 86.358 \\
-  \gls{EGCNN} & 9 & C64-C64-P4-C128-C128-P4-Avg-F128 & 97.405 & 98.025 \\
+  \acs{RL} & 25 & C64-F1600-F256 & 82.873 & 85.226 \\
+  \acs{SGCNN} & 9 & C64-P4-C128-P4-Avg-F128 & & 92.718 \\
+  \acs{GCN} & 1 & C64-C64-P4-C128-C128-P4-Avg-F128 & 78.155 & 86.358 \\
+  \acs{EGCNN} & 9 & C64-C64-P4-C128-C128-P4-Avg-F128 & 97.405 & 98.025 \\
   \bottomrule
 \end{tabular}
 \caption[Testgenauigkeiten der \gls{MNIST} Superpixelrepräsentationen]{15k steps}
@@ -88,11 +93,11 @@ Das ist riesig!
   \toprule
   Ansatz & \ma{W} & Architektur & \multicolumn{2}{c}{Genauigkeit [\%]}\\
   \cmidrule{4-5}
-   & & & \gls{SLIC} & \gls{QS}\\
+   & & & \gls{SLIC} & \acs{QS}\\
   \midrule
-  \gls{SGCNN} & 9 & C64-P2-C128-P2-C256-P2-C512-Avg-FC256-FC128 & & 67.748\\
-  \gls{GCN} & 1 & C64-C64-P2-C128-P2-C256-P2-C512-Avg-FC256-FC128 & 54.497 & 53.606\\
-  \gls{EGCNN} & 9 & C64-C64-P2-C128-P2-C256-P2-C512-Avg-FC256-FC128 & 74.218 & 75.230\\
+  \acs{SGCNN} & 9 & C64-P2-C128-P2-C256-P2-C512-Avg-FC256-FC128 & & 67.748\\
+  \acs{GCN} & 1 & C64-C64-P2-C128-P2-C256-P2-C512-Avg-FC256-FC128 & 54.497 & 53.606\\
+  \acs{EGCNN} & 9 & C64-C64-P2-C128-P2-C256-P2-C512-Avg-FC256-FC128 & 74.218 & 75.230\\
   \midrule
   klassisch & $3 \times 3$ & C64-C64-P4-C128-P4-C256-P4-FC256-FC128 & \multicolumn{2}{c}{82.061} \\
   \bottomrule
@@ -110,9 +115,9 @@ Das ist riesig!
   \toprule
   Ansatz & \ma{W} & Architektur & \multicolumn{2}{c}{Genauigkeit [\%]}\\
   \cmidrule{4-5}
-   & & & \gls{SLIC} & \gls{QS}\\
+   & & & \gls{SLIC} & \acs{QS}\\
   \midrule
-  \gls{EGCNN} & 9 & &\\
+  \acs{EGCNN} & 9 & &\\
   \midrule
   klassisch & — & SqueezeNet 1.1 & \multicolumn{2}{c}{54.731} \\
   \bottomrule
@@ -124,3 +129,6 @@ Das ist riesig!
 PascalVOC Squeeze einheitliche Größe von $224 \times 224$.
 Squeeze vorstellen
 insbesondere nur Vorverarbeitung vorm Training (aufgrund Laufzeiten)
+
+% Alle Faltungen wurden dabei mit einer Partitionsgröße von $8$ bei $K=0$ und $K=1$ implementiert, um ein \gls{CNN} mit einem $3 \times 3$ Filter zu simulieren.
+% Es erscheint jedoch vorstellbar die Filtergröße bei größerer lokaler Kontrollierbarkeit, \dhe{} $K > 1$, weiter zu reduzieren und die Gefahr des Overfittings damit aufgrund der kleineren Anzahl an Trainingsparametern einzuschränken.

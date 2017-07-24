@@ -14,11 +14,11 @@
   \toprule
   & \multicolumn{2}{c}{Räumlich [ms]} & \multicolumn{2}{c}{Spektral [ms]}\\
   \cmidrule{2-5}
-  & \gls{SLIC} & Quickshift & \gls{SLIC} & Quickshift\\
+  & \gls{SLIC} & Quickshift & \acs{SLIC} & Quickshift\\
   \midrule
-  \gls{MNIST} & 30.59 & 24.00 & 20.32 & 19.40\\
-  \gls{Cifar}-10 & 72.74 & 43.85 & 25.34 & 23.18\\
-  \gls{Pascal} & 713.40 & 1080.78 & 372.79 & 782.56\\
+  \acs{MNIST} & 30.59 & 24.00 & 20.32 & 19.40\\
+  \acs{Cifar}-10 & 72.74 & 43.85 & 25.34 & 23.18\\
+  \acs{Pascal} & 713.40 & 1080.78 & 372.79 & 782.56\\
   \bottomrule
 \end{tabular}
 \caption[Laufzeiten der räumlichen und spektralen Vorverarbeitung]{Laufzeiten der räumlichen sowie spektralen Vorverarbeitung für ein Bild der jeweiligen Datensätze und Superpixelalgorithmen basierend auf den Laufzeiten aus Abbildung~\ref{fig:laufzeit_raeumlich_pipeline} und~\ref{fig:laufzeit_spektral_pipeline}.
@@ -37,24 +37,24 @@ Die räumliche Vorverarbeitung ist aufgrund der einzelnen Receptive-Field-Berech
   \cmidrule{5-7}
    & & & & Vorverarbeitung & Training & $\sum$\\
   \midrule
-  \gls{MNIST} & \gls{SLIC} & \gls{RL} & 0.04 & \multicolumn{3}{c}{—}\\
-  \gls{MNIST} & \gls{SLIC} & \gls{SGCNN} & & \multicolumn{3}{c}{—}\\
-  \gls{MNIST} & \gls{SLIC} & \gls{GCN} & 0.20 & \multicolumn{3}{c}{—}\\
-  \gls{MNIST} & \gls{SLIC} & \gls{EGCNN} & 0.61 & \multicolumn{3}{c}{—}\\
-  \gls{MNIST} & \gls{QS}   & \gls{RL} & 0.04 & \multicolumn{3}{c}{—}\\
-  \gls{MNIST} & \gls{QS}   & \gls{SGCNN} & 0.37 & \multicolumn{3}{c}{—}\\
-  \gls{MNIST} & \gls{QS}   & \gls{GCN} & 0.21 & \multicolumn{3}{c}{—}\\
-  \gls{MNIST} & \gls{QS}   & \gls{EGCNN} & 0.63 & \multicolumn{3}{c}{—}\\
+  \gls{MNIST} & \gls{SLIC} & \acs{RL} & 0.04 & \multicolumn{3}{c}{—}\\
+  \gls{MNIST} & \gls{SLIC} & \acs{SGCNN} & & \multicolumn{3}{c}{—}\\
+  \gls{MNIST} & \gls{SLIC} & \acs{GCN} & 0.20 & \multicolumn{3}{c}{—}\\
+  \gls{MNIST} & \gls{SLIC} & \acs{EGCNN} & 0.61 & \multicolumn{3}{c}{—}\\
+  \gls{MNIST} & \acs{QS}   & \acs{RL} & 0.04 & \multicolumn{3}{c}{—}\\
+  \gls{MNIST} & \acs{QS}   & \acs{SGCNN} & 0.37 & \multicolumn{3}{c}{—}\\
+  \gls{MNIST} & \acs{QS}   & \acs{GCN} & 0.21 & \multicolumn{3}{c}{—}\\
+  \gls{MNIST} & \acs{QS}   & \acs{EGCNN} & 0.63 & \multicolumn{3}{c}{—}\\
   \midrule
-  \gls{Cifar}-10 & \gls{SLIC} & \gls{SGCNN} & & & & \\
-  \gls{Cifar}-10 & \gls{SLIC} & \gls{GCN} & & 1.24 & 0.39 & 1.63 \\
-  \gls{Cifar}-10 & \gls{SLIC} & \gls{EGCNN} & & 0.44 & 2.00 & 2.44 \\
-  \gls{Cifar}-10 & \gls{QS}   & \gls{SGCNN} & & 0.43 & 1.95 & 2.38\\
-  \gls{Cifar}-10 & \gls{QS}   & \gls{GCN} & & 1.09 & 0.36 & 1.45\\
-  \gls{Cifar}-10 & \gls{QS}   & \gls{EGCNN} & & & & \\
+  \gls{Cifar}-10 & \gls{SLIC} & \acs{SGCNN} & & & & \\
+  \gls{Cifar}-10 & \gls{SLIC} & \acs{GCN} & & 1.24 & 0.39 & 1.63 \\
+  \gls{Cifar}-10 & \gls{SLIC} & \acs{EGCNN} & & 0.44 & 2.00 & 2.44 \\
+  \gls{Cifar}-10 & \acs{QS}   & \acs{SGCNN} & & 0.43 & 1.95 & 2.38\\
+  \gls{Cifar}-10 & \acs{QS}   & \acs{GCN} & & 1.09 & 0.36 & 1.45\\
+  \gls{Cifar}-10 & \acs{QS}   & \acs{EGCNN} & & & & \\
   \midrule
-  \gls{Pascal} & \gls{SLIC} & \gls{EGCNN} & & \multicolumn{3}{c}{—}\\
-  \gls{Pascal} & \gls{QS}   & \gls{EGCNN} & & \multicolumn{3}{c}{—}\\
+  \gls{Pascal} & \gls{SLIC} & \acs{EGCNN} & & \multicolumn{3}{c}{—}\\
+  \gls{Pascal} & \acs{QS}   & \acs{EGCNN} & & \multicolumn{3}{c}{—}\\
   \midrule
   \gls{MNIST} & — & klassisch & & \multicolumn{3}{c}{—}\\
   \gls{Cifar}-10 & — & klassisch & 0.49 & \multicolumn{3}{c}{—}\\
