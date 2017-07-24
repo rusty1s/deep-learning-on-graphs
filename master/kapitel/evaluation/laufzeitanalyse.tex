@@ -10,17 +10,24 @@ Bei der Verwendung einer Grafikkarte stellen sich dabei Laufzeitgewinne in Berei
 Die Vorverarbeitung der Eingabedaten in eine geeignete Graphrepräsentation, das Berechnen der Merkmalsmatrix sowie zusätzliche Aufwände wie die Vergröberung des Graphen oder die Bestimmung der Receptive-Fields seiner Knoten, welche für die Eingabe in ein neuronales Netz notwendig sind, trägt einen entscheidenen Anteil an der Ausführungsgeschwindigkeit für das Training und die Auswertung eines neuronalen Netzes bei.
 Graphen sollen demnach bestmöglichst zur Laufzeit eines Trainings generiert werden können und möglichst die Ausführung des eigentlichen Trainings garnicht bis kaum beeinflussen.
 
+Abbildung~\ref{fig:laufzeit_raeumlich_pipeline} illustriert die relative Laufzeitverteilung der einzelnen räumlichen Vorverarbeitungsschritte \bzgl{} aller Datensätze und Superpixelalgorithmen.
 \input{tikz/laufzeit_raeumlich_pipeline}
-\input{tikz/laufzeit_spektral_pipeline}
+Dabei stellt sich die Berechnung der eindeutigen Receptive-Fields einer groß gewählten Kotenauswahl als Flaschenhals in (fast) allen Datensätzen heraus, die die meiste Zeit in Anspruch nimmt.
+Lediglich auf großen Bildern, wie sie in \gls{Pascal} enthalten sind, zeigt sich der Aufwand der Segmentierung als ebenso kostspielig.
 
-% Tabelle~\ref{tab:laufzeit_raeumlich_spektral} zeigt
+Abbildung~\ref{fig:laufzeit_spektral_pipeline} veranschaulicht auf ähnliche Weise die Laufzeitverteilung der spektralen Vorverarbeitungsschritte.
+\input{tikz/laufzeit_spektral_pipeline}
+Anstelle der Receptive-Field-Berechnung entsteht hier ein Mehraufwand durch die Berechnung der Graphvergröberung zu vier Ebenen.
+Dieser Aufwand zeigt sich jedoch auf Bildern aus \gls{Pascal} als zu vernachlässigen, da die Laufzeit bei großen Bildern (fast) rein von der Laufzeit der Superpixelalgorithmen abhängig ist.
+
+Tabelle~\ref{tab:laufzeit_raeumlich_spektral} stellt die absoluten Aufwände zur räumlichen sowie spektralen Vorverarbeitung eines Bildes aus allen Datensätze und Superpixelalgorithmen gegenüber.
 \begin{table}[t]
 \centering
 \begin{tabular}{lrrrr}
   \toprule
   & \multicolumn{2}{c}{Räumlich [ms]} & \multicolumn{2}{c}{Spektral [ms]}\\
   \cmidrule{2-5}
-  & \acs{SLIC} & Quickshift & \acs{SLIC} & Quickshift\\
+  & \acs{SLIC} & \acs{QS} & \acs{SLIC} & \acs{QS}\\
   \midrule
   \acs{MNIST} & 30.59 & 24.00 & 20.32 & 19.40\\
   \acs{Cifar}-10 & 72.74 & 43.85 & 25.34 & 23.18\\
@@ -31,6 +38,9 @@ Graphen sollen demnach bestmöglichst zur Laufzeit eines Trainings generiert wer
 Die räumliche Vorverarbeitung ist aufgrund der einzelnen Receptive-Field-Berechnungen deutlich ineffizienter.}
 \label{tab:laufzeit_raeumlich_spektral}
 \end{table}
+Wohingegen sich für Bilder mit kleinen Auflösungen aus den Datensätzen \gls{MNIST} und \gls{Cifar}-10 der Aufwand zur Vorverarbeitung in Grenzen hält, zeigen sich für ein Bild aus \gls{Pascal} die Kosten zur Vorverarbeitung als nicht zu unterschätzen.
+Eine Vorverarbeitung zur Laufzeit ist auf diesem Datensatz daher (zurzeit) nicht zu empfehlen.
+Weiterhin sei anzumerken, dass die spektralen Vorverarbeitungsschritte in jedem Versuchsaufbau entschieden schneller als die räumlichen berechnet werden können.
 
 \paragraph{Training}
 
