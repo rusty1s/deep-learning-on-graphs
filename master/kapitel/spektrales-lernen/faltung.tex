@@ -162,7 +162,7 @@ Mit $N \leq \left|\gls{E}\right|$ ergibt dies eine finale Laufzeit der spektrale
 \label{tschebyschow_tensor}
 
 Für gewöhnlich besteht eine \gls{CNN}-Schicht nicht nur aus einem, sondern aus $M_{\mathrm{in}}$ vielen Signalen \bzw{} Merkmalen pro Knoten mit jeweils unterschiedlichen Filtern \bzw{} Gewichten pro Ein- und Ausgabekarte.
-In klassichen zweidimensionalen \glspl{CNN} werden diese Merkmale auf $M_{\mathrm{out}}$ viele Merkmale abgebildet, in dem für jede Ausgabekarte über jede Eingabekarte gefaltet und dessen Ergebnisse sukzessive aufsummiert werden (\vgl{} Kapitel~\ref{convolutional_neural_networks}).
+In klassichen zweidimensionalen \glspl{CNN} werden diese Merkmale auf $M_{\mathrm{out}}$ viele Merkmale abgebildet, indem für jede Ausgabekarte über jede Eingabekarte gefaltet und dessen Ergebnisse sukzessive aufsummiert werden (\vgl{} Kapitel~\ref{convolutional_neural_networks}).
 Modellieren wir diesen Fall für den spektralen Faltungsoperator, dann erhalten wir rekursiv für eine Merkmalsmatrix $\gls{F}_{\mathrm{in}} \in \gls{R}^{N \times M_{\mathrm{in}}}$ gefaltet auf eine Merkmalsmatrix $\gls{F}_{\mathrm{out}} \in \gls{R}^{N \times M_{\mathrm{out}}}$ über den $N$ Knoten eines Graphen \gls{G} mittels des Filtertensors $\gls{W} \in \gls{R}^{\left(K+1\right) \times M_{\mathrm{in}} \times M_{\mathrm{out}}}$
 \begin{equation*}
   \gls{F}_{\mathrm{out}} \coloneqq \sum_{k=0}^K \ma{\bar F}_k,

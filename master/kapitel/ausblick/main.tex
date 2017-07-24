@@ -39,7 +39,7 @@ Es lassen sich jedoch die beiden nächsten zueinander liegenden Knoten unterschi
 \label{spatial_pyramid_pooling}
 
 Eine Alternative zu der verwendeten Durchschnittsbildung zwischen Faltungs- und vollverbundener Schicht, die für die Implementierung der spektralen Netzarchitektur auf Graphen mit dynamischer Knotengröße benutzt wurde (\vgl{} Kapitel~\ref{spektrale_netzarchitektur}), ist das \emph{\gls{SPP}}~\cite{spp}.
-Die \gls{SPP}-Schicht erhält entgegen der Durchschnittsbildung räumliche Informationen, in dem über einer Menge räumlicher Gruppierungen unterschiedlicher Auflösungen \emph{gepoolt} wird, sodass sich als Endresultat ein Vektor fester Größe ergibt (\vgl{}~\cite{spp}).
+Die \gls{SPP}-Schicht erhält entgegen der Durchschnittsbildung räumliche Informationen, indem über einer Menge räumlicher Gruppierungen unterschiedlicher Auflösungen \emph{gepoolt} wird, sodass sich als Endresultat ein Vektor fester Größe ergibt (\vgl{}~\cite{spp}).
 Ein modifizierter Ansatz dieses Algorithmus auf Graphen erfordert demnach die Vergröberung der Graphen auf deren gemeinsame kleinste Größe (Vielfaches von zwei) mit möglicherweise unterschiedlich vielen Ebenen.
 Damit ist die Verwendung einer \gls{SPP}-Schicht mit weitaus mehr Berechnungsaufwand verbunden, dessen Qualität aufgrund der Translationsinvarianz von Adjazenzmatrizen erst zu evaluieren ist.
 

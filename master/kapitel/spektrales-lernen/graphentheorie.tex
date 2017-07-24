@@ -23,13 +23,11 @@ Dann gilt $\ma{M}\gls{Eiv} = \gls{Eiv}\gls{Lambda}$ und insbesondere ist \ma{M} 
 \begin{equation*}
   \ma{M} = \left(\ma{M}\gls{Eiv}\right)\gls{Eiv}^{\top} = \left(\gls{Eiv}\gls{Lambda}\right)\gls{Eiv}^{\top}.
 \end{equation*}
-
 Weiterhin gilt für die $k$-te Potenz von $\ma{M}$, $k \in \gls{N}$,~\cite{gcn}
 \begin{equation}
-  \ma{M}^k = {\left(\gls{Eiv}\gls{Lambda}\gls{Eiv}^{\top}\right)}^k = \gls{Eiv}\gls{Lambda}^k\gls{Eiv}^{\top}.
+  \ma{M}^k = {\left(\gls{Eiv}\gls{Lambda}\gls{Eiv}^{\top}\right)}^k = \gls{Eiv}\gls{Lambda}^k\gls{Eiv}^{\top}
   \label{eq:matrix_potenz}
 \end{equation}
-
 aufgrund der Induktion ($k - 1 \rightarrow k$)
 \begin{equation*}
   {\left(\gls{Eiv}\gls{Lambda}\gls{Eiv}^{\top}\right)}^k = {\left(\gls{Eiv}\gls{Lambda}\gls{Eiv}^{\top}\right)}^{k-1}\gls{Eiv}\gls{Lambda}\gls{Eiv}^{\top} = \gls{Eiv}\gls{Lambda}^{k-1}\gls{Eiv}^{\top}\gls{Eiv}\gls{Lambda}\gls{Eiv} = \gls{Eiv}\gls{Lambda}^k\gls{Eiv}^{\top}.
@@ -51,7 +49,7 @@ Viele der Eigenschaften von \gls{G} können durch die Eigenwerte ihrer Laplace-M
 Dies ist vor allem dem Fakt geschuldet, dass die Eigenwerte der Laplace-Matrix konsistent sind mit den Eigenwerten des Laplace-Beltrami Operators $\nabla^2$ in der spektralen Geometrie~\cite{Chung}.
 Die Laplace-Matrix ist damit ein geeignetes Mittel zur Betrachtung und Analyse eines Graphen.
 
-Für einen schleifenlosen, ungerichteteten, gewichtet oder ungewichteten Graphen \gls{G} und dessen Adjazenzmatrix \gls{A} mit Gradmatrix \gls{D} ist die \emph{kombinatorische Laplace-Matrix} \gls{L} definiert als $\gls{L} \coloneqq \gls{D} - \gls{A}$~\cite{Chung}.
+Für einen schleifenlosen, ungerichteteten, gewichteten oder ungewichteten Graphen \gls{G} und dessen Adjazenzmatrix \gls{A} mit Gradmatrix \gls{D} ist die \emph{kombinatorische Laplace-Matrix} \gls{L} definiert als $\gls{L} \coloneqq \gls{D} - \gls{A}$~\cite{Chung}.
 Die \emph{normalisierte Laplace-Matrix} \gls{Lnorm} ist definiert als $\gls{Lnorm} \coloneqq \gls{D}^{-1/2} \gls{L} \gls{D}^{-1/2}$ mit der Konvention, dass $\gls{D}^{-1/2}_{ii} = 0$ für isolierte Knoten $\gls{v}_i \in \gls{V}$ in \gls{G}, \dhe{} $\gls{D}_{ii} = 0$~\cite{Chung}.
 Daraus ergibt sich die elementweise Definition
 \begin{equation*}
@@ -92,10 +90,10 @@ Dann beschreibt
 \end{equation*}
 die \emph{5-Punkte-Stern} Approximation $\nabla^2 f$ (bei umgekehrtem Vorzeichen) definiert auf den Punkten $\left\{\left(x,y\right), \left(x+\delta,y\right), \left(x-\delta,y\right), \left(x,y + \delta\right),\left(x,y-\delta\right)\right\}$~\cite{Hammond} (\vgl{} Abbildung~\ref{fig:5_punkte_stern}).
 Ähnlich zu einem regulären Gitter lässt sich ein Graph \gls{G} auch über beliebig viele Abtastpunkte einer differenzierbaren Mannigfaltigkeit konstruieren.
-Es zeigt sich, dass mit steigender Abtastdichte und geeigneter Wahl der Kantengewichte die normalisierte Laplace-Matrix \gls{Lnorm} zu dem kontinuierlichem Laplace-Beltrami Operator $\nabla^2$ konvergiert~\cite{Hammond}.
+Es zeigt sich, dass mit steigender Abtastdichte und geeigneter Wahl der Kantengewichte die normalisierte Laplace-Matrix \gls{Lnorm} zu dem kontinuierlichen Laplace-Beltrami Operator $\nabla^2$ konvergiert~\cite{Hammond}.
 Damit kann $\gls{Lnorm}$ als die diskrete Analogie des $\nabla^2$ Operators auf Graphen verstanden werden.
 Der Laplace-Beltrami Operator $\nabla^2 f\left(p\right)$ misst dabei, in wie weit sich eine Funktion $f$ an einem Punkt $p$ von dem Durchschnitt aller Funktionspunkte um einen kleinen Bereich um $p$ unterscheidet.
-Die Laplace-Matrix operiert dabei völlig analog, in dem sie misst, wie sehr sich eine (diskrete) Funktion um einen Knoten im Vergleich zu seinen Nachbarknoten unterscheidet.
+Die Laplace-Matrix operiert dabei völlig analog, indem sie misst, wie sehr sich eine (diskrete) Funktion um einen Knoten im Vergleich zu seinen Nachbarknoten unterscheidet.
 
 Die Eigenwerte und Eigenvektoren von \gls{Lboth} helfen uns beim Verständnis der linearen Transformation einer Funktion \gls{f} (mehrfach) angewendet auf \gls{Lboth}.
 Wir können dafür \gls{f} als Linearkombination der Eigenbasis $\gls{f} = \sum_{n=1}^N a_n \gls{eiv}_n$, $a_n \in \gls{R}$ schreiben und erhalten
@@ -114,7 +112,7 @@ Die kombinatorische Laplace-Matrix $\gls{L}$ ist nach~\eqref{eq:schwach_diagonal
 Insbesondere summiert sich jede Zeilen- und Spaltensumme von \gls{L} zu Null auf, \dhe{} $\sum_{j=1}^N \gls{L}_{ij} = \sum_{j=1}^N \gls{L}_{ji} = 0$.
 Daraus folgt unmittelbar, dass $\gls{lambda}_1 = 0$, da $\gls{eiv}_1 = 1/\sqrt{N}{\left[1, \ldots, 1\right]}^{\top} \in \gls{R}^N$ Eigenvektor von \gls{L} mit $\gls{L}\gls{eiv}_1 = \ve{0}$~\cite{Shuman}.
 \gls{Lnorm} hingegen ist nicht zwingend schwach diagonaldominant.
-Es lässt sich jedoch zeigen, dass auch für \gls{Lnorm} gilt, dass $\gls{lambda}_1 = 0$~\cite{Chung}.
+Es lässt sich jedoch zeigen, dass $\gls{lambda}_1 = 0$ auch für \gls{Lnorm} gilt~\cite{Chung}.
 
 Eine der interessantesten Eigenschaften eines Graphen ist dessen Konnektivität.
 Die Laplace-Matrix \gls{Lboth} \bzw{} deren Eigenwerte stellen ein geeignetes Mittel zur Untersuchung dieser Eigenschaft dar.
