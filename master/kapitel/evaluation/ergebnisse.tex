@@ -49,7 +49,7 @@ Die entwickelten Faltungsansätze \acs{RL} und \acs{EGCNN} beweisen sich aufgrun
 Insbesondere lässt sich die Äquivalenz des \acs{EGCNN}s \bzgl{} regulärer Gitter verifizieren.
 Das räumliche Lernen zeigt sich aufgrund ihrer eindimensionalen Knotenauswahl und uneinheitlichen Nachbarschaftsanordnung an Randknoten als leicht schwächer.
 
-Die in Tabelle~\ref{tab:train_mnist} vorgestellten Netzarchitekturen zeigen die Genauigkeiten des Trainings auf irregulären Dateneingaben, welche über die Superpixelalgorithmen \gls{SLIC} und \gls{QS} anhand der in Kapitel~\ref{datensaetze} vorgestellten Parameterwahlen gewonnen wurden.
+Die in Tabelle~\ref{tab:train_mnist} vorgestellten Netzarchitekturen zeigen die Genauigkeiten des Trainings auf irregulären Dateneingaben, welche über die Superpixelalgorithmen \gls{SLIC} und \gls{QS} anhand der in Kapitel~\ref{datensaetze} vorgestellten Parameterwerte gewonnen wurden.
 \begin{table}[t]
 \centering
 \begin{tabular}{lclrrr}
@@ -67,15 +67,15 @@ Die in Tabelle~\ref{tab:train_mnist} vorgestellten Netzarchitekturen zeigen die 
 \caption[Testgenauigkeiten der \gls{MNIST} Superpixelrepräsentationen]{Testgenauigkeiten eines Trainings auf dem \gls{MNIST} Datensatz nach 17 Epochen, dessen Bilder zuvor durch einen Superpixelalgorithmus in irreguläre Graphrepräsentationen gebracht werden.}
 \label{tab:train_mnist}
 \end{table}
-Für \acs{SGCNN} wurde dabei aufgrund der kleineren Eingabemenge die Filtergröße im Vergleich zum Vortest gedrosselt und besitzt im Vergleich zu den \acs{GCN} und \acs{EGCNN}-Netzen nicht mehrere, aufeinanderfolgende Faltungsschichten.
+Für \acs{SGCNN} wurde dabei aufgrund der kleineren Eingabemenge die Filtergröße im Vergleich zum Vortest gedrosselt und besitzt im Vergleich zu den \acs{GCN}- und \acs{EGCNN}-Netzarchitekturen nicht mehrere, aufeinanderfolgende Faltungsschichten.
 Es zeigt sich jedoch, dass alle Netzansätze auf irregulären Daten garnicht oder nur knapp an die Ergebnisse auf regulären Gittereingaben heranreichen.
 Insbesondere offenbart der räumliche Faltungsansatz hier seine Schwächen, denn obwohl die Trainingsmenge erfolgreich gelernt wird, so lassen sich unbekannte Eingaben aufgrund der Anordnung zu eindimensionalen Knoten- sowie Nachbarschaftsmengen für irreguläre Graphen nur schwer bis garnicht generalisieren.
-Für alle Netze zeigt sich desweiteren die Quickshift-Segmentierung aufgrund ihrer überlegenden Segmentierung auf den Bildern des \gls{MNIST} Datensatz als die bessere Wahl (\vgl{} Abbildung~\ref{fig:mnist}).
+Für alle Ansätze zeigt sich desweiteren die Quickshift-Segmentierung aufgrund ihrer überlegenden Segmentierung auf den Bildern des \gls{MNIST} Datensatz als die bessere Wahl (\vgl{} Abbildung~\ref{fig:mnist}).
 Insbesondere erreicht der entwickelte spektrale Faltungsoperator über B-Spline-Kurven (\acs{EGCNN}) auch hier die eindeutig besten Resultate.
 
 \paragraph{\gls{Cifar}-10}
 
-Die Klassifikation auf dem \gls{Cifar}-10 Datensatz ist eine eindeutig schwierigere Aufgabe,
+Die Klassifikation auf dem \gls{Cifar}-10 Datensatz ist im Verlgeich zu \gls{MNIST} eine schwierigere Angelegenheit, die eine weitaus längere Trainingsdauer in Anspruch nimmt.
 
 % Abbildung~\ref{fig:cifar_10_train} zeigt
 \input{tikz/cifar_10_train}
@@ -89,9 +89,6 @@ WeightDecay in FC256 und FC128: 0.004
 Dropout vor letztem: 0.5
 jeweils 65k Steps (entspricht ungefähr 75 Epochen)
 65k steps trainiert: vereinheitlichen wir zu 60k
-
-Chebyshev: Es werden pro Faltung eine 8fache Nachbarschaft betrachtet.
-Das ist riesig!
 
 \begin{table}[t]
 \centering
