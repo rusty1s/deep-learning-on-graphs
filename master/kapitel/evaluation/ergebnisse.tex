@@ -102,10 +102,10 @@ Tabelle~\ref{tab:train_cifar_10} fasst die Netzarchitekturen der einzelnen Ansä
 \caption[Testgenauigkeiten der \gls{Cifar}-10 Superpixelrepräsentationen]{Testgenauigkeiten eines Trainings auf den durch \gls{SLIC} und Quickshift generierten Graphrepräsentationen des \gls{Cifar}-10 Datensatz nach 80 Epochen im Vergleich zu einer ähnlichen klassischen Netzarchitektur auf den Bildrohdaten.}
 \label{tab:train_cifar_10}
 \end{table}
-Alle spektralen Graphansätze auf den aus \gls{SLIC} und Quickshift generierten Graphrepräsentationen können nicht mit einer ähnlichen klassischen Netzarchitektur auf den Bildrohdaten konkurrieren.
+Alle spektralen Graphansätze auf den aus \gls{SLIC} und Quickshift generierten Graphrepräsentationen können nicht mit der ähnlichen klassischen Netzarchitektur auf den Bildrohdaten konkurrieren.
 Wohingegen jedoch die vorhandenen Ansätze \acs{SGCNN} und \acs{GCN} eine maximale Genauigkeit von rund 67\% erreichen, zeigt sich auch hier eine signfikante Verbesserung durch den neu entwickelten spektralen Faltungsoperator \acs{EGCNN}.
 Er erreicht mit $75\%$ mittels der Quickshift-Segmentierung das eindeutig beste Resultat.
-Hochoptimierte Ansätze, bei denen noch weitaus mehr Augmentierungsschritte zum Einsatz kommen, erreichen auf \gls{Cifar}-10 jedoch bereits mehr als $90\%$ und so ist nicht auszuschließen, dass auch für \acs{EGCNN} Potential nach oben besteht~\cite{fracmaxpool}.
+Hochoptimierte Ansätze, bei denen noch weitaus mehr Augmentierungsschritte zum Einsatz kommen, erreichen auf \gls{Cifar}-10 jedoch bereits mehr als $90\%$ und so ist nicht auszuschließen, dass auch für \acs{EGCNN} weiterhin Potential nach oben besteht~\cite{fracmaxpool}.
 
 Abbildung~\ref{fig:cifar_10_train} illustriert den Genauigkeitsverlauf des \gls{Cifar}-10 Trainings- und Validierungsdatensatzes während des Trainings in Abhängigkeit der vergangenen Epochen.
 \input{tikz/cifar_10_train}
@@ -122,7 +122,7 @@ Wohingegen der klassische Ansatz recht schnell nach ungefähr 14 Epochen seine M
   \cmidrule{4-5}
    & & & \acs{SLIC} & \acs{QS}\\
   \midrule
-  \acs{EGCNN} & 9 & &\\
+  \acs{EGCNN} & 9 & C64-C64-P2-C128-C128-P2-C256-P2-C512-Avg-FC256-FC128 &\\
   \midrule
   klassisch & — & SqueezeNet 1.1 & \multicolumn{2}{c}{54.731} \\
   \bottomrule
@@ -134,6 +134,3 @@ Wohingegen der klassische Ansatz recht schnell nach ungefähr 14 Epochen seine M
 PascalVOC Squeeze einheitliche Größe von $224 \times 224$.
 Squeeze vorstellen
 insbesondere nur Vorverarbeitung vorm Training (aufgrund Laufzeiten)
-
-% Alle Faltungen wurden dabei mit einer Partitionsgröße von $8$ bei $K=0$ und $K=1$ implementiert, um ein \gls{CNN} mit einem $3 \times 3$ Filter zu simulieren.
-% Es erscheint jedoch vorstellbar die Filtergröße bei größerer lokaler Kontrollierbarkeit, \dhe{} $K > 1$, weiter zu reduzieren und die Gefahr des Overfittings damit aufgrund der kleineren Anzahl an Trainingsparametern einzuschränken.
