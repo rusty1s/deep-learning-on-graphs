@@ -98,4 +98,10 @@ So zeigt sich \bspw{} bei \gls{Cifar}-10, dass das \acs{EGCNN} und \acs{SGCNN} i
 \paragraph{Vergleich \bzgl{} vorhandener Implementierungen}
 \label{vergleich_laufzeit}
 
+Obwohl die Vorverarbeitung das Training eines neuronalen Netzes zur Laufzeit behindern kann, so konnten bereits viele Vorverarbeitungsschritte im Laufe dieser Arbeit effizienter als ihre vorhandenen, quelloffenenen Implementierungen gestaltet werden.
+So besitzt \bspw{} \texttt{skimage} eine Implementierung zur Adjazenzbestimmung einer Segmentierungsmaske und zur Extraktion von den meisten in dieser Arbeit vorgestellten Merkmalen.
+Beide Verfahren konnten mit deutlichem Laufzeitgewinnn optimiert werden.
+Der frei zugängliche Quelltext des spektralen Faltungsoperators (\acs{SGCNN}) besitzt ebenso eine Implementierung zur Vergröberung eines Graphen.
+Dieser konnte, trotz der Berücksichtigung der Knotenpositionen und Generierung zweier Adjazenzmatrizen \gls{Adist} und \gls{Arad} fast dreimal so schnell implementiert werden.
+Abbildung~\ref{fig:laufzeit_vergleich} fasst die beschriebenen Laufzeitgewinne separat zusammen.
 \input{tikz/laufzeit_vergleich}
