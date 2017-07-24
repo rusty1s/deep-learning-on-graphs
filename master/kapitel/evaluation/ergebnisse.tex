@@ -4,7 +4,6 @@
 Dieses Kapitel stellt die Ergebnisse einer ausgewählten Untermenge der in dieser Arbeit vorgestellten Graphrepräsentationen von Bildern, den Ansätzen zum Lernen auf diesen sowie den beschriebenen Datensätzen und Superpixelalgorithmen vor.
 Zur Kenntlichmachung der einzelnen Ansätze erhält das räumliche Lernen auf Graphen dabei die Abkürzung \enquote{\acs{RL}} und das spektrale Lernen auf Graphen über den Tschebyschow-Polynomen \bzw{} dessen Einschränkung auf eine Filtergröße von Eins die Abkürzungen \enquote{\acs{SGCNN}} \bzw{} \enquote{\acs{GCN}}.
 Der erweiterte Ansatz zum spektralen Lernen ist über \enquote{\acs{EGCNN}} gekennzeichnet.
-Der Quickshift-Algorithmus wird über \enquote{\acs{QS}} abgekürzt.
 
 Netzarchitekturen werden im Folgenden \bspw{} über ein Muster der Form \enquote{C32-P2-FC128} beschrieben und signalisieren eine Faltungsschicht, die auf 32 Merkmalskarten abbildet, gefolgt von einer Poolingschicht, welche zwei Knoten vereint, und danach mit einer vollverbundenen Schicht zu 128 Neuronen verknüpft wird.
 Die für das spektrale Lernen bei dynamischen Eingabegrößen notwendige Durchschnittsbildung zwischen Faltungs- und vollverbundener Schicht wird als \enquote{Avg} gekennzeichnet (\vgl{} Kapitel~\ref{spektrale_netzarchitektur}).
@@ -39,35 +38,35 @@ Die Spalte \ma{W} kennzeichnet die benutzten Filtergrößen der einzelnen Faltun
 \end{table}
 Die Netzarchitekturen sind dabei an der von \texttt{tensorflow} vorgeschlagenen Architektur orientiert~\cite{tensorflow}.
 Alle Netze wurden einheitlich mit einer Lernrate von $0.001$ trainiert.
-Es wurde auf die für \gls{MNIST} eher untypische Augmentierung der Eingabedaten, die L2-Regularisierung sowie der Verminderung der Lernrate in Abhängigkeit zur Trainingsdauer verzichet~\cite{tensorflow}.
+Es wurde auf die für \gls{MNIST} eher untypische Augmentierung der Eingabedaten, die L2-Regularisierung sowie auf die Verminderung der Lernrate in Abhängigkeit zur Trainingsdauer verzichet~\cite{tensorflow}.
 Es findet sich jedoch die Anwendung eines Dropouts von $0.5$ vor der Ausgabeschicht.
 \citeauthor{Defferrard} benutzen zur Validierung des \acs{SGCNN}s eine ähnliche Netzarchitektur auf \gls{MNIST} und schlagen dazu eine Filtergröße von $25$ vor, sodass eine Faltung die gleiche Anzahl an trainierbaren Parametern enthält wie die klassische Faltung über ein $5 \times 5$ Fenster~\cite{Defferrard}.
-Diese Faltung lässt sich im Kontext des spektralen Faltungsoperators auf einem Gitter der Größe $28 \times 28$ aber kaum noch als lokale Faltung verstehen, denn sie lässt Knoten in die Berechnung mit einfließen, die 25 Kanten weit vom Ursprungsknoten entfernt liegen und betrachtet folglich außer für Randknoten das globale Bild (\vgl{} Kapitel~\ref{spektraler_faltungsoperator}).
+Diese Faltung lässt sich im Kontext des spektralen Faltungsoperators auf einem Gitter der Größe $28 \times 28$ aber kaum noch als lokale Faltung verstehen, denn sie lässt Knoten in die Berechnung mit einfließen, die 25 Kanten weit vom Ursprungsknoten entfernt liegen, und betrachtet folglich außer bei Randknoten das globale Bild (\vgl{} Kapitel~\ref{spektraler_faltungsoperator}).
 Eine lokalere Faltung lässt sich mit dem \acs{RL}, \acs{GCN} und \acs{EGCNN} gewinnen.
 Für das \acs{GCN} zeigt sich dabei jedoch eine eindeutige Limitierung durch die geringe Filtergröße.
-Die entwickelten Faltungsansätze \acs{RL} und \acs{EGCNN} beweisen sich demnach aufgrund der Berücksichtigung ihrer Kantenausrichtungen als die bessere Alternative.
+Die entwickelten Faltungsansätze \acs{RL} und \acs{EGCNN} beweisen sich aufgrund der Berücksichtigung ihrer Kantenausrichtungen als die bessere Alternative.
 Insbesondere lässt sich die Äquivalenz des \acs{EGCNN}s \bzgl{} regulärer Gitter verifizieren.
-Das räumliche Lernen zeigt sich aufgrund ihrer eindimensionalen Knotenanordnung und uneinheitlichen Nachbarschaftsanordnung an Randknoten als leicht schwächer.
-
-Die in Tabelle~\ref{tab:train_mnist} vorgestellten Netzarchitekturen und Genauigkeiten zeigen
-
+Das räumliche Lernen zeigt sich aufgrund ihrer eindimensionalen Knotenauswahl und uneinheitlichen Nachbarschaftsanordnung an Randknoten als leicht schwächer.
+\\\\
+Die in Tabelle~\ref{tab:train_mnist} vorgestellten Netzarchitekturen zeigen die Genauigkeiten des Trainings auf irregulären Dateneingaben, welche über die Superpixelalgorithmen \gls{SLIC} und \gls{QS} anhand der in Kapitel~\ref{datensaetze} vorgestellten Parameter gewonnen wurden.
 \begin{table}[t]
 \centering
 \begin{tabular}{lclrrr}
   \toprule
   Ansatz & \ma{W} & Architektur & \multicolumn{2}{c}{Genauigkeit [\%]}\\
   \cmidrule{4-5}
-   & & & \gls{SLIC} & \acs{QS}\\
+   & & & \acs{SLIC} & \acs{QS}\\
   \midrule
   \acs{RL} & 25 & C64-F1600-F256 & 82.873 & 85.226 \\
-  \acs{SGCNN} & 9 & C64-P4-C128-P4-Avg-F128 & & 92.718 \\
-  \acs{GCN} & 1 & C64-C64-P4-C128-C128-P4-Avg-F128 & 78.155 & 86.358 \\
-  \acs{EGCNN} & 9 & C64-C64-P4-C128-C128-P4-Avg-F128 & 97.405 & 98.025 \\
+  \acs{SGCNN} & 9 & C64-P4-C128-P4-Avg & & 92.718 \\
+  \acs{GCN} & 1 & C64-C64-P4-C128-C128-P4-Avg & 78.155 & 86.358 \\
+  \acs{EGCNN} & 9 & C64-C64-P4-C128-C128-P4-Avg & 97.405 & 98.025 \\
   \bottomrule
 \end{tabular}
-\caption[Testgenauigkeiten der \gls{MNIST} Superpixelrepräsentationen]{15k steps}
+\caption[Testgenauigkeiten der \gls{MNIST} Superpixelrepräsentationen]{17 Epochen}
 \label{tab:train_mnist}
 \end{table}
+Für \acs{SGCNN} wurde dabei aufgrund der kleineren Eingabemenge die Filtergröße gedrosselt.
 
 \paragraph{\gls{Cifar}-10}
 
