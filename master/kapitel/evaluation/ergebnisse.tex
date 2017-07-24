@@ -47,7 +47,7 @@ Eine lokalere Faltung lässt sich mit dem \acs{RL}, \acs{GCN} und \acs{EGCNN} ge
 Für das \acs{GCN} zeigt sich dabei jedoch eine eindeutige Limitierung durch die geringe Filtergröße.
 Die entwickelten Faltungsansätze \acs{RL} und \acs{EGCNN} beweisen sich aufgrund der Berücksichtigung ihrer Kantenausrichtungen als die bessere Alternative.
 Insbesondere lässt sich die Äquivalenz des \acs{EGCNN}s \bzgl{} regulärer Gitter verifizieren.
-Das räumliche Lernen zeigt sich aufgrund ihrer eindimensionalen Knotenauswahl und uneinheitlichen Nachbarschaftsanordnung an Randknoten als leicht schwächer.
+Das räumliche Lernen zeigt sich aufgrund der Beschränkung auf eine Faltungsschicht, der eindimensionalen Knotenauswahl sowie der uneinheitlichen Nachbarschaftsanordnung an Randknoten als leicht schwächer.
 
 Die in Tabelle~\ref{tab:train_mnist} vorgestellten Netzarchitekturen zeigen die Genauigkeiten des Trainings auf irregulären Dateneingaben, welche über die Superpixelalgorithmen \gls{SLIC} und \gls{QS} anhand der in Kapitel~\ref{datensaetze} vorgestellten Parameterwerte gewonnen wurden.
 \begin{table}[t]
