@@ -16,7 +16,7 @@ Für die Validierung der Faltungsansätze starten wir mit dem \gls{MNIST}-Datens
 Damit kann jedes Bild über den selben Graphen dargestellt werden und insbesondere verfällt damit die Notwendigkeit der Durchschnittsbildung für das spektrale Lernen.
 Für das räumliche Lernen wurden 196 Knoten mit Schrittweite 4 bei $\delta=1$ und einer Nachbarschaftsgröße von 25 besimmt (\vgl{} Kapitel~\ref{raeumliches_lernen}).
 Die Graphvergröberung des spektralen Lernens (\vgl{} Kapitel~\ref{pooling}) wiederum generiert für die erste Schicht 976 Knoten ($28^2 = 784$ Pixelknoten und 192 Fakeknoten).
-Die Anzahl der generierten Knoten kann jedoch von Testverlauf zu Testverlauf aufgrund ihrer zufälligen Permutation variieren.
+Die Anzahl der generierten Knoten kann jedoch von Training zu Training aufgrund ihrer zufälligen Permutation variieren.
 Tabelle~\ref{tab:train_mnist_gitter} fasst die Netzarchitekturen und dessen erreichte Genauigkeiten der einzelnen Ansätze zusammen.
 \begin{table}[t]
 \centering
@@ -24,7 +24,7 @@ Tabelle~\ref{tab:train_mnist_gitter} fasst die Netzarchitekturen und dessen erre
   \toprule
   Ansatz & \ma{W} & Architektur & Genauigkeit [\%]\\
   \midrule
-  \acs{RL} & 25 & C64-F2048-FC1024 & \\
+  \acs{RL} & 25 & C64-FC1024 & \\
   \acs{SGCNN} & 25 & C32-P4-C64-P4-FC1024 & 98.888\\
   \acs{GCN} & 1 & C32-C32-P4-C64-C64-P4-FC1024 & 96.675\\
   \acs{EGCNN} & 9 & C32-C32-P4-C64-C64-P4-FC1024 & 99.145\\
@@ -48,6 +48,8 @@ Für das \acs{GCN} zeigt sich dabei jedoch eine eindeutige Limitierung durch die
 Die entwickelten Faltungsansätze \acs{RL} und \acs{EGCNN} beweisen sich demnach aufgrund der Berücksichtigung ihrer Kantenausrichtungen als die bessere Alternative.
 Insbesondere lässt sich die Äquivalenz des \acs{EGCNN}s \bzgl{} regulärer Gitter verifizieren.
 Das räumliche Lernen zeigt sich aufgrund ihrer eindimensionalen Knotenanordnung und uneinheitlichen Nachbarschaftsanordnung an Randknoten als leicht schwächer.
+
+Die in Tabelle~\ref{tab:train_mnist} vorgestellten Netzarchitekturen und Genauigkeiten zeigen
 
 \begin{table}[t]
 \centering
