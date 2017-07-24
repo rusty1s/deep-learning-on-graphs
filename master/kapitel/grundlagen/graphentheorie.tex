@@ -19,7 +19,7 @@ Als \emph{Grad} eines Knotens $\gls{v} \in \gls{V}$ wird die Anzahl der Knoten b
 Im Falle von gewichteten Graphen wird der Grad eines Knotens von $\gls{v}_i \in \gls{V}$ auch oft über $\gls{d}\left(v_i\right) \coloneqq \sum^N_{j=1} \gls{A}_{ij}$ definiert~\cite{Defferrard}.
 Die unterschiedliche Notation macht deutlich, welcher Grad eines Knotens gemeint ist.
 Die \emph{Gradmatrix} $\gls{D} \in \gls{R+}^{N \times N}$ eines Graphen \gls{G} ist dann definiert als Diagonalmatrix $\gls{D} \coloneqq \gls{diag}\left( {\left[ \gls{d}\left(v_1\right), \ldots, \gls{d}\left(v_N\right) \right]}^{\top} \right)$ \bzw{} $\gls{D}_{ii} = \gls{d}\left(\gls{v}_i\right)$~\cite{Defferrard}.
-Ein Knoten $\gls{v} \in \gls{V}$ heißt \emph{isoliert}, falls dieser keinen Nachbarsknoten besitzt, \dhe{} $\gls{degree}\left(\gls{v}\right) = 0$~\cite{Defferrard}.
+Ein Knoten $\gls{v} \in \gls{V}$ heißt \emph{isoliert}, falls dieser keinen Nachbarknoten besitzt, \dhe{} $\gls{degree}\left(\gls{v}\right) = 0$~\cite{Defferrard}.
 
 Ein \emph{Weg} der Länge $K$ auf \gls{G} ist eine Folge von Knoten $\left(\gls{v}_{x\left(1\right)}, \gls{v}_{x\left(2\right)}, \ldots, \gls{v}_{x\left(K\right)}\right)$, sodass $\left(v_{x\left(k\right)}, v_{x\left(k+1\right)}\right) \in \gls{E}$ für alle $1 \leq k < K$, wobei $x \colon \left\{ 1, \ldots, K \right\} \to \left\{ 1, \ldots, N \right\}$ eine Abbildung auf den Indizes der Knoten ${\left\{ \gls{v}_n \right\}}^N_{n=1}$~\cite{Biggs}.
 Ein \emph{Pfad} ist ein Weg mit der Bedingung, dass $\gls{v}_{x\left(k\right)} \neq \gls{v}_{x\left(k+1\right)}$.

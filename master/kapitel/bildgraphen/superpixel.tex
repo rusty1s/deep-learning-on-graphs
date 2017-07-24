@@ -31,7 +31,7 @@ Zusätzlich zu der Positionsfunktion \gls{p} auf den Superpixelknoten kann der G
 \paragraph{Effiziente Adjazenzbestimmung}
 \label{adjazenzbestimmung_superpixel}
 
-Die Bestimmung einer Kantenrelation \gls{E} auf einer Superpixelrepräsentation kann aufgrund der pixelweisen Iteration auf der Segmentierungsmaske und dem sukzessiven Vergleich mit den jeweiligen Nachbarspixeln über ein $3 \times 3$ Fenster recht teuer werden.
+Die Bestimmung einer Kantenrelation \gls{E} auf einer Superpixelrepräsentation kann aufgrund der pixelweisen Iteration auf der Segmentierungsmaske und dem sukzessiven Vergleich mit den jeweiligen Nachbarpixeln über ein $3 \times 3$ Fenster recht teuer werden.
 Eine effizientere und zugleich elegantere Bestimmung einer Kantenrelation als ungewichtete Adjazenzmatrix kann über eine versetzte Überlagerung der Segmentierungsmasken gewonnen werden.
 Sei dafür $\gls{Smaske} \in {\left\{1, \ldots N\right\}}^{H \times W}$ eine Segmentierungsmaske.
 Dann wird für die vertikale Adjazenzbestimmung die oberste und unterste Zeile aus \gls{Smaske} abgeschnitten.

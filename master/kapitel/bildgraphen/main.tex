@@ -1,7 +1,7 @@
 \chapter{Graphrepräsentationen von Bildern}
 \label{graphrepraesentationen_von_bildern}
 
-Als eine \emph{Graphrepräsentation eines Bildes} $\gls{B} \in \gls{R}^{H \times W \times C}$ wird eine Darstellung von \gls{B} als ein gewichteter, ungerichteter sowie schleifenloser Graph \gls{G} verstanden, deren Knoten Informationen zu ausgewählten Bereichen von \gls{B} über eine Merkmalsmatrix $\gls{F} \in \gls{R}^{N \times M}$ speichern und deren Kanten eine Aussage über die örtlichen Nachbarschaften eines jeden Bildbereichs inne wohnt.
+Als eine \emph{Graphrepräsentation eines Bildes} $\gls{B} \in \gls{R}^{H \times W \times C}$ wird eine Darstellung von \gls{B} als ein gewichteter, ungerichteter sowie schleifenloser Graph \gls{G} verstanden, deren Knoten Informationen zu ausgewählten Bereichen von \gls{B} über eine Merkmalsmatrix $\gls{F} \in \gls{R}^{N \times M}$ speichern und deren Kanten eine Aussage über die örtlichen Nachbarschaften eines jeden Bildbereichs innewohnt.
 Formal lässt sich eine Graphrepräsentation eines Bildes damit als ein \emph{Graph im zweidimensionalen euklidischen Raum} $\gls{G} = \left(\gls{V}, \gls{E}, \gls{p}\right)$ verstehen, dem zusätzlich zu seinen Knoten- und Kantenmengen anstatt einer Gewichtsfunktion $\gls{w} \colon \gls{V} \times \gls{V} \to \gls{R}$ eine Positionsfunktion $\gls{p} \colon \gls{V} \to \gls{R}^2$ auf seinen Knoten in den zweidimensionalen euklidischen Raum $\gls{R}^2$ zugeordnet ist.
 Das Gewicht $\gls{w} \colon \gls{E} \to \left[0, 1\right]$ einer Kante ergibt sich dann implizit als \enquote{Abstandsfunktion} mit Hilfe der euklidischen Norm $\left\|\cdot\right\|_2$ auf den Positionen der Knoten und der Gaußfunktion als
 \begin{equation}

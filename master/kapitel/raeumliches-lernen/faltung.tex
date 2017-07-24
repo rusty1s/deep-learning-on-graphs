@@ -59,7 +59,7 @@ Demnach ist es möglich, dass $\gls{V}_{\mathrm{out}}$ weniger, aber niemals meh
 Für jeden in $\gls{V}_{\mathrm{out}} \subseteq \gls{V}$ enthaltenden Knoten muss nun ein Receptive-Field konstruiert werden.
 Dafür generiert Algorithmus~\ref{alg:nachbarschaftsgruppierung} zuvor eine Nachbarschaftsgruppierung $\gls{Neighbor}_{\gls{v}} \subseteq \gls{V}$ eines jeden Knoten $\gls{v} \in \gls{V}_{\mathrm{out}}$, die eine Vorauswahl der maximal in dessen Receptive-Field enthaltenden Knoten beschreibt.
 Für einen Knoten $\gls{v} \in \gls{V}_{\mathrm{out}}$ und eine Receptive-Field-Größe $K \in \gls{N}$ vollzieht der Algorithmus eine von $v$ ausgehende Breitensuche durch den Graphen, bei der die Knoten in Abhängigkeit zu ihrem Abstand zu \gls{v} durchlaufen werden.
-Dabei werden zuerst die lokalen Nachbarsknoten $\gls{v}_i \in \gls{V}$ mit $\left(\gls{v}, \gls{v}_i\right) \in \gls{E}$ zu der Menge $\gls{Neighbor}_{\gls{v}} \in \gls{V}$ hinzugefügt.
+Dabei werden zuerst die lokalen Nachbarknoten $\gls{v}_i \in \gls{V}$ mit $\left(\gls{v}, \gls{v}_i\right) \in \gls{E}$ zu der Menge $\gls{Neighbor}_{\gls{v}} \in \gls{V}$ hinzugefügt.
 Falls $\left|\gls{Neighbor}_{\gls{v}}\right| < K$ werden die Nachbarschaften der zuletzt zu $\gls{Neighbor}_{\gls{v}}$ hinzugefügten Knoten durchlaufen und zu $\gls{Neighbor}_{\gls{v}}$ hinzugefügt.
 Der Prozess wiederholt sich solange, bis mindestens $K$ Knoten gefunden wurden oder keine Knoten mehr zur Verfügung stehen, für die ein Weg nach \gls{v} existiert und noch nicht in der Nachbarschaftsgruppierung enthalten sind.
 $\gls{Neighbor}_{\mathrm{v}}$ erzeugt dabei in den allermeisten Fällen eine Menge, die sich in ihrer Anzahl stark von $K$ unterscheidet (\vgl{}~\cite{patchy}).
@@ -102,7 +102,7 @@ Eine kanonische Ordnung auf Graphen mit fester Größe $K$ ist dabei in linearer
 Da die Kanonisierung des Graphen nur für Knoten mit gleicher Knotenfarbe angewendet werden muss, zeigt sich der zusätzliche Aufwand dieser Operation als zu vernachlässigen.
 
 Abschließend muss weiterhin der Fall betrachtet werden, dass $\left|\gls{Neighbor}_{\gls{v}}\right| < K$ weniger als $K$ Knoten enthält.
-Dafür werden $\max\left(K - \left|\gls{Neighbor}_{\gls{v}}\right|, 0\right)$ \emph{Fakeknoten} an das Ende von $\gls{Neighbor}_{\mathrm{out}}$ gehängt, denen keine Bedeutung inne wohnt und später so belegt werden, dass diese keinen Einfluss auf das Resultat der Faltung nehmen.
+Dafür werden $\max\left(K - \left|\gls{Neighbor}_{\gls{v}}\right|, 0\right)$ \emph{Fakeknoten} an das Ende von $\gls{Neighbor}_{\mathrm{out}}$ gehängt, denen keine Bedeutung innewohnt und später so belegt werden, dass diese keinen Einfluss auf das Resultat der Faltung nehmen.
 \input{tikz/raeumliche_faltung}
 Abbildung~\ref{fig:raeumliche_faltung} illustriert den Normalisierungsprozess an einem einfachen Beispiel.
 \\\\
