@@ -1,8 +1,14 @@
 \section{Laufzeitanalyse}
 \label{laufzeitanalyse}
 
-% Das Training des neuronalen Netzes und der Betrieb des in Kapitel 3.4 vorgestell- ten Systems erfolgte auf einem Intel R CoreTM i5 Prozessor mit 3,2 Ghz, 16GB Ar- beitsspeicher und einer Nvidia R GeForceTM 980GTX Grafikkarte.
-% Rechnerhardware vorstellen
+Die Vorverarbeitung der Eingabedaten sowie das Training der neuronalen Netze erfolgte auf einem 3.5 GHz 6-Core Intel Xeon E5, 16GB DDR3 Arbeitsspeicher und einer \gls{SSD}.
+Die in dieser Arbeit präsentierten Laufzeiten wurden ausschließlich über Berechnungen auf dem Prozessor gewonnen.
+Bei der Verwendung einer Grafikkarte stellen sich dabei Laufzeitgewinne in Bereichen, die auf die diese ausgelagert werden können, von $300 - 400 \%$ ein.
+
+\paragraph{Vorverarbeitung}
+
+Die Vorverarbeitung der Eingabedaten in eine geeignete Graphrepräsentation, das Berechnen der Merkmalsmatrix sowie zusätzliche Aufwände wie die Vergröberung des Graphen oder die Bestimmung der Receptive-Fields seiner Knoten, welche für die Eingabe in ein neuronales Netz notwendig sind, trägt einen entscheidenen Anteil an der Ausführungsgeschwindigkeit für das Training und die Auswertung eines neuronalen Netzes bei.
+Graphen sollen demnach bestmöglichst zur Laufzeit eines Trainings generiert werden können und möglichst die Ausführung des eigentlichen Trainings garnicht bis kaum beeinflussen.
 
 \input{tikz/laufzeit_raeumlich_pipeline}
 \input{tikz/laufzeit_spektral_pipeline}
@@ -14,7 +20,7 @@
   \toprule
   & \multicolumn{2}{c}{Räumlich [ms]} & \multicolumn{2}{c}{Spektral [ms]}\\
   \cmidrule{2-5}
-  & \gls{SLIC} & Quickshift & \acs{SLIC} & Quickshift\\
+  & \acs{SLIC} & Quickshift & \acs{SLIC} & Quickshift\\
   \midrule
   \acs{MNIST} & 30.59 & 24.00 & 20.32 & 19.40\\
   \acs{Cifar}-10 & 72.74 & 43.85 & 25.34 & 23.18\\
@@ -25,6 +31,8 @@
 Die räumliche Vorverarbeitung ist aufgrund der einzelnen Receptive-Field-Berechnungen deutlich ineffizienter.}
 \label{tab:laufzeit_raeumlich_spektral}
 \end{table}
+
+\paragraph{Training}
 
 \begin{table}[t]
 \centering

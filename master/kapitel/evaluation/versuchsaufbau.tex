@@ -193,16 +193,16 @@ Dabei werden insbesondere bei Quickshift auch kleine, auffällige Flächen des B
 \paragraph{Weitere Datensätze}
 \label{weitere_datensaetze}
 
-Es existieren eine Reihe weitere Bilddatensätze, die zwar in dieser Arbeit nicht benutzt werden, aber dennoch hier eine kurze Erwähnung finden sollen.
+Es existiert eine Reihe weiterer Bilddatensätze, die zwar in dieser Arbeit nicht benutzt werden, aber dennoch hier eine kurze Erwähnung finden sollen.
 Der weitaus größte und beliebteste Datensatz zur Bildklassifizierung ist der \emph{ImageNet} Datensatz, der aus mehr als 1.2 Millionen Bildern besteht, denen jeweils eine von $1000$ Klassen zugeordnet ist~\cite{imagenet}.
 Er wird aufgrund seiner Größe und seiner Komplexität für die reine Verifizierung der Faltungsansätze auf Graphrepräsentationen von Bildern in dieser Arbeit nicht verwendet.
 Er bildet jedoch insbesondere die Basis weiterer Datensätze.
 So beinhaltet \bspw{} der \emph{Tiny ImageNet} Datensatz eine Untermenge der Bilder von ImageNet (200 Klassen mit jeweils 600 Bildern), bei denen die Bilder auf eine einheitliche Größe von $64 \times 64$ Pixeln skaliert wurden~\cite{imagenet}.
-\gls{Pascal} bedient sich ebenso einer Untermenge der Bilder des ImageNet Datensatzes, die um entsprechende Annotationen wie \zB{} den Hüllkörpern der Objekte erweitert wurden~\cite{pascal_voc}.
+\gls{Pascal} bedient sich ebenso einer Untermenge der Bilder des ImageNet Datensatzes, die um entsprechende Annotationen, wie \zB{} den Hüllkörpern der Objekte, erweitert wurden~\cite{pascal_voc}.
 Namenhaft zu erwähnen sei weiterhin der von \gls{Cifar}-10 inspirierte \emph{STL-10} Datensatz von Stanford mit einer einheitlichen Bildergröße von $96 \times 96$ Pixeln~\cite{stl}.
-Er enthält aber nur sehr wenige annotierte Bilder und findet seine Anwendung daher vor allem im unüberwachten Lernen — ein Ansatz, der in dieser Arbeit nicht verfolgt wird.
+Er enthält aber nur sehr wenige annotierte Bilder und findet seine Anwendung daher vor allem im unüberwachten Lernen: ein Ansatz, der in dieser Arbeit nicht verfolgt wird.
 Der \emph{\gls{SVHN}} Datensatz beinhaltet 600000 annotierte Bilder $\left(32 \times 32\right)$ von Hausnummern, die aus \emph{Google Street View} extrahiert wurden~\cite{svhn}.
-Er enthält damit weitaus mehr Bilder als der zu ihm ähnliche \gls{MNIST} Datensatz und versucht dabei ein weitaus schwereres Problem zu lösen — der Objekterkennung von Zahlen in natürlichen Szenen.
+Er enthält damit weitaus mehr Bilder als der zu ihm ähnliche \gls{MNIST} Datensatz und versucht dabei ein weitaus schwereres Problem zu lösen: die Objekterkennung von Zahlen in natürlichen Szenen.
 Er kann jedoch insbesondere aufgrund der beliebigen Anzahl an Ziffern im Bild nicht für eine Bildklassifizierung genutzt werden.
 
 \subsection{Metriken}
@@ -216,8 +216,8 @@ die einer Wahrscheinlichkeitsverteilung der Klassen $\mathcal{Y}$ für das Auftr
 Damit gilt insbesondere $\mathrm{softmax}\left(\ve{y}\right) \in {\left[0, 1\right]}^Y$ sowie $\sum_{i=1}^Y {\mathrm{softmax}\left(\ve{y}\right)}_i = 1$~\cite{Nielsen}.
 Aufgrund der Verwendung der Exponentialfunktion werden dabei die höchsten Werte in $\ve{y}$ hervorgehoben, wohingegen Werte, die signifikant unter dem Maximum liegen, abgeschwächt werden.
 
-Neben der in Kapitel~\ref{convolutional_neural_networks} vorgestellten quadratischen Kostenfunktion aus~\eqref{eq:quadratische_kostenfunktion} findet sich in neuronalen Netzen häufiger die Verwendung der Kreuzentropie als Kostenfunktion, welche dem Netz ermöglicht, schneller bessere Entscheidungen zu treffen (\vgl{}~\cite{Nielsen}).
-Die \emph{Kreuzentropie} ist dabei über einer Eingabemenge $\mathcal{X}$ definiert als
+Neben der in Kapitel~\ref{convolutional_neural_networks} vorgestellten quadratischen Kostenfunktion aus~\eqref{eq:quadratische_kostenfunktion} findet sich in neuronalen Netzen häufiger die Verwendung der \emph{Kreuzentropie} als Kostenfunktion, welche dem Netz ermöglicht, schneller bessere Entscheidungen zu treffen (\vgl{}~\cite{Nielsen}).
+Die Kreuzentropie ist dabei über einer Eingabemenge $\mathcal{X}$ definiert als
 \begin{equation*}
   H\left(\mathcal{X}\right) \coloneqq - \frac{1}{\left|\mathcal{X}\right|} \sum_{\ve{x} \in \mathcal{X}} \left\langle \gls{yground}\left(\ve{x}\right), \log\left(\gls{y}\left(\ve{x}\right)\right)\right\rangle,
 \end{equation*}
@@ -248,7 +248,7 @@ Für jede Poolingschicht kommt das Max-Pooling zum Einsatz.
 Die gewählte Lernrate \gls{learning} des Netzes unterscheidet sich je nach getestetem Modell zwischen $0.001$ und $0.0001$.
 Sie wird dabei zusätzlich stufenweise exponentiell nach einer definierten Anzahl an Epochen reduziert.
 
-Es wurden ebenso Methodiken angewendet, die das Overfitting eines Netzes reduzieren.
+Es werden ebenso Methodiken angewendet, die das Overfitting eines Netzes reduzieren.
 So finden sich speziell in den vollverbundenen Schichten Anwendungen der \emph{Dropout}-Technik sowie der \emph{L2-Regularisierung} (\vgl{}~\cite{dropout, weight_decay}).
 
 \subsection{Augmentierung}
@@ -267,7 +267,7 @@ Ebenso kann die Helligkeit eines Bildes, welches im RGB-Farbmodell in Gleitkomma
 um den Faktor $\delta \in \left[-1, 1\right]$ justiert werden~\cite{tensorflow}.
 Weiterhin ist die Kontrastanpassung eines RGB-Bildes $\gls{B} \in {\left[0, 1\right]}^{H \times W \times C}$ um den Faktor $\delta \in \left[-1, 1\right]$ definiert als
 \begin{equation*}
-  {\mathrm{contrast}\left(\gls{B}, \delta\right)}_{yxc} \coloneqq \min \left( \max \left(\delta \left(\gls{B}_{yxc} - \overline{\gls{B}}_c\right) + \overline{\gls{B}}_c, 0\right), 1 \right)
+  {\mathrm{contrast}\left(\gls{B}, \delta\right)}_{yxc} \coloneqq \min \left( \max \left(\delta \left(\gls{B}_{yxc} - \overline{\gls{B}}_c\right) + \overline{\gls{B}}_c, 0\right), 1 \right),
 \end{equation*}
 wobei $\overline{\gls{B}}_c \coloneqq 1/\left(WH\right) \sum_{x = 1}^W \sum_{y = 1}^H \gls{B}_{yxc}$ die Durchschnittsfarbe des Bildes \bzgl{} des Farbkanals $c \in \left\{1, \ldots, C\right\}$ beschreibt~\cite{tensorflow}.
 Es sind eine ganze Reihe weiterer Augmentierungsschritte denkbar, wie \zB{} das Zuschneiden des Bildes an dessen Rändern auf eine kleinere Auflösung (\engl{} \emph{Cropping})~\cite{tensorflow}.
@@ -291,9 +291,9 @@ Eine realistischere Augmentierung der Eingabedaten ist folglich nur dann gegeben
 \subsection{Implementierung}
 \label{implementierung}
 
-Alle vorgestellten Methodiken wurden in der Programmiersprache \emph{Python} implementiert und stehen unter der \emph{MIT-Lizenz} zur freien Verfügung\footnote{\url{https://github.com/rusty1s/embedded\_gcnn}}.
+Alle vorgestellten Methodiken wurden in der Programmiersprache \emph{Python} implementiert und stehen unter der \emph{MIT}-Lizenz zur freien Verfügung\footnote{\url{https://github.com/rusty1s/embedded\_gcnn}}.
 Es liegen ausführbare Dateien zum Trainieren der neuronalen Netze auf allen erwähnten Datensätzen bereit, die sich bei Ausführung automatisch herunterladen.
-Die Implementation erreicht dabei eine \emph{Testabdeckung}, \dhe{} Anteil getesteter Quelltextzeilen, von \codecov{}\% und wurde auf den Pythonversionen 2.7 und > 3.4 getestet.
+Die Implementation erreicht dabei eine \emph{Testabdeckung} (Anteil getesteter Quelltextzeilen) von \codecov{}\% und wurde auf den Pythonversionen $2.7$ und $\geq 3.4$ getestet.
 Es liegen zusätzliche Installationsanweisungen bei und der Quelltext ist so dokumentiert, dass er mit Hilfe dieser Arbeit verstanden werden kann.
 
 \paragraph{Benutzte Bibliotheken}
@@ -301,14 +301,14 @@ Es liegen zusätzliche Installationsanweisungen bei und der Quelltext ist so dok
 
 Für die Modellierung und den Betrieb neuronaler Netze in Python wurde die Bibliothek \texttt{tensorflow} von Google verwendet~\cite{tensorflow}.
 Sie erlaubt die Modellierung eines Berechnungsgraphen, bei dem Knoten mathematische Operationen repräsentieren und die Kanten zwischen ihnen den Datenfluss multidimensionaler Tensoren steuern.
-So gut wie alle implementierten mathematischen Operationen in \texttt{tensorflow} besitzen eine Gradientenimplementierung, sodass die Kosten der Ausgabe eines Berechnungsgraphen über das Backpropagationverfahren minimiert werden können.
+So gut wie alle implementierten mathematischen Operationen in \texttt{tensorflow} besitzen eine Gradientenimplementierung, sodass die Kosten der Ausgabe eines Berechnungsgraphen über das Backpropagation-Verfahren minimiert werden können.
 Dies erlaubt insbesondere den Bau der implementierten Faltungsoperatoren mit den in \texttt{tensorflow} zur Verfügung stehenden Operationen.
 
 Zur Generierung der Superpixelrepräsentationen der Bildermengen wurde die Bibliothek \texttt{scikit-image} (\texttt{skimage}) benutzt~\cite{scikit}.
 Sie enthält die Implementierungen zu den Superpixelalgorithmen \gls{SLIC} und Quickshift, die in dieser Arbeit benutzt werden.
 Sie enthält ebenso eine Implementierung zur Graphgenerierung einer Superpixelrepräsentation, die sich aber in Tests als ineffizient herausstellte und daher in dieser Arbeit nicht verwendet wird (\vgl{} Kapitel~\ref{laufzeitanalyse}).
 
-Für die Merkmalsextraktion, die Graphgenerierung, die Implementierung der Graphvergröberungen für das spektrale Lernen sowie die Generierung der Receptive-Fields für das räumliche Lernen wurden die Bibliotheken \texttt{numpy} und \texttt{scipy} verwendet~\cite{numpy, scipy}.
+Für die Merkmalsextraktion, die Graphgenerierung, die Implementierung der Graph\-vergröberungen für das spektrale Lernen sowie die Generierung der Receptive-Fields für das räumliche Lernen wurden die Bibliotheken \texttt{numpy} und \texttt{scipy} verwendet~\cite{numpy, scipy}.
 Beide Bibliotheken gehören aufgrund ihrer effizienten Implementierung in C zu der Standardwahl wissenschaflicher Berechnungen in Python.
 Alle dünnbesetzten Matrizen, \dhe{} Adjazenzmatrizen sowie Diagonalmatrizen, sind insbesondere auch als solche implementiert.
 Für die Merkmalsselektion kommt die Bibliothek \texttt{scikit-learn} zum Einsatz~\cite{scikitlearn}.
@@ -323,7 +323,7 @@ wobei $\overline{\gls{f}} \coloneqq \left(1/N\right) \sum_{n=1}^N \gls{f}_n$ den
 Die Verteilung eines Merkmals eines Graphen liegt damit durchschnittlich bei Null und besitzt eine Standardabweichung von Eins.
 Die Überführung der Eingabedaten in die Standardnormalverteilung ist ein übliches Verfahren im Kontext von neuronalen Netzen.
 
-Für die Vorverarbeitung der Daten wurden zwei unterschiedliche Ansätze verfolgt, die sowohl Vor- wie auch Nachteile aufweisen und daher je nach Datensatz Verwendung finden.
+Für die Vorverarbeitung der Daten werden zwei unterschiedliche Ansätze verfolgt, die sowohl Vor- wie auch Nachteile aufweisen und daher je nach Datensatz Verwendung finden.
 Dem Benutzer steht es dabei frei, die vorverarbeiteten Daten in einem eigenen Datensatz vor Trainingsbeginn zu speichern oder alle notwendigen Vorverarbeitungsschritte der Bilder zur Laufzeit während des Trainings für das aktuell zu lernende Bild zu vollziehen.
 Die Vorverarbeitung während des Trainings wurde dabei mit Hilfe mehrerer Threads implementiert, sodass die Laufzeit der Lernprozedur möglichst nicht gestört wird.
 Es zeigt sich, dass die Vorverarbeitung der Daten während des Trainings für kleine Datensätze wie \gls{MNIST} oder \gls{Cifar}-10 so gut wie keinen Einfluss auf die Lerngeschwindigkeit mit sich zieht.
