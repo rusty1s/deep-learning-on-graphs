@@ -44,6 +44,7 @@ Weiterhin sei anzumerken, dass die spektralen Vorverarbeitungsschritte in jedem 
 
 \paragraph{Training}
 
+Tabelle~\ref{tab:train_laufzeit} zeigt die im Durschnitt ermittelten Laufzeiten des Trainings eines Batches der Größe $64$ für alle vorgestellten Netzarchitekturen.
 \begin{table}[t]
 \centering
 \resizebox{\textwidth}{!}{%
@@ -64,12 +65,12 @@ Weiterhin sei anzumerken, dass die spektralen Vorverarbeitungsschritte in jedem 
   \gls{MNIST} & \acs{QS}   & \acs{GCN} & 0.21 & \multicolumn{3}{c}{—}\\
   \gls{MNIST} & \acs{QS}   & \acs{EGCNN} & 0.63 & \multicolumn{3}{c}{—}\\
   \midrule
-  \gls{Cifar}-10 & \gls{SLIC} & \acs{SGCNN} & & & & \\
-  \gls{Cifar}-10 & \gls{SLIC} & \acs{GCN} & & 1.24 & 0.39 & 1.63 \\
-  \gls{Cifar}-10 & \gls{SLIC} & \acs{EGCNN} & & 0.44 & 2.00 & 2.44 \\
-  \gls{Cifar}-10 & \acs{QS}   & \acs{SGCNN} & & 0.43 & 1.95 & 2.38\\
-  \gls{Cifar}-10 & \acs{QS}   & \acs{GCN} & & 1.09 & 0.36 & 1.45\\
-  \gls{Cifar}-10 & \acs{QS}   & \acs{EGCNN} & & & & \\
+  \gls{Cifar}-10 & \gls{SLIC} & \acs{SGCNN} & — & & & \\
+  \gls{Cifar}-10 & \gls{SLIC} & \acs{GCN} &   — & 1.24 & 0.39 & 1.63 \\
+  \gls{Cifar}-10 & \gls{SLIC} & \acs{EGCNN} & — & 0.44 & 2.00 & 2.44 \\
+  \gls{Cifar}-10 & \acs{QS}   & \acs{SGCNN} & — & 0.43 & 1.95 & 2.38\\
+  \gls{Cifar}-10 & \acs{QS}   & \acs{GCN} &   — & 1.09 & 0.36 & 1.45\\
+  \gls{Cifar}-10 & \acs{QS}   & \acs{EGCNN} & — & & & \\
   \midrule
   \gls{Pascal} & \gls{SLIC} & \acs{EGCNN} & & \multicolumn{3}{c}{—}\\
   \gls{Pascal} & \acs{QS}   & \acs{EGCNN} & & \multicolumn{3}{c}{—}\\
@@ -79,21 +80,20 @@ Weiterhin sei anzumerken, dass die spektralen Vorverarbeitungsschritte in jedem 
   \gls{Pascal} & — & klassisch & & \multicolumn{3}{c}{—}\\
   \bottomrule
 \end{tabular}}
-\caption[bla]{bla}
+\caption[Vergleich der Trainingslaufzeiten]{Vergleich der Laufzeiten des Trainings eines Batches der Größe 64 für alle vorgestellten Netzarchitekturen.}
 \label{tab:train_laufzeit}
 \end{table}
+\gls{MNIST} \bzw{} \gls{Pascal} wurden aufgrund fehlender Augmentierung \bzw{} aufwändigen Berechnung vorab berechnnet, wohingegen die Grapheingabedaten für \gls{Cifar}-10 zur Laufzeit generiert wurden.
+Es zeigt sich, dass das Training auf Graphen im Allgemeinen deutlich langsamer im Vergleich zu ausgereiften Bildimplementierungen ist.
+Lediglich der Ansatz des räumlichen Lernens kann aufgrund seiner Verwendung der klassischen Faltungsoperation und bei einer Vorverarbeitung vor Beginn des Trainings schnelle Laufzeiten garantieren.
 
-% Je höher die Laufzeit des Lernens wird, umso geringer wird die Dauer der Vorverarbeitung.
+Zwischen den spektralen Faltungsansätzen zeigt sich das \acs{GCN} aufgrund seiner geringen Berechnungskomplexität als sehr effizient, leidet jedoch wie in Kapitel~\ref{ergebnisse} beschrieben an mangelnder Genauigkeit.
+Das \acs{EGCNN} weist unter allen Ansätzen die höchste Berechnungskomplexität auf.
+Dies ist im Vergleich mit dem \acs{SGCNN} insoweit zu erklären, dass dessen Netzarchitektur in der Regel tiefer ist und mehrere Faltungsschichten hintereinander verlangt, um an Informationen nicht direkt benachbarter Knoten zu gelangen.
+Das \acs{SGCNN} erfordert dies nicht, da dessen Filtergröße in direktem Zusammenhang zur Größe der Faltung steht.
 
-% Laufzeitvergleich Slic Quickshift
-% Laufzeitvergleich Normales CNN und die entsprechenden Graphimplementierungen
-% Laufzeitvergleich CPU GPU
-
-% Laufzeitvergleich Preprocessing / ohne (+ Verhältnis Faltung / Preprocessing)
-
-% \todo{laufzeitentabelle Lernen pro Batch}
-
-% langsamer als ausgereifte Bildimplementierungen
+Desweiteren zeigt sich in der Tabelle bei einer Vorverarbeitung während des Trainings, dass je höher die Laufzeit des eigentlichen Lernens ist, die Dauer der Vorverarbeitung umso geringer wird.
+So zeigt sich \bspw{} bei \gls{Cifar}-10, dass das \acs{EGCNN} und \acs{SGCNN} in der Regel lediglich $\approx$ 0.4s auf die Vorverarbeitung warten muss, wohingegen bei einer effizienteren Faltung wie beim \acs{GCN} das Training pro Batch $\approx$ 1.1s pausiert.
 
 \paragraph{Vergleich \bzgl{} vorhandener Implementierungen}
 \label{vergleich_laufzeit}
