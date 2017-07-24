@@ -36,12 +36,12 @@ Diese Werte werden dabei sequentiell über einer kleinen Eingabemenge $\mathcal{
 Die Größe der Menge $\mathcal{X}$ wird dabei als \emph{Batch-Size} betitelt~\cite{Nielsen}.
 Ein Beispiel einer Kostenfunktion ist die \emph{quadratische Kostenfunktion}, die über
 \begin{equation}
-  C\left(\mathcal{X}, \mathcal{W}, \mathcal{B}\right) \coloneqq \frac{1}{2\left|\mathcal{X}\right|} \sum_{\ve{x} \in \mathcal{X}} {\left\| \ve{y} - \ve{y}^{\prime} \right\|}_2^2
+  C\left(\mathcal{X}, \mathcal{W}, \mathcal{B}\right) \coloneqq \frac{1}{2\left|\mathcal{X}\right|} \sum_{\ve{x} \in \mathcal{X}} {\left\| \gls{y}\left(\ve{x}\right) - \gls{yground}\left(\ve{x}\right) \right\|}_2^2
   \label{eq:quadratische_kostenfunktion}
 \end{equation}
-definiert ist, wobei \ve{y} die Ausgabe des Netzes und $\ve{y}^{\prime}$ die erwartete Ausgabe \bzgl{} \ve{x} beschreibt~\cite{Nielsen}.
+definiert ist, wobei $\gls{y} \colon \gls{R}^{N^{\left(1\right)}} \to \gls{R}^{N^{\left(T\right)}}$ \bzw{} $\gls{yground} \colon \gls{R}^{N^{\left(1\right)}} \to \gls{R}^{N^{\left(T\right)}}$ die Ausgabe \bzw{} die erwartete Ausgabe des Netzes \bzgl{} \ve{x} beschreibt~\cite{Nielsen}.
 Die implizit durch das Netz gegebenen Werte $\mathcal{W}$ und $\mathcal{B}$ werden dabei oft weggelassen, sodass wir lediglich $C\left(\mathcal{X}\right)$ schreiben.
-$C$ zeichnet sich dabei als Kostenfunktion aus, denn sie ist für alle Eingaben stets positiv und wird umso kleiner, je ähnlicher \ve{y} und $\ve{y}^{\prime}$ werden.
+$C$ zeichnet sich dabei als Kostenfunktion aus, denn sie ist für alle Eingaben stets positiv und wird umso kleiner, je ähnlicher sich $\gls{y}\left(\ve{x}\right)$ und $\gls{yground}\left(\ve{x}\right)$ werden.
 Die Anpassung der Parameter des Netzes erfolgt über die sukzessive Eingabe einer Menge $\mathcal{X}$ in das Netz und der Berechnung eines negativen Gradienten in Richtung des steilsten Abstieges von $C$.
 Formal betrachtet entspricht der Gradient der Kostenfunktion $C$ dem Vektor der partiellen Ableitungen
 \begin{equation*}

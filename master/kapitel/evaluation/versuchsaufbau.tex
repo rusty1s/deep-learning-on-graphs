@@ -2,8 +2,8 @@
 \label{versuchsaufbau}
 
 Die Aufgabe einer \emph{Klassifizerung} ist die Zuordnung einer Eingabe $\ve{x}$ zu genau einem Element einer endlichen Menge fest definierter Klassen $\mathcal{Y} = {\left\{y_i\right\}}_{i=1}^Y$ mit $\left|\mathcal{Y}\right| = Y$.
-Das neuronale Netz approximiert \bzw{} lernt dabei eine Funktion, die eine beliebige Eingabe, \dhe{} ein Bild (oder in diesem Fall ein Graph), auf eine $Y$-dimensionale Ausgabe $\ve{y} \in \gls{R}^Y$ überführt, wobei $\ve{y}_i$ die Konfidenz des Auftretens der Klasse $y_i$ in der Eingabe beschreibt.
-Der Index des höchsten Werts des Ausgabevektors $\ve{y}$ gilt damit folglich als die Klasse der Eingabe $\ve{x}$, die diese am ehesten beschreibt.
+Das neuronale Netz approximiert \bzw{} lernt dabei eine Funktion \gls{y}, die eine beliebige Eingabe, \dhe{} ein Bild (oder in diesem Fall ein Graph), auf eine $Y$-dimensionale Ausgabe $\gls{y}\left(\ve{x}\right) \in \gls{R}^Y$ überführt, wobei ${\gls{y}\left(\ve{x}\right)}_i$ die Konfidenz des Auftretens der Klasse $y_i$ in der Eingabe beschreibt.
+Der Index des höchsten Werts des Ausgabevektors $\gls{y}\left(\ve{x}\right)$ gilt damit folglich als die Klasse der Eingabe $\ve{x}$, die diese am ehesten beschreibt.
 
 Die Bildklassifizerung ist, gerade im Kontext neuronaler Netze \bzw{} \glspl{CNN}, ein bereits weit erforschtes Gebiet.
 Es gibt eine Vielzahl an Datensätzen und Methodiken, die sich ausschließlich diesem Problem widmen.
@@ -111,7 +111,7 @@ Tabelle~\ref{tab:cifar_10_merkmale} zeigt die berechnete Wahl der Merkmale der S
 \begin{tabular}{lccccccccc}
   \toprule
   \gls{SLIC} & $\gls{M}_{00}$ & $\mathrm{box}_y$ & $\hat x$ & $\mathrm{dia}$ & $\mathrm{ext}$ & $\gls{hu}_1$ & $\gls{lambda}_1$ & $\mathrm{axis}_1$ & $\mathrm{axis}_2$\\
-  \midrule{}
+  \midrule
   Quickshift & $\mathrm{box}_y$ & $\mathrm{box}_x$ & $\hat x$ & $\hat y$ & $\mathrm{ecc}$ & $\mathrm{ext}$ & $\gls{lambda}_1$ & $\mathrm{axis}_1$ & $\mathrm{axis}_2$\\
   \bottomrule
 \end{tabular}
@@ -175,7 +175,7 @@ Auch für \gls{Pascal} bestimmt die Merkmalsselektion $9$ Merkmale aus den $38$ 
 \begin{tabular}{lccccccccc}
   \toprule
   \gls{SLIC} & $\mathrm{box}$ & $\mathrm{box}_y$ & $\mathrm{box}_x$ & $\hat x$ & $\hat y$ & $\mathrm{ecc}$ & $\mathrm{ext}$ & $\gls{hu}_1$ & $\mathrm{axis}_1$\\
-  \midrule{}
+  \midrule
   Quickshift & $\gls{M}_{00}$ & $\mathrm{box}_y$ & $\mathrm{box}_x$ & $\hat x$ & $\mathrm{dia}$ & $\gls{lambda}_1$ & $\gls{lambda}_2$ & $\mathrm{axis}_1$ & $\mathrm{axis}_2$\\
   \bottomrule
 \end{tabular}
@@ -208,7 +208,7 @@ Er kann jedoch insbesondere aufgrund der beliebigen Anzahl an Ziffern im Bild ni
 \subsection{Metriken}
 \label{metriken}
 
-Eine typische Aktivierungsfunktion für die Ausgabe $\ve{y} \in \gls{R}^Y$ eines neuronalen Netzes für ein multidimensionales Klassifizierungsproblem ist die \emph{Softmax Regression}
+Eine typische Aktivierungsfunktion für die Ausgabe $\ve{y} \coloneqq \gls{y}\left(\ve{x}\right) \in \gls{R}^Y$ eines neuronalen Netzes für ein multidimensionales Klassifizierungsproblem ist die \emph{Softmax Regression}
 \begin{equation*}
   \mathrm{softmax}\left(\ve{y}\right) \coloneqq \frac{\exp\left(\ve{y}\right)}{\sum_{i=1}^Y \exp\left(\ve{y}_i\right)},
 \end{equation*}
@@ -216,17 +216,17 @@ die einer Wahrscheinlichkeitsverteilung der Klassen $\mathcal{Y}$ für das Auftr
 Damit gilt insbesondere $\mathrm{softmax}\left(\ve{y}\right) \in {\left[0, 1\right]}^Y$ sowie $\sum_{i=1}^Y {\mathrm{softmax}\left(\ve{y}\right)}_i = 1$~\cite{Nielsen}.
 Aufgrund der Verwendung der Exponentialfunktion werden dabei die höchsten Werte in $\ve{y}$ hervorgehoben, wohingegen Werte, die signifikant unter dem Maximum liegen, abgeschwächt werden.
 
-Neben der in Kapitel~\ref{convolutional_neural_networks} vorgestellten quadratischen Kostenfunktion aus~\eqref{eq:quadratische_kostenfunktion} findet sich in neuronalen Netzen häufiger die Verwendung der Kreuzentropie als Kostenfunktion, welche dem Netz ermöglicht, schneller bessere Entscheidungen zu fällen (\vgl{}~\cite{Nielsen}).
+Neben der in Kapitel~\ref{convolutional_neural_networks} vorgestellten quadratischen Kostenfunktion aus~\eqref{eq:quadratische_kostenfunktion} findet sich in neuronalen Netzen häufiger die Verwendung der Kreuzentropie als Kostenfunktion, welche dem Netz ermöglicht, schneller bessere Entscheidungen zu treffen (\vgl{}~\cite{Nielsen}).
 Die \emph{Kreuzentropie} ist dabei über einer Eingabemenge $\mathcal{X}$ definiert als
 \begin{equation*}
-  H\left(\mathcal{X}\right) \coloneqq - \frac{1}{\left|\mathcal{X}\right|} \sum_{\ve{x} \in \mathcal{X}} \left\langle \ve{y}^{\prime}, \log\left(\ve{y}\right)\right\rangle,
+  H\left(\mathcal{X}\right) \coloneqq - \frac{1}{\left|\mathcal{X}\right|} \sum_{\ve{x} \in \mathcal{X}} \left\langle \gls{yground}\left(\ve{x}\right), \log\left(\gls{y}\left(\ve{x}\right)\right)\right\rangle,
 \end{equation*}
-wobei $\ve{y}^{\prime} \in {\left\{ 0, 1 \right\}}^Y$ die \emph{Ground-Truth} der Eingabe $\ve{x} \in \mathcal{X}$ als \emph{One-Hot}-Kodierung beschreibt~\cite{tensorflow, Nielsen}.
-$H\left(\mathcal{X}\right)$ ist aufgrund der Intervalleinschränkung der jeweiligen Ausgaben \ve{y} von $\ve{x} \in \mathcal{X}$ mit Hilfe der Softmax Regression stets positiv und wird umso kleiner, je ähnlicher sich $\ve{y}^{\prime}$ und dessen Ground-Truth $\ve{y}$ werden~\cite{Nielsen}.
+wobei $\gls{yground}\left(\ve{x}\right) \in {\left\{ 0, 1 \right\}}^Y$ die \emph{Ground-Truth} der Eingabe $\ve{x} \in \mathcal{X}$ als \emph{One-Hot}-Kodierung beschreibt~\cite{tensorflow, Nielsen}.
+$H\left(\mathcal{X}\right)$ ist aufgrund der Intervalleinschränkung der jeweiligen Ausgaben $\gls{y}\left(\ve{x}\right)$ von $\ve{x} \in \mathcal{X}$ mit Hilfe der Softmax Regression stets positiv und wird umso kleiner, je ähnlicher sich $\gls{y}\left(\ve{x}\right)$ und dessen Ground-Truth $\gls{yground}\left(\ve{x}\right)$ werden~\cite{Nielsen}.
 
 Zur Evaluation der Ergebnisse einer Klassifizierung wird neben der Kostenfunktion die \emph{Genauigkeit} (\engl{} \emph{Accuracy}) über einer Eingabemenge $\mathcal{X}$ als
 \begin{equation*}
-  \mathrm{accuracy}\left(\mathcal{X}\right) \coloneqq \frac{1}{\left|\mathcal{X}\right|}\sum_{\ve{x} \in \mathcal{X}} \max \left( - \left| \mathrm{argmax}\left(\ve{y}\right) - \mathrm{argmax}\left(\ve{y}^{\prime}\right) \right| + 1, 0 \right)
+  \mathrm{accuracy}\left(\mathcal{X}\right) \coloneqq \frac{1}{\left|\mathcal{X}\right|}\sum_{\ve{x} \in \mathcal{X}} \max \left( - \left| \mathrm{argmax}\left(\gls{y}\left(\ve{x}\right)\right) - \mathrm{argmax}\left(\gls{yground}\left(\ve{x}\right)\right) \right| + 1, 0 \right)
 \end{equation*}
 definiert, wobei $\mathrm{argmax}\left(\ve{y}\right) = n$ genau dann, wenn $\ve{y}_n \geq \ve{y}_m$ für alle $1 \leq m \leq Y$.
 Sie beschreibt den Anteil korrekt klassifizierter Eingabedaten aus der jeweiligen Gesamtmenge der Trainings-, Validierungs- oder Testdaten $\mathcal{X}$ und ist daher ein geeignetes Mittel, die Qualität eines neuronalen Klassifizierungsnetzes zu bestimmen~\cite{Nielsen}.
