@@ -4,7 +4,7 @@
 Neuronale Netze \bzw{} Deep-Learning gehören zu den derzeit besten und beliebtesten Lösungen zu Problemen der Bild- oder Spracherkennung~\cite{Nielsen}.
 Dabei lernt \bzw{} approximiert das Netz durch eine Anpassung ihrer Parameter über einer Menge an Trainingsbeispielen eine Funktion, sodass die Trainingsbeispiele auf ihre gewünschte Ausgabe abbilden und auch für unbekannte Eingaben zuverlässige Vorhersagen getroffen werden können.
 Neuronale Netze sind daher größtenteils in dem Bereich des \emph{überwachten maschinellen Lernens} anzuordnen.
-Ein Netz, welches lediglich die Trainingsmenge lernt, aber über der Trainingsmenge hinausgehende Daten nicht beschreiben kann, wird als ein \emph{überangepasstes} (\engl{} \emph{overfitted}) Netz bezeichnet~\cite{Nielsen}.
+Ein Netz, welches lediglich die Trainingsmenge lernt, aber über der Trainingsmenge hinausgehende Eingaben nicht gut beschreiben kann, wird als ein \emph{überangepasstes} (\engl{} \emph{overfitted}) Netz bezeichnet~\cite{Nielsen}.
 
 Ein \emph{neuronales Netz} besteht aus einer beliebigen Anzahl miteinander verbundener \emph{Neuronen}.
 Neuronen sind üblicherweise mit anderen Neuronen in sequentiellen \emph{Schichten} \bzw{} \emph{Ebenen} angeordnet.
@@ -81,7 +81,7 @@ Ein Bild $\gls{B} \in \gls{R}^{H \times W \times 3}$ mit drei Farbkanälen besch
 
 Formal lässt sich damit die \emph{zweidimensionale Faltungsoperation}
 \begin{equation*}
-  \gls{conv2d} \gls{R}^{\colon H \times W \times M_{\mathrm{in}}} \to \gls{R}^{H \times W \times M_{\mathrm{out}}},
+  \gls{conv2d} \colon \gls{R}^{H \times W \times M_{\mathrm{in}}} \to \gls{R}^{H \times W \times M_{\mathrm{out}}},
 \end{equation*}
 im Folgenden auch oft als \emph{klassische Faltungsoperation} betitelt, als
 \begin{equation*}

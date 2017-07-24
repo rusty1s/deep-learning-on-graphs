@@ -24,7 +24,7 @@ Weiterhin wird in diesem Unterkapitel abhängig von dem gewählten Datensatz und
 Der \emph{\gls{MNIST}} Datensatz enthält eine große Menge eindeutig klassifizierter handgeschriebener Zahlen von $0$ bis $9$, welcher daher zum Lernen einer Schrift- \bzw{} Zahlenerkennung genutzt werden kann~\cite{mnist}.
 Er besteht aus $55000$ Trainingsbildern, $5000$ Validierungsbildern sowie $10000$ Testbildern.
 Die Bilder des Datensatzes sind einheitlich auf die Größe $28 \times 28$ skaliert und besitzen lediglich einen Farbkanal mit Grauwerten, welcher angibt, ob ein Pixel des Bildes zu einer Zahl (weiß), zu deren Rand oder zum Hintergrund (schwarz) gehört~\cite{mnist}.
-Aufgrund seiner kleinen Datengröße und leichten Handhabung gilt er als die ideale Einführung in Prinzipien des maschinellen Lernens und zeichnet sich damit als ideal für die Verifizierung eines neuen Ansatzes \bzgl{} neuronaler Netze aus.
+Aufgrund seiner kleinen Datengröße und leichten Handhabung gilt er als die ideale Einführung in Prinzipien des maschinellen Lernens und zeichnet sich damit insbesondere für die Verifizierung eines neuen Ansatzes \bzgl{} neuronaler Netze aus.
 Insbesondere kann der Datensatz während des gesamten Trainings im Hauptspeicher gehalten werden, was den Aufwand \bzgl{} der Verarbeitung und Eingabe der Daten auf ein Minimum reduziert.
 
 Die ermittelten Parameter \bzgl{} der beiden benutzten Superpixelalgorithmen sind in Tabelle~\ref{tab:mnist} gegeben.
@@ -131,7 +131,7 @@ Der \emph{\gls{Pascal}} Datensatz besteht aus $17126$ farbigen Bildern beliebige
 Zu jedem Bild stehen insbesondere Informationen zu den enhaltenden Objekten und deren Hüllkörpern zur Verfügung~\cite{pascal_voc}.
 Ein Bild besitzt dabei minimal ein Objekt der $20$ annotierten Objektklassen.
 Gleiche oder unterschiedliche Objektklassen können mehrfach in einem Bild existieren.
-Die enthaltenden Objekte der Bilder sind im Einzelnen~\cite{pascal_voc}:
+Die enthaltenen Objekte der Bilder sind im Einzelnen~\cite{pascal_voc}:
 \begin{itemize}
   \item Person
   \item Vogel, Katze, Kuh, Hund, Pferd, Schaf
@@ -213,7 +213,7 @@ Eine typische Aktivierungsfunktion für die Ausgabe $\ve{y} \in \gls{R}^Y$ eines
   \mathrm{softmax}\left(\ve{y}\right) \coloneqq \frac{\exp\left(\ve{y}\right)}{\sum_{i=1}^Y \exp\left(\ve{y}_i\right)},
 \end{equation*}
 die einer Wahrscheinlichkeitsverteilung der Klassen $\mathcal{Y}$ für das Auftreten dieser in der Eingabe $\ve{x}$ entspricht~\cite{Nielsen, tensorflow}.
-Damit gilt insbesondere $\mathrm{softmax}\left(\ve{y}\right) \in {\left[0, 1\right]}^Y$ sowie $\sum_{i=1}^Y = {\mathrm{softmax}\left(\ve{y}\right)}_i = 1$~\cite{Nielsen}.
+Damit gilt insbesondere $\mathrm{softmax}\left(\ve{y}\right) \in {\left[0, 1\right]}^Y$ sowie $\sum_{i=1}^Y {\mathrm{softmax}\left(\ve{y}\right)}_i = 1$~\cite{Nielsen}.
 Aufgrund der Verwendung der Exponentialfunktion werden dabei die höchsten Werte in $\ve{y}$ hervorgehoben, wohingegen Werte, die signifikant unter dem Maximum liegen, abgeschwächt werden.
 
 Neben der in Kapitel~\ref{convolutional_neural_networks} vorgestellten quadratischen Kostenfunktion aus~\eqref{eq:quadratische_kostenfunktion} findet sich in neuronalen Netzen häufiger die Verwendung der Kreuzentropie als Kostenfunktion, welche dem Netz ermöglicht, schneller bessere Entscheidungen zu fällen (\vgl{}~\cite{Nielsen}).
