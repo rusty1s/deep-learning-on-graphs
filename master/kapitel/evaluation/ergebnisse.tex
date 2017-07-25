@@ -64,7 +64,7 @@ Die in Tabelle~\ref{tab:train_mnist} vorgestellten Netzarchitekturen zeigen die 
   \acs{EGCNN} & 9 & C64-C64-P4-C128-C128-P4-Avg & 97.405 & 98.025 \\
   \bottomrule
 \end{tabular}
-\caption[Testgenauigkeiten der \gls{MNIST} Superpixelrepräsentationen]{Testgenauigkeiten eines Trainings auf dem \gls{MNIST} Datensatz nach 17 Epochen, dessen Bilder zuvor durch einen Superpixelalgorithmus in irreguläre Graphrepräsentationen gebracht werden.}
+\caption[Testgenauigkeiten der \gls{MNIST} Superpixelrepräsentationen]{Testgenauigkeiten eines Trainings auf dem \gls{MNIST} Datensatz nach 17 Epochen, dessen Bilder zuvor durch die Superpixelalgorithmen \gls{SLIC} und Quickshift in irreguläre Graphrepräsentationen gebracht werden.}
 \label{tab:train_mnist}
 \end{table}
 Für \acs{SGCNN} wurde dabei aufgrund der reduzierten Datenmenge die Filtergröße im Vergleich zum Vortest gedrosselt und besitzt im Vergleich zu den \acs{GCN}- und \acs{EGCNN}-Netzarchitekturen nicht mehrere, aufeinanderfolgende Faltungsschichten.
@@ -100,7 +100,7 @@ Tabelle~\ref{tab:train_cifar_10} fasst die Netzarchitekturen der einzelnen Ansä
   klassisch & $3 \times 3$ & C64-C64-P4-C128-P4-C256-P4-FC256-FC128 & \multicolumn{2}{c}{82.061} \\
   \bottomrule
 \end{tabular}}
-\caption[Testgenauigkeiten der \gls{Cifar}-10 Superpixelrepräsentationen]{Testgenauigkeiten eines Trainings auf den durch \gls{SLIC} und Quickshift generierten Graphrepräsentationen des \gls{Cifar}-10 Datensatz nach 80 Epochen im Vergleich zu einer ähnlichen klassischen Netzarchitektur auf den Bildrohdaten.}
+\caption[Testgenauigkeiten der \gls{Cifar}-10 Superpixelrepräsentationen]{Testgenauigkeiten eines Trainings auf den durch \gls{SLIC} und Quickshift zur Laufzeit generierten Graphrepräsentationen des \gls{Cifar}-10 Datensatz nach 80 Epochen im Vergleich zu einer ähnlichen klassischen Netzarchitektur auf den Bildrohdaten.}
 \label{tab:train_cifar_10}
 \end{table}
 Alle spektralen Graphansätze auf den aus \gls{SLIC} und Quickshift generierten Graphrepräsentationen können nicht mit einer ähnlichen klassischen Netzarchitektur auf den Bildrohdaten konkurrieren.
@@ -138,9 +138,9 @@ Tabelle~\ref{tab:train_pascal} stellt die Ergebnisse des SqueezeNets mit den Erg
   klassisch & — & SqueezeNet 1.1 & \multicolumn{2}{c}{54.731} \\
   \bottomrule
 \end{tabular}}
-\caption[Testgenauigkeiten der \gls{Pascal} Superpixelrepräsentationen]{50k Steps}
+\caption[Testgenauigkeiten der \gls{Pascal} Superpixelrepräsentationen]{Testgenauigkeiten eines Trainings auf den durch \gls{SLIC} und Quickshift vorab generierten Graphrepräsentationen des \gls{Pascal} Datensatz nach 120 Epochen im Vergleich zu der Verwendung des SqueezeNets in Version 1.1 auf den Bildrohdaten~\cite{squeeze}.}
 \label{tab:train_pascal}
 \end{table}
 Es zeigt sich, dass auf \gls{Pascal} die Graphansätze durchaus mit klassischen Lösungen auf diesem Gebiet mithalten können.
 Sie beweisen sich als lediglich marginal schwächer gegenüber der Benutzung einer ausgereiften Architektur wie dem SqueezeNet.
-Die allgemein relativ schlechten Ergebnisse im Vergleich zu \gls{MNIST} und \gls{Cifar}-10 sind damit größtenteils dem Datensatz geschuldet, da dieser eine weitaus geringere Trainingsmenge besitzt, keine einander ausschließenden Bildklassen besitzt und seine Verwendung eher in der Lösung zu Problemen wie der Objekterkennung oder Segmentierung sieht.
+Die allgemein relativ schlechten Ergebnisse im Vergleich zu \gls{MNIST} und \gls{Cifar}-10 sind damit größtenteils dem Datensatz geschuldet, da dieser eine weitaus geringere Trainingsmenge sowie keine einander ausschließenden Bildklassen besitzt und seine Verwendung eher in der Lösung zu Problemen wie der Objekterkennung oder Bildsegmentierung sieht.
