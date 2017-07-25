@@ -39,7 +39,7 @@ Die Spalte \ma{W} kennzeichnet die benutzten Filtergrößen der einzelnen Faltun
 \end{table}
 Die Netzarchitekturen sind dabei an der von \texttt{tensorflow} vorgeschlagenen Architektur orientiert~\cite{tensorflow}.
 Alle Netze wurden einheitlich mit einer Lernrate von $0.001$ trainiert.
-Es wurde auf die für \gls{MNIST} eher untypische Augmentierung der Eingabedaten, die L2-Regularisierung sowie auf die Verminderung der Lernrate in Abhängigkeit zur Trainingsdauer verzichet~\cite{tensorflow}.
+Es wurde auf die für \gls{MNIST} eher untypische Augmentierung der Eingabedaten, die L2-Regularisierung sowie auf die Verminderung der Lernrate in Abhängigkeit zur Trainingsdauer ver\-zich\-tet~\cite{tensorflow}.
 Es findet sich jedoch die Anwendung eines Dropouts von $0.5$ vor der Ausgabeschicht.
 \citeauthor{Defferrard} benutzen zur Validierung des \acs{SGCNN}s eine ähnliche Netzarchitektur auf \gls{MNIST} und schlagen dazu eine Filtergröße von $25$ vor, sodass die Anzahl der Parameter mit der Anzahl der klassischen Faltung über ein $5 \times 5$ Fenster korrespondiert~\cite{Defferrard}.
 Diese Faltung lässt sich im Kontext des spektralen Faltungsoperators auf einem Gitter der Größe $28 \times 28$ aber kaum noch als lokale Faltung verstehen, denn sie lässt Knoten in die Berechnung mit einfließen, die 25 Kanten weit vom Ursprungsknoten entfernt liegen, und betrachtet folglich außer bei Randknoten das globale Bild (\vgl{} Kapitel~\ref{spektraler_faltungsoperator}).
@@ -67,8 +67,9 @@ Die in Tabelle~\ref{tab:train_mnist} vorgestellten Netzarchitekturen zeigen die 
 \caption[Testgenauigkeiten der \gls{MNIST} Superpixelrepräsentationen]{Testgenauigkeiten eines Trainings auf dem \gls{MNIST} Datensatz nach 17 Epochen, dessen Bilder zuvor durch einen Superpixelalgorithmus in irreguläre Graphrepräsentationen gebracht werden.}
 \label{tab:train_mnist}
 \end{table}
-Für \acs{SGCNN} wurde dabei aufgrund der kleineren Eingabemenge die Filtergröße im Vergleich zum Vortest gedrosselt und besitzt im Vergleich zu den \acs{GCN}- und \acs{EGCNN}-Netzarchitekturen nicht mehrere, aufeinanderfolgende Faltungsschichten.
-Es zeigt sich jedoch, dass alle Netzansätze auf irregulären Daten garnicht oder nur knapp an die Ergebnisse auf regulären Gittereingaben heranreichen.
+Für \acs{SGCNN} wurde dabei aufgrund der reduzierten Datenmenge die Filtergröße im Vergleich zum Vortest gedrosselt und besitzt im Vergleich zu den \acs{GCN}- und \acs{EGCNN}-Netzarchitekturen nicht mehrere, aufeinanderfolgende Faltungsschichten.
+
+Es zeigt sich, dass alle Netzansätze auf irregulären Daten garnicht oder nur knapp an die Ergebnisse auf regulären Gittereingaben heranreichen.
 Insbesondere offenbart der räumliche Faltungsansatz hier seine Schwächen, denn obwohl die Trainingsmenge erfolgreich gelernt wird, so lassen sich unbekannte Eingaben aufgrund der Anordnung zu eindimensionalen Knoten- sowie Nachbarschaftsmengen für irreguläre Graphen nur schwer bis garnicht generalisieren.
 Für alle Ansätze zeigt sich desweiteren die Quickshift-Segmentierung aufgrund ihrer überlegenden Segmentierung auf den Bildern des \gls{MNIST} Datensatz als die bessere Wahl (\vgl{} Abbildung~\ref{fig:mnist}).
 Insbesondere erreicht der entwickelte spektrale Faltungsoperator über B-Spline-Kurven (\acs{EGCNN}) auch hier die eindeutig besten Resultate.
@@ -102,14 +103,14 @@ Tabelle~\ref{tab:train_cifar_10} fasst die Netzarchitekturen der einzelnen Ansä
 \caption[Testgenauigkeiten der \gls{Cifar}-10 Superpixelrepräsentationen]{Testgenauigkeiten eines Trainings auf den durch \gls{SLIC} und Quickshift generierten Graphrepräsentationen des \gls{Cifar}-10 Datensatz nach 80 Epochen im Vergleich zu einer ähnlichen klassischen Netzarchitektur auf den Bildrohdaten.}
 \label{tab:train_cifar_10}
 \end{table}
-Alle spektralen Graphansätze auf den aus \gls{SLIC} und Quickshift generierten Graphrepräsentationen können nicht mit der ähnlichen klassischen Netzarchitektur auf den Bildrohdaten konkurrieren.
+Alle spektralen Graphansätze auf den aus \gls{SLIC} und Quickshift generierten Graphrepräsentationen können nicht mit einer ähnlichen klassischen Netzarchitektur auf den Bildrohdaten konkurrieren.
 Wohingegen jedoch die vorhandenen Ansätze \acs{SGCNN} und \acs{GCN} eine maximale Genauigkeit von rund 67\% erreichen, zeigt sich auch hier eine signfikante Verbesserung durch den neu entwickelten spektralen Faltungsoperator \acs{EGCNN}.
-Er erreicht mit $75\%$ mittels der Quickshift-Segmentierung das eindeutig beste Resultat.
+Er erreicht mit $75\%$ mittels der Quickshift-Segmentierung das beste Resultat.
 Hochoptimierte Ansätze, bei denen noch weitaus mehr Augmentierungsschritte zum Einsatz kommen, erreichen auf \gls{Cifar}-10 jedoch bereits mehr als $90\%$ und so ist nicht auszuschließen, dass auch für \acs{EGCNN} weiterhin Potential nach oben besteht~\cite{fracmaxpool}.
 
 Abbildung~\ref{fig:cifar_10_train} illustriert den Genauigkeitsverlauf des \gls{Cifar}-10 Trainings- und Validierungsdatensatzes während des Trainings in Abhängigkeit der vergangenen Epochen.
 \input{tikz/cifar_10_train}
-Wohingegen der klassische Ansatz recht schnell nach ungefähr 14 Epochen seine Maximalgenauigkeit erreicht und den Rest des Trainings damit verbringt, seine Trainingsdaten \enquote{überanzupassen}, lernen die Graphansätze weitaus langsamer und kontinuierlicher.
+Wohingegen der klassische Ansatz recht schnell nach ungefähr 14 Epochen seine Maximalgenauigkeit erreicht und den Rest des Trainings damit verbringt, seine Trainingsdaten \enquote{überanzupassen}, ist zu beobachten, dass die Graphansätze weitaus langsamer und kontinuierlicher lernen.
 
 \paragraph{\gls{Pascal}}
 
