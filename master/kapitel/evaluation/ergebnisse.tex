@@ -122,7 +122,7 @@ Wohingegen der klassische Ansatz recht schnell nach ungefähr 14 Epochen seine M
   \cmidrule{4-5}
    & & & \acs{SLIC} & \acs{QS}\\
   \midrule
-  \acs{EGCNN} & 9 & C64-C64-P2-C128-C128-P2-C256-P2-C512-Avg-FC256-FC128 &\\
+  \acs{EGCNN} & 9 & C64-P2-C128-P2-C256-P2-C512-Avg-FC256-FC128 &\\
   \midrule
   klassisch & — & SqueezeNet 1.1 & \multicolumn{2}{c}{54.731} \\
   \bottomrule
@@ -130,6 +130,8 @@ Wohingegen der klassische Ansatz recht schnell nach ungefähr 14 Epochen seine M
 \caption[Testgenauigkeiten der \gls{Pascal} Superpixelrepräsentationen]{50k Steps}
 \label{tab:train_pascal}
 \end{table}
+
+keine Faltungsschichten hintereinander, da eine Faltung bei relativ großen Superpixeln bereits einen großen Bildbereich abdeckt
 
 PascalVOC Squeeze einheitliche Größe von $224 \times 224$.
 Squeeze vorstellen
