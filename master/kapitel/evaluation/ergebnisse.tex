@@ -114,6 +114,16 @@ Wohingegen der klassische Ansatz recht schnell nach ungefähr 14 Epochen seine M
 
 \paragraph{\gls{Pascal}}
 
+Für die Evaluierung der Ergebnisse auf dem \gls{Pascal} Datensatz wurde zum Vergleich die SqueezeNet-Architektur in Version 1.1 auf den Bildrohdaten zu Rate gezogen (\vgl{}~\cite{squeeze}).
+Die Architektur des SqueezeNets gilt aufgrund bewährter Ergebnisse auf dem ImageNet Datensatz bei einer gleichzeitig extrem geringen Anzahl zu trainierender Parameter als \enquote{State-of-the-Art} in der Klassifizerung von Bildern mit recht hoher Auflösung~\cite{squeeze}.
+Zur Verwendung wurden die Bilder dafür einheitlich auf die Größe $224 \times 224$ skaliert und mit schwarzen Bereichen an den horizontalen oder vertikalen Rändern je nach Ursprungsauflösung befüllt.
+Für das Lernen auf Graphen ist diese Sklarierung der Bildeingabedaten nicht von Nöten.
+Für die Netzarchitektur wurde dabei insbesondere im Vergleich zu vorherigen Testläufen auf die Verwendung mehrmaliger hintereinanderfolgender Faltungsschichten verzichtet.
+Die Superpixel, die aus den Bildern von \gls{Pascal} generiert werden, sind bereits ausreichend groß und eine einzige Faltung auf diesen deckt bereits einen großen Bereich des Bildes ab.
+Dabei findet das Training ausschließlich aus Laufzeit technischen Gründen auf vorverarbeiten Daten statt und erlaubt damit lediglich eine Augmentierung der Graphen zur Laufzeit (\vgl{} Kapitel~\ref{laufzeitanalyse}).
+Es finden sich weiterhin Anwendungen der Dropout-Technik und der L2-Regularisierung in den vollverbundenen Schichten bei einer Lernrate von 0.0001 für das SqueezeNet und 0.001 bei den Graphansätzen.
+
+Tabelle~\ref{tab:train_pascal} stellt die Ergebnisse des SqueezeNets mit den Ergebnissen auf irregulären Dateneingaben bei Benutzung des \acs{EGCNN}s gegenüber.
 \begin{table}[t]
 \centering
 \resizebox{\textwidth}{!}{%
@@ -131,9 +141,6 @@ Wohingegen der klassische Ansatz recht schnell nach ungefähr 14 Epochen seine M
 \caption[Testgenauigkeiten der \gls{Pascal} Superpixelrepräsentationen]{50k Steps}
 \label{tab:train_pascal}
 \end{table}
-
-keine Faltungsschichten hintereinander, da eine Faltung bei relativ großen Superpixeln bereits einen großen Bildbereich abdeckt
-
-PascalVOC Squeeze einheitliche Größe von $224 \times 224$.
-Squeeze vorstellen
-insbesondere nur Vorverarbeitung vorm Training (aufgrund Laufzeiten)
+Es zeigt sich, dass auf \gls{Pascal} die Graphansätze durchaus mit klassischen Lösungen auf diesem Gebiet mithalten können.
+Sie beweisen sich als lediglich marginal schwächer gegenüber der Benutzung einer ausgereiften Architektur wie dem SqueezeNet.
+Die allgemein relativ schlechten Ergebnisse im Vergleich zu \gls{MNIST} und \gls{Cifar}-10 sind damit größtenteils dem Datensatz geschuldet, da dieser eine weitaus geringere Trainingsmenge besitzt, keine einander ausschließenden Bildklassen besitzt und seine Verwendung eher in der Lösung zu Problemen wie der Objekterkennung oder Segmentierung sieht.
