@@ -83,7 +83,7 @@ Tabelle~\ref{tab:train_laufzeit} zeigt die im Durschnitt ermittelten Laufzeiten 
 \caption[Vergleich der Trainingslaufzeiten]{Vergleich der Laufzeiten des Trainings eines Batches der Größe 64 für alle vorgestellten Netzarchitekturen.}
 \label{tab:train_laufzeit}
 \end{table}
-\gls{MNIST} \bzw{} \gls{Pascal} wurden aufgrund fehlender Augmentierung \bzw{} aufwändigen Berechnung vorab berechnnet, wohingegen die Grapheingabedaten für \gls{Cifar}-10 zur Laufzeit generiert wurden.
+Die Eingabedaten wurden für \gls{MNIST} \bzw{} \gls{Pascal} aufgrund nicht benötigter Augmentierung \bzw{} der aufwändigen Berechnungen vorab gespeichert, wohingegen die Grapheingabedaten für \gls{Cifar}-10 zur Laufzeit generiert wurden.
 Es zeigt sich, dass das Training auf Graphen im Allgemeinen deutlich langsamer als im Vergleich zu ausgereiften Bildimplementierungen ist.
 Lediglich der Ansatz des räumlichen Lernens kann aufgrund seiner Verwendung der klassischen Faltungsoperation und bei einer Vorverarbeitung vor Beginn des Trainings schnelle Laufzeiten garantieren.
 
