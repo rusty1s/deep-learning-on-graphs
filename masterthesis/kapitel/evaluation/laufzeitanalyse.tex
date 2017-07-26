@@ -3,12 +3,12 @@
 
 Die Vorverarbeitung der Eingabedaten sowie das Training der neuronalen Netze erfolgte auf einem 3.5 GHz 6-Core Intel Xeon E5, 16GB DDR3 Arbeitsspeicher und einer Solid-State-Drive.
 Die in dieser Arbeit präsentierten Laufzeiten wurden ausschließlich über Berechnungen auf dem Prozessor gewonnen.
-Bei der Verwendung einer Grafikkarte stellen sich dabei Laufzeitgewinne in Bereichen, die auf die diese ausgelagert werden können, von $300 - 400 \%$ ein.
+Bei der Verwendung einer Grafikkarte stellen sich dabei Laufzeitgewinne von $300 - 400 \%$ in Bereichen ein, die auf die diese ausgelagert werden können.
 
 \paragraph{Vorverarbeitung}
 
-Die Vorverarbeitung der Eingabedaten in eine geeignete Graphrepräsentation, das Berechnen der Merkmalsmatrix sowie zusätzliche Aufwände wie die Vergröberung des Graphen oder die Bestimmung der Receptive-Fields seiner Knoten, welche für die Eingabe in ein neuronales Netz notwendig sind, trägt einen entscheidenen Anteil an der Ausführungsgeschwindigkeit des Trainings und der Auswertung eines neuronalen Netzes bei.
-Graphen sollen dabei bestmöglichst zur Laufzeit eines Trainings generiert werden können und möglichst die Ausführung des eigentlichen Trainings garnicht bis kaum beeinflussen.
+Die Vorverarbeitung der Eingabedaten in eine geeignete Graph\-re\-prä\-sen\-ta\-tion, das Berechnen der Merkmalsmatrix sowie zusätzliche Aufwände, wie die Vergröberung des Graphen oder die Bestimmung der Receptive-Fields seiner Knoten, welche für die Eingabe in ein neuronales Netz notwendig sind, trägt einen entscheidenen Anteil an der Ausführungsgeschwindigkeit des Trainings und der Auswertung eines neuronalen Netzes bei.
+Graphen sollen dabei bestmöglichst zur Laufzeit eines Trainings generiert werden können und möglichst die Ausführung des eigentlichen Trainings gar nicht bis kaum beeinflussen.
 
 Abbildung~\ref{fig:laufzeit_raeumlich_pipeline} illustriert die relative Laufzeitverteilung der einzelnen räumlichen Vorverarbeitungsschritte \bzgl{} aller Datensätze und Superpixelalgorithmen.
 \input{tikz/laufzeit_raeumlich_pipeline}
@@ -83,23 +83,23 @@ Tabelle~\ref{tab:train_laufzeit} zeigt die im Durschnitt ermittelten Laufzeiten 
 \caption[Vergleich der Trainingslaufzeiten]{Vergleich der Laufzeiten des Trainings eines Batches der Größe 64 für alle vorgestellten Netzarchitekturen.}
 \label{tab:train_laufzeit}
 \end{table}
-Die Eingabedaten wurden für \gls{MNIST} \bzw{} \gls{Pascal} aufgrund nicht benötigter Augmentierung \bzw{} der aufwändigen Berechnungen vorab gespeichert, wohingegen die Grapheingabedaten für \gls{Cifar}-10 zur Laufzeit generiert wurden.
+Die Eingabedaten wurden für \gls{MNIST} \bzw{} \gls{Pascal} aufgrund nicht benötigter Augmentierung \bzw{} der aufwändigen Berechnungen vorab gespeichert, wohingegen die Graph\-ein\-ga\-be\-da\-ten für \gls{Cifar}-10 zur Laufzeit generiert werden.
 Es zeigt sich, dass das Training auf Graphen je nach Komplexität der Faltung im Allgemeinen deutlich langsamer als im Vergleich zu ausgereiften Bildimplementierungen ist.
 Lediglich der Ansatz des räumlichen Lernens kann aufgrund seiner Verwendung der klassischen Faltungsoperation und bei einer Vorverarbeitung vor Beginn des Trainings schnellere Laufzeiten garantieren.
 
-Zwischen den spektralen Faltungsansätzen zeigt sich das \acs{GCN} aufgrund seiner geringen Berechnungskomplexität als sehr effizient, leidet jedoch wie in Kapitel~\ref{ergebnisse} beschrieben an mangelnder Genauigkeit.
+Zwischen den spektralen Faltungsansätzen zeigt sich das \acs{GCN} aufgrund seiner geringen Berechnungskomplexität als sehr effizient, leidet jedoch, wie in Kapitel~\ref{ergebnisse} beschrieben, an mangelnder Genauigkeit.
 Das \acs{EGCNN} weist unter allen Ansätzen die höchste Berechnungskomplexität auf.
 Dies ist im Vergleich mit dem \acs{SGCNN} insoweit zu erklären, dass dessen Netzarchitektur in der Regel tiefer ist und mehrere Faltungsschichten hintereinander verlangt, um an Informationen nicht direkt benachbarter Knoten zu gelangen.
 Das \acs{SGCNN} erfordert dies nicht, da dessen Filtergröße in direktem Zusammenhang zur Größe der Faltung steht.
 
 Es ist weiter bei einer Vorverarbeitung während des Trainings zu beobachten, dass die Aufwände für die Vorverarbeitung umso höher werden, umso schneller die eigentliche Lernprozedur vonstatten geht.
-So zeigt sich \bspw{} bei \gls{Cifar}-10, dass das \acs{EGCNN} und \acs{SGCNN} in der Regel lediglich $\approx$ 0.4s auf die Vorverarbeitung warten müssen, wohingegen bei der effizienteren Faltung des \acs{GCN}s das Training pro Batch $\approx$ 1.1s pausiert.
+So zeigt sich \bspw{} bei \gls{Cifar}-10, dass die Ansätze \acs{EGCNN} und \acs{SGCNN} in der Regel lediglich $\approx$ 0.4s auf die Vorverarbeitung warten müssen, wohingegen bei der effizienteren Faltung des \acs{GCN}s das Training pro Batch $\approx$ 1.1s pausiert.
 Damit wird trotz Multithreading die Vorverarbeitung zur Laufzeit zum Flaschenhals des Trainings.
 
 \paragraph{Vergleich \bzgl{} vorhandener Implementierungen}
 \label{vergleich_laufzeit}
 
-Obwohl die Vorverarbeitung das Training eines neuronalen Netzes zur Laufzeit behindern kann, so konnten bereits viele Vorverarbeitungsschritte im Laufe dieser Arbeit effizienter als ihre vorhandenen, quelloffenenen Implementierungen gestaltet werden.
+Obwohl die Vorverarbeitung zur Laufzeit das Training eines neuronalen Netzes behindern kann, so konnten bereits viele Vorverarbeitungsschritte im Laufe dieser Arbeit effizienter als ihre vorhandenen, quelloffenenen Implementierungen gestaltet werden.
 So besitzt \bspw{} \texttt{skimage} eine Implementierung zur Adjazenzbestimmung einer Segmentierungsmaske und zur Extraktion der meisten in dieser Arbeit vorgestellten Merkmale.
 Beide Verfahren konnten mit deutlichem Laufzeitgewinnn optimiert werden.
 Der frei zugängliche Quelltext des spektralen Faltungsoperators (\acs{SGCNN}) besitzt ebenso eine Implementierung zur Vergröberung eines Graphen.
