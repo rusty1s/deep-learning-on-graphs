@@ -65,17 +65,17 @@ Tabelle~\ref{tab:train_laufzeit} zeigt die im Durschnitt ermittelten Laufzeiten 
   \gls{MNIST} & \acs{QS}   & \acs{GCN}   & 0.21 & 0.87 & 0.21 & 1.08\\
   \gls{MNIST} & \acs{QS}   & \acs{EGCNN} & 0.63 & 0.54 & 0.63 & 1.17\\
   \midrule
-  \gls{Cifar}-10 & \gls{SLIC} & \acs{SGCNN} & — & 0.52 & 1.89 & 2.41 \\
-  \gls{Cifar}-10 & \gls{SLIC} & \acs{GCN}   & — & 1.24 & 0.39 & 1.63 \\
-  \gls{Cifar}-10 & \gls{SLIC} & \acs{EGCNN} & — & 0.44 & 2.00 & 2.44 \\
-  \gls{Cifar}-10 & \acs{QS}   & \acs{SGCNN} & — & 0.43 & 1.95 & 2.38\\
-  \gls{Cifar}-10 & \acs{QS}   & \acs{GCN}   & — & 1.09 & 0.36 & 1.45\\
-  \gls{Cifar}-10 & \acs{QS}   & \acs{EGCNN} & — & 0.44 & 1.90 & 2.34 \\
+  \gls{Cifar}-10 & \gls{SLIC} & \acs{SGCNN} & 2.01 & 0.52 & 1.89 & 2.41 \\
+  \gls{Cifar}-10 & \gls{SLIC} & \acs{GCN}   & 0.38 & 1.24 & 0.39 & 1.63 \\
+  \gls{Cifar}-10 & \gls{SLIC} & \acs{EGCNN} & 2.04 & 0.44 & 2.00 & 2.44 \\
+  \gls{Cifar}-10 & \acs{QS}   & \acs{SGCNN} & 1.98  & 0.43 & 1.95 & 2.38\\
+  \gls{Cifar}-10 & \acs{QS}   & \acs{GCN}   & 0.37 & 1.09 & 0.36 & 1.45\\
+  \gls{Cifar}-10 & \acs{QS}   & \acs{EGCNN} & 2.01 & 0.44 & 1.90 & 2.34 \\
   \midrule
   \gls{Pascal} & \gls{SLIC} & \acs{EGCNN} & 4.15 & 23.05 & 4.17 & 27.22\\
   \gls{Pascal} & \acs{QS}   & \acs{EGCNN} & 5.28 & 51.32 & 5.46 & 56.78 \\
   \midrule
-  \gls{MNIST}    & — & klassisch & 0.19 & \multicolumn{3}{c}{—}\\
+  \gls{MNIST}    & — & klassisch & 0.21 & \multicolumn{3}{c}{—}\\
   \gls{Cifar}-10 & — & klassisch & 0.48 & \multicolumn{3}{c}{—}\\
   \gls{Pascal}   & — & klassisch & 3.27 & \multicolumn{3}{c}{—}\\
   \bottomrule
@@ -84,8 +84,8 @@ Tabelle~\ref{tab:train_laufzeit} zeigt die im Durschnitt ermittelten Laufzeiten 
 \label{tab:train_laufzeit}
 \end{table}
 Die Eingabedaten wurden für \gls{MNIST} \bzw{} \gls{Pascal} aufgrund nicht benötigter Augmentierung \bzw{} der aufwändigen Berechnungen vorab gespeichert, wohingegen die Grapheingabedaten für \gls{Cifar}-10 zur Laufzeit generiert wurden.
-Es zeigt sich, dass das Training auf Graphen im Allgemeinen deutlich langsamer als im Vergleich zu ausgereiften Bildimplementierungen ist.
-Lediglich der Ansatz des räumlichen Lernens kann aufgrund seiner Verwendung der klassischen Faltungsoperation und bei einer Vorverarbeitung vor Beginn des Trainings schnelle Laufzeiten garantieren.
+Es zeigt sich, dass das Training auf Graphen je nach Komplexität der Faltung im Allgemeinen deutlich langsamer als im Vergleich zu ausgereiften Bildimplementierungen ist.
+Lediglich der Ansatz des räumlichen Lernens kann aufgrund seiner Verwendung der klassischen Faltungsoperation und bei einer Vorverarbeitung vor Beginn des Trainings schnellere Laufzeiten garantieren.
 
 Zwischen den spektralen Faltungsansätzen zeigt sich das \acs{GCN} aufgrund seiner geringen Berechnungskomplexität als sehr effizient, leidet jedoch wie in Kapitel~\ref{ergebnisse} beschrieben an mangelnder Genauigkeit.
 Das \acs{EGCNN} weist unter allen Ansätzen die höchste Berechnungskomplexität auf.
