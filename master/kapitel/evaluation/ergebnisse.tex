@@ -4,6 +4,7 @@
 Dieses Kapitel stellt die Ergebnisse einer ausgewählten Untermenge der in dieser Arbeit vorgestellten Graphrepräsentationen von Bildern, den Ansätzen zum Lernen auf diesen sowie den beschriebenen Datensätzen und Superpixelalgorithmen vor.
 Zur Kenntlichmachung der einzelnen Ansätze erhält das räumliche Lernen auf Graphen dabei die Abkürzung \enquote{\acs{RL}} und das spektrale Lernen auf Graphen über den Tschebyschow-Polynomen \bzw{} dessen Einschränkung auf eine Filtergröße von Eins die Abkürzungen \enquote{\acs{SGCNN}} \bzw{} \enquote{\acs{GCN}}.
 Der erweiterte Ansatz zum spektralen Lernen ist über \enquote{\acs{EGCNN}} gekennzeichnet.
+Alle Faltungen des \acs{EGCNN}s wurden dabei mit einer Partitionsgröße von $8$ bei einem Grad von Eins implementiert, um ein \gls{CNN} mit einem $3 \times 3$ Filter zu simulieren.
 
 Netzarchitekturen werden im Folgenden \bspw{} über ein Muster der Form \enquote{C32-P2-FC128} beschrieben und signalisieren eine Faltungsschicht, die auf 32 Merkmalskarten abbildet, gefolgt von einer Poolingschicht, welche zwei Knoten vereint, und danach mit einer vollverbundenen Schicht zu 128 Neuronen verknüpft wird.
 Die für das spektrale Lernen bei dynamischen Eingabegrößen notwendige Durchschnittsbildung zwischen Faltungs- und vollverbundener Schicht wird als \enquote{Avg} gekennzeichnet (\vgl{} Kapitel~\ref{spektrale_netzarchitektur}).
