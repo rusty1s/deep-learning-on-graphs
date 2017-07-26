@@ -1,7 +1,8 @@
 # Masterthesis: Convolutional Neural Networks auf Graphrepräsentationen von Bildern
 
+| | |
 | -------------- | -------------------------------- |
-| **Uinversity** | Teschnische Universität Dortmund |
+| **University** | Technische Universität Dortmund  |
 | **Department** | Lehrstuhl für Graphische Systeme |
 
 :paperclip: [Masterthesis (3.4MB)](https://github.com/rusty1s/deep-learning-on-graphs/raw/masterthesis/thesis/main.pdf)
