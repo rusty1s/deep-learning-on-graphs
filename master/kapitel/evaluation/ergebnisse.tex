@@ -24,7 +24,7 @@ Tabelle~\ref{tab:train_mnist_gitter} fasst die Netzarchitekturen und dessen erre
   \toprule
   Ansatz & \ma{W} & Architektur & Genauigkeit [\%]\\
   \midrule
-  \acs{RL} & 25 & C64-FC1024 & \\
+  \acs{RL} & 25 & C64-FC1024 & 98.774 \\
   \acs{SGCNN} & 25 & C32-P4-C64-P4-FC1024 & 98.888\\
   \acs{GCN} & 1 & C32-C32-P4-C64-C64-P4-FC1024 & 96.675\\
   \acs{EGCNN} & 9 & C32-C32-P4-C64-C64-P4-FC1024 & 99.145\\
@@ -138,7 +138,7 @@ Tabelle~\ref{tab:train_pascal} stellt die Ergebnisse des SqueezeNets mit den Erg
   klassisch & — & SqueezeNet 1.1 & \multicolumn{2}{c}{54.731} \\
   \bottomrule
 \end{tabular}}
-\caption[Testgenauigkeiten der \gls{Pascal} Superpixelrepräsentationen]{Testgenauigkeiten eines Trainings auf den durch \gls{SLIC} und Quickshift vorab generierten Graphrepräsentationen des \gls{Pascal} Datensatz nach 60 Epochen im Vergleich zu der Verwendung des SqueezeNets in Version 1.1 auf den Bildrohdaten~\cite{squeeze}.}
+\caption[Testgenauigkeiten der \gls{Pascal} Superpixelrepräsentationen]{Testgenauigkeiten eines Trainings auf den durch \gls{SLIC} und Quickshift vorab generierten Graphrepräsentationen des \gls{Pascal} Datensatz nach 70 Epochen im Vergleich zu der Verwendung des SqueezeNets in Version 1.1 auf den Bildrohdaten~\cite{squeeze}.}
 \label{tab:train_pascal}
 \end{table}
 Es zeigt sich, dass auf \gls{Pascal} die Graphansätze durchaus mit klassischen Lösungen auf diesem Gebiet mithalten können.
