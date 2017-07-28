@@ -69,7 +69,7 @@ mit Faltungsaufwand $\gls{O}\left(M_{\mathrm{in}}M_{\mathrm{out}}\left|\gls{E}\r
 \label{alg:wl}
 \end{algorithm}
 
-Der \emph{eindimensionale Weis\-fei\-ler-Lehman Algorithmus} beschreibt eine weit untersuchte Methode zur Knotenklassifizierung eines Graphen basierend auf einer initialen Färbung \bzw{} Merkmalsfunktion auf den Knoten eines Graphen \gls{G}, die unter anderem zur Bestimmung von Graphisomorphismen genutzt wird~\cite{douglas}.
+Der \emph{eindimensionale Weis\-fei\-ler-Lehman Algorithmus} beschreibt eine weit untersuchte Methode zur Knotenklassifizierung eines Graphen basierend auf einer initialen Färbung \bzw{} Merkmalsfunktion auf den Knoten eines Graphen \gls{G}, die unter anderem zur Bestimmung von Graph\-iso\-mor\-phis\-men genutzt wird~\cite{douglas}.
 Basierend auf einer initialen kontinuierlichen Knotenfärbung $\gls{f}^{\left(0\right)} \in \gls{R}^N$ wird die Farbe eines jeden Knotens $\gls{v}_i \in \gls{V}$ sukzessive mit Hilfe einer Hashfunktion $\mathrm{hash}\left(\cdot\right)$ so angepasst, dass sie die vorangegangene Farbe des Knotens zusammen mit den Farben seiner lokalen Nachbarschaft repräsentiert.
 Dieser Prozess wiederholt sich solange, bis eine stabile Knotenfärbung gefunden wurde, \dhe{} die gefundene Färbung des Graphen konvergiert (\vgl{} Algorithmus~\ref{alg:wl}).
 

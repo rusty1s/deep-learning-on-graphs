@@ -38,7 +38,7 @@ Die Spalte \ma{W} kennzeichnet die benutzten Filtergrößen der einzelnen Faltun
 \label{tab:train_mnist_gitter}
 \end{table}
 Die Netzarchitekturen sind dabei an der von \texttt{tensorflow} vorgeschlagenen Architektur orientiert~\cite{tensorflow}.
-Alle Netze wurden einheitlich mit einer Lernrate von $0.001$ über den \emph{Adam}-Optimierer trainiert~\cite{adam}.
+Alle Netze wurden einheitlich mit einer Lernrate von $0.001$ mit Hilfe des \emph{Adam}-Optimierers trainiert~\cite{adam}.
 Es wurde auf die für \gls{MNIST} eher untypische Augmentierung der Eingabedaten, die L2-Regularisierung sowie auf die Verminderung der Lernrate in Abhängigkeit zur Trainingsdauer ver\-zich\-tet~\cite{tensorflow}.
 Es findet sich jedoch die Anwendung eines Dropouts von $0.5$ vor der Ausgabeschicht.
 \citeauthor{Defferrard} benutzen zur Validierung des \acs{SGCNN}s eine ähnliche Netzarchitektur auf \gls{MNIST} und schlagen dazu eine Filtergröße von $25$ vor, sodass die Anzahl der Parameter mit der Anzahl der klassischen Faltung über ein $5 \times 5$ Fenster korrespondiert~\cite{Defferrard}.
@@ -67,7 +67,7 @@ Die in Tabelle~\ref{tab:train_mnist} vorgestellten Netzarchitekturen zeigen die 
 \caption[Testgenauigkeiten der \gls{MNIST} Superpixelrepräsentationen]{Testgenauigkeiten der trainierten Netze auf dem \gls{MNIST} Datensatz nach 17 Epochen, dessen Bilder zuvor durch die Superpixelalgorithmen \gls{SLIC} und Quickshift in irreguläre Graphrepräsentationen gebracht werden.}
 \label{tab:train_mnist}
 \end{table}
-Bei \acs{SGCNN} wurde dabei aufgrund der reduzierten Datenmenge die Filtergröße im Vergleich zum Vortest gedrosselt und besitzt im Vergleich zu den \acs{GCN}- \bzw{} \acs{EGCNN}-Netzarchitekturen nicht mehrere, aufeinanderfolgende Faltungsschichten.
+Bei \acs{SGCNN} wurde dabei aufgrund der reduzierten Datenmenge die Filtergröße zum Vortest gedrosselt und besitzt im Vergleich zu den \acs{GCN}- \bzw{} \acs{EGCNN}-Netzarchitekturen nicht mehrere, aufeinanderfolgende Faltungsschichten.
 
 Es zeigt sich, dass alle Netzansätze auf irregulären Daten gar nicht oder nur knapp an die Ergebnisse auf regulären Gittereingaben heranreichen.
 Insbesondere offenbart der räumliche Faltungsansatz hier seine Schwächen, denn obwohl die Trainingsmenge erfolgreich gelernt wird, so lässt sich auf unbekannte Eingaben aufgrund der Anordnung zu eindimensionalen Knoten- sowie Nachbarschaftsmengen für irreguläre Graphen nur schwer bis gar nicht generalisieren.
@@ -116,9 +116,9 @@ Wohingegen der klassische Ansatz recht schnell nach ungefähr 14 Epochen seine M
 
 Für die Evaluierung der Ergebnisse auf dem \gls{Pascal} Datensatz wurde zum Vergleich die SqueezeNet-Architektur in Version 1.1 auf den Bildrohdaten zu Rate gezogen (\vgl{}~\cite{squeeze}).
 Das SqueezeNet gilt aufgrund ihres Preis-Leistungs-Verhältnis zwischen ermittelter Genauigkeit und Anzahl zu trainierender Parameter als bewährte Netzarchiktektur für die Klassifizerung von Bildern mit recht hoher Auflösung~\cite{squeeze}.
-Zur Verwendung wurden die Bilder dafür einheitlich auf die Größe $224 \times 224$ skaliert und mit schwarzen Bereichen an den horizontalen oder vertikalen Rändern je nach Ursprungsauflösung befüllt.
+Zur Verwendung werden die Bilder dafür einheitlich auf die Größe $224 \times 224$ skaliert und mit schwarzen Bereichen an den horizontalen oder vertikalen Rändern je nach Ursprungsauflösung befüllt.
 Für das Lernen auf Graphen ist diese Skalierung der Bildeingabedaten nicht von Nöten.
-Die Klassen der Bilder wurden über das Objekt mit dem größten Hüllkörper bestimmt (\vgl{} Kapitel~\ref{datensaetze}).
+Die Klassen der Bilder werden über das Objekt mit dem größten Hüllkörper bestimmt (\vgl{} Kapitel~\ref{datensaetze}).
 Für die Netzarchitektur wurde dabei insbesondere im Vergleich zu vorherigen Testläufen auf die Verwendung mehrmaliger hintereinanderfolgender Faltungsschichten verzichtet.
 Die Superpixel, die aus den Bildern von \gls{Pascal} generiert werden, sind bereits ausreichend groß und eine einzige Faltung auf diesen deckt bereits einen großen Bereich des Bildes ab.
 Aus laufzeittechnischen Gründen findet das Training des Netzes ausschließlich auf vorverarbeiten Daten statt und erlaubt damit lediglich eine Augmentierung der Graphen anstelle der Bilder (\vgl{} Kapitel~\ref{laufzeitanalyse}).

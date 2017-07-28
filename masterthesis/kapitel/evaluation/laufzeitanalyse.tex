@@ -3,7 +3,7 @@
 
 Die Vorverarbeitung der Eingabedaten sowie das Training der neuronalen Netze erfolgte auf einem 3.5 GHz 6-Core Intel Xeon E5, 16GB DDR3 Arbeitsspeicher und einer Solid-State-Drive.
 Die in dieser Arbeit präsentierten Laufzeiten wurden ausschließlich über Berechnungen auf dem Prozessor gewonnen.
-Bei der Verwendung einer Grafikkarte stellen sich dabei Laufzeitgewinne von $300 - 400 \%$ in Bereichen ein, die auf die diese ausgelagert werden können.
+Bei Verwendung der NVIDIA GeForce GTX TITAN X Grafikkarte der Kepler-Generation stellen sich dabei Laufzeitgewinne von $300 - 400 \%$ in Bereichen ein, die auf die diese ausgelagert werden können.
 
 \paragraph{Vorverarbeitung}
 
@@ -92,7 +92,7 @@ Das \acs{EGCNN} weist unter allen Ansätzen die höchste Berechnungskomplexität
 Dies ist im Vergleich mit dem \acs{SGCNN} insoweit zu erklären, dass dessen Netzarchitektur in der Regel tiefer ist und mehrere Faltungsschichten hintereinander verlangt, um an Informationen nicht direkt benachbarter Knoten zu gelangen.
 Das \acs{SGCNN} erfordert dies nicht, da dessen Filtergröße in direktem Zusammenhang zur Größe der Faltung steht.
 
-Es ist weiter bei einer Vorverarbeitung während des Trainings zu beobachten, dass die Aufwände für die Vorverarbeitung umso höher werden, umso schneller die eigentliche Lernprozedur vonstatten geht.
+Es ist weiter bei einer Vorverarbeitung während des Trainings zu beobachten, dass der Aufwand für die Vorverarbeitung umso größer wird, umso schneller die eigentliche Lernprozedur vonstatten geht.
 So zeigt sich \bspw{} bei \gls{Cifar}-10, dass die Ansätze \acs{EGCNN} und \acs{SGCNN} in der Regel lediglich $\approx$ 0.4s auf die Vorverarbeitung warten müssen, wohingegen bei der effizienteren Faltung des \acs{GCN}s das Training pro Batch $\approx$ 1.1s pausiert.
 Damit wird trotz Multithreading die Vorverarbeitung zur Laufzeit zum Flaschenhals des Trainings.
 

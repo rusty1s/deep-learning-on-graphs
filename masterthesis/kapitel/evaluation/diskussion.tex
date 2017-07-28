@@ -2,7 +2,7 @@
 \label{diskussion}
 
 Das räumliche Lernen hat sich in Tests auf irregulären Grapheingaben als unzureichend herausgestellt.
-Das Verfahren scheint zwar aus Laufzeit technischen Gründen aufgrund der Benutzung der klassischen Faltungsoperation als interessant, jedoch lassen sich Grapheingaben nicht ohne Weiteres in eine reguläre Eingabe überführen.
+Das Verfahren scheint zwar aus laufzeittechnischen Gründen aufgrund der Benutzung der klassischen Faltungsoperation als interessant, jedoch lassen sich Grapheingaben nicht ohne Weiteres in eine reguläre Eingabe überführen.
 Ebenso erweist sich die Vorabberechnung der Receptive-Fields als unzufriedenstellend.
 Wohingegen die Receptive-Fields im klassischem Fall implizit von der Faltungsoperation bestimmt und berechnet werden, müssen diese beim räumlichen Lernen explizit bei der Eingabe in ein neuronales Netz gegeben sein.
 Damit erlaubt das räumliche Lernen lediglich eine Faltungsschicht in einem neuronalen Netz.
@@ -10,7 +10,7 @@ Die Anwendung der klassischen Faltungsoperation wird zudem etwas entfremdet, den
 
 Der Ansatz des spektralen Lernens erweist sich sowohl in der Theorie als auch in der Praxis als das zukunftsorientiertere Verfahren.
 Dabei wird nicht versucht, die Grapheingaben in eine reguläre Form zu transformieren, sondern den ursprünglich nur auf regulären Gittern definierten Faltungsoperator für weiterführende Eingaben zu generalisieren.
-Anhand der Evaluierung lässt sich dieses Verfahren im Vergleich als den klaren Gewinner auszeichnen.
+In den durchgeführten Experimenten erwies sich dieser Ansatz als das größtenteils erfolgreichere Verfahren.
 Bisherige Unternehmungen auf diesem Gebiet zeigen ebenso für andere Anwendungsgebiete beachtliche Ergebnisse (\vgl{}~\cite{Defferrard, gcn}).
 Probleme ergeben sich jedoch dennoch aufgrund der in der Praxis nicht tolerierbaren hohen Laufzeiten spektraler neuronaler Netze.
 Kapitel~\ref{ausblick} versucht diesbezüglich Lösungsansätze für weiterführende Arbeiten aufzuzeigen.
@@ -20,5 +20,5 @@ In allen Testdurchläufen erwies sich dieser Ansatz als geglückt und es konnten
 In der Evaluierung wurde aus implementierungstechnischen Gründen dabei ein maximaler Grad der B-Spline-Funktionen von Eins verwendet.
 Es erscheint jedoch vorstellbar, die Filtergröße bei größerer lokaler Kontrollierbarkeit zu reduzieren und die Gefahr des Overfittings damit aufgrund der kleineren Anzahl an Trainingsparametern weiter einzuschränken.
 
-Die Problemstellung dieser Arbeit, die Klassifizierung aus Bildern gewonnener Graphrepräsentationen, erfordert aufgrund allgemein schwächerer Ergebnisse im Vergleich zu den klassischen Lösungen auf diesem Gebiet weitere Nachforschungen \bzw{} Optimierungen.
-Der spektrale Ansatz sprengt jedoch die regulären Einschränkungen des klassischen Faltungsoperators und öffnet ein Tor zu einer Vielzahl weiterer Anwendungsgebiete.
+Die Problemstellung dieser Arbeit, die Klassifizierung aus Bildern gewonnener Graph\-re\-prä\-sen\-ta\-tio\-nen, erfordert aufgrund allgemein schwächerer Ergebnisse im Vergleich zu den klassischen Lösungen auf diesem Gebiet weitere Nachforschungen \bzw{} Optimierungen.
+Der vorgestellte spektrale Ansatz erweitert jedoch die regulären Einschränkungen des klassischen Faltungsoperators und öffnet damit ein Tor zu einer Vielzahl weiterer Anwendungsgebiete.
