@@ -2,8 +2,8 @@
 \label{ergebnisse}
 
 Dieses Kapitel stellt die Ergebnisse einer ausgewählten Untermenge der in dieser Arbeit vorgestellten Graphrepräsentationen von Bildern, den Ansätzen zum Lernen auf diesen sowie den beschriebenen Datensätzen und Superpixelalgorithmen vor.
-Zur Kenntlichmachung der einzelnen Ansätze erhält das räumliche Lernen auf Graphen dabei die Abkürzung \enquote{\acs{RL}} und das spektrale Lernen auf Graphen über den Tschebyschow-Polynomen \bzw{} dessen Einschränkung auf eine Filtergröße von Eins die Abkürzungen \enquote{\acs{SGCNN}} \bzw{} \enquote{\acs{GCN}}.
-Der erweiterte Ansatz zum spektralen Lernen ist über \enquote{\acs{EGCNN}} gekennzeichnet.
+Zur Kenntlichmachung der einzelnen Ansätze erhält der weiterentwickelte Ansatz des räumlichen Lernens auf Graphen (\vgl{} Kapitel~\ref{raeumliches_lernen}) die Abkürzung \enquote{\acs{RL}} und das spektrale Lernen auf Graphen über den Tschebyschow-Polynomen (\vgl{} Kapitel~\ref{spektraler_faltungsoperator}) \bzw{} dessen Einschränkung auf eine Filtergröße von Eins (\vgl{} Kapitel~\ref{graph_convolutional_networks}) die Abkürzungen \enquote{\acs{SGCNN}} \bzw{} \enquote{\acs{GCN}}~\cite{patchy, Defferrard, gcn}.
+Der in dieser Arbeit weiterentwickelte Ansatz zum spektralen Lernen ist über \enquote{\acs{EGCNN}} gekennzeichnet (\vgl{} Kapitel~\ref{gcn_erweiterung}).
 Alle Faltungen des \acs{EGCNN}s wurden dabei mit einer Partitionsgröße von $8$ bei einem Grad von Eins implementiert, um ein \gls{CNN} mit einem $3 \times 3$ Filter zu simulieren.
 
 Netzarchitekturen werden im Folgenden \bspw{} über ein Muster der Form \enquote{C32-P2-FC128} beschrieben und signalisieren eine Faltungsschicht, die auf 32 Merkmalskarten abbildet, gefolgt von einer Poolingschicht, welche zwei Knoten vereint, und danach mit einer vollverbundenen Schicht zu 128 Neuronen verknüpft wird.
@@ -12,10 +12,9 @@ Auf die explizite Erwähnung der Eingabe- und Ausgabeschichten der Netze wird ü
 
 \paragraph{\gls{MNIST}}
 
-Für die Validierung der Faltungsansätze starten wir mit dem \gls{MNIST} Datensatz und der in Kapitel~\ref{gitter} beschriebenen Graphrepräsentation der Bilder über ein reguläres Gitter.
-Damit kann jedes Bild über den selben Graphen dargestellt werden.
-Insbesondere verfällt damit die Notwendigkeit der Durchschnittsbildung, da die Anzahl an Neuronen zu jedem Zeitpunkt klar definiert ist.
-Für das räumliche Lernen wurden 196 Knoten mit Schrittweite 4 bei $\delta=1$ und einer Nachbarschaftsgröße von 25 besimmt (\vgl{} Kapitel~\ref{raeumliches_lernen}).
+Zur Valdierung der Faltungansätze im Vergleich zur klassischen Faltungsoperation eignet sich die in Kapitel~\ref{gitter} beschriebene Graphrepräsentation der Bilder über ein reguläres Gitter, da diese anstelle der Bilder eine äquivalente Eingabe in das Netz darstellen.
+Damit verfällt insbesondere die Notwendigkeit die Anwendung der Durchschnittsbildung, da die Anzahl an Neuronen zu jedem Zeitpunkt klar definiert ist.
+Für das räumliche Lernen werden dabei 196 Knoten mit Schrittweite 4 bei $\delta=1$ und einer Nachbarschaftsgröße von 25 ausgewählt (\vgl{} Kapitel~\ref{raeumliches_lernen}).
 Die Graphvergröberung des spektralen Lernens wiederum generiert für die erste Schicht 976 Knoten ($28^2 = 784$ Pixelknoten und 192 Fakeknoten).
 Die Anzahl der generierten Fakeknoten kann jedoch aufgrund der zufälligen Permutation variieren.
 Tabelle~\ref{tab:train_mnist_gitter} fasst die Netzarchitekturen und dessen erreichte Genauigkeiten der einzelnen Ansätze zusammen.
@@ -34,12 +33,12 @@ Tabelle~\ref{tab:train_mnist_gitter} fasst die Netzarchitekturen und dessen erre
   klassisch & $3 \times 3$ & C32-C32-P4-C64-C64-P4-FC1024 & 99.139\\
   \bottomrule
 \end{tabular}
-\caption[Testgenauigkeiten der \gls{MNIST}-Gitterrepräsentation]{Testgenauigkeiten eines Trainings auf einer \gls{MNIST}-Gitterrepräsentation nach 10 Epochen für die vorgestellten Ansätze inklusive äquivalenter Netzarchitekturen bei Benutzung der klassischen Faltungsoperation.
+\caption[Testgenauigkeiten der \gls{MNIST}-Gitterrepräsentation]{Testgenauigkeiten der trainierten Netze auf einer \gls{MNIST}-Gitterrepräsentation nach 10 Epochen für die vorgestellten Ansätze inklusive äquivalenter Netzarchitekturen bei Benutzung der klassischen Faltungsoperation.
 Die Spalte \ma{W} kennzeichnet die benutzten Filtergrößen der einzelnen Faltungsschichten.}
 \label{tab:train_mnist_gitter}
 \end{table}
 Die Netzarchitekturen sind dabei an der von \texttt{tensorflow} vorgeschlagenen Architektur orientiert~\cite{tensorflow}.
-Alle Netze wurden einheitlich mit einer Lernrate von $0.001$ trainiert.
+Alle Netze wurden einheitlich mit einer Lernrate von $0.001$ über den \emph{Adam}-Optimierer trainiert~\cite{adam}.
 Es wurde auf die für \gls{MNIST} eher untypische Augmentierung der Eingabedaten, die L2-Regularisierung sowie auf die Verminderung der Lernrate in Abhängigkeit zur Trainingsdauer ver\-zich\-tet~\cite{tensorflow}.
 Es findet sich jedoch die Anwendung eines Dropouts von $0.5$ vor der Ausgabeschicht.
 \citeauthor{Defferrard} benutzen zur Validierung des \acs{SGCNN}s eine ähnliche Netzarchitektur auf \gls{MNIST} und schlagen dazu eine Filtergröße von $25$ vor, sodass die Anzahl der Parameter mit der Anzahl der klassischen Faltung über ein $5 \times 5$ Fenster korrespondiert~\cite{Defferrard}.
@@ -65,14 +64,14 @@ Die in Tabelle~\ref{tab:train_mnist} vorgestellten Netzarchitekturen zeigen die 
   \acs{EGCNN} & 9 & C64-C64-P4-C128-C128-P4-Avg & 97.405 & 98.025 \\
   \bottomrule
 \end{tabular}
-\caption[Testgenauigkeiten der \gls{MNIST} Superpixelrepräsentationen]{Testgenauigkeiten eines Trainings auf dem \gls{MNIST} Datensatz nach 17 Epochen, dessen Bilder zuvor durch die Superpixelalgorithmen \gls{SLIC} und Quickshift in irreguläre Graphrepräsentationen gebracht werden.}
+\caption[Testgenauigkeiten der \gls{MNIST} Superpixelrepräsentationen]{Testgenauigkeiten der trainierten Netze auf dem \gls{MNIST} Datensatz nach 17 Epochen, dessen Bilder zuvor durch die Superpixelalgorithmen \gls{SLIC} und Quickshift in irreguläre Graphrepräsentationen gebracht werden.}
 \label{tab:train_mnist}
 \end{table}
 Bei \acs{SGCNN} wurde dabei aufgrund der reduzierten Datenmenge die Filtergröße im Vergleich zum Vortest gedrosselt und besitzt im Vergleich zu den \acs{GCN}- \bzw{} \acs{EGCNN}-Netzarchitekturen nicht mehrere, aufeinanderfolgende Faltungsschichten.
 
 Es zeigt sich, dass alle Netzansätze auf irregulären Daten gar nicht oder nur knapp an die Ergebnisse auf regulären Gittereingaben heranreichen.
-Insbesondere offenbart der räumliche Faltungsansatz hier seine Schwächen, denn obwohl die Trainingsmenge erfolgreich gelernt wird, so lassen sich unbekannte Eingaben aufgrund der Anordnung zu eindimensionalen Knoten- sowie Nachbarschaftsmengen für irreguläre Graphen nur schwer bis gar nicht generalisieren.
-Für alle Ansätze zeigt sich desweiteren die Quickshift-Segmentierung aufgrund ihrer überlegenden Segmentierung auf den Bildern des \gls{MNIST} Datensatz als die bessere Wahl (\vgl{} Abbildung~\ref{fig:mnist}).
+Insbesondere offenbart der räumliche Faltungsansatz hier seine Schwächen, denn obwohl die Trainingsmenge erfolgreich gelernt wird, so lässt sich auf unbekannte Eingaben aufgrund der Anordnung zu eindimensionalen Knoten- sowie Nachbarschaftsmengen für irreguläre Graphen nur schwer bis gar nicht generalisieren.
+Für alle Ansätze zeigt sich des Weiteren die Quickshift-Segmentierung aufgrund ihrer überlegenden Segmentierung auf den Bildern des \gls{MNIST} Datensatz als die bessere Wahl (\vgl{} Abbildung~\ref{fig:mnist}).
 Insbesondere erreicht der entwickelte spektrale Faltungsoperator über B-Spline-Kurven (\acs{EGCNN}) auch hier die eindeutig besten Resultate.
 
 \paragraph{\gls{Cifar}-10}
@@ -101,7 +100,7 @@ Tabelle~\ref{tab:train_cifar_10} fasst die Netzarchitekturen der einzelnen Ansä
   klassisch & $3 \times 3$ & C64-C64-P4-C128-P4-C256-P4-FC256-FC128 & \multicolumn{2}{c}{82.061} \\
   \bottomrule
 \end{tabular}}
-\caption[Testgenauigkeiten der \gls{Cifar}-10 Superpixelrepräsentationen]{Testgenauigkeiten eines Trainings auf den durch \gls{SLIC} und Quickshift zur Laufzeit generierten Graphrepräsentationen des \gls{Cifar}-10 Datensatz nach 80 Epochen im Vergleich zu einer ähnlichen klassischen Netzarchitektur auf den Bildrohdaten.}
+\caption[Testgenauigkeiten der \gls{Cifar}-10 Superpixelrepräsentationen]{Testgenauigkeiten der trainierten Netze auf den durch \gls{SLIC} und Quickshift zur Laufzeit generierten Graphrepräsentationen des \gls{Cifar}-10 Datensatz nach 80 Epochen im Vergleich zu einer ähnlichen klassischen Netzarchitektur auf den Bildrohdaten.}
 \label{tab:train_cifar_10}
 \end{table}
 Alle spektralen Graphansätze auf den aus \gls{SLIC} und Quickshift generierten Graphrepräsentationen können nicht mit einer ähnlichen klassischen Netzarchitektur auf den Bildrohdaten konkurrieren.
@@ -111,17 +110,18 @@ Hochoptimierte Ansätze, bei denen noch weitaus mehr Augmentierungsschritte zum 
 
 Abbildung~\ref{fig:cifar_10_train} illustriert den Genauigkeitsverlauf des \gls{Cifar}-10 Trainings- und Validierungsdatensatzes in Abhängigkeit der vergangenen Epochen.
 \input{tikz/cifar_10_train}
-Wohingegen der klassische Ansatz recht schnell nach ungefähr 14 Epochen seine Maximalgenauigkeit erreicht und den Rest des Trainings damit verbringt, seine Trainingsdaten \enquote{überanzupassen}, ist zu beobachten, dass die Graphansätze weitaus langsamer und kontinuierlicher lernen.
+Wohingegen der klassische Ansatz recht schnell nach ungefähr 14 Epochen seine Maximalgenauigkeit erreicht und den Rest des Trainings damit verbringt, seine Gewichte auf die Trainingsdaten \enquote{überanzupassen}, ist zu beobachten, dass die Graphansätze weitaus langsamer und kontinuierlicher lernen.
 
 \paragraph{\gls{Pascal}}
 
 Für die Evaluierung der Ergebnisse auf dem \gls{Pascal} Datensatz wurde zum Vergleich die SqueezeNet-Architektur in Version 1.1 auf den Bildrohdaten zu Rate gezogen (\vgl{}~\cite{squeeze}).
-Die Architektur des SqueezeNets gilt aufgrund bewährter Ergebnisse auf dem ImageNet Datensatz bei einer gleichzeitig extrem geringen Anzahl zu trainierender Parameter als \enquote{State-of-the-Art} in der Klassifizerung von Bildern mit recht hoher Auflösung~\cite{squeeze}.
+Das SqueezeNet gilt aufgrund ihres Preis-Leistungs-Verhältnis zwischen ermittelter Genauigkeit und Anzahl zu trainierender Parameter als bewährte Netzarchiktektur für die Klassifizerung von Bildern mit recht hoher Auflösung~\cite{squeeze}.
 Zur Verwendung wurden die Bilder dafür einheitlich auf die Größe $224 \times 224$ skaliert und mit schwarzen Bereichen an den horizontalen oder vertikalen Rändern je nach Ursprungsauflösung befüllt.
-Für das Lernen auf Graphen ist diese Sklarierung der Bildeingabedaten nicht von Nöten.
+Für das Lernen auf Graphen ist diese Skalierung der Bildeingabedaten nicht von Nöten.
+Die Klassen der Bilder wurden über das Objekt mit dem größten Hüllkörper bestimmt (\vgl{} Kapitel~\ref{datensaetze}).
 Für die Netzarchitektur wurde dabei insbesondere im Vergleich zu vorherigen Testläufen auf die Verwendung mehrmaliger hintereinanderfolgender Faltungsschichten verzichtet.
 Die Superpixel, die aus den Bildern von \gls{Pascal} generiert werden, sind bereits ausreichend groß und eine einzige Faltung auf diesen deckt bereits einen großen Bereich des Bildes ab.
-Dabei findet das Training ausschließlich aus Laufzeit technischen Gründen auf vorverarbeiten Daten statt und erlaubt damit lediglich eine Augmentierung der Graphen zur Laufzeit (\vgl{} Kapitel~\ref{laufzeitanalyse}).
+Aus laufzeittechnischen Gründen findet das Training des Netzes ausschließlich auf vorverarbeiten Daten statt und erlaubt damit lediglich eine Augmentierung der Graphen anstelle der Bilder (\vgl{} Kapitel~\ref{laufzeitanalyse}).
 Es finden sich weiterhin Anwendungen der Dropout-Technik und der L2-Regularisierung in den vollverbundenen Schichten bei einer Lernrate von 0.0001 für das SqueezeNet und 0.001 bei den Graphansätzen.
 
 Tabelle~\ref{tab:train_pascal} stellt die Ergebnisse des SqueezeNets mit den Ergebnissen auf irregulären Dateneingaben bei Benutzung des \acs{EGCNN}s gegenüber.
@@ -139,9 +139,11 @@ Tabelle~\ref{tab:train_pascal} stellt die Ergebnisse des SqueezeNets mit den Erg
   klassisch & — & SqueezeNet 1.1 & \multicolumn{2}{c}{54.731} \\
   \bottomrule
 \end{tabular}}
-\caption[Testgenauigkeiten der \gls{Pascal} Superpixelrepräsentationen]{Testgenauigkeiten eines Trainings auf den durch \gls{SLIC} und Quickshift vorab generierten Graphrepräsentationen des \gls{Pascal} Datensatz nach 70 Epochen im Vergleich zu der Verwendung des SqueezeNets in Version 1.1 auf den Bildrohdaten~\cite{squeeze}.}
+\caption[Testgenauigkeiten der \gls{Pascal} Superpixelrepräsentationen]{Testgenauigkeiten der trainierten Netze auf den durch \gls{SLIC} und Quickshift vorab generierten Graphrepräsentationen des \gls{Pascal} Datensatz nach 70 Epochen im Vergleich zu der Verwendung des SqueezeNets in Version 1.1 auf den Bildrohdaten~\cite{squeeze}.}
 \label{tab:train_pascal}
 \end{table}
 Es zeigt sich, dass auf \gls{Pascal} die Graphansätze durchaus mit klassischen Lösungen auf diesem Gebiet mithalten können.
 Sie beweisen sich als lediglich marginal schwächer gegenüber der Benutzung einer ausgereiften Architektur wie dem SqueezeNet.
-Die allgemein relativ schlechten Ergebnisse im Vergleich zu \gls{MNIST} und \gls{Cifar}-10 sind damit größtenteils dem Datensatz geschuldet, da dieser eine weitaus geringere Trainingsmenge sowie keine einander ausschließenden Bildklassen besitzt und seine Verwendung eher in der Lösung zu Problemen wie der Objekterkennung oder Bildsegmentierung sieht.
+Die allgemein relativ schwachen Ergebnisse sind damit unter Umständen auf die Transformation von \gls{Pascal} zu einem Klassfikationsdatensatz zurückzuführen.
+Bilder, die mehrere Objekte enthalten, werden über die Größe ihrer Hüllkörper auf eine Objektklasse reduziert und verweisen damit nicht zwangsläufig auf das dominierende Objekt des Bildes.
+Des Weiteren beinhaltet der Datensatz eine weitaus geringere Trainingsmenge als die Datensätze \gls{MNIST} und \gls{Cifar}-10.

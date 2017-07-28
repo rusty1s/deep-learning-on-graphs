@@ -5,7 +5,7 @@ Superpixel erfreuen sich in allen Anwendungen der Bildverarbeitung, insbesondere
 Superpixel fassen dabei ein Bild in logische, räumliche Gruppen anhand ausgewählter Metriken zusammen, sodass sich Pixel innerhalb einer Gruppe besonders ähnlich sind.
 
 Formal besteht eine \emph{Superpixelrepräsentation} eines Bildes $\gls{B} \in \gls{R}^{H \times W \times C}$ aus einer Menge von $N \in \gls{N}$ \emph{Superpixeln} \bzw{} \emph{Regionen} $\gls{Smenge} \coloneqq {\left\{\gls{Smenge}_n\right\}}_{n=1}^N$ mit $\gls{Smenge}_n \subseteq W \times H$, sodass $\gls{Smenge}_i \cap \gls{Smenge}_j = \emptyset$ und $\bigcup\limits_{n=1}^N \gls{Smenge}_n = W \times H$~\cite{super}.
-Für eine gültige Superpixelsegmentierung fordern wir desweiteren, dass $\gls{Smenge}_n$ zusammenhängend ist~\cite{super}.
+Für eine gültige Superpixelsegmentierung fordern wir des Weiteren, dass $\gls{Smenge}_n$ zusammenhängend ist~\cite{super}.
 Aus der Menge an Superpixeln \gls{Smenge} lässt sich damit eine \emph{Segmentierungsmaske} $\gls{Smaske} \in {\left\{1, \ldots, N\right\}}^{H \times W}$ über
 \begin{equation*}
   \gls{Smaske}_{yx} = n\,\, \text{\gdw{} } \left(x,y\right) \in \gls{Smenge}_n
@@ -19,7 +19,7 @@ Dann ordnet die Positionsfunktion $\gls{p} \colon \gls{V} \to \gls{R}^2$ den ein
   \gls{p}\left(\gls{v}_n\right) \coloneqq {\left[\bar{x}, \bar{y}\right]}^{\top} =  \frac{1}{\left|\gls{Smenge}_n\right|}\sum_{\left(x,y\right) \in \gls{Smenge}_n} {\left[x, y\right]}^{\top}
 \end{equation*}
 eine eindeutige Position in der Ebene über deren absoluten Schwerpunkt zu.
-Die Kantenrelation \gls{E} des Graphen \gls{G} wird desweiteren über die örtlichen Nachbarregionen der Superpixel basierend auf einem $3 \times 3$ Fenster um die Pixel in \gls{Smaske} definiert.
+Die Kantenrelation \gls{E} des Graphen \gls{G} wird des Weiteren über die örtlichen Nachbarregionen der Superpixel basierend auf einem $3 \times 3$ Fenster um die Pixel in \gls{Smaske} definiert.
 Falls sich \bspw{} die Werte in $\gls{Smaske}_{y+1,x}$ und $\gls{Smaske}_{y,x}$ unterscheiden,
 \dhe{} $\gls{Smaske}_{y,x} \neq \gls{Smaske}_{y+1,x}$ mit $\gls{Smaske}_{y,x} = i$ und $\gls{Smaske}_{y+1,x}=j$, dann wird den Knoten $\gls{v}_i, \gls{v}_j \in \gls{V}$ über $\left(\gls{v}_i, \gls{v}_j\right) \in \gls{E}$ eine Kante in \gls{G} zugeordnet.
 Formal lassen sich dabei erneut die zwei Konnektivitäten $4$ und $8$ unterscheiden, für die in der Praxis lediglich ein Unterschied in Bereichen erkennbar ist, deren Superpixelregionen rechteckig als Gitter aneinander liegen.
