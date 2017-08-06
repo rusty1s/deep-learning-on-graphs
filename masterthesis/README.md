@@ -3,7 +3,7 @@
 * **Universität:** Technische Universität Dortmund
 * **Lehrstuhl:** Lehrstuhl für Graphische Systeme
 
-* :paperclip: [Master-Arbeit [3.4MB]](https://github.com/rusty1s/deep-learning-on-graphs/raw/master/masterthesis/main.pdf)
+* :paperclip: [PDF [3.4MB]](https://github.com/rusty1s/deep-learning-on-graphs/raw/master/masterthesis/main.pdf)
 * :minidisc: [Source Code](https://github.com/rusty1s/embedded_gcnn)
 
 ```
