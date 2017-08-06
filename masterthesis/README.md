@@ -7,7 +7,7 @@
 * :minidisc: [Source Code](https://github.com/rusty1s/embedded_gcnn)
 
 ```
-@mastersthesis{fey2017egcnn,
+@mastersthesis{Fey2017,
   title={Convolutional Neural Networks auf Graphrepr{\"a}sentationen von Bildern},
   author={Matthias Fey},
   school={Technische Universit{\"a}t Dortmund},
