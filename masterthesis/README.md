@@ -5,7 +5,7 @@
 
 * :paperclip: [PDF [3.4MB]](https://github.com/rusty1s/deep-learning-on-graphs/raw/master/masterthesis/main.pdf)
 * :minidisc: [Source Code](https://github.com/rusty1s/embedded_gcnn)
-* :movie_camera: [Slides]()
+* :movie_camera: [Slides](https://github.com/rusty1s/deep-learning-on-graphs/files/1298988/praesentation.pdf)
 
 ```
 @mastersthesis{Fey2017,
